@@ -37,6 +37,26 @@
   --font-body:    'Instrument Sans', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', 'Courier New', monospace;
 }
+
+/*
+  Type scale reference:
+  ─────────────────────────────────────────────────────────
+  Role         Font               Weight  Size          opsz
+  ─────────────────────────────────────────────────────────
+  Display/H1   Fraunces           800     clamp(56–112) 72 or 36
+  H2           Fraunces           700     clamp(28–42)  24
+  H3           Fraunces           600     clamp(20–28)  20
+  Body         Instrument Sans    400     16px          —
+  UI/metadata  Instrument Sans    500–600 11–14px       —
+  Code         JetBrains Mono     400–500 12–13px       —
+  ─────────────────────────────────────────────────────────
+  Rules:
+  - Max 3 type sizes per layout
+  - Body column max 68 characters per line (68ch)
+  - Fraunces minimum size: 16px — never smaller
+  - Never use Instrument Sans weight 700+
+  - letter-spacing: -0.02em on display; 0 on body
+*/
 /* ── Keld — Spacing, layout, and radius tokens ──────────────────────── */
 /* Base unit: 12px (0.75rem). Scale multiplied from there.                  */
 
@@ -73,7 +93,21 @@
   --z-toast:   500;
 }
 /* ── Keld — Semantic tokens and surface patterns ──────────────────────── */
+/*                                                                           */
+/* Two-layer architecture:                                                   */
+/*   Layer 1 — palette (colors.css): raw color values, never used directly  */
+/*   Layer 2 — semantic (this file): purpose-mapped aliases                  */
+/*                                                                           */
+/* Dark/light mode: controlled via [data-theme] on <html>                   */
+/* Surface override: use data-surface="light|dark|tinted" on any element     */
+/*                                                                           */
+/* FOWT prevention: add this inline script before <body>:                    */
+/*   const t = localStorage.getItem('keld-theme');                           */
+/*   const s = window.matchMedia('(prefers-color-scheme: dark)').matches     */
+/*     ? 'dark' : 'light';                                                   */
+/*   document.documentElement.setAttribute('data-theme', t ?? s);            */
 
+/* ── Semantic tokens — light (default) ───────────────────────────────── */
 :root,
 [data-theme="light"] {
   --color-bg:             var(--bs2-parchment);
@@ -88,6 +122,7 @@
   --color-accent-text:    var(--bs2-parchment);
 }
 
+/* ── Semantic tokens — dark ─────────────────────────────────────────── */
 [data-theme="dark"] {
   --color-bg:             var(--kn0-void);
   --color-bg-elevated:    var(--kn1-iron);
@@ -100,6 +135,10 @@
   --color-accent-hover:   var(--fr1-fern);
   --color-accent-text:    var(--bs2-parchment);
 }
+
+/* ── Surface patterns ─────────────────────────────────────────────────── */
+/* Apply data-surface to any element to force a surface context             */
+/* regardless of the page-level dark/light theme.                           */
 
 [data-surface="light"] {
   background: var(--bs2-parchment);
@@ -174,6 +213,7 @@ a {
   color: var(--color-accent);
 }
 
+/* ── Focus ─────────────────────────────────────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
@@ -184,6 +224,7 @@ a {
   outline: none;
 }
 
+/* ── Reduced motion ────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
