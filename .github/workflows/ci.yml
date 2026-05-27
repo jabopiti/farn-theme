@@ -11,6 +11,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   build-site:
     name: Build docs site
@@ -18,16 +21,31 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Verify dist/keld.css is up-to-date
+        run: |
+          cat tokens/colors.css tokens/typography.css tokens/spacing.css \
+              tokens/dark-light.css tokens/base.css > /tmp/keld-rebuilt.css
+          if ! diff -q dist/keld.css /tmp/keld-rebuilt.css > /dev/null; then
+            echo "dist/keld.css is out of sync with tokens/. Rebuild:"
+            echo "  cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/dark-light.css tokens/base.css > dist/keld.css"
+            diff dist/keld.css /tmp/keld-rebuilt.css
+            exit 1
+          fi
+
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: site/package.json
+          run_install: false
+
       - uses: actions/setup-node@v6
         with:
           node-version: 24
-
-      - name: Install pnpm
-        run: npm install -g pnpm
+          cache: 'pnpm'
+          cache-dependency-path: site/pnpm-lock.yaml
 
       - name: Install dependencies
         working-directory: site
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build
         working-directory: site
