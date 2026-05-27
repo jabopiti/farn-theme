@@ -8,7 +8,7 @@
 #   Root directory:       (leave empty — repo root)
 #
 # Environment variables to set in dashboard:
-#   NODE_VERSION = 20
+#   NODE_VERSION = 24
 #
 # Custom domain: keld.jbpt.de
 #   Add CNAME in DNS: keld → <project>.pages.dev
