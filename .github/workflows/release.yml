@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild dist/keld.css
+        run: |
+          cat tokens/colors.css \
+              tokens/typography.css \
+              tokens/spacing.css \
+              tokens/dark-light.css \
+              tokens/base.css \
+            > dist/keld.css
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/keld.css
+          body: |
+            See [CHANGELOG.md](https://github.com/jabopiti/keld-theme/blob/main/CHANGELOG.md) for what changed.
+
+            **CDN (jsDelivr):**
+            ```html
+            <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/gh/jabopiti/keld-theme@${{ github.ref_name }}/dist/keld.css">
+            ```
