@@ -2,7 +2,126 @@
 import DocLayout from '../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Getting Started" description="How to install and use Keld in your project">
+<DocLayout title="Getting Started" description="Install Keld and set up dark/light mode in your project">
   <h1>Getting Started</h1>
-  <p>Full documentation coming in Phase 3.</p>
+  <p>Keld ships as a single CSS file — no build step, no runtime, no framework assumptions. Add one <code>&lt;link&gt;</code> tag and you have all tokens.</p>
+
+  <h2>CDN Install</h2>
+  <p>Link directly from jsDelivr. Replace <code>@0.1.0</code> with the latest version tag.</p>
+  <pre><code>&lt;link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jabopiti/keld-theme@0.1.0/dist/keld.css"&gt;</code></pre>
+  <p><code>dist/keld.css</code> is a single concatenated file containing palette tokens, semantic tokens, typography, spacing, and base resets.</p>
+
+  <h2>What Gets Loaded</h2>
+  <p><code>keld.css</code> bundles five layers in order:</p>
+  <ol>
+    <li><code>colors.css</code> — 17 palette tokens across four palettes</li>
+    <li><code>typography.css</code> — font-family tokens and scale reference</li>
+    <li><code>spacing.css</code> — space scale, layout widths, border radius, z-index</li>
+    <li><code>dark-light.css</code> — semantic token layer with dark/light switching</li>
+    <li><code>base.css</code> — box-sizing reset, smooth scroll, focus ring, reduced-motion</li>
+  </ol>
+  <p>Fonts are not bundled in <code>keld.css</code>. Load them separately via Google Fonts.</p>
+
+  <h2>Load Fonts</h2>
+  <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
+&lt;link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+/&gt;</code></pre>
+  <p>Load fonts via a <code>&lt;link&gt;</code> tag in <code>&lt;head&gt;</code>, not via <code>@import url()</code> inside CSS — the <code>@import</code> approach delays rendering.</p>
+
+  <h2>Prevent Flash of Wrong Theme (FOWT)</h2>
+  <p>Add this inline script in <code>&lt;head&gt;</code> before any CSS loads. It reads the stored preference and sets <code>data-theme</code> on <code>&lt;html&gt;</code> before the browser paints.</p>
+  <pre><code>&lt;script&gt;
+  (function () &#123;
+    const stored = localStorage.getItem('keld-theme');
+    const system = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', stored ?? system);
+  &#125;)();
+&lt;/script&gt;</code></pre>
+
+  <h2>Dark / Light Mode</h2>
+  <p>Theme mode is controlled via a <code>data-theme</code> attribute on <code>&lt;html&gt;</code>:</p>
+  <pre><code>&lt;html data-theme="light"&gt; &hellip; &lt;/html&gt;
+&lt;html data-theme="dark"&gt; &hellip; &lt;/html&gt;</code></pre>
+  <p>Toggle it with JavaScript and persist the choice:</p>
+  <pre><code>function toggleTheme() &#123;
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('keld-theme', next);
+&#125;</code></pre>
+  <p>Default (no attribute) is light mode. System preference is respected when no manual choice is stored.</p>
+
+  <h2>Surface Overrides</h2>
+  <p>Apply <code>data-surface</code> to any element to force a surface context independently of the page theme:</p>
+  <pre><code>&lt;section data-surface="dark"&gt;
+  &lt;!-- All children use dark surface tokens automatically --&gt;
+  &lt;button&gt;Primary action&lt;/button&gt;
+&lt;/section&gt;</code></pre>
+  <p>Available values: <code>light</code>, <code>dark</code>, <code>tinted</code>. All child components inherit the re-scoped tokens with no extra markup.</p>
+
+  <h2>Using Tokens</h2>
+  <p>Reference semantic tokens in your component CSS — never raw palette tokens:</p>
+  <pre><code>.btn-primary &#123;
+  background: var(--color-accent);      /* Fern (light) or Sage (dark) */
+  color: var(--color-accent-text);      /* always Parchment */
+  border-radius: var(--radius-md);      /* 6px */
+  padding: 0 var(--space-md);
+  font-family: var(--font-body);
+  font-weight: 600;
+&#125;
+
+.card &#123;
+  background: var(--color-bg-elevated); /* Linen (light) or Iron (dark) */
+  border-radius: var(--radius-lg);      /* 8px */
+  padding: var(--space-md);
+&#125;</code></pre>
+
+  <h2>Fraunces Headings</h2>
+  <p><code>font-variation-settings: 'opsz'</code> is mandatory on every Fraunces heading — the font renders incorrectly without it:</p>
+  <pre><code>h1 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 72; &#125;
+h2 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 24; &#125;
+h3 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; &#125;</code></pre>
+
+  <h2>Minimal Example</h2>
+  <pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/jabopiti/keld-theme@0.1.0/dist/keld.css"&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap"&gt;
+  &lt;script&gt;
+    (function()&#123;
+      const s = localStorage.getItem('keld-theme');
+      const p = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', s ?? p);
+    &#125;)();
+  &lt;/script&gt;
+  &lt;style&gt;
+    body &#123;
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: var(--space-xl);
+    &#125;
+    h1 &#123;
+      font-family: var(--font-display);
+      font-variation-settings: 'opsz' 72;
+      font-weight: 800;
+    &#125;
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, Keld&lt;/h1&gt;
+  &lt;p&gt;Token-first design system.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 </DocLayout>

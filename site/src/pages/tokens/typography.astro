@@ -2,7 +2,136 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Typography" description="Keld typography tokens and type scale">
+<DocLayout title="Typography" description="Keld typography system — font stacks, type scale, and opsz rules">
   <h1>Typography</h1>
-  <p>Full documentation coming in Phase 3.</p>
+  <p>Display serif for personality, humanist sans for readability, mono for code. The combination creates warmth without sacrificing legibility.</p>
+
+  <h2>Font Stacks</h2>
+  <table>
+    <thead><tr><th>Token</th><th>Stack</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td><code>--font-display</code></td><td><code>'Fraunces', Georgia, serif</code></td><td>Headings h1–h3, display copy</td></tr>
+      <tr><td><code>--font-body</code></td><td><code>'Instrument Sans', system-ui, sans-serif</code></td><td>Body copy, paragraphs</td></tr>
+      <tr><td><code>--font-mono</code></td><td><code>'JetBrains Mono', 'Courier New', monospace</code></td><td>Code, <code>&lt;pre&gt;</code> blocks</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Fraunces is an optical-size variable serif — warm and considered rather than generic.
+    Instrument Sans pairs naturally: geometric enough to feel clean, humanist enough to not
+    feel cold. Together they create the &ldquo;familiar but differentiated&rdquo; quality the system aims for.
+  </p>
+
+  <h2>Fraunces Optical Size — Critical Rule</h2>
+  <p>
+    Fraunces is a variable font with an optical size axis (<code>opsz</code>).
+    This axis <strong>must always be set explicitly</strong> — the font renders
+    differently at different optical sizes and will look wrong without it.
+  </p>
+  <table>
+    <thead><tr><th>Element</th><th>opsz value</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><code>h1</code></td><td><strong>72</strong></td><td>Optimises letterform detail for large display sizes</td></tr>
+      <tr><td><code>h2</code></td><td><strong>24</strong></td><td>Section heading weight — balanced stroke contrast</td></tr>
+      <tr><td><code>h3</code></td><td><strong>20</strong></td><td>Subsection — slightly thicker strokes at smaller size</td></tr>
+    </tbody>
+  </table>
+  <pre><code>h1 &#123;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: 'opsz' 72;  /* mandatory */
+&#125;
+
+h2 &#123;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: 'opsz' 24;  /* mandatory */
+&#125;
+
+h3 &#123;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variation-settings: 'opsz' 20;  /* mandatory */
+&#125;</code></pre>
+
+  <h2>Type Scale</h2>
+  <p>A modular scale anchored at 16px base, stepping ~1.25&times; (major third).</p>
+  <table>
+    <thead><tr><th>rem</th><th>px</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><code>0.75rem</code></td><td>12px</td><td>Captions, labels, badges</td></tr>
+      <tr><td><code>0.875rem</code></td><td>14px</td><td>Small body, UI secondary</td></tr>
+      <tr><td><code>1rem</code></td><td>16px</td><td>Default body</td></tr>
+      <tr><td><code>1.125rem</code></td><td>18px</td><td>Large body, intro copy</td></tr>
+      <tr><td><code>1.25rem</code></td><td>20px</td><td>H3 base</td></tr>
+      <tr><td><code>1.5rem</code></td><td>24px</td><td>H2 base</td></tr>
+      <tr><td><code>2.25rem</code></td><td>36px</td><td>H1 base</td></tr>
+      <tr><td><code>4.5rem</code></td><td>72px</td><td>Display / hero</td></tr>
+    </tbody>
+  </table>
+  <p>Use <code>clamp()</code> for fluid heading sizes — no breakpoint jumps. The DocLayout already applies <code>clamp()</code> to all h1–h3 elements.</p>
+
+  <h2>Heading Styles</h2>
+  <table>
+    <thead><tr><th>Element</th><th>Font</th><th>Weight</th><th>Size</th><th>opsz</th><th>Tracking</th></tr></thead>
+    <tbody>
+      <tr><td><code>h1</code></td><td>Fraunces</td><td>800</td><td>clamp(2.5rem, 5vw, 4rem)</td><td><strong>72</strong></td><td>-0.02em</td></tr>
+      <tr><td><code>h2</code></td><td>Fraunces</td><td>700</td><td>clamp(1.5rem, 3vw, 2rem)</td><td><strong>24</strong></td><td>-0.02em</td></tr>
+      <tr><td><code>h3</code></td><td>Fraunces</td><td>600</td><td>clamp(1.1rem, 2vw, 1.35rem)</td><td><strong>20</strong></td><td>-0.01em</td></tr>
+      <tr><td><code>h4</code></td><td>Instrument Sans</td><td>600</td><td>1rem</td><td>—</td><td>0</td></tr>
+      <tr><td><code>h5</code>, <code>h6</code></td><td>Instrument Sans</td><td>600</td><td>0.875rem</td><td>—</td><td>0.04em</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Body &amp; UI Styles</h2>
+  <table>
+    <thead><tr><th>Role</th><th>Font</th><th>Weight</th><th>Size</th><th>Line height</th></tr></thead>
+    <tbody>
+      <tr><td>Body</td><td>Instrument Sans</td><td>400</td><td>16px</td><td>1.7</td></tr>
+      <tr><td>Body large</td><td>Instrument Sans</td><td>400</td><td>18px</td><td>1.7</td></tr>
+      <tr><td>Body small</td><td>Instrument Sans</td><td>400</td><td>14px</td><td>1.7</td></tr>
+      <tr><td>Label</td><td>Instrument Sans</td><td>600</td><td>12px</td><td>—</td></tr>
+      <tr><td>Caption</td><td>Instrument Sans</td><td>400</td><td>12px</td><td>1.6</td></tr>
+      <tr><td>UI / buttons</td><td>Instrument Sans</td><td>500–600</td><td>13–14px</td><td>1.6</td></tr>
+      <tr><td>Code</td><td>JetBrains Mono</td><td>400–500</td><td>13px</td><td>1.6</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Letter Spacing</h2>
+  <table>
+    <thead><tr><th>Value</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><code>-0.02em</code></td><td>Display, h1, h2 — tightens large headings</td></tr>
+      <tr><td><code>0em</code></td><td>Default for body and most UI</td></tr>
+      <tr><td><code>0.04em</code></td><td>H5/h6, small UI labels</td></tr>
+      <tr><td><code>0.12em</code></td><td>Uppercase caps, overline labels</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Responsive Typography</h2>
+  <table>
+    <thead><tr><th>Breakpoint</th><th>H1</th><th>H2</th><th>Body</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile &lt; 640px</td><td>28px</td><td>22px</td><td>16px</td></tr>
+      <tr><td>Tablet 640–1079px</td><td>clamp(28px, 5vw, 52px)</td><td>clamp(22px, 4vw, 36px)</td><td>16px</td></tr>
+      <tr><td>Desktop &ge; 1080px</td><td>36px</td><td>24px</td><td>16px</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Loading Fonts</h2>
+  <p>Load via a <code>&lt;link&gt;</code> tag in <code>&lt;head&gt;</code> — not via <code>@import url()</code> inside CSS. The import approach delays rendering.</p>
+  <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
+&lt;link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+/&gt;</code></pre>
+
+  <h2>Usage Rules</h2>
+  <ul>
+    <li>Fraunces for h1–h3 and display copy only — never for body text, UI labels, or navigation.</li>
+    <li><code>font-variation-settings: 'opsz'</code> is mandatory on every Fraunces usage: h1 &rarr; 72, h2 &rarr; 24, h3 &rarr; 20.</li>
+    <li>Instrument Sans for everything interactive: buttons, inputs, nav, labels, UI text.</li>
+    <li>JetBrains Mono for code and inline code only — never decorative.</li>
+    <li>Body copy max-width: 70ch (<code>--width-prose</code>). Never use Instrument Sans at weight 700+.</li>
+    <li>Fraunces minimum size: 16px — never smaller.</li>
+  </ul>
 </DocLayout>
