@@ -1,6 +1,6 @@
 # Keld
 
-A design system rooted in northern European forest landscapes. Framework-agnostic, token-first, built for brand consistency across websites and web apps.
+A design system rooted in northern European forest landscapes. Framework-agnostic, token-first, built for consistency across websites and web apps. Inspired by [Nord Theme](https://www.nordtheme.com/).
 
 **Sharp. Warm. Intellectual.**
 
