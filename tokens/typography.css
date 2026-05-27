@@ -1,0 +1,31 @@
+/* ── Keld — Typography tokens ─────────────────────────────────────── */
+/* Fraunces (display) · Instrument Sans (body) · JetBrains Mono (code)      */
+/* IMPORTANT: Fraunces requires font-variation-settings: 'opsz' <size>       */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Instrument Sans', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+}
+
+/*
+  Type scale reference:
+  ─────────────────────────────────────────────────────────
+  Role         Font               Weight  Size          opsz
+  ─────────────────────────────────────────────────────────
+  Display/H1   Fraunces           800     clamp(56–112) 72 or 36
+  H2           Fraunces           700     clamp(28–42)  24
+  H3           Fraunces           600     clamp(20–28)  20
+  Body         Instrument Sans    400     16px          —
+  UI/metadata  Instrument Sans    500–600 11–14px       —
+  Code         JetBrains Mono     400–500 12–13px       —
+  ─────────────────────────────────────────────────────────
+  Rules:
+  - Max 3 type sizes per layout
+  - Body column max 68 characters per line (68ch)
+  - Fraunces minimum size: 16px — never smaller
+  - Never use Instrument Sans weight 700+
+  - letter-spacing: -0.02em on display; 0 on body
+*/

@@ -1,0 +1,194 @@
+/* ── Keld — Palette tokens ─────────────────────────────────────────── */
+/* Four palettes: Iron Night · Birch Storm · Forest · Bloom                 */
+
+:root {
+  /* Iron Night — dark surfaces */
+  --kn0-void:      #0D1117;   /* Darkest base, primary dark bg             */
+  --kn1-iron:      #374151;   /* Elevated surfaces, borders                */
+  --kn2-slate:     #4B5563;   /* Active lines, selections                  */
+  --kn3-ash:       #6B7280;   /* Comments, placeholders, guides            */
+
+  /* Birch Storm — light surfaces */
+  --bs0-sand:      #E4E2DA;   /* Variables, elevated UI (dark)             */
+  --bs1-linen:     #EEEDE9;   /* Hover states, active line (light)         */
+  --bs2-parchment: #F5F4F0;   /* Primary bg (light) / text (dark)         */
+
+  /* Forest — accent */
+  --fr0-sage:      #5C9E86;   /* Classes, types, supporting accent         */
+  --fr1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs     */
+  --fr2-forest:    #2D5E4A;   /* Keywords, operators, secondary accent     */
+  --fr3-deepwater: #254D5A;   /* Pragmas, pre-processor, tertiary accent   */
+
+  /* Bloom — semantic */
+  --bl0-ember:     #C5414C;   /* Errors, deletions                         */
+  --bl1-ochre:     #AB5A2B;   /* Annotations, decorators                   */
+  --bl2-grain:     #8D6B20;   /* Warnings, regex, escapes                  */
+  --bl3-moss:      #567A37;   /* Success, additions, strings               */
+  --bl4-heather:   #885DB4;   /* Numbers, uncommon functionality           */
+}
+/* ── Keld — Typography tokens ─────────────────────────────────────── */
+/* Fraunces (display) · Instrument Sans (body) · JetBrains Mono (code)      */
+/* IMPORTANT: Fraunces requires font-variation-settings: 'opsz' <size>       */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Instrument Sans', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+}
+/* ── Keld — Spacing, layout, and radius tokens ──────────────────────── */
+/* Base unit: 12px (0.75rem). Scale multiplied from there.                  */
+
+:root {
+  /* Spacing scale */
+  --space-xs:  0.375rem;   /*  6px */
+  --space-sm:  0.75rem;    /* 12px */
+  --space-md:  1.5rem;     /* 24px */
+  --space-lg:  2.25rem;    /* 36px */
+  --space-xl:  3rem;       /* 48px */
+  --space-2xl: 3.75rem;    /* 60px */
+  --space-3xl: 4.5rem;     /* 72px */
+  --space-4xl: 6rem;       /* 96px */
+
+  /* Layout widths */
+  --width-content: 1080px;
+  --width-prose:   70ch;
+  --width-narrow:  640px;
+
+  /* Border radius */
+  --radius-sm:  4px;
+  --radius-md:  6px;
+  --radius-lg:  8px;
+  --radius-xl:  12px;
+  --radius-full: 9999px;
+
+  /* Z-index scale */
+  --z-base:    0;
+  --z-raised:  1;
+  --z-dropdown: 100;
+  --z-sticky:  200;
+  --z-overlay: 300;
+  --z-modal:   400;
+  --z-toast:   500;
+}
+/* ── Keld — Semantic tokens and surface patterns ──────────────────────── */
+
+:root,
+[data-theme="light"] {
+  --color-bg:             var(--bs2-parchment);
+  --color-bg-elevated:    var(--bs1-linen);
+  --color-bg-sunken:      var(--bs0-sand);
+  --color-text:           var(--kn0-void);
+  --color-text-secondary: var(--kn2-slate);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn1-iron);
+  --color-accent:         var(--fr1-fern);
+  --color-accent-hover:   var(--fr2-forest);
+  --color-accent-text:    var(--bs2-parchment);
+}
+
+[data-theme="dark"] {
+  --color-bg:             var(--kn0-void);
+  --color-bg-elevated:    var(--kn1-iron);
+  --color-bg-sunken:      var(--kn2-slate);
+  --color-text:           var(--bs2-parchment);
+  --color-text-secondary: var(--bs0-sand);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn2-slate);
+  --color-accent:         var(--fr0-sage);
+  --color-accent-hover:   var(--fr1-fern);
+  --color-accent-text:    var(--bs2-parchment);
+}
+
+[data-surface="light"] {
+  background: var(--bs2-parchment);
+  --color-bg:             var(--bs2-parchment);
+  --color-bg-elevated:    var(--bs1-linen);
+  --color-bg-sunken:      var(--bs0-sand);
+  --color-text:           var(--kn0-void);
+  --color-text-secondary: var(--kn2-slate);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn1-iron);
+  --color-accent:         var(--fr1-fern);
+  --color-accent-hover:   var(--fr2-forest);
+  --color-accent-text:    var(--bs2-parchment);
+}
+
+[data-surface="dark"] {
+  background: var(--kn0-void);
+  --color-bg:             var(--kn0-void);
+  --color-bg-elevated:    var(--kn1-iron);
+  --color-bg-sunken:      var(--kn2-slate);
+  --color-text:           var(--bs2-parchment);
+  --color-text-secondary: var(--bs0-sand);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn2-slate);
+  --color-accent:         var(--fr0-sage);
+  --color-accent-hover:   var(--fr1-fern);
+  --color-accent-text:    var(--bs2-parchment);
+}
+
+[data-surface="tinted"] {
+  background: var(--bs1-linen);
+  --color-bg:             var(--bs1-linen);
+  --color-bg-elevated:    var(--bs2-parchment);
+  --color-bg-sunken:      var(--bs0-sand);
+  --color-text:           var(--kn0-void);
+  --color-text-secondary: var(--kn2-slate);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn1-iron);
+  --color-accent:         var(--fr1-fern);
+  --color-accent-hover:   var(--fr2-forest);
+  --color-accent-text:    var(--bs2-parchment);
+}
+/* ── Keld — Base reset and global styles ──────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: inherit;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

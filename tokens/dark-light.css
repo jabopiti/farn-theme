@@ -1,0 +1,89 @@
+/* ── Keld — Semantic tokens and surface patterns ──────────────────────── */
+/*                                                                           */
+/* Two-layer architecture:                                                   */
+/*   Layer 1 — palette (colors.css): raw color values, never used directly  */
+/*   Layer 2 — semantic (this file): purpose-mapped aliases                  */
+/*                                                                           */
+/* Dark/light mode: controlled via [data-theme] on <html>                   */
+/* Surface override: use data-surface="light|dark|tinted" on any element     */
+/*                                                                           */
+/* FOWT prevention: add this inline script before <body>:                    */
+/*   const t = localStorage.getItem('keld-theme');                           */
+/*   const s = window.matchMedia('(prefers-color-scheme: dark)').matches     */
+/*     ? 'dark' : 'light';                                                   */
+/*   document.documentElement.setAttribute('data-theme', t ?? s);            */
+
+/* ── Semantic tokens — light (default) ───────────────────────────────── */
+:root,
+[data-theme="light"] {
+  --color-bg:             var(--bs2-parchment);
+  --color-bg-elevated:    var(--bs1-linen);
+  --color-bg-sunken:      var(--bs0-sand);
+  --color-text:           var(--kn0-void);
+  --color-text-secondary: var(--kn2-slate);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn1-iron);
+  --color-accent:         var(--fr1-fern);
+  --color-accent-hover:   var(--fr2-forest);
+  --color-accent-text:    var(--bs2-parchment);
+}
+
+/* ── Semantic tokens — dark ─────────────────────────────────────────── */
+[data-theme="dark"] {
+  --color-bg:             var(--kn0-void);
+  --color-bg-elevated:    var(--kn1-iron);
+  --color-bg-sunken:      var(--kn2-slate);
+  --color-text:           var(--bs2-parchment);
+  --color-text-secondary: var(--bs0-sand);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn2-slate);
+  --color-accent:         var(--fr0-sage);
+  --color-accent-hover:   var(--fr1-fern);
+  --color-accent-text:    var(--bs2-parchment);
+}
+
+/* ── Surface patterns ─────────────────────────────────────────────────── */
+/* Apply data-surface to any element to force a surface context             */
+/* regardless of the page-level dark/light theme.                           */
+
+[data-surface="light"] {
+  background: var(--bs2-parchment);
+  --color-bg:             var(--bs2-parchment);
+  --color-bg-elevated:    var(--bs1-linen);
+  --color-bg-sunken:      var(--bs0-sand);
+  --color-text:           var(--kn0-void);
+  --color-text-secondary: var(--kn2-slate);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn1-iron);
+  --color-accent:         var(--fr1-fern);
+  --color-accent-hover:   var(--fr2-forest);
+  --color-accent-text:    var(--bs2-parchment);
+}
+
+[data-surface="dark"] {
+  background: var(--kn0-void);
+  --color-bg:             var(--kn0-void);
+  --color-bg-elevated:    var(--kn1-iron);
+  --color-bg-sunken:      var(--kn2-slate);
+  --color-text:           var(--bs2-parchment);
+  --color-text-secondary: var(--bs0-sand);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn2-slate);
+  --color-accent:         var(--fr0-sage);
+  --color-accent-hover:   var(--fr1-fern);
+  --color-accent-text:    var(--bs2-parchment);
+}
+
+[data-surface="tinted"] {
+  background: var(--bs1-linen);
+  --color-bg:             var(--bs1-linen);
+  --color-bg-elevated:    var(--bs2-parchment);
+  --color-bg-sunken:      var(--bs0-sand);
+  --color-text:           var(--kn0-void);
+  --color-text-secondary: var(--kn2-slate);
+  --color-text-tertiary:  var(--kn3-ash);
+  --color-border:         var(--kn1-iron);
+  --color-accent:         var(--fr1-fern);
+  --color-accent-hover:   var(--fr2-forest);
+  --color-accent-text:    var(--bs2-parchment);
+}
