@@ -1,0 +1,301 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Keld design system documentation' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} — Keld</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <!-- FOWT prevention: set theme before first paint -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('keld-theme');
+        const system = window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+        document.documentElement.setAttribute('data-theme', stored ?? system);
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="layout">
+      <header class="site-header">
+        <a href="/" class="site-logo">Keld</a>
+        <nav class="header-nav" aria-label="Site links">
+          <a href="https://github.com/jabopiti/keld-theme">GitHub</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+          &#x25D0;
+        </button>
+      </header>
+
+      <div class="layout-body">
+        <aside class="sidebar" aria-label="Documentation navigation">
+          <nav class="sidebar-nav">
+            <div class="nav-section">
+              <span class="nav-label">Start</span>
+              <a href="/" class="nav-link">Overview</a>
+              <a href="/getting-started" class="nav-link">Getting Started</a>
+              <a href="/about" class="nav-link">About</a>
+            </div>
+            <div class="nav-section">
+              <span class="nav-label">Tokens</span>
+              <a href="/tokens/colors" class="nav-link">Colors</a>
+              <a href="/tokens/typography" class="nav-link">Typography</a>
+              <a href="/tokens/spacing" class="nav-link">Spacing</a>
+            </div>
+            <div class="nav-section">
+              <span class="nav-label">Components</span>
+              <a href="/components" class="nav-link">Overview</a>
+            </div>
+            <div class="nav-section">
+              <span class="nav-label">PWA</span>
+              <a href="/pwa" class="nav-link">PWA Patterns</a>
+            </div>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <slot />
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const toggle = document.getElementById('theme-toggle');
+      toggle?.addEventListener('click', () => {
+        const html = document.documentElement;
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('keld-theme', next);
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* ── Keld token imports ──────────────────────────────────────────────── */
+  /* Paths resolve relative to this file: site/src/layouts/ → repo root    */
+  @import '../../../tokens/colors.css';
+  @import '../../../tokens/spacing.css';
+  @import '../../../tokens/dark-light.css';
+  @import '../../../tokens/base.css';
+
+  /* Font-family tokens (fonts loaded via <link> in <head> above) */
+  :root {
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body:    'Instrument Sans', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  /* ── Layout ──────────────────────────────────────────────────────────── */
+  .layout {
+    min-height: 100vh;
+  }
+
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    z-index: var(--z-sticky);
+    background: var(--color-bg-elevated);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .site-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-variation-settings: 'opsz' 20;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .header-nav {
+    margin-left: auto;
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .header-nav a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .header-nav a:hover {
+    color: var(--color-text);
+  }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1;
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  .layout-body {
+    display: flex;
+    padding-top: 56px;
+  }
+
+  /* ── Sidebar ─────────────────────────────────────────────────────────── */
+  .sidebar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 240px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+    border-right: 1px solid var(--color-border);
+    background: var(--color-bg);
+    padding: var(--space-md) 0;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .nav-section {
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--space-sm);
+  }
+
+  .nav-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .nav-link {
+    display: block;
+    padding: 6px var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: background 100ms ease, color 100ms ease;
+  }
+
+  .nav-link:hover {
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+  }
+
+  /* ── Content area ────────────────────────────────────────────────────── */
+  .content {
+    margin-left: 240px;
+    flex: 1;
+    padding: var(--space-xl) var(--space-2xl);
+    max-width: calc(var(--width-content) + 240px);
+  }
+
+  /* ── Prose typography ────────────────────────────────────────────────── */
+  /* Fraunces: font-variation-settings: 'opsz' <size> is mandatory         */
+  .content h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-variation-settings: 'opsz' 72;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+
+  .content h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-variation-settings: 'opsz' 24;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .content h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-variation-settings: 'opsz' 20;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .content p {
+    max-width: var(--width-prose);
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+  }
+
+  .content code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-bg-sunken);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+  }
+
+  .content pre {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    background: var(--color-bg-sunken);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    overflow-x: auto;
+    margin-bottom: var(--space-md);
+    max-width: var(--width-prose);
+  }
+
+  .content pre code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+</style>

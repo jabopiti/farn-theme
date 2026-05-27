@@ -1,0 +1,17 @@
+# Cloudflare Pages — build configuration reference
+# Connect the repo at https://dash.cloudflare.com → Pages → Create project
+#
+# Build settings (configure in Cloudflare dashboard):
+#   Framework preset:     Astro  (or None)
+#   Build command:        cd site && pnpm install && pnpm build
+#   Build output dir:     site/dist
+#   Root directory:       (leave empty — repo root)
+#
+# Environment variables to set in dashboard:
+#   NODE_VERSION = 20
+#
+# Custom domain: keld.jbpt.de
+#   Add CNAME in DNS: keld → <project>.pages.dev
+
+name = "keld-docs"
+pages_build_output_dir = "site/dist"
