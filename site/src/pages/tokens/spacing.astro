@@ -2,7 +2,163 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Spacing" description="Keld spacing scale and layout tokens">
+<DocLayout title="Spacing" description="Keld spacing scale, layout widths, border radius, and z-index">
   <h1>Spacing</h1>
-  <p>Full documentation coming in Phase 3.</p>
+  <p>Proximity signals relationship; distance signals importance. The spacing scale encodes this — small gaps within components, large gaps between sections.</p>
+
+  <h2>Space Scale</h2>
+  <p>Base unit is 12px. All tokens are multiples of 12, except <code>--space-xs</code> (6px = half-unit).</p>
+
+  <div class="scale-preview" aria-hidden="true">
+    <div class="scale-bar" style="width:6px"  title="6px"></div>
+    <div class="scale-bar" style="width:12px" title="12px"></div>
+    <div class="scale-bar" style="width:24px" title="24px"></div>
+    <div class="scale-bar" style="width:36px" title="36px"></div>
+    <div class="scale-bar" style="width:48px" title="48px"></div>
+    <div class="scale-bar" style="width:60px" title="60px"></div>
+    <div class="scale-bar" style="width:72px" title="72px"></div>
+    <div class="scale-bar" style="width:96px" title="96px"></div>
+  </div>
+
+  <table>
+    <thead><tr><th>Token</th><th>rem</th><th>px</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><code>--space-xs</code></td><td>0.375rem</td><td>6px</td><td>Icon-to-label gap, tag padding</td></tr>
+      <tr><td><code>--space-sm</code></td><td>0.75rem</td><td>12px</td><td>Tight grouping within a component</td></tr>
+      <tr><td><code>--space-md</code></td><td>1.5rem</td><td>24px</td><td>Standard gap — when in doubt, start here</td></tr>
+      <tr><td><code>--space-lg</code></td><td>2.25rem</td><td>36px</td><td>Between distinct content blocks</td></tr>
+      <tr><td><code>--space-xl</code></td><td>3rem</td><td>48px</td><td>Section breathing room, major transitions</td></tr>
+      <tr><td><code>--space-2xl</code></td><td>3.75rem</td><td>60px</td><td>Between page sections</td></tr>
+      <tr><td><code>--space-3xl</code></td><td>4.5rem</td><td>72px</td><td>Hero padding, top-of-page breathing room</td></tr>
+      <tr><td><code>--space-4xl</code></td><td>6rem</td><td>96px</td><td>Maximum section gap — use sparingly</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Usage Rules</h3>
+  <ul>
+    <li><strong>xs / sm</strong> — intra-component only. Never use to separate independent elements.</li>
+    <li><strong>md</strong> — the default gap. When in doubt, start here.</li>
+    <li><strong>lg / xl</strong> — between content blocks within a section.</li>
+    <li><strong>2xl / 3xl</strong> — between named page sections. The visual pause that lets sections breathe.</li>
+    <li><strong>4xl</strong> — reserved for hero areas. More than one use per page usually signals restructuring is needed.</li>
+  </ul>
+
+  <h2>Layout Widths</h2>
+  <table>
+    <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><code>--width-content</code></td><td>1080px</td><td>Outer page container</td></tr>
+      <tr><td><code>--width-prose</code></td><td>70ch</td><td>Body copy, articles, long-form text</td></tr>
+      <tr><td><code>--width-narrow</code></td><td>640px</td><td>Forms, focused UI, modals</td></tr>
+    </tbody>
+  </table>
+  <p>
+    The page container can be wide (<code>--width-content</code>), but readable text should always
+    be constrained to ~70ch (<code>--width-prose</code>). These two values operate independently.
+  </p>
+
+  <h3>Page Structure</h3>
+  <pre><code>[site header / nav]       — sticky or static, full-width
+[hero / page header]      — padding-top: --space-3xl
+[content sections]        — gap between sections: --space-2xl
+  [section heading]
+  [section body]          — max-width: --width-prose or --width-content
+[site footer]             — padding: --space-xl top</code></pre>
+
+  <h3>Grid Pattern</h3>
+  <pre><code>.card-grid &#123;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md); /* 24px */
+&#125;</code></pre>
+  <p>Use CSS Grid for two-dimensional layouts, flexbox for one-dimensional. Never go beyond 3 columns at <code>--width-content</code>.</p>
+
+  <h2>Border Radius</h2>
+  <p>Each radius maps to a specific element type. The progression creates implicit hierarchy — larger surfaces have larger radii.</p>
+  <table>
+    <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><code>--radius-sm</code></td><td>4px</td><td>Badges, tags, nav link focus ring, checkboxes</td></tr>
+      <tr><td><code>--radius-md</code></td><td>6px</td><td>Buttons, inputs, selects, textarea, icon containers</td></tr>
+      <tr><td><code>--radius-lg</code></td><td>8px</td><td>Cards, dropdowns, popovers, drawers</td></tr>
+      <tr><td><code>--radius-xl</code></td><td>12px</td><td>Large panels, featured sections</td></tr>
+      <tr><td><code>--radius-full</code></td><td>9999px</td><td>Avatar circles (one-off use — not for badges)</td></tr>
+    </tbody>
+  </table>
+  <p>A badge (4px) sits inside a card (8px) — the radius difference signals containment without needing a border. The system does not use pill-shaped badges.</p>
+
+  <div class="radius-preview" aria-hidden="true">
+    <div class="radius-chip" style="border-radius:4px">4px</div>
+    <div class="radius-chip" style="border-radius:6px">6px</div>
+    <div class="radius-chip" style="border-radius:8px">8px</div>
+    <div class="radius-chip" style="border-radius:12px">12px</div>
+    <div class="radius-chip" style="border-radius:9999px">9999px</div>
+  </div>
+
+  <h2>Z-index Scale</h2>
+  <p>Always reference a token — never use raw numbers. Never skip levels.</p>
+  <table>
+    <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><code>--z-base</code></td><td>0</td><td>Default page content</td></tr>
+      <tr><td><code>--z-raised</code></td><td>1</td><td>Sticky elements in flow (sub-nav tab row)</td></tr>
+      <tr><td><code>--z-dropdown</code></td><td>100</td><td>Dropdowns, popovers</td></tr>
+      <tr><td><code>--z-sticky</code></td><td>200</td><td>Sticky nav bar, fixed header</td></tr>
+      <tr><td><code>--z-overlay</code></td><td>300</td><td>Overlays, mobile nav drawer</td></tr>
+      <tr><td><code>--z-modal</code></td><td>400</td><td>Modals</td></tr>
+      <tr><td><code>--z-toast</code></td><td>500</td><td>Toast notifications</td></tr>
+    </tbody>
+  </table>
+  <p>The nav (<code>--z-sticky: 200</code>) sits below overlays (<code>--z-overlay: 300</code>) — dropdowns triggered inside the nav render correctly above it without adjustment.</p>
+
+  <h2>Responsive Breakpoints</h2>
+  <table>
+    <thead><tr><th>Breakpoint</th><th>Behaviour</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile &lt; 640px</td><td>Single column. Horizontal padding: <code>--space-md</code> (24px)</td></tr>
+      <tr><td>Tablet 640–1079px</td><td>Single column, centered. Horizontal padding: <code>--space-lg</code> (36px)</td></tr>
+      <tr><td>Desktop &ge; 1080px</td><td>Centered container at <code>--width-content</code>, auto horizontal margins</td></tr>
+    </tbody>
+  </table>
+  <p>Avoid fixed pixel breakpoints inside components — use <code>min()</code>, <code>max()</code>, and <code>clamp()</code> where the content dictates the reflow point.</p>
 </DocLayout>
+
+<style>
+  .scale-preview &#123;
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0;
+    height: 96px;
+  &#125;
+
+  .scale-bar &#123;
+    background: var(--color-accent);
+    opacity: 0.6;
+    height: 100%;
+    border-radius: var(--radius-sm);
+    min-width: 6px;
+    flex-shrink: 0;
+  &#125;
+
+  .radius-preview &#123;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0;
+  &#125;
+
+  .radius-chip &#123;
+    width: 64px;
+    height: 40px;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+  &#125;
+</style>
