@@ -86,6 +86,7 @@
   /* Z-index scale */
   --z-base:    0;
   --z-raised:  1;
+  --z-content: 10;    /* sticky sub-nav — above page, below fixed nav */
   --z-dropdown: 100;
   --z-sticky:  200;
   --z-overlay: 300;
@@ -117,6 +118,9 @@
   --color-text-secondary: var(--kn2-slate);
   --color-text-tertiary:  var(--kn3-ash);
   --color-border:         var(--kn1-iron);
+  --color-border-subtle:  rgba(55,65,81,0.12);
+  --color-ghost-border:   rgba(55,65,81,0.25);
+  --color-bg-code:        var(--fr3-deepwater);
   --color-accent:         var(--fr1-fern);
   --color-accent-hover:   var(--fr2-forest);
   --color-accent-text:    var(--bs2-parchment);
@@ -131,6 +135,9 @@
   --color-text-secondary: var(--bs0-sand);
   --color-text-tertiary:  var(--kn3-ash);
   --color-border:         var(--kn2-slate);
+  --color-border-subtle:  rgba(75,85,99,0.25);
+  --color-ghost-border:   rgba(245,244,240,0.25);
+  --color-bg-code:        var(--fr3-deepwater);
   --color-accent:         var(--fr0-sage);
   --color-accent-hover:   var(--fr1-fern);
   --color-accent-text:    var(--bs2-parchment);
@@ -149,6 +156,9 @@
   --color-text-secondary: var(--kn2-slate);
   --color-text-tertiary:  var(--kn3-ash);
   --color-border:         var(--kn1-iron);
+  --color-border-subtle:  rgba(55,65,81,0.12);
+  --color-ghost-border:   rgba(55,65,81,0.25);
+  --color-bg-code:        var(--fr3-deepwater);
   --color-accent:         var(--fr1-fern);
   --color-accent-hover:   var(--fr2-forest);
   --color-accent-text:    var(--bs2-parchment);
@@ -163,6 +173,9 @@
   --color-text-secondary: var(--bs0-sand);
   --color-text-tertiary:  var(--kn3-ash);
   --color-border:         var(--kn2-slate);
+  --color-border-subtle:  rgba(75,85,99,0.25);
+  --color-ghost-border:   rgba(245,244,240,0.25);
+  --color-bg-code:        var(--fr3-deepwater);
   --color-accent:         var(--fr0-sage);
   --color-accent-hover:   var(--fr1-fern);
   --color-accent-text:    var(--bs2-parchment);
@@ -177,6 +190,9 @@
   --color-text-secondary: var(--kn2-slate);
   --color-text-tertiary:  var(--kn3-ash);
   --color-border:         var(--kn1-iron);
+  --color-border-subtle:  rgba(55,65,81,0.12);
+  --color-ghost-border:   rgba(55,65,81,0.25);
+  --color-bg-code:        var(--fr3-deepwater);
   --color-accent:         var(--fr1-fern);
   --color-accent-hover:   var(--fr2-forest);
   --color-accent-text:    var(--bs2-parchment);
