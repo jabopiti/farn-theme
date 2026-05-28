@@ -1,4 +1,6 @@
 ---
+import LogoIcon from '../components/LogoIcon.astro';
+
 interface Props {
   title: string;
   description?: string;
@@ -46,7 +48,7 @@ function isActive(route: string) {
     <!-- Nav — always filled on doc pages -->
     <nav class="nav filled" id="nav" aria-label="Main navigation">
       <div class="nav-inner">
-        <a href="/" class="nav-logo"><img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />Farn<span>.</span></a>
+        <a href="/" class="nav-logo"><LogoIcon />Farn<span>.</span></a>
         <ul class="nav-links">
           <li><a href="/getting-started" class={isActive('/getting-started') ? 'active' : ''}>Getting Started</a></li>
           <li><a href="/tokens/colors" class={isActive('/tokens') ? 'active' : ''}>Colors</a></li>
@@ -72,7 +74,7 @@ function isActive(route: string) {
     <!-- Mobile drawer -->
     <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
       <div class="drawer-header">
-        <span class="drawer-logo"><img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />Farn<span>.</span></span>
+        <span class="drawer-logo"><LogoIcon />Farn<span>.</span></span>
         <button class="drawer-close" id="drawerClose" aria-label="Close menu">
           <i class="ti ti-x"></i>
         </button>
@@ -102,7 +104,7 @@ function isActive(route: string) {
     <footer class="page-footer" data-surface="dark">
       <div class="footer-inner">
         <div class="footer-top">
-          <div class="footer-logo"><img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />Farn<span>.</span></div>
+          <div class="footer-logo"><LogoIcon class="footer-logo-icon" />Farn<span>.</span></div>
           <p class="footer-tagline">A design system — sharp, warm, intellectual.</p>
           <div class="footer-nav">
             <a href="/">Design System</a>
@@ -181,6 +183,8 @@ function isActive(route: string) {
       // Sub-nav scroll tracking (runs only when a sub-nav slot is provided)
       const docSubNav = document.querySelector('.sub-nav');
       if (docSubNav) {
+        // Expand scroll-padding to clear both nav and sub-nav on this page
+        document.documentElement.style.scrollPaddingTop = 'var(--scroll-offset)';
         const docSubNavLinks = docSubNav.querySelectorAll('.sub-nav-link');
         const docIndicator = docSubNav.querySelector('.sub-nav-indicator');
 
@@ -204,7 +208,7 @@ function isActive(route: string) {
               if (link) { link.classList.add('active'); updateDocIndicator(link); }
             }
           });
-        }, { threshold: 0.3 });
+        }, { threshold: 0.1 });
 
         docSubNavLinks.forEach(l => {
           const id = l.getAttribute('href')?.slice(1);
@@ -225,10 +229,17 @@ function isActive(route: string) {
   @import '../styles/site.css';
 
   /* ── Doc page layout ─────────────────────────────────────────────────── */
-  html { scroll-padding-top: var(--scroll-offset); }
+  /* body padding pushes all flow content below the fixed nav; sub-nav
+     uses position:sticky top:nav-height which only activates on scroll —
+     without this padding the sub-nav starts at y:0 and is hidden behind
+     the fixed nav until the user scrolls. */
+  body { padding-top: var(--nav-height); }
+
+  /* Default scroll offset clears the fixed nav; JS overrides to
+     --scroll-offset on pages that also have a sticky sub-nav. */
+  html { scroll-padding-top: var(--nav-height); }
 
   .doc-main {
-    padding-top: var(--nav-height);
     min-height: 100vh;
   }
 
