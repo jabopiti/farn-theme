@@ -38,7 +38,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ### Added
 - Initial public release
-- Four color palettes: Iron Night, Birch Storm, Forest, Bloom (17 tokens)
+- Four color palettes: Iron Night, Birch Mist, Forest, Bloom (17 tokens)
 - Semantic token layer with light and dark mode (`[data-theme]`)
 - Surface pattern overrides (`[data-surface="light|dark|tinted"]`)
 - Typography tokens: Fraunces, Instrument Sans, JetBrains Mono

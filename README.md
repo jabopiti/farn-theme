@@ -16,7 +16,7 @@ Farn is a zero-dependency, pure CSS design token library for projects that want 
 
 ---
 
-![Farn colour palettes — Iron Night, Birch Storm, Forest, Bloom](.github/farn-palette.svg)
+![Farn colour palettes — Iron Night, Birch Mist, Forest, Bloom](.github/farn-palette.svg)
 
 ---
 
@@ -69,7 +69,7 @@ Then use the tokens:
 | Palette | Prefix | Tokens | Use for |
 |---|---|---|---|
 | Iron Night | `--kn*` | void, iron, slate, ash | Dark surfaces, borders |
-| Birch Storm | `--bs*` | sand, linen, parchment | Light surfaces, text on dark |
+| Birch Mist | `--bs*` | sand, linen, parchment | Light surfaces, text on dark |
 | Forest | `--fr*` | sage, fern, forest, deepwater | Accents, CTAs, links |
 | Bloom | `--bl*` | ember, ochre, grain, moss, heather | Semantic states |
 

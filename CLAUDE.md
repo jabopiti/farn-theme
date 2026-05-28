@@ -24,7 +24,7 @@ CHANGELOG.md      Update on every token or component change
 | Prefix | Palette | Examples |
 |---|---|---|
 | `--kn` | Iron Night (dark) | `--kn0-void`, `--kn1-iron`, `--kn2-slate`, `--kn3-ash` |
-| `--bs` | Birch Storm (light) | `--bs0-sand`, `--bs1-linen`, `--bs2-parchment` |
+| `--bs` | Birch Mist (light) | `--bs0-sand`, `--bs1-linen`, `--bs2-parchment` |
 | `--fr` | Forest (accent) | `--fr0-sage`, `--fr1-fern`, `--fr2-forest`, `--fr3-deepwater` |
 | `--bl` | Bloom (semantic) | `--bl0-ember`, `--bl1-ochre`, `--bl2-grain`, `--bl3-moss`, `--bl4-heather` |
 | `--color-*` | Semantic layer | `--color-bg`, `--color-text`, `--color-accent`, etc. |
