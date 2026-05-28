@@ -61,6 +61,13 @@
 .nav-logo span { color: var(--fr0-sage); }
 .nav.filled .nav-logo { color: var(--color-text); }
 .nav.filled .nav-logo span { color: var(--color-accent); }
+.nav-logo-icon {
+  height: 1.25em;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.35em;
+}
 .nav-links {
   display: flex;
   align-items: center;

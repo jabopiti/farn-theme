@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Placeholder — replace with final Keld logo -->
-  <rect width="32" height="32" rx="4" fill="#0D1117"/>
-  <path d="M9.5 8v16M9.5 16l10.5-8M9.5 16l10.5 8"
-        stroke="#5C9E86" stroke-width="3.5" stroke-linecap="square" fill="none"/>
-  <rect x="22" y="8" width="2.5" height="2.5" fill="#3E7A62"/>
-</svg>
