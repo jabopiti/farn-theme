@@ -86,7 +86,8 @@
 .nav-right {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
+  margin-left: var(--space-sm);
 }
 .theme-toggle {
   width: 36px; height: 36px;
@@ -129,6 +130,7 @@
 .nav-cta {
   height: 36px;
   padding: 0 16px;
+  margin-left: var(--space-xs);
   background: transparent;
   color: var(--bs2-parchment);
   border-radius: var(--radius-md);
