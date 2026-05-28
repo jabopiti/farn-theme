@@ -368,9 +368,6 @@
   padding: 0 var(--space-lg);
 }
 .footer-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   margin-bottom: var(--space-xl);
 }
 .footer-logo {
@@ -385,12 +382,12 @@
 .footer-tagline {
   font-size: 14px;
   color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
 }
 .footer-nav {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-sm);
+  gap: var(--space-md);
+  flex-wrap: wrap;
 }
 .footer-nav a {
   font-size: 14px;
