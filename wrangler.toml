@@ -10,8 +10,8 @@
 # Environment variables to set in dashboard:
 #   NODE_VERSION = 24
 #
-# Custom domain: keld.jbpt.de
-#   Add CNAME in DNS: keld → <project>.pages.dev
+# Custom domain: farn.jbpt.de
+#   Add CNAME in DNS: farn → <project>.pages.dev
 
-name = "keld-docs"
+name = "farn-docs"
 pages_build_output_dir = "site/dist"

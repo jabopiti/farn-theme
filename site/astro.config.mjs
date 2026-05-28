@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://keld.jbpt.de',
+  site: 'https://farn.jbpt.de',
   vite: {
     server: {
       fs: {

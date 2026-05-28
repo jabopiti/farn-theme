@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Keld — Design System</title>
+<title>Farn — Design System</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 <script is:inline>
   (function() {
-    const stored = localStorage.getItem('keld-theme');
+    const stored = localStorage.getItem('farn-theme');
     const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', stored ?? system);
   })();
@@ -445,13 +445,13 @@
 <!-- Nav -->
 <nav class="nav" id="nav" aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" class="nav-logo" data-view="design-system">Keld<span>.</span></a>
+    <a href="/" class="nav-logo" data-view="design-system">Farn<span>.</span></a>
     <ul class="nav-links">
       <li><a href="#" data-view="design-system" class="nav-view-link active">Design System</a></li>
       <li><a href="#" data-view="palette" class="nav-view-link">Palette</a></li>
     </ul>
     <div class="nav-right">
-      <a href="https://github.com/jabopiti/keld-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/jabopiti/farn-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
         <i class="ti ti-brand-github"></i>
       </a>
       <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
@@ -501,7 +501,7 @@
   <div class="hero-inner">
     <p class="hero-eyebrow">Design System — v0.1.0</p>
     <h1 class="hero-title">Sharp.<br><em>Warm.</em><br>Intellectual.</h1>
-    <p class="hero-desc">A personal design system rooted in northern European forest landscapes. Framework-agnostic, token-first, built for brand, websites, and web apps.</p>
+    <p class="hero-desc">A design system rooted in the forests of northern Germany. Framework-agnostic, token-first, built for brand, websites, and web apps.</p>
     <div class="hero-actions">
       <a href="#" class="btn-primary" data-view="palette"><i class="ti ti-palette"></i> Explore palette</a>
       <a href="/getting-started" class="btn-ghost"><i class="ti ti-book"></i> Getting Started</a>
@@ -534,8 +534,8 @@
       <div class="about-text">
         <p class="section-eyebrow">About</p>
         <h2 class="section-title">A design system that knows what it is.</h2>
-        <p>Keld is built on a single conviction: that a design system should have a point of view. Not a collection of neutral components, but a coherent vocabulary — warm enough to feel human, sharp enough to feel considered.</p>
-        <p>Four token palettes. A two-layer semantic architecture. Framework-agnostic CSS custom properties. Seventeen component definitions, each with light and dark surface variants.</p>
+        <p>Farn is built on a single conviction: that a design system should have a point of view. Not a collection of neutral components, but a coherent vocabulary — warm enough to feel human, sharp enough to feel considered.</p>
+        <p>Four token palettes. A two-layer semantic architecture. Framework-agnostic CSS custom properties. Component definitions, each with light and dark surface variants.</p>
         <a href="#" class="btn-primary" data-view="palette" style="width:fit-content">Explore the colour system →</a>
       </div>
       <div class="about-palettes">
@@ -740,7 +740,7 @@
 <div id="view-palette" hidden>
   <div class="container">
     <header class="page-header">
-      <p class="page-eyebrow">Keld Design System</p>
+      <p class="page-eyebrow">Farn Design System</p>
       <h1 class="page-title">Colors &amp;<br><em>Palettes</em></h1>
       <p class="page-desc">A warm, earthy colour system rooted in northern European forest landscapes. Seventeen carefully selected tokens across four named palettes — each with a distinct semantic role for dark and light surface design.</p>
     </header>
@@ -920,7 +920,7 @@
       <p class="palette-concept reveal" style="margin-bottom:var(--space-xl)">Copy the full palette token block into your project's base CSS, or use the CDN link below.</p>
       <div class="code-block reveal">
         <button class="code-copy-btn" id="codeCopyBtn">Copy</button>
-        <pre id="cssCode"><span class="code-comment">/* Keld Design System — Palette Tokens v0.1.0 */</span>
+        <pre id="cssCode"><span class="code-comment">/* Farn Design System — Palette Tokens v0.1.0 */</span>
 <span class="code-prop">:root</span> &#123;
   <span class="code-comment">/* ── Iron Night ──────────────────────────── */</span>
   <span class="code-prop">--kn0-void</span>:        <span class="code-val">#0D1117</span>;   <span class="code-comment">/* Primary dark bg       */</span>
@@ -956,14 +956,14 @@
 <footer class="page-footer" data-surface="dark">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-logo">Keld<span>.</span></div>
-      <p class="footer-tagline">A personal design system — sharp, warm, intellectual.</p>
+      <div class="footer-logo">Farn<span>.</span></div>
+      <p class="footer-tagline">A design system — sharp, warm, intellectual.</p>
       <div class="footer-nav">
         <a href="#foundations">Foundations</a>
         <a href="#components">Components</a>
         <a href="#" data-view="palette">Palette</a>
         <a href="/getting-started">Getting Started</a>
-        <a href="https://github.com/jabopiti/keld-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/jabopiti/farn-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
     <hr class="footer-hr" />
@@ -993,11 +993,11 @@ updateToggleIcon();
 toggle.addEventListener('click', () => {
   const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('keld-theme', next);
+  localStorage.setItem('farn-theme', next);
   updateToggleIcon();
 });
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-  if (!localStorage.getItem('keld-theme')) {
+  if (!localStorage.getItem('farn-theme')) {
     document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
     updateToggleIcon();
   }

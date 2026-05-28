@@ -1,4 +1,4 @@
-/* ── Keld — Palette tokens ─────────────────────────────────────────── */
+/* ── Farn — Palette tokens ─────────────────────────────────────────── */
 /* Four palettes: Iron Night · Birch Storm · Forest · Bloom                 */
 
 :root {
@@ -26,7 +26,7 @@
   --bl3-moss:      #567A37;   /* Success, additions, strings               */
   --bl4-heather:   #885DB4;   /* Numbers, uncommon functionality           */
 }
-/* ── Keld — Typography tokens ─────────────────────────────────────── */
+/* ── Farn — Typography tokens ─────────────────────────────────────── */
 /* Fraunces (display) · Instrument Sans (body) · JetBrains Mono (code)      */
 /* IMPORTANT: Fraunces requires font-variation-settings: 'opsz' <size>       */
 
@@ -57,7 +57,7 @@
   - Never use Instrument Sans weight 700+
   - letter-spacing: -0.02em on display; 0 on body
 */
-/* ── Keld — Spacing, layout, and radius tokens ──────────────────────── */
+/* ── Farn — Spacing, layout, and radius tokens ──────────────────────── */
 /* Base unit: 12px (0.75rem). Scale multiplied from there.                  */
 
 :root {
@@ -93,7 +93,7 @@
   --z-modal:   400;
   --z-toast:   500;
 }
-/* ── Keld — Semantic tokens and surface patterns ──────────────────────── */
+/* ── Farn — Semantic tokens and surface patterns ──────────────────────── */
 /*                                                                           */
 /* Two-layer architecture:                                                   */
 /*   Layer 1 — palette (colors.css): raw color values, never used directly  */
@@ -103,7 +103,7 @@
 /* Surface override: use data-surface="light|dark|tinted" on any element     */
 /*                                                                           */
 /* FOWT prevention: add this inline script before <body>:                    */
-/*   const t = localStorage.getItem('keld-theme');                           */
+/*   const t = localStorage.getItem('farn-theme');                           */
 /*   const s = window.matchMedia('(prefers-color-scheme: dark)').matches     */
 /*     ? 'dark' : 'light';                                                   */
 /*   document.documentElement.setAttribute('data-theme', t ?? s);            */
@@ -197,7 +197,7 @@
   --color-accent-hover:   var(--fr2-forest);
   --color-accent-text:    var(--bs2-parchment);
 }
-/* ── Keld — Base reset and global styles ──────────────────────────────── */
+/* ── Farn — Base reset and global styles ──────────────────────────────── */
 
 *,
 *::before,

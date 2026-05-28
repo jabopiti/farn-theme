@@ -4,7 +4,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'Keld design system documentation' } = Astro.props;
+const { title, description = 'Farn design system documentation' } = Astro.props;
 const path = Astro.url.pathname;
 
 function isActive(route: string) {
@@ -21,7 +21,7 @@ function isActive(route: string) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} — Keld</title>
+    <title>{title} — Farn</title>
     {description && <meta name="description" content={description} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -34,7 +34,7 @@ function isActive(route: string) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <script is:inline>
       (function () {
-        const stored = localStorage.getItem('keld-theme');
+        const stored = localStorage.getItem('farn-theme');
         const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', stored ?? system);
       })();
@@ -45,7 +45,7 @@ function isActive(route: string) {
     <!-- Nav — always filled on doc pages -->
     <nav class="nav filled" id="nav" aria-label="Main navigation">
       <div class="nav-inner">
-        <a href="/" class="nav-logo">Keld<span>.</span></a>
+        <a href="/" class="nav-logo">Farn<span>.</span></a>
         <ul class="nav-links">
           <li><a href="/getting-started" class={isActive('/getting-started') ? 'active' : ''}>Getting Started</a></li>
           <li><a href="/tokens/colors" class={isActive('/tokens') ? 'active' : ''}>Colors</a></li>
@@ -54,7 +54,7 @@ function isActive(route: string) {
           <li><a href="/components" class={isActive('/components') ? 'active' : ''}>Components</a></li>
         </ul>
         <div class="nav-right">
-          <a href="https://github.com/jabopiti/keld-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/jabopiti/farn-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
             <i class="ti ti-brand-github"></i>
           </a>
           <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
@@ -70,7 +70,7 @@ function isActive(route: string) {
     <!-- Mobile drawer -->
     <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
       <div class="drawer-header">
-        <span class="drawer-logo">Keld<span>.</span></span>
+        <span class="drawer-logo">Farn<span>.</span></span>
         <button class="drawer-close" id="drawerClose" aria-label="Close menu">
           <i class="ti ti-x"></i>
         </button>
@@ -110,7 +110,7 @@ function isActive(route: string) {
         const html = document.documentElement;
         const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
-        localStorage.setItem('keld-theme', next);
+        localStorage.setItem('farn-theme', next);
         syncThemeIcon();
       });
 
@@ -147,7 +147,7 @@ function isActive(route: string) {
 </html>
 
 <style is:global>
-  /* ── Keld token imports ──────────────────────────────────────────────── */
+  /* ── Farn token imports ──────────────────────────────────────────────── */
   @import '../../../tokens/colors.css';
   @import '../../../tokens/spacing.css';
   @import '../../../tokens/dark-light.css';

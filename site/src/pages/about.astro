@@ -2,22 +2,27 @@
 import DocLayout from '../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="About" description="What Keld is and the design philosophy behind it">
-  <h1>About Keld</h1>
+<DocLayout title="About" description="What Farn is and the design philosophy behind it">
+  <h1>About Farn</h1>
+  <p><em>From the Old Saxon farn — feather-leaf, forest floor, northern ground.</em></p>
   <p>
-    Keld is a personal design system for brand, websites, and web apps. It is token-first
-    and framework-agnostic — the entire system ships as plain CSS custom properties
-    with no build step, no runtime dependencies, and no framework assumptions.
+    Farn is built on a single conviction: that a design system should have a point of view.
+    Not a collection of neutral components, but a coherent vocabulary — warm enough to feel
+    human, sharp enough to feel considered.
+  </p>
+  <p>
+    Four token palettes. A two-layer semantic architecture. Framework-agnostic CSS custom
+    properties. Component definitions, each with light and dark surface variants.
   </p>
 
   <h2>Aesthetic Direction</h2>
   <p>
     Clean, minimal, humanist — sharp, warm, intellectual. Familiar but differentiated.
-    Keld aims for the quality of feeling considered rather than generic: warm enough to have
+    Farn aims for the quality of feeling considered rather than generic: warm enough to have
     character, restrained enough to not distract from content.
   </p>
   <p>
-    The name and palette draw from northern European forest landscapes — birch, fern, iron, ash.
+    The name and palette draw from the forests of northern Germany — birch, fern, iron, ash.
     These aren't decorative references; they shaped the specific colour choices: the slightly
     desaturated warmth of Birch Storm, the cool depth of Forest, the weight of Iron Night.
   </p>
@@ -90,9 +95,9 @@ import DocLayout from '../layouts/DocLayout.astro';
     <li><strong>Semantic tokens over raw palette.</strong> Components never hardcode colours. The token layer handles light, dark, and surface overrides automatically.</li>
   </ul>
 
-  <h2>What Keld Is Not</h2>
+  <h2>What Farn Is Not</h2>
   <p>
-    Keld is not a component library. It does not ship pre-built buttons, cards, or layouts
+    Farn is not a component library. It does not ship pre-built buttons, cards, or layouts
     as importable components. It ships the token foundations and specifications that make
     building components consistent and correct. The CSS spec is the deliverable;
     implementations live in each project.
