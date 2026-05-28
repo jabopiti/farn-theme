@@ -23,8 +23,8 @@ function isActive(route: string) {
     <meta name="generator" content={Astro.generator} />
     <title>{title} — Farn</title>
     {description && <meta name="description" content={description} />}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -45,7 +45,10 @@ function isActive(route: string) {
     <!-- Nav — always filled on doc pages -->
     <nav class="nav filled" id="nav" aria-label="Main navigation">
       <div class="nav-inner">
-        <a href="/" class="nav-logo">Farn<span>.</span></a>
+        <a href="/" class="nav-logo">
+          <img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />
+          Farn<span>.</span>
+        </a>
         <ul class="nav-links">
           <li><a href="/getting-started" class={isActive('/getting-started') ? 'active' : ''}>Getting Started</a></li>
           <li><a href="/tokens/colors" class={isActive('/tokens') ? 'active' : ''}>Colors</a></li>
@@ -70,7 +73,10 @@ function isActive(route: string) {
     <!-- Mobile drawer -->
     <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
       <div class="drawer-header">
-        <span class="drawer-logo">Farn<span>.</span></span>
+        <span class="drawer-logo">
+          <img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />
+          Farn<span>.</span>
+        </span>
         <button class="drawer-close" id="drawerClose" aria-label="Close menu">
           <i class="ti ti-x"></i>
         </button>
@@ -91,6 +97,15 @@ function isActive(route: string) {
         <slot />
       </div>
     </main>
+
+    <footer class="page-footer">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <img src="/fern_icon.png" alt="" class="footer-logo-icon" aria-hidden="true" />
+          Farn<span>.</span>
+        </div>
+      </div>
+    </footer>
 
     <script is:inline>
       // Theme toggle

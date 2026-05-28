@@ -49,6 +49,9 @@
   justify-content: flex-start;
 }
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 800;
@@ -61,6 +64,7 @@
 .nav-logo span { color: var(--fr0-sage); }
 .nav.filled .nav-logo { color: var(--color-text); }
 .nav.filled .nav-logo span { color: var(--color-accent); }
+.nav-logo-icon { width: 24px; height: 24px; object-fit: contain; flex-shrink: 0; vertical-align: middle; }
 .nav-links {
   display: flex;
   align-items: center;
@@ -385,6 +389,9 @@
   margin-bottom: var(--space-xl);
 }
 .footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 800;
@@ -393,6 +400,7 @@
   margin-bottom: var(--space-xs);
 }
 .footer-logo span { color: var(--fr1-fern); }
+.footer-logo-icon { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
 .footer-tagline {
   font-size: 14px;
   color: var(--color-text-secondary);

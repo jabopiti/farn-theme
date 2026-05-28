@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="site/public/fern_icon.png" alt="Farn icon" width="80" />
+</p>
+
 # Farn
 
 A design system rooted in the forests of northern Germany. Inspired by [Nord Theme](https://nordtheme.com).
