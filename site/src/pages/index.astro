@@ -30,7 +30,7 @@
   .nav-view-link { cursor: pointer; }
 
   /* ── Section spacing ──────────────────────────────── */
-  #about, #tokens, #components { padding: var(--space-3xl) 0; }
+  #about, #foundations, #components { padding: var(--space-3xl) 0; }
 
   /* ── Hero ─────────────────────────────────────────── */
   .hero {
@@ -467,7 +467,7 @@
 <nav class="sub-nav" id="sub-nav" aria-label="Section navigation">
   <div class="sub-nav-inner" id="subnav-ds">
     <a href="#about" class="sub-nav-link">About</a>
-    <a href="#tokens" class="sub-nav-link">Tokens</a>
+    <a href="#foundations" class="sub-nav-link">Foundations</a>
     <a href="#components" class="sub-nav-link">Components</a>
     <a href="#surfaces" class="sub-nav-link">Surfaces</a>
     <span class="sub-nav-indicator" id="sub-nav-indicator-ds"></span>
@@ -526,11 +526,11 @@
 </section>
 
 <!-- About -->
-<section id="about">
+<section id="about" data-surface="dark">
   <div class="container">
     <div class="about-grid">
       <div class="about-text">
-        <p class="section-eyebrow">About Keld</p>
+        <p class="section-eyebrow">About</p>
         <h2 class="section-title">A design system that knows what it is.</h2>
         <p>Keld is built on a single conviction: that a design system should have a point of view. Not a collection of neutral components, but a coherent vocabulary — warm enough to feel human, sharp enough to feel considered.</p>
         <p>Four token palettes. A two-layer semantic architecture. Framework-agnostic CSS custom properties. Seventeen component definitions, each with light and dark surface variants.</p>
@@ -570,10 +570,10 @@
   </div>
 </section>
 
-<!-- Tokens -->
-<section id="tokens">
+<!-- Foundations -->
+<section id="foundations">
   <div class="container">
-    <p class="section-eyebrow reveal">Tokens</p>
+    <p class="section-eyebrow reveal">Foundations</p>
     <h2 class="section-title reveal">Typography &amp; Spacing</h2>
     <p class="section-desc reveal">Fraunces for display — an optical-size variable serif with visible personality. Instrument Sans for body and UI — humanist enough to feel warm, geometric enough to feel clean. A 12px-base spacing scale where proximity signals relationship.</p>
 
@@ -1086,7 +1086,7 @@ const dsNavObs = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.3 });
-['about', 'tokens', 'components', 'surfaces'].forEach(id => {
+['about', 'foundations', 'components', 'surfaces'].forEach(id => {
   const el = document.getElementById(id); if (el) dsNavObs.observe(el);
 });
 
