@@ -1,4 +1,6 @@
 ---
+import LogoIcon from '../components/LogoIcon.astro';
+
 interface Props {
   title: string;
   description?: string;
@@ -46,7 +48,7 @@ function isActive(route: string) {
     <!-- Nav — always filled on doc pages -->
     <nav class="nav filled" id="nav" aria-label="Main navigation">
       <div class="nav-inner">
-        <a href="/" class="nav-logo"><img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />Farn<span>.</span></a>
+        <a href="/" class="nav-logo"><LogoIcon />Farn<span>.</span></a>
         <ul class="nav-links">
           <li><a href="/getting-started" class={isActive('/getting-started') ? 'active' : ''}>Getting Started</a></li>
           <li><a href="/tokens/colors" class={isActive('/tokens') ? 'active' : ''}>Colors</a></li>
@@ -61,6 +63,7 @@ function isActive(route: string) {
           <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
             <i class="ti ti-moon" id="themeIcon"></i>
           </button>
+          <a href="/" class="nav-cta">Docs</a>
           <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileDrawer">
             <i class="ti ti-menu-2" id="hamburgerIcon"></i>
           </button>
@@ -71,7 +74,7 @@ function isActive(route: string) {
     <!-- Mobile drawer -->
     <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
       <div class="drawer-header">
-        <span class="drawer-logo"><img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />Farn<span>.</span></span>
+        <span class="drawer-logo"><LogoIcon />Farn<span>.</span></span>
         <button class="drawer-close" id="drawerClose" aria-label="Close menu">
           <i class="ti ti-x"></i>
         </button>
@@ -83,8 +86,12 @@ function isActive(route: string) {
         <a href="/tokens/spacing" class={`drawer-link${isActive('/tokens/spacing') ? ' active' : ''}`}>Spacing</a>
         <a href="/components" class={`drawer-link${isActive('/components') ? ' active' : ''}`}>Components</a>
       </nav>
+      <a href="/" class="drawer-cta">Docs</a>
     </div>
     <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Optional sub-nav (provided by individual pages via slot="subnav") -->
+    <slot name="subnav" />
 
     <!-- Page content -->
     <main class="doc-main">
@@ -92,6 +99,35 @@ function isActive(route: string) {
         <slot />
       </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="page-footer" data-surface="dark">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-logo"><LogoIcon class="footer-logo-icon" />Farn<span>.</span></div>
+          <p class="footer-tagline">A design system — sharp, warm, intellectual.</p>
+          <div class="footer-nav">
+            <a href="/">Design System</a>
+            <a href="/getting-started">Getting Started</a>
+            <a href="/">Palette</a>
+            <a href="/tokens/colors">Colors</a>
+            <a href="/components">Components</a>
+            <a href="https://github.com/jabopiti/farn-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+        <hr class="footer-hr" />
+        <div class="footer-bar">
+          <p class="footer-copy">© 2026 Jacob Lueg Tiedemann — v0.1.0</p>
+          <div class="footer-links">
+            <a href="https://jbpt.de" target="_blank" rel="noopener noreferrer">About</a>
+            <a href="https://jbpt.de/#contact" target="_blank" rel="noopener noreferrer">Contact</a>
+            <a href="https://jbpt.de/legal/" target="_blank" rel="noopener noreferrer">Legal Notice / Impressum</a>
+            <a href="https://jbpt.de/privacy/" target="_blank" rel="noopener noreferrer">Data Privacy / Datenschutz</a>
+            <a href="https://jbpt.de/accessibility/" target="_blank" rel="noopener noreferrer">Accessibility / Barrierefreiheit</a>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script is:inline>
       // Theme toggle
@@ -143,6 +179,43 @@ function isActive(route: string) {
       });
       drawerClose?.addEventListener('click', closeDrawer);
       drawerOverlay?.addEventListener('click', closeDrawer);
+
+      // Sub-nav scroll tracking (runs only when a sub-nav slot is provided)
+      const docSubNav = document.querySelector('.sub-nav');
+      if (docSubNav) {
+        // Expand scroll-padding to clear both nav and sub-nav on this page
+        document.documentElement.style.scrollPaddingTop = 'var(--scroll-offset)';
+        const docSubNavLinks = docSubNav.querySelectorAll('.sub-nav-link');
+        const docIndicator = docSubNav.querySelector('.sub-nav-indicator');
+
+        function updateDocIndicator(activeLink) {
+          if (activeLink && docIndicator) {
+            docIndicator.style.left = activeLink.offsetLeft + 'px';
+            docIndicator.style.width = activeLink.offsetWidth + 'px';
+          }
+        }
+
+        if (docSubNavLinks[0]) {
+          docSubNavLinks[0].classList.add('active');
+          requestAnimationFrame(() => updateDocIndicator(docSubNavLinks[0]));
+        }
+
+        const sectionObs = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              docSubNavLinks.forEach(l => l.classList.remove('active'));
+              const link = docSubNav.querySelector(`a[href="#${CSS.escape(e.target.id)}"]`);
+              if (link) { link.classList.add('active'); updateDocIndicator(link); }
+            }
+          });
+        }, { threshold: 0.1 });
+
+        docSubNavLinks.forEach(l => {
+          const id = l.getAttribute('href')?.slice(1);
+          const el = id ? document.getElementById(id) : null;
+          if (el) sectionObs.observe(el);
+        });
+      }
     </script>
   </body>
 </html>
@@ -156,8 +229,17 @@ function isActive(route: string) {
   @import '../styles/site.css';
 
   /* ── Doc page layout ─────────────────────────────────────────────────── */
+  /* body padding pushes all flow content below the fixed nav; sub-nav
+     uses position:sticky top:nav-height which only activates on scroll —
+     without this padding the sub-nav starts at y:0 and is hidden behind
+     the fixed nav until the user scrolls. */
+  body { padding-top: var(--nav-height); }
+
+  /* Default scroll offset clears the fixed nav; JS overrides to
+     --scroll-offset on pages that also have a sticky sub-nav. */
+  html { scroll-padding-top: var(--nav-height); }
+
   .doc-main {
-    padding-top: var(--nav-height);
     min-height: 100vh;
   }
 
