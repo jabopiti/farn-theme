@@ -1,3 +1,5 @@
+<img src="site/public/fern_icon.png" alt="Farn icon" height="72" />
+
 # Farn
 
 [![CI](https://img.shields.io/github/actions/workflow/status/jabopiti/farn-theme/ci.yml?branch=main&label=CI&color=3E7A62)](https://github.com/jabopiti/farn-theme/actions/workflows/ci.yml)
