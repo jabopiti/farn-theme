@@ -158,4 +158,4 @@ Full contrast matrix in the [documentation](https://farn.jbpt.de).
 
 MIT — see [LICENSE](LICENSE).
 
-Design by [Jacob Lueg Tiedemann (Bo.)](https://jbpt.de).
+Design by [Jacob Lueg Tiedemann](https://jbpt.de).
