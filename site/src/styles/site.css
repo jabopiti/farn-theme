@@ -51,7 +51,7 @@
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.45em;
+  gap: 0;
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 800;
@@ -68,6 +68,7 @@
   height: 40px;
   width: auto;
   flex-shrink: 0;
+  margin-right: 0.45em;
 }
 .nav-links {
   display: flex;
@@ -395,7 +396,7 @@
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 0.45em;
+  gap: 0;
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 800;
@@ -408,16 +409,19 @@
   height: 56px;
   width: auto;
   flex-shrink: 0;
+  margin-right: 0.45em;
 }
 .footer-tagline {
   font-size: 14px;
   color: var(--color-text-secondary);
   margin-bottom: var(--space-md);
+  padding-left: 69px; /* 56px icon + ~13px gap, align with Farn. text */
 }
 .footer-nav {
   display: flex;
   gap: var(--space-md);
   flex-wrap: wrap;
+  padding-left: 69px; /* align with Farn. text */
 }
 .footer-nav a {
   font-size: 14px;
