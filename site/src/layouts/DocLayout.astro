@@ -184,25 +184,24 @@ function isActive(route: string) {
         const docSubNavLinks = docSubNav.querySelectorAll('.sub-nav-link');
         const docIndicator = docSubNav.querySelector('.sub-nav-indicator');
 
-        function updateDocIndicator() {
-          const active = docSubNav.querySelector('.sub-nav-link.active');
-          if (active && docIndicator) {
-            docIndicator.style.left = active.offsetLeft + 'px';
-            docIndicator.style.width = active.offsetWidth + 'px';
+        function updateDocIndicator(activeLink) {
+          if (activeLink && docIndicator) {
+            docIndicator.style.left = activeLink.offsetLeft + 'px';
+            docIndicator.style.width = activeLink.offsetWidth + 'px';
           }
         }
 
         if (docSubNavLinks[0]) {
           docSubNavLinks[0].classList.add('active');
-          requestAnimationFrame(updateDocIndicator);
+          requestAnimationFrame(() => updateDocIndicator(docSubNavLinks[0]));
         }
 
         const sectionObs = new IntersectionObserver(entries => {
           entries.forEach(e => {
             if (e.isIntersecting) {
               docSubNavLinks.forEach(l => l.classList.remove('active'));
-              const link = docSubNav.querySelector(`a[href="#${e.target.id}"]`);
-              if (link) { link.classList.add('active'); updateDocIndicator(); }
+              const link = docSubNav.querySelector(`a[href="#${CSS.escape(e.target.id)}"]`);
+              if (link) { link.classList.add('active'); updateDocIndicator(link); }
             }
           });
         }, { threshold: 0.3 });
