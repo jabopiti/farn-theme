@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 348" width="720" height="348">
+  <rect width="720" height="348" rx="8" fill="#F5F4F0"/>
+
+  <!-- Iron Night -->
+  <text x="20" y="48" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif" font-size="11" font-weight="500" fill="#374151">Iron Night</text>
+  <rect x="132" y="20" width="136" height="48" rx="4" fill="#0D1117"/>
+  <text x="200" y="82" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">void</text>
+  <rect x="276" y="20" width="136" height="48" rx="4" fill="#374151"/>
+  <text x="344" y="82" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">iron</text>
+  <rect x="420" y="20" width="136" height="48" rx="4" fill="#4B5563"/>
+  <text x="488" y="82" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">slate</text>
+  <rect x="564" y="20" width="136" height="48" rx="4" fill="#6B7280"/>
+  <text x="632" y="82" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">ash</text>
+
+  <!-- Birch Storm -->
+  <text x="20" y="128" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif" font-size="11" font-weight="500" fill="#374151">Birch Storm</text>
+  <rect x="132" y="100" width="184" height="48" rx="4" fill="#E4E2DA"/>
+  <text x="224" y="162" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">sand</text>
+  <rect x="324" y="100" width="184" height="48" rx="4" fill="#EEEDE9"/>
+  <text x="416" y="162" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">linen</text>
+  <rect x="516" y="100" width="184" height="48" rx="4" fill="#F5F4F0" stroke="#E4E2DA" stroke-width="1"/>
+  <text x="608" y="162" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">parchment</text>
+
+  <!-- Forest -->
+  <text x="20" y="208" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif" font-size="11" font-weight="500" fill="#374151">Forest</text>
+  <rect x="132" y="180" width="136" height="48" rx="4" fill="#5C9E86"/>
+  <text x="200" y="242" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">sage</text>
+  <rect x="276" y="180" width="136" height="48" rx="4" fill="#3E7A62"/>
+  <text x="344" y="242" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">fern</text>
+  <rect x="420" y="180" width="136" height="48" rx="4" fill="#2D5E4A"/>
+  <text x="488" y="242" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">forest</text>
+  <rect x="564" y="180" width="136" height="48" rx="4" fill="#254D5A"/>
+  <text x="632" y="242" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">deepwater</text>
+
+  <!-- Bloom -->
+  <text x="20" y="288" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif" font-size="11" font-weight="500" fill="#374151">Bloom</text>
+  <rect x="132" y="260" width="107" height="48" rx="4" fill="#C5414C"/>
+  <text x="185" y="322" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">ember</text>
+  <rect x="247" y="260" width="107" height="48" rx="4" fill="#AB5A2B"/>
+  <text x="300" y="322" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">ochre</text>
+  <rect x="362" y="260" width="107" height="48" rx="4" fill="#8D6B20"/>
+  <text x="415" y="322" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">grain</text>
+  <rect x="477" y="260" width="107" height="48" rx="4" fill="#567A37"/>
+  <text x="530" y="322" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">moss</text>
+  <rect x="592" y="260" width="107" height="48" rx="4" fill="#885DB4"/>
+  <text x="645" y="322" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">heather</text>
+</svg>

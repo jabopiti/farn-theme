@@ -1,10 +1,20 @@
 # Farn
 
+[![CI](https://img.shields.io/github/actions/workflow/status/jabopiti/farn-theme/ci.yml?branch=main&label=CI&color=3E7A62)](https://github.com/jabopiti/farn-theme/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-3E7A62)](LICENSE)
+[![Version](https://img.shields.io/github/v/tag/jabopiti/farn-theme?color=3E7A62&label=version&sort=semver)](https://github.com/jabopiti/farn-theme/releases)
+
 A design system rooted in the forests of northern Germany. Inspired by [Nord Theme](https://nordtheme.com).
 
 ## Sharp. *Warm.* Intellectual.
 
-Four palettes — Iron Night · Birch Storm · Forest · Bloom — with a two-layer token architecture for clean dark/light mode switching.
+Farn is a zero-dependency, pure CSS design token library for projects that want a calm, intellectual aesthetic without a JavaScript framework. Drop in a single `<link>` tag and you get a complete two-layer token system: raw palette tokens for flexibility, semantic tokens for consistent theming across dark and light modes.
+
+**Documentation:** [farn.jbpt.de](https://farn.jbpt.de) &nbsp;·&nbsp; **Changelog:** [CHANGELOG.md](CHANGELOG.md)
+
+---
+
+![Farn colour palettes — Iron Night, Birch Storm, Forest, Bloom](.github/farn-palette.svg)
 
 ---
 
@@ -16,6 +26,8 @@ Add one `<link>` to your HTML:
 <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn.css">
 ```
+
+> **Version tip:** Replace `0.1.0` with the [latest release tag](https://github.com/jabopiti/farn-theme/releases) to stay current, or pin to a specific version for stability.
 
 Prevent flash of wrong theme by adding this script before `<body>`:
 
@@ -52,12 +64,12 @@ Then use the tokens:
 
 ### Palette tokens (raw — use sparingly)
 
-| Palette | Tokens | Use for |
-|---|---|---|
-| Iron Night (`--kn*`) | void, iron, slate, ash | Dark surfaces, borders |
-| Birch Storm (`--bs*`) | sand, linen, parchment | Light surfaces, text on dark |
-| Forest (`--fr*`) | sage, fern, forest, deepwater | Accents, CTAs, links |
-| Bloom (`--bl*`) | ember, ochre, grain, moss, heather | Semantic states |
+| Palette | Prefix | Tokens | Use for |
+|---|---|---|---|
+| Iron Night | `--kn*` | void, iron, slate, ash | Dark surfaces, borders |
+| Birch Storm | `--bs*` | sand, linen, parchment | Light surfaces, text on dark |
+| Forest | `--fr*` | sage, fern, forest, deepwater | Accents, CTAs, links |
+| Bloom | `--bl*` | ember, ochre, grain, moss, heather | Semantic states |
 
 ### Semantic tokens (preferred for components)
 
@@ -117,6 +129,12 @@ Force a surface context on any element, independent of the page theme:
 | `--space-2xl` | 60px |
 | `--space-3xl` | 72px |
 | `--space-4xl` | 96px |
+
+---
+
+## Browser support
+
+Farn uses [CSS custom properties](https://caniuse.com/css-variables) — supported in all modern browsers (Chrome 49+, Firefox 31+, Safari 9.1+, Edge 16+). No build step, no JavaScript required.
 
 ---
 
