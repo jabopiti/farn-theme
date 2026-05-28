@@ -1,5 +1,5 @@
 /* ── Farn — Palette tokens ─────────────────────────────────────────── */
-/* Four palettes: Iron Night · Birch Storm · Forest · Bloom                 */
+/* Four palettes: Iron Night · Birch Mist · Forest · Bloom                  */
 
 :root {
   /* Iron Night — dark surfaces */
@@ -8,7 +8,7 @@
   --kn2-slate:     #4B5563;   /* Active lines, selections                  */
   --kn3-ash:       #6B7280;   /* Comments, placeholders, guides            */
 
-  /* Birch Storm — light surfaces */
+  /* Birch Mist — light surfaces */
   --bs0-sand:      #E4E2DA;   /* Variables, elevated UI (dark)             */
   --bs1-linen:     #EEEDE9;   /* Hover states, active line (light)         */
   --bs2-parchment: #F5F4F0;   /* Primary bg (light) / text (dark)         */

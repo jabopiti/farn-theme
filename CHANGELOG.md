@@ -35,6 +35,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - Usage pill styles are now mode-invariant (no dark-theme overrides): light=parchment/iron, dark=slate/parchment, both=sage/void
 - Semantic layer diagram updated to reflect dark mode changes (accent→fern, accent-hover→sage, text-secondary→linen, text-tertiary→sand, bg-sunken→void)
 - `--fr0-sage` token comment updated to "Supporting accent, dark-mode hover state"
+- Nav and footer logo switched from inline formatting to flexbox; icon grows from ~27.5px to 40px in the nav bar and 56px in the footer; footer tagline and nav links indent to align under the "Farn." wordmark
 - Landing page replaced with full prototype implementation (hero, Design System view, Palette view)
 - Hero and footer now use `data-surface="dark"` with semantic tokens throughout (no hardcoded palette refs)
 - Semantic comparison dark card uses `data-surface="dark"` instead of inline `var(--kn1-iron)`
@@ -55,7 +56,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ### Added
 - Initial public release
-- Four color palettes: Iron Night, Birch Storm, Forest, Bloom (17 tokens)
+- Four color palettes: Iron Night, Birch Mist, Forest, Bloom (17 tokens)
 - Semantic token layer with light and dark mode (`[data-theme]`)
 - Surface pattern overrides (`[data-surface="light|dark|tinted"]`)
 - Typography tokens: Fraunces, Instrument Sans, JetBrains Mono

@@ -3,16 +3,31 @@ import DocLayout from '../layouts/DocLayout.astro';
 ---
 
 <DocLayout title="Getting Started" description="Install Farn and set up dark/light mode in your project">
+  <nav slot="subnav" class="sub-nav filled" id="sub-nav-gs" aria-label="Section navigation">
+    <div class="sub-nav-inner">
+      <a href="#cdn-install" class="sub-nav-link">Install</a>
+      <a href="#what-gets-loaded" class="sub-nav-link">Layers</a>
+      <a href="#load-fonts" class="sub-nav-link">Fonts</a>
+      <a href="#fowt" class="sub-nav-link">FOWT</a>
+      <a href="#dark-light-mode" class="sub-nav-link">Theming</a>
+      <a href="#surface-overrides" class="sub-nav-link">Surfaces</a>
+      <a href="#using-tokens" class="sub-nav-link">Tokens</a>
+      <a href="#fraunces-headings" class="sub-nav-link">Fraunces</a>
+      <a href="#minimal-example" class="sub-nav-link">Example</a>
+      <span class="sub-nav-indicator"></span>
+    </div>
+  </nav>
+
   <h1>Getting Started</h1>
   <p>Farn ships as a single CSS file — no build step, no runtime, no framework assumptions. Add one <code>&lt;link&gt;</code> tag and you have all tokens.</p>
 
-  <h2>CDN Install</h2>
+  <h2 id="cdn-install">CDN Install</h2>
   <p>Link directly from jsDelivr. Replace <code>@0.1.0</code> with the latest version tag.</p>
   <pre><code>&lt;link rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn.css"&gt;</code></pre>
   <p><code>dist/farn.css</code> is a single concatenated file containing palette tokens, semantic tokens, typography, spacing, and base resets.</p>
 
-  <h2>What Gets Loaded</h2>
+  <h2 id="what-gets-loaded">What Gets Loaded</h2>
   <p><code>farn.css</code> bundles five layers in order:</p>
   <ol>
     <li><code>colors.css</code> — 17 palette tokens across four palettes</li>
@@ -23,7 +38,7 @@ import DocLayout from '../layouts/DocLayout.astro';
   </ol>
   <p>Fonts are not bundled in <code>farn.css</code>. Load them separately via Google Fonts.</p>
 
-  <h2>Load Fonts</h2>
+  <h2 id="load-fonts">Load Fonts</h2>
   <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
 &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
 &lt;link rel="stylesheet"
@@ -31,7 +46,7 @@ import DocLayout from '../layouts/DocLayout.astro';
 /&gt;</code></pre>
   <p>Load fonts via a <code>&lt;link&gt;</code> tag in <code>&lt;head&gt;</code>, not via <code>@import url()</code> inside CSS — the <code>@import</code> approach delays rendering.</p>
 
-  <h2>Prevent Flash of Wrong Theme (FOWT)</h2>
+  <h2 id="fowt">Prevent Flash of Wrong Theme (FOWT)</h2>
   <p>Add this inline script in <code>&lt;head&gt;</code> before any CSS loads. It reads the stored preference and sets <code>data-theme</code> on <code>&lt;html&gt;</code> before the browser paints.</p>
   <pre><code>&lt;script&gt;
   (function () &#123;
@@ -42,7 +57,7 @@ import DocLayout from '../layouts/DocLayout.astro';
   &#125;)();
 &lt;/script&gt;</code></pre>
 
-  <h2>Dark / Light Mode</h2>
+  <h2 id="dark-light-mode">Dark / Light Mode</h2>
   <p>Theme mode is controlled via a <code>data-theme</code> attribute on <code>&lt;html&gt;</code>:</p>
   <pre><code>&lt;html data-theme="light"&gt; &hellip; &lt;/html&gt;
 &lt;html data-theme="dark"&gt; &hellip; &lt;/html&gt;</code></pre>
@@ -55,7 +70,7 @@ import DocLayout from '../layouts/DocLayout.astro';
 &#125;</code></pre>
   <p>Default (no attribute) is light mode. System preference is respected when no manual choice is stored.</p>
 
-  <h2>Surface Overrides</h2>
+  <h2 id="surface-overrides">Surface Overrides</h2>
   <p>Apply <code>data-surface</code> to any element to force a surface context independently of the page theme:</p>
   <pre><code>&lt;section data-surface="dark"&gt;
   &lt;!-- All children use dark surface tokens automatically --&gt;
@@ -63,7 +78,7 @@ import DocLayout from '../layouts/DocLayout.astro';
 &lt;/section&gt;</code></pre>
   <p>Available values: <code>light</code>, <code>dark</code>, <code>tinted</code>. All child components inherit the re-scoped tokens with no extra markup.</p>
 
-  <h2>Using Tokens</h2>
+  <h2 id="using-tokens">Using Tokens</h2>
   <p>Reference semantic tokens in your component CSS — never raw palette tokens:</p>
   <pre><code>.btn-primary &#123;
   background: var(--color-accent);      /* Fern (light) or Sage (dark) */
@@ -80,13 +95,13 @@ import DocLayout from '../layouts/DocLayout.astro';
   padding: var(--space-md);
 &#125;</code></pre>
 
-  <h2>Fraunces Headings</h2>
+  <h2 id="fraunces-headings">Fraunces Headings</h2>
   <p><code>font-variation-settings: 'opsz'</code> is mandatory on every Fraunces heading — the font renders incorrectly without it:</p>
   <pre><code>h1 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 72; &#125;
 h2 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 24; &#125;
 h3 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; &#125;</code></pre>
 
-  <h2>Minimal Example</h2>
+  <h2 id="minimal-example">Minimal Example</h2>
   <pre><code>&lt;!doctype html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;

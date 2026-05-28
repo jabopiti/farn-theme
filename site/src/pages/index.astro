@@ -1,5 +1,6 @@
 ---
 // Standalone page — full landing experience, does not use DocLayout
+import LogoIcon from '../components/LogoIcon.astro';
 ---
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
@@ -442,7 +443,7 @@
 <!-- Nav -->
 <nav class="nav" id="nav" aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" class="nav-logo" data-view="design-system"><img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />Farn<span>.</span></a>
+    <a href="/" class="nav-logo" data-view="design-system"><LogoIcon />Farn<span>.</span></a>
     <ul class="nav-links">
       <li><a href="#" data-view="design-system" class="nav-view-link active">Design System</a></li>
       <li><a href="#" data-view="palette" class="nav-view-link">Palette</a></li>
@@ -473,7 +474,7 @@
   </div>
   <div class="sub-nav-inner" id="subnav-palette" style="display:none">
     <a href="#iron-night" class="sub-nav-link">Iron Night</a>
-    <a href="#birch-storm" class="sub-nav-link">Birch Storm</a>
+    <a href="#birch-mist" class="sub-nav-link">Birch Mist</a>
     <a href="#forest" class="sub-nav-link">Forest</a>
     <a href="#bloom" class="sub-nav-link">Bloom</a>
     <a href="#semantic" class="sub-nav-link">Semantic</a>
@@ -543,7 +544,7 @@
           <div class="swatch" style="background:#4B5563" title="slate"></div>
           <div class="swatch" style="background:#6B7280" title="ash"></div>
         </div>
-        <div class="palette-label" style="margin-top:12px">Birch Storm</div>
+        <div class="palette-label" style="margin-top:12px">Birch Mist</div>
         <div class="palette-row">
           <div class="swatch" style="background:#E4E2DA" title="sand"></div>
           <div class="swatch" style="background:#EEEDE9" title="linen"></div>
@@ -783,10 +784,10 @@
 
     <div class="palette-divider"></div>
 
-    <section class="palette-section" id="birch-storm">
+    <section class="palette-section" id="birch-mist">
       <div class="palette-header reveal">
         <div>
-          <h2 class="palette-name">Birch Storm</h2>
+          <h2 class="palette-name">Birch Mist</h2>
           <p class="palette-concept">Three warm off-white tones — not pure white, but the colour of aged parchment, linen, and river sand. The foundation of all light surface design.</p>
         </div>
         <div class="palette-swatches">
@@ -924,7 +925,7 @@
   <span class="code-prop">--kn2-slate</span>:       <span class="code-val">#4B5563</span>;   <span class="code-comment">/* Active line, selections*/</span>
   <span class="code-prop">--kn3-ash</span>:         <span class="code-val">#6B7280</span>;   <span class="code-comment">/* Placeholders, guides   */</span>
 
-  <span class="code-comment">/* ── Birch Storm ─────────────────────────── */</span>
+  <span class="code-comment">/* ── Birch Mist ──────────────────────────── */</span>
   <span class="code-prop">--bs0-sand</span>:        <span class="code-val">#E4E2DA</span>;   <span class="code-comment">/* Elevated UI, dark text */</span>
   <span class="code-prop">--bs1-linen</span>:       <span class="code-val">#EEEDE9</span>;   <span class="code-comment">/* Card fills, hover      */</span>
   <span class="code-prop">--bs2-parchment</span>:   <span class="code-val">#F5F4F0</span>;   <span class="code-comment">/* Primary bg / dark text */</span>
@@ -952,7 +953,7 @@
 <footer class="page-footer" data-surface="dark">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-logo"><img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />Farn<span>.</span></div>
+      <div class="footer-logo"><LogoIcon class="footer-logo-icon" />Farn<span>.</span></div>
       <p class="footer-tagline">A design system — sharp, warm, intellectual.</p>
       <div class="footer-nav">
         <a href="#foundations">Foundations</a>
@@ -1114,7 +1115,7 @@ const paletteNavObs = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.3 });
-['iron-night', 'birch-storm', 'forest', 'bloom', 'semantic', 'wcag', 'css-vars'].forEach(id => {
+['iron-night', 'birch-mist', 'forest', 'bloom', 'semantic', 'wcag', 'css-vars'].forEach(id => {
   const el = document.getElementById(id); if (el) paletteNavObs.observe(el);
 });
 
