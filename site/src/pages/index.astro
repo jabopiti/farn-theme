@@ -34,13 +34,13 @@
 
   /* ── Hero ─────────────────────────────────────────── */
   .hero {
-    min-height: 100vh;
+    min-height: calc(100vh + var(--subnav-height));
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    margin-top: -44px;
-    padding-top: calc(var(--space-4xl) + 44px);
+    margin-top: calc(-1 * var(--subnav-height));
+    padding-top: calc(var(--space-4xl) + var(--subnav-height));
     padding-bottom: var(--space-4xl);
   }
   .hero::before {
@@ -1036,23 +1036,26 @@ window.addEventListener('popstate', e => {
 if (window.location.hash === '#palette') switchView('palette', false);
 
 // ── Smart nav ──────────────────────────────────
+const cs = getComputedStyle(document.documentElement);
+const NAV_H    = parseInt(cs.getPropertyValue('--nav-height'));
+const SUBNAV_H = parseInt(cs.getPropertyValue('--subnav-height'));
 let lastY = 0;
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
   nav.classList.toggle('filled', y > 20 || inPaletteView);
   subNav.classList.toggle('filled', y > 20 || inPaletteView);
-  if (y < 64) {
+  if (y < NAV_H) {
     nav.classList.remove('hidden');
-    subNav.style.top = '64px';
-    document.documentElement.style.setProperty('--scroll-offset', '108px');
+    subNav.style.top = NAV_H + 'px';
+    document.documentElement.style.setProperty('--scroll-offset', (NAV_H + SUBNAV_H) + 'px');
   } else if (y > lastY + 8) {
     nav.classList.add('hidden');
     subNav.style.top = '0px';
-    document.documentElement.style.setProperty('--scroll-offset', '44px');
+    document.documentElement.style.setProperty('--scroll-offset', SUBNAV_H + 'px');
   } else if (y < lastY) {
     nav.classList.remove('hidden');
-    subNav.style.top = '64px';
-    document.documentElement.style.setProperty('--scroll-offset', '108px');
+    subNav.style.top = NAV_H + 'px';
+    document.documentElement.style.setProperty('--scroll-offset', (NAV_H + SUBNAV_H) + 'px');
   }
   lastY = y;
 }, { passive: true });
