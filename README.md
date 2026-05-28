@@ -1,6 +1,6 @@
 # Farn
 
-A design system rooted in the forests of northern Germany. Inspired by [https://nordtheme.com](Nord Theme).
+A design system rooted in the forests of northern Germany. Inspired by [Nord Theme](https://nordtheme.com).
 
 ## Sharp. *Warm.* Intellectual.
 
