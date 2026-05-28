@@ -61,6 +61,7 @@ function isActive(route: string) {
           <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
             <i class="ti ti-moon" id="themeIcon"></i>
           </button>
+          <a href="/" class="nav-cta">Docs</a>
           <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileDrawer">
             <i class="ti ti-menu-2" id="hamburgerIcon"></i>
           </button>
@@ -83,8 +84,12 @@ function isActive(route: string) {
         <a href="/tokens/spacing" class={`drawer-link${isActive('/tokens/spacing') ? ' active' : ''}`}>Spacing</a>
         <a href="/components" class={`drawer-link${isActive('/components') ? ' active' : ''}`}>Components</a>
       </nav>
+      <a href="/" class="drawer-cta">Docs</a>
     </div>
     <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Optional sub-nav (provided by individual pages via slot="subnav") -->
+    <slot name="subnav" />
 
     <!-- Page content -->
     <main class="doc-main">
@@ -92,6 +97,35 @@ function isActive(route: string) {
         <slot />
       </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="page-footer" data-surface="dark">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-logo"><img src="/fern_icon.png" alt="" class="nav-logo-icon" aria-hidden="true" />Farn<span>.</span></div>
+          <p class="footer-tagline">A design system — sharp, warm, intellectual.</p>
+          <div class="footer-nav">
+            <a href="/">Design System</a>
+            <a href="/getting-started">Getting Started</a>
+            <a href="/">Palette</a>
+            <a href="/tokens/colors">Colors</a>
+            <a href="/components">Components</a>
+            <a href="https://github.com/jabopiti/farn-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+        <hr class="footer-hr" />
+        <div class="footer-bar">
+          <p class="footer-copy">© 2026 Jacob Lueg Tiedemann — v0.1.0</p>
+          <div class="footer-links">
+            <a href="https://jbpt.de" target="_blank" rel="noopener noreferrer">About</a>
+            <a href="https://jbpt.de/#contact" target="_blank" rel="noopener noreferrer">Contact</a>
+            <a href="https://jbpt.de/legal/" target="_blank" rel="noopener noreferrer">Legal Notice / Impressum</a>
+            <a href="https://jbpt.de/privacy/" target="_blank" rel="noopener noreferrer">Data Privacy / Datenschutz</a>
+            <a href="https://jbpt.de/accessibility/" target="_blank" rel="noopener noreferrer">Accessibility / Barrierefreiheit</a>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script is:inline>
       // Theme toggle
@@ -143,6 +177,42 @@ function isActive(route: string) {
       });
       drawerClose?.addEventListener('click', closeDrawer);
       drawerOverlay?.addEventListener('click', closeDrawer);
+
+      // Sub-nav scroll tracking (runs only when a sub-nav slot is provided)
+      const docSubNav = document.querySelector('.sub-nav');
+      if (docSubNav) {
+        const docSubNavLinks = docSubNav.querySelectorAll('.sub-nav-link');
+        const docIndicator = docSubNav.querySelector('.sub-nav-indicator');
+
+        function updateDocIndicator() {
+          const active = docSubNav.querySelector('.sub-nav-link.active');
+          if (active && docIndicator) {
+            docIndicator.style.left = active.offsetLeft + 'px';
+            docIndicator.style.width = active.offsetWidth + 'px';
+          }
+        }
+
+        if (docSubNavLinks[0]) {
+          docSubNavLinks[0].classList.add('active');
+          requestAnimationFrame(updateDocIndicator);
+        }
+
+        const sectionObs = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              docSubNavLinks.forEach(l => l.classList.remove('active'));
+              const link = docSubNav.querySelector(`a[href="#${e.target.id}"]`);
+              if (link) { link.classList.add('active'); updateDocIndicator(); }
+            }
+          });
+        }, { threshold: 0.3 });
+
+        docSubNavLinks.forEach(l => {
+          const id = l.getAttribute('href')?.slice(1);
+          const el = id ? document.getElementById(id) : null;
+          if (el) sectionObs.observe(el);
+        });
+      }
     </script>
   </body>
 </html>
@@ -156,6 +226,8 @@ function isActive(route: string) {
   @import '../styles/site.css';
 
   /* ── Doc page layout ─────────────────────────────────────────────────── */
+  html { scroll-padding-top: var(--scroll-offset); }
+
   .doc-main {
     padding-top: var(--nav-height);
     min-height: 100vh;
