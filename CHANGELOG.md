@@ -17,6 +17,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - "Get Started" CTA button in landing page nav linking to `/getting-started`
 
 ### Changed
+- Nav and footer logo switched from inline formatting to flexbox; icon grows from ~27.5px to 40px in the nav bar and 56px in the footer; footer tagline and nav links indent to align under the "Farn." wordmark
 - Landing page replaced with full prototype implementation (hero, Design System view, Palette view)
 - Hero and footer now use `data-surface="dark"` with semantic tokens throughout (no hardcoded palette refs)
 - Semantic comparison dark card uses `data-surface="dark"` instead of inline `var(--kn1-iron)`
