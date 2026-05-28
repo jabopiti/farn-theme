@@ -25,24 +25,24 @@ jobs:
             exit 1
           fi
 
-      - name: Rebuild dist/keld.css
+      - name: Rebuild dist/farn.css
         run: |
           cat tokens/colors.css \
               tokens/typography.css \
               tokens/spacing.css \
               tokens/dark-light.css \
               tokens/base.css \
-            > dist/keld.css
+            > dist/farn.css
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
-          files: dist/keld.css
+          files: dist/farn.css
           body: |
-            See [CHANGELOG.md](https://github.com/jabopiti/keld-theme/blob/main/CHANGELOG.md) for what changed.
+            See [CHANGELOG.md](https://github.com/jabopiti/farn-theme/blob/main/CHANGELOG.md) for what changed.
 
             **CDN (jsDelivr):**
             ```html
             <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/gh/jabopiti/keld-theme@${{ github.ref_name }}/dist/keld.css">
+              href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@${{ github.ref_name }}/dist/farn.css">
             ```

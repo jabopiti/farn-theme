@@ -1,8 +1,8 @@
-# Keld
+# Farn
 
-A design system rooted in northern European forest landscapes. Framework-agnostic, token-first, built for consistency across websites and web apps. Inspired by [Nord Theme](https://www.nordtheme.com/).
+A design system rooted in the forests of northern Germany.
 
-**Sharp. Warm. Intellectual.**
+## Sharp. *Warm.* Intellectual.
 
 Four palettes — Iron Night · Birch Storm · Forest · Bloom — with a two-layer token architecture for clean dark/light mode switching.
 
@@ -14,7 +14,7 @@ Add one `<link>` to your HTML:
 
 ```html
 <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jabopiti/keld-theme@0.1.0/dist/keld.css">
+  href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn.css">
 ```
 
 Prevent flash of wrong theme by adding this script before `<body>`:
@@ -22,7 +22,7 @@ Prevent flash of wrong theme by adding this script before `<body>`:
 ```html
 <script>
   (function() {
-    const stored = localStorage.getItem('keld-theme');
+    const stored = localStorage.getItem('farn-theme');
     const system = window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', stored ?? system);
@@ -132,7 +132,7 @@ All semantic pairings meet WCAG 2.1 AA:
 | Sage on Void | 5.19:1 | ✓ AA |
 | All Bloom colors on Parchment | ≥ 4.47:1 | ✓ AA |
 
-Full contrast matrix in the [documentation](https://keld.jbpt.de).
+Full contrast matrix in the [documentation](https://farn.jbpt.de).
 
 ---
 

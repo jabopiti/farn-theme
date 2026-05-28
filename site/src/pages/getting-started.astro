@@ -2,18 +2,18 @@
 import DocLayout from '../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Getting Started" description="Install Keld and set up dark/light mode in your project">
+<DocLayout title="Getting Started" description="Install Farn and set up dark/light mode in your project">
   <h1>Getting Started</h1>
-  <p>Keld ships as a single CSS file — no build step, no runtime, no framework assumptions. Add one <code>&lt;link&gt;</code> tag and you have all tokens.</p>
+  <p>Farn ships as a single CSS file — no build step, no runtime, no framework assumptions. Add one <code>&lt;link&gt;</code> tag and you have all tokens.</p>
 
   <h2>CDN Install</h2>
   <p>Link directly from jsDelivr. Replace <code>@0.1.0</code> with the latest version tag.</p>
   <pre><code>&lt;link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jabopiti/keld-theme@0.1.0/dist/keld.css"&gt;</code></pre>
-  <p><code>dist/keld.css</code> is a single concatenated file containing palette tokens, semantic tokens, typography, spacing, and base resets.</p>
+  href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn.css"&gt;</code></pre>
+  <p><code>dist/farn.css</code> is a single concatenated file containing palette tokens, semantic tokens, typography, spacing, and base resets.</p>
 
   <h2>What Gets Loaded</h2>
-  <p><code>keld.css</code> bundles five layers in order:</p>
+  <p><code>farn.css</code> bundles five layers in order:</p>
   <ol>
     <li><code>colors.css</code> — 17 palette tokens across four palettes</li>
     <li><code>typography.css</code> — font-family tokens and scale reference</li>
@@ -21,7 +21,7 @@ import DocLayout from '../layouts/DocLayout.astro';
     <li><code>dark-light.css</code> — semantic token layer with dark/light switching</li>
     <li><code>base.css</code> — box-sizing reset, smooth scroll, focus ring, reduced-motion</li>
   </ol>
-  <p>Fonts are not bundled in <code>keld.css</code>. Load them separately via Google Fonts.</p>
+  <p>Fonts are not bundled in <code>farn.css</code>. Load them separately via Google Fonts.</p>
 
   <h2>Load Fonts</h2>
   <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
@@ -35,7 +35,7 @@ import DocLayout from '../layouts/DocLayout.astro';
   <p>Add this inline script in <code>&lt;head&gt;</code> before any CSS loads. It reads the stored preference and sets <code>data-theme</code> on <code>&lt;html&gt;</code> before the browser paints.</p>
   <pre><code>&lt;script&gt;
   (function () &#123;
-    const stored = localStorage.getItem('keld-theme');
+    const stored = localStorage.getItem('farn-theme');
     const system = window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', stored ?? system);
@@ -51,7 +51,7 @@ import DocLayout from '../layouts/DocLayout.astro';
   const current = document.documentElement.getAttribute('data-theme');
   const next = current === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('keld-theme', next);
+  localStorage.setItem('farn-theme', next);
 &#125;</code></pre>
   <p>Default (no attribute) is light mode. System preference is respected when no manual choice is stored.</p>
 
@@ -93,14 +93,14 @@ h3 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; 
   &lt;meta charset="UTF-8"&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
   &lt;link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/jabopiti/keld-theme@0.1.0/dist/keld.css"&gt;
+    href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn.css"&gt;
   &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
   &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
   &lt;link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap"&gt;
   &lt;script&gt;
     (function()&#123;
-      const s = localStorage.getItem('keld-theme');
+      const s = localStorage.getItem('farn-theme');
       const p = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', s ?? p);
     &#125;)();
@@ -120,7 +120,7 @@ h3 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; 
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;h1&gt;Hello, Keld&lt;/h1&gt;
+  &lt;h1&gt;Hello, Farn&lt;/h1&gt;
   &lt;p&gt;Token-first design system.&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>

@@ -1,7 +1,7 @@
-# Keld — Agent Guide
+# Farn — Agent Guide
 
 ## What this repo is
-Keld is a CSS custom-property design system. It ships as `dist/keld.css` (a single flat CSS file) built from source files in `tokens/`. A documentation site lives in `site/` (Astro, styled with Keld itself).
+Farn is a CSS custom-property design system. It ships as `dist/farn.css` (a single flat CSS file) built from source files in `tokens/`. A documentation site lives in `site/` (Astro, styled with Farn itself).
 
 ## Repo structure
 
@@ -14,7 +14,7 @@ tokens/           CSS source — edit here, not in dist/
   base.css        Reset, focus, reduced-motion
   index.css       @import chain (used by the site)
 dist/
-  keld.css        Built output — concatenation of all tokens/*.css
+  farn.css        Built output — concatenation of all tokens/*.css
 site/             Astro documentation site (Phase 2+)
 CHANGELOG.md      Update on every token or component change
 ```
@@ -37,24 +37,24 @@ CHANGELOG.md      Update on every token or component change
 
 1. Add the CSS variable to the appropriate palette block in `tokens/colors.css`
 2. If it has a semantic role, add a mapping in `tokens/dark-light.css` for both light and dark contexts
-3. Rebuild `dist/keld.css` (see below)
+3. Rebuild `dist/farn.css` (see below)
 4. Add the token to the color page in `site/src/pages/tokens/colors.astro`
 5. Update `CHANGELOG.md`
 
-## Rebuilding dist/keld.css
+## Rebuilding dist/farn.css
 
 ```bash
-cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/dark-light.css tokens/base.css > dist/keld.css
+cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/dark-light.css tokens/base.css > dist/farn.css
 ```
 
 No build tool required — it's plain concatenation.
 
 ## Adding a new component
 
-Components are documentation patterns, not CSS classes shipped in `dist/keld.css`. To add one:
+Components are documentation patterns, not CSS classes shipped in `dist/farn.css`. To add one:
 
 1. Create `site/src/pages/components/<component-name>.astro`
-2. Include: description, anatomy, live demo (using Keld tokens), CSS snippet, and a status label (`stable` / `beta`)
+2. Include: description, anatomy, live demo (using Farn tokens), CSS snippet, and a status label (`stable` / `beta`)
 3. Add the page to the sidebar navigation in `site/src/layouts/DocLayout.astro`
 
 ## Typography critical rule
@@ -79,8 +79,8 @@ h1 {
 
 1. Update `CHANGELOG.md` (move items from Unreleased to the new version)
 2. Tag: `git tag v<X.Y.Z> && git push origin v<X.Y.Z>`
-3. GitHub Actions attaches `dist/keld.css` to the release
-4. jsDelivr CDN link becomes live: `https://cdn.jsdelivr.net/gh/jabopiti/keld-theme@<version>/dist/keld.css`
+3. GitHub Actions attaches `dist/farn.css` to the release
+4. jsDelivr CDN link becomes live: `https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@<version>/dist/farn.css`
 
 ## Load order for editing tasks
 

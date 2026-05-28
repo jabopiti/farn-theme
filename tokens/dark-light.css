@@ -1,4 +1,4 @@
-/* ── Keld — Semantic tokens and surface patterns ──────────────────────── */
+/* ── Farn — Semantic tokens and surface patterns ──────────────────────── */
 /*                                                                           */
 /* Two-layer architecture:                                                   */
 /*   Layer 1 — palette (colors.css): raw color values, never used directly  */
@@ -8,7 +8,7 @@
 /* Surface override: use data-surface="light|dark|tinted" on any element     */
 /*                                                                           */
 /* FOWT prevention: add this inline script before <body>:                    */
-/*   const t = localStorage.getItem('keld-theme');                           */
+/*   const t = localStorage.getItem('farn-theme');                           */
 /*   const s = window.matchMedia('(prefers-color-scheme: dark)').matches     */
 /*     ? 'dark' : 'light';                                                   */
 /*   document.documentElement.setAttribute('data-theme', t ?? s);            */

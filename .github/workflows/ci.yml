@@ -21,14 +21,14 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Verify dist/keld.css is up-to-date
+      - name: Verify dist/farn.css is up-to-date
         run: |
           cat tokens/colors.css tokens/typography.css tokens/spacing.css \
-              tokens/dark-light.css tokens/base.css > /tmp/keld-rebuilt.css
-          if ! diff -q dist/keld.css /tmp/keld-rebuilt.css > /dev/null; then
-            echo "dist/keld.css is out of sync with tokens/. Rebuild:"
-            echo "  cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/dark-light.css tokens/base.css > dist/keld.css"
-            diff dist/keld.css /tmp/keld-rebuilt.css
+              tokens/dark-light.css tokens/base.css > /tmp/farn-rebuilt.css
+          if ! diff -q dist/farn.css /tmp/farn-rebuilt.css > /dev/null; then
+            echo "dist/farn.css is out of sync with tokens/. Rebuild:"
+            echo "  cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/dark-light.css tokens/base.css > dist/farn.css"
+            diff dist/farn.css /tmp/farn-rebuilt.css
             exit 1
           fi
 

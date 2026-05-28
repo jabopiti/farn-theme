@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Keld will be documented here.
+All notable changes to Farn will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
@@ -42,5 +42,5 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - Typography tokens: Fraunces, Instrument Sans, JetBrains Mono
 - Spacing scale (xs–4xl), layout widths, border radius, z-index scale
 - Base reset and global styles
-- `dist/keld.css` — single-file distributable
+- `dist/farn.css` — single-file distributable
 - CDN distribution via jsDelivr
