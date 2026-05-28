@@ -59,8 +59,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <table>
     <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
     <tbody>
-      <tr><td><code>--fr0-sage</code></td><td><code>#5C9E86</code></td><td>Supporting accent, dark-mode primary accent</td></tr>
-      <tr><td><code>--fr1-fern</code></td><td><code>#3E7A62</code></td><td><strong>Primary accent</strong> — buttons, links, CTAs (light mode)</td></tr>
+      <tr><td><code>--fr0-sage</code></td><td><code>#5C9E86</code></td><td>Supporting accent, dark-mode hover state for Fern</td></tr>
+      <tr><td><code>--fr1-fern</code></td><td><code>#3E7A62</code></td><td><strong>Primary accent</strong> — buttons, links, CTAs (both modes)</td></tr>
       <tr><td><code>--fr2-forest</code></td><td><code>#2D5E4A</code></td><td>Accent hover, secondary emphasis</td></tr>
       <tr><td><code>--fr3-deepwater</code></td><td><code>#254D5A</code></td><td>Code block backgrounds (light pages), blockquote accent</td></tr>
     </tbody>
@@ -97,7 +97,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   --color-text:           var(--kn0-void);        /* Primary text           */
   --color-text-secondary: var(--kn2-slate);       /* Supporting text        */
   --color-text-tertiary:  var(--kn3-ash);         /* Placeholders, captions */
-  --color-border:         var(--kn1-iron);        /* Default border         */
+  --color-border:         var(--kn3-ash);         /* Default border         */
   --color-accent:         var(--fr1-fern);        /* Primary CTA, links     */
   --color-accent-hover:   var(--fr2-forest);      /* Accent hover           */
   --color-accent-text:    var(--bs2-parchment);   /* Text on accent bg      */
@@ -107,13 +107,13 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <pre><code>[data-theme="dark"] &#123;
   --color-bg:             var(--kn0-void);
   --color-bg-elevated:    var(--kn1-iron);
-  --color-bg-sunken:      var(--kn2-slate);
+  --color-bg-sunken:      var(--kn0-void);
   --color-text:           var(--bs2-parchment);
-  --color-text-secondary: var(--bs0-sand);
-  --color-text-tertiary:  var(--kn3-ash);
+  --color-text-secondary: var(--bs1-linen);
+  --color-text-tertiary:  var(--bs0-sand);
   --color-border:         var(--kn2-slate);
-  --color-accent:         var(--fr0-sage);  /* Sage reads better on dark */
-  --color-accent-hover:   var(--fr1-fern);
+  --color-accent:         var(--fr1-fern);
+  --color-accent-hover:   var(--fr0-sage);
   --color-accent-text:    var(--bs2-parchment);
 &#125;</code></pre>
 

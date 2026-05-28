@@ -14,7 +14,7 @@
   --bs2-parchment: #F5F4F0;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
-  --fr0-sage:      #5C9E86;   /* Classes, types, supporting accent         */
+  --fr0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */
   --fr1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs     */
   --fr2-forest:    #2D5E4A;   /* Keywords, operators, secondary accent     */
   --fr3-deepwater: #254D5A;   /* Pragmas, pre-processor, tertiary accent   */
@@ -117,7 +117,8 @@
   --color-text:           var(--kn0-void);
   --color-text-secondary: var(--kn2-slate);
   --color-text-tertiary:  var(--kn3-ash);
-  --color-border:         var(--kn1-iron);
+  --color-border:         var(--kn3-ash);
+  --color-border-strong:  var(--kn1-iron);
   --color-border-subtle:  rgba(55,65,81,0.12);
   --color-ghost-border:   rgba(55,65,81,0.25);
   --color-bg-code:        var(--fr3-deepwater);
@@ -130,16 +131,17 @@
 [data-theme="dark"] {
   --color-bg:             var(--kn0-void);
   --color-bg-elevated:    var(--kn1-iron);
-  --color-bg-sunken:      var(--kn2-slate);
+  --color-bg-sunken:      var(--kn0-void);
   --color-text:           var(--bs2-parchment);
-  --color-text-secondary: var(--bs0-sand);
-  --color-text-tertiary:  var(--kn3-ash);
+  --color-text-secondary: var(--bs1-linen);
+  --color-text-tertiary:  var(--bs0-sand);
   --color-border:         var(--kn2-slate);
+  --color-border-strong:  var(--bs0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
   --color-ghost-border:   rgba(245,244,240,0.25);
-  --color-bg-code:        var(--fr3-deepwater);
-  --color-accent:         var(--fr0-sage);
-  --color-accent-hover:   var(--fr1-fern);
+  --color-bg-code:        var(--kn1-iron);
+  --color-accent:         var(--fr1-fern);
+  --color-accent-hover:   var(--fr0-sage);
   --color-accent-text:    var(--bs2-parchment);
 }
 
@@ -155,7 +157,8 @@
   --color-text:           var(--kn0-void);
   --color-text-secondary: var(--kn2-slate);
   --color-text-tertiary:  var(--kn3-ash);
-  --color-border:         var(--kn1-iron);
+  --color-border:         var(--kn3-ash);
+  --color-border-strong:  var(--kn1-iron);
   --color-border-subtle:  rgba(55,65,81,0.12);
   --color-ghost-border:   rgba(55,65,81,0.25);
   --color-bg-code:        var(--fr3-deepwater);
@@ -168,16 +171,17 @@
   background: var(--kn0-void);
   --color-bg:             var(--kn0-void);
   --color-bg-elevated:    var(--kn1-iron);
-  --color-bg-sunken:      var(--kn2-slate);
+  --color-bg-sunken:      var(--kn0-void);
   --color-text:           var(--bs2-parchment);
-  --color-text-secondary: var(--bs0-sand);
-  --color-text-tertiary:  var(--kn3-ash);
+  --color-text-secondary: var(--bs1-linen);
+  --color-text-tertiary:  var(--bs0-sand);
   --color-border:         var(--kn2-slate);
+  --color-border-strong:  var(--bs0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
   --color-ghost-border:   rgba(245,244,240,0.25);
-  --color-bg-code:        var(--fr3-deepwater);
-  --color-accent:         var(--fr0-sage);
-  --color-accent-hover:   var(--fr1-fern);
+  --color-bg-code:        var(--kn1-iron);
+  --color-accent:         var(--fr1-fern);
+  --color-accent-hover:   var(--fr0-sage);
   --color-accent-text:    var(--bs2-parchment);
 }
 
@@ -189,7 +193,8 @@
   --color-text:           var(--kn0-void);
   --color-text-secondary: var(--kn2-slate);
   --color-text-tertiary:  var(--kn3-ash);
-  --color-border:         var(--kn1-iron);
+  --color-border:         var(--kn3-ash);
+  --color-border-strong:  var(--kn1-iron);
   --color-border-subtle:  rgba(55,65,81,0.12);
   --color-ghost-border:   rgba(55,65,81,0.25);
   --color-bg-code:        var(--fr3-deepwater);
