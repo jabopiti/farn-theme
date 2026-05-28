@@ -205,10 +205,10 @@
 :root { --scroll-offset: 108px; }
 .sub-nav {
   position: sticky; top: 64px; z-index: var(--z-content);
-  background: var(--color-bg);
-  border-bottom: 1px solid var(--color-border-subtle);
+  background: transparent;
+  border-bottom: 1px solid rgba(75,85,99,0.25);
   height: 44px; overflow-x: auto; scrollbar-width: none;
-  transition: top 250ms ease, background-color 200ms ease;
+  transition: top 250ms ease, background-color 200ms ease, border-color 200ms ease;
 }
 .sub-nav::-webkit-scrollbar { display: none; }
 .sub-nav-inner {
@@ -218,18 +218,25 @@
 }
 .sub-nav-link {
   padding: 0 16px; font-size: 14px; font-weight: 500;
-  color: var(--color-text-secondary); text-decoration: none;
+  color: rgba(245,244,240,0.6); text-decoration: none;
   white-space: nowrap; display: inline-flex; align-items: center;
   border-bottom: 2px solid transparent; transition: color 120ms ease;
 }
-.sub-nav-link:hover { color: var(--color-text); }
-.sub-nav-link.active { color: var(--color-text); font-weight: 600; }
+.sub-nav-link:hover { color: var(--bs2-parchment); }
+.sub-nav-link.active { color: var(--bs2-parchment); font-weight: 600; }
 .sub-nav-indicator {
   position: absolute; bottom: 0; height: 2px;
   background: var(--color-accent);
   transition: left 200ms ease-out, width 200ms ease-out;
   pointer-events: none;
 }
+.sub-nav.filled {
+  background: var(--color-bg);
+  border-bottom-color: var(--color-border-subtle);
+}
+.sub-nav.filled .sub-nav-link { color: var(--color-text-secondary); }
+.sub-nav.filled .sub-nav-link:hover,
+.sub-nav.filled .sub-nav-link.active { color: var(--color-text); font-weight: 600; }
 
 /* ── Section labels ───────────────────────────────────────────────────────── */
 .section-eyebrow {

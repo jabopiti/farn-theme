@@ -1020,8 +1020,8 @@ function switchView(viewName, pushHistory) {
   document.querySelectorAll('.nav-view-link').forEach(l => l.classList.toggle('active', l.dataset.view === viewName));
   if (pushHistory !== false) history.pushState({ view: viewName }, '', isDs ? '#design-system' : '#palette');
   window.scrollTo(0, 0);
-  if (!isDs) nav.classList.add('filled');
-  else if (window.scrollY <= 20) nav.classList.remove('filled');
+  if (!isDs) { nav.classList.add('filled'); subNav.classList.add('filled'); }
+  else if (window.scrollY <= 20) { nav.classList.remove('filled'); subNav.classList.remove('filled'); }
   requestAnimationFrame(() => updateSubNavIndicator(isDs ? 'ds' : 'palette'));
 }
 
@@ -1038,6 +1038,7 @@ let lastY = 0;
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
   nav.classList.toggle('filled', y > 20 || inPaletteView);
+  subNav.classList.toggle('filled', y > 20 || inPaletteView);
   if (y < 64) {
     nav.classList.remove('hidden');
     subNav.style.top = '64px';
