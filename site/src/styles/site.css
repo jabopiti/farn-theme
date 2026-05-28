@@ -212,8 +212,9 @@
   background: transparent;
   border-bottom: 1px solid rgba(75,85,99,0.25);
   height: var(--subnav-height); overflow-x: auto; scrollbar-width: none;
-  transition: top 250ms ease, background-color 200ms ease, border-color 200ms ease;
+  transition: transform 250ms ease, background-color 200ms ease, border-color 200ms ease;
 }
+.sub-nav.hidden { transform: translateY(calc(-1 * var(--nav-height))); }
 .sub-nav::-webkit-scrollbar { display: none; }
 .sub-nav-inner {
   max-width: var(--width-content); margin: 0 auto;

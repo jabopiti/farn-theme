@@ -1046,15 +1046,15 @@ window.addEventListener('scroll', () => {
   subNav.classList.toggle('filled', y > 20 || inPaletteView);
   if (y < NAV_H) {
     nav.classList.remove('hidden');
-    subNav.style.top = NAV_H + 'px';
+    subNav.classList.remove('hidden');
     document.documentElement.style.setProperty('--scroll-offset', (NAV_H + SUBNAV_H) + 'px');
   } else if (y > lastY + 8) {
     nav.classList.add('hidden');
-    subNav.style.top = '0px';
+    subNav.classList.add('hidden');
     document.documentElement.style.setProperty('--scroll-offset', SUBNAV_H + 'px');
   } else if (y < lastY) {
     nav.classList.remove('hidden');
-    subNav.style.top = NAV_H + 'px';
+    subNav.classList.remove('hidden');
     document.documentElement.style.setProperty('--scroll-offset', (NAV_H + SUBNAV_H) + 'px');
   }
   lastY = y;
