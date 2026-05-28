@@ -17,6 +17,24 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - "Get Started" CTA button in landing page nav linking to `/getting-started`
 
 ### Changed
+- **Color coherence overhaul** aligned with Nord theme philosophy:
+  - Dark mode `--color-accent` now maps to `--fr1-fern` (was `--fr0-sage`); dark mode hover shifts to Sage — Fern is now the primary accent in both modes
+  - Dark mode `--color-accent-hover` now maps to `--fr0-sage` (was `--fr1-fern`)
+  - Dark mode `--color-bg-sunken` now maps to `--kn0-void` (was `--kn2-slate`); depth hierarchy void < iron < void matches inset expectation
+  - Dark mode `--color-text-secondary` now maps to `--bs1-linen` (was `--bs0-sand`); full Birch Storm 3-level scale restored
+  - Dark mode `--color-text-tertiary` now maps to `--bs0-sand` (was `--kn3-ash`); text hierarchy stays within Birch Storm family
+  - Dark mode `--color-bg-code` now maps to `--kn1-iron` (was `--fr3-deepwater`); deepwater on void had near-zero contrast
+  - Light mode `--color-border` now maps to `--kn3-ash` (was `--kn1-iron`); reduces default border weight from 9:1 to ~4:1
+  - New `--color-border-strong` token added (light: `--kn1-iron`, dark: `--bs0-sand`) for intentionally heavy borders
+  - `data-surface` overrides updated to match all the above in their respective contexts
+- Nav `.nav-logo span` and `.nav-links a.active` now use `var(--color-accent)` (was hardcoded `var(--fr0-sage)`)
+- `[data-theme="dark"] .btn-s:hover` now uses `var(--kn2-slate)` (was `var(--kn3-ash)`)
+- `hr.section-divider` no longer applies `opacity: 0.4` (ash-weight border is already light enough)
+- Field input hover/focus in dark mode explicitly uses `var(--kn2-slate)` to prevent invisible inputs when `--color-bg-sunken` resolves to void
+- All 17 color token cards in landing page updated with new usage pills aligned to final tag definitions
+- Usage pill styles are now mode-invariant (no dark-theme overrides): light=parchment/iron, dark=slate/parchment, both=sage/void
+- Semantic layer diagram updated to reflect dark mode changes (accent→fern, accent-hover→sage, text-secondary→linen, text-tertiary→sand, bg-sunken→void)
+- `--fr0-sage` token comment updated to "Supporting accent, dark-mode hover state"
 - Landing page replaced with full prototype implementation (hero, Design System view, Palette view)
 - Hero and footer now use `data-surface="dark"` with semantic tokens throughout (no hardcoded palette refs)
 - Semantic comparison dark card uses `data-surface="dark"` instead of inline `var(--kn1-iron)`
