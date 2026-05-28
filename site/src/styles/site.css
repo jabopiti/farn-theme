@@ -390,7 +390,7 @@
   flex-wrap: wrap;
 }
 .footer-nav a {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--color-text-tertiary);
   text-decoration: none;
   transition: color 120ms ease;
