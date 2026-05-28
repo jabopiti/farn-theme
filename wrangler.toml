@@ -13,5 +13,5 @@
 # Custom domain: farn.jbpt.de
 #   Add CNAME in DNS: farn → <project>.pages.dev
 
-name = "farn-docs"
+name = "farn-theme"
 pages_build_output_dir = "site/dist"
