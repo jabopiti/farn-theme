@@ -3,21 +3,21 @@
 
 :root {
   /* Iron Night — dark surfaces */
-  --kn0-void:      #0D1117;   /* Darkest base, primary dark bg             */
-  --kn1-iron:      #374151;   /* Elevated surfaces, borders                */
-  --kn2-slate:     #4B5563;   /* Active lines, selections                  */
-  --kn3-ash:       #6B7280;   /* Comments, placeholders, guides            */
+  --in0-void:      #0D1117;   /* Darkest base, primary dark bg             */
+  --in1-iron:      #374151;   /* Elevated surfaces, borders                */
+  --in2-slate:     #4B5563;   /* Active lines, selections                  */
+  --in3-ash:       #6B7280;   /* Comments, placeholders, guides            */
 
   /* Birch Mist — light surfaces */
-  --bs0-sand:      #E4E2DA;   /* Variables, elevated UI (dark)             */
-  --bs1-linen:     #EEEDE9;   /* Hover states, active line (light)         */
-  --bs2-parchment: #F5F4F0;   /* Primary bg (light) / text (dark)         */
+  --bm0-sand:      #E4E2DA;   /* Variables, elevated UI (dark)             */
+  --bm1-linen:     #EEEDE9;   /* Hover states, active line (light)         */
+  --bm2-parchment: #F5F4F0;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
-  --fr0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */
-  --fr1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs     */
-  --fr2-forest:    #2D5E4A;   /* Keywords, operators, secondary accent     */
-  --fr3-deepwater: #254D5A;   /* Pragmas, pre-processor, tertiary accent   */
+  --fo0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */
+  --fo1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs     */
+  --fo2-forest:    #2D5E4A;   /* Keywords, operators, secondary accent     */
+  --fo3-deepwater: #254D5A;   /* Pragmas, pre-processor, tertiary accent   */
 
   /* Bloom — semantic */
   --bl0-ember:     #C5414C;   /* Errors, deletions                         */

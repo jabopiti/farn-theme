@@ -77,13 +77,13 @@ import DocLayout from '../layouts/DocLayout.astro';
     purpose-named tokens to the correct palette value per theme mode:
   </p>
   <pre><code>/* Layer 1 — palette (defined once, never changes) */
---fr1-fern: #3E7A62;
+--fo1-fern: #3E7A62;
 
 /* Layer 2 — semantic (resolves differently per mode) */
-[data-theme="light"] &#123; --color-accent: var(--fr1-fern); &#125;
-[data-theme="dark"]  &#123; --color-accent: var(--fr0-sage); &#125;</code></pre>
+[data-theme="light"] &#123; --color-accent: var(--fo1-fern); &#125;
+[data-theme="dark"]  &#123; --color-accent: var(--fo0-sage); &#125;</code></pre>
   <p>
-    Components reference <code>--color-accent</code> — never <code>--fr1-fern</code> directly.
+    Components reference <code>--color-accent</code> — never <code>--fo1-fern</code> directly.
     When the mode switches, all components update automatically with no conditional logic.
   </p>
 

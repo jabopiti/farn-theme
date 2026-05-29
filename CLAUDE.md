@@ -7,7 +7,7 @@ Farn is a CSS custom-property design system. It ships as `dist/farn.css` (a sing
 
 ```
 tokens/           CSS source — edit here, not in dist/
-  colors.css      All 17 palette tokens (--kn*, --bs*, --fr*, --bl*)
+  colors.css      All 17 palette tokens (--in*, --bm*, --fo*, --bl*)
   typography.css  Font imports + font-family tokens
   spacing.css     Spacing scale, widths, radius, z-index
   dark-light.css  Semantic tokens + data-surface patterns
@@ -23,9 +23,9 @@ CHANGELOG.md      Update on every token or component change
 
 | Prefix | Palette | Examples |
 |---|---|---|
-| `--kn` | Iron Night (dark) | `--kn0-void`, `--kn1-iron`, `--kn2-slate`, `--kn3-ash` |
-| `--bs` | Birch Mist (light) | `--bs0-sand`, `--bs1-linen`, `--bs2-parchment` |
-| `--fr` | Forest (accent) | `--fr0-sage`, `--fr1-fern`, `--fr2-forest`, `--fr3-deepwater` |
+| `--in` | Iron Night (dark) | `--in0-void`, `--in1-iron`, `--in2-slate`, `--in3-ash` |
+| `--bm` | Birch Mist (light) | `--bm0-sand`, `--bm1-linen`, `--bm2-parchment` |
+| `--fo` | Forest (accent) | `--fo0-sage`, `--fo1-fern`, `--fo2-forest`, `--fo3-deepwater` |
 | `--bl` | Bloom (semantic) | `--bl0-ember`, `--bl1-ochre`, `--bl2-grain`, `--bl3-moss`, `--bl4-heather` |
 | `--color-*` | Semantic layer | `--color-bg`, `--color-text`, `--color-accent`, etc. |
 | `--space-*` | Spacing scale | `--space-xs` through `--space-4xl` |

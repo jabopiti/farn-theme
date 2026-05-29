@@ -16,38 +16,38 @@
 /* ── Semantic tokens — light (default) ───────────────────────────────── */
 :root,
 [data-theme="light"] {
-  --color-bg:             var(--bs2-parchment);
-  --color-bg-elevated:    var(--bs1-linen);
-  --color-bg-sunken:      var(--bs0-sand);
-  --color-text:           var(--kn0-void);
-  --color-text-secondary: var(--kn2-slate);
-  --color-text-tertiary:  var(--kn3-ash);
-  --color-border:         var(--kn3-ash);
-  --color-border-strong:  var(--kn1-iron);
+  --color-bg:             var(--bm2-parchment);
+  --color-bg-elevated:    var(--bm1-linen);
+  --color-bg-sunken:      var(--bm0-sand);
+  --color-text:           var(--in0-void);
+  --color-text-secondary: var(--in2-slate);
+  --color-text-tertiary:  var(--in3-ash);
+  --color-border:         var(--in3-ash);
+  --color-border-strong:  var(--in1-iron);
   --color-border-subtle:  rgba(55,65,81,0.12);
   --color-ghost-border:   rgba(55,65,81,0.25);
-  --color-bg-code:        var(--fr3-deepwater);
-  --color-accent:         var(--fr1-fern);
-  --color-accent-hover:   var(--fr2-forest);
-  --color-accent-text:    var(--bs2-parchment);
+  --color-bg-code:        var(--fo3-deepwater);
+  --color-accent:         var(--fo1-fern);
+  --color-accent-hover:   var(--fo2-forest);
+  --color-accent-text:    var(--bm2-parchment);
 }
 
 /* ── Semantic tokens — dark ─────────────────────────────────────────── */
 [data-theme="dark"] {
-  --color-bg:             var(--kn0-void);
-  --color-bg-elevated:    var(--kn1-iron);
-  --color-bg-sunken:      var(--kn0-void);
-  --color-text:           var(--bs2-parchment);
-  --color-text-secondary: var(--bs1-linen);
-  --color-text-tertiary:  var(--bs0-sand);
-  --color-border:         var(--kn2-slate);
-  --color-border-strong:  var(--bs0-sand);
+  --color-bg:             var(--in0-void);
+  --color-bg-elevated:    var(--in1-iron);
+  --color-bg-sunken:      var(--in0-void);
+  --color-text:           var(--bm2-parchment);
+  --color-text-secondary: var(--bm1-linen);
+  --color-text-tertiary:  var(--bm0-sand);
+  --color-border:         var(--in2-slate);
+  --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
   --color-ghost-border:   rgba(245,244,240,0.25);
-  --color-bg-code:        var(--kn1-iron);
-  --color-accent:         var(--fr1-fern);
-  --color-accent-hover:   var(--fr0-sage);
-  --color-accent-text:    var(--bs2-parchment);
+  --color-bg-code:        var(--in1-iron);
+  --color-accent:         var(--fo1-fern);
+  --color-accent-hover:   var(--fo0-sage);
+  --color-accent-text:    var(--bm2-parchment);
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */
@@ -55,55 +55,55 @@
 /* regardless of the page-level dark/light theme.                           */
 
 [data-surface="light"] {
-  background: var(--bs2-parchment);
-  --color-bg:             var(--bs2-parchment);
-  --color-bg-elevated:    var(--bs1-linen);
-  --color-bg-sunken:      var(--bs0-sand);
-  --color-text:           var(--kn0-void);
-  --color-text-secondary: var(--kn2-slate);
-  --color-text-tertiary:  var(--kn3-ash);
-  --color-border:         var(--kn3-ash);
-  --color-border-strong:  var(--kn1-iron);
+  background: var(--bm2-parchment);
+  --color-bg:             var(--bm2-parchment);
+  --color-bg-elevated:    var(--bm1-linen);
+  --color-bg-sunken:      var(--bm0-sand);
+  --color-text:           var(--in0-void);
+  --color-text-secondary: var(--in2-slate);
+  --color-text-tertiary:  var(--in3-ash);
+  --color-border:         var(--in3-ash);
+  --color-border-strong:  var(--in1-iron);
   --color-border-subtle:  rgba(55,65,81,0.12);
   --color-ghost-border:   rgba(55,65,81,0.25);
-  --color-bg-code:        var(--fr3-deepwater);
-  --color-accent:         var(--fr1-fern);
-  --color-accent-hover:   var(--fr2-forest);
-  --color-accent-text:    var(--bs2-parchment);
+  --color-bg-code:        var(--fo3-deepwater);
+  --color-accent:         var(--fo1-fern);
+  --color-accent-hover:   var(--fo2-forest);
+  --color-accent-text:    var(--bm2-parchment);
 }
 
 [data-surface="dark"] {
-  background: var(--kn0-void);
-  --color-bg:             var(--kn0-void);
-  --color-bg-elevated:    var(--kn1-iron);
-  --color-bg-sunken:      var(--kn0-void);
-  --color-text:           var(--bs2-parchment);
-  --color-text-secondary: var(--bs1-linen);
-  --color-text-tertiary:  var(--bs0-sand);
-  --color-border:         var(--kn2-slate);
-  --color-border-strong:  var(--bs0-sand);
+  background: var(--in0-void);
+  --color-bg:             var(--in0-void);
+  --color-bg-elevated:    var(--in1-iron);
+  --color-bg-sunken:      var(--in0-void);
+  --color-text:           var(--bm2-parchment);
+  --color-text-secondary: var(--bm1-linen);
+  --color-text-tertiary:  var(--bm0-sand);
+  --color-border:         var(--in2-slate);
+  --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
   --color-ghost-border:   rgba(245,244,240,0.25);
-  --color-bg-code:        var(--kn1-iron);
-  --color-accent:         var(--fr1-fern);
-  --color-accent-hover:   var(--fr0-sage);
-  --color-accent-text:    var(--bs2-parchment);
+  --color-bg-code:        var(--in1-iron);
+  --color-accent:         var(--fo1-fern);
+  --color-accent-hover:   var(--fo0-sage);
+  --color-accent-text:    var(--bm2-parchment);
 }
 
 [data-surface="tinted"] {
-  background: var(--bs1-linen);
-  --color-bg:             var(--bs1-linen);
-  --color-bg-elevated:    var(--bs2-parchment);
-  --color-bg-sunken:      var(--bs0-sand);
-  --color-text:           var(--kn0-void);
-  --color-text-secondary: var(--kn2-slate);
-  --color-text-tertiary:  var(--kn3-ash);
-  --color-border:         var(--kn3-ash);
-  --color-border-strong:  var(--kn1-iron);
+  background: var(--bm1-linen);
+  --color-bg:             var(--bm1-linen);
+  --color-bg-elevated:    var(--bm2-parchment);
+  --color-bg-sunken:      var(--bm0-sand);
+  --color-text:           var(--in0-void);
+  --color-text-secondary: var(--in2-slate);
+  --color-text-tertiary:  var(--in3-ash);
+  --color-border:         var(--in3-ash);
+  --color-border-strong:  var(--in1-iron);
   --color-border-subtle:  rgba(55,65,81,0.12);
   --color-ghost-border:   rgba(55,65,81,0.25);
-  --color-bg-code:        var(--fr3-deepwater);
-  --color-accent:         var(--fr1-fern);
-  --color-accent-hover:   var(--fr2-forest);
-  --color-accent-text:    var(--bs2-parchment);
+  --color-bg-code:        var(--fo3-deepwater);
+  --color-accent:         var(--fo1-fern);
+  --color-accent-hover:   var(--fo2-forest);
+  --color-accent-text:    var(--bm2-parchment);
 }

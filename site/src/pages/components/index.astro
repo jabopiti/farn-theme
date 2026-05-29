@@ -18,9 +18,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <table>
     <thead><tr><th>Variant</th><th>Background</th><th>Use</th></tr></thead>
     <tbody>
-      <tr><td>Default</td><td><code>--bs1-linen</code> / <code>--kn1-iron</code> (dark)</td><td>Article lists, feature grids, project indexes</td></tr>
-      <tr><td>Highlight — light</td><td><code>--kn0-void</code></td><td>Featured content on light backgrounds</td></tr>
-      <tr><td>Highlight — dark</td><td><code>--kn1-iron</code> + 1px <code>--kn2-slate</code> border</td><td>Featured content on dark backgrounds</td></tr>
+      <tr><td>Default</td><td><code>--bm1-linen</code> / <code>--in1-iron</code> (dark)</td><td>Article lists, feature grids, project indexes</td></tr>
+      <tr><td>Highlight — light</td><td><code>--in0-void</code></td><td>Featured content on light backgrounds</td></tr>
+      <tr><td>Highlight — dark</td><td><code>--in1-iron</code> + 1px <code>--in2-slate</code> border</td><td>Featured content on dark backgrounds</td></tr>
     </tbody>
   </table>
 
@@ -51,11 +51,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <table>
     <thead><tr><th>Variant</th><th>Light bg</th><th>Dark bg</th><th>Use</th></tr></thead>
     <tbody>
-      <tr><td>Primary</td><td><code>--fr1-fern</code>, Parchment text</td><td><code>--fr0-sage</code>, Parchment text</td><td>The single strongest action per context</td></tr>
-      <tr><td>Secondary</td><td><code>--bs0-sand</code>, Void text</td><td><code>--kn2-slate</code>, Parchment text</td><td>Second most important action</td></tr>
+      <tr><td>Primary</td><td><code>--fo1-fern</code>, Parchment text</td><td><code>--fo0-sage</code>, Parchment text</td><td>The single strongest action per context</td></tr>
+      <tr><td>Secondary</td><td><code>--bm0-sand</code>, Void text</td><td><code>--in2-slate</code>, Parchment text</td><td>Second most important action</td></tr>
       <tr><td>Ghost</td><td>Transparent, Iron border</td><td>Transparent, Slate border</td><td>Low-priority — cancel, back, dismiss</td></tr>
       <tr><td>Destructive</td><td colspan="2"><code>--bl0-ember</code>, Parchment text (both modes)</td><td>Irreversible actions only</td></tr>
-      <tr><td>Text link</td><td><code>--fr1-fern</code> text, underline</td><td><code>--fr0-sage</code> text, underline</td><td>Tertiary actions in prose or UI text</td></tr>
+      <tr><td>Text link</td><td><code>--fo1-fern</code> text, underline</td><td><code>--fo0-sage</code> text, underline</td><td>Tertiary actions in prose or UI text</td></tr>
     </tbody>
   </table>
 
@@ -88,11 +88,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <table>
     <thead><tr><th>State</th><th>Background</th><th>Border</th></tr></thead>
     <tbody>
-      <tr><td>Rest</td><td><code>--bs1-linen</code></td><td>none</td></tr>
-      <tr><td>Hover</td><td><code>--bs0-sand</code></td><td>none</td></tr>
-      <tr><td>Focus</td><td><code>--bs0-sand</code></td><td>1.5px <code>--fr1-fern</code> + Fern glow</td></tr>
-      <tr><td>Error</td><td><code>--bs2-parchment</code></td><td>1.5px <code>--bl0-ember</code></td></tr>
-      <tr><td>Disabled</td><td><code>--bs2-parchment</code></td><td>none, 40% opacity</td></tr>
+      <tr><td>Rest</td><td><code>--bm1-linen</code></td><td>none</td></tr>
+      <tr><td>Hover</td><td><code>--bm0-sand</code></td><td>none</td></tr>
+      <tr><td>Focus</td><td><code>--bm0-sand</code></td><td>1.5px <code>--fo1-fern</code> + Fern glow</td></tr>
+      <tr><td>Error</td><td><code>--bm2-parchment</code></td><td>1.5px <code>--bl0-ember</code></td></tr>
+      <tr><td>Disabled</td><td><code>--bm2-parchment</code></td><td>none, 40% opacity</td></tr>
     </tbody>
   </table>
   <pre><code>input:focus &#123;
@@ -138,8 +138,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <tr><td>Draft / Pending / Warning</td><td>Grain — <code>--bl2-grain</code></td></tr>
       <tr><td>Archived / Error / Removed</td><td>Ember — <code>--bl0-ember</code></td></tr>
       <tr><td>Beta / Special</td><td>Heather — <code>--bl4-heather</code></td></tr>
-      <tr><td>Primary category</td><td>Forest — <code>--fr1-fern</code></td></tr>
-      <tr><td>Neutral / Uncategorised</td><td>Sand — <code>--bs0-sand</code></td></tr>
+      <tr><td>Primary category</td><td>Forest — <code>--fo1-fern</code></td></tr>
+      <tr><td>Neutral / Uncategorised</td><td>Sand — <code>--bm0-sand</code></td></tr>
     </tbody>
   </table>
   <pre><code>.badge &#123;
@@ -184,9 +184,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <table>
     <thead><tr><th>Surface</th><th>Background</th><th>Use</th></tr></thead>
     <tbody>
-      <tr><td><code>light</code></td><td><code>--bs2-parchment</code></td><td>Default. Most content sections.</td></tr>
-      <tr><td><code>dark</code></td><td><code>--kn0-void</code></td><td>Hero, feature callouts, closing CTAs.</td></tr>
-      <tr><td><code>tinted</code></td><td><code>--bs1-linen</code></td><td>Subtle variation within a light page.</td></tr>
+      <tr><td><code>light</code></td><td><code>--bm2-parchment</code></td><td>Default. Most content sections.</td></tr>
+      <tr><td><code>dark</code></td><td><code>--in0-void</code></td><td>Hero, feature callouts, closing CTAs.</td></tr>
+      <tr><td><code>tinted</code></td><td><code>--bm1-linen</code></td><td>Subtle variation within a light page.</td></tr>
     </tbody>
   </table>
   <p>Sections are flush — no gap between them. The background colour change is the visual separator. Page rhythm example: <strong>dark hero &rarr; light features &rarr; tinted aside &rarr; dark CTA</strong>.</p>
