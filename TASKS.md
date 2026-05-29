@@ -224,3 +224,121 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 - [ ] Add root `package.json` with `name`, `version`, and `exports` pointing to `dist/farn.css` and `dist/farn-tokens.css`
 - [ ] Add npm installation instructions to `site/src/pages/getting-started.astro` and `README.md`
 - [ ] Verify the package installs cleanly and exports resolve correctly
+
+---
+
+## T-20 · Review section divider spec
+`status: backlog` `effort: XS`
+
+**Gap:** `divider-spec.md` contains six patterns and per-pattern animation decisions that need a design pass before implementation — to confirm which patterns fit Farn's aesthetic, whether the animation tiers are right, and what the implementation order should be.
+
+- [ ] Read `divider-spec.md` in full
+- [ ] Decide which patterns to implement and in what order; annotate this task or the spec directly
+- [ ] Confirm whether the stacked card reveal fits the current site structure (requires full-viewport sections)
+
+---
+
+## T-21 · Section transition color tokens
+`status: backlog` `effort: XS`
+
+**Gap:** The divider spec references `--color-section-dark`, `--color-section-mid`, `--color-section-light` etc., which are not part of the token system; SVG fills and pseudo-element backgrounds would be hardcoded.
+
+- [ ] Add `--color-section-*` aliases to `tokens/dark-light.css` mapped to existing semantic tokens (e.g. `--color-section-dark: var(--color-bg)`)
+- [ ] Ensure aliases resolve correctly in both light and dark themes
+- [ ] Rebuild `dist/farn.css` and update `CHANGELOG.md`
+
+---
+
+## T-22 · Scroll-reveal shared infrastructure
+`status: backlog` `effort: S`
+
+**Gap:** No shared scroll-entry animation infrastructure exists; each animated element would need its own observer and transition logic, and the `prefers-reduced-motion` guard would have to be duplicated.
+
+- [ ] Add `.scroll-reveal` base class with `transition-property`, `transition-duration`, and `transition-timing-function` to `site/src/styles/site.css` (or `tokens/base.css` if shipping in dist)
+- [ ] Add `@media (prefers-reduced-motion: reduce)` guard covering `.scroll-reveal` and its children
+- [ ] Create `site/src/scripts/scroll-reveal.js` with the shared `IntersectionObserver` (threshold: 0.15, unobserve after first reveal)
+- [ ] Wire the script into Astro's client-side loading
+
+---
+
+## T-23 · Sine wave divider
+`status: backlog` `effort: S`
+
+**Gap:** No section divider patterns exist in the system; the sine wave is the most versatile and character-appropriate organic transition for Farn's aesthetic.
+
+- [ ] Implement `.section-wave` CSS and two-path SVG markup per spec (depth layer first in source order)
+- [ ] Apply Tier 1 scroll-reveal animation (`translateY(24px)` → `0` + opacity, 0.1s delay) using T-22 infrastructure
+- [ ] Verify `preserveAspectRatio="none"` and `aria-hidden="true"` are present
+- [ ] Document on the dividers component page (T-29)
+
+---
+
+## T-24 · Convex arc divider
+`status: backlog` `effort: S`
+
+**Gap:** No arc divider; the quadratic bezier arc is calmer than the sine wave and suits refined, centred hero layouts.
+
+- [ ] Implement `.section-arc` CSS and both convex and concave SVG variants per spec
+- [ ] Apply Tier 2 `clip-path` expand animation with `animation-timeline: view()` and `@supports not` fallback (static arc)
+- [ ] Apply the concave bug fix: use `scaleY(-1)` on the `<svg>` element only, not the wrapper div
+- [ ] Document on the dividers component page (T-29)
+
+---
+
+## T-25 · Organic blob divider
+`status: backlog` `effort: S`
+
+**Gap:** No blob divider; the organic shape serves high-emphasis brand moments and one-off expressive transitions.
+
+- [ ] Implement `.section-blob` CSS and example two-path SVG per spec
+- [ ] Apply Tier 1 fade-only animation (opacity only — no translate, no morph) using T-22 infrastructure
+- [ ] Document that blob paths should be drawn in Figma/Inkscape and exported, not hand-authored
+- [ ] Document on the dividers component page (T-29)
+
+---
+
+## T-26 · Layered overlap pattern
+`status: backlog` `effort: S`
+
+**Gap:** No layered overlap pattern; it is the only pure-CSS divider in the spec and creates depth without any SVG.
+
+- [ ] Implement both Option A (full section overlap) and Option B (card overlap) CSS per spec
+- [ ] Apply Tier 1 card lift animation (`translateY(40px)` → `0` + opacity + `box-shadow` grow) using T-22 infrastructure
+- [ ] Document the `overflow: visible` requirement on the preceding section to avoid the common clipping mistake
+- [ ] Document on the dividers component page (T-29)
+
+---
+
+## T-27 · Diagonal cut divider
+`status: backlog` `effort: S`
+
+**Gap:** No diagonal cut pattern; the energetic directional transition suits CTAs and momentum-forward page moments.
+
+- [ ] Implement all three approaches from spec: `clip-path` polygon, `::before skewY`, and SVG triangle
+- [ ] Apply Tier 2 angle-flattening animation (`skewY(-5deg)` → `0deg`) with `animation-timeline: view()` and static fallback
+- [ ] Document the `clip-path` + `box-shadow` incompatibility and when to use the `::before` approach instead
+- [ ] Document on the dividers component page (T-29)
+
+---
+
+## T-28 · Stacked card reveal
+`status: backlog` `effort: S`
+
+**Gap:** No stacked card reveal pattern; the cinematic depth effect is the highest-drama transition in the spec, suited to long scrolling pages with 3–5 landmark sections.
+
+- [ ] Implement `.stack-container` and `.stack-section` with `--stack-depth` and `--stack-index` CSS custom properties per spec
+- [ ] Verify sticky positioning behaviour across Chrome, Firefox, and Safari; document the `height: N×100vh` requirement
+- [ ] Document content-height constraint (sections must fit within `100vh`) and the 3–5 section limit
+- [ ] Document on the dividers component page (T-29)
+
+---
+
+## T-29 · Section divider documentation page
+`status: backlog` `effort: M`
+
+**Gap:** No documentation page for section transitions; the six patterns in `divider-spec.md` are invisible to consumers of the system.
+
+- [ ] Create `site/src/pages/components/dividers.astro` with a live demo of each implemented pattern
+- [ ] Include the animation for each pattern (not just static CSS snippets)
+- [ ] Add pattern-selection guidance: one primary type per page, when to use each
+- [ ] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
