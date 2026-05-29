@@ -55,7 +55,7 @@ Then use the tokens:
 
 .my-cta {
   background: var(--fo1-fern);
-  color: var(--bm2-parchment);
+  color: var(--bm2-birch);
   font-family: var(--font-body);
 }
 ```

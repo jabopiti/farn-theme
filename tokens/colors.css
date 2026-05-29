@@ -10,8 +10,8 @@
 
   /* Birch Mist — light surfaces */
   --bm0-sand:      #D5D2C7;   /* Variables, elevated UI (dark)             */
-  --bm1-linen:     #E9E6DC;   /* Hover states, active line (light)         */
-  --bm2-parchment: #F7F6F3;   /* Primary bg (light) / text (dark)         */
+  --bm1-mist:      #E9E6DC;   /* Hover states, active line (light)         */
+  --bm2-birch:     #F7F6F3;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
   --fo0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */
