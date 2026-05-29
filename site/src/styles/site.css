@@ -22,6 +22,11 @@
 }
 
 /* ── Nav ─────────────────────────────────────────────────────────────────── */
+/* Intentional transparent-overlay pattern:                                    */
+/* When the nav sits over the dark hero (unfilled state), rgba tints are used  */
+/* for border and link colours because no solid palette token can represent a  */
+/* semi-transparent overlay against an unknown background. Once the nav fills   */
+/* (class .filled), all colours switch to semantic tokens.                     */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -114,7 +119,7 @@
   background: rgba(245,244,240,0.1);
   color: var(--bm2-parchment);
 }
-.nav.filled .theme-toggle { color: var(--in3-ash); }
+.nav.filled .theme-toggle { color: var(--color-text-tertiary); }
 .nav.filled .theme-toggle:hover { background: var(--color-bg-elevated); color: var(--color-text); }
 .github-link {
   width: 36px; height: 36px;
@@ -133,7 +138,7 @@
   background: rgba(245,244,240,0.1);
   color: var(--bm2-parchment);
 }
-.nav.filled .github-link { color: var(--in3-ash); }
+.nav.filled .github-link { color: var(--color-text-tertiary); }
 .nav.filled .github-link:hover { background: var(--color-bg-elevated); color: var(--color-text); }
 .nav-cta {
   height: 36px;
@@ -156,7 +161,7 @@
   color: var(--color-accent-text);
   border-color: transparent;
 }
-.nav.filled .nav-cta:hover { background: var(--color-accent-hover); color: var(--bm2-parchment); }
+.nav.filled .nav-cta:hover { background: var(--color-accent-hover); color: var(--color-accent-text); }
 .hamburger {
   display: none;
   width: 36px; height: 36px;
@@ -220,7 +225,7 @@
 .sub-nav {
   position: sticky; top: var(--nav-height); z-index: var(--z-content);
   background: transparent;
-  border-bottom: 1px solid rgba(75,85,99,0.25);
+  border-bottom: 1px solid var(--color-border-subtle);
   height: var(--subnav-height); overflow-x: auto; scrollbar-width: none;
   transition: transform 250ms ease, background-color 200ms ease, border-color 200ms ease;
 }
@@ -324,15 +329,15 @@
 }
 .btn:active { transform: scale(0.98); }
 .btn-p { background: var(--color-accent); color: var(--color-accent-text); }
-.btn-p:hover { background: var(--color-accent-hover); color: var(--bm2-parchment); }
+.btn-p:hover { background: var(--color-accent-hover); color: var(--color-accent-text); }
 .btn-s { background: var(--color-bg-sunken); color: var(--color-text); }
 .btn-s:hover { background: var(--color-bg-elevated); }
 [data-theme="dark"] .btn-s:hover,
 [data-surface="dark"] .btn-s:hover { background: var(--in2-slate); }
 .btn-g { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-border); }
 .btn-g:hover { background: var(--color-bg-elevated); }
-.btn-d { background: var(--bl0-ember); color: var(--bm2-parchment); }
-.btn-d:hover { background: #a8343e; }
+.btn-d { background: var(--color-error); color: var(--bm2-parchment); }
+.btn-d:hover { background: #a8343e; } /* darker --color-error; no palette token at this depth */
 .btn-sm { height: 32px; padding: 0 12px; font-size: 12px; }
 .btn-lg { height: 48px; padding: 0 20px; font-size: 14px; }
 
@@ -347,18 +352,13 @@
   font-weight: 600;
   letter-spacing: 0.04em;
 }
-.badge-neutral { background: var(--bm0-sand); color: var(--in1-iron); }
-[data-theme="dark"] .badge-neutral { background: var(--in1-iron); color: var(--bm0-sand); }
-.badge-forest  { background: rgba(62,122,98,0.12); color: var(--fo2-forest); }
-[data-theme="dark"] .badge-forest { background: rgba(92,158,134,0.15); color: var(--fo0-sage); }
-.badge-moss    { background: rgba(86,122,55,0.12); color: #3A5523; }
-[data-theme="dark"] .badge-moss { background: rgba(86,122,55,0.15); color: #7AAD52; }
-.badge-grain   { background: rgba(141,107,32,0.12); color: #6B4E17; }
-[data-theme="dark"] .badge-grain { background: rgba(141,107,32,0.15); color: #C4943A; }
-.badge-ember   { background: rgba(197,65,76,0.1); color: #9B2F38; }
-[data-theme="dark"] .badge-ember { background: rgba(197,65,76,0.15); color: #E06870; }
-.badge-heather { background: rgba(136,93,180,0.12); color: #5E3D8A; }
-[data-theme="dark"] .badge-heather { background: rgba(136,93,180,0.15); color: #AA82D4; }
+.badge-general   { background: var(--bm0-sand);    color: var(--in0-void); }
+.badge-published { background: var(--bl3-moss);    color: var(--bm2-parchment); }
+.badge-draft     { background: var(--bl2-grain);   color: var(--bm2-parchment); }
+.badge-archived  { background: var(--bl0-ember);   color: var(--bm2-parchment); }
+.badge-beta      { background: var(--bl4-heather); color: var(--bm2-parchment); }
+.badge-research  { background: var(--bl1-ochre);   color: var(--bm2-parchment); }
+.badge-category  { background: var(--fo2-forest);  color: var(--bm2-parchment); }
 
 /* ── Reveal animations ────────────────────────────────────────────────────── */
 .reveal {
@@ -403,7 +403,7 @@
   color: var(--color-text);
   margin-bottom: var(--space-xs);
 }
-.footer-logo span { color: var(--fo1-fern); }
+.footer-logo span { color: var(--color-accent); }
 .footer-logo-icon {
   height: 56px;
   width: auto;

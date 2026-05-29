@@ -51,11 +51,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <table>
     <thead><tr><th>Variant</th><th>Light bg</th><th>Dark bg</th><th>Use</th></tr></thead>
     <tbody>
-      <tr><td>Primary</td><td><code>--fo1-fern</code>, Parchment text</td><td><code>--fo0-sage</code>, Parchment text</td><td>The single strongest action per context</td></tr>
+      <tr><td>Primary</td><td><code>--fo1-fern</code>, Parchment text</td><td><code>--fo1-fern</code>, Parchment text</td><td>The single strongest action per context</td></tr>
       <tr><td>Secondary</td><td><code>--bm0-sand</code>, Void text</td><td><code>--in2-slate</code>, Parchment text</td><td>Second most important action</td></tr>
       <tr><td>Ghost</td><td>Transparent, Iron border</td><td>Transparent, Slate border</td><td>Low-priority — cancel, back, dismiss</td></tr>
       <tr><td>Destructive</td><td colspan="2"><code>--bl0-ember</code>, Parchment text (both modes)</td><td>Irreversible actions only</td></tr>
-      <tr><td>Text link</td><td><code>--fo1-fern</code> text, underline</td><td><code>--fo0-sage</code> text, underline</td><td>Tertiary actions in prose or UI text</td></tr>
+      <tr><td>Text link</td><td><code>--fo1-fern</code> text, underline</td><td><code>--fo1-fern</code> text, underline</td><td>Tertiary actions in prose or UI text</td></tr>
     </tbody>
   </table>
 
@@ -130,37 +130,33 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &lt;div role="tabpanel" id="panel-details" aria-labelledby="tab-details" hidden&gt; &hellip; &lt;/div&gt;</code></pre>
 
   <h2>Badges &amp; Tags</h2>
-  <p>Subtle tinted — low-opacity Bloom palette fills, 4px border radius. Informational only, never interactive except for dismissible tags.</p>
+  <p>Solid Bloom/Forest palette fills, full opacity. Informational only, never interactive except for dismissible tags. No dark-mode overrides needed — each badge has its own opaque background.</p>
   <table>
-    <thead><tr><th>Status</th><th>Colour</th></tr></thead>
+    <thead><tr><th>Label</th><th>Class</th><th>Background token</th><th>Use</th></tr></thead>
     <tbody>
-      <tr><td>Published / Active / Success</td><td>Moss — <code>--bl3-moss</code></td></tr>
-      <tr><td>Draft / Pending / Warning</td><td>Grain — <code>--bl2-grain</code></td></tr>
-      <tr><td>Archived / Error / Removed</td><td>Ember — <code>--bl0-ember</code></td></tr>
-      <tr><td>Beta / Special</td><td>Heather — <code>--bl4-heather</code></td></tr>
-      <tr><td>Primary category</td><td>Forest — <code>--fo1-fern</code></td></tr>
-      <tr><td>Neutral / Uncategorised</td><td>Sand — <code>--bm0-sand</code></td></tr>
+      <tr><td>General</td><td><code>.badge-general</code></td><td><code>--bm0-sand</code></td><td>Neutral, uncategorised</td></tr>
+      <tr><td>Published</td><td><code>.badge-published</code></td><td><code>--bl3-moss</code></td><td>Active, stable, success</td></tr>
+      <tr><td>Draft</td><td><code>.badge-draft</code></td><td><code>--bl2-grain</code></td><td>In-progress, pending, warning</td></tr>
+      <tr><td>Archived</td><td><code>.badge-archived</code></td><td><code>--bl0-ember</code></td><td>Deprecated, removed, error</td></tr>
+      <tr><td>Beta</td><td><code>.badge-beta</code></td><td><code>--bl4-heather</code></td><td>Experimental, new feature</td></tr>
+      <tr><td>Research</td><td><code>.badge-research</code></td><td><code>--bl1-ochre</code></td><td>Discovery, annotation phase</td></tr>
+      <tr><td>Category</td><td><code>.badge-category</code></td><td><code>--fo2-forest</code></td><td>Primary content category label</td></tr>
     </tbody>
   </table>
   <pre><code>.badge &#123;
   display: inline-flex;
   align-items: center;
   height: 22px;
-  padding: 3px 8px;
-  border-radius: var(--radius-sm); /* 4px */
+  padding: 0 8px;
+  border-radius: var(--radius-sm);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.04em;
 &#125;
 
-.badge-moss &#123;
-  background: rgba(86, 122, 55, 0.12);
-  color: #3A5523;
-&#125;
-
-[data-theme="dark"] .badge-moss &#123;
-  background: rgba(86, 122, 55, 0.15);
-  color: #7AAD52;
+.badge-published &#123;
+  background: var(--bl3-moss);
+  color: var(--bs2-parchment);
 &#125;</code></pre>
 
   <h2>Focus Styles</h2>
