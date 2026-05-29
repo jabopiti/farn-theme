@@ -173,10 +173,21 @@
   gap: 5px;
   align-items: center;
   border-radius: var(--radius-md);
-  color: var(--color-text);
+  color: rgba(245,244,240,0.6);
   font-size: 22px;
+  transition: background-color 120ms ease, color 120ms ease;
 }
-@media (max-width: 640px) { .hamburger { display: flex; } }
+.hamburger:hover {
+  background: rgba(245,244,240,0.1);
+  color: var(--bm2-parchment);
+}
+.nav.filled .hamburger { color: var(--color-text-secondary); }
+.nav.filled .hamburger:hover { background: var(--color-bg-elevated); color: var(--color-text); }
+@media (max-width: 640px) {
+  .hamburger { display: flex; }
+  .nav-right { margin-left: auto; }
+  .nav-cta { display: none; }
+}
 
 /* Mobile drawer */
 .mobile-drawer {
