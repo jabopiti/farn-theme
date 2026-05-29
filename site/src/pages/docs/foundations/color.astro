@@ -18,72 +18,287 @@ import DocLayout from '../../../layouts/DocLayout.astro';
   </p>
 
   <h3>Iron Night — Dark Surfaces</h3>
-  <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip" style="background:#0D1117"></span><div><code>--in0-void</code><small>#0D1117</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#374151"></span><div><code>--in1-iron</code><small>#374151</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#4B5563"></span><div><code>--in2-slate</code><small>#4B5563</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#6B7280"></span><div><code>--in3-ash</code><small>#6B7280</small></div></div>
+  <div class="token-grid">
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#0D1117">
+        <button class="copy-btn" data-copy="#0D1117">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--in0-void</div>
+        <div class="token-hex">#0D1117 · lum 0.0055</div>
+        <div class="token-role">Void</div>
+        <div class="token-desc">Primary dark background. Ink-black with a slight blue-green undertone.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-dark">primary dark background</span>
+          <span class="usage-pill usage-light">primary text on light</span>
+          <span class="usage-pill usage-both">tooltip</span>
+          <span class="usage-pill usage-both">overlay / scrim</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#374151">
+        <button class="copy-btn" data-copy="#374151">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--in1-iron</div>
+        <div class="token-hex">#374151 · lum 0.0519</div>
+        <div class="token-role">Iron</div>
+        <div class="token-desc">Elevated dark surfaces — panels, cards, modals, floating popups. Border and state animations on light surfaces.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-dark">elevated surface</span>
+          <span class="usage-pill usage-dark">panels</span>
+          <span class="usage-pill usage-dark">modals</span>
+          <span class="usage-pill usage-dark">icon background</span>
+          <span class="usage-pill usage-light">border</span>
+          <span class="usage-pill usage-light">state animations</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#4B5563">
+        <button class="copy-btn" data-copy="#4B5563">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--in2-slate</div>
+        <div class="token-hex">#4B5563 · lum 0.0784</div>
+        <div class="token-role">Slate</div>
+        <div class="token-desc">Selection, input fills, and active states on dark surfaces. Secondary text on light surfaces.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-dark">selection</span>
+          <span class="usage-pill usage-dark">border</span>
+          <span class="usage-pill usage-dark">input fill</span>
+          <span class="usage-pill usage-dark">active states</span>
+          <span class="usage-pill usage-light">secondary text</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#6B7280">
+        <button class="copy-btn" data-copy="#6B7280">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--in3-ash</div>
+        <div class="token-hex">#6B7280 · lum 0.1329</div>
+        <div class="token-role">Ash</div>
+        <div class="token-desc">Tertiary text on light surfaces. Captions, placeholders, and disabled states. AA-large only — 18px+ or 14px bold.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-light">tertiary text</span>
+          <span class="usage-pill usage-both">captions</span>
+          <span class="usage-pill usage-both">placeholders</span>
+          <span class="usage-pill usage-both">disabled</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <table>
-    <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><code>--in0-void</code></td><td><code>#0D1117</code></td><td>Primary background (dark mode)</td></tr>
-      <tr><td><code>--in1-iron</code></td><td><code>#374151</code></td><td>Elevated surfaces — panels, cards on dark</td></tr>
-      <tr><td><code>--in2-slate</code></td><td><code>#4B5563</code></td><td>Active lines, selections, highlights</td></tr>
-      <tr><td><code>--in3-ash</code></td><td><code>#6B7280</code></td><td>Secondary text, placeholders (AA-large only)</td></tr>
-    </tbody>
-  </table>
 
   <h3>Birch Mist — Light Surfaces</h3>
-  <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip chip-light" style="background:#E4E2DA"></span><div><code>--bm0-sand</code><small>#E4E2DA</small></div></div>
-    <div class="swatch-chip"><span class="chip chip-light" style="background:#EEEDE9"></span><div><code>--bm1-linen</code><small>#EEEDE9</small></div></div>
-    <div class="swatch-chip"><span class="chip chip-light" style="background:#F5F4F0"></span><div><code>--bm2-parchment</code><small>#F5F4F0</small></div></div>
+  <div class="token-grid">
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#E4E2DA;border-bottom:1px solid rgba(0,0,0,0.06)">
+        <button class="copy-btn" data-copy="#E4E2DA" style="color:#374151;background:rgba(0,0,0,0.1)">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bm0-sand</div>
+        <div class="token-hex">#E4E2DA · lum 0.7340</div>
+        <div class="token-role">Sand</div>
+        <div class="token-desc">Input fills, hover and active states on light surfaces. Tertiary text on dark surfaces.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-dark">tertiary text</span>
+          <span class="usage-pill usage-light">input fill</span>
+          <span class="usage-pill usage-light">hover</span>
+          <span class="usage-pill usage-light">active states</span>
+          <span class="usage-pill usage-light">selection</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#EEEDE9;border-bottom:1px solid rgba(0,0,0,0.06)">
+        <button class="copy-btn" data-copy="#EEEDE9" style="color:#374151;background:rgba(0,0,0,0.1)">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bm1-linen</div>
+        <div class="token-hex">#EEEDE9 · lum 0.8468</div>
+        <div class="token-role">Linen</div>
+        <div class="token-desc">Elevated surfaces, cards, and panels on light. Secondary text, hover, and state animations on dark.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-dark">secondary text</span>
+          <span class="usage-pill usage-dark">hover</span>
+          <span class="usage-pill usage-light">elevated surface</span>
+          <span class="usage-pill usage-light">panels</span>
+          <span class="usage-pill usage-light">modals</span>
+          <span class="usage-pill usage-light">icon background</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#F5F4F0;border-bottom:1px solid rgba(0,0,0,0.06)">
+        <button class="copy-btn" data-copy="#F5F4F0" style="color:#374151;background:rgba(0,0,0,0.1)">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bm2-parchment</div>
+        <div class="token-hex">#F5F4F0 · lum 0.9041</div>
+        <div class="token-role">Parchment</div>
+        <div class="token-desc">Primary light background. Primary text on dark surfaces. CTA/button text in both modes. 13.07:1 on Void.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-dark">primary text on dark</span>
+          <span class="usage-pill usage-light">primary light background</span>
+          <span class="usage-pill usage-both">button / CTA text</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <table>
-    <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><code>--bm0-sand</code></td><td><code>#E4E2DA</code></td><td>Elevated UI (light), input fills, sunken surfaces</td></tr>
-      <tr><td><code>--bm1-linen</code></td><td><code>#EEEDE9</code></td><td>Card fill, hover states, tinted sections</td></tr>
-      <tr><td><code>--bm2-parchment</code></td><td><code>#F5F4F0</code></td><td>Primary background (light) / primary text (dark)</td></tr>
-    </tbody>
-  </table>
 
   <h3>Forest — Accent</h3>
-  <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip" style="background:#5C9E86"></span><div><code>--fo0-sage</code><small>#5C9E86</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#3E7A62"></span><div><code>--fo1-fern</code><small>#3E7A62</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#2D5E4A"></span><div><code>--fo2-forest</code><small>#2D5E4A</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#254D5A"></span><div><code>--fo3-deepwater</code><small>#254D5A</small></div></div>
+  <div class="token-grid">
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#5C9E86">
+        <button class="copy-btn" data-copy="#5C9E86">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--fo0-sage</div>
+        <div class="token-hex">#5C9E86 · lum 0.2492</div>
+        <div class="token-role">Sage</div>
+        <div class="token-desc">Supporting accent and dark-mode hover state for Fern. 5.19:1 on Void.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-both">supporting accent</span>
+          <span class="usage-pill usage-both">accent hover</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#3E7A62">
+        <button class="copy-btn" data-copy="#3E7A62">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--fo1-fern</div>
+        <div class="token-hex">#3E7A62 · lum 0.1302</div>
+        <div class="token-role">Fern — Primary Accent</div>
+        <div class="token-desc">The primary accent in both modes — every button, link, focus ring, and CTA. WCAG AA on Parchment (4.80:1) and Void (4.68:1).</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-both">primary accent</span>
+          <span class="usage-pill usage-both">primary CTA</span>
+          <span class="usage-pill usage-both">links</span>
+          <span class="usage-pill usage-both">focus ring</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#2D5E4A">
+        <button class="copy-btn" data-copy="#2D5E4A">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--fo2-forest</div>
+        <div class="token-hex">#2D5E4A · lum 0.0673</div>
+        <div class="token-role">Forest</div>
+        <div class="token-desc">Secondary accent depth. Accent hover in light mode. Badge text. 5.38:1 on Parchment.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-both">secondary accent</span>
+          <span class="usage-pill usage-both">accent depth</span>
+          <span class="usage-pill usage-both">badge text</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#254D5A">
+        <button class="copy-btn" data-copy="#254D5A">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--fo3-deepwater</div>
+        <div class="token-hex">#254D5A · lum 0.0527</div>
+        <div class="token-role">Deepwater</div>
+        <div class="token-desc">Code block backgrounds on light pages. Blockquote border accent.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-both">code block background</span>
+          <span class="usage-pill usage-both">blockquote accent</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <table>
-    <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><code>--fo0-sage</code></td><td><code>#5C9E86</code></td><td>Supporting accent, dark-mode hover state for Fern</td></tr>
-      <tr><td><code>--fo1-fern</code></td><td><code>#3E7A62</code></td><td><strong>Primary accent</strong> — buttons, links, CTAs (both modes)</td></tr>
-      <tr><td><code>--fo2-forest</code></td><td><code>#2D5E4A</code></td><td>Accent hover, secondary emphasis</td></tr>
-      <tr><td><code>--fo3-deepwater</code></td><td><code>#254D5A</code></td><td>Code block backgrounds (light pages), blockquote accent</td></tr>
-    </tbody>
-  </table>
 
   <h3>Bloom — Semantic States</h3>
-  <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip" style="background:#C5414C"></span><div><code>--bl0-ember</code><small>#C5414C</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#AB5A2B"></span><div><code>--bl1-ochre</code><small>#AB5A2B</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#8D6B20"></span><div><code>--bl2-grain</code><small>#8D6B20</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#567A37"></span><div><code>--bl3-moss</code><small>#567A37</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#885DB4"></span><div><code>--bl4-heather</code><small>#885DB4</small></div></div>
+  <div class="token-grid">
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#C5414C">
+        <button class="copy-btn" data-copy="#C5414C">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bl0-ember</div>
+        <div class="token-hex">#C5414C · on Parchment 4.51:1</div>
+        <div class="token-role">Ember — Error</div>
+        <div class="token-desc">Error states, destructive actions, form validation failures. The only red in the system.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-both">error</span>
+          <span class="usage-pill usage-both">destructive</span>
+          <span class="usage-pill usage-both">form validation</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#AB5A2B">
+        <button class="copy-btn" data-copy="#AB5A2B">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bl1-ochre</div>
+        <div class="token-hex">#AB5A2B · on Parchment 4.51:1</div>
+        <div class="token-role">Ochre — Annotation</div>
+        <div class="token-desc">Annotations, decorators, and informational callouts.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-both">annotation</span>
+          <span class="usage-pill usage-both">decorators</span>
+          <span class="usage-pill usage-both">callouts</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#8D6B20">
+        <button class="copy-btn" data-copy="#8D6B20">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bl2-grain</div>
+        <div class="token-hex">#8D6B20 · on Parchment 4.48:1</div>
+        <div class="token-role">Grain — Warning</div>
+        <div class="token-desc">Warning states, draft status, pending review.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-both">warning</span>
+          <span class="usage-pill usage-both">draft</span>
+          <span class="usage-pill usage-both">pending</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#567A37">
+        <button class="copy-btn" data-copy="#567A37">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bl3-moss</div>
+        <div class="token-hex">#567A37 · on Parchment 4.51:1</div>
+        <div class="token-role">Moss — Success</div>
+        <div class="token-desc">Success states, published status, confirmations.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-both">success</span>
+          <span class="usage-pill usage-both">published</span>
+          <span class="usage-pill usage-both">active</span>
+        </div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-color-strip" style="background:#885DB4">
+        <button class="copy-btn" data-copy="#885DB4">copy</button>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bl4-heather</div>
+        <div class="token-hex">#885DB4 · on Parchment 4.47:1</div>
+        <div class="token-role">Heather — Special</div>
+        <div class="token-desc">Uncommon or special states — beta features, research content. The only purple in the system.</div>
+        <div class="token-usage">
+          <span class="usage-pill usage-both">beta</span>
+          <span class="usage-pill usage-both">research</span>
+          <span class="usage-pill usage-both">uncommon</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <table>
-    <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><code>--bl0-ember</code></td><td><code>#C5414C</code></td><td>Error, destructive actions</td></tr>
-      <tr><td><code>--bl1-ochre</code></td><td><code>#AB5A2B</code></td><td>Annotation, decorator-weight info</td></tr>
-      <tr><td><code>--bl2-grain</code></td><td><code>#8D6B20</code></td><td>Warning, draft, pending</td></tr>
-      <tr><td><code>--bl3-moss</code></td><td><code>#567A37</code></td><td>Success, published, active</td></tr>
-      <tr><td><code>--bl4-heather</code></td><td><code>#885DB4</code></td><td>Special states, beta, experimental</td></tr>
-    </tbody>
-  </table>
 
   <h2>Semantic Token Layer</h2>
   <p>Components always reference semantic tokens — never palette tokens directly. The semantic layer resolves to the correct palette value per theme mode automatically.</p>
@@ -163,36 +378,105 @@ import DocLayout from '../../../layouts/DocLayout.astro';
   </ul>
 </DocLayout>
 
+<script is:inline>
+  document.querySelectorAll('.copy-btn[data-copy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(btn.dataset.copy).then(() => {
+        btn.textContent = 'copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+</script>
+
 <style>
-  .swatch-row {
-    display: flex;
-    flex-wrap: wrap;
+  /* ── Token grid ─────────────────────────────────────────────────── */
+  .token-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: var(--space-sm);
-    margin: var(--space-sm) 0 var(--space-md);
+    margin: var(--space-sm) 0 var(--space-xl);
   }
-  .swatch-chip {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    font-size: 0.8125rem;
+  .token-card {
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: box-shadow 150ms ease;
   }
-  .swatch-chip div {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  [data-theme="dark"] .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+
+  /* ── Color strip ────────────────────────────────────────────────── */
+  .token-color-strip {
+    height: 56px;
+    position: relative;
   }
-  .chip {
-    display: block;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
-    flex-shrink: 0;
-  }
-  .chip-light { box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); }
-  .swatch-chip small {
-    display: block;
-    color: var(--color-text-tertiary);
+  .copy-btn {
+    position: absolute;
+    top: 50%; right: 8px;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.25);
+    color: var(--bm2-parchment);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 4px 8px;
+    font-size: 10px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 120ms ease, background 120ms ease;
   }
+  .token-card:hover .copy-btn { opacity: 1; }
+  .copy-btn:hover { background: rgba(0,0,0,0.45); }
+  .copy-btn.copied { background: rgba(62,122,98,0.8); }
+
+  /* ── Token info ─────────────────────────────────────────────────── */
+  .token-info { padding: 14px 16px; }
+  .token-name {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: 4px;
+  }
+  .token-hex {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    margin-bottom: 8px;
+  }
+  .token-role {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+  .token-desc {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    margin-bottom: 0;
+  }
+  .token-usage {
+    margin-top: 10px;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  /* ── Usage pills ────────────────────────────────────────────────── */
+  .usage-pill {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.04em;
+  }
+  .usage-light { background: var(--bm0-sand); color: var(--in1-iron); }
+  [data-theme="dark"] .usage-light { background: rgba(228,226,218,0.12); color: var(--bm0-sand); }
+  .usage-dark  { background: var(--in1-iron); color: var(--bm0-sand); }
+  [data-theme="dark"] .usage-dark { background: rgba(55,65,81,0.5); color: var(--in3-ash); }
+  .usage-both  { background: rgba(62,122,98,0.1); color: var(--fo2-forest); }
+  [data-theme="dark"] .usage-both { background: rgba(92,158,134,0.12); color: var(--fo0-sage); }
 </style>
