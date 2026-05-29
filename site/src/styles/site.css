@@ -353,12 +353,12 @@
   letter-spacing: 0.04em;
 }
 .badge-general   { background: var(--bm0-sand);    color: var(--in0-void); }
-.badge-published { background: var(--bl3-moss);    color: var(--bm2-birch); }
-.badge-draft     { background: var(--bl2-grain);   color: var(--bm2-birch); }
-.badge-archived  { background: var(--bl0-ember);   color: var(--bm2-birch); }
-.badge-beta      { background: var(--bl4-heather); color: var(--bm2-birch); }
-.badge-research  { background: var(--bl1-ochre);   color: var(--bm2-birch); }
-.badge-category  { background: var(--fo2-forest);  color: var(--bm2-birch); }
+.badge-published { background: var(--bl3-moss);    color: var(--color-accent-text); }
+.badge-draft     { background: var(--bl2-grain);   color: var(--color-accent-text); }
+.badge-archived  { background: var(--bl0-ember);   color: var(--color-accent-text); }
+.badge-beta      { background: var(--bl4-heather); color: var(--color-accent-text); }
+.badge-research  { background: var(--bl1-ochre);   color: var(--color-accent-text); }
+.badge-category  { background: var(--fo2-forest);  color: var(--color-accent-text); }
 
 /* ── Reveal animations ────────────────────────────────────────────────────── */
 .reveal {

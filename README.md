@@ -69,7 +69,7 @@ Then use the tokens:
 | Palette | Prefix | Tokens | Use for |
 |---|---|---|---|
 | Iron Night | `--in*` | void, iron, slate, ash | Dark surfaces, borders |
-| Birch Mist | `--bm*` | sand, linen, parchment | Light surfaces, text on dark |
+| Birch Mist | `--bm*` | sand, mist, birch | Light surfaces, text on dark |
 | Forest | `--fo*` | sage, fern, forest, deepwater | Accents, CTAs, links |
 | Bloom | `--bl*` | ember, ochre, grain, moss, heather | Semantic states |
 
