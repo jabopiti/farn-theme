@@ -106,45 +106,45 @@ import DocLayout from '../layouts/DocLayout.astro';
 </DocLayout>
 
 <style>
-  .palette-grid &#123;
+  .palette-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--space-md);
     margin: var(--space-md) 0 var(--space-lg);
-  &#125;
+  }
 
-  .palette-card &#123;
+  .palette-card {
     background: var(--color-bg-elevated);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
-  &#125;
+  }
 
-  .palette-swatches &#123;
+  .palette-swatches {
     display: flex;
     gap: 4px;
     margin-bottom: var(--space-sm);
-  &#125;
+  }
 
-  .swatch &#123;
+  .swatch {
     display: block;
     width: 28px;
     height: 28px;
     border-radius: var(--radius-sm);
-  &#125;
+  }
 
-  .swatch-light &#123; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); &#125;
+  .swatch-light { box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); }
 
-  .palette-name &#123;
+  .palette-name {
     font-weight: 600;
     font-size: 0.875rem;
     color: var(--color-text);
     margin-bottom: 2px;
-  &#125;
+  }
 
-  .palette-desc &#123;
+  .palette-desc {
     font-size: 0.8125rem;
     color: var(--color-text-secondary);
     margin-bottom: 0;
-  &#125;
+  }
 </style>

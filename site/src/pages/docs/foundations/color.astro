@@ -1,9 +1,9 @@
 ---
-import DocLayout from '../../layouts/DocLayout.astro';
+import DocLayout from '../../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Colors" description="Farn color palette tokens and semantic layer">
-  <h1>Colors</h1>
+<DocLayout title="Color" description="Farn color palette tokens and semantic layer" section="foundations">
+  <h1>Color</h1>
   <p>
     Four palettes — Iron Night, Birch Mist, Forest, Bloom — organised by role.
     A two-layer token architecture separates raw palette values from semantic aliases,
@@ -164,40 +164,35 @@ import DocLayout from '../../layouts/DocLayout.astro';
 </DocLayout>
 
 <style>
-  .swatch-row &#123;
+  .swatch-row {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
     margin: var(--space-sm) 0 var(--space-md);
-  &#125;
-
-  .swatch-chip &#123;
+  }
+  .swatch-chip {
     display: flex;
     align-items: center;
     gap: var(--space-xs);
     font-size: 0.8125rem;
-  &#125;
-
-  .swatch-chip div &#123;
+  }
+  .swatch-chip div {
     display: flex;
     flex-direction: column;
     gap: 2px;
-  &#125;
-
-  .chip &#123;
+  }
+  .chip {
     display: block;
     width: 40px;
     height: 40px;
     border-radius: var(--radius-md);
     flex-shrink: 0;
-  &#125;
-
-  .chip-light &#123; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); &#125;
-
-  .swatch-chip small &#123;
+  }
+  .chip-light { box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); }
+  .swatch-chip small {
     display: block;
     color: var(--color-text-tertiary);
     font-family: var(--font-mono);
     font-size: 0.75rem;
-  &#125;
+  }
 </style>

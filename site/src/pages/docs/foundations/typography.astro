@@ -1,8 +1,8 @@
 ---
-import DocLayout from '../../layouts/DocLayout.astro';
+import DocLayout from '../../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Typography" description="Farn typography system — font stacks, type scale, and opsz rules">
+<DocLayout title="Typography" description="Farn typography system — font stacks, type scale, and opsz rules" section="foundations">
   <h1>Typography</h1>
   <p>Display serif for personality, humanist sans for readability, mono for code. The combination creates warmth without sacrificing legibility.</p>
 
@@ -68,7 +68,7 @@ h3 &#123;
       <tr><td><code>4.5rem</code></td><td>72px</td><td>Display / hero</td></tr>
     </tbody>
   </table>
-  <p>Use <code>clamp()</code> for fluid heading sizes — no breakpoint jumps. The DocLayout already applies <code>clamp()</code> to all h1–h3 elements.</p>
+  <p>Use <code>clamp()</code> for fluid heading sizes — no breakpoint jumps.</p>
 
   <h2>Heading Styles</h2>
   <table>
@@ -118,7 +118,6 @@ h3 &#123;
       </tr>
     </tbody>
   </table>
-  <p>Inline code uses <code>em</code> so it scales with surrounding text size. Block code uses <code>rem</code> for a fixed 13px baseline regardless of context.</p>
 
   <h3>Live demo — inline code</h3>
   <p style="font-family: var(--font-body); font-size: 1rem; line-height: 1.7;">
@@ -132,7 +131,6 @@ h3 &#123;
   color: var(--color-text);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
-  /* ligatures: => != --> are on by default */
   font-variation-settings: normal;
 &#125;</code></pre>
 
@@ -170,7 +168,7 @@ h3 &#123;
     <li>Fraunces for h1–h3 and display copy only — never for body text, UI labels, or navigation.</li>
     <li><code>font-variation-settings: 'opsz'</code> is mandatory on every Fraunces usage: h1 &rarr; 72, h2 &rarr; 24, h3 &rarr; 20.</li>
     <li>Instrument Sans for everything interactive: buttons, inputs, nav, labels, UI text.</li>
-    <li>JetBrains Mono for code only — never decorative. Inline <code>&lt;code&gt;</code>: <code>font-size: 0.875em</code> (scales with context). Block <code>&lt;pre&gt;&lt;code&gt;</code>: <code>font-size: 0.8125rem; line-height: 1.6</code>.</li>
+    <li>JetBrains Mono for code only — never decorative. Inline <code>&lt;code&gt;</code>: <code>font-size: 0.875em</code>. Block <code>&lt;pre&gt;&lt;code&gt;</code>: <code>font-size: 0.8125rem; line-height: 1.6</code>.</li>
     <li>Body copy max-width: 70ch (<code>--width-prose</code>). Never use Instrument Sans at weight 700+.</li>
     <li>Fraunces minimum size: 16px — never smaller.</li>
   </ul>

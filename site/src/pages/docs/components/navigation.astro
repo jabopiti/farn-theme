@@ -1,0 +1,125 @@
+---
+import DocLayout from '../../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Navigation" description="Farn navigation patterns — main nav, in-page tabs, and focus styles" section="components">
+  <h1>Navigation</h1>
+  <p>Navigation in Farn follows two distinct patterns: the main horizontal top bar for page-level routing, and in-page tab navigation for switching views within a single screen.</p>
+
+  <h2>Main Nav</h2>
+  <p>Horizontal top bar, sticky. Hides on scroll down, reappears on scroll up. Transparent over hero, fills on scroll. Maximum 4–6 links.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Height</td><td>64px (<code>--nav-height</code>)</td></tr>
+      <tr><td>Nav link font</td><td><code>--font-body</code>, 14px, weight 500</td></tr>
+      <tr><td>Active link</td><td><code>--color-accent</code>, weight 600</td></tr>
+      <tr><td>Active link treatment</td><td>Colour + weight shift only — no background pill</td></tr>
+      <tr><td>Z-index</td><td><code>--z-sticky</code> (200)</td></tr>
+    </tbody>
+  </table>
+  <pre><code>.nav &#123;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height); /* 64px */
+  z-index: var(--z-sticky);
+  background: transparent;
+  transition: background-color 200ms ease, transform 250ms ease;
+&#125;
+
+/* Filled on scroll — logo reads against page bg */
+.nav.filled &#123;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-subtle);
+&#125;
+
+/* Hide on scroll down, show on scroll up */
+.nav.hidden &#123; transform: translateY(-100%); &#125;
+
+/* Active link */
+.nav-link.active &#123;
+  color: var(--color-accent);
+  font-weight: 600;
+&#125;</code></pre>
+
+  <h3>Smart hide/show</h3>
+  <pre><code>let lastY = 0;
+window.addEventListener('scroll', () =&gt; &#123;
+  const y = window.scrollY;
+  nav.classList.toggle('filled', y &gt; 20);
+  if (y &gt; lastY + 8) nav.classList.add('hidden');
+  else if (y &lt; lastY) nav.classList.remove('hidden');
+  lastY = y;
+&#125;, &#123; passive: true &#125;);</code></pre>
+
+  <h2>In-Page Tab Navigation</h2>
+  <p>Horizontal tabs with underline active indicator. Switches views within a single screen — not routing between pages. Active indicator slides between tabs rather than appearing/disappearing.</p>
+  <pre><code>&lt;div role="tablist" aria-label="Content sections"&gt;
+  &lt;button role="tab" aria-selected="true"
+    aria-controls="panel-overview" id="tab-overview"&gt;Overview&lt;/button&gt;
+  &lt;button role="tab" aria-selected="false"
+    aria-controls="panel-details" id="tab-details" tabindex="-1"&gt;Details&lt;/button&gt;
+&lt;/div&gt;
+&lt;div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview"&gt; &hellip; &lt;/div&gt;
+&lt;div role="tabpanel" id="panel-details" aria-labelledby="tab-details" hidden&gt; &hellip; &lt;/div&gt;</code></pre>
+
+  <h3>Sliding indicator</h3>
+  <pre><code>.tab-bar &#123;
+  position: relative;
+  display: flex;
+  border-bottom: 1px solid var(--color-border-subtle);
+&#125;
+.tab &#123;
+  padding: 0 16px;
+  height: 44px;
+  font-size: 14px; font-weight: 500;
+  color: var(--color-text-secondary);
+  border: none; background: transparent; cursor: pointer;
+&#125;
+.tab[aria-selected="true"] &#123;
+  color: var(--color-text);
+  font-weight: 600;
+&#125;
+.tab-indicator &#123;
+  position: absolute; bottom: 0; height: 2px;
+  background: var(--color-accent);
+  transition: left 200ms ease-out, width 200ms ease-out;
+&#125;</code></pre>
+
+  <h2>Sub-Nav</h2>
+  <p>A second sticky bar below the main nav for in-page section anchors or sibling page links. Sticky at <code>top: var(--nav-height)</code>.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Height</td><td>44px (<code>--subnav-height</code>)</td></tr>
+      <tr><td>Position</td><td><code>position: sticky; top: var(--nav-height)</code></td></tr>
+      <tr><td>Z-index</td><td><code>--z-raised</code> (1)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Focus Styles</h2>
+  <p>A single consistent focus ring across all interactive elements — defined once in <code>base.css</code>, applied everywhere via <code>:focus-visible</code>. Never remove focus styles.</p>
+  <pre><code>:focus-visible &#123;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: inherit;
+&#125;
+
+:focus:not(:focus-visible) &#123;
+  outline: none;
+&#125;</code></pre>
+  <p><code>focus-visible</code> ensures the ring only appears for keyboard navigation — not on mouse click. <code>border-radius: inherit</code> follows the element's shape automatically.</p>
+
+  <h2>Mobile Drawer</h2>
+  <p>On viewports below 640px the nav links collapse into a hamburger-triggered drawer that slides down from below the nav bar.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Trigger</td><td>Hamburger icon (≡), 36×36px touch target</td></tr>
+      <tr><td>Position</td><td><code>position: fixed</code>, appears at <code>top: var(--nav-height)</code></td></tr>
+      <tr><td>Background</td><td><code>--color-bg</code></td></tr>
+      <tr><td>Z-index</td><td><code>--z-overlay</code> (300)</td></tr>
+      <tr><td>Scroll lock</td><td><code>body: overflow hidden</code> while open</td></tr>
+    </tbody>
+  </table>
+</DocLayout>

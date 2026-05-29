@@ -1,0 +1,157 @@
+---
+import DocLayout from '../../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Buttons & Badges" description="Farn button variants, sizes, states, and badge colour semantics" section="components">
+  <h1>Buttons &amp; Badges</h1>
+  <p>Five button variants, three sizes. Buttons adapt to surface context via semantic tokens — the surface declaration handles dark/light automatically, no conditional logic needed.</p>
+
+  <h2>Button Variants</h2>
+  <table>
+    <thead><tr><th>Variant</th><th>Light bg</th><th>Dark bg</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Primary</td><td><code>--fo1-fern</code>, Parchment text</td><td><code>--fo0-sage</code>, Parchment text</td><td>The single strongest action per context</td></tr>
+      <tr><td>Secondary</td><td><code>--bm0-sand</code>, Void text</td><td><code>--in2-slate</code>, Parchment text</td><td>Second most important action</td></tr>
+      <tr><td>Ghost</td><td>Transparent, Iron border</td><td>Transparent, Slate border</td><td>Low-priority — cancel, back, dismiss</td></tr>
+      <tr><td>Destructive</td><td colspan="2"><code>--bl0-ember</code>, Parchment text (both modes)</td><td>Irreversible actions only</td></tr>
+      <tr><td>Text link</td><td><code>--fo1-fern</code> text, underline</td><td><code>--fo0-sage</code> text, underline</td><td>Tertiary actions in prose or UI text</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Sizes</h2>
+  <table>
+    <thead><tr><th>Size</th><th>Height</th><th>H. Padding</th><th>Font</th></tr></thead>
+    <tbody>
+      <tr><td>Small</td><td>32px</td><td>12px</td><td>12px, weight 600</td></tr>
+      <tr><td>Default</td><td>40px</td><td>16px</td><td>13px, weight 600</td></tr>
+      <tr><td>Large</td><td>48px</td><td>20px</td><td>14px, weight 600</td></tr>
+    </tbody>
+  </table>
+  <p>All sizes: 6px border radius (<code>--radius-md</code>). One primary button per action context — two primaries compete and neither wins.</p>
+
+  <h2>States</h2>
+  <table>
+    <thead><tr><th>State</th><th>Treatment</th></tr></thead>
+    <tbody>
+      <tr><td>Hover</td><td>Background shift — <code>transition: background-color 120ms ease-out</code></td></tr>
+      <tr><td>Focus</td><td><code>outline: 2px solid var(--color-accent)</code>, <code>outline-offset: 3px</code></td></tr>
+      <tr><td>Active</td><td><code>transform: scale(0.98)</code></td></tr>
+      <tr><td>Disabled</td><td>40% opacity, <code>cursor: not-allowed</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Live Demo</h2>
+  <div class="btn-row">
+    <button class="btn btn-p"><i class="ti ti-arrow-right"></i> Primary</button>
+    <button class="btn btn-s">Secondary</button>
+    <button class="btn btn-g">Ghost</button>
+    <button class="btn btn-d"><i class="ti ti-trash"></i> Destructive</button>
+    <button class="btn btn-p btn-sm">Small</button>
+    <button class="btn btn-p btn-lg">Large</button>
+  </div>
+
+  <h2>CSS</h2>
+  <pre><code>.btn &#123;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background-color 120ms ease, transform 80ms ease;
+&#125;
+.btn:active &#123; transform: scale(0.98); &#125;
+
+/* Variants */
+.btn-primary &#123;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+&#125;
+.btn-primary:hover &#123; background: var(--color-accent-hover); &#125;
+
+.btn-secondary &#123;
+  background: var(--color-bg-sunken);
+  color: var(--color-text);
+&#125;
+
+.btn-ghost &#123;
+  background: transparent;
+  color: var(--color-text);
+  border: 1.5px solid var(--color-border);
+&#125;
+
+.btn-destructive &#123;
+  background: var(--bl0-ember);
+  color: var(--bm2-parchment);
+&#125;
+
+/* Sizes */
+.btn-sm &#123; height: 32px; padding: 0 12px; font-size: 12px; &#125;
+.btn-lg &#123; height: 48px; padding: 0 20px; font-size: 14px; &#125;</code></pre>
+
+  <h2>Badges</h2>
+  <p>Subtle tinted — low-opacity Bloom palette fills, 4px border radius. Informational only, never interactive except for dismissible tags.</p>
+
+  <div class="badge-row">
+    <span class="badge badge-neutral">General</span>
+    <span class="badge badge-forest">Platform</span>
+    <span class="badge badge-moss">Published</span>
+    <span class="badge badge-grain">Draft</span>
+    <span class="badge badge-ember">Archived</span>
+    <span class="badge badge-heather">Research</span>
+  </div>
+
+  <table>
+    <thead><tr><th>Status</th><th>Colour</th></tr></thead>
+    <tbody>
+      <tr><td>Published / Active / Success</td><td>Moss — <code>--bl3-moss</code></td></tr>
+      <tr><td>Draft / Pending / Warning</td><td>Grain — <code>--bl2-grain</code></td></tr>
+      <tr><td>Archived / Error / Removed</td><td>Ember — <code>--bl0-ember</code></td></tr>
+      <tr><td>Beta / Special</td><td>Heather — <code>--bl4-heather</code></td></tr>
+      <tr><td>Primary category</td><td>Forest — <code>--fo1-fern</code></td></tr>
+      <tr><td>Neutral / Uncategorised</td><td>Sand — <code>--bm0-sand</code></td></tr>
+    </tbody>
+  </table>
+
+  <pre><code>.badge &#123;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm); /* 4px */
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+&#125;
+
+.badge-moss &#123;
+  background: rgba(86, 122, 55, 0.12);
+  color: #3A5523;
+&#125;
+[data-theme="dark"] .badge-moss &#123;
+  background: rgba(86, 122, 55, 0.15);
+  color: #7AAD52;
+&#125;</code></pre>
+</DocLayout>
+
+<style>
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0 var(--space-xl);
+    align-items: center;
+  }
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: var(--space-md) 0 var(--space-xl);
+    align-items: center;
+  }
+</style>

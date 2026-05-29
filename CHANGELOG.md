@@ -73,9 +73,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - DocLayout: nav always starts in filled state (no transparent-over-hero behavior)
 - DocLayout: Tabler Icons added for theme toggle (sun/moon) and hamburger
 - `site/src/styles/site.css` created as shared stylesheet for nav, buttons, badges, footer, and animations
+- **IA restructuring — docs hub**: new two-layer navigation (main nav + context-sensitive section sub-nav, no sidebar), new URL structure under `/docs`, new `/docs` hub page with role-based entry, five component sub-pages split from the single components page
 
 ### Removed
 - PWA Patterns page (`/pwa`) — not yet production-ready
+- JS-toggled Palette view from homepage (content moved to `/docs/foundations/color`)
+- Components showcase section from homepage (content moved to `/docs/components/*`)
+- Old URL structure: `/getting-started`, `/tokens/*`, `/components`
 
 ---
 

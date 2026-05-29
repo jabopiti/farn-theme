@@ -1,0 +1,120 @@
+---
+import DocLayout from '../../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Components" description="Farn component patterns — buttons, cards, forms, navigation, and more" section="components">
+  <h1>Components</h1>
+  <p>
+    Farn is a token system, not a component library. This reference specifies what
+    components should look like and how they should behave — using which tokens, with
+    which states, following which accessibility rules. Implementation lives in your project.
+  </p>
+  <p>All components use semantic tokens only — never raw palette tokens. The surface declaration handles dark/light adaptation automatically.</p>
+
+  <div class="comp-grid">
+    <a href="/docs/components/buttons" class="comp-card">
+      <h2 class="comp-card-title">Buttons &amp; Badges</h2>
+      <p class="comp-card-desc">Five button variants, three sizes. Badge colour semantics — moss, grain, ember, heather, forest.</p>
+      <span class="comp-card-cta">View spec →</span>
+    </a>
+    <a href="/docs/components/cards" class="comp-card">
+      <h2 class="comp-card-title">Cards</h2>
+      <p class="comp-card-desc">Flat inset style. Default, highlight-light, and highlight-dark variants. Grid sizing patterns.</p>
+      <span class="comp-card-cta">View spec →</span>
+    </a>
+    <a href="/docs/components/forms" class="comp-card">
+      <h2 class="comp-card-title">Forms &amp; Inputs</h2>
+      <p class="comp-card-desc">Filled style inputs. Rest, hover, focus, error, and disabled states. Validation patterns.</p>
+      <span class="comp-card-cta">View spec →</span>
+    </a>
+    <a href="/docs/components/navigation" class="comp-card">
+      <h2 class="comp-card-title">Navigation</h2>
+      <p class="comp-card-desc">Main nav bar, in-page tab navigation, focus styles, and surface section patterns.</p>
+      <span class="comp-card-cta">View spec →</span>
+    </a>
+  </div>
+
+  <h2>Token Usage Rules</h2>
+  <ul>
+    <li>Components reference <code>--color-*</code> semantic tokens only — never <code>--fo1-fern</code> or other palette tokens directly.</li>
+    <li>Hover and focus states use the provided semantic aliases: <code>--color-accent-hover</code>, <code>--color-bg-elevated</code>, etc.</li>
+    <li>Surface declarations (<code>data-surface="dark"</code>, etc.) on parent elements re-scope all token values automatically — no conditional logic needed in component CSS.</li>
+    <li>Bloom palette colours are reserved for semantic states (error, warning, success, annotation). Never use them decoratively.</li>
+  </ul>
+
+  <h2>Focus Styles</h2>
+  <p>A single consistent focus ring across all interactive elements — defined once in <code>base.css</code>, applied everywhere via <code>:focus-visible</code>. Never remove focus styles.</p>
+  <pre><code>:focus-visible &#123;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: inherit;
+&#125;
+
+:focus:not(:focus-visible) &#123;
+  outline: none;
+&#125;</code></pre>
+  <p><code>focus-visible</code> ensures the ring only appears for keyboard navigation — not on mouse click. <code>border-radius: inherit</code> follows the element's shape automatically.</p>
+
+  <h2>Dark / Light Sections</h2>
+  <p>Full-width page sections with explicit surface declarations. All child components inherit the correct tokens automatically — no extra markup needed.</p>
+  <pre><code>&lt;section data-surface="light"&gt; &hellip; &lt;/section&gt;
+&lt;section data-surface="dark"&gt; &hellip; &lt;/section&gt;
+&lt;section data-surface="tinted"&gt; &hellip; &lt;/section&gt;</code></pre>
+  <table>
+    <thead><tr><th>Surface</th><th>Background</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><code>light</code></td><td><code>--bm2-parchment</code></td><td>Default. Most content sections.</td></tr>
+      <tr><td><code>dark</code></td><td><code>--in0-void</code></td><td>Hero, feature callouts, closing CTAs.</td></tr>
+      <tr><td><code>tinted</code></td><td><code>--bm1-linen</code></td><td>Subtle variation within a light page.</td></tr>
+    </tbody>
+  </table>
+  <p>Sections are flush — no gap between them. The background colour change is the visual separator. Page rhythm example: <strong>dark hero &rarr; light features &rarr; tinted aside &rarr; dark CTA</strong>.</p>
+</DocLayout>
+
+<style>
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-xl) 0 var(--space-2xl);
+    max-width: var(--width-prose);
+  }
+  .comp-card {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    transition: background-color 150ms ease, border-color 150ms ease;
+  }
+  .comp-card:hover {
+    background: var(--color-bg-sunken);
+    border-color: var(--color-accent);
+  }
+  .comp-card-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    font-variation-settings: 'opsz' 16;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .comp-card-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    margin: 0;
+    max-width: none;
+    flex: 1;
+  }
+  .comp-card-cta {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-top: var(--space-xs);
+  }
+</style>

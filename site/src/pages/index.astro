@@ -8,6 +8,7 @@ import LogoIcon from '../components/LogoIcon.astro';
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Farn — Design System</title>
+<meta name="description" content="A CSS custom-property design system — sharp, warm, intellectual. Token-first, framework-agnostic." />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" href="/fern_icon.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -29,11 +30,8 @@ import LogoIcon from '../components/LogoIcon.astro';
   @import '../../../tokens/base.css';
   @import '../styles/site.css';
 
-  /* ── Nav view-link cursor ─────────────────────────── */
-  .nav-view-link { cursor: pointer; }
-
   /* ── Section spacing ──────────────────────────────── */
-  #about, #foundations, #components { padding: var(--space-3xl) 0; }
+  #about, #foundations, #surfaces { padding: var(--space-3xl) 0; }
 
   /* ── Hero ─────────────────────────────────────────── */
   .hero {
@@ -85,10 +83,7 @@ import LogoIcon from '../components/LogoIcon.astro';
     opacity: 0;
     animation: fadeUp 700ms ease-out 200ms forwards;
   }
-  .hero-title em {
-    font-style: italic;
-    color: var(--color-accent);
-  }
+  .hero-title em { font-style: italic; color: var(--color-accent); }
   .hero-desc {
     font-size: clamp(16px, 2vw, 20px);
     line-height: 1.65;
@@ -106,36 +101,20 @@ import LogoIcon from '../components/LogoIcon.astro';
     animation: fadeUp 700ms ease-out 450ms forwards;
   }
   .btn-primary {
-    height: 48px;
-    padding: 0 24px;
-    background: var(--color-accent);
-    color: var(--color-accent-text);
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: none;
-    cursor: pointer;
+    height: 48px; padding: 0 24px;
+    background: var(--color-accent); color: var(--color-accent-text);
+    border-radius: var(--radius-md); font-size: 14px; font-weight: 600;
+    text-decoration: none; display: inline-flex; align-items: center;
+    gap: 8px; border: none; cursor: pointer;
     transition: background-color 120ms ease;
   }
   .btn-primary:hover { background: var(--color-accent-hover); color: var(--bm2-parchment); }
   .btn-ghost {
-    height: 48px;
-    padding: 0 24px;
-    background: transparent;
-    color: var(--color-text);
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: 1.5px solid var(--color-ghost-border);
-    cursor: pointer;
+    height: 48px; padding: 0 24px;
+    background: transparent; color: var(--color-text);
+    border-radius: var(--radius-md); font-size: 14px; font-weight: 600;
+    text-decoration: none; display: inline-flex; align-items: center;
+    gap: 8px; border: 1.5px solid var(--color-ghost-border); cursor: pointer;
     transition: background-color 120ms ease, border-color 120ms ease;
   }
   .btn-ghost:hover { background: rgba(245,244,240,0.08); border-color: rgba(245,244,240,0.5); }
@@ -151,11 +130,7 @@ import LogoIcon from '../components/LogoIcon.astro';
     animation: fadeIn 1000ms ease-out 700ms forwards;
   }
   @media (max-width: 900px) { .hero-palette-strip { display: none; } }
-  .palette-swatch {
-    width: 8px;
-    height: 28px;
-    border-radius: var(--radius-sm);
-  }
+  .palette-swatch { width: 8px; height: 28px; border-radius: var(--radius-sm); }
 
   /* ── About section ──────────────────────────── */
   .about-grid {
@@ -164,15 +139,8 @@ import LogoIcon from '../components/LogoIcon.astro';
     gap: var(--space-4xl);
     align-items: center;
   }
-  @media (max-width: 768px) {
-    .about-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
-  }
-  .about-text p {
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-md);
-  }
+  @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: var(--space-2xl); } }
+  .about-text p { font-size: 16px; line-height: 1.75; color: var(--color-text-secondary); margin-bottom: var(--space-md); }
   .about-text p:last-child { margin-bottom: 0; }
   .about-palettes { display: flex; flex-direction: column; gap: var(--space-sm); }
   .palette-row { display: flex; gap: 4px; }
@@ -182,10 +150,7 @@ import LogoIcon from '../components/LogoIcon.astro';
     transition: transform 150ms ease, flex 200ms ease;
   }
   .palette-row .swatch:hover { transform: scaleY(1.15); flex: 2; }
-  .palette-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 6px;
-  }
+  .palette-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 6px; }
 
   /* ── Typography specimen ────────────────────── */
   .type-specimen {
@@ -193,10 +158,7 @@ import LogoIcon from '../components/LogoIcon.astro';
   }
   @media (max-width: 640px) { .type-specimen { grid-template-columns: 1fr; } }
   .specimen-card { background: var(--color-bg-elevated); border-radius: var(--radius-lg); padding: var(--space-lg); }
-  .specimen-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: var(--space-md);
-  }
+  .specimen-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: var(--space-md); }
   .specimen-display {
     font-family: var(--font-display); font-size: clamp(32px, 5vw, 56px);
     font-weight: 800; font-variation-settings: 'opsz' 48;
@@ -218,106 +180,6 @@ import LogoIcon from '../components/LogoIcon.astro';
   .scale-bar { height: 8px; background: var(--color-accent); border-radius: var(--radius-sm); opacity: 0.7; transition: opacity 150ms ease; }
   .scale-row:hover .scale-bar { opacity: 1; }
 
-  /* ── Components showcase ────────────────────── */
-  .components-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl);
-  }
-  .card {
-    background: var(--color-bg-elevated); border-radius: var(--radius-lg); padding: 20px;
-    transition: background-color 180ms ease; text-decoration: none; display: block; color: inherit;
-  }
-  .card:hover { background: var(--color-bg-sunken); }
-  .card-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
-  .card-title { font-size: 15px; font-weight: 600; color: var(--color-text); margin-bottom: 6px; line-height: 1.3; }
-  .card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 14px; }
-  .card-meta { font-size: 11px; color: var(--color-text-tertiary); display: flex; justify-content: space-between; align-items: center; }
-  .card-arrow { color: var(--color-accent); font-weight: 500; }
-  .card-icon-wrap {
-    width: 32px; height: 32px; border-radius: var(--radius-md);
-    background: rgba(62,122,98,0.12); display: flex; align-items: center;
-    justify-content: center; margin-bottom: 12px; font-size: 18px; color: var(--color-accent);
-  }
-  [data-theme="dark"] .card-icon-wrap { background: rgba(92,158,134,0.15); }
-  .card-highlight-light { background: var(--in0-void); }
-  .card-highlight-light:hover { background: var(--in1-iron); }
-  .card-highlight-dark { background: var(--in1-iron); border: 1px solid var(--in2-slate); }
-  .card-highlight-dark:hover { background: var(--in2-slate); }
-  .card-highlight-light .card-title,
-  .card-highlight-dark .card-title { color: var(--bm2-parchment); }
-  .card-highlight-light .card-body { color: var(--in3-ash); }
-  .card-highlight-dark .card-body { color: var(--bm0-sand); }
-  .card-highlight-light .card-tag, .card-highlight-light .card-arrow,
-  .card-highlight-dark .card-tag,  .card-highlight-dark .card-arrow { color: var(--color-accent); }
-  .card-highlight-light .card-meta,
-  .card-highlight-dark .card-meta { color: var(--in3-ash); }
-
-  .btn-showcase { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-lg); align-items: center; }
-  .badge-showcase { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--space-lg); align-items: center; }
-
-  /* ── Inputs ─────────────────────────────────── */
-  .input-showcase { max-width: 400px; margin-bottom: var(--space-lg); }
-  .field { display: flex; flex-direction: column; gap: 4px; margin-bottom: var(--space-md); }
-  .field-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); }
-  .field-input {
-    height: 48px; padding: 0 14px;
-    border: 1.5px solid transparent; border-radius: var(--radius-md);
-    background: var(--color-bg-elevated); font-family: var(--font-body);
-    font-size: 14px; color: var(--color-text);
-    transition: background 180ms ease, border-color 150ms ease, box-shadow 150ms ease; outline: none;
-  }
-  .field-input::placeholder { color: var(--color-text-tertiary); }
-  .field-input:hover { background: var(--color-bg-sunken); }
-  .field-input:focus {
-    background: var(--color-bg-sunken); border-color: var(--color-accent);
-  }
-  [data-theme="dark"] .field-input:hover { background: var(--kn2-slate); }
-  [data-theme="dark"] .field-input:focus { background: var(--kn2-slate); }
-  .field-error .field-input { border-color: var(--color-error); }
-  .field-hint { font-size: 11px; color: var(--color-text-tertiary); }
-  .field-error-msg { font-size: 11px; color: var(--color-error); }
-
-  /* ── Dividers ───────────────────────────────── */
-  .divider-demo { margin-bottom: var(--space-lg); }
-  .divider-demo p { font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
-  hr.hairline { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; }
-  hr.section-divider { border: none; border-top: 1px solid var(--color-border); margin: var(--space-md) 0; }
-  hr.decorative { border: none; border-top: 2px solid var(--color-accent); width: 32px; margin: var(--space-md) 0; }
-
-  /* ── Quotes ─────────────────────────────────── */
-  .blockquote-demo { border-left: 3px solid var(--color-accent); padding: 4px 0 4px 20px; margin-bottom: var(--space-lg); }
-  .blockquote-demo p {
-    font-family: var(--font-display); font-style: italic; font-variation-settings: 'opsz' 16;
-    font-size: 16px; color: var(--color-text-secondary); line-height: 1.7;
-  }
-  .blockquote-demo footer { font-size: 12px; color: var(--color-text-tertiary); margin-top: 8px; }
-  .pullquote-demo { text-align: center; padding: 0 var(--space-xl); margin-bottom: var(--space-lg); }
-  .pullquote-rule { width: 32px; height: 2px; background: var(--color-accent); margin: 0 auto var(--space-md); }
-  .pullquote-demo p {
-    font-family: var(--font-display); font-style: italic; font-variation-settings: 'opsz' 20;
-    font-size: clamp(18px, 3vw, 24px); color: var(--color-text); line-height: 1.4; letter-spacing: -0.01em;
-  }
-  .pullquote-demo figcaption {
-    margin-top: var(--space-md); font-size: 11px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent);
-  }
-  .attribution-demo {
-    background: var(--color-bg-elevated); border-radius: var(--radius-lg);
-    padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start;
-  }
-  [data-theme="dark"] .attribution-demo { border: 1px solid var(--color-border); }
-  .attribution-avatar {
-    width: 40px; height: 40px; border-radius: var(--radius-full);
-    background: rgba(62,122,98,0.15); display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 600; color: var(--fo2-forest); flex-shrink: 0;
-  }
-  [data-theme="dark"] .attribution-avatar { background: rgba(92,158,134,0.15); color: var(--fo0-sage); }
-  .attribution-quote {
-    font-family: var(--font-display); font-style: italic; font-variation-settings: 'opsz' 14;
-    font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; margin-bottom: 8px;
-  }
-  .attribution-name { font-size: 13px; font-weight: 600; color: var(--color-text); }
-  .attribution-role { font-size: 12px; color: var(--color-text-secondary); }
-
   /* ── Surface demo ───────────────────────────── */
   .surface-demo-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
@@ -335,112 +197,6 @@ import LogoIcon from '../components/LogoIcon.astro';
     display: inline-flex; align-items: center; height: 32px; padding: 0 12px;
     border-radius: var(--radius-md); font-size: 12px; font-weight: 600; border: none; cursor: pointer;
   }
-
-  /* ── Palette view ───────────────────────────── */
-  .all-swatches {
-    display: flex; height: 48px; border-radius: var(--radius-lg);
-    overflow: hidden; margin-bottom: var(--space-3xl); cursor: default;
-  }
-  .all-swatches .sw { flex: 1; transition: flex 200ms ease; position: relative; }
-  .all-swatches .sw:hover { flex: 3; }
-  .all-swatches .sw .sw-tip {
-    position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
-    background: var(--in0-void); color: var(--bm2-parchment); font-family: var(--font-mono);
-    font-size: 10px; padding: 4px 8px; border-radius: var(--radius-sm);
-    white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 120ms ease;
-  }
-  .all-swatches .sw:hover .sw-tip { opacity: 1; }
-
-  .palette-section { margin-bottom: var(--space-4xl); scroll-margin-top: var(--scroll-offset, 108px); }
-  .palette-header { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: start; margin-bottom: var(--space-xl); }
-  @media (max-width: 768px) { .palette-header { grid-template-columns: 1fr; } }
-  .palette-name {
-    font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 800;
-    font-variation-settings: 'opsz' 36; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: var(--space-sm);
-  }
-  .palette-concept { font-size: 15px; line-height: 1.7; color: var(--color-text-secondary); }
-  .palette-swatches { display: flex; gap: 6px; flex-wrap: wrap; }
-  .palette-swatch-large {
-    flex: 1; min-width: 64px; height: 72px; border-radius: var(--radius-md);
-    position: relative; cursor: pointer; transition: transform 150ms ease, box-shadow 150ms ease;
-  }
-  .palette-swatch-large:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-  .palette-swatch-large .swatch-hex {
-    position: absolute; bottom: 8px; left: 0; right: 0; text-align: center;
-    font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.02em;
-    opacity: 0; transition: opacity 150ms ease;
-  }
-  .palette-swatch-large:hover .swatch-hex { opacity: 1; }
-  .palette-divider { height: 1px; background: var(--color-border-subtle); margin: var(--space-4xl) 0; }
-
-  .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-sm); }
-  .token-card { background: var(--color-bg-elevated); border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 150ms ease; }
-  .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  [data-theme="dark"] .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-  .token-color-strip { height: 56px; position: relative; }
-  .token-color-strip .copy-btn {
-    position: absolute; top: 50%; right: 8px; transform: translateY(-50%);
-    background: rgba(0,0,0,0.25); color: var(--bs2-parchment); border: none; border-radius: var(--radius-sm);
-    padding: 4px 8px; font-size: 10px; font-family: var(--font-mono); cursor: pointer;
-    opacity: 0; transition: opacity 120ms ease, background 120ms ease;
-  }
-  .token-card:hover .copy-btn { opacity: 1; }
-  .copy-btn:hover { background: rgba(0,0,0,0.45); }
-  .copy-btn.copied { background: rgba(62,122,98,0.8); }
-  .token-info { padding: 14px 16px; }
-  .token-name { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--color-accent); margin-bottom: 4px; }
-  .token-hex { font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 8px; }
-  .token-role { font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 4px; }
-  .token-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; }
-  .token-usage { margin-top: 10px; display: flex; gap: 4px; flex-wrap: wrap; }
-  .usage-pill { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: var(--radius-sm); letter-spacing: 0.04em; }
-  /* usage-light: looks like a light surface (sandy, warm) */
-  .usage-light { background: var(--bm0-sand); color: var(--in1-iron); }
-  [data-theme="dark"] .usage-light { background: rgba(228,226,218,0.12); color: var(--bm0-sand); }
-  /* usage-dark: looks like a dark surface (charcoal, cool) */
-  .usage-dark  { background: var(--in1-iron); color: var(--bm0-sand); }
-  [data-theme="dark"] .usage-dark { background: rgba(55,65,81,0.5); color: var(--in3-ash); }
-  /* usage-both: forest accent, signals universal applicability */
-  .usage-both  { background: rgba(62,122,98,0.1); color: var(--fo2-forest); }
-  [data-theme="dark"] .usage-both { background: rgba(92,158,134,0.12); color: var(--fo0-sage); }
-
-  .semantic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
-  @media (max-width: 640px) { .semantic-grid { grid-template-columns: 1fr; } }
-  .semantic-mode { background: var(--color-bg-elevated); border-radius: var(--radius-lg); padding: var(--space-md); }
-  .semantic-mode-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-md); }
-  .semantic-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--color-border-subtle); }
-  .semantic-row:last-child { border-bottom: none; }
-  .semantic-dot { width: 20px; height: 20px; border-radius: var(--radius-sm); flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
-  .semantic-token-name { font-family: var(--font-mono); font-size: 11px; color: var(--color-accent); flex: 1; }
-  .semantic-resolves { font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); }
-
-  .wcag-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .wcag-table th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); border-bottom: 1px solid var(--color-border-subtle); }
-  .wcag-table td { padding: 10px 14px; border-bottom: 1px solid var(--color-border-subtle); color: var(--color-text-secondary); vertical-align: middle; }
-  .wcag-table tr:hover td { background: var(--color-bg-elevated); }
-  .wcag-pair { display: flex; align-items: center; gap: 8px; }
-  .wcag-dot-wrap { display: flex; gap: 2px; }
-  .wcag-dot { width: 16px; height: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(0,0,0,0.08); }
-  .wcag-pass { color: var(--bl3-moss); font-weight: 600; }
-  .wcag-large { color: var(--bl2-grain); font-weight: 600; }
-  .wcag-ratio { font-family: var(--font-mono); font-size: 12px; }
-
-  .code-block {
-    background: var(--color-bg-code); border-radius: var(--radius-lg); padding: var(--space-md);
-    font-family: var(--font-mono); font-size: 12px; line-height: 1.7;
-    color: var(--bm2-parchment); overflow-x: auto; position: relative;
-  }
-  .code-comment { color: var(--fo0-sage); opacity: 0.7; }
-  .code-prop { color: var(--bm0-sand); }
-  .code-val { color: var(--bm2-parchment); }
-  .code-copy-btn {
-    position: absolute; top: 12px; right: 12px;
-    background: rgba(245,244,240,0.15); color: var(--bm2-parchment); border: none;
-    border-radius: var(--radius-sm); padding: 4px 10px; font-size: 11px;
-    font-family: var(--font-body); font-weight: 600; cursor: pointer; transition: background 120ms ease;
-  }
-  .code-copy-btn:hover { background: rgba(245,244,240,0.25); }
-  .code-copy-btn.copied { background: rgba(86,122,55,0.5); }
 </style>
 </head>
 <body>
@@ -448,10 +204,10 @@ import LogoIcon from '../components/LogoIcon.astro';
 <!-- Nav -->
 <nav class="nav" id="nav" aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" class="nav-logo" data-view="design-system"><LogoIcon />Farn<span>.</span></a>
+    <a href="/" class="nav-logo"><LogoIcon />Farn<span>.</span></a>
     <ul class="nav-links">
-      <li><a href="#" data-view="design-system" class="nav-view-link active">Design System</a></li>
-      <li><a href="#" data-view="palette" class="nav-view-link">Palette</a></li>
+      <li><a href="/docs">Docs</a></li>
+      <li><a href="/about">About</a></li>
     </ul>
     <div class="nav-right">
       <a href="https://github.com/jabopiti/farn-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
@@ -460,7 +216,7 @@ import LogoIcon from '../components/LogoIcon.astro';
       <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
         <i class="ti ti-moon" id="themeIcon"></i>
       </button>
-      <a href="/getting-started" class="nav-cta">Get Started</a>
+      <a href="/docs/getting-started" class="nav-cta">Get Started</a>
       <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileDrawer">
         <i class="ti ti-menu-2" id="hamburgerIcon"></i>
       </button>
@@ -470,34 +226,20 @@ import LogoIcon from '../components/LogoIcon.astro';
 
 <!-- Sub-nav -->
 <nav class="sub-nav" id="sub-nav" aria-label="Section navigation">
-  <div class="sub-nav-inner" id="subnav-ds">
+  <div class="sub-nav-inner">
     <a href="#about" class="sub-nav-link">About</a>
     <a href="#foundations" class="sub-nav-link">Foundations</a>
-    <a href="#components" class="sub-nav-link">Components</a>
     <a href="#surfaces" class="sub-nav-link">Surfaces</a>
-    <span class="sub-nav-indicator" id="sub-nav-indicator-ds"></span>
-  </div>
-  <div class="sub-nav-inner" id="subnav-palette" style="display:none">
-    <a href="#iron-night" class="sub-nav-link">Iron Night</a>
-    <a href="#birch-mist" class="sub-nav-link">Birch Mist</a>
-    <a href="#forest" class="sub-nav-link">Forest</a>
-    <a href="#bloom" class="sub-nav-link">Bloom</a>
-    <a href="#semantic" class="sub-nav-link">Semantic</a>
-    <a href="#wcag" class="sub-nav-link">WCAG</a>
-    <a href="#css-vars" class="sub-nav-link">CSS Variables</a>
-    <span class="sub-nav-indicator" id="sub-nav-indicator-palette"></span>
+    <span class="sub-nav-indicator" id="sub-nav-indicator"></span>
   </div>
 </nav>
 
 <!-- Mobile drawer -->
 <div class="mobile-drawer" id="mobileDrawer">
-  <a href="#" data-view="design-system" class="nav-view-link active">Design System</a>
-  <a href="#" data-view="palette" class="nav-view-link">Palette</a>
-  <a href="/getting-started" class="drawer-cta">Get Started</a>
+  <a href="/docs">Docs</a>
+  <a href="/about">About</a>
+  <a href="/docs/getting-started" class="drawer-cta">Get Started</a>
 </div>
-
-<!-- Design System View -->
-<div id="view-ds">
 
 <!-- Hero -->
 <section class="hero" data-surface="dark" aria-label="Hero">
@@ -506,8 +248,8 @@ import LogoIcon from '../components/LogoIcon.astro';
     <h1 class="hero-title">Sharp.<br><em>Warm.</em><br>Intellectual.</h1>
     <p class="hero-desc">A design system rooted in the forests of northern Germany. Framework-agnostic, token-first, built for brand, websites, and web apps.</p>
     <div class="hero-actions">
-      <a href="#" class="btn-primary" data-view="palette"><i class="ti ti-palette"></i> Explore palette</a>
-      <a href="/getting-started" class="btn-ghost"><i class="ti ti-book"></i> Getting Started</a>
+      <a href="/docs" class="btn-primary"><i class="ti ti-book"></i> Read the docs</a>
+      <a href="https://github.com/jabopiti/farn-theme" class="btn-ghost" target="_blank" rel="noopener noreferrer"><i class="ti ti-brand-github"></i> View on GitHub</a>
     </div>
   </div>
   <div class="hero-palette-strip" aria-hidden="true">
@@ -539,7 +281,7 @@ import LogoIcon from '../components/LogoIcon.astro';
         <h2 class="section-title">A design system that knows what it is.</h2>
         <p>Farn is built on a single conviction: that a design system should have a point of view. Not a collection of neutral components, but a coherent vocabulary — warm enough to feel human, sharp enough to feel considered.</p>
         <p>Four token palettes. A two-layer semantic architecture. Framework-agnostic CSS custom properties. Component definitions, each with light and dark surface variants.</p>
-        <a href="#" class="btn-primary" data-view="palette" style="width:fit-content">Explore the colour system →</a>
+        <a href="/docs/foundations/color" class="btn-primary" style="width:fit-content">Explore the colour system →</a>
       </div>
       <div class="about-palettes">
         <div class="palette-label">Iron Night</div>
@@ -608,106 +350,6 @@ import LogoIcon from '../components/LogoIcon.astro';
   </div>
 </section>
 
-<!-- Components -->
-<section data-surface="tinted" id="components">
-  <div class="container">
-    <p class="section-eyebrow reveal">Components</p>
-    <h2 class="section-title reveal">The building blocks</h2>
-    <p class="section-desc reveal">Every component is specified for both light and dark surfaces. Token-first — no hardcoded colours anywhere in the implementation.</p>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em" class="reveal">Cards</h3>
-    <div class="components-grid">
-      <a href="#" class="card reveal" style="text-decoration:none">
-        <div class="card-tag">Platform · 4 min</div>
-        <div class="card-title">Platform thinking at scale</div>
-        <div class="card-body">How internal platform teams shift from cost centre to product organisation.</div>
-        <div class="card-meta"><span>12 Apr 2025</span><span class="card-arrow">Read →</span></div>
-      </a>
-      <div class="card reveal card-highlight-light">
-        <div class="card-tag">Featured</div>
-        <div class="card-title">The product builder archetype</div>
-        <div class="card-body">End-to-end ownership from strategy through shipped code — the emerging role.</div>
-        <div class="card-meta"><span>2 May 2025</span><span class="card-arrow">Read →</span></div>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon-wrap"><i class="ti ti-layout-grid"></i></div>
-        <div class="card-title">Composable layout</div>
-        <div class="card-body">Build pages from reusable layout primitives, not fixed templates.</div>
-      </div>
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="reveal">Buttons</h3>
-    <div class="btn-showcase reveal">
-      <button class="btn btn-p"><i class="ti ti-arrow-right"></i> Primary</button>
-      <button class="btn btn-s">Secondary</button>
-      <button class="btn btn-g">Ghost</button>
-      <button class="btn btn-d"><i class="ti ti-trash"></i> Destructive</button>
-      <button class="btn btn-p btn-sm">Small</button>
-      <button class="btn btn-p btn-lg">Large</button>
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="reveal">Badges &amp; Tags</h3>
-    <div class="badge-showcase reveal">
-      <span class="badge badge-general">General</span>
-      <span class="badge badge-category">Category</span>
-      <span class="badge badge-published">Published</span>
-      <span class="badge badge-draft">Draft</span>
-      <span class="badge badge-archived">Archived</span>
-      <span class="badge badge-beta">Beta</span>
-      <span class="badge badge-research">Research</span>
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="reveal">Forms &amp; Inputs</h3>
-    <div class="input-showcase reveal">
-      <div class="field">
-        <label class="field-label" for="demo-name">Name</label>
-        <input class="field-input" id="demo-name" type="text" placeholder="Jacob Lueg Tiedemann" />
-      </div>
-      <div class="field field-error">
-        <label class="field-label" for="demo-email">Email</label>
-        <input class="field-input" id="demo-email" type="email" value="not-an-email" aria-invalid="true" aria-describedby="email-err" />
-        <span class="field-error-msg" id="email-err">Enter a valid email address</span>
-      </div>
-      <div class="field">
-        <label class="field-label" for="demo-msg">Message</label>
-        <input class="field-input" id="demo-msg" type="text" placeholder="What's on your mind?" />
-        <span class="field-hint">We'll get back to you within 2 business days</span>
-      </div>
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="reveal">Dividers</h3>
-    <div class="divider-demo reveal">
-      <p>Hairline — between list items</p>
-      <hr class="hairline" />
-      <p style="margin-top:12px">Section — between content groups</p>
-      <hr class="section-divider" />
-      <p style="margin-top:12px">Decorative — editorial scene break</p>
-      <hr class="decorative" />
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="reveal">Quotes</h3>
-    <div class="reveal" style="margin-bottom:var(--space-md)">
-      <blockquote class="blockquote-demo">
-        <p>The platform is never finished. The moment you ship it, the next set of needs is already forming at the edges.</p>
-        <footer>— Teresa Torres, <cite>Continuous Discovery Habits</cite></footer>
-      </blockquote>
-    </div>
-    <figure class="pullquote-demo reveal">
-      <div class="pullquote-rule"></div>
-      <p>Good platform thinking starts with the developer, not the platform.</p>
-      <figcaption>Jacob Lueg Tiedemann</figcaption>
-    </figure>
-    <div class="attribution-demo reveal">
-      <div class="attribution-avatar" aria-hidden="true">MR</div>
-      <div>
-        <p class="attribution-quote">"Working this way changed how I think about internal tooling entirely. It stopped being infrastructure and started being product."</p>
-        <p class="attribution-name">Maya Rodriguez</p>
-        <p class="attribution-role">VP Engineering, Acme</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Surface demo -->
 <section id="surfaces" style="padding:0;overflow:hidden">
   <div style="max-width:var(--width-content);margin:0 auto;padding:0 var(--space-lg)">
@@ -738,223 +380,6 @@ import LogoIcon from '../components/LogoIcon.astro';
   <div style="padding-bottom:var(--space-3xl)"></div>
 </section>
 
-</div><!-- /view-ds -->
-
-<!-- Palette View -->
-<div id="view-palette" hidden>
-  <div class="container">
-    <header class="page-header">
-      <p class="page-eyebrow">Farn Design System</p>
-      <h1 class="page-title">Colors &amp;<br><em>Palettes</em></h1>
-      <p class="page-desc">A warm, earthy colour system rooted in northern European forest landscapes. Seventeen carefully selected tokens across four named palettes — each with a distinct semantic role for dark and light surface design.</p>
-    </header>
-    <div class="all-swatches reveal" aria-hidden="true">
-      <div class="sw" style="background:#0D1117"><span class="sw-tip">void</span></div>
-      <div class="sw" style="background:#374151"><span class="sw-tip">iron</span></div>
-      <div class="sw" style="background:#4B5563"><span class="sw-tip">slate</span></div>
-      <div class="sw" style="background:#6B7280"><span class="sw-tip">ash</span></div>
-      <div class="sw" style="background:#E4E2DA"><span class="sw-tip">sand</span></div>
-      <div class="sw" style="background:#EEEDE9"><span class="sw-tip">linen</span></div>
-      <div class="sw" style="background:#F5F4F0"><span class="sw-tip">parchment</span></div>
-      <div class="sw" style="background:#5C9E86"><span class="sw-tip">sage</span></div>
-      <div class="sw" style="background:#3E7A62"><span class="sw-tip">fern</span></div>
-      <div class="sw" style="background:#2D5E4A"><span class="sw-tip">forest</span></div>
-      <div class="sw" style="background:#254D5A"><span class="sw-tip">deepwater</span></div>
-      <div class="sw" style="background:#C5414C"><span class="sw-tip">ember</span></div>
-      <div class="sw" style="background:#AB5A2B"><span class="sw-tip">ochre</span></div>
-      <div class="sw" style="background:#8D6B20"><span class="sw-tip">grain</span></div>
-      <div class="sw" style="background:#567A37"><span class="sw-tip">moss</span></div>
-      <div class="sw" style="background:#885DB4"><span class="sw-tip">heather</span></div>
-    </div>
-
-    <section class="palette-section" id="iron-night">
-      <div class="palette-header reveal">
-        <div>
-          <h2 class="palette-name">Iron Night</h2>
-          <p class="palette-concept">Four progressively lighter dark tones — from the deepest void to a warm slate. The backbone of dark surface design. Used for backgrounds, elevated surfaces, active states, and secondary text. Never used as foreground text on light backgrounds.</p>
-        </div>
-        <div class="palette-swatches">
-          <div class="palette-swatch-large" style="background:#0D1117"><span class="swatch-hex" style="color:#6B7280">#0D1117</span></div>
-          <div class="palette-swatch-large" style="background:#374151"><span class="swatch-hex" style="color:var(--bs0-sand)">#374151</span></div>
-          <div class="palette-swatch-large" style="background:#4B5563"><span class="swatch-hex" style="color:var(--bs0-sand)">#4B5563</span></div>
-          <div class="palette-swatch-large" style="background:#6B7280"><span class="swatch-hex" style="color:var(--bs2-parchment)">#6B7280</span></div>
-        </div>
-      </div>
-      <div class="token-grid">
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#0D1117"><button class="copy-btn" data-copy="#0D1117">copy</button></div><div class="token-info"><div class="token-name">--in0-void</div><div class="token-hex">#0D1117 · lum 0.0055</div><div class="token-role">Void</div><div class="token-desc">Primary dark background. Ink-black with a slight blue-green undertone.</div><div class="token-usage"><span class="usage-pill usage-dark">primary dark background</span><span class="usage-pill usage-light">primary text on light</span><span class="usage-pill usage-both">tooltip</span><span class="usage-pill usage-both">overlay / scrim</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#374151"><button class="copy-btn" data-copy="#374151">copy</button></div><div class="token-info"><div class="token-name">--in1-iron</div><div class="token-hex">#374151 · lum 0.0519</div><div class="token-role">Iron</div><div class="token-desc">Elevated dark surfaces — panels, cards, modals, floating popups. Border and state animations on light surfaces.</div><div class="token-usage"><span class="usage-pill usage-dark">elevated surface</span><span class="usage-pill usage-dark">status bars</span><span class="usage-pill usage-dark">panels</span><span class="usage-pill usage-dark">modals</span><span class="usage-pill usage-dark">floating popups</span><span class="usage-pill usage-dark">icon background</span><span class="usage-pill usage-light">border</span><span class="usage-pill usage-light">state animations</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#4B5563"><button class="copy-btn" data-copy="#4B5563">copy</button></div><div class="token-info"><div class="token-name">--in2-slate</div><div class="token-hex">#4B5563 · lum 0.0784</div><div class="token-role">Slate</div><div class="token-desc">Selection, input fills, and active states on dark surfaces. Secondary text on light surfaces.</div><div class="token-usage"><span class="usage-pill usage-dark">selection</span><span class="usage-pill usage-dark">text highlighting</span><span class="usage-pill usage-dark">border</span><span class="usage-pill usage-dark">tinted section</span><span class="usage-pill usage-dark">input fill</span><span class="usage-pill usage-dark">active states</span><span class="usage-pill usage-light">secondary text</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#6B7280"><button class="copy-btn" data-copy="#6B7280">copy</button></div><div class="token-info"><div class="token-name">--in3-ash</div><div class="token-hex">#6B7280 · lum 0.1329</div><div class="token-role">Ash</div><div class="token-desc">Tertiary text on light surfaces. Captions, placeholders, and disabled states. AA-large only — 18px+ or 14px bold.</div><div class="token-usage"><span class="usage-pill usage-light">tertiary text</span><span class="usage-pill usage-both">captions</span><span class="usage-pill usage-both">placeholders</span><span class="usage-pill usage-both">disabled</span></div></div></div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="birch-mist">
-      <div class="palette-header reveal">
-        <div>
-          <h2 class="palette-name">Birch Mist</h2>
-          <p class="palette-concept">Three warm off-white tones — not pure white, but the colour of aged parchment, linen, and river sand. The foundation of all light surface design.</p>
-        </div>
-        <div class="palette-swatches">
-          <div class="palette-swatch-large" style="background:#E4E2DA;border:1px solid rgba(0,0,0,0.06)"><span class="swatch-hex" style="color:#4B5563">#E4E2DA</span></div>
-          <div class="palette-swatch-large" style="background:#EEEDE9;border:1px solid rgba(0,0,0,0.06)"><span class="swatch-hex" style="color:#4B5563">#EEEDE9</span></div>
-          <div class="palette-swatch-large" style="background:#F5F4F0;border:1px solid rgba(0,0,0,0.06)"><span class="swatch-hex" style="color:#4B5563">#F5F4F0</span></div>
-        </div>
-      </div>
-      <div class="token-grid">
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#E4E2DA;border-bottom:1px solid rgba(0,0,0,0.06)"><button class="copy-btn" data-copy="#E4E2DA" style="color:#374151;background:rgba(0,0,0,0.1)">copy</button></div><div class="token-info"><div class="token-name">--bm0-sand</div><div class="token-hex">#E4E2DA · lum 0.7340</div><div class="token-role">Sand</div><div class="token-desc">Input fills, hover and active states on light surfaces. Tertiary text on dark surfaces.</div><div class="token-usage"><span class="usage-pill usage-dark">tertiary text</span><span class="usage-pill usage-light">input fill</span><span class="usage-pill usage-light">hover</span><span class="usage-pill usage-light">active states</span><span class="usage-pill usage-light">selection</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#EEEDE9;border-bottom:1px solid rgba(0,0,0,0.06)"><button class="copy-btn" data-copy="#EEEDE9" style="color:#374151;background:rgba(0,0,0,0.1)">copy</button></div><div class="token-info"><div class="token-name">--bm1-linen</div><div class="token-hex">#EEEDE9 · lum 0.8468</div><div class="token-role">Linen</div><div class="token-desc">Elevated surfaces, cards, and panels on light. Secondary text, hover, and state animations on dark.</div><div class="token-usage"><span class="usage-pill usage-dark">secondary text</span><span class="usage-pill usage-dark">state animations</span><span class="usage-pill usage-dark">hover</span><span class="usage-pill usage-light">elevated surface</span><span class="usage-pill usage-light">status bars</span><span class="usage-pill usage-light">panels</span><span class="usage-pill usage-light">modals</span><span class="usage-pill usage-light">floating popups</span><span class="usage-pill usage-light">text highlighting</span><span class="usage-pill usage-light">icon background</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#F5F4F0;border-bottom:1px solid rgba(0,0,0,0.06)"><button class="copy-btn" data-copy="#F5F4F0" style="color:#374151;background:rgba(0,0,0,0.1)">copy</button></div><div class="token-info"><div class="token-name">--bm2-parchment</div><div class="token-hex">#F5F4F0 · lum 0.9041</div><div class="token-role">Parchment</div><div class="token-desc">Primary light background. Primary text on dark surfaces. CTA/button text in both modes. 13.07:1 on Void.</div><div class="token-usage"><span class="usage-pill usage-dark">primary text on dark</span><span class="usage-pill usage-light">primary light background</span><span class="usage-pill usage-both">button / CTA text</span></div></div></div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="forest">
-      <div class="palette-header reveal">
-        <div>
-          <h2 class="palette-name">Forest</h2>
-          <p class="palette-concept">Four tones from calm sage through rich fern to a deep teal-inflected forest. The accent palette — every primary action, link, and interactive signal uses these tokens.</p>
-        </div>
-        <div class="palette-swatches">
-          <div class="palette-swatch-large" style="background:#5C9E86"><span class="swatch-hex" style="color:rgba(245,244,240,0.9)">#5C9E86</span></div>
-          <div class="palette-swatch-large" style="background:#3E7A62"><span class="swatch-hex" style="color:rgba(245,244,240,0.9)">#3E7A62</span></div>
-          <div class="palette-swatch-large" style="background:#2D5E4A"><span class="swatch-hex" style="color:rgba(245,244,240,0.9)">#2D5E4A</span></div>
-          <div class="palette-swatch-large" style="background:#254D5A"><span class="swatch-hex" style="color:rgba(245,244,240,0.9)">#254D5A</span></div>
-        </div>
-      </div>
-      <div class="token-grid">
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#5C9E86"><button class="copy-btn" data-copy="#5C9E86">copy</button></div><div class="token-info"><div class="token-name">--fo0-sage</div><div class="token-hex">#5C9E86 · lum 0.2492</div><div class="token-role">Sage</div><div class="token-desc">Supporting accent and dark-mode hover state for Fern. 5.19:1 on Void.</div><div class="token-usage"><span class="usage-pill usage-both">alternative primary accent</span><span class="usage-pill usage-both">supporting accent</span><span class="usage-pill usage-both">accent hover</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#3E7A62"><button class="copy-btn" data-copy="#3E7A62">copy</button></div><div class="token-info"><div class="token-name">--fo1-fern</div><div class="token-hex">#3E7A62 · lum 0.1302</div><div class="token-role">Fern — Primary Accent</div><div class="token-desc">The primary accent in both modes — every button, link, focus ring, and CTA. WCAG AA on Parchment (4.80:1) and Void (4.68:1).</div><div class="token-usage"><span class="usage-pill usage-both">primary accent</span><span class="usage-pill usage-both">primary CTA</span><span class="usage-pill usage-both">links</span><span class="usage-pill usage-both">focus ring</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#2D5E4A"><button class="copy-btn" data-copy="#2D5E4A">copy</button></div><div class="token-info"><div class="token-name">--fo2-forest</div><div class="token-hex">#2D5E4A · lum 0.0673</div><div class="token-role">Forest</div><div class="token-desc">Secondary accent depth. Accent hover in light mode. Badge text. 5.38:1 on Parchment.</div><div class="token-usage"><span class="usage-pill usage-both">secondary accent</span><span class="usage-pill usage-both">accent depth</span><span class="usage-pill usage-both">badge text</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#254D5A"><button class="copy-btn" data-copy="#254D5A">copy</button></div><div class="token-info"><div class="token-name">--fo3-deepwater</div><div class="token-hex">#254D5A · lum 0.0527</div><div class="token-role">Deepwater</div><div class="token-desc">Code block backgrounds on light pages. Blockquote border accent.</div><div class="token-usage"><span class="usage-pill usage-both">tertiary accent</span><span class="usage-pill usage-both">code block background</span><span class="usage-pill usage-both">blockquote accent</span></div></div></div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="bloom">
-      <div class="palette-header reveal">
-        <div>
-          <h2 class="palette-name">Bloom</h2>
-          <p class="palette-concept">Five semantic colours with fixed meanings that must not be repurposed. All five meet WCAG AA (4.5:1) on Parchment. Never used decoratively.</p>
-        </div>
-        <div class="palette-swatches">
-          <div class="palette-swatch-large" style="background:#C5414C"><span class="swatch-hex" style="color:rgba(245,244,240,0.9)">#C5414C</span></div>
-          <div class="palette-swatch-large" style="background:#AB5A2B"><span class="swatch-hex" style="color:rgba(245,244,240,0.9)">#AB5A2B</span></div>
-          <div class="palette-swatch-large" style="background:#8D6B20"><span class="swatch-hex" style="color:rgba(245,244,240,0.9)">#8D6B20</span></div>
-          <div class="palette-swatch-large" style="background:#567A37"><span class="swatch-hex" style="color:rgba(245,244,240,0.9)">#567A37</span></div>
-          <div class="palette-swatch-large" style="background:#885DB4"><span class="swatch-hex" style="color:rgba(245,244,240,0.9)">#885DB4</span></div>
-        </div>
-      </div>
-      <div class="token-grid">
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#C5414C"><button class="copy-btn" data-copy="#C5414C">copy</button></div><div class="token-info"><div class="token-name">--bl0-ember</div><div class="token-hex">#C5414C · on Parchment 4.51:1</div><div class="token-role">Ember — Error</div><div class="token-desc">Error states, destructive actions, form validation failures. The only red in the system.</div><div class="token-usage"><span class="usage-pill usage-both">error</span><span class="usage-pill usage-both">destructive</span><span class="usage-pill usage-both">form validation</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#AB5A2B"><button class="copy-btn" data-copy="#AB5A2B">copy</button></div><div class="token-info"><div class="token-name">--bl1-ochre</div><div class="token-hex">#AB5A2B · on Parchment 4.51:1</div><div class="token-role">Ochre — Annotation</div><div class="token-desc">Annotations, decorators, and informational callouts.</div><div class="token-usage"><span class="usage-pill usage-both">annotation</span><span class="usage-pill usage-both">decorators</span><span class="usage-pill usage-both">callouts</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#8D6B20"><button class="copy-btn" data-copy="#8D6B20">copy</button></div><div class="token-info"><div class="token-name">--bl2-grain</div><div class="token-hex">#8D6B20 · on Parchment 4.48:1</div><div class="token-role">Grain — Warning</div><div class="token-desc">Warning states, draft status, pending review.</div><div class="token-usage"><span class="usage-pill usage-both">warning</span><span class="usage-pill usage-both">draft</span><span class="usage-pill usage-both">pending</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#567A37"><button class="copy-btn" data-copy="#567A37">copy</button></div><div class="token-info"><div class="token-name">--bl3-moss</div><div class="token-hex">#567A37 · on Parchment 4.51:1</div><div class="token-role">Moss — Success</div><div class="token-desc">Success states, published status, confirmations.</div><div class="token-usage"><span class="usage-pill usage-both">success</span><span class="usage-pill usage-both">published</span><span class="usage-pill usage-both">active</span></div></div></div>
-        <div class="token-card reveal"><div class="token-color-strip" style="background:#885DB4"><button class="copy-btn" data-copy="#885DB4">copy</button></div><div class="token-info"><div class="token-name">--bl4-heather</div><div class="token-hex">#885DB4 · on Parchment 4.47:1</div><div class="token-role">Heather — Special</div><div class="token-desc">Uncommon or special states — beta features, research content. The only purple in the system.</div><div class="token-usage"><span class="usage-pill usage-both">beta</span><span class="usage-pill usage-both">research</span><span class="usage-pill usage-both">uncommon</span></div></div></div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="semantic">
-      <h2 class="palette-name reveal">Semantic Token Layer</h2>
-      <p class="palette-concept reveal" style="margin-bottom:var(--space-xl)">Components never reference palette tokens directly. They reference semantic aliases that resolve to the correct palette value per mode. When the theme switches, every component adapts automatically — no conditional logic needed.</p>
-      <div class="semantic-grid reveal">
-        <div class="semantic-mode">
-          <div class="semantic-mode-label" style="color:var(--color-accent)">Light mode</div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#F5F4F0"></div><span class="semantic-token-name">--color-bg</span><span class="semantic-resolves">→ parchment</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#EEEDE9"></div><span class="semantic-token-name">--color-bg-elevated</span><span class="semantic-resolves">→ linen</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#E4E2DA"></div><span class="semantic-token-name">--color-bg-sunken</span><span class="semantic-resolves">→ sand</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-text</span><span class="semantic-resolves">→ void</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#4B5563"></div><span class="semantic-token-name">--color-text-secondary</span><span class="semantic-resolves">→ slate</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#6B7280"></div><span class="semantic-token-name">--color-text-tertiary</span><span class="semantic-resolves">→ ash</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#3E7A62"></div><span class="semantic-token-name">--color-accent</span><span class="semantic-resolves">→ fern</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#2D5E4A"></div><span class="semantic-token-name">--color-accent-hover</span><span class="semantic-resolves">→ forest</span></div>
-        </div>
-        <div class="semantic-mode" data-surface="dark">
-          <div class="semantic-mode-label" style="color:var(--color-accent)">Dark mode</div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-bg</span><span class="semantic-resolves">→ void</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#374151"></div><span class="semantic-token-name">--color-bg-elevated</span><span class="semantic-resolves">→ iron</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-bg-sunken</span><span class="semantic-resolves">→ void</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#F5F4F0"></div><span class="semantic-token-name">--color-text</span><span class="semantic-resolves">→ parchment</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#EEEDE9"></div><span class="semantic-token-name">--color-text-secondary</span><span class="semantic-resolves">→ linen</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#E4E2DA"></div><span class="semantic-token-name">--color-text-tertiary</span><span class="semantic-resolves">→ sand</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#3E7A62"></div><span class="semantic-token-name">--color-accent</span><span class="semantic-resolves">→ fern</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#5C9E86"></div><span class="semantic-token-name">--color-accent-hover</span><span class="semantic-resolves">→ sage</span></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="wcag">
-      <h2 class="palette-name reveal">WCAG Contrast Reference</h2>
-      <p class="palette-concept reveal" style="margin-bottom:var(--space-xl)">Key contrast pairs across the system. All primary text combinations exceed AA (4.5:1). Ash is AA-large only.</p>
-      <div style="overflow-x:auto" class="reveal">
-        <table class="wcag-table">
-          <thead><tr><th>Pair</th><th>Ratio</th><th>Result</th></tr></thead>
-          <tbody>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#F5F4F0"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Parchment on Void</div></td><td class="wcag-ratio">13.07:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#E4E2DA"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Sand on Void</div></td><td class="wcag-ratio">10.96:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#6B7280"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Ash on Void</div></td><td class="wcag-ratio">3.35:1</td><td class="wcag-large">AA large only</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#0D1117"></div><div class="wcag-dot" style="background:#F5F4F0"></div></div>Void on Parchment</div></td><td class="wcag-ratio">13.07:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#374151"></div><div class="wcag-dot" style="background:#F5F4F0"></div></div>Iron on Parchment</div></td><td class="wcag-ratio">9.37:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#6B7280"></div><div class="wcag-dot" style="background:#F5F4F0"></div></div>Ash on Parchment</div></td><td class="wcag-ratio">4.39:1</td><td class="wcag-large">AA large only</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#3E7A62"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Fern on Void</div></td><td class="wcag-ratio">4.68:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#3E7A62"></div><div class="wcag-dot" style="background:#F5F4F0"></div></div>Fern on Parchment</div></td><td class="wcag-ratio">4.80:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#5C9E86"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Sage on Void</div></td><td class="wcag-ratio">5.19:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#2D5E4A"></div><div class="wcag-dot" style="background:#F5F4F0"></div></div>Forest on Parchment</div></td><td class="wcag-ratio">5.38:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#C5414C"></div><div class="wcag-dot" style="background:#F5F4F0"></div></div>Ember on Parchment</div></td><td class="wcag-ratio">4.51:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#567A37"></div><div class="wcag-dot" style="background:#F5F4F0"></div></div>Moss on Parchment</div></td><td class="wcag-ratio">4.51:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#885DB4"></div><div class="wcag-dot" style="background:#F5F4F0"></div></div>Heather on Parchment</div></td><td class="wcag-ratio">4.47:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#F5F4F0"></div><div class="wcag-dot" style="background:#3E7A62"></div></div>Parchment on Fern (btn text)</div></td><td class="wcag-ratio">4.80:1</td><td class="wcag-pass">✓ AA</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="css-vars">
-      <h2 class="palette-name reveal">CSS Variables</h2>
-      <p class="palette-concept reveal" style="margin-bottom:var(--space-xl)">Copy the full palette token block into your project's base CSS, or use the CDN link below.</p>
-      <div class="code-block reveal">
-        <button class="code-copy-btn" id="codeCopyBtn">Copy</button>
-        <pre id="cssCode"><span class="code-comment">/* Farn Design System — Palette Tokens v0.1.0 */</span>
-<span class="code-prop">:root</span> &#123;
-  <span class="code-comment">/* ── Iron Night ──────────────────────────── */</span>
-  <span class="code-prop">--in0-void</span>:        <span class="code-val">#0D1117</span>;   <span class="code-comment">/* Primary dark bg       */</span>
-  <span class="code-prop">--in1-iron</span>:        <span class="code-val">#374151</span>;   <span class="code-comment">/* Elevated surfaces      */</span>
-  <span class="code-prop">--in2-slate</span>:       <span class="code-val">#4B5563</span>;   <span class="code-comment">/* Active line, selections*/</span>
-  <span class="code-prop">--in3-ash</span>:         <span class="code-val">#6B7280</span>;   <span class="code-comment">/* Placeholders, guides   */</span>
-
-  <span class="code-comment">/* ── Birch Mist ──────────────────────────── */</span>
-  <span class="code-prop">--bm0-sand</span>:        <span class="code-val">#E4E2DA</span>;   <span class="code-comment">/* Elevated UI, dark text */</span>
-  <span class="code-prop">--bm1-linen</span>:       <span class="code-val">#EEEDE9</span>;   <span class="code-comment">/* Card fills, hover      */</span>
-  <span class="code-prop">--bm2-parchment</span>:   <span class="code-val">#F5F4F0</span>;   <span class="code-comment">/* Primary bg / dark text */</span>
-
-  <span class="code-comment">/* ── Forest ──────────────────────────────── */</span>
-  <span class="code-prop">--fo0-sage</span>:        <span class="code-val">#5C9E86</span>;   <span class="code-comment">/* Dark accent, support   */</span>
-  <span class="code-prop">--fo1-fern</span>:        <span class="code-val">#3E7A62</span>;   <span class="code-comment">/* Primary accent         */</span>
-  <span class="code-prop">--fo2-forest</span>:      <span class="code-val">#2D5E4A</span>;   <span class="code-comment">/* Hover, badge text      */</span>
-  <span class="code-prop">--fo3-deepwater</span>:   <span class="code-val">#254D5A</span>;   <span class="code-comment">/* Code bg, selected dark */</span>
-
-  <span class="code-comment">/* ── Bloom ───────────────────────────────── */</span>
-  <span class="code-prop">--bl0-ember</span>:       <span class="code-val">#C5414C</span>;   <span class="code-comment">/* Error                  */</span>
-  <span class="code-prop">--bl1-ochre</span>:       <span class="code-val">#AB5A2B</span>;   <span class="code-comment">/* Annotation             */</span>
-  <span class="code-prop">--bl2-grain</span>:       <span class="code-val">#8D6B20</span>;   <span class="code-comment">/* Warning                */</span>
-  <span class="code-prop">--bl3-moss</span>:        <span class="code-val">#567A37</span>;   <span class="code-comment">/* Success                */</span>
-  <span class="code-prop">--bl4-heather</span>:     <span class="code-val">#885DB4</span>;   <span class="code-comment">/* Special                */</span>
-&#125;</pre>
-      </div>
-    </section>
-
-  </div>
-</div><!-- /view-palette -->
-
 <!-- Footer -->
 <footer class="page-footer" data-surface="dark">
   <div class="footer-inner">
@@ -962,10 +387,11 @@ import LogoIcon from '../components/LogoIcon.astro';
       <div class="footer-logo"><LogoIcon class="footer-logo-icon" />Farn<span>.</span></div>
       <p class="footer-tagline">A design system — sharp, warm, intellectual.</p>
       <div class="footer-nav">
-        <a href="#foundations">Foundations</a>
-        <a href="#components">Components</a>
-        <a href="#" data-view="palette">Palette</a>
-        <a href="/getting-started">Getting Started</a>
+        <a href="/docs">Docs</a>
+        <a href="/docs/getting-started">Getting Started</a>
+        <a href="/docs/foundations/color">Color</a>
+        <a href="/docs/components">Components</a>
+        <a href="/about">About</a>
         <a href="https://github.com/jabopiti/farn-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
@@ -1006,47 +432,17 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   }
 });
 
-// ── View switching ─────────────────────────────
+// ── Smart nav ──────────────────────────────────
 const nav = document.getElementById('nav');
 const subNav = document.getElementById('sub-nav');
-const viewDs = document.getElementById('view-ds');
-const viewPalette = document.getElementById('view-palette');
-const subnavDs = document.getElementById('subnav-ds');
-const subnavPalette = document.getElementById('subnav-palette');
-let inPaletteView = false;
-
-function switchView(viewName, pushHistory) {
-  const isDs = viewName === 'design-system';
-  inPaletteView = !isDs;
-  viewDs.hidden = !isDs;
-  viewPalette.hidden = isDs;
-  subnavDs.style.display = isDs ? '' : 'none';
-  subnavPalette.style.display = isDs ? 'none' : '';
-  document.querySelectorAll('.nav-view-link').forEach(l => l.classList.toggle('active', l.dataset.view === viewName));
-  if (pushHistory !== false) history.pushState({ view: viewName }, '', isDs ? '#design-system' : '#palette');
-  window.scrollTo(0, 0);
-  if (!isDs) { nav.classList.add('filled'); subNav.classList.add('filled'); }
-  else if (window.scrollY <= 20) { nav.classList.remove('filled'); subNav.classList.remove('filled'); }
-  requestAnimationFrame(() => updateSubNavIndicator(isDs ? 'ds' : 'palette'));
-}
-
-document.querySelectorAll('[data-view]').forEach(el => {
-  el.addEventListener('click', e => { e.preventDefault(); switchView(el.dataset.view); });
-});
-window.addEventListener('popstate', e => {
-  switchView(e.state?.view ?? (window.location.hash === '#palette' ? 'palette' : 'design-system'), false);
-});
-if (window.location.hash === '#palette') switchView('palette', false);
-
-// ── Smart nav ──────────────────────────────────
 const cs = getComputedStyle(document.documentElement);
 const NAV_H    = parseInt(cs.getPropertyValue('--nav-height'));
 const SUBNAV_H = parseInt(cs.getPropertyValue('--subnav-height'));
 let lastY = 0;
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
-  nav.classList.toggle('filled', y > 20 || inPaletteView);
-  subNav.classList.toggle('filled', y > 20 || inPaletteView);
+  nav.classList.toggle('filled', y > 20);
+  subNav.classList.toggle('filled', y > 20);
   if (y < NAV_H) {
     nav.classList.remove('hidden');
     subNav.classList.remove('hidden');
@@ -1083,11 +479,10 @@ drawer.querySelectorAll('a:not(.drawer-cta)').forEach(a => {
 });
 
 // ── Sub-nav indicator ──────────────────────────
-function updateSubNavIndicator(which) {
-  const panel = document.getElementById(which === 'ds' ? 'subnav-ds' : 'subnav-palette');
-  const indicator = document.getElementById(which === 'ds' ? 'sub-nav-indicator-ds' : 'sub-nav-indicator-palette');
-  if (!panel || !indicator) return;
-  const active = panel.querySelector('.sub-nav-link.active') || panel.querySelector('.sub-nav-link');
+function updateSubNavIndicator() {
+  const indicator = document.getElementById('sub-nav-indicator');
+  if (!indicator) return;
+  const active = subNav.querySelector('.sub-nav-link.active') || subNav.querySelector('.sub-nav-link');
   if (active) { indicator.style.left = active.offsetLeft + 'px'; indicator.style.width = active.offsetWidth + 'px'; }
 }
 
@@ -1097,74 +492,22 @@ const revealObs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-// ── Sub-nav: DS section tracking ───────────────
-const dsNavObs = new IntersectionObserver(entries => {
+// ── Sub-nav section tracking ───────────────────
+const sectionObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      document.querySelectorAll('#subnav-ds .sub-nav-link').forEach(l => l.classList.remove('active'));
-      const link = document.querySelector(`#subnav-ds a[href="#${e.target.id}"]`);
-      if (link) { link.classList.add('active'); updateSubNavIndicator('ds'); }
+      subNav.querySelectorAll('.sub-nav-link').forEach(l => l.classList.remove('active'));
+      const link = subNav.querySelector(`a[href="#${e.target.id}"]`);
+      if (link) { link.classList.add('active'); updateSubNavIndicator(); }
     }
   });
 }, { threshold: 0.3 });
-['about', 'foundations', 'components', 'surfaces'].forEach(id => {
-  const el = document.getElementById(id); if (el) dsNavObs.observe(el);
+['about', 'foundations', 'surfaces'].forEach(id => {
+  const el = document.getElementById(id); if (el) sectionObs.observe(el);
 });
 
-// ── Sub-nav: Palette section tracking ──────────
-const paletteNavObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      document.querySelectorAll('#subnav-palette .sub-nav-link').forEach(l => l.classList.remove('active'));
-      const link = document.querySelector(`#subnav-palette a[href="#${e.target.id}"]`);
-      if (link) { link.classList.add('active'); updateSubNavIndicator('palette'); }
-    }
-  });
-}, { threshold: 0.3 });
-['iron-night', 'birch-mist', 'forest', 'bloom', 'semantic', 'wcag', 'css-vars'].forEach(id => {
-  const el = document.getElementById(id); if (el) paletteNavObs.observe(el);
-});
-
-// Initialise DS sub-nav first link as active
-const firstDsLink = document.querySelector('#subnav-ds .sub-nav-link');
-if (firstDsLink) { firstDsLink.classList.add('active'); requestAnimationFrame(() => updateSubNavIndicator('ds')); }
-
-// ── Palette sub-nav: scroll without hash change ─
-document.querySelectorAll('#subnav-palette .sub-nav-link').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const id = link.getAttribute('href').slice(1);
-    const target = document.getElementById(id);
-    if (target) {
-      const scrollOffset = parseInt(
-        getComputedStyle(document.documentElement).getPropertyValue('--scroll-offset')
-      ) || 108;
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - scrollOffset, behavior: 'smooth' });
-    }
-  });
-});
-
-// ── Palette: copy hex buttons ──────────────────
-document.querySelectorAll('.copy-btn[data-copy]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    navigator.clipboard.writeText(btn.dataset.copy).then(() => {
-      btn.textContent = 'copied!'; btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1500);
-    });
-  });
-});
-
-// ── Palette: copy CSS block ────────────────────
-const codeCopyBtn = document.getElementById('codeCopyBtn');
-const cssCodeEl = document.getElementById('cssCode');
-if (codeCopyBtn && cssCodeEl) {
-  codeCopyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(cssCodeEl.textContent).then(() => {
-      codeCopyBtn.textContent = 'Copied!'; codeCopyBtn.classList.add('copied');
-      setTimeout(() => { codeCopyBtn.textContent = 'Copy'; codeCopyBtn.classList.remove('copied'); }, 2000);
-    });
-  });
-}
+const firstLink = subNav.querySelector('.sub-nav-link');
+if (firstLink) { firstLink.classList.add('active'); requestAnimationFrame(updateSubNavIndicator); }
 </script>
 </body>
 </html>

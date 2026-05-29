@@ -1,8 +1,8 @@
 ---
-import DocLayout from '../../layouts/DocLayout.astro';
+import DocLayout from '../../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Spacing" description="Farn spacing scale, layout widths, border radius, and z-index">
+<DocLayout title="Spacing" description="Farn spacing scale, layout widths, border radius, and z-index" section="foundations">
   <h1>Spacing</h1>
   <p>Proximity signals relationship; distance signals importance. The spacing scale encodes this — small gaps within components, large gaps between sections.</p>
 
@@ -124,32 +124,29 @@ import DocLayout from '../../layouts/DocLayout.astro';
 </DocLayout>
 
 <style>
-  .scale-preview &#123;
+  .scale-preview {
     display: flex;
     align-items: flex-end;
     gap: var(--space-sm);
     margin: var(--space-md) 0;
     height: 96px;
-  &#125;
-
-  .scale-bar &#123;
+  }
+  .scale-bar {
     background: var(--color-accent);
     opacity: 0.6;
     height: 100%;
     border-radius: var(--radius-sm);
     min-width: 6px;
     flex-shrink: 0;
-  &#125;
-
-  .radius-preview &#123;
+  }
+  .radius-preview {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: var(--space-sm);
     margin: var(--space-md) 0;
-  &#125;
-
-  .radius-chip &#123;
+  }
+  .radius-chip {
     width: 64px;
     height: 40px;
     background: var(--color-bg-elevated);
@@ -160,5 +157,5 @@ import DocLayout from '../../layouts/DocLayout.astro';
     font-size: 0.75rem;
     font-family: var(--font-mono);
     color: var(--color-text-secondary);
-  &#125;
+  }
 </style>
