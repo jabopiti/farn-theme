@@ -14,7 +14,7 @@
   --bm2-parchment: #F5F4F0;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
-  --fo0-sage:      #5C9E86;   /* Classes, types, supporting accent         */
+  --fo0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */
   --fo1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs     */
   --fo2-forest:    #2D5E4A;   /* Keywords, operators, secondary accent     */
   --fo3-deepwater: #254D5A;   /* Pragmas, pre-processor, tertiary accent   */

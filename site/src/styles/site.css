@@ -60,7 +60,7 @@
   letter-spacing: -0.02em;
   transition: color 200ms ease;
 }
-.nav-logo span { color: var(--fo0-sage); }
+.nav-logo span { color: var(--color-accent); }
 .nav.filled .nav-logo { color: var(--color-text); }
 .nav.filled .nav-logo span { color: var(--color-accent); }
 .nav-logo-icon {
@@ -87,7 +87,7 @@
   transition: color 120ms ease;
 }
 .nav-links a:hover { color: var(--bm2-parchment); font-weight: 600; }
-.nav-links a.active { color: var(--fo0-sage); font-weight: 600; }
+.nav-links a.active { color: var(--color-accent); font-weight: 600; }
 .nav.filled .nav-links a { color: var(--color-text-secondary); }
 .nav.filled .nav-links a:hover,
 .nav.filled .nav-links a.active { color: var(--color-accent); font-weight: 600; }
@@ -328,7 +328,7 @@
 .btn-s { background: var(--color-bg-sunken); color: var(--color-text); }
 .btn-s:hover { background: var(--color-bg-elevated); }
 [data-theme="dark"] .btn-s:hover,
-[data-surface="dark"] .btn-s:hover { background: var(--in3-ash); }
+[data-surface="dark"] .btn-s:hover { background: var(--in2-slate); }
 .btn-g { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-border); }
 .btn-g:hover { background: var(--color-bg-elevated); }
 .btn-d { background: var(--bl0-ember); color: var(--bm2-parchment); }

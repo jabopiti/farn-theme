@@ -22,7 +22,8 @@
   --color-text:           var(--in0-void);
   --color-text-secondary: var(--in2-slate);
   --color-text-tertiary:  var(--in3-ash);
-  --color-border:         var(--in1-iron);
+  --color-border:         var(--in3-ash);
+  --color-border-strong:  var(--in1-iron);
   --color-border-subtle:  rgba(55,65,81,0.12);
   --color-ghost-border:   rgba(55,65,81,0.25);
   --color-bg-code:        var(--fo3-deepwater);
@@ -35,16 +36,17 @@
 [data-theme="dark"] {
   --color-bg:             var(--in0-void);
   --color-bg-elevated:    var(--in1-iron);
-  --color-bg-sunken:      var(--in2-slate);
+  --color-bg-sunken:      var(--in0-void);
   --color-text:           var(--bm2-parchment);
-  --color-text-secondary: var(--bm0-sand);
-  --color-text-tertiary:  var(--in3-ash);
+  --color-text-secondary: var(--bm1-linen);
+  --color-text-tertiary:  var(--bm0-sand);
   --color-border:         var(--in2-slate);
+  --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
   --color-ghost-border:   rgba(245,244,240,0.25);
-  --color-bg-code:        var(--fo3-deepwater);
-  --color-accent:         var(--fo0-sage);
-  --color-accent-hover:   var(--fo1-fern);
+  --color-bg-code:        var(--in1-iron);
+  --color-accent:         var(--fo1-fern);
+  --color-accent-hover:   var(--fo0-sage);
   --color-accent-text:    var(--bm2-parchment);
 }
 
@@ -60,7 +62,8 @@
   --color-text:           var(--in0-void);
   --color-text-secondary: var(--in2-slate);
   --color-text-tertiary:  var(--in3-ash);
-  --color-border:         var(--in1-iron);
+  --color-border:         var(--in3-ash);
+  --color-border-strong:  var(--in1-iron);
   --color-border-subtle:  rgba(55,65,81,0.12);
   --color-ghost-border:   rgba(55,65,81,0.25);
   --color-bg-code:        var(--fo3-deepwater);
@@ -73,16 +76,17 @@
   background: var(--in0-void);
   --color-bg:             var(--in0-void);
   --color-bg-elevated:    var(--in1-iron);
-  --color-bg-sunken:      var(--in2-slate);
+  --color-bg-sunken:      var(--in0-void);
   --color-text:           var(--bm2-parchment);
-  --color-text-secondary: var(--bm0-sand);
-  --color-text-tertiary:  var(--in3-ash);
+  --color-text-secondary: var(--bm1-linen);
+  --color-text-tertiary:  var(--bm0-sand);
   --color-border:         var(--in2-slate);
+  --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
   --color-ghost-border:   rgba(245,244,240,0.25);
-  --color-bg-code:        var(--fo3-deepwater);
-  --color-accent:         var(--fo0-sage);
-  --color-accent-hover:   var(--fo1-fern);
+  --color-bg-code:        var(--in1-iron);
+  --color-accent:         var(--fo1-fern);
+  --color-accent-hover:   var(--fo0-sage);
   --color-accent-text:    var(--bm2-parchment);
 }
 
@@ -94,7 +98,8 @@
   --color-text:           var(--in0-void);
   --color-text-secondary: var(--in2-slate);
   --color-text-tertiary:  var(--in3-ash);
-  --color-border:         var(--in1-iron);
+  --color-border:         var(--in3-ash);
+  --color-border-strong:  var(--in1-iron);
   --color-border-subtle:  rgba(55,65,81,0.12);
   --color-ghost-border:   rgba(55,65,81,0.25);
   --color-bg-code:        var(--fo3-deepwater);
