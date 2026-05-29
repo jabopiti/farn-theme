@@ -9,9 +9,9 @@
   --in3-ash:       #6B7280;   /* Comments, placeholders, guides            */
 
   /* Birch Mist — light surfaces */
-  --bm0-sand:      #E4E2DA;   /* Variables, elevated UI (dark)             */
-  --bm1-linen:     #EEEDE9;   /* Hover states, active line (light)         */
-  --bm2-parchment: #F5F4F0;   /* Primary bg (light) / text (dark)         */
+  --bm0-sand:      #D5D2C7;   /* Variables, elevated UI (dark)             */
+  --bm1-linen:     #E9E6DC;   /* Hover states, active line (light)         */
+  --bm2-parchment: #F7F6F3;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
   --fo0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */

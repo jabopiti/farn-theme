@@ -46,7 +46,7 @@
   --color-border:         var(--in2-slate);
   --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
-  --color-ghost-border:   rgba(245,244,240,0.25);
+  --color-ghost-border:   rgba(247,246,243,0.25);
   --color-bg-code:        var(--in1-iron);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo0-sage);
@@ -89,7 +89,7 @@
   --color-border:         var(--in2-slate);
   --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
-  --color-ghost-border:   rgba(245,244,240,0.25);
+  --color-ghost-border:   rgba(247,246,243,0.25);
   --color-bg-code:        var(--in1-iron);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo0-sage);

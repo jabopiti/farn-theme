@@ -9,9 +9,9 @@
   --in3-ash:       #6B7280;   /* Comments, placeholders, guides            */
 
   /* Birch Mist — light surfaces */
-  --bm0-sand:      #E4E2DA;   /* Variables, elevated UI (dark)             */
-  --bm1-linen:     #EEEDE9;   /* Hover states, active line (light)         */
-  --bm2-parchment: #F5F4F0;   /* Primary bg (light) / text (dark)         */
+  --bm0-sand:      #D5D2C7;   /* Variables, elevated UI (dark)             */
+  --bm1-linen:     #E9E6DC;   /* Hover states, active line (light)         */
+  --bm2-parchment: #F7F6F3;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
   --fo0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */
@@ -141,7 +141,7 @@
   --color-border:         var(--in2-slate);
   --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
-  --color-ghost-border:   rgba(245,244,240,0.25);
+  --color-ghost-border:   rgba(247,246,243,0.25);
   --color-bg-code:        var(--in1-iron);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo0-sage);
@@ -184,7 +184,7 @@
   --color-border:         var(--in2-slate);
   --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
-  --color-ghost-border:   rgba(245,244,240,0.25);
+  --color-ghost-border:   rgba(247,246,243,0.25);
   --color-bg-code:        var(--in1-iron);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo0-sage);
