@@ -54,8 +54,8 @@ Then use the tokens:
 }
 
 .my-cta {
-  background: var(--fr1-fern);
-  color: var(--bs2-parchment);
+  background: var(--fo1-fern);
+  color: var(--bm2-parchment);
   font-family: var(--font-body);
 }
 ```
@@ -68,9 +68,9 @@ Then use the tokens:
 
 | Palette | Prefix | Tokens | Use for |
 |---|---|---|---|
-| Iron Night | `--kn*` | void, iron, slate, ash | Dark surfaces, borders |
-| Birch Mist | `--bs*` | sand, linen, parchment | Light surfaces, text on dark |
-| Forest | `--fr*` | sage, fern, forest, deepwater | Accents, CTAs, links |
+| Iron Night | `--in*` | void, iron, slate, ash | Dark surfaces, borders |
+| Birch Mist | `--bm*` | sand, linen, parchment | Light surfaces, text on dark |
+| Forest | `--fo*` | sage, fern, forest, deepwater | Accents, CTAs, links |
 | Bloom | `--bl*` | ember, ochre, grain, moss, heather | Semantic states |
 
 ### Semantic tokens (preferred for components)

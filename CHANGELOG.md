@@ -11,7 +11,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - Fern icon (`fern_icon.png`) as favicon (ICO + PNG + apple-touch-icon), nav/footer wordmark icon, and README header image; removed placeholder `favicon.svg`
 - `--color-border-subtle` semantic token (hairline borders; light: `rgba(55,65,81,0.12)`, dark: `rgba(75,85,99,0.25)`)
 - `--color-ghost-border` semantic token (semi-transparent border for ghost elements; light: `rgba(55,65,81,0.25)`, dark: `rgba(245,244,240,0.25)`)
-- `--color-bg-code` semantic token (code block backgrounds; maps to `--fr3-deepwater` in both modes)
+- `--color-bg-code` semantic token (code block backgrounds; maps to `--fo3-deepwater` in both modes)
 - `--z-content: 10` z-index token (sticky sub-nav stacking, between `--z-raised` and `--z-dropdown`)
 - GitHub icon link in nav (Tabler Icons `ti-brand-github`, icon-only with aria-label)
 - "Get Started" CTA button in landing page nav linking to `/getting-started`
@@ -20,8 +20,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - Nav and footer logo switched from inline formatting to flexbox; icon grows from ~27.5px to 40px in the nav bar and 56px in the footer; footer tagline and nav links indent to align under the "Farn." wordmark
 - Landing page replaced with full prototype implementation (hero, Design System view, Palette view)
 - Hero and footer now use `data-surface="dark"` with semantic tokens throughout (no hardcoded palette refs)
-- Semantic comparison dark card uses `data-surface="dark"` instead of inline `var(--kn1-iron)`
-- Code blocks use `var(--color-bg-code)` instead of direct `var(--fr3-deepwater)`
+- Semantic comparison dark card uses `data-surface="dark"` instead of inline `var(--in1-iron)`
+- Code blocks use `var(--color-bg-code)` instead of direct `var(--fo3-deepwater)`
 - Hero secondary CTA changed from "Read the guide" to "Getting Started →" linking to `/getting-started`
 - Version strings updated from "v2.0" to "v0.1.0"
 - DocLayout: sidebar removed; full-width content layout; nav updated to match prototype style
