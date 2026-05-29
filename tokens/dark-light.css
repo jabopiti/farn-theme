@@ -30,6 +30,9 @@
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo2-forest);
   --color-accent-text:    var(--bm2-parchment);
+  --color-error:          var(--bl0-ember);
+  --color-warning:        var(--bl2-grain);
+  --color-success:        var(--bl3-moss);
 }
 
 /* ── Semantic tokens — dark ─────────────────────────────────────────── */
@@ -48,6 +51,9 @@
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo0-sage);
   --color-accent-text:    var(--bm2-parchment);
+  --color-error:          var(--bl0-ember);
+  --color-warning:        var(--bl2-grain);
+  --color-success:        var(--bl3-moss);
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */

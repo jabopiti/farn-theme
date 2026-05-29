@@ -81,7 +81,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <tr><td><code>--bl1-ochre</code></td><td><code>#AB5A2B</code></td><td>Annotation, decorator-weight info</td></tr>
       <tr><td><code>--bl2-grain</code></td><td><code>#8D6B20</code></td><td>Warning, draft, pending</td></tr>
       <tr><td><code>--bl3-moss</code></td><td><code>#567A37</code></td><td>Success, published, active</td></tr>
-      <tr><td><code>--bl4-heather</code></td><td><code>#885DB4</code></td><td>Special states, beta, research</td></tr>
+      <tr><td><code>--bl4-heather</code></td><td><code>#885DB4</code></td><td>Special states, beta, experimental</td></tr>
     </tbody>
   </table>
 
@@ -91,16 +91,23 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h3>Light Mode (default)</h3>
   <pre><code>:root,
 [data-theme="light"] &#123;
-  --color-bg:             var(--bm2-parchment);  /* Page background        */
-  --color-bg-elevated:    var(--bm1-linen);       /* Cards, panels          */
-  --color-bg-sunken:      var(--bm0-sand);        /* Input fills            */
-  --color-text:           var(--in0-void);        /* Primary text           */
-  --color-text-secondary: var(--in2-slate);       /* Supporting text        */
-  --color-text-tertiary:  var(--in3-ash);         /* Placeholders, captions */
-  --color-border:         var(--in3-ash);         /* Default border         */
-  --color-accent:         var(--fo1-fern);        /* Primary CTA, links     */
-  --color-accent-hover:   var(--fo2-forest);      /* Accent hover           */
-  --color-accent-text:    var(--bm2-parchment);   /* Text on accent bg      */
+  --color-bg:             var(--bm2-parchment);      /* Page background        */
+  --color-bg-elevated:    var(--bm1-linen);           /* Cards, panels          */
+  --color-bg-sunken:      var(--bm0-sand);            /* Input fills            */
+  --color-bg-code:        var(--fo3-deepwater);       /* Code block background  */
+  --color-text:           var(--in0-void);            /* Primary text           */
+  --color-text-secondary: var(--in2-slate);           /* Supporting text        */
+  --color-text-tertiary:  var(--in3-ash);             /* Placeholders, captions */
+  --color-border:         var(--in3-ash);             /* Default border         */
+  --color-border-strong:  var(--in1-iron);            /* Prominent dividers     */
+  --color-border-subtle:  rgba(55,65,81,0.12);        /* Hairline borders       */
+  --color-ghost-border:   rgba(55,65,81,0.25);        /* Ghost button border    */
+  --color-accent:         var(--fo1-fern);            /* Primary CTA, links     */
+  --color-accent-hover:   var(--fo2-forest);          /* Accent hover           */
+  --color-accent-text:    var(--bm2-parchment);       /* Text on accent bg      */
+  --color-error:          var(--bl0-ember);           /* Error, destructive     */
+  --color-warning:        var(--bl2-grain);           /* Warning, draft         */
+  --color-success:        var(--bl3-moss);            /* Success, published     */
 &#125;</code></pre>
 
   <h3>Dark Mode</h3>
@@ -108,13 +115,20 @@ import DocLayout from '../../layouts/DocLayout.astro';
   --color-bg:             var(--in0-void);
   --color-bg-elevated:    var(--in1-iron);
   --color-bg-sunken:      var(--in0-void);
+  --color-bg-code:        var(--in1-iron);
   --color-text:           var(--bm2-parchment);
   --color-text-secondary: var(--bm1-linen);
   --color-text-tertiary:  var(--bm0-sand);
   --color-border:         var(--in2-slate);
+  --color-border-strong:  var(--bm0-sand);
+  --color-border-subtle:  rgba(75,85,99,0.25);
+  --color-ghost-border:   rgba(245,244,240,0.25);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo0-sage);
   --color-accent-text:    var(--bm2-parchment);
+  --color-error:          var(--bl0-ember);
+  --color-warning:        var(--bl2-grain);
+  --color-success:        var(--bl3-moss);
 &#125;</code></pre>
 
   <h3>Surface Overrides</h3>

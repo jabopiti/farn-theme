@@ -247,7 +247,7 @@ import LogoIcon from '../components/LogoIcon.astro';
   .card-highlight-light .card-body { color: var(--in3-ash); }
   .card-highlight-dark .card-body { color: var(--bm0-sand); }
   .card-highlight-light .card-tag, .card-highlight-light .card-arrow,
-  .card-highlight-dark .card-tag,  .card-highlight-dark .card-arrow { color: var(--fo0-sage); }
+  .card-highlight-dark .card-tag,  .card-highlight-dark .card-arrow { color: var(--color-accent); }
   .card-highlight-light .card-meta,
   .card-highlight-dark .card-meta { color: var(--in3-ash); }
 
@@ -269,13 +269,12 @@ import LogoIcon from '../components/LogoIcon.astro';
   .field-input:hover { background: var(--color-bg-sunken); }
   .field-input:focus {
     background: var(--color-bg-sunken); border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px rgba(62,122,98,0.15);
   }
   [data-theme="dark"] .field-input:hover { background: var(--kn2-slate); }
-  [data-theme="dark"] .field-input:focus { background: var(--kn2-slate); box-shadow: 0 0 0 3px rgba(92,158,134,0.18); }
-  .field-error .field-input { border-color: var(--bl0-ember); }
+  [data-theme="dark"] .field-input:focus { background: var(--kn2-slate); }
+  .field-error .field-input { border-color: var(--color-error); }
   .field-hint { font-size: 11px; color: var(--color-text-tertiary); }
-  .field-error-msg { font-size: 11px; color: var(--bl0-ember); }
+  .field-error-msg { font-size: 11px; color: var(--color-error); }
 
   /* ── Dividers ───────────────────────────────── */
   .divider-demo { margin-bottom: var(--space-lg); }
@@ -305,7 +304,7 @@ import LogoIcon from '../components/LogoIcon.astro';
     background: var(--color-bg-elevated); border-radius: var(--radius-lg);
     padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start;
   }
-  [data-theme="dark"] .attribution-demo { border: 1px solid var(--in2-slate); }
+  [data-theme="dark"] .attribution-demo { border: 1px solid var(--color-border); }
   .attribution-avatar {
     width: 40px; height: 40px; border-radius: var(--radius-full);
     background: rgba(62,122,98,0.15); display: flex; align-items: center; justify-content: center;
@@ -381,7 +380,7 @@ import LogoIcon from '../components/LogoIcon.astro';
   .token-color-strip { height: 56px; position: relative; }
   .token-color-strip .copy-btn {
     position: absolute; top: 50%; right: 8px; transform: translateY(-50%);
-    background: rgba(0,0,0,0.25); color: white; border: none; border-radius: var(--radius-sm);
+    background: rgba(0,0,0,0.25); color: var(--bs2-parchment); border: none; border-radius: var(--radius-sm);
     padding: 4px 8px; font-size: 10px; font-family: var(--font-mono); cursor: pointer;
     opacity: 0; transition: opacity 120ms ease, background 120ms ease;
   }
@@ -649,12 +648,13 @@ import LogoIcon from '../components/LogoIcon.astro';
 
     <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="reveal">Badges &amp; Tags</h3>
     <div class="badge-showcase reveal">
-      <span class="badge badge-neutral">General</span>
-      <span class="badge badge-forest">Platform</span>
-      <span class="badge badge-moss">Published</span>
-      <span class="badge badge-grain">Draft</span>
-      <span class="badge badge-ember">Archived</span>
-      <span class="badge badge-heather">Research</span>
+      <span class="badge badge-general">General</span>
+      <span class="badge badge-category">Category</span>
+      <span class="badge badge-published">Published</span>
+      <span class="badge badge-draft">Draft</span>
+      <span class="badge badge-archived">Archived</span>
+      <span class="badge badge-beta">Beta</span>
+      <span class="badge badge-research">Research</span>
     </div>
 
     <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="reveal">Forms &amp; Inputs</h3>
@@ -775,9 +775,9 @@ import LogoIcon from '../components/LogoIcon.astro';
         </div>
         <div class="palette-swatches">
           <div class="palette-swatch-large" style="background:#0D1117"><span class="swatch-hex" style="color:#6B7280">#0D1117</span></div>
-          <div class="palette-swatch-large" style="background:#374151"><span class="swatch-hex" style="color:#9CA3AF">#374151</span></div>
-          <div class="palette-swatch-large" style="background:#4B5563"><span class="swatch-hex" style="color:#9CA3AF">#4B5563</span></div>
-          <div class="palette-swatch-large" style="background:#6B7280"><span class="swatch-hex" style="color:#D1D5DB">#6B7280</span></div>
+          <div class="palette-swatch-large" style="background:#374151"><span class="swatch-hex" style="color:var(--bs0-sand)">#374151</span></div>
+          <div class="palette-swatch-large" style="background:#4B5563"><span class="swatch-hex" style="color:var(--bs0-sand)">#4B5563</span></div>
+          <div class="palette-swatch-large" style="background:#6B7280"><span class="swatch-hex" style="color:var(--bs2-parchment)">#6B7280</span></div>
         </div>
       </div>
       <div class="token-grid">
@@ -864,7 +864,7 @@ import LogoIcon from '../components/LogoIcon.astro';
       <p class="palette-concept reveal" style="margin-bottom:var(--space-xl)">Components never reference palette tokens directly. They reference semantic aliases that resolve to the correct palette value per mode. When the theme switches, every component adapts automatically — no conditional logic needed.</p>
       <div class="semantic-grid reveal">
         <div class="semantic-mode">
-          <div class="semantic-mode-label" style="color:var(--fo1-fern)">Light mode</div>
+          <div class="semantic-mode-label" style="color:var(--color-accent)">Light mode</div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#F5F4F0"></div><span class="semantic-token-name">--color-bg</span><span class="semantic-resolves">→ parchment</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#EEEDE9"></div><span class="semantic-token-name">--color-bg-elevated</span><span class="semantic-resolves">→ linen</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#E4E2DA"></div><span class="semantic-token-name">--color-bg-sunken</span><span class="semantic-resolves">→ sand</span></div>
@@ -875,7 +875,7 @@ import LogoIcon from '../components/LogoIcon.astro';
           <div class="semantic-row"><div class="semantic-dot" style="background:#2D5E4A"></div><span class="semantic-token-name">--color-accent-hover</span><span class="semantic-resolves">→ forest</span></div>
         </div>
         <div class="semantic-mode" data-surface="dark">
-          <div class="semantic-mode-label" style="color:var(--fo1-fern)">Dark mode</div>
+          <div class="semantic-mode-label" style="color:var(--color-accent)">Dark mode</div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-bg</span><span class="semantic-resolves">→ void</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#374151"></div><span class="semantic-token-name">--color-bg-elevated</span><span class="semantic-resolves">→ iron</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-bg-sunken</span><span class="semantic-resolves">→ void</span></div>
