@@ -173,13 +173,13 @@
   gap: 5px;
   align-items: center;
   border-radius: var(--radius-md);
-  color: rgba(245,244,240,0.6);
+  color: rgba(247,246,243,0.6);
   font-size: 22px;
   transition: background-color 120ms ease, color 120ms ease;
 }
 .hamburger:hover {
-  background: rgba(245,244,240,0.1);
-  color: var(--bm2-parchment);
+  background: rgba(247,246,243,0.1);
+  color: var(--bm2-birch);
 }
 .nav.filled .hamburger { color: var(--color-text-secondary); }
 .nav.filled .hamburger:hover { background: var(--color-bg-elevated); color: var(--color-text); }
@@ -348,7 +348,7 @@
 .btn-g { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-border); }
 .btn-g:hover { background: var(--color-bg-elevated); }
 .btn-d { background: var(--color-error); color: var(--bm2-birch); }
-.btn-d:hover { background: #a8343e; } /* darker --color-error; no palette token at this depth */
+.btn-d:hover { background: var(--in0-void); }
 .btn-sm { height: 32px; padding: 0 12px; font-size: 12px; }
 .btn-lg { height: 48px; padding: 0 20px; font-size: 14px; }
 
