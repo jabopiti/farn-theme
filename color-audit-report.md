@@ -70,7 +70,7 @@
 
 - **Focus-ring glow token** — `index.astro: .field-input:focus` and `components/index.astro` code example — The focus ring glow `rgba(62,122,98,0.15)` (light) and `rgba(92,158,134,0.18)` (dark) are hardcoded in at least three locations. No semantic token covers this. A `--color-focus-glow` token (or documentation of the intended rgba formula) would let every input and interactive element share a single definition.
 
-- **Transparent-nav / transparent-subnav state** — `site.css` — When the nav and sub-nav are transparent (over the hero), link and icon colors are `rgba(245,244,240,0.7)`, `rgba(245,244,240,0.6)`, and border is `rgba(75,85,99,0.25)`. These are not documented tokens — they form an undocumented third surface state (transparent-on-dark). No guidance exists for how consumers should recreate a transparent nav in their own projects.
+- **Transparent-nav / transparent-subnav state** — `site.css` — When the nav and sub-nav are transparent (over the hero), link and icon colors are `rgba(247,246,243,0.7)`, `rgba(247,246,243,0.6)`, and border is `rgba(75,85,99,0.25)`. These are not documented tokens — they form an undocumented third surface state (transparent-on-dark). No guidance exists for how consumers should recreate a transparent nav in their own projects.
 
 - **`--color-border-strong`, `--color-ghost-border`, `--color-bg-code` missing from the doc page** — `site/src/pages/tokens/colors.astro` — All three tokens are defined in `tokens/dark-light.css`, noted in the CHANGELOG as newly added, and used throughout the site — but the Semantic Token Layer section in `colors.astro` only lists 10 of the 14 semantic tokens. The doc page omits `--color-border-strong`, `--color-ghost-border`, `--color-bg-code`, and `--color-accent-text`.
 
@@ -98,11 +98,11 @@
   **Location**: `site.css: .sub-nav` default border
   **Assessment**: ❌ Replace — `--color-border-subtle` in dark mode is defined as exactly this value. The `.sub-nav` unfilled state should use `var(--color-border-subtle)` instead of the hardcoded rgba, matching the already-correct `.sub-nav.filled` rule one line above.
 
-- **Value**: `rgba(245,244,240,0.7)`, `rgba(245,244,240,0.6)`, `rgba(245,244,240,0.35)`, `rgba(245,244,240,0.1)`, `rgba(245,244,240,0.25)`
+- **Value**: `rgba(247,246,243,0.7)`, `rgba(247,246,243,0.6)`, `rgba(247,246,243,0.35)`, `rgba(247,246,243,0.1)`, `rgba(247,246,243,0.25)`
   **Location**: `site.css` — nav transparent-state link colors, icon colors, CTA border
-  **Assessment**: ⚠️ Keep — specific use case. `--bs2-parchment` (245,244,240) at varying opacities for the transparent-over-hero nav state. No palette equivalent; transparency is inherent to the use case. Recommend documenting these as a named "transparent nav palette" in the token spec.
+  **Assessment**: ⚠️ Keep — specific use case. `--bs2-parchment` (247,246,243) at varying opacities for the transparent-over-hero nav state. No palette equivalent; transparency is inherent to the use case. Recommend documenting these as a named "transparent nav palette" in the token spec.
 
-- **Value**: `rgba(245,244,240,0.15)`, `rgba(245,244,240,0.25)`
+- **Value**: `rgba(247,246,243,0.15)`, `rgba(247,246,243,0.25)`
   **Location**: `index.astro: .code-copy-btn` — background and hover background inside code blocks
   **Assessment**: ⚠️ Keep — specific use case. Copy button lives on a dark code-block surface and needs a semi-transparent parchment tint. No palette token exists for UI overlays on code backgrounds.
 
@@ -156,11 +156,11 @@
 
 - **Value**: `white`
   **Location**: `index.astro: .token-color-strip .copy-btn` — copy button text on color strips
-  **Assessment**: ❌ Replace — a palette equivalent exists: `var(--bs2-parchment)` (#F5F4F0) is the documented "white" of the system and achieves 13.07:1 on Void. Replace `color: white` with `color: var(--bs2-parchment)`.
+  **Assessment**: ❌ Replace — a palette equivalent exists: `var(--bs2-parchment)` (#F7F6F3) is the documented "white" of the system and achieves 17.51:1 on Void. Replace `color: white` with `color: var(--bs2-parchment)`.
 
 - **Value**: `#9CA3AF`, `#D1D5DB`
   **Location**: `index.astro` — swatch hex label text in `.palette-swatch-large .swatch-hex` (inline `style` on individual swatch elements)
-  **Assessment**: ❌ Replace — these are Tailwind-derived grays not in the Iron Night scale. On the dark iron (#374151) and slate (#4B5563) swatches, use `var(--bs0-sand)` (#E4E2DA, 10.96:1 on Void) for legible contrast. On the void swatch, `var(--kn3-ash)` (#6B7280, 3.35:1 on void — AA large only) is already used correctly as `#6B7280`.
+  **Assessment**: ❌ Replace — these are Tailwind-derived grays not in the Iron Night scale. On the dark iron (#374151) and slate (#4B5563) swatches, use `var(--bs0-sand)` (#D5D2C7, 12.50:1 on Void) for legible contrast. On the void swatch, `var(--kn3-ash)` (#6B7280, 3.35:1 on void — AA large only) is already used correctly as `#6B7280`.
 
 ---
 

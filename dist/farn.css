@@ -9,9 +9,9 @@
   --in3-ash:       #6B7280;   /* Comments, placeholders, guides            */
 
   /* Birch Mist — light surfaces */
-  --bm0-sand:      #E4E2DA;   /* Variables, elevated UI (dark)             */
-  --bm1-linen:     #EEEDE9;   /* Hover states, active line (light)         */
-  --bm2-parchment: #F5F4F0;   /* Primary bg (light) / text (dark)         */
+  --bm0-sand:      #D5D2C7;   /* Variables, elevated UI (dark)             */
+  --bm1-mist:      #E9E6DC;   /* Hover states, active line (light)         */
+  --bm2-birch:     #F7F6F3;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
   --fo0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */
@@ -111,8 +111,8 @@
 /* ── Semantic tokens — light (default) ───────────────────────────────── */
 :root,
 [data-theme="light"] {
-  --color-bg:             var(--bm2-parchment);
-  --color-bg-elevated:    var(--bm1-linen);
+  --color-bg:             var(--bm2-birch);
+  --color-bg-elevated:    var(--bm1-mist);
   --color-bg-sunken:      var(--bm0-sand);
   --color-text:           var(--in0-void);
   --color-text-secondary: var(--in2-slate);
@@ -124,7 +124,7 @@
   --color-bg-code:        var(--fo3-deepwater);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo2-forest);
-  --color-accent-text:    var(--bm2-parchment);
+  --color-accent-text:    var(--bm2-birch);
   --color-error:          var(--bl0-ember);
   --color-warning:        var(--bl2-grain);
   --color-success:        var(--bl3-moss);
@@ -135,17 +135,17 @@
   --color-bg:             var(--in0-void);
   --color-bg-elevated:    var(--in1-iron);
   --color-bg-sunken:      var(--in0-void);
-  --color-text:           var(--bm2-parchment);
-  --color-text-secondary: var(--bm1-linen);
+  --color-text:           var(--bm2-birch);
+  --color-text-secondary: var(--bm1-mist);
   --color-text-tertiary:  var(--bm0-sand);
   --color-border:         var(--in2-slate);
   --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
-  --color-ghost-border:   rgba(245,244,240,0.25);
+  --color-ghost-border:   rgba(247,246,243,0.25);
   --color-bg-code:        var(--in1-iron);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo0-sage);
-  --color-accent-text:    var(--bm2-parchment);
+  --color-accent-text:    var(--bm2-birch);
   --color-error:          var(--bl0-ember);
   --color-warning:        var(--bl2-grain);
   --color-success:        var(--bl3-moss);
@@ -156,9 +156,9 @@
 /* regardless of the page-level dark/light theme.                           */
 
 [data-surface="light"] {
-  background: var(--bm2-parchment);
-  --color-bg:             var(--bm2-parchment);
-  --color-bg-elevated:    var(--bm1-linen);
+  background: var(--bm2-birch);
+  --color-bg:             var(--bm2-birch);
+  --color-bg-elevated:    var(--bm1-mist);
   --color-bg-sunken:      var(--bm0-sand);
   --color-text:           var(--in0-void);
   --color-text-secondary: var(--in2-slate);
@@ -170,7 +170,7 @@
   --color-bg-code:        var(--fo3-deepwater);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo2-forest);
-  --color-accent-text:    var(--bm2-parchment);
+  --color-accent-text:    var(--bm2-birch);
 }
 
 [data-surface="dark"] {
@@ -178,23 +178,23 @@
   --color-bg:             var(--in0-void);
   --color-bg-elevated:    var(--in1-iron);
   --color-bg-sunken:      var(--in0-void);
-  --color-text:           var(--bm2-parchment);
-  --color-text-secondary: var(--bm1-linen);
+  --color-text:           var(--bm2-birch);
+  --color-text-secondary: var(--bm1-mist);
   --color-text-tertiary:  var(--bm0-sand);
   --color-border:         var(--in2-slate);
   --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
-  --color-ghost-border:   rgba(245,244,240,0.25);
+  --color-ghost-border:   rgba(247,246,243,0.25);
   --color-bg-code:        var(--in1-iron);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo0-sage);
-  --color-accent-text:    var(--bm2-parchment);
+  --color-accent-text:    var(--bm2-birch);
 }
 
 [data-surface="tinted"] {
-  background: var(--bm1-linen);
-  --color-bg:             var(--bm1-linen);
-  --color-bg-elevated:    var(--bm2-parchment);
+  background: var(--bm1-mist);
+  --color-bg:             var(--bm1-mist);
+  --color-bg-elevated:    var(--bm2-birch);
   --color-bg-sunken:      var(--bm0-sand);
   --color-text:           var(--in0-void);
   --color-text-secondary: var(--in2-slate);
@@ -206,7 +206,7 @@
   --color-bg-code:        var(--fo3-deepwater);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo2-forest);
-  --color-accent-text:    var(--bm2-parchment);
+  --color-accent-text:    var(--bm2-birch);
 }
 /* ── Farn — Base reset and global styles ──────────────────────────────── */
 

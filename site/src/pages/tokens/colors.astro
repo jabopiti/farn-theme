@@ -36,16 +36,16 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <h3>Birch Mist — Light Surfaces</h3>
   <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip chip-light" style="background:#E4E2DA"></span><div><code>--bm0-sand</code><small>#E4E2DA</small></div></div>
-    <div class="swatch-chip"><span class="chip chip-light" style="background:#EEEDE9"></span><div><code>--bm1-linen</code><small>#EEEDE9</small></div></div>
-    <div class="swatch-chip"><span class="chip chip-light" style="background:#F5F4F0"></span><div><code>--bm2-parchment</code><small>#F5F4F0</small></div></div>
+    <div class="swatch-chip"><span class="chip chip-light" style="background:#D5D2C7"></span><div><code>--bm0-sand</code><small>#D5D2C7</small></div></div>
+    <div class="swatch-chip"><span class="chip chip-light" style="background:#E9E6DC"></span><div><code>--bm1-mist</code><small>#E9E6DC</small></div></div>
+    <div class="swatch-chip"><span class="chip chip-light" style="background:#F7F6F3"></span><div><code>--bm2-birch</code><small>#F7F6F3</small></div></div>
   </div>
   <table>
     <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
     <tbody>
-      <tr><td><code>--bm0-sand</code></td><td><code>#E4E2DA</code></td><td>Elevated UI (light), input fills, sunken surfaces</td></tr>
-      <tr><td><code>--bm1-linen</code></td><td><code>#EEEDE9</code></td><td>Card fill, hover states, tinted sections</td></tr>
-      <tr><td><code>--bm2-parchment</code></td><td><code>#F5F4F0</code></td><td>Primary background (light) / primary text (dark)</td></tr>
+      <tr><td><code>--bm0-sand</code></td><td><code>#D5D2C7</code></td><td>Elevated UI (light), input fills, sunken surfaces</td></tr>
+      <tr><td><code>--bm1-mist</code></td><td><code>#E9E6DC</code></td><td>Card fill, hover states, tinted sections</td></tr>
+      <tr><td><code>--bm2-birch</code></td><td><code>#F7F6F3</code></td><td>Primary background (light) / primary text (dark)</td></tr>
     </tbody>
   </table>
 
@@ -91,8 +91,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h3>Light Mode (default)</h3>
   <pre><code>:root,
 [data-theme="light"] &#123;
-  --color-bg:             var(--bm2-parchment);      /* Page background        */
-  --color-bg-elevated:    var(--bm1-linen);           /* Cards, panels          */
+  --color-bg:             var(--bm2-birch);           /* Page background        */
+  --color-bg-elevated:    var(--bm1-mist);            /* Cards, panels          */
   --color-bg-sunken:      var(--bm0-sand);            /* Input fills            */
   --color-bg-code:        var(--fo3-deepwater);       /* Code block background  */
   --color-text:           var(--in0-void);            /* Primary text           */
@@ -104,7 +104,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   --color-ghost-border:   rgba(55,65,81,0.25);        /* Ghost button border    */
   --color-accent:         var(--fo1-fern);            /* Primary CTA, links     */
   --color-accent-hover:   var(--fo2-forest);          /* Accent hover           */
-  --color-accent-text:    var(--bm2-parchment);       /* Text on accent bg      */
+  --color-accent-text:    var(--bm2-birch);           /* Text on accent bg      */
   --color-error:          var(--bl0-ember);           /* Error, destructive     */
   --color-warning:        var(--bl2-grain);           /* Warning, draft         */
   --color-success:        var(--bl3-moss);            /* Success, published     */
@@ -116,16 +116,16 @@ import DocLayout from '../../layouts/DocLayout.astro';
   --color-bg-elevated:    var(--in1-iron);
   --color-bg-sunken:      var(--in0-void);
   --color-bg-code:        var(--in1-iron);
-  --color-text:           var(--bm2-parchment);
-  --color-text-secondary: var(--bm1-linen);
+  --color-text:           var(--bm2-birch);
+  --color-text-secondary: var(--bm1-mist);
   --color-text-tertiary:  var(--bm0-sand);
   --color-border:         var(--in2-slate);
   --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
-  --color-ghost-border:   rgba(245,244,240,0.25);
+  --color-ghost-border:   rgba(247,246,243,0.25);
   --color-accent:         var(--fo1-fern);
   --color-accent-hover:   var(--fo0-sage);
-  --color-accent-text:    var(--bm2-parchment);
+  --color-accent-text:    var(--bm2-birch);
   --color-error:          var(--bl0-ember);
   --color-warning:        var(--bl2-grain);
   --color-success:        var(--bl3-moss);
@@ -141,23 +141,23 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <table>
     <thead><tr><th>Pair</th><th>Ratio</th><th>Result</th></tr></thead>
     <tbody>
-      <tr><td>Parchment on Void</td><td>13.07:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Sand on Void</td><td>10.96:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Fern on Parchment</td><td>4.80:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Fern on Void</td><td>4.68:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Sage on Void</td><td>5.19:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Ember on Parchment</td><td>4.51:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Parchment on Fern (button text)</td><td>4.80:1</td><td>&#10003; AA</td></tr>
+      <tr><td>Parchment on Void</td><td>17.51:1</td><td>&#10003; AA</td></tr>
+      <tr><td>Sand on Void</td><td>12.50:1</td><td>&#10003; AA</td></tr>
+      <tr><td>Fern on Parchment</td><td>4.67:1</td><td>&#10003; AA</td></tr>
+      <tr><td>Fern on Void</td><td>3.75:1</td><td>AA large only</td></tr>
+      <tr><td>Sage on Void</td><td>6.03:1</td><td>&#10003; AA</td></tr>
+      <tr><td>Ember on Parchment</td><td>4.59:1</td><td>&#10003; AA</td></tr>
+      <tr><td>Parchment on Fern (button text)</td><td>4.67:1</td><td>&#10003; AA</td></tr>
       <tr><td>Ash on Void</td><td>3.35:1</td><td>AA large only</td></tr>
     </tbody>
   </table>
-  <p><code>--in3-ash</code> is AA-large only — use at 18px or bold weight only, never for small body text. All Bloom tokens meet WCAG AA (4.5:1) against <code>--bm2-parchment</code> in light mode.</p>
+  <p><code>--in3-ash</code> is AA-large only — use at 18px or bold weight only, never for small body text. All Bloom tokens meet WCAG AA (4.5:1) against <code>--bm2-birch</code> in light mode.</p>
 
   <h2>Usage Rules</h2>
   <ul>
     <li><strong>Never</strong> use Bloom colours as decorative accents — reserve them for semantic states only (error, warning, success, annotation).</li>
     <li>Iron Night tones must not appear as foreground text on light backgrounds — contrast is too low.</li>
-    <li>Primary CTA: <code>--fo1-fern</code> background with <code>--bm2-parchment</code> text (4.80:1 &#10003;).</li>
+    <li>Primary CTA: <code>--fo1-fern</code> background with <code>--bm2-birch</code> text (4.67:1 &#10003;).</li>
     <li>Dark mode accent shifts Fern &rarr; Sage automatically. Both are the same palette family — the shift is imperceptible as a brand change but improves legibility.</li>
     <li>Components reference semantic tokens only. Palette tokens are for brand moments and one-off elements.</li>
   </ul>
