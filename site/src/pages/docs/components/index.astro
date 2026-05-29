@@ -2,7 +2,7 @@
 import DocLayout from '../../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Components" description="Farn component patterns — buttons, cards, forms, navigation, and more" section="components">
+<DocLayout title="Components" description="Farn component patterns — buttons, badges, cards, forms, and navigation">
   <h1>Components</h1>
   <p>
     Farn is a token system, not a component library. This reference specifies what
@@ -10,29 +10,6 @@ import DocLayout from '../../../layouts/DocLayout.astro';
     which states, following which accessibility rules. Implementation lives in your project.
   </p>
   <p>All components use semantic tokens only — never raw palette tokens. The surface declaration handles dark/light adaptation automatically.</p>
-
-  <div class="comp-grid">
-    <a href="/docs/components/buttons" class="comp-card">
-      <h2 class="comp-card-title">Buttons &amp; Badges</h2>
-      <p class="comp-card-desc">Five button variants, three sizes. Badge colour semantics — moss, grain, ember, heather, forest.</p>
-      <span class="comp-card-cta">View spec →</span>
-    </a>
-    <a href="/docs/components/cards" class="comp-card">
-      <h2 class="comp-card-title">Cards</h2>
-      <p class="comp-card-desc">Flat inset style. Default, highlight-light, and highlight-dark variants. Grid sizing patterns.</p>
-      <span class="comp-card-cta">View spec →</span>
-    </a>
-    <a href="/docs/components/forms" class="comp-card">
-      <h2 class="comp-card-title">Forms &amp; Inputs</h2>
-      <p class="comp-card-desc">Filled style inputs. Rest, hover, focus, error, and disabled states. Validation patterns.</p>
-      <span class="comp-card-cta">View spec →</span>
-    </a>
-    <a href="/docs/components/navigation" class="comp-card">
-      <h2 class="comp-card-title">Navigation</h2>
-      <p class="comp-card-desc">Main nav bar, in-page tab navigation, focus styles, and surface section patterns.</p>
-      <span class="comp-card-cta">View spec →</span>
-    </a>
-  </div>
 
   <h2>Token Usage Rules</h2>
   <ul>
@@ -42,7 +19,452 @@ import DocLayout from '../../../layouts/DocLayout.astro';
     <li>Bloom palette colours are reserved for semantic states (error, warning, success, annotation). Never use them decoratively.</li>
   </ul>
 
-  <h2>Focus Styles</h2>
+  <hr />
+
+  <h2 id="buttons">Buttons</h2>
+  <p>Five button variants, three sizes. Buttons adapt to surface context via semantic tokens — the surface declaration handles dark/light automatically, no conditional logic needed.</p>
+
+  <h3>Variants</h3>
+  <table>
+    <thead><tr><th>Variant</th><th>Light bg</th><th>Dark bg</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Primary</td><td><code>--fo1-fern</code>, Parchment text</td><td><code>--fo0-sage</code>, Parchment text</td><td>The single strongest action per context</td></tr>
+      <tr><td>Secondary</td><td><code>--bm0-sand</code>, Void text</td><td><code>--in2-slate</code>, Parchment text</td><td>Second most important action</td></tr>
+      <tr><td>Ghost</td><td>Transparent, Iron border</td><td>Transparent, Slate border</td><td>Low-priority — cancel, back, dismiss</td></tr>
+      <tr><td>Destructive</td><td colspan="2"><code>--bl0-ember</code>, Parchment text (both modes)</td><td>Irreversible actions only</td></tr>
+      <tr><td>Text link</td><td><code>--fo1-fern</code> text, underline</td><td><code>--fo0-sage</code> text, underline</td><td>Tertiary actions in prose or UI text</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Sizes</h3>
+  <table>
+    <thead><tr><th>Size</th><th>Height</th><th>H. Padding</th><th>Font</th></tr></thead>
+    <tbody>
+      <tr><td>Small</td><td>32px</td><td>12px</td><td>12px, weight 600</td></tr>
+      <tr><td>Default</td><td>40px</td><td>16px</td><td>13px, weight 600</td></tr>
+      <tr><td>Large</td><td>48px</td><td>20px</td><td>14px, weight 600</td></tr>
+    </tbody>
+  </table>
+  <p>All sizes: 6px border radius (<code>--radius-md</code>). One primary button per action context — two primaries compete and neither wins.</p>
+
+  <h3>States</h3>
+  <table>
+    <thead><tr><th>State</th><th>Treatment</th></tr></thead>
+    <tbody>
+      <tr><td>Hover</td><td>Background shift — <code>transition: background-color 120ms ease-out</code></td></tr>
+      <tr><td>Focus</td><td><code>outline: 2px solid var(--color-accent)</code>, <code>outline-offset: 3px</code></td></tr>
+      <tr><td>Active</td><td><code>transform: scale(0.98)</code></td></tr>
+      <tr><td>Disabled</td><td>40% opacity, <code>cursor: not-allowed</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Live Demo</h3>
+  <div class="btn-row">
+    <button class="btn btn-p"><i class="ti ti-arrow-right"></i> Primary</button>
+    <button class="btn btn-s">Secondary</button>
+    <button class="btn btn-g">Ghost</button>
+    <button class="btn btn-d"><i class="ti ti-trash"></i> Destructive</button>
+    <button class="btn btn-p btn-sm">Small</button>
+    <button class="btn btn-p btn-lg">Large</button>
+  </div>
+
+  <details class="css-block">
+    <summary>Show CSS</summary>
+    <pre><code>.btn &#123;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background-color 120ms ease, transform 80ms ease;
+&#125;
+.btn:active &#123; transform: scale(0.98); &#125;
+
+/* Variants */
+.btn-primary &#123;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+&#125;
+.btn-primary:hover &#123; background: var(--color-accent-hover); &#125;
+
+.btn-secondary &#123;
+  background: var(--color-bg-sunken);
+  color: var(--color-text);
+&#125;
+
+.btn-ghost &#123;
+  background: transparent;
+  color: var(--color-text);
+  border: 1.5px solid var(--color-border);
+&#125;
+
+.btn-destructive &#123;
+  background: var(--bl0-ember);
+  color: var(--bm2-parchment);
+&#125;
+
+/* Sizes */
+.btn-sm &#123; height: 32px; padding: 0 12px; font-size: 12px; &#125;
+.btn-lg &#123; height: 48px; padding: 0 20px; font-size: 14px; &#125;</code></pre>
+  </details>
+
+  <hr />
+
+  <h2 id="badges">Badges</h2>
+  <p>Subtle tinted — low-opacity Bloom palette fills, 4px border radius. Informational only, never interactive except for dismissible tags.</p>
+
+  <div class="badge-row">
+    <span class="badge badge-neutral">General</span>
+    <span class="badge badge-forest">Platform</span>
+    <span class="badge badge-moss">Published</span>
+    <span class="badge badge-grain">Draft</span>
+    <span class="badge badge-ember">Archived</span>
+    <span class="badge badge-heather">Research</span>
+  </div>
+
+  <table>
+    <thead><tr><th>Status</th><th>Colour</th></tr></thead>
+    <tbody>
+      <tr><td>Published / Active / Success</td><td>Moss — <code>--bl3-moss</code></td></tr>
+      <tr><td>Draft / Pending / Warning</td><td>Grain — <code>--bl2-grain</code></td></tr>
+      <tr><td>Archived / Error / Removed</td><td>Ember — <code>--bl0-ember</code></td></tr>
+      <tr><td>Beta / Special</td><td>Heather — <code>--bl4-heather</code></td></tr>
+      <tr><td>Primary category</td><td>Forest — <code>--fo1-fern</code></td></tr>
+      <tr><td>Neutral / Uncategorised</td><td>Sand — <code>--bm0-sand</code></td></tr>
+    </tbody>
+  </table>
+
+  <details class="css-block">
+    <summary>Show CSS</summary>
+    <pre><code>.badge &#123;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm); /* 4px */
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+&#125;
+
+.badge-moss &#123;
+  background: rgba(86, 122, 55, 0.12);
+  color: #3A5523;
+&#125;
+[data-theme="dark"] .badge-moss &#123;
+  background: rgba(86, 122, 55, 0.15);
+  color: #7AAD52;
+&#125;</code></pre>
+  </details>
+
+  <hr />
+
+  <h2 id="cards">Cards</h2>
+  <p>Flat inset style — background fill, no border at rest. Cards are entry points, not content containers. Body text: 2–3 lines maximum.</p>
+
+  <h3>Variants</h3>
+  <table>
+    <thead><tr><th>Variant</th><th>Background</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Default</td><td><code>--bm1-linen</code> / <code>--in1-iron</code> (dark)</td><td>Article lists, feature grids, project indexes</td></tr>
+      <tr><td>Highlight — light</td><td><code>--in0-void</code></td><td>Featured content on light backgrounds</td></tr>
+      <tr><td>Highlight — dark</td><td><code>--in1-iron</code> + 1px <code>--in2-slate</code> border</td><td>Featured content on dark backgrounds</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Live Demo</h3>
+  <div class="card-demo-grid">
+    <a href="#" class="card" style="text-decoration:none">
+      <div class="card-tag">Platform · 4 min</div>
+      <div class="card-title">Platform thinking at scale</div>
+      <div class="card-body">How internal platform teams shift from cost centre to product organisation.</div>
+      <div class="card-meta"><span>12 Apr 2025</span><span class="card-arrow">Read →</span></div>
+    </a>
+    <div class="card card-highlight-light">
+      <div class="card-tag">Featured</div>
+      <div class="card-title">The product builder archetype</div>
+      <div class="card-body">End-to-end ownership from strategy through shipped code — the emerging role.</div>
+      <div class="card-meta"><span>2 May 2025</span><span class="card-arrow">Read →</span></div>
+    </div>
+    <div class="card">
+      <div class="card-icon-wrap"><i class="ti ti-layout-grid"></i></div>
+      <div class="card-title">Composable layout</div>
+      <div class="card-body">Build pages from reusable layout primitives, not fixed templates.</div>
+    </div>
+  </div>
+
+  <h3>Anatomy</h3>
+  <pre><code>&lt;article class="card"&gt;
+  &lt;p class="card-tag"&gt;Category · Read time&lt;/p&gt;
+  &lt;h3 class="card-title"&gt;Title — 1 line max&lt;/h3&gt;
+  &lt;p class="card-body"&gt;2–3 line description. No more.&lt;/p&gt;
+  &lt;div class="card-meta"&gt;
+    &lt;span&gt;Date or detail&lt;/span&gt;
+    &lt;span class="card-arrow"&gt;Read →&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+
+  <h3>Tokens Used</h3>
+  <table>
+    <thead><tr><th>Property</th><th>Token</th></tr></thead>
+    <tbody>
+      <tr><td>Background</td><td><code>--color-bg-elevated</code></td></tr>
+      <tr><td>Background (hover)</td><td><code>--color-bg-sunken</code></td></tr>
+      <tr><td>Border radius</td><td><code>--radius-lg</code> (8px)</td></tr>
+      <tr><td>Padding</td><td>20px (between <code>--space-md</code> and <code>--space-lg</code>)</td></tr>
+      <tr><td>Tag colour</td><td><code>--color-accent</code></td></tr>
+      <tr><td>Title colour</td><td><code>--color-text</code></td></tr>
+      <tr><td>Body colour</td><td><code>--color-text-secondary</code></td></tr>
+      <tr><td>Meta colour</td><td><code>--color-text-tertiary</code></td></tr>
+    </tbody>
+  </table>
+
+  <details class="css-block">
+    <summary>Show CSS</summary>
+    <pre><code>.card-grid &#123;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md); /* 24px */
+&#125;
+
+.card &#123;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-lg);  /* 8px */
+  padding: 20px;
+&#125;
+
+/* Clickable card */
+.card:hover &#123; background: var(--color-bg-sunken); &#125;
+.card:focus-visible &#123;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+&#125;</code></pre>
+  </details>
+
+  <hr />
+
+  <h2 id="forms">Forms &amp; Inputs</h2>
+  <p>Filled style, comfortable density (48px height). Chrome only appears when needed — borders emerge on focus and error, not by default.</p>
+
+  <h3>Input States (light surface)</h3>
+  <table>
+    <thead><tr><th>State</th><th>Background</th><th>Border</th></tr></thead>
+    <tbody>
+      <tr><td>Rest</td><td><code>--bm1-linen</code></td><td>none</td></tr>
+      <tr><td>Hover</td><td><code>--bm0-sand</code></td><td>none</td></tr>
+      <tr><td>Focus</td><td><code>--bm0-sand</code></td><td>1.5px <code>--fo1-fern</code> + Fern glow</td></tr>
+      <tr><td>Error</td><td><code>--bm2-parchment</code></td><td>1.5px <code>--bl0-ember</code></td></tr>
+      <tr><td>Disabled</td><td><code>--bm2-parchment</code></td><td>none, 40% opacity</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Live Demo</h3>
+  <div class="input-demo">
+    <div class="field">
+      <label class="field-label" for="demo-name">Name</label>
+      <input class="field-input" id="demo-name" type="text" placeholder="Jacob Lueg Tiedemann" />
+    </div>
+    <div class="field field-error">
+      <label class="field-label" for="demo-email">Email</label>
+      <input class="field-input" id="demo-email" type="email" value="not-an-email" aria-invalid="true" aria-describedby="email-err" />
+      <span class="field-error-msg" id="email-err">Enter a valid email address</span>
+    </div>
+    <div class="field">
+      <label class="field-label" for="demo-msg">Message</label>
+      <input class="field-input" id="demo-msg" type="text" placeholder="What's on your mind?" />
+      <span class="field-hint">We'll get back to you within 2 business days</span>
+    </div>
+  </div>
+
+  <h3>Validation</h3>
+  <p>Validate on blur — not on every keystroke. Show errors inline below the field. On submit, scroll to and focus the first errored field. Error messages are specific: &ldquo;Enter a valid email address&rdquo; not &ldquo;Invalid input&rdquo;.</p>
+
+  <h3>Anatomy</h3>
+  <pre><code>&lt;div class="field"&gt;
+  &lt;label class="field-label" for="email"&gt;Email&lt;/label&gt;
+  &lt;input class="field-input" id="email" type="email"
+    aria-invalid="false" aria-describedby="email-hint" /&gt;
+  &lt;span class="field-hint" id="email-hint"&gt;Used for account recovery only.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Error state --&gt;
+&lt;div class="field field-error"&gt;
+  &lt;label class="field-label" for="email"&gt;Email&lt;/label&gt;
+  &lt;input class="field-input" id="email" type="email"
+    aria-invalid="true" aria-describedby="email-err" /&gt;
+  &lt;span class="field-error-msg" id="email-err"&gt;
+    Enter a valid email address
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+  <h3>Tokens Used</h3>
+  <table>
+    <thead><tr><th>Property</th><th>Token</th></tr></thead>
+    <tbody>
+      <tr><td>Background (rest)</td><td><code>--color-bg-elevated</code></td></tr>
+      <tr><td>Background (hover/focus)</td><td><code>--color-bg-sunken</code></td></tr>
+      <tr><td>Border (focus)</td><td><code>--color-accent</code></td></tr>
+      <tr><td>Border (error)</td><td><code>--bl0-ember</code></td></tr>
+      <tr><td>Label colour</td><td><code>--color-text-tertiary</code></td></tr>
+      <tr><td>Input text</td><td><code>--color-text</code></td></tr>
+      <tr><td>Placeholder</td><td><code>--color-text-tertiary</code></td></tr>
+      <tr><td>Height</td><td>48px</td></tr>
+      <tr><td>Border radius</td><td><code>--radius-md</code> (6px)</td></tr>
+    </tbody>
+  </table>
+
+  <details class="css-block">
+    <summary>Show CSS</summary>
+    <pre><code>.field &#123;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: var(--space-md);
+&#125;
+
+.field-label &#123;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+&#125;
+
+.field-input &#123;
+  height: 48px;
+  padding: 0 14px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text);
+  transition: background 180ms ease, border-color 150ms ease, box-shadow 150ms ease;
+  outline: none;
+&#125;
+.field-input::placeholder &#123; color: var(--color-text-tertiary); &#125;
+.field-input:hover &#123; background: var(--color-bg-sunken); &#125;
+.field-input:focus &#123;
+  background: var(--color-bg-sunken);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(62, 122, 98, 0.15);
+&#125;
+
+/* Error state */
+.field-error .field-input &#123; border-color: var(--bl0-ember); &#125;
+.field-error-msg &#123; font-size: 11px; color: var(--bl0-ember); &#125;
+.field-hint &#123; font-size: 11px; color: var(--color-text-tertiary); &#125;</code></pre>
+  </details>
+
+  <hr />
+
+  <h2 id="navigation">Navigation</h2>
+  <p>Navigation in Farn follows two distinct patterns: the main horizontal top bar for page-level routing, and in-page tab navigation for switching views within a single screen.</p>
+
+  <h3>Main Nav</h3>
+  <p>Horizontal top bar, sticky. Hides on scroll down, reappears on scroll up. Transparent over hero, fills on scroll. Maximum 4–6 links.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Height</td><td>64px (<code>--nav-height</code>)</td></tr>
+      <tr><td>Nav link font</td><td><code>--font-body</code>, 14px, weight 500</td></tr>
+      <tr><td>Active link</td><td><code>--color-accent</code>, weight 600</td></tr>
+      <tr><td>Active link treatment</td><td>Colour + weight shift only — no background pill</td></tr>
+      <tr><td>Z-index</td><td><code>--z-sticky</code> (200)</td></tr>
+    </tbody>
+  </table>
+
+  <details class="css-block">
+    <summary>Show CSS</summary>
+    <pre><code>.nav &#123;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height); /* 64px */
+  z-index: var(--z-sticky);
+  background: transparent;
+  transition: background-color 200ms ease, transform 250ms ease;
+&#125;
+
+/* Filled on scroll — logo reads against page bg */
+.nav.filled &#123;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-subtle);
+&#125;
+
+/* Hide on scroll down, show on scroll up */
+.nav.hidden &#123; transform: translateY(-100%); &#125;
+
+/* Active link */
+.nav-link.active &#123;
+  color: var(--color-accent);
+  font-weight: 600;
+&#125;</code></pre>
+  </details>
+
+  <h3>Smart hide/show</h3>
+  <pre><code>let lastY = 0;
+window.addEventListener('scroll', () =&gt; &#123;
+  const y = window.scrollY;
+  nav.classList.toggle('filled', y &gt; 20);
+  if (y &gt; lastY + 8) nav.classList.add('hidden');
+  else if (y &lt; lastY) nav.classList.remove('hidden');
+  lastY = y;
+&#125;, &#123; passive: true &#125;);</code></pre>
+
+  <h3>In-Page Tab Navigation</h3>
+  <p>Horizontal tabs with underline active indicator. Switches views within a single screen — not routing between pages. Active indicator slides between tabs rather than appearing/disappearing.</p>
+  <pre><code>&lt;div role="tablist" aria-label="Content sections"&gt;
+  &lt;button role="tab" aria-selected="true"
+    aria-controls="panel-overview" id="tab-overview"&gt;Overview&lt;/button&gt;
+  &lt;button role="tab" aria-selected="false"
+    aria-controls="panel-details" id="tab-details" tabindex="-1"&gt;Details&lt;/button&gt;
+&lt;/div&gt;
+&lt;div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview"&gt; &hellip; &lt;/div&gt;
+&lt;div role="tabpanel" id="panel-details" aria-labelledby="tab-details" hidden&gt; &hellip; &lt;/div&gt;</code></pre>
+
+  <details class="css-block">
+    <summary>Show CSS — Tab bar &amp; sliding indicator</summary>
+    <pre><code>.tab-bar &#123;
+  position: relative;
+  display: flex;
+  border-bottom: 1px solid var(--color-border-subtle);
+&#125;
+.tab &#123;
+  padding: 0 16px;
+  height: 44px;
+  font-size: 14px; font-weight: 500;
+  color: var(--color-text-secondary);
+  border: none; background: transparent; cursor: pointer;
+&#125;
+.tab[aria-selected="true"] &#123;
+  color: var(--color-text);
+  font-weight: 600;
+&#125;
+.tab-indicator &#123;
+  position: absolute; bottom: 0; height: 2px;
+  background: var(--color-accent);
+  transition: left 200ms ease-out, width 200ms ease-out;
+&#125;</code></pre>
+  </details>
+
+  <h3>Sub-Nav</h3>
+  <p>A second sticky bar below the main nav for in-page section anchors or sibling page links. Sticky at <code>top: var(--nav-height)</code>.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Height</td><td>44px (<code>--subnav-height</code>)</td></tr>
+      <tr><td>Position</td><td><code>position: sticky; top: var(--nav-height)</code></td></tr>
+      <tr><td>Z-index</td><td><code>--z-raised</code> (1)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Focus Styles</h3>
   <p>A single consistent focus ring across all interactive elements — defined once in <code>base.css</code>, applied everywhere via <code>:focus-visible</code>. Never remove focus styles.</p>
   <pre><code>:focus-visible &#123;
   outline: 2px solid var(--color-accent);
@@ -55,7 +477,22 @@ import DocLayout from '../../../layouts/DocLayout.astro';
 &#125;</code></pre>
   <p><code>focus-visible</code> ensures the ring only appears for keyboard navigation — not on mouse click. <code>border-radius: inherit</code> follows the element's shape automatically.</p>
 
-  <h2>Dark / Light Sections</h2>
+  <h3>Mobile Drawer</h3>
+  <p>On viewports below 640px the nav links collapse into a hamburger-triggered drawer that slides down from below the nav bar.</p>
+  <table>
+    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Trigger</td><td>Hamburger icon (≡), 36×36px touch target</td></tr>
+      <tr><td>Position</td><td><code>position: fixed</code>, appears at <code>top: var(--nav-height)</code></td></tr>
+      <tr><td>Background</td><td><code>--color-bg</code></td></tr>
+      <tr><td>Z-index</td><td><code>--z-overlay</code> (300)</td></tr>
+      <tr><td>Scroll lock</td><td><code>body: overflow hidden</code> while open</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2 id="surfaces">Dark / Light Sections</h2>
   <p>Full-width page sections with explicit surface declarations. All child components inherit the correct tokens automatically — no extra markup needed.</p>
   <pre><code>&lt;section data-surface="light"&gt; &hellip; &lt;/section&gt;
 &lt;section data-surface="dark"&gt; &hellip; &lt;/section&gt;
@@ -72,49 +509,104 @@ import DocLayout from '../../../layouts/DocLayout.astro';
 </DocLayout>
 
 <style>
-  .comp-grid {
+  /* Collapsible CSS blocks */
+  .css-block {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+    max-width: var(--width-prose);
+    overflow: hidden;
+  }
+  .css-block summary {
+    cursor: pointer;
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    user-select: none;
+    list-style: none;
+  }
+  .css-block summary::-webkit-details-marker { display: none; }
+  .css-block summary::before {
+    content: '▶ ';
+    font-size: 0.75em;
+    color: var(--color-accent);
+  }
+  .css-block[open] summary::before { content: '▼ '; }
+  .css-block summary:hover { color: var(--color-text); }
+  .css-block pre {
+    margin: 0;
+    border: none;
+    border-top: 1px solid var(--color-border);
+    border-radius: 0;
+    max-width: none;
+  }
+
+  /* Button demo */
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0 var(--space-lg);
+    align-items: center;
+  }
+
+  /* Badge demo */
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: var(--space-md) 0 var(--space-lg);
+    align-items: center;
+  }
+
+  /* Card demo */
+  .card-demo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: var(--space-md);
-    margin: var(--space-xl) 0 var(--space-2xl);
+    margin: var(--space-md) 0 var(--space-lg);
     max-width: var(--width-prose);
   }
-  .comp-card {
-    background: var(--color-bg-elevated);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    text-decoration: none;
+
+  /* Form demo */
+  .input-demo {
+    max-width: 400px;
+    margin: var(--space-md) 0 var(--space-lg);
+  }
+  .field {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
-    transition: background-color 150ms ease, border-color 150ms ease;
+    gap: 4px;
+    margin-bottom: var(--space-md);
   }
-  .comp-card:hover {
+  .field-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .field-input {
+    height: 48px;
+    padding: 0 14px;
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-md);
+    background: var(--color-bg-elevated);
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text);
+    transition: background 180ms ease, border-color 150ms ease, box-shadow 150ms ease;
+    outline: none;
+  }
+  .field-input::placeholder { color: var(--color-text-tertiary); }
+  .field-input:hover { background: var(--color-bg-sunken); }
+  .field-input:focus {
     background: var(--color-bg-sunken);
     border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(62,122,98,0.15);
   }
-  .comp-card-title {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
-    font-variation-settings: 'opsz' 16;
-    letter-spacing: -0.01em;
-    color: var(--color-text);
-    margin: 0;
-  }
-  .comp-card-desc {
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-    line-height: 1.55;
-    margin: 0;
-    max-width: none;
-    flex: 1;
-  }
-  .comp-card-cta {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--color-accent);
-    margin-top: var(--space-xs);
-  }
+  .field-error .field-input { border-color: var(--bl0-ember); }
+  .field-error-msg { font-size: 11px; color: var(--bl0-ember); }
+  .field-hint { font-size: 11px; color: var(--color-text-tertiary); }
 </style>

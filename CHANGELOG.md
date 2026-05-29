@@ -74,6 +74,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - DocLayout: Tabler Icons added for theme toggle (sun/moon) and hamburger
 - `site/src/styles/site.css` created as shared stylesheet for nav, buttons, badges, footer, and animations
 - **IA restructuring — docs hub**: new two-layer navigation (main nav + context-sensitive section sub-nav, no sidebar), new URL structure under `/docs`, new `/docs` hub page with role-based entry, five component sub-pages split from the single components page
+- **Nav simplification**: docs sub-nav is now uniform across all `/docs/*` pages — Guide · Color · Typography · Spacing · Components; `section` prop removed from DocLayout; scroll-tracking anchor sub-nav on Getting Started removed
+- Docs hub card grid removed (sub-nav covers discovery)
+- Components reference page consolidated from five pages into one scrollable page with collapsible CSS code blocks (`<details>`/`<summary>`); old sub-page URLs redirect to `/docs/components`
 
 ### Removed
 - PWA Patterns page (`/pwa`) — not yet production-ready

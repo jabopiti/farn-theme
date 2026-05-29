@@ -3,6 +3,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
 <DocLayout title="Docs" description="Farn design system documentation — foundations, tokens, components">
+
   <h1>Documentation</h1>
   <p>
     Farn is a CSS custom-property design system — token-first, framework-agnostic, built for
@@ -14,33 +15,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     Designing components? Jump to <a href="/docs/foundations/color">Foundations</a>
     for token reference, then <a href="/docs/components">Components</a> for specs.
   </p>
-
-  <div class="docs-grid">
-    <a href="/docs/getting-started" class="docs-card">
-      <div class="docs-card-icon"><i class="ti ti-rocket"></i></div>
-      <h2 class="docs-card-title">Getting Started</h2>
-      <p class="docs-card-desc">Install Farn, load fonts, prevent FOWT, and set up dark/light mode in your project.</p>
-      <span class="docs-card-cta">Read guide →</span>
-    </a>
-    <a href="/docs/foundations/color" class="docs-card">
-      <div class="docs-card-icon"><i class="ti ti-palette"></i></div>
-      <h2 class="docs-card-title">Foundations</h2>
-      <p class="docs-card-desc">Color palettes, typography tokens, spacing scale, border radius, and z-index reference.</p>
-      <span class="docs-card-cta">Explore tokens →</span>
-    </a>
-    <a href="/docs/components" class="docs-card">
-      <div class="docs-card-icon"><i class="ti ti-components"></i></div>
-      <h2 class="docs-card-title">Components</h2>
-      <p class="docs-card-desc">Buttons, cards, forms, navigation, and badges — spec'd for light and dark surfaces.</p>
-      <span class="docs-card-cta">View components →</span>
-    </a>
-    <a href="/about" class="docs-card docs-card-about">
-      <div class="docs-card-icon"><i class="ti ti-leaf"></i></div>
-      <h2 class="docs-card-title">About Farn</h2>
-      <p class="docs-card-desc">The design philosophy, aesthetic direction, and principles behind the system.</p>
-      <span class="docs-card-cta">Learn more →</span>
-    </a>
-  </div>
 
   <h2>What Farn Includes</h2>
   <table>
@@ -55,68 +29,3 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </table>
   <p>All five layers ship as a single <code>dist/farn.css</code> via CDN — one <code>&lt;link&gt;</code> tag loads everything.</p>
 </DocLayout>
-
-<style>
-  .docs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: var(--space-md);
-    margin: var(--space-xl) 0 var(--space-2xl);
-    max-width: var(--width-prose);
-  }
-
-  .docs-card {
-    background: var(--color-bg-elevated);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
-  }
-  .docs-card:hover {
-    background: var(--color-bg-sunken);
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 1px var(--color-accent);
-  }
-
-  .docs-card-icon {
-    width: 36px; height: 36px;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(62,122,98,0.1);
-    border-radius: var(--radius-md);
-    color: var(--color-accent);
-    font-size: 20px;
-    margin-bottom: var(--space-xs);
-    flex-shrink: 0;
-  }
-  [data-theme="dark"] .docs-card-icon { background: rgba(92,158,134,0.15); }
-
-  .docs-card-title {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 700;
-    font-variation-settings: 'opsz' 18;
-    letter-spacing: -0.01em;
-    color: var(--color-text);
-    margin: 0;
-  }
-
-  .docs-card-desc {
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    margin: 0;
-    max-width: none;
-    flex: 1;
-  }
-
-  .docs-card-cta {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--color-accent);
-    margin-top: var(--space-xs);
-  }
-</style>

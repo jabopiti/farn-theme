@@ -4,36 +4,33 @@ import LogoIcon from '../components/LogoIcon.astro';
 interface Props {
   title: string;
   description?: string;
-  section?: 'getting-started' | 'foundations' | 'components' | 'none';
 }
 
-const { title, description = 'Farn design system documentation', section = 'none' } = Astro.props;
+const { title, description = 'Farn design system documentation' } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 function isActive(href: string) {
   const norm = href.replace(/\/$/, '') || '/';
-  if (norm === '/docs') return path === '/docs' || (path.startsWith('/docs/') && !path.startsWith('/docs/foundations') && !path.startsWith('/docs/components'));
   return path === norm;
 }
 function isSection(prefix: string) {
   return path === prefix || path.startsWith(prefix + '/');
 }
 
-const foundationsLinks = [
+const isDocsPage = path.startsWith('/docs');
+
+const docsSubNav = [
+  { href: '/docs', label: 'Guide' },
   { href: '/docs/foundations/color', label: 'Color' },
   { href: '/docs/foundations/typography', label: 'Typography' },
   { href: '/docs/foundations/spacing', label: 'Spacing' },
-];
-const componentsLinks = [
-  { href: '/docs/components', label: 'Overview' },
-  { href: '/docs/components/buttons', label: 'Buttons' },
-  { href: '/docs/components/cards', label: 'Cards' },
-  { href: '/docs/components/forms', label: 'Forms' },
-  { href: '/docs/components/navigation', label: 'Navigation' },
+  { href: '/docs/components', label: 'Components' },
 ];
 
-const hasSubNav = section !== 'none';
-const subNavLinks = section === 'foundations' ? foundationsLinks : section === 'components' ? componentsLinks : null;
+function isSubNavActive(href: string) {
+  if (href === '/docs/components') return path.startsWith('/docs/components');
+  return path === href;
+}
 ---
 
 <!doctype html>
@@ -98,26 +95,25 @@ const subNavLinks = section === 'foundations' ? foundationsLinks : section === '
       <nav class="drawer-nav">
         <a href="/docs" class={`drawer-link${isSection('/docs') ? ' active' : ''}`}>Docs</a>
         <a href="/about" class={`drawer-link${isActive('/about') ? ' active' : ''}`}>About</a>
-        {subNavLinks && subNavLinks.map(link => (
-          <a href={link.href} class={`drawer-link drawer-sublink${isActive(link.href) ? ' active' : ''}`}>{link.label}</a>
+        {isDocsPage && docsSubNav.map(link => (
+          <a href={link.href} class={`drawer-link drawer-sublink${isSubNavActive(link.href) ? ' active' : ''}`}>{link.label}</a>
         ))}
       </nav>
       <a href="/docs/getting-started" class="drawer-cta">Get Started</a>
     </div>
     <div class="drawer-overlay" id="drawerOverlay"></div>
 
-    <!-- Sub-nav: structural (foundations / components) or provided via slot (getting-started) -->
-    {subNavLinks && (
-      <nav class="sub-nav filled section-subnav" id="doc-subnav" aria-label={section === 'foundations' ? 'Foundations navigation' : 'Components navigation'}>
+    <!-- Docs sub-nav: uniform across all /docs/* pages -->
+    {isDocsPage && (
+      <nav class="sub-nav filled" id="doc-subnav" aria-label="Documentation navigation">
         <div class="sub-nav-inner">
-          {subNavLinks.map(link => (
-            <a href={link.href} class={`sub-nav-link${isActive(link.href) ? ' active' : ''}`}>{link.label}</a>
+          {docsSubNav.map(link => (
+            <a href={link.href} class={`sub-nav-link${isSubNavActive(link.href) ? ' active' : ''}`}>{link.label}</a>
           ))}
           <span class="sub-nav-indicator" id="doc-subnav-indicator"></span>
         </div>
       </nav>
     )}
-    {section === 'getting-started' && <slot name="subnav" />}
 
     <!-- Page content -->
     <main class="doc-main">
@@ -198,50 +194,17 @@ const subNavLinks = section === 'foundations' ? foundationsLinks : section === '
       drawerClose?.addEventListener('click', closeDrawer);
       drawerOverlay?.addEventListener('click', closeDrawer);
 
-      // ── Structural sub-nav indicator (foundations / components) ────────────
-      const structuralSubNav = document.getElementById('doc-subnav');
-      if (structuralSubNav) {
+      // ── Docs sub-nav indicator ─────────────────────────────────────────────
+      const docSubNav = document.getElementById('doc-subnav');
+      if (docSubNav) {
         const indicator = document.getElementById('doc-subnav-indicator');
-        const activeLink = structuralSubNav.querySelector('.sub-nav-link.active');
+        const activeLink = docSubNav.querySelector('.sub-nav-link.active');
         if (activeLink && indicator) {
           requestAnimationFrame(() => {
             indicator.style.left = activeLink.offsetLeft + 'px';
             indicator.style.width = activeLink.offsetWidth + 'px';
           });
         }
-      }
-
-      // ── Scroll-tracking sub-nav (getting-started anchor nav) ───────────────
-      const scrollSubNav = document.querySelector('.sub-nav:not(#doc-subnav)');
-      if (scrollSubNav) {
-        document.documentElement.style.scrollPaddingTop = 'var(--scroll-offset)';
-        const subNavLinks = scrollSubNav.querySelectorAll('.sub-nav-link');
-        const indicator = scrollSubNav.querySelector('.sub-nav-indicator');
-
-        function updateIndicator(activeLink) {
-          if (activeLink && indicator) {
-            indicator.style.left = activeLink.offsetLeft + 'px';
-            indicator.style.width = activeLink.offsetWidth + 'px';
-          }
-        }
-        if (subNavLinks[0]) {
-          subNavLinks[0].classList.add('active');
-          requestAnimationFrame(() => updateIndicator(subNavLinks[0]));
-        }
-        const sectionObs = new IntersectionObserver(entries => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              subNavLinks.forEach(l => l.classList.remove('active'));
-              const link = scrollSubNav.querySelector(`a[href="#${CSS.escape(e.target.id)}"]`);
-              if (link) { link.classList.add('active'); updateIndicator(link); }
-            }
-          });
-        }, { threshold: 0.1 });
-        subNavLinks.forEach(l => {
-          const id = l.getAttribute('href')?.slice(1);
-          const el = id ? document.getElementById(id) : null;
-          if (el) sectionObs.observe(el);
-        });
       }
     </script>
   </body>
