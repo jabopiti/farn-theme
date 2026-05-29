@@ -20,7 +20,7 @@ function isSection(prefix: string) {
 const isDocsPage = path.startsWith('/docs');
 
 const docsSubNav = [
-  { href: '/docs', label: 'Guide' },
+  { href: '/docs', label: 'Overview' },
   { href: '/docs/foundations/color', label: 'Color' },
   { href: '/docs/foundations/typography', label: 'Typography' },
   { href: '/docs/foundations/spacing', label: 'Spacing' },
@@ -95,9 +95,6 @@ function isSubNavActive(href: string) {
       <nav class="drawer-nav">
         <a href="/docs" class={`drawer-link${isSection('/docs') ? ' active' : ''}`}>Docs</a>
         <a href="/about" class={`drawer-link${isActive('/about') ? ' active' : ''}`}>About</a>
-        {isDocsPage && docsSubNav.map(link => (
-          <a href={link.href} class={`drawer-link drawer-sublink${isSubNavActive(link.href) ? ' active' : ''}`}>{link.label}</a>
-        ))}
       </nav>
       <a href="/docs/getting-started" class="drawer-cta">Get Started</a>
     </div>
@@ -129,11 +126,8 @@ function isSubNavActive(href: string) {
           <div class="footer-logo"><LogoIcon class="footer-logo-icon" />Farn<span>.</span></div>
           <p class="footer-tagline">A design system — sharp, warm, intellectual.</p>
           <div class="footer-nav">
-            <a href="/">Home</a>
             <a href="/docs">Docs</a>
             <a href="/docs/getting-started">Getting Started</a>
-            <a href="/docs/foundations/color">Color</a>
-            <a href="/docs/components">Components</a>
             <a href="/about">About</a>
             <a href="https://github.com/jabopiti/farn-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>

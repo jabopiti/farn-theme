@@ -117,26 +117,28 @@ import DocLayout from '../../../layouts/DocLayout.astro';
   <hr />
 
   <h2 id="badges">Badges</h2>
-  <p>Subtle tinted — low-opacity Bloom palette fills, 4px border radius. Informational only, never interactive except for dismissible tags.</p>
+  <p>Solid palette-token fills, 4px border radius. All variants WCAG AA. No dark-mode overrides needed — opaque palette colours work in both modes. Informational only, never interactive except for dismissible tags.</p>
 
   <div class="badge-row">
-    <span class="badge badge-neutral">General</span>
-    <span class="badge badge-forest">Platform</span>
-    <span class="badge badge-moss">Published</span>
-    <span class="badge badge-grain">Draft</span>
-    <span class="badge badge-ember">Archived</span>
-    <span class="badge badge-heather">Research</span>
+    <span class="badge badge-general">General</span>
+    <span class="badge badge-category">Platform</span>
+    <span class="badge badge-published">Published</span>
+    <span class="badge badge-draft">Draft</span>
+    <span class="badge badge-archived">Archived</span>
+    <span class="badge badge-beta">Beta</span>
+    <span class="badge badge-research">Research</span>
   </div>
 
   <table>
-    <thead><tr><th>Status</th><th>Colour</th></tr></thead>
+    <thead><tr><th>Status</th><th>Class</th><th>Palette token</th></tr></thead>
     <tbody>
-      <tr><td>Published / Active / Success</td><td>Moss — <code>--bl3-moss</code></td></tr>
-      <tr><td>Draft / Pending / Warning</td><td>Grain — <code>--bl2-grain</code></td></tr>
-      <tr><td>Archived / Error / Removed</td><td>Ember — <code>--bl0-ember</code></td></tr>
-      <tr><td>Beta / Special</td><td>Heather — <code>--bl4-heather</code></td></tr>
-      <tr><td>Primary category</td><td>Forest — <code>--fo1-fern</code></td></tr>
-      <tr><td>Neutral / Uncategorised</td><td>Sand — <code>--bm0-sand</code></td></tr>
+      <tr><td>Neutral / General</td><td><code>.badge-general</code></td><td><code>--bm0-sand</code></td></tr>
+      <tr><td>Published / Active / Success</td><td><code>.badge-published</code></td><td><code>--bl3-moss</code></td></tr>
+      <tr><td>Draft / Pending / Warning</td><td><code>.badge-draft</code></td><td><code>--bl2-grain</code></td></tr>
+      <tr><td>Archived / Error / Removed</td><td><code>.badge-archived</code></td><td><code>--bl0-ember</code></td></tr>
+      <tr><td>Beta / Special / Experimental</td><td><code>.badge-beta</code></td><td><code>--bl4-heather</code></td></tr>
+      <tr><td>Research / Annotation</td><td><code>.badge-research</code></td><td><code>--bl1-ochre</code></td></tr>
+      <tr><td>Primary category</td><td><code>.badge-category</code></td><td><code>--fo2-forest</code></td></tr>
     </tbody>
   </table>
 
@@ -146,21 +148,21 @@ import DocLayout from '../../../layouts/DocLayout.astro';
   display: inline-flex;
   align-items: center;
   height: 22px;
-  padding: 3px 8px;
+  padding: 0 8px;
   border-radius: var(--radius-sm); /* 4px */
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.04em;
 &#125;
 
-.badge-moss &#123;
-  background: rgba(86, 122, 55, 0.12);
-  color: #3A5523;
-&#125;
-[data-theme="dark"] .badge-moss &#123;
-  background: rgba(86, 122, 55, 0.15);
-  color: #7AAD52;
-&#125;</code></pre>
+/* Solid opaque palette tokens — no dark-mode overrides needed */
+.badge-general   &#123; background: var(--bm0-sand);    color: var(--in0-void); &#125;
+.badge-published &#123; background: var(--bl3-moss);    color: var(--bm2-parchment); &#125;
+.badge-draft     &#123; background: var(--bl2-grain);   color: var(--bm2-parchment); &#125;
+.badge-archived  &#123; background: var(--bl0-ember);   color: var(--bm2-parchment); &#125;
+.badge-beta      &#123; background: var(--bl4-heather); color: var(--bm2-parchment); &#125;
+.badge-research  &#123; background: var(--bl1-ochre);   color: var(--bm2-parchment); &#125;
+.badge-category  &#123; background: var(--fo2-forest);  color: var(--bm2-parchment); &#125;</code></pre>
   </details>
 
   <hr />
@@ -568,6 +570,25 @@ window.addEventListener('scroll', () =&gt; &#123;
     margin: var(--space-md) 0 var(--space-lg);
     max-width: var(--width-prose);
   }
+  .card {
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    cursor: default;
+    transition: background-color 180ms ease;
+  }
+  .card:hover { background: var(--color-bg-sunken); }
+  .card-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
+  .card-title { font-size: 15px; font-weight: 600; color: var(--color-text); margin-bottom: 6px; line-height: 1.3; }
+  .card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 14px; }
+  .card-meta { font-size: 11px; color: var(--color-text-tertiary); display: flex; justify-content: space-between; align-items: center; }
+  .card-arrow { color: var(--color-accent); font-weight: 500; }
+  .card-highlight-light { background: var(--in0-void); }
+  .card-highlight-light .card-title { color: var(--bm2-parchment); }
+  .card-highlight-light .card-body { color: rgba(245,244,240,0.7); }
+  .card-highlight-light .card-tag { color: var(--fo0-sage); }
+  .card-highlight-light .card-meta { color: rgba(245,244,240,0.5); }
+  .card-icon-wrap { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: var(--color-bg-sunken); border-radius: var(--radius-md); font-size: 20px; color: var(--color-accent); margin-bottom: 12px; }
 
   /* Form demo */
   .input-demo {
@@ -606,7 +627,7 @@ window.addEventListener('scroll', () =&gt; &#123;
     border-color: var(--color-accent);
     box-shadow: 0 0 0 3px rgba(62,122,98,0.15);
   }
-  .field-error .field-input { border-color: var(--bl0-ember); }
-  .field-error-msg { font-size: 11px; color: var(--bl0-ember); }
+  .field-error .field-input { border-color: var(--color-error); }
+  .field-error-msg { font-size: 11px; color: var(--color-error); }
   .field-hint { font-size: 11px; color: var(--color-text-tertiary); }
 </style>
