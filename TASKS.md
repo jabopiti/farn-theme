@@ -116,7 +116,51 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 ---
 
-## T-11 · Audit & restructure site for target state
+## T-11 · Button component CSS
+`status: backlog` `effort: M`
+
+**Gap:** No `.btn` CSS classes are shipped in `dist/farn.css`; every consumer must reimplement button styles from scratch using tokens with no reference implementation.
+
+- [ ] Add `.btn`, `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d` and size modifiers `.btn-sm`, `.btn-lg` to a new `tokens/components.css` (or a separate `dist/farn-components.css` artifact)
+- [ ] Button styles must consume T-08 component tokens (`--btn-*`) rather than referencing semantic tokens directly
+- [ ] Document variants, sizes, and states (hover, focus, active, disabled) on the buttons component page
+
+---
+
+## T-12 · Badge component CSS
+`status: backlog` `effort: S`
+
+**Gap:** Seven `.badge-*` variants exist only in `site/src/styles/site.css` and are not part of the distributed token system.
+
+- [ ] Add `.badge` base class and the 7 variant modifiers to the component CSS artifact
+- [ ] Ensure badge styles use palette tokens directly (as they do now) so variants remain visually distinct across themes
+- [ ] Document on the badges component page (T-06)
+
+---
+
+## T-13 · Card component CSS
+`status: backlog` `effort: S`
+
+**Gap:** No `.card` CSS class is shipped; consumers must build card layouts from scratch using T-09 component tokens with no reference implementation.
+
+- [ ] Add `.card` base class (and any surface/elevated variants) to the component CSS artifact
+- [ ] Card styles must consume T-09 `--card-*` tokens
+- [ ] Document on the cards component page with live examples
+
+---
+
+## T-14 · Form component CSS
+`status: backlog` `effort: M`
+
+**Gap:** No form element CSS is shipped; consumers must style inputs, textareas, selects, and labels from scratch using T-10 component tokens.
+
+- [ ] Add base styles for `input`, `textarea`, `select`, `label`, and a `.form-field` wrapper to the component CSS artifact
+- [ ] Styles must consume T-10 `--input-*` tokens
+- [ ] Document states (default, focus, error, disabled) on the forms component page
+
+---
+
+## T-15 · Audit & restructure site for target state
 `status: backlog` `effort: M`
 
 **Gap:** Site navigation and page structure reflect the initial release; as the system grows toward Tier 3, the IA needs review to clearly separate token reference, component docs, and demo content.
@@ -127,7 +171,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 ---
 
-## T-12 · Component demo pages with live token examples
+## T-16 · Component demo pages with live token examples
 `status: backlog` `effort: M`
 
 **Gap:** Component pages show CSS snippets but no live demos; the relationship between tokens and rendered output is not visible.
@@ -138,7 +182,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 ---
 
-## T-13 · Split dist — tokens-only artifact
+## T-17 · Split dist — tokens-only artifact
 `status: backlog` `effort: S`
 
 **Gap:** `dist/farn.css` bundles tokens and the base reset together; consumers who manage their own reset cannot import tokens in isolation.
@@ -149,7 +193,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 ---
 
-## T-14 · npm package setup
+## T-18 · npm package setup
 `status: backlog` `effort: S`
 
 **Gap:** No `package.json` at the repo root; Farn can only be consumed via CDN, not installed as a dependency.
