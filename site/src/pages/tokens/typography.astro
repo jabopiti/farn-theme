@@ -96,6 +96,46 @@ h3 &#123;
     </tbody>
   </table>
 
+  <h2>Mono &amp; Code</h2>
+  <p>
+    <code>--font-mono</code> is JetBrains Mono, loaded at weights 400 and 500.
+    Use it exclusively for code — never decorative text.
+    Coding ligatures (<code>=&gt;</code>, <code>!=</code>, <code>--&gt;</code>) are enabled by default.
+    To disable: <code>font-variant-ligatures: none</code>.
+  </p>
+  <table>
+    <thead><tr><th>Element</th><th>Context</th><th>CSS</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>&lt;code&gt;</code></td>
+        <td>Inline code in prose</td>
+        <td><code>font-family: var(--font-mono); font-size: 0.875em</code></td>
+      </tr>
+      <tr>
+        <td><code>&lt;pre&gt;&lt;code&gt;</code></td>
+        <td>Code blocks</td>
+        <td><code>font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.6</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Inline code uses <code>em</code> so it scales with surrounding text size. Block code uses <code>rem</code> for a fixed 13px baseline regardless of context.</p>
+
+  <h3>Live demo — inline code</h3>
+  <p style="font-family: var(--font-body); font-size: 1rem; line-height: 1.7;">
+    Set the background colour with <code style="font-family: var(--font-mono); font-size: 0.875em;">background-color: var(--color-bg)</code> and pair it with
+    <code style="font-family: var(--font-mono); font-size: 0.875em;">color: var(--color-text)</code> for proper contrast in both themes.
+  </p>
+
+  <h3>Live demo — code block</h3>
+  <pre style="font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.6;"><code>.card &#123;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  /* ligatures: => != --> are on by default */
+  font-variation-settings: normal;
+&#125;</code></pre>
+
   <h2>Letter Spacing</h2>
   <table>
     <thead><tr><th>Value</th><th>Use</th></tr></thead>
@@ -130,7 +170,7 @@ h3 &#123;
     <li>Fraunces for h1–h3 and display copy only — never for body text, UI labels, or navigation.</li>
     <li><code>font-variation-settings: 'opsz'</code> is mandatory on every Fraunces usage: h1 &rarr; 72, h2 &rarr; 24, h3 &rarr; 20.</li>
     <li>Instrument Sans for everything interactive: buttons, inputs, nav, labels, UI text.</li>
-    <li>JetBrains Mono for code and inline code only — never decorative.</li>
+    <li>JetBrains Mono for code only — never decorative. Inline <code>&lt;code&gt;</code>: <code>font-size: 0.875em</code> (scales with context). Block <code>&lt;pre&gt;&lt;code&gt;</code>: <code>font-size: 0.8125rem; line-height: 1.6</code>.</li>
     <li>Body copy max-width: 70ch (<code>--width-prose</code>). Never use Instrument Sans at weight 700+.</li>
     <li>Fraunces minimum size: 16px — never smaller.</li>
   </ul>
