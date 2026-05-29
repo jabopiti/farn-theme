@@ -55,7 +55,9 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 **Gap:** The `data-surface` system (light / dark / tinted overrides) is implemented in tokens but has no live documentation page; consumers cannot see it in action without reading source code.
 
-- [ ] Create `site/src/pages/tokens/theming.astro` with live `data-surface` examples showing light, dark, and tinted surfaces nested within each other
+**Depends on T-19** — implement the symmetric surface model first; otherwise this page documents the old `tinted` nomenclature and has to be rewritten.
+
+- [ ] Create `site/src/pages/tokens/theming.astro` with live `data-surface` examples showing all five surfaces nested within each other in both themes
 - [ ] Document the `data-theme` page-level toggle and the FOWT prevention pattern
 - [ ] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
 
@@ -89,6 +91,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 **Gap:** No Tier 3 tokens exist; consumers who want to reskin buttons or links must override implementation details rather than declared intent.
 
 - [ ] Create `tokens/components.css` and add `--btn-*` tokens (background, text, border, radius, hover-background)
+- [ ] Add `@import './components.css';` to `tokens/index.css` and update the build command in `CLAUDE.md` to include `tokens/components.css` in the `cat` concatenation
 - [ ] Update `site/src/styles/site.css` button styles to consume these tokens instead of direct semantic token references
 - [ ] Rebuild `dist/farn.css`, update `CHANGELOG.md`, and document the tokens on the buttons component page
 
@@ -99,7 +102,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 **Gap:** Card styles reference semantic tokens directly with no component-level override points.
 
-- [ ] Add `--card-*` tokens (background, border, radius, padding) to `tokens/components.css`
+- [ ] Add `--card-*` tokens (background, border, radius, padding) to `tokens/components.css` (created in T-08)
 - [ ] Update site card styles to consume these tokens
 - [ ] Rebuild `dist/farn.css` and update `CHANGELOG.md`
 
@@ -110,7 +113,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 **Gap:** Form element styles have no component-level tokens; inputs cannot be rethemed without overriding semantic-layer values that affect unrelated elements.
 
-- [ ] Add `--input-*` tokens (background, border, radius, focus-ring color) to `tokens/components.css`
+- [ ] Add `--input-*` tokens (background, border, radius, focus-ring color) to `tokens/components.css` (created in T-08)
 - [ ] Update site form styles to consume these tokens
 - [ ] Rebuild `dist/farn.css` and update `CHANGELOG.md`
 
@@ -166,7 +169,8 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 **Gap:** Site navigation and page structure reflect the initial release; as the system grows toward Tier 3, the IA needs review to clearly separate token reference, component docs, and demo content.
 
 - [ ] Audit current page structure against what a Tier 3 token system's docs should include (tokens, components, theming, getting started, changelog)
-- [ ] Propose and implement updated nav hierarchy and page groupings in `DocLayout.astro`
+- [ ] **Propose the new IA as a written outline and get explicit approval before making any structural changes** — nav hierarchy, page groupings, and URL changes affect all existing links
+- [ ] Implement the approved nav hierarchy and page groupings in `DocLayout.astro`
 - [ ] Ensure landing page, token reference pages, and component pages are clearly differentiated in purpose and navigation
 
 ---
@@ -254,7 +258,9 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 
 **Gap:** No shared scroll-entry animation infrastructure exists; each animated element would need its own observer and transition logic, and the `prefers-reduced-motion` guard would have to be duplicated.
 
-- [ ] Add `.scroll-reveal` base class with `transition-property`, `transition-duration`, and `transition-timing-function` to `site/src/styles/site.css` (or `tokens/base.css` if shipping in dist)
+**Depends on T-04** — `.scroll-reveal` transition values must consume `--duration-base` and `--ease-default` from the motion tokens rather than hardcoding `0.6s` and `cubic-bezier(0.4, 0, 0.2, 1)`.
+
+- [ ] Add `.scroll-reveal` base class consuming `var(--duration-base)` and `var(--ease-default)` from T-04 to `site/src/styles/site.css`
 - [ ] Add `@media (prefers-reduced-motion: reduce)` guard covering `.scroll-reveal` and its children
 - [ ] Create `site/src/scripts/scroll-reveal.js` with the shared `IntersectionObserver` (threshold: 0.15, unobserve after first reveal)
 - [ ] Wire the script into Astro's client-side loading
@@ -342,3 +348,131 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 - [ ] Include the animation for each pattern (not just static CSS snippets)
 - [ ] Add pattern-selection guidance: one primary type per page, when to use each
 - [ ] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
+
+---
+
+## T-30 · Typography utility classes
+`status: backlog` `effort: S`
+
+**Gap:** Font and size tokens exist but there are no utility classes; consumers must manually reapply the type scale (including the mandatory Fraunces `font-variation-settings`) every time they build a new surface.
+
+- [ ] Add `.text-display`, `.text-h1`, `.text-h2`, `.text-h3`, `.text-body`, `.text-caption`, `.text-mono` classes consuming `--font-*` tokens and `clamp()` sizes from the documented type scale
+- [ ] Every Fraunces class must include `font-variation-settings: 'opsz' <value>` — this is a hard requirement per CLAUDE.md
+- [ ] Add to the component CSS artifact and document on the typography page
+
+---
+
+## T-31 · Table styles
+`status: backlog` `effort: S`
+
+**Gap:** No table styles exist anywhere in the system; tabular data is one of the most common UI patterns and must be reinvented by every consumer.
+
+- [ ] Add `.table` base class with border, cell padding, and header styles consuming semantic tokens
+- [ ] Add `.table-striped` variant using `--color-bg-elevated` on alternating rows
+- [ ] Document the `overflow-x: auto` scroll wrapper pattern for narrow viewports
+- [ ] Document on a tables component page
+
+---
+
+## T-32 · Alert / notification component
+`status: backlog` `effort: S`
+
+**Gap:** State tokens (`--color-error`, `--color-warning`, `--color-success`) exist but no `.alert` component consumes them; status messages cannot be expressed consistently across projects.
+
+- [ ] Add `--alert-*` Tier 3 tokens (background, border, text, icon-color per variant) to `tokens/components.css`
+- [ ] Add `.alert` base class and `.alert-info`, `.alert-success`, `.alert-warning`, `.alert-error` variants to the component CSS artifact
+- [ ] Verify all variants work correctly in both light and dark modes
+- [ ] Document on an alerts component page with dismissible and non-dismissible examples
+
+---
+
+## T-33 · Code block styles
+`status: backlog` `effort: S`
+
+**Gap:** `--color-bg-code` and `--font-mono` tokens exist but no `.code-block` or `.inline-code` CSS classes are shipped; code formatting is reinvented by every consumer.
+
+- [ ] Add `.code-block` (block-level, scrollable) and `.inline-code` (inline) CSS classes consuming `--color-bg-code`, `--font-mono`, and `--radius-*` tokens
+- [ ] Add `--code-*` Tier 3 tokens (background, text, border) to `tokens/components.css` so consumers can retheme code blocks independently
+- [ ] Document on the typography page or a dedicated code component page
+
+---
+
+## T-34 · Tabs component
+`status: backlog` `effort: M`
+
+**Gap:** Tabs are one of the three most common navigation components and are entirely absent from the system.
+
+- [ ] Add `--tab-*` Tier 3 tokens (active-border, active-text, inactive-text, panel-background) to `tokens/components.css`
+- [ ] Add `.tabs`, `.tab-list`, `.tab`, and `.tab-panel` CSS classes to the component artifact
+- [ ] Implement CSS-only active state via `:checked` on radio inputs for no-JS usage; document the ARIA `role="tablist"` JS enhancement separately
+- [ ] Document all states (default, active, hover, focus, disabled) on a tabs component page
+
+---
+
+## T-35 · Accordion / disclosure
+`status: backlog` `effort: S`
+
+**Gap:** No expandable content pattern; accordions are ubiquitous for FAQs, settings panels, and nested navigation.
+
+- [ ] Build on native `<details>` / `<summary>` — no JS required for core functionality
+- [ ] Add `--accordion-*` Tier 3 tokens (border, summary-background, panel-background) to `tokens/components.css`
+- [ ] Include a CSS animated height transition using `interpolate-size: allow-keywords` with a static-reveal fallback for older browsers
+- [ ] Document on an accordion component page
+
+---
+
+## T-36 · Breadcrumbs
+`status: backlog` `effort: XS`
+
+**Gap:** No breadcrumb navigation pattern; a basic wayfinding component missing from any multi-level site.
+
+- [ ] Add `.breadcrumb` and `.breadcrumb-item` styles with a CSS `::after` separator consuming `--color-text-secondary`
+- [ ] Current page item uses `--color-text`; preceding items use `--color-text-secondary` — both must adapt per surface
+- [ ] Document correct `aria-label="Breadcrumb"` and `aria-current="page"` markup on the component page
+
+---
+
+## T-37 · Pagination
+`status: backlog` `effort: S`
+
+**Gap:** No pagination pattern; any list or data view spanning multiple pages has no reference implementation.
+
+- [ ] Add `--pagination-*` Tier 3 tokens (active-background, active-text, border) to `tokens/components.css`
+- [ ] Add `.pagination`, `.page-item`, and `.page-link` CSS classes with active, hover, focus, and disabled states
+- [ ] Document on a pagination component page with previous/next and numbered variants
+
+---
+
+## T-38 · Tooltip
+`status: backlog` `effort: S`
+
+**Gap:** No tooltip pattern; a basic affordance used for labels, abbreviations, and icon-only buttons has no implementation.
+
+- [ ] Implement CSS-only tooltip via `[data-tooltip]` attribute and `::before` / `::after` pseudo-elements; no JS for hover
+- [ ] Add `--tooltip-*` Tier 3 tokens (background, text, max-width) to `tokens/components.css`
+- [ ] Document the limitation: CSS-only tooltips do not respond to keyboard focus; document the JS enhancement needed for `focus-visible` support
+- [ ] Document on a tooltip component page
+
+---
+
+## T-39 · Loading states — skeleton & spinner
+`status: backlog` `effort: S`
+
+**Gap:** Farn has no visual language for async or in-progress states; loading feedback must be built from scratch by every consumer.
+
+- [ ] Add `.spinner` (rotating ring) using `@keyframes` and consuming `--color-accent` and T-04 `--duration-*` tokens
+- [ ] Add `.skeleton` (shimmer placeholder) using a CSS gradient animation for the loading shimmer effect
+- [ ] Both must respect `prefers-reduced-motion`: spinner stops, skeleton renders as a static tinted block
+- [ ] Document on a feedback / loading states component page
+
+---
+
+## T-40 · Modal / dialog
+`status: backlog` `effort: M`
+
+**Gap:** No modal or dialog pattern; the most common overlay component is entirely absent from the system.
+
+- [ ] Add `--modal-*` Tier 3 tokens (background, backdrop-color, border-radius, shadow) to `tokens/components.css`
+- [ ] Add `.modal`, `.modal-backdrop`, `.modal-header`, `.modal-body`, `.modal-footer` CSS classes with size variants (sm, md, lg)
+- [ ] Document the required JS responsibilities clearly: focus trap, `aria-modal="true"`, `role="dialog"`, `Escape` key handler — CSS owns appearance, JS owns behaviour
+- [ ] Document on a modal component page
