@@ -193,6 +193,29 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 ---
 
+## T-19 · Symmetric surface system
+`status: backlog` `effort: M`
+
+**Gap:** The current surface model (`light`, `dark`, `tinted`) is asymmetric and ambiguous: "tinted" has no dark-mode counterpart, there is no sunken/recessed surface, and it is unclear whether surfaces are absolute or relative to the current theme.
+
+Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
+
+| `data-surface` | Light mode | Dark mode |
+|---|---|---|
+| `light` | base light bg | forced light (override) |
+| `light-elevated` | raised/tinted light | raised light (override) |
+| `elevated` | one step up from current theme | one step up from current theme |
+| `dark-elevated` | forced dark raised | raised dark bg |
+| `dark` | forced dark (override) | base dark bg |
+| `sunken` | recessed (inputs, code) | recessed (inputs, code) |
+
+- [ ] Audit `tokens/dark-light.css` and define the full symmetric token set for all surface contexts (bg, text, text-secondary, border, accent, accent-hover)
+- [ ] Rename `data-surface="tinted"` to `data-surface="elevated"` and add `data-surface="light-elevated"`, `data-surface="dark-elevated"`, and `data-surface="sunken"`
+- [ ] Verify that every semantic token (including link/accent colors and state colors) cascades correctly when a surface overrides the page theme
+- [ ] Update `CLAUDE.md` dark/light mode documentation and rebuild `dist/farn.css`
+
+---
+
 ## T-18 · npm package setup
 `status: backlog` `effort: S`
 
