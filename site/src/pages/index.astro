@@ -1066,11 +1066,7 @@ drawer.querySelectorAll('a:not(.drawer-cta)').forEach(a => {
 
 // ── Sub-nav indicator ──────────────────────────
 function updateSubNavIndicator(which) {
-  const panel = document.getElementById(which === 'ds' ? 'subnav-ds' : 'subnav-palette');
-  const indicator = document.getElementById(which === 'ds' ? 'sub-nav-indicator-ds' : 'sub-nav-indicator-palette');
-  if (!panel || !indicator) return;
-  const active = panel.querySelector('.sub-nav-link.active') || panel.querySelector('.sub-nav-link');
-  if (active) { indicator.style.left = active.offsetLeft + 'px'; indicator.style.width = active.offsetWidth + 'px'; }
+  window.__subnavTrackers?.[which]?.();
 }
 
 // ── Reveal animation ───────────────────────────
@@ -1078,38 +1074,6 @@ const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); revealObs.unobserve(e.target); } });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
-// ── Sub-nav: DS section tracking ───────────────
-const dsNavObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      document.querySelectorAll('#subnav-ds .sub-nav-link').forEach(l => l.classList.remove('active'));
-      const link = document.querySelector(`#subnav-ds a[href="#${e.target.id}"]`);
-      if (link) { link.classList.add('active'); updateSubNavIndicator('ds'); }
-    }
-  });
-}, { threshold: 0.3 });
-['about', 'foundations', 'components', 'surfaces'].forEach(id => {
-  const el = document.getElementById(id); if (el) dsNavObs.observe(el);
-});
-
-// ── Sub-nav: Palette section tracking ──────────
-const paletteNavObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      document.querySelectorAll('#subnav-palette .sub-nav-link').forEach(l => l.classList.remove('active'));
-      const link = document.querySelector(`#subnav-palette a[href="#${e.target.id}"]`);
-      if (link) { link.classList.add('active'); updateSubNavIndicator('palette'); }
-    }
-  });
-}, { threshold: 0.3 });
-['iron-night', 'birch-mist', 'forest', 'bloom', 'semantic', 'wcag', 'css-vars'].forEach(id => {
-  const el = document.getElementById(id); if (el) paletteNavObs.observe(el);
-});
-
-// Initialise DS sub-nav first link as active
-const firstDsLink = document.querySelector('#subnav-ds .sub-nav-link');
-if (firstDsLink) { firstDsLink.classList.add('active'); requestAnimationFrame(() => updateSubNavIndicator('ds')); }
 
 // ── Palette sub-nav: scroll without hash change ─
 document.querySelectorAll('#subnav-palette .sub-nav-link').forEach(link => {
@@ -1147,6 +1111,18 @@ if (codeCopyBtn && cssCodeEl) {
     });
   });
 }
+</script>
+<script>
+  import { initSubNavTracker } from '../scripts/subnav-tracker.js';
+  const dsTracker = initSubNavTracker(document.getElementById('subnav-ds'), {
+    threshold: 0.3,
+    activateFirst: true,
+  });
+  const paletteTracker = initSubNavTracker(document.getElementById('subnav-palette'), {
+    threshold: 0.3,
+    activateFirst: false,
+  });
+  window.__subnavTrackers = { ds: dsTracker.updateIndicator, palette: paletteTracker.updateIndicator };
 </script>
 </body>
 </html>

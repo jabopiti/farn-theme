@@ -24,6 +24,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `--color-ghost-border` dark mode rgba updated from `rgba(245,244,240,0.25)` → `rgba(247,246,243,0.25)` to match new bm2-birch value
 
 ### Added
+- `site/src/scripts/subnav-tracker.js`: shared `initSubNavTracker(subNavEl, options)` utility — extracts duplicated `IntersectionObserver` scroll-tracking from `DocLayout.astro` and `index.astro`; targets derived from nav link `href` attributes, `CSS.escape()` applied consistently, accepts `threshold`/`activateFirst`/`setScrollPadding` options
 - `--color-error`, `--color-warning`, `--color-success` semantic tokens in `tokens/dark-light.css` (map to `--bl0-ember`, `--bl2-grain`, `--bl3-moss`; same in both modes)
 - Badge redesign: 7 solid-palette-token variants replacing 6 semi-transparent variants
   - New classes: `.badge-general`, `.badge-published`, `.badge-draft`, `.badge-archived`, `.badge-beta`, `.badge-research`, `.badge-category`

@@ -9,13 +9,13 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-02 · Extract shared sub-nav scroll-tracking utility
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/busy-allen-ThaIb`
 
 **Gap:** The `IntersectionObserver` scroll-tracking logic is structurally identical in `DocLayout.astro` and `index.astro`; threshold or indicator changes must be applied in two places.
 
-- [ ] Create `site/src/scripts/subnav-tracker.js` exporting an `initSubNavTracker(subNavEl)` function
-- [ ] Replace the inline observer scripts in both layouts with an import of the shared utility
-- [ ] Verify no FOWT or scroll-tracking regressions after switching to module import
+- [x] Create `site/src/scripts/subnav-tracker.js` exporting an `initSubNavTracker(subNavEl)` function
+- [x] Replace the inline observer scripts in both layouts with an import of the shared utility
+- [x] Verify no FOWT or scroll-tracking regressions after switching to module import
 
 ---
 
