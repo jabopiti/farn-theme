@@ -8,17 +8,6 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 ---
 
-## T-01 · Extract shared Footer component
-`status: done` `effort: XS`
-
-**Gap:** Footer HTML is duplicated verbatim between `site/src/layouts/DocLayout.astro` and `site/src/pages/index.astro`; any copy or link change must be made twice.
-
-- [ ] Create `site/src/components/Footer.astro` containing the shared footer block
-- [ ] Replace the inline footer in `DocLayout.astro` and `index.astro` with `<Footer />`
-- [ ] Verify no visual regressions in both doc pages and landing page
-
----
-
 ## T-02 · Extract shared sub-nav scroll-tracking utility
 `status: backlog` `effort: XS`
 
