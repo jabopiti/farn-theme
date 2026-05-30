@@ -86,9 +86,5 @@ h1 {
 
 Always read before editing:
 - Token changes: read `tokens/colors.css` or the relevant token file first
-- Component documentation: read the existing component page + `web-reference.md` context in `bo-creative-kit` (see below)
+- Component documentation: read the existing component page
 - Site layout: read `site/src/layouts/DocLayout.astro` first
-
-## Source of truth for component specs
-
-The canonical component specifications live in `bo-creative-kit/design-system/web-reference.md` (web) and `bo-creative-kit/design-system/pwa-reference.md` (PWA). The `site/` pages in this repo are the public-facing rendition of that content.
