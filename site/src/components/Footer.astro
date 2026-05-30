@@ -1,0 +1,25 @@
+---
+import LogoIcon from './LogoIcon.astro';
+---
+<footer class="page-footer" data-surface="dark">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo"><LogoIcon class="footer-logo-icon" />Farn<span>.</span></div>
+      <p class="footer-tagline">A design system — sharp, warm, intellectual.</p>
+      <div class="footer-nav">
+        <slot />
+      </div>
+    </div>
+    <hr class="footer-hr" />
+    <div class="footer-bar">
+      <p class="footer-copy">© 2026 Jacob Lueg Tiedemann — v0.1.0</p>
+      <div class="footer-links">
+        <a href="https://jbpt.de" target="_blank" rel="noopener noreferrer">About</a>
+        <a href="https://jbpt.de/#contact" target="_blank" rel="noopener noreferrer">Contact</a>
+        <a href="https://jbpt.de/legal/" target="_blank" rel="noopener noreferrer">Legal Notice / Impressum</a>
+        <a href="https://jbpt.de/privacy/" target="_blank" rel="noopener noreferrer">Data Privacy / Datenschutz</a>
+        <a href="https://jbpt.de/accessibility/" target="_blank" rel="noopener noreferrer">Accessibility / Barrierefreiheit</a>
+      </div>
+    </div>
+  </div>
+</footer>
