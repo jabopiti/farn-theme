@@ -20,13 +20,13 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-03 · Make farn-theme the canonical source of truth
-`status: in-progress` `effort: XS` `branch: claude/gifted-goldberg-BaIKt`
+`status: done` `effort: XS` `branch: claude/gifted-goldberg-BaIKt`
 
 **Gap:** `CLAUDE.md` references `bo-creative-kit/design-system/web-reference.md` as the canonical component spec, making this repo a secondary rendition rather than the authoritative source.
 
-- [ ] Remove the "Source of truth for component specs" section from `CLAUDE.md`
-- [ ] Update `CLAUDE.md` to state that `site/` pages are the canonical specifications
-- [ ] Check for any other references to `bo-creative-kit` in the repo and remove or reframe them
+- [x] Remove the "Source of truth for component specs" section from `CLAUDE.md`
+- [x] Update `CLAUDE.md` to state that `site/` pages are the canonical specifications
+- [x] Check for any other references to `bo-creative-kit` in the repo and remove or reframe them
 
 ---
 

@@ -117,7 +117,7 @@ Commit in logical chunks. Update `CHANGELOG.md` as part of the work.
 
 Run in order:
 1. `/simplify`
-2. `/review` (low effort for `XS`; medium for `S`; high for `M`/`L`)
+2. `/review` (low effort for `XS`; medium for `S`; high for `M`/`L`; bump one level if the task touches token architecture files — `dark-light.css`, `colors.css`)
 
 Fix all findings before closing.
 
