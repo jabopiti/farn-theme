@@ -9,7 +9,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-01 · Extract shared Footer component
-`status: backlog` `effort: XS`
+`status: done` `effort: XS`
 
 **Gap:** Footer HTML is duplicated verbatim between `site/src/layouts/DocLayout.astro` and `site/src/pages/index.astro`; any copy or link change must be made twice.
 
