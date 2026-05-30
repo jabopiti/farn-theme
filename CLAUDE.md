@@ -88,3 +88,45 @@ Always read before editing:
 - Token changes: read `tokens/colors.css` or the relevant token file first
 - Component documentation: read the existing component page
 - Site layout: read `site/src/layouts/DocLayout.astro` first
+
+## Task workflow
+
+When picking up a task from TASKS.md, follow these five phases in order.
+
+### Phase 0 — Task selection
+Self-select one `status: backlog` task, respecting any `Depends on` notes (implement the dependency first). Update its status tag to `in-progress` and add `branch: <branch-name>` inline. Create the git branch. The user can override by naming a task ID (e.g. "pick up T-04").
+
+### Phase 1 — Specify the WHAT
+Tasks are intentionally lean. Before writing any code:
+1. Read the task and all related files (follow Load order above).
+2. Identify ambiguities, design options, and tradeoffs.
+3. Propose options and a recommendation to the user via `AskUserQuestion`.
+   **Skip this step only if the user explicitly said "hands-off".**
+
+### Phase 2 — Plan the HOW
+After the spec is agreed:
+1. Draft an implementation plan.
+2. **Self-critique the plan** — check for each of these before moving on:
+   - Correct file targets (token files, not `dist/` directly)?
+   - `dist/farn.css` rebuild included if any token file changes?
+   - `CHANGELOG.md` update included?
+   - `font-variation-settings: 'opsz' <value>` present on every Fraunces usage?
+   - Dark/light mode regression considered?
+   - Existing utilities reused rather than reimplemented?
+3. Revise the plan based on the critique.
+4. **Complexity gate — any one of these triggers mandatory user approval** (present plan via ExitPlanMode before executing):
+   - Task effort is `M` or `L`
+   - Changes to token architecture (`colors.css`, `dark-light.css` structure)
+   - Changes to the surface system (`data-surface` patterns)
+   - Changes to IA or nav (`DocLayout.astro` sidebar, URL structure)
+
+### Phase 3 — Execute
+Follow all conventions in this file. Commit in logical chunks with clear messages. Update `CHANGELOG.md` as part of the work, not as an afterthought.
+
+### Phase 4 — Quality gates (always run, in this order)
+1. `/simplify` — clean up the implementation.
+2. `/review` — catch correctness issues (medium effort for `S` tasks, high for `M`/`L`).
+Fix anything surfaced before closing the task.
+
+### Phase 5 — Close out
+Mark the task `done` in TASKS.md. Push the branch and open a PR.
