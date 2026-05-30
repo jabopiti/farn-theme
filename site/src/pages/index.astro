@@ -1084,8 +1084,7 @@ drawer.querySelectorAll('a:not(.drawer-cta)').forEach(a => {
 
 // ── Sub-nav indicator ──────────────────────────
 function updateSubNavIndicator(which) {
-  const fn = which === 'ds' ? window.__subnavUpdateDs : window.__subnavUpdatePalette;
-  if (fn) fn();
+  window.__subnavTrackers?.[which]?.();
 }
 
 // ── Reveal animation ───────────────────────────
@@ -1141,8 +1140,7 @@ if (codeCopyBtn && cssCodeEl) {
     threshold: 0.3,
     activateFirst: false,
   });
-  window.__subnavUpdateDs = dsTracker.updateIndicator;
-  window.__subnavUpdatePalette = paletteTracker.updateIndicator;
+  window.__subnavTrackers = { ds: dsTracker.updateIndicator, palette: paletteTracker.updateIndicator };
 </script>
 </body>
 </html>
