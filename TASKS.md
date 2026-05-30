@@ -4,6 +4,8 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 **Effort scale:** `XS` < 1 hr · `S` 1–3 hr · `M` half day · `L` full day+
 
+**Status values:** `backlog` → `in-progress` (add `branch: <branch-name>`) → `done`
+
 ---
 
 ## T-01 · Extract shared Footer component
