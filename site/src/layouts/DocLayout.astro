@@ -180,42 +180,14 @@ function isActive(route: string) {
       drawerClose?.addEventListener('click', closeDrawer);
       drawerOverlay?.addEventListener('click', closeDrawer);
 
-      // Sub-nav scroll tracking (runs only when a sub-nav slot is provided)
-      const docSubNav = document.querySelector('.sub-nav');
-      if (docSubNav) {
-        // Expand scroll-padding to clear both nav and sub-nav on this page
-        document.documentElement.style.scrollPaddingTop = 'var(--scroll-offset)';
-        const docSubNavLinks = docSubNav.querySelectorAll('.sub-nav-link');
-        const docIndicator = docSubNav.querySelector('.sub-nav-indicator');
-
-        function updateDocIndicator(activeLink) {
-          if (activeLink && docIndicator) {
-            docIndicator.style.left = activeLink.offsetLeft + 'px';
-            docIndicator.style.width = activeLink.offsetWidth + 'px';
-          }
-        }
-
-        if (docSubNavLinks[0]) {
-          docSubNavLinks[0].classList.add('active');
-          requestAnimationFrame(() => updateDocIndicator(docSubNavLinks[0]));
-        }
-
-        const sectionObs = new IntersectionObserver(entries => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              docSubNavLinks.forEach(l => l.classList.remove('active'));
-              const link = docSubNav.querySelector(`a[href="#${CSS.escape(e.target.id)}"]`);
-              if (link) { link.classList.add('active'); updateDocIndicator(link); }
-            }
-          });
-        }, { threshold: 0.1 });
-
-        docSubNavLinks.forEach(l => {
-          const id = l.getAttribute('href')?.slice(1);
-          const el = id ? document.getElementById(id) : null;
-          if (el) sectionObs.observe(el);
-        });
-      }
+    </script>
+    <script>
+      import { initSubNavTracker } from '../scripts/subnav-tracker.js';
+      initSubNavTracker(document.querySelector('.sub-nav'), {
+        threshold: 0.1,
+        activateFirst: true,
+        setScrollPadding: true,
+      });
     </script>
   </body>
 </html>
