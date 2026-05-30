@@ -70,7 +70,7 @@ h1 {
 
 ## Adding a component
 
-Components are documentation patterns, not shipped CSS classes.
+Components are documentation patterns, not shipped CSS classes. The `site/` pages in this repo are the canonical specification for all components — no external repo is authoritative.
 
 1. Create `site/src/pages/components/<name>.astro` — include description, anatomy, live demo, CSS snippet, status label (`stable` / `beta`)
 2. Add to sidebar in `site/src/layouts/DocLayout.astro`
@@ -113,9 +113,11 @@ Before writing code:
 Commit in logical chunks. Update `CHANGELOG.md` as part of the work.
 
 ### Phase 4 — Quality gates
+**Mandatory — never skip, regardless of effort size.**
+
 Run in order:
 1. `/simplify`
-2. `/review` (medium effort for `S`; high for `M`/`L`)
+2. `/review` (low effort for `XS`; medium for `S`; high for `M`/`L`; bump one level if the task touches token architecture files — `dark-light.css`, `colors.css`)
 
 Fix all findings before closing.
 
