@@ -7,6 +7,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Documentation
+- `CLAUDE.md`: declared `site/` pages as the canonical component specification; removed ambiguity about external sources (T-03)
+- `CLAUDE.md`: Phase 4 quality gates now marked mandatory for all effort sizes, with explicit low-effort guidance for `XS` tasks
+
 ### Refactored
 - Extracted shared `Footer` component to `site/src/components/Footer.astro`; `DocLayout.astro` and `index.astro` now use `<Footer>` with a default slot for context-specific nav links (T-01)
 

@@ -20,7 +20,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-03 · Make farn-theme the canonical source of truth
-`status: backlog` `effort: XS`
+`status: in-progress` `effort: XS` `branch: claude/gifted-goldberg-BaIKt`
 
 **Gap:** `CLAUDE.md` references `bo-creative-kit/design-system/web-reference.md` as the canonical component spec, making this repo a secondary rendition rather than the authoritative source.
 
