@@ -8,6 +8,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `site/src/pages/components/badges.astro`: dedicated badges documentation page with live demos of all 7 variants, usage guidance, anatomy reference, and full CSS snippet (T-06)
 - `tokens/motion.css`: `--duration-fast` (80ms), `--duration-base` (120ms), `--duration-slow` (200ms), `--duration-enter` (250ms), `--duration-reveal` (400ms), `--ease-default`, `--ease-out`, `--ease-spring` motion tokens (T-04)
 - `tokens/index.css`: `@import './motion.css'` added to the token import chain (T-04)
 

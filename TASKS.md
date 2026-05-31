@@ -55,7 +55,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-06 · Badges documentation page
-`status: backlog` `effort: S`
+`status: in-progress` `effort: S` `branch: claude/next-task-planning-irPLH`
 
 **Gap:** Seven badge variants exist in `site/src/styles/site.css` but are undocumented on the site; consumers have no reference for which variant to use when.
 
