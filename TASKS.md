@@ -31,13 +31,13 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-04 · Motion tokens
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/task-t-04-rM9f4`
 
 **Gap:** Transition timings and easing values are hardcoded throughout `site/src/styles/site.css` rather than tokenized; consumers cannot override animation behaviour via the token system.
 
-- [ ] Add `--duration-*` (e.g. `fast`, `base`, `slow`) and `--ease-*` (e.g. `default`, `in`, `out`) tokens to `tokens/spacing.css` or a new `tokens/motion.css`
-- [ ] Replace hardcoded `transition` and `animation` values in `site/src/styles/site.css` with the new tokens
-- [ ] Rebuild `dist/farn.css` and update `CHANGELOG.md`
+- [x] Add `--duration-*` (e.g. `fast`, `base`, `slow`) and `--ease-*` (e.g. `default`, `in`, `out`) tokens to `tokens/spacing.css` or a new `tokens/motion.css`
+- [x] Replace hardcoded `transition` and `animation` values in `site/src/styles/site.css` with the new tokens
+- [x] Rebuild `dist/farn.css` and update `CHANGELOG.md`
 
 ---
 

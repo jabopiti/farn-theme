@@ -7,6 +7,7 @@ tokens/           CSS source — edit here, not in dist/
   colors.css      Palette tokens (--in*, --bm*, --fo*, --bl*)
   typography.css  Font imports + font-family tokens
   spacing.css     Spacing scale, widths, radius, z-index
+  motion.css      Duration and easing tokens
   dark-light.css  Semantic tokens + data-surface patterns
   base.css        Reset, focus, reduced-motion
   index.css       @import chain (used by the site)
@@ -19,7 +20,7 @@ CHANGELOG.md      Updated on every token or component change
 ## Build command
 
 ```bash
-cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/dark-light.css tokens/base.css > dist/farn.css
+cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/base.css > dist/farn.css
 ```
 
 Run after any change to a `tokens/` file.

@@ -18,7 +18,7 @@ body {
   line-height: 1.7;
   background: var(--color-bg);
   color: var(--color-text);
-  transition: background-color 200ms ease, color 200ms ease;
+  transition: background-color var(--duration-slow) var(--ease-default), color var(--duration-slow) var(--ease-default);
 }
 
 img {
