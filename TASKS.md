@@ -178,7 +178,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-17 · Split dist — tokens-only artifact
-`status: backlog` `effort: S`
+`status: in-progress` `effort: S` `branch: claude/wonderful-hopper-cvk4K`
 
 **Gap:** `dist/farn.css` bundles tokens and the base reset together; consumers who manage their own reset cannot import tokens in isolation.
 
