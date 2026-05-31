@@ -25,6 +25,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - Extracted shared `Footer` component to `site/src/components/Footer.astro`; `DocLayout.astro` and `index.astro` now use `<Footer>` with a default slot for context-specific nav links (T-01)
 
 ### Fixed
+- `index.astro`: `.usage-dark` pill in dark mode now uses `var(--in0-void)` background and `var(--bm0-sand)` text; previously used a semi-transparent `--in1-iron` that blended into the card surface, making the pill invisible
 - `site.css`: `.btn-d:hover` was using hardcoded `#a8343e`; replaced with `var(--in0-void)`
 - `site.css`: `.hamburger` color and hover background were using `rgba(245,244,240,...)` (stale bm2-parchment value `#F5F4F0`); corrected to `rgba(247,246,243,...)` matching current `--bm2-birch`
 - `site.css`: `.hamburger:hover` color was `var(--bm2-parchment)` (undefined token); replaced with `var(--bm2-birch)`
