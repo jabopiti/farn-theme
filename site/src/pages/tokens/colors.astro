@@ -138,20 +138,148 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &lt;section data-surface="tinted"&gt; &hellip; &lt;/section&gt;</code></pre>
 
   <h2>Accessibility</h2>
-  <table>
-    <thead><tr><th>Pair</th><th>Ratio</th><th>Result</th></tr></thead>
-    <tbody>
-      <tr><td>Parchment on Void</td><td>17.51:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Sand on Void</td><td>12.50:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Fern on Parchment</td><td>4.67:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Fern on Void</td><td>3.75:1</td><td>AA large only</td></tr>
-      <tr><td>Sage on Void</td><td>6.03:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Ember on Parchment</td><td>4.59:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Parchment on Fern (button text)</td><td>4.67:1</td><td>&#10003; AA</td></tr>
-      <tr><td>Ash on Void</td><td>3.35:1</td><td>AA large only</td></tr>
-    </tbody>
-  </table>
-  <p><code>--in3-ash</code> is AA-large only — use at 18px or bold weight only, never for small body text. All Bloom tokens meet WCAG AA (4.5:1) against <code>--bm2-birch</code> in light mode.</p>
+  <p>Full contrast matrix for all semantic foreground/background token pairs. Ratings follow WCAG 2.1: <strong>AAA</strong> ≥ 7:1 · <strong>AA</strong> ≥ 4.5:1 · <strong>AA Large</strong> ≥ 3:1 (≥ 24 px regular, or ≥ 19 px bold) · <strong>Fail</strong> &lt; 3:1.</p>
+
+  <h3>Light mode</h3>
+  <div class="matrix-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Foreground token</th>
+          <th>on <code>--color-bg</code></th>
+          <th>on <code>--color-bg-elevated</code></th>
+          <th>on <code>--color-bg-sunken</code></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>--color-text</code></td>
+          <td><span class="cr cr-aaa">17.51:1 AAA</span></td>
+          <td><span class="cr cr-aaa">15.15:1 AAA</span></td>
+          <td><span class="cr cr-aaa">12.50:1 AAA</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-text-secondary</code></td>
+          <td><span class="cr cr-aa">6.99:1 AA</span></td>
+          <td><span class="cr cr-aa">6.05:1 AA</span></td>
+          <td><span class="cr cr-aa">4.99:1 AA</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-text-tertiary</code></td>
+          <td><span class="cr cr-aal">4.47:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.87:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.19:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-accent</code></td>
+          <td><span class="cr cr-aa">4.67:1 AA</span></td>
+          <td><span class="cr cr-aal">4.04:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.33:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-accent-hover</code></td>
+          <td><span class="cr cr-aa">6.91:1 AA</span></td>
+          <td><span class="cr cr-aa">5.98:1 AA</span></td>
+          <td><span class="cr cr-aa">4.93:1 AA</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-accent-text</code> †</td>
+          <td><span class="cr cr-fail">1.00:1 Fail</span></td>
+          <td><span class="cr cr-fail">1.16:1 Fail</span></td>
+          <td><span class="cr cr-fail">1.40:1 Fail</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-error</code></td>
+          <td><span class="cr cr-aa">4.59:1 AA</span></td>
+          <td><span class="cr cr-aal">3.97:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.28:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-warning</code></td>
+          <td><span class="cr cr-aa">4.57:1 AA</span></td>
+          <td><span class="cr cr-aal">3.95:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.26:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-success</code></td>
+          <td><span class="cr cr-aa">4.59:1 AA</span></td>
+          <td><span class="cr cr-aal">3.97:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.28:1 AA Large</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Dark mode</h3>
+  <div class="matrix-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Foreground token</th>
+          <th>on <code>--color-bg</code></th>
+          <th>on <code>--color-bg-elevated</code></th>
+          <th>on <code>--color-bg-sunken</code></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>--color-text</code></td>
+          <td><span class="cr cr-aaa">17.51:1 AAA</span></td>
+          <td><span class="cr cr-aaa">9.54:1 AAA</span></td>
+          <td><span class="cr cr-aaa">17.51:1 AAA</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-text-secondary</code></td>
+          <td><span class="cr cr-aaa">15.15:1 AAA</span></td>
+          <td><span class="cr cr-aaa">8.25:1 AAA</span></td>
+          <td><span class="cr cr-aaa">15.15:1 AAA</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-text-tertiary</code></td>
+          <td><span class="cr cr-aaa">12.50:1 AAA</span></td>
+          <td><span class="cr cr-aa">6.81:1 AA</span></td>
+          <td><span class="cr cr-aaa">12.50:1 AAA</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-accent</code></td>
+          <td><span class="cr cr-aal">3.75:1 AA Large</span></td>
+          <td><span class="cr cr-fail">2.04:1 Fail</span></td>
+          <td><span class="cr cr-aal">3.75:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-accent-hover</code></td>
+          <td><span class="cr cr-aa">6.03:1 AA</span></td>
+          <td><span class="cr cr-aal">3.28:1 AA Large</span></td>
+          <td><span class="cr cr-aa">6.03:1 AA</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-accent-text</code></td>
+          <td><span class="cr cr-aaa">17.51:1 AAA</span></td>
+          <td><span class="cr cr-aaa">9.54:1 AAA</span></td>
+          <td><span class="cr cr-aaa">17.51:1 AAA</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-error</code> †</td>
+          <td><span class="cr cr-aal">3.82:1 AA Large</span></td>
+          <td><span class="cr cr-fail">2.08:1 Fail</span></td>
+          <td><span class="cr cr-aal">3.82:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-warning</code> †</td>
+          <td><span class="cr cr-aal">3.84:1 AA Large</span></td>
+          <td><span class="cr cr-fail">2.09:1 Fail</span></td>
+          <td><span class="cr cr-aal">3.84:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><code>--color-success</code> †</td>
+          <td><span class="cr cr-aal">3.82:1 AA Large</span></td>
+          <td><span class="cr cr-fail">2.08:1 Fail</span></td>
+          <td><span class="cr cr-aal">3.82:1 AA Large</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>† <code>--color-accent-text</code> (light mode) is designed for text <em>on</em> <code>--color-accent</code> button backgrounds — Fail against page surfaces is by design. State tokens (error/warning/success) marked † fall below 3:1 on <code>--color-bg-elevated</code> in dark mode; pair with an icon or use on <code>--color-bg</code>/<code>--color-bg-sunken</code> instead. Note: in dark mode <code>--color-bg</code> and <code>--color-bg-sunken</code> both resolve to <code>--in0-void</code>, so those two columns are identical by design. <code>--color-text-tertiary</code> is AA Large only in all light-mode contexts — never use it for body-size text; restrict to ≥ 24 px regular or ≥ 19 px bold.</p>
 
   <h2>Usage Rules</h2>
   <ul>
@@ -200,4 +328,29 @@ import DocLayout from '../../layouts/DocLayout.astro';
     font-family: var(--font-mono);
     font-size: 0.75rem;
   &#125;
+
+  .matrix-scroll &#123;
+    overflow-x: auto;
+    margin: var(--space-sm) 0 var(--space-md);
+  &#125;
+
+  .cr &#123;
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 0.1em 0.45em;
+    border-radius: var(--radius-sm);
+  &#125;
+
+  .cr-aaa &#123; background: color-mix(in srgb, var(--color-success) 15%, var(--color-bg)); color: var(--color-success); &#125;
+  .cr-aa  &#123; background: color-mix(in srgb, var(--color-accent) 15%, var(--color-bg)); color: var(--color-accent); &#125;
+  .cr-aal &#123; background: color-mix(in srgb, var(--color-warning) 15%, var(--color-bg)); color: var(--color-warning); &#125;
+  .cr-fail &#123; background: color-mix(in srgb, var(--color-error) 15%, var(--color-bg)); color: var(--color-error); &#125;
+
+  [data-theme="dark"] .cr-aaa &#123; background: color-mix(in srgb, var(--color-success) 35%, var(--color-bg)); &#125;
+  [data-theme="dark"] .cr-aa  &#123; background: color-mix(in srgb, var(--color-accent) 35%, var(--color-bg)); &#125;
+  [data-theme="dark"] .cr-aal &#123; background: color-mix(in srgb, var(--color-warning) 35%, var(--color-bg)); &#125;
+  [data-theme="dark"] .cr-fail &#123; background: color-mix(in srgb, var(--color-error) 35%, var(--color-bg)); &#125;
 </style>
