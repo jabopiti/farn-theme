@@ -130,34 +130,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &lt;div role="tabpanel" id="panel-details" aria-labelledby="tab-details" hidden&gt; &hellip; &lt;/div&gt;</code></pre>
 
   <h2>Badges &amp; Tags</h2>
-  <p>Solid Bloom/Forest palette fills, full opacity. Informational only, never interactive except for dismissible tags. No dark-mode overrides needed — each badge has its own opaque background.</p>
-  <table>
-    <thead><tr><th>Label</th><th>Class</th><th>Background token</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr><td>General</td><td><code>.badge-general</code></td><td><code>--bm0-sand</code></td><td>Neutral, uncategorised</td></tr>
-      <tr><td>Published</td><td><code>.badge-published</code></td><td><code>--bl3-moss</code></td><td>Active, stable, success</td></tr>
-      <tr><td>Draft</td><td><code>.badge-draft</code></td><td><code>--bl2-grain</code></td><td>In-progress, pending, warning</td></tr>
-      <tr><td>Archived</td><td><code>.badge-archived</code></td><td><code>--bl0-ember</code></td><td>Deprecated, removed, error</td></tr>
-      <tr><td>Beta</td><td><code>.badge-beta</code></td><td><code>--bl4-heather</code></td><td>Experimental, new feature</td></tr>
-      <tr><td>Research</td><td><code>.badge-research</code></td><td><code>--bl1-ochre</code></td><td>Discovery, annotation phase</td></tr>
-      <tr><td>Category</td><td><code>.badge-category</code></td><td><code>--fo2-forest</code></td><td>Primary content category label</td></tr>
-    </tbody>
-  </table>
-  <pre><code>.badge &#123;
-  display: inline-flex;
-  align-items: center;
-  height: 22px;
-  padding: 0 8px;
-  border-radius: var(--radius-sm);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-&#125;
-
-.badge-published &#123;
-  background: var(--bl3-moss);
-  color: var(--bm2-birch);
-&#125;</code></pre>
+  <p>Seven semantic variants — informational only, never interactive. Each badge uses an opaque palette fill so it reads correctly on any surface without dark-mode overrides. See the <a href="/components/badges">Badges documentation</a> for live demos, usage guidance, and full CSS reference.</p>
 
   <h2>Focus Styles</h2>
   <p>A single consistent focus ring across all interactive elements — defined once in <code>base.css</code>, applied everywhere via <code>:focus-visible</code>. Never remove focus styles.</p>
