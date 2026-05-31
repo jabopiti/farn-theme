@@ -55,13 +55,13 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-06 · Badges documentation page
-`status: in-progress` `effort: S` `branch: claude/next-task-planning-irPLH`
+`status: done` `effort: S` `branch: claude/next-task-planning-irPLH`
 
 **Gap:** Seven badge variants exist in `site/src/styles/site.css` but are undocumented on the site; consumers have no reference for which variant to use when.
 
-- [ ] Create `site/src/pages/components/badges.astro`
-- [ ] Document all 7 variants (general, published, draft, archived, beta, research, category) with live examples and usage guidance
-- [ ] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
+- [x] Create `site/src/pages/components/badges.astro`
+- [x] Document all 7 variants (general, published, draft, archived, beta, research, category) with live examples and usage guidance
+- [x] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
 
 ---
 
