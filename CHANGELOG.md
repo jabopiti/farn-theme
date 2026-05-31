@@ -7,6 +7,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Added
+- `tokens/motion.css`: `--duration-fast` (80ms), `--duration-base` (120ms), `--duration-slow` (200ms), `--duration-enter` (250ms), `--duration-reveal` (400ms), `--ease-default`, `--ease-out`, `--ease-spring` motion tokens (T-04)
+- `tokens/index.css`: `@import './motion.css'` added to the token import chain (T-04)
+
+### Changed
+- `tokens/base.css`, `site/src/styles/site.css`: all hardcoded `transition` durations and easing values replaced with `--duration-*` and `--ease-*` tokens — 17 declarations updated across 16 rule sets (T-04)
+- `CLAUDE.md`: build command updated to include `tokens/motion.css` in the `cat` concatenation (T-04)
+
 ### Documentation
 - `CLAUDE.md`: declared `site/` pages as the canonical component specification; removed ambiguity about external sources (T-03)
 - `CLAUDE.md`: Phase 4 quality gates now marked mandatory for all effort sizes, with explicit low-effort guidance for `XS` tasks (T-03)

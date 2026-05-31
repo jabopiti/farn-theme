@@ -1,0 +1,15 @@
+/* ── Farn — Motion tokens ─────────────────────────────────────────────── */
+
+:root {
+  /* Duration scale */
+  --duration-fast:   80ms;   /* Press / active states */
+  --duration-base:  120ms;   /* Standard hover interactions */
+  --duration-slow:  200ms;   /* Fill, colour, and indicator transitions */
+  --duration-enter: 250ms;   /* Enter / exit geometry (drawers, nav hide) */
+  --duration-reveal: 400ms;  /* Content reveal and stagger animations */
+
+  /* Easing */
+  --ease-default: ease;
+  --ease-out:     ease-out;
+  --ease-spring:  cubic-bezier(0.16, 1, 0.3, 1); /* overshoot / spring out */
+}

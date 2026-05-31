@@ -93,6 +93,21 @@
   --z-modal:   400;
   --z-toast:   500;
 }
+/* ── Farn — Motion tokens ─────────────────────────────────────────────── */
+
+:root {
+  /* Duration scale */
+  --duration-fast:   80ms;   /* Press / active states */
+  --duration-base:  120ms;   /* Standard hover interactions */
+  --duration-slow:  200ms;   /* Fill, colour, and indicator transitions */
+  --duration-enter: 250ms;   /* Enter / exit geometry (drawers, nav hide) */
+  --duration-reveal: 400ms;  /* Content reveal and stagger animations */
+
+  /* Easing */
+  --ease-default: ease;
+  --ease-out:     ease-out;
+  --ease-spring:  cubic-bezier(0.16, 1, 0.3, 1); /* overshoot / spring out */
+}
 /* ── Farn — Semantic tokens and surface patterns ──────────────────────── */
 /*                                                                           */
 /* Two-layer architecture:                                                   */
@@ -228,7 +243,7 @@ body {
   line-height: 1.7;
   background: var(--color-bg);
   color: var(--color-text);
-  transition: background-color 200ms ease, color 200ms ease;
+  transition: background-color var(--duration-slow) var(--ease-default), color var(--duration-slow) var(--ease-default);
 }
 
 img {
