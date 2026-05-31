@@ -189,7 +189,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-19 · Symmetric surface system
-`status: in-progress` `effort: M` `branch: claude/task-t-05-AbCGl`
+`status: done` `effort: M` `branch: claude/task-t-05-AbCGl`
 
 **Gap:** The current surface model (`light`, `dark`, `tinted`) is asymmetric and ambiguous: "tinted" has no dark-mode counterpart, there is no sunken/recessed surface, and it is unclear whether surfaces are absolute or relative to the current theme.
 
