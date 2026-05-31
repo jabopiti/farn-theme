@@ -20,7 +20,7 @@ CHANGELOG.md      Updated on every token or component change
 ## Build command
 
 ```bash
-cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/base.css > dist/farn.css
+cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css tokens/base.css > dist/farn.css
 ```
 
 Run after any change to a `tokens/` file.

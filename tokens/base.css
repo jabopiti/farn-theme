@@ -27,7 +27,15 @@ img {
 }
 
 a {
-  color: var(--color-accent);
+  color: var(--link-color);
+}
+
+a:visited {
+  color: var(--link-visited-color);
+}
+
+a:hover {
+  color: var(--link-hover-color);
 }
 
 /* ── Focus ─────────────────────────────────────────────────────────────────────── */

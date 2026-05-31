@@ -77,14 +77,14 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-08 · Interactive component tokens — buttons & links (Tier 3)
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/nifty-keller-ebzbq`
 
 **Gap:** No Tier 3 tokens exist; consumers who want to reskin buttons or links must override implementation details rather than declared intent.
 
-- [ ] Create `tokens/components.css` and add `--btn-*` tokens (background, text, border, radius, hover-background)
-- [ ] Add `@import './components.css';` to `tokens/index.css` and update the build command in `CLAUDE.md` to include `tokens/components.css` in the `cat` concatenation
-- [ ] Update `site/src/styles/site.css` button styles to consume these tokens instead of direct semantic token references
-- [ ] Rebuild `dist/farn.css`, update `CHANGELOG.md`, and document the tokens on the buttons component page
+- [x] Create `tokens/components.css` and add `--btn-*` tokens (background, text, border, radius, hover-background)
+- [x] Add `@import './components.css';` to `tokens/index.css` and update the build command in `CLAUDE.md` to include `tokens/components.css` in the `cat` concatenation
+- [x] Update `site/src/styles/site.css` button styles to consume these tokens instead of direct semantic token references
+- [x] Rebuild `dist/farn.css`, update `CHANGELOG.md`, and document the tokens on the buttons component page
 
 ---
 
