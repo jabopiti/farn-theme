@@ -189,7 +189,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-19 · Symmetric surface system
-`status: backlog` `effort: M`
+`status: in-progress` `effort: M` `branch: claude/task-t-05-AbCGl`
 
 **Gap:** The current surface model (`light`, `dark`, `tinted`) is asymmetric and ambiguous: "tinted" has no dark-mode counterpart, there is no sunken/recessed surface, and it is unclear whether surfaces are absolute or relative to the current theme.
 
@@ -204,10 +204,10 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 | `dark` | forced dark (override) | base dark bg |
 | `sunken` | recessed (inputs, code) | recessed (inputs, code) |
 
-- [ ] Audit `tokens/dark-light.css` and define the full symmetric token set for all surface contexts (bg, text, text-secondary, border, accent, accent-hover)
-- [ ] Rename `data-surface="tinted"` to `data-surface="elevated"` and add `data-surface="light-elevated"`, `data-surface="dark-elevated"`, and `data-surface="sunken"`
-- [ ] Verify that every semantic token (including link/accent colors and state colors) cascades correctly when a surface overrides the page theme
-- [ ] Update `CLAUDE.md` dark/light mode documentation and rebuild `dist/farn.css`
+- [x] Audit `tokens/dark-light.css` and define the full symmetric token set for all surface contexts (bg, text, text-secondary, border, accent, accent-hover)
+- [x] Replace asymmetric `light/dark/tinted` surfaces with symmetric `base/layer/overlay` model; make `[data-theme]` self-contained with `background: var(--color-bg)`; rename `--color-bg-elevated` → `--color-bg-panel` and `--color-bg-sunken` → `--color-bg-inset`
+- [x] Verify that every semantic token cascades correctly when a surface overrides the page theme
+- [x] Update `CLAUDE.md` dark/light mode documentation and rebuild `dist/farn.css`
 
 ---
 

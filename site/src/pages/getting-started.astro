@@ -70,13 +70,18 @@ import DocLayout from '../layouts/DocLayout.astro';
 &#125;</code></pre>
   <p>Default (no attribute) is light mode. System preference is respected when no manual choice is stored.</p>
 
-  <h2 id="surface-overrides">Surface Overrides</h2>
-  <p>Apply <code>data-surface</code> to any element to force a surface context independently of the page theme:</p>
-  <pre><code>&lt;section data-surface="dark"&gt;
-  &lt;!-- All children use dark surface tokens automatically --&gt;
-  &lt;button&gt;Primary action&lt;/button&gt;
+  <h2 id="surface-overrides">Surfaces and Theme Overrides</h2>
+  <p>Use <code>data-surface</code> to set a depth level on any element. All three surfaces are relative — they adapt automatically when the page theme switches:</p>
+  <pre><code>&lt;!-- depth level: adapts to current theme --&gt;
+&lt;div data-surface="base"&gt;&hellip;&lt;/div&gt;    &lt;!-- page-level bg --&gt;
+&lt;div data-surface="layer"&gt;&hellip;&lt;/div&gt;   &lt;!-- cards, panels --&gt;
+&lt;div data-surface="overlay"&gt;&hellip;&lt;/div&gt; &lt;!-- modals, dropdowns --&gt;
+
+&lt;!-- forced theme on any element: combine with data-surface --&gt;
+&lt;section data-theme="dark" data-surface="layer"&gt;
+  &lt;!-- dark panel regardless of page theme --&gt;
 &lt;/section&gt;</code></pre>
-  <p>Available values: <code>light</code>, <code>dark</code>, <code>tinted</code>. All child components inherit the re-scoped tokens with no extra markup.</p>
+  <p>All children inherit the re-scoped tokens automatically — no conditional logic needed.</p>
 
   <h2 id="using-tokens">Using Tokens</h2>
   <p>Reference semantic tokens in your component CSS — never raw palette tokens:</p>
@@ -90,7 +95,7 @@ import DocLayout from '../layouts/DocLayout.astro';
 &#125;
 
 .card &#123;
-  background: var(--color-bg-elevated); /* Linen (light) or Iron (dark) */
+  background: var(--color-bg-panel); /* Linen (light) or Iron (dark) */
   border-radius: var(--radius-lg);      /* 8px */
   padding: var(--space-md);
 &#125;</code></pre>

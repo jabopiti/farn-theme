@@ -57,7 +57,12 @@ h1 {
 ## Dark/light mode
 
 - Page-level: `data-theme="dark"` or `data-theme="light"` on `<html>`
-- Element override: `data-surface="light"`, `data-surface="dark"`, or `data-surface="tinted"` on any element (pre-T-19 nomenclature)
+- Any element: `data-theme="dark|light"` sets `background` + all semantic tokens (self-contained)
+- Depth: `data-surface="base|layer|overlay"` — relative to current theme
+  - `base` — page-level bg; resets context inside a deeper surface
+  - `layer` — card/panel level (mist in light, iron in dark)
+  - `overlay` — modal/dropdown level (sand in light, slate in dark)
+- Compose: `<section data-theme="dark" data-surface="layer">` = dark panel regardless of page theme
 - FOWT prevention: see `tokens/dark-light.css`
 
 ## Adding a color token

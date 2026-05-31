@@ -32,13 +32,13 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &#125;
 
 .card &#123;
-  background: var(--color-bg-elevated);
+  background: var(--color-bg-panel);
   border-radius: var(--radius-lg);  /* 8px */
   padding: 20px;
 &#125;
 
 /* Clickable card */
-.card:hover &#123; background: var(--color-bg-sunken); &#125;
+.card:hover &#123; background: var(--color-bg-inset); &#125;
 .card:focus-visible &#123;
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
@@ -172,18 +172,25 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &#125;</code></pre>
   <p><code>focus-visible</code> ensures the ring only appears for keyboard navigation — not on mouse click. <code>border-radius: inherit</code> follows the element's shape automatically.</p>
 
-  <h2>Dark / Light Sections</h2>
-  <p>Full-width page sections with explicit surface declarations. All child components inherit the correct tokens automatically — no extra markup needed.</p>
-  <pre><code>&lt;section data-surface="light"&gt; &hellip; &lt;/section&gt;
-&lt;section data-surface="dark"&gt; &hellip; &lt;/section&gt;
-&lt;section data-surface="tinted"&gt; &hellip; &lt;/section&gt;</code></pre>
+  <h2>Surfaces and Theme Sections</h2>
+  <p>Full-width sections use <code>data-surface</code> for depth levels and <code>data-theme</code> for forced theme context. All child components inherit the correct tokens automatically.</p>
+  <pre><code>&lt;!-- depth levels (relative to page theme) --&gt;
+&lt;section data-surface="base"&gt; &hellip; &lt;/section&gt;
+&lt;section data-surface="layer"&gt; &hellip; &lt;/section&gt;
+&lt;section data-surface="overlay"&gt; &hellip; &lt;/section&gt;
+
+&lt;!-- forced theme (sets background + all tokens) --&gt;
+&lt;section data-theme="dark"&gt; &hellip; &lt;/section&gt;
+&lt;section data-theme="dark" data-surface="layer"&gt; &hellip; &lt;/section&gt;</code></pre>
   <table>
-    <thead><tr><th>Surface</th><th>Background</th><th>Use</th></tr></thead>
+    <thead><tr><th>Attribute</th><th>Background</th><th>Use</th></tr></thead>
     <tbody>
-      <tr><td><code>light</code></td><td><code>--bm2-birch</code></td><td>Default. Most content sections.</td></tr>
-      <tr><td><code>dark</code></td><td><code>--in0-void</code></td><td>Hero, feature callouts, closing CTAs.</td></tr>
-      <tr><td><code>tinted</code></td><td><code>--bm1-mist</code></td><td>Subtle variation within a light page.</td></tr>
+      <tr><td><code>data-surface="base"</code></td><td><code>--color-bg</code></td><td>Page-level bg; resets context inside deeper surfaces.</td></tr>
+      <tr><td><code>data-surface="layer"</code></td><td>mist (light) / iron (dark)</td><td>Cards, sidebars, panels.</td></tr>
+      <tr><td><code>data-surface="overlay"</code></td><td>sand (light) / slate (dark)</td><td>Modals, dropdowns, floating elements.</td></tr>
+      <tr><td><code>data-theme="dark"</code></td><td><code>--in0-void</code></td><td>Force dark context on any element.</td></tr>
+      <tr><td><code>data-theme="light"</code></td><td><code>--bm2-birch</code></td><td>Force light context on any element.</td></tr>
     </tbody>
   </table>
-  <p>Sections are flush — no gap between them. The background colour change is the visual separator. Page rhythm example: <strong>dark hero &rarr; light features &rarr; tinted aside &rarr; dark CTA</strong>.</p>
+  <p>Sections are flush — no gap between them. The background change is the visual separator. Page rhythm example: <strong>dark hero &rarr; base features &rarr; layer aside &rarr; dark CTA</strong>.</p>
 </DocLayout>

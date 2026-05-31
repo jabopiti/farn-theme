@@ -120,7 +120,7 @@
   color: var(--bm2-birch);
 }
 .nav.filled .theme-toggle { color: var(--color-text-tertiary); }
-.nav.filled .theme-toggle:hover { background: var(--color-bg-elevated); color: var(--color-text); }
+.nav.filled .theme-toggle:hover { background: var(--color-bg-panel); color: var(--color-text); }
 .github-link {
   width: 36px; height: 36px;
   background: transparent;
@@ -139,7 +139,7 @@
   color: var(--bm2-birch);
 }
 .nav.filled .github-link { color: var(--color-text-tertiary); }
-.nav.filled .github-link:hover { background: var(--color-bg-elevated); color: var(--color-text); }
+.nav.filled .github-link:hover { background: var(--color-bg-panel); color: var(--color-text); }
 .nav-cta {
   height: 36px;
   padding: 0 16px;
@@ -182,7 +182,7 @@
   color: var(--bm2-birch);
 }
 .nav.filled .hamburger { color: var(--color-text-secondary); }
-.nav.filled .hamburger:hover { background: var(--color-bg-elevated); color: var(--color-text); }
+.nav.filled .hamburger:hover { background: var(--color-bg-panel); color: var(--color-text); }
 @media (max-width: 640px) {
   .hamburger { display: flex; }
   .nav-right { margin-left: auto; }
@@ -212,7 +212,7 @@
   border-bottom: 1px solid var(--color-border-subtle);
   transition: background 120ms ease, color 120ms ease;
 }
-.mobile-drawer a:hover { background: var(--color-bg-elevated); color: var(--color-accent); }
+.mobile-drawer a:hover { background: var(--color-bg-panel); color: var(--color-accent); }
 .mobile-drawer .drawer-cta {
   margin: var(--space-md);
   height: 48px;
@@ -341,12 +341,11 @@
 .btn:active { transform: scale(0.98); }
 .btn-p { background: var(--color-accent); color: var(--color-accent-text); }
 .btn-p:hover { background: var(--color-accent-hover); color: var(--color-accent-text); }
-.btn-s { background: var(--color-bg-sunken); color: var(--color-text); }
-.btn-s:hover { background: var(--color-bg-elevated); }
-[data-theme="dark"] .btn-s:hover,
-[data-surface="dark"] .btn-s:hover { background: var(--in2-slate); }
+.btn-s { background: var(--color-bg-inset); color: var(--color-text); }
+.btn-s:hover { background: var(--color-bg-panel); }
+[data-theme="dark"] .btn-s:hover { background: var(--in2-slate); }
 .btn-g { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-border); }
-.btn-g:hover { background: var(--color-bg-elevated); }
+.btn-g:hover { background: var(--color-bg-panel); }
 .btn-d { background: var(--color-error); color: var(--bm2-birch); }
 .btn-d:hover { background: var(--in0-void); }
 .btn-sm { height: 32px; padding: 0 12px; font-size: 12px; }

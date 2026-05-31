@@ -92,8 +92,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <pre><code>:root,
 [data-theme="light"] &#123;
   --color-bg:             var(--bm2-birch);           /* Page background        */
-  --color-bg-elevated:    var(--bm1-mist);            /* Cards, panels          */
-  --color-bg-sunken:      var(--bm0-sand);            /* Input fills            */
+  --color-bg-panel:       var(--bm1-mist);            /* Cards, panels          */
+  --color-bg-inset:       var(--bm0-sand);            /* Input fills            */
   --color-bg-code:        var(--fo3-deepwater);       /* Code block background  */
   --color-text:           var(--in0-void);            /* Primary text           */
   --color-text-secondary: var(--in2-slate);           /* Supporting text        */
@@ -113,8 +113,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h3>Dark Mode</h3>
   <pre><code>[data-theme="dark"] &#123;
   --color-bg:             var(--in0-void);
-  --color-bg-elevated:    var(--in1-iron);
-  --color-bg-sunken:      var(--in0-void);
+  --color-bg-panel:       var(--in1-iron);
+  --color-bg-inset:       var(--in0-void);
   --color-bg-code:        var(--in1-iron);
   --color-text:           var(--bm2-birch);
   --color-text-secondary: var(--bm1-mist);
@@ -131,11 +131,12 @@ import DocLayout from '../../layouts/DocLayout.astro';
   --color-success:        var(--bl3-moss);
 &#125;</code></pre>
 
-  <h3>Surface Overrides</h3>
-  <p>Apply <code>data-surface</code> to any element to force a surface context regardless of the page-level theme. All child components inherit the re-scoped tokens automatically.</p>
-  <pre><code>&lt;section data-surface="dark"&gt; &hellip; &lt;/section&gt;
-&lt;section data-surface="light"&gt; &hellip; &lt;/section&gt;
-&lt;section data-surface="tinted"&gt; &hellip; &lt;/section&gt;</code></pre>
+  <h3>Surface Depth</h3>
+  <p>Apply <code>data-surface</code> to set a depth level on any element. All surfaces are relative — they adapt when the page theme switches. Use <code>data-theme</code> on an element to force a specific theme context.</p>
+  <pre><code>&lt;section data-surface="base"&gt; &hellip; &lt;/section&gt;    &lt;!-- page-level --&gt;
+&lt;section data-surface="layer"&gt; &hellip; &lt;/section&gt;   &lt;!-- cards, panels --&gt;
+&lt;section data-surface="overlay"&gt; &hellip; &lt;/section&gt; &lt;!-- modals, dropdowns --&gt;
+&lt;section data-theme="dark" data-surface="layer"&gt; &hellip; &lt;/section&gt; &lt;!-- forced dark panel --&gt;</code></pre>
 
   <h2>Accessibility</h2>
   <table>

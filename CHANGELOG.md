@@ -22,6 +22,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `index.astro`: `.usage-light` dark-mode tint was `rgba(228,226,218,...)` (stale bm1-mist value); corrected to `rgba(233,230,220,...)` matching current `--bm1-mist`
 
 ### Changed
+- Replaced `data-surface="light"`, `"dark"`, `"tinted"` with a symmetric 3-surface relative model: `"base"` (page-level), `"layer"` (cards/panels), `"overlay"` (modals/dropdowns). All surfaces adapt automatically when the page theme switches (T-19)
+- `[data-theme="dark|light"]` now sets `background: var(--color-bg)` in addition to custom properties, making it self-contained when applied to any element — enabling `data-theme` + `data-surface` composition (T-19)
+- Renamed `--color-bg-elevated` → `--color-bg-panel` and `--color-bg-sunken` → `--color-bg-inset` throughout all token definitions and site styles (T-19)
 - Badge text tokens (`.badge-published`, `.badge-draft`, `.badge-archived`, `.badge-beta`, `.badge-research`, `.badge-category`) now use `var(--color-accent-text)` instead of direct `var(--bm2-birch)`
 - Birch Mist palette differentiation widened: `--bm0-sand` #E4E2DA → #D5D2C7, `--bm1-mist` (was `linen`) #EEEDE9 → #E9E6DC, `--bm2-birch` (was `parchment`) #F5F4F0 → #F7F6F3; lightness spread per step increases from ~5–6 pts to ~9–10 pts for better screen differentiation
 - `--bm1-linen` renamed to `--bm1-mist`; `--bm2-parchment` renamed to `--bm2-birch` — names now reflect the palette's birch/mist character
