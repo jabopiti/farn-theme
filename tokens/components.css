@@ -1,0 +1,40 @@
+/* ── Farn — Component tokens (Tier 3) ─────────────────────────────────── */
+/*                                                                           */
+/* Tier-3 tokens sit above the semantic layer and below implementation.      */
+/* Override these to retheme a component without touching semantic tokens    */
+/* that affect the rest of the system.                                       */
+
+:root {
+  /* ── Button tokens ──────────────────────────────────────────────────── */
+  --btn-radius:           var(--radius-md);
+  --btn-disabled-opacity: 0.5;
+
+  /* Primary */
+  --btn-p-bg:       var(--color-accent);
+  --btn-p-text:     var(--color-accent-text);
+  --btn-p-border:   transparent;
+  --btn-p-hover-bg: var(--color-accent-hover);
+
+  /* Secondary */
+  --btn-s-bg:       var(--color-bg-inset);
+  --btn-s-text:     var(--color-text);
+  --btn-s-border:   transparent;
+  --btn-s-hover-bg: var(--color-bg-panel); /* dark override: --btn-s-hover-bg in dark-light.css */
+
+  /* Ghost */
+  --btn-g-bg:       transparent;
+  --btn-g-text:     var(--color-text);
+  --btn-g-border:   var(--color-border);
+  --btn-g-hover-bg: var(--color-bg-panel);
+
+  /* Destructive — hover is theme-invariant (always near-black for emphasis) */
+  --btn-d-bg:       var(--color-error);
+  --btn-d-text:     var(--color-on-error);
+  --btn-d-border:   transparent;
+  --btn-d-hover-bg: var(--in0-void);
+
+  /* ── Link tokens ────────────────────────────────────────────────────── */
+  --link-color:         var(--color-accent);
+  --link-hover-color:   var(--color-accent-hover);
+  --link-visited-color: var(--color-accent);
+}

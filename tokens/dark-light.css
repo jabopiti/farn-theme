@@ -36,6 +36,7 @@
   --color-error:            var(--bl0-ember);
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
+  --color-on-error:         var(--bm2-birch);
 }
 
 /* ── Semantic tokens — dark ─────────────────────────────────────────── */
@@ -58,6 +59,8 @@
   --color-error:            var(--bl0-ember);
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
+  --color-on-error:         var(--bm2-birch);
+  --btn-s-hover-bg:         var(--in2-slate);
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */

@@ -22,7 +22,7 @@ CHANGELOG.md      Updated on every token or component change
 
 ```bash
 # Tokens only (no reset) — build this first
-cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css > dist/farn-tokens.css
+cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css
 
 # Full bundle (tokens + reset) — appends base.css to the tokens-only output
 cat dist/farn-tokens.css tokens/base.css > dist/farn.css

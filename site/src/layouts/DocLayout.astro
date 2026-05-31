@@ -56,6 +56,8 @@ function isActive(route: string) {
           <li><a href="/tokens/typography" class={isActive('/tokens/typography') ? 'active' : ''}>Typography</a></li>
           <li><a href="/tokens/spacing" class={isActive('/tokens/spacing') ? 'active' : ''}>Spacing</a></li>
           <li><a href="/components" class={isActive('/components') ? 'active' : ''}>Components</a></li>
+          <li><a href="/components/badges" class={isActive('/components/badges') ? 'active' : ''}>Badges</a></li>
+          <li><a href="/components/buttons" class={isActive('/components/buttons') ? 'active' : ''}>Buttons</a></li>
         </ul>
         <div class="nav-right">
           <a href="https://github.com/jabopiti/farn-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
@@ -86,6 +88,8 @@ function isActive(route: string) {
         <a href="/tokens/typography" class={`drawer-link${isActive('/tokens/typography') ? ' active' : ''}`}>Typography</a>
         <a href="/tokens/spacing" class={`drawer-link${isActive('/tokens/spacing') ? ' active' : ''}`}>Spacing</a>
         <a href="/components" class={`drawer-link${isActive('/components') ? ' active' : ''}`}>Components</a>
+        <a href="/components/badges" class={`drawer-link${isActive('/components/badges') ? ' active' : ''}`}>Badges</a>
+        <a href="/components/buttons" class={`drawer-link${isActive('/components/buttons') ? ' active' : ''}`}>Buttons</a>
       </nav>
       <a href="/" class="drawer-cta">Docs</a>
     </div>
@@ -178,7 +182,9 @@ function isActive(route: string) {
   /* ── Farn token imports ──────────────────────────────────────────────── */
   @import '../../../tokens/colors.css';
   @import '../../../tokens/spacing.css';
+  @import '../../../tokens/motion.css';
   @import '../../../tokens/dark-light.css';
+  @import '../../../tokens/components.css';
   @import '../../../tokens/base.css';
   @import '../styles/site.css';
 
