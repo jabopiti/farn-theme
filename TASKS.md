@@ -359,7 +359,7 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 **Gap:** No table styles exist anywhere in the system; tabular data is one of the most common UI patterns and must be reinvented by every consumer.
 
 - [ ] Add `.table` base class with border, cell padding, and header styles consuming semantic tokens
-- [ ] Add `.table-striped` variant using `--color-bg-elevated` on alternating rows
+- [ ] Add `.table-striped` variant using `--color-bg-panel` on alternating rows
 - [ ] Document the `overflow-x: auto` scroll wrapper pattern for narrow viewports
 - [ ] Document on a tables component page
 

@@ -199,7 +199,7 @@
 [data-surface="overlay"][data-theme="dark"] {
   background:       var(--in2-slate);
   --color-bg:       var(--in2-slate);
-  --color-bg-panel: var(--in2-slate); /* Iron Night ceiling for this context */
+  --color-bg-panel: var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
   --color-bg-inset: var(--in1-iron);
 }
 /* ── Farn — Base reset and global styles ──────────────────────────────── */
