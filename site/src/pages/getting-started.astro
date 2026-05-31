@@ -25,18 +25,24 @@ import DocLayout from '../layouts/DocLayout.astro';
   <p>Link directly from jsDelivr. Replace <code>@0.1.0</code> with the latest version tag.</p>
   <pre><code>&lt;link rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn.css"&gt;</code></pre>
-  <p><code>dist/farn.css</code> is a single concatenated file containing palette tokens, semantic tokens, typography, spacing, and base resets.</p>
+  <p><code>dist/farn.css</code> is a single concatenated file containing palette tokens, semantic tokens, typography, spacing, motion tokens, and the base reset.</p>
+  <p>If you manage your own CSS reset, use the tokens-only bundle instead:</p>
+  <pre><code>&lt;link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn-tokens.css"&gt;</code></pre>
+  <p><code>dist/farn-tokens.css</code> includes all tokens but omits <code>base.css</code> (box-sizing reset, smooth scroll, focus ring, reduced-motion guard).</p>
 
   <h2 id="what-gets-loaded">What Gets Loaded</h2>
-  <p><code>farn.css</code> bundles five layers in order:</p>
+  <p><code>farn.css</code> bundles six layers in order:</p>
   <ol>
     <li><code>colors.css</code> — 17 palette tokens across four palettes</li>
     <li><code>typography.css</code> — font-family tokens and scale reference</li>
     <li><code>spacing.css</code> — space scale, layout widths, border radius, z-index</li>
+    <li><code>motion.css</code> — duration scale and easing tokens</li>
     <li><code>dark-light.css</code> — semantic token layer with dark/light switching</li>
     <li><code>base.css</code> — box-sizing reset, smooth scroll, focus ring, reduced-motion</li>
   </ol>
-  <p>Fonts are not bundled in <code>farn.css</code>. Load them separately via Google Fonts.</p>
+  <p><code>farn-tokens.css</code> is the same bundle without <code>base.css</code>.</p>
+  <p>Fonts are not bundled. Load them separately via Google Fonts.</p>
 
   <h2 id="load-fonts">Load Fonts</h2>
   <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;

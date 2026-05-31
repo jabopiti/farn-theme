@@ -25,8 +25,17 @@ Farn is a zero-dependency, pure CSS design token library for projects that want 
 Add one `<link>` to your HTML:
 
 ```html
+<!-- Full bundle: tokens + base reset -->
 <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn.css">
+```
+
+If you manage your own CSS reset, use the tokens-only bundle:
+
+```html
+<!-- Tokens only: no base reset -->
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn-tokens.css">
 ```
 
 > **Version tip:** Replace `0.1.0` with the [latest release tag](https://github.com/jabopiti/farn-theme/releases) to stay current, or pin to a specific version for stability.

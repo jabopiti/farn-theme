@@ -12,6 +12,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `tokens/dark-light.css`: `--color-on-error` semantic token (text on error/destructive backgrounds; maps to `--bm2-birch` in both themes) and `--btn-s-hover-bg` dark-mode override (`var(--in2-slate)`) (T-08)
 - `tokens/index.css`: `@import './components.css'` added to the token import chain (T-08)
 - `site/src/pages/components/buttons.astro`: buttons documentation page with live demos of all 4 variants, 3 sizes, disabled states, link-button pattern, full `--btn-*` token reference table, and override examples (T-08)
+- `dist/farn-tokens.css`: tokens-only build artifact — palette tokens, typography, spacing, motion, semantic tokens, and component tokens without the base reset (`base.css`); now includes `tokens/components.css` (T-17 + T-08)
 - `site/src/pages/tokens/colors.astro`: full WCAG 2.1 contrast matrix covering all 54 semantic foreground/background token pairs across light and dark modes, with AAA/AA/AA Large/Fail ratings (T-07)
 - `site/src/pages/components/badges.astro`: dedicated badges documentation page with live demos of all 7 variants, usage guidance, anatomy reference, and full CSS snippet (T-06)
 - `tokens/motion.css`: `--duration-fast` (80ms), `--duration-base` (120ms), `--duration-slow` (200ms), `--duration-enter` (250ms), `--duration-reveal` (400ms), `--ease-default`, `--ease-out`, `--ease-spring` motion tokens (T-04)
@@ -20,7 +21,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ### Changed
 - `site/src/styles/site.css`: button variant rules updated to consume `--btn-*` Tier-3 tokens; `.btn` base class changed from `border: none` to `border: 1.5px solid transparent` so ghost border renders via token; dark-mode `[data-theme="dark"] .btn-s:hover` override removed (now handled by `--btn-s-hover-bg` in `dark-light.css`); disabled state added via `--btn-disabled-opacity` (T-08)
 - `tokens/base.css`: naked `<a>` rule updated to consume `--link-color`, `--link-hover-color`, and `--link-visited-color` tokens (T-08)
-- `CLAUDE.md`: build command updated to include `tokens/components.css` in the `cat` concatenation (T-08)
+- `CLAUDE.md`: build command updated to include `tokens/components.css` in the tokens-only artifact step (T-08)
 - `tokens/base.css`, `site/src/styles/site.css`: all hardcoded `transition` durations and easing values replaced with `--duration-*` and `--ease-*` tokens — 17 declarations updated across 16 rule sets (T-04)
 - `CLAUDE.md`: build command updated to include `tokens/motion.css` in the `cat` concatenation (T-04)
 
@@ -32,6 +33,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - Extracted shared `Footer` component to `site/src/components/Footer.astro`; `DocLayout.astro` and `index.astro` now use `<Footer>` with a default slot for context-specific nav links (T-01)
 
 ### Fixed
+- `index.astro`: `.usage-dark` pill in dark mode now uses `var(--in0-void)` background and `var(--bm0-sand)` text; previously used a semi-transparent `--in1-iron` that blended into the card surface, making the pill invisible
 - `site.css`: `.btn-d:hover` was using hardcoded `#a8343e`; replaced with `var(--in0-void)`
 - `site.css`: `.hamburger` color and hover background were using `rgba(245,244,240,...)` (stale bm2-parchment value `#F5F4F0`); corrected to `rgba(247,246,243,...)` matching current `--bm2-birch`
 - `site.css`: `.hamburger:hover` color was `var(--bm2-parchment)` (undefined token); replaced with `var(--bm2-birch)`

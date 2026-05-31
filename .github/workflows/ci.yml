@@ -21,13 +21,23 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Verify dist/farn.css is up-to-date
+      - name: Verify dist/farn-tokens.css is up-to-date
         run: |
           cat tokens/colors.css tokens/typography.css tokens/spacing.css \
-              tokens/motion.css tokens/dark-light.css tokens/components.css tokens/base.css > /tmp/farn-rebuilt.css
+              tokens/motion.css tokens/dark-light.css tokens/components.css > /tmp/farn-tokens-rebuilt.css
+          if ! diff -q dist/farn-tokens.css /tmp/farn-tokens-rebuilt.css > /dev/null; then
+            echo "dist/farn-tokens.css is out of sync with tokens/. Rebuild:"
+            echo "  cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css"
+            diff dist/farn-tokens.css /tmp/farn-tokens-rebuilt.css
+            exit 1
+          fi
+
+      - name: Verify dist/farn.css is up-to-date
+        run: |
+          cat dist/farn-tokens.css tokens/base.css > /tmp/farn-rebuilt.css
           if ! diff -q dist/farn.css /tmp/farn-rebuilt.css > /dev/null; then
-            echo "dist/farn.css is out of sync with tokens/. Rebuild:"
-            echo "  cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css tokens/base.css > dist/farn.css"
+            echo "dist/farn.css is out of sync with dist/farn-tokens.css. Rebuild:"
+            echo "  cat dist/farn-tokens.css tokens/base.css > dist/farn.css"
             diff dist/farn.css /tmp/farn-rebuilt.css
             exit 1
           fi

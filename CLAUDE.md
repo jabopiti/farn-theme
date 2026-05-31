@@ -12,7 +12,8 @@ tokens/           CSS source — edit here, not in dist/
   base.css        Reset, focus, reduced-motion
   index.css       @import chain (used by the site)
 dist/
-  farn.css        Built output — concatenation of all tokens/*.css
+  farn.css        Full bundle — tokens + base reset
+  farn-tokens.css Tokens only — no base reset (for consumers with their own reset)
 site/             Astro documentation site
 CHANGELOG.md      Updated on every token or component change
 ```
@@ -20,10 +21,14 @@ CHANGELOG.md      Updated on every token or component change
 ## Build command
 
 ```bash
-cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css tokens/base.css > dist/farn.css
+# Tokens only (no reset) — build this first
+cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css
+
+# Full bundle (tokens + reset) — appends base.css to the tokens-only output
+cat dist/farn-tokens.css tokens/base.css > dist/farn.css
 ```
 
-Run after any change to a `tokens/` file.
+Run both after any change to a `tokens/` file (in order — `farn-tokens.css` first).
 
 ## CSS naming conventions
 
