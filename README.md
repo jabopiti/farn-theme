@@ -77,16 +77,16 @@ Then use the tokens:
 
 | Token | Light | Dark |
 |---|---|---|
-| `--color-bg` | parchment | void |
-| `--color-bg-elevated` | linen | iron |
-| `--color-bg-sunken` | sand | slate |
-| `--color-text` | void | parchment |
-| `--color-text-secondary` | slate | sand |
-| `--color-text-tertiary` | ash | ash |
-| `--color-border` | iron | slate |
-| `--color-accent` | fern | sage |
-| `--color-accent-hover` | forest | fern |
-| `--color-accent-text` | parchment | parchment |
+| `--color-bg` | birch | void |
+| `--color-bg-panel` | mist | iron |
+| `--color-bg-inset` | sand | void |
+| `--color-text` | void | birch |
+| `--color-text-secondary` | slate | mist |
+| `--color-text-tertiary` | ash | sand |
+| `--color-border` | ash | slate |
+| `--color-accent` | fern | fern |
+| `--color-accent-hover` | forest | sage |
+| `--color-accent-text` | birch | birch |
 
 ### Dark/light mode
 
@@ -94,12 +94,16 @@ Set `data-theme="dark"` or `data-theme="light"` on `<html>`. The FOWT prevention
 
 ### Surface overrides
 
-Force a surface context on any element, independent of the page theme:
+Set a depth level on any element — all surfaces adapt to the current page theme automatically:
 
 ```html
-<section data-surface="dark">Always dark background</section>
-<section data-surface="light">Always light background</section>
-<section data-surface="tinted">Slightly tinted light background</section>
+<section data-surface="base">Page-level bg (resets inside deeper surfaces)</section>
+<section data-surface="layer">Card/panel level — mist (light) or iron (dark)</section>
+<section data-surface="overlay">Modal/dropdown level — sand (light) or slate (dark)</section>
+
+<!-- Force a specific theme on any element -->
+<section data-theme="dark">Always dark</section>
+<section data-theme="dark" data-surface="layer">Dark panel regardless of page theme</section>
 ```
 
 ---

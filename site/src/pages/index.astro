@@ -193,7 +193,7 @@ import Footer from '../components/Footer.astro';
     display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-xl);
   }
   @media (max-width: 640px) { .type-specimen { grid-template-columns: 1fr; } }
-  .specimen-card { background: var(--color-bg-elevated); border-radius: var(--radius-lg); padding: var(--space-lg); }
+  .specimen-card { background: var(--color-bg-panel); border-radius: var(--radius-lg); padding: var(--space-lg); }
   .specimen-label {
     font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: var(--space-md);
@@ -224,10 +224,10 @@ import Footer from '../components/Footer.astro';
     display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl);
   }
   .card {
-    background: var(--color-bg-elevated); border-radius: var(--radius-lg); padding: 20px;
+    background: var(--color-bg-panel); border-radius: var(--radius-lg); padding: 20px;
     transition: background-color 180ms ease; text-decoration: none; display: block; color: inherit;
   }
-  .card:hover { background: var(--color-bg-sunken); }
+  .card:hover { background: var(--color-bg-inset); }
   .card-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
   .card-title { font-size: 15px; font-weight: 600; color: var(--color-text); margin-bottom: 6px; line-height: 1.3; }
   .card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 14px; }
@@ -262,17 +262,17 @@ import Footer from '../components/Footer.astro';
   .field-input {
     height: 48px; padding: 0 14px;
     border: 1.5px solid transparent; border-radius: var(--radius-md);
-    background: var(--color-bg-elevated); font-family: var(--font-body);
+    background: var(--color-bg-panel); font-family: var(--font-body);
     font-size: 14px; color: var(--color-text);
     transition: background 180ms ease, border-color 150ms ease, box-shadow 150ms ease; outline: none;
   }
   .field-input::placeholder { color: var(--color-text-tertiary); }
-  .field-input:hover { background: var(--color-bg-sunken); }
+  .field-input:hover { background: var(--color-bg-inset); }
   .field-input:focus {
-    background: var(--color-bg-sunken); border-color: var(--color-accent);
+    background: var(--color-bg-inset); border-color: var(--color-accent);
   }
-  [data-theme="dark"] .field-input:hover { background: var(--kn2-slate); }
-  [data-theme="dark"] .field-input:focus { background: var(--kn2-slate); }
+  [data-theme="dark"] .field-input:hover { background: var(--in2-slate); }
+  [data-theme="dark"] .field-input:focus { background: var(--in2-slate); }
   .field-error .field-input { border-color: var(--color-error); }
   .field-hint { font-size: 11px; color: var(--color-text-tertiary); }
   .field-error-msg { font-size: 11px; color: var(--color-error); }
@@ -302,7 +302,7 @@ import Footer from '../components/Footer.astro';
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent);
   }
   .attribution-demo {
-    background: var(--color-bg-elevated); border-radius: var(--radius-lg);
+    background: var(--color-bg-panel); border-radius: var(--radius-lg);
     padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start;
   }
   [data-theme="dark"] .attribution-demo { border: 1px solid var(--color-border); }
@@ -375,7 +375,7 @@ import Footer from '../components/Footer.astro';
   .palette-divider { height: 1px; background: var(--color-border-subtle); margin: var(--space-4xl) 0; }
 
   .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-sm); }
-  .token-card { background: var(--color-bg-elevated); border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 150ms ease; }
+  .token-card { background: var(--color-bg-panel); border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 150ms ease; }
   .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
   [data-theme="dark"] .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
   .token-color-strip { height: 56px; position: relative; }
@@ -407,7 +407,7 @@ import Footer from '../components/Footer.astro';
 
   .semantic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
   @media (max-width: 640px) { .semantic-grid { grid-template-columns: 1fr; } }
-  .semantic-mode { background: var(--color-bg-elevated); border-radius: var(--radius-lg); padding: var(--space-md); }
+  .semantic-mode { background: var(--color-bg-panel); border-radius: var(--radius-lg); padding: var(--space-md); }
   .semantic-mode-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-md); }
   .semantic-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--color-border-subtle); }
   .semantic-row:last-child { border-bottom: none; }
@@ -418,7 +418,7 @@ import Footer from '../components/Footer.astro';
   .wcag-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .wcag-table th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); border-bottom: 1px solid var(--color-border-subtle); }
   .wcag-table td { padding: 10px 14px; border-bottom: 1px solid var(--color-border-subtle); color: var(--color-text-secondary); vertical-align: middle; }
-  .wcag-table tr:hover td { background: var(--color-bg-elevated); }
+  .wcag-table tr:hover td { background: var(--color-bg-panel); }
   .wcag-pair { display: flex; align-items: center; gap: 8px; }
   .wcag-dot-wrap { display: flex; gap: 2px; }
   .wcag-dot { width: 16px; height: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(0,0,0,0.08); }
@@ -501,7 +501,7 @@ import Footer from '../components/Footer.astro';
 <div id="view-ds">
 
 <!-- Hero -->
-<section class="hero" data-surface="dark" aria-label="Hero">
+<section class="hero" data-theme="dark" aria-label="Hero">
   <div class="hero-inner">
     <p class="hero-eyebrow">Design System — v0.1.0</p>
     <h1 class="hero-title">Sharp.<br><em>Warm.</em><br>Intellectual.</h1>
@@ -532,7 +532,7 @@ import Footer from '../components/Footer.astro';
 </section>
 
 <!-- About -->
-<section id="about" data-surface="dark">
+<section id="about" data-theme="dark">
   <div class="container">
     <div class="about-grid">
       <div class="about-text">
@@ -610,7 +610,7 @@ import Footer from '../components/Footer.astro';
 </section>
 
 <!-- Components -->
-<section data-surface="tinted" id="components">
+<section data-surface="layer" id="components">
   <div class="container">
     <p class="section-eyebrow reveal">Components</p>
     <h2 class="section-title reveal">The building blocks</h2>
@@ -713,26 +713,26 @@ import Footer from '../components/Footer.astro';
 <section id="surfaces" style="padding:0;overflow:hidden">
   <div style="max-width:var(--width-content);margin:0 auto;padding:0 var(--space-lg)">
     <p class="section-eyebrow reveal" style="padding-top:var(--space-3xl)">Surfaces</p>
-    <h2 class="section-title reveal">Light, dark, tinted.</h2>
-    <p class="section-desc reveal">Every section declares its own surface context. Components inherit the correct token values automatically — no conditional logic needed.</p>
+    <h2 class="section-title reveal">Base, layer, overlay.</h2>
+    <p class="section-desc reveal">Three depth levels, all relative to the current theme. Apply <code>data-surface</code> to any element — tokens cascade automatically. Combine with <code>data-theme</code> to force a specific context.</p>
   </div>
   <div class="surface-demo-grid reveal">
-    <div class="surface-demo-cell" data-surface="light">
-      <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:8px">Light surface</p>
-      <h4>data-surface="light"</h4>
-      <p>Default page surface. Most content sections live here.</p>
+    <div class="surface-demo-cell" data-surface="base">
+      <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:8px">Base</p>
+      <h4>data-surface="base"</h4>
+      <p>Page-level background. Resets to base within any deeper surface context.</p>
       <button class="mini-btn" style="background:var(--color-accent);color:var(--color-accent-text)">Primary</button>
     </div>
-    <div class="surface-demo-cell" data-surface="dark">
-      <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:8px">Dark surface</p>
-      <h4>data-surface="dark"</h4>
-      <p>Hero, feature callouts, closing CTAs. High contrast.</p>
+    <div class="surface-demo-cell" data-surface="layer">
+      <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:8px">Layer</p>
+      <h4>data-surface="layer"</h4>
+      <p>Cards, sidebars, panels. One depth level above the page.</p>
       <button class="mini-btn" style="background:var(--color-accent);color:var(--color-accent-text)">Primary</button>
     </div>
-    <div class="surface-demo-cell" data-surface="tinted">
-      <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:8px">Tinted surface</p>
-      <h4>data-surface="tinted"</h4>
-      <p>Subtle variation. Subsections, asides, secondary content.</p>
+    <div class="surface-demo-cell" data-surface="overlay">
+      <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:8px">Overlay</p>
+      <h4>data-surface="overlay"</h4>
+      <p>Modals, dropdowns, floating elements. Highest depth level.</p>
       <button class="mini-btn" style="background:var(--color-accent);color:var(--color-accent-text)">Primary</button>
     </div>
   </div>
@@ -867,19 +867,19 @@ import Footer from '../components/Footer.astro';
         <div class="semantic-mode">
           <div class="semantic-mode-label" style="color:var(--color-accent)">Light mode</div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#F7F6F3"></div><span class="semantic-token-name">--color-bg</span><span class="semantic-resolves">→ birch</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#E9E6DC"></div><span class="semantic-token-name">--color-bg-elevated</span><span class="semantic-resolves">→ mist</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#D5D2C7"></div><span class="semantic-token-name">--color-bg-sunken</span><span class="semantic-resolves">→ sand</span></div>
+          <div class="semantic-row"><div class="semantic-dot" style="background:#E9E6DC"></div><span class="semantic-token-name">--color-bg-panel</span><span class="semantic-resolves">→ mist</span></div>
+          <div class="semantic-row"><div class="semantic-dot" style="background:#D5D2C7"></div><span class="semantic-token-name">--color-bg-inset</span><span class="semantic-resolves">→ sand</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-text</span><span class="semantic-resolves">→ void</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#4B5563"></div><span class="semantic-token-name">--color-text-secondary</span><span class="semantic-resolves">→ slate</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#6B7280"></div><span class="semantic-token-name">--color-text-tertiary</span><span class="semantic-resolves">→ ash</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#3E7A62"></div><span class="semantic-token-name">--color-accent</span><span class="semantic-resolves">→ fern</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#2D5E4A"></div><span class="semantic-token-name">--color-accent-hover</span><span class="semantic-resolves">→ forest</span></div>
         </div>
-        <div class="semantic-mode" data-surface="dark">
+        <div class="semantic-mode" data-theme="dark">
           <div class="semantic-mode-label" style="color:var(--color-accent)">Dark mode</div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-bg</span><span class="semantic-resolves">→ void</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#374151"></div><span class="semantic-token-name">--color-bg-elevated</span><span class="semantic-resolves">→ iron</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-bg-sunken</span><span class="semantic-resolves">→ void</span></div>
+          <div class="semantic-row"><div class="semantic-dot" style="background:#374151"></div><span class="semantic-token-name">--color-bg-panel</span><span class="semantic-resolves">→ iron</span></div>
+          <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-bg-inset</span><span class="semantic-resolves">→ void</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#F7F6F3"></div><span class="semantic-token-name">--color-text</span><span class="semantic-resolves">→ birch</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#E9E6DC"></div><span class="semantic-token-name">--color-text-secondary</span><span class="semantic-resolves">→ mist</span></div>
           <div class="semantic-row"><div class="semantic-dot" style="background:#D5D2C7"></div><span class="semantic-token-name">--color-text-tertiary</span><span class="semantic-resolves">→ sand</span></div>

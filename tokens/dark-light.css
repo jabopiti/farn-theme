@@ -4,8 +4,10 @@
 /*   Layer 1 — palette (colors.css): raw color values, never used directly  */
 /*   Layer 2 — semantic (this file): purpose-mapped aliases                  */
 /*                                                                           */
-/* Dark/light mode: controlled via [data-theme] on <html>                   */
-/* Surface override: use data-surface="light|dark|tinted" on any element     */
+/* Theme control:                                                             */
+/*   Page-level : data-theme="dark" or data-theme="light" on <html>         */
+/*   Any element: data-theme="dark|light" — sets background + all tokens    */
+/*   Depth      : data-surface="base|layer|overlay" — relative to theme     */
 /*                                                                           */
 /* FOWT prevention: add this inline script before <body>:                    */
 /*   const t = localStorage.getItem('farn-theme');                           */
@@ -16,100 +18,92 @@
 /* ── Semantic tokens — light (default) ───────────────────────────────── */
 :root,
 [data-theme="light"] {
-  --color-bg:             var(--bm2-birch);
-  --color-bg-elevated:    var(--bm1-mist);
-  --color-bg-sunken:      var(--bm0-sand);
-  --color-text:           var(--in0-void);
-  --color-text-secondary: var(--in2-slate);
-  --color-text-tertiary:  var(--in3-ash);
-  --color-border:         var(--in3-ash);
-  --color-border-strong:  var(--in1-iron);
-  --color-border-subtle:  rgba(55,65,81,0.12);
-  --color-ghost-border:   rgba(55,65,81,0.25);
-  --color-bg-code:        var(--fo3-deepwater);
-  --color-accent:         var(--fo1-fern);
-  --color-accent-hover:   var(--fo2-forest);
-  --color-accent-text:    var(--bm2-birch);
-  --color-error:          var(--bl0-ember);
-  --color-warning:        var(--bl2-grain);
-  --color-success:        var(--bl3-moss);
+  background:               var(--color-bg);
+  --color-bg:               var(--bm2-birch);
+  --color-bg-panel:         var(--bm1-mist);
+  --color-bg-inset:         var(--bm0-sand);
+  --color-text:             var(--in0-void);
+  --color-text-secondary:   var(--in2-slate);
+  --color-text-tertiary:    var(--in3-ash);
+  --color-border:           var(--in3-ash);
+  --color-border-strong:    var(--in1-iron);
+  --color-border-subtle:    rgba(55,65,81,0.12);
+  --color-ghost-border:     rgba(55,65,81,0.25);
+  --color-bg-code:          var(--fo3-deepwater);
+  --color-accent:           var(--fo1-fern);
+  --color-accent-hover:     var(--fo2-forest);
+  --color-accent-text:      var(--bm2-birch);
+  --color-error:            var(--bl0-ember);
+  --color-warning:          var(--bl2-grain);
+  --color-success:          var(--bl3-moss);
 }
 
 /* ── Semantic tokens — dark ─────────────────────────────────────────── */
 [data-theme="dark"] {
-  --color-bg:             var(--in0-void);
-  --color-bg-elevated:    var(--in1-iron);
-  --color-bg-sunken:      var(--in0-void);
-  --color-text:           var(--bm2-birch);
-  --color-text-secondary: var(--bm1-mist);
-  --color-text-tertiary:  var(--bm0-sand);
-  --color-border:         var(--in2-slate);
-  --color-border-strong:  var(--bm0-sand);
-  --color-border-subtle:  rgba(75,85,99,0.25);
-  --color-ghost-border:   rgba(247,246,243,0.25);
-  --color-bg-code:        var(--in1-iron);
-  --color-accent:         var(--fo1-fern);
-  --color-accent-hover:   var(--fo0-sage);
-  --color-accent-text:    var(--bm2-birch);
-  --color-error:          var(--bl0-ember);
-  --color-warning:        var(--bl2-grain);
-  --color-success:        var(--bl3-moss);
+  background:               var(--color-bg);
+  --color-bg:               var(--in0-void);
+  --color-bg-panel:         var(--in1-iron);
+  --color-bg-inset:         var(--in0-void);
+  --color-text:             var(--bm2-birch);
+  --color-text-secondary:   var(--bm1-mist);
+  --color-text-tertiary:    var(--bm0-sand);
+  --color-border:           var(--in2-slate);
+  --color-border-strong:    var(--bm0-sand);
+  --color-border-subtle:    rgba(75,85,99,0.25);
+  --color-ghost-border:     rgba(247,246,243,0.25);
+  --color-bg-code:          var(--in1-iron);
+  --color-accent:           var(--fo1-fern);
+  --color-accent-hover:     var(--fo0-sage);
+  --color-accent-text:      var(--bm2-birch);
+  --color-error:            var(--bl0-ember);
+  --color-warning:          var(--bl2-grain);
+  --color-success:          var(--bl3-moss);
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */
-/* Apply data-surface to any element to force a surface context             */
-/* regardless of the page-level dark/light theme.                           */
+/* All surfaces are relative — they adapt to the current data-theme.         */
+/* Only tokens that differ from the inherited theme values are declared.     */
+/* Each surface that changes in dark mode has two override selectors:        */
+/*   [data-theme="dark"] [data-surface]  — theme on ancestor element         */
+/*   [data-surface][data-theme="dark"]   — theme on same element             */
 
-[data-surface="light"] {
+/* base — resets to page-level bg (useful inside deeper surface contexts) */
+[data-surface="base"] {
   background: var(--bm2-birch);
-  --color-bg:             var(--bm2-birch);
-  --color-bg-elevated:    var(--bm1-mist);
-  --color-bg-sunken:      var(--bm0-sand);
-  --color-text:           var(--in0-void);
-  --color-text-secondary: var(--in2-slate);
-  --color-text-tertiary:  var(--in3-ash);
-  --color-border:         var(--in3-ash);
-  --color-border-strong:  var(--in1-iron);
-  --color-border-subtle:  rgba(55,65,81,0.12);
-  --color-ghost-border:   rgba(55,65,81,0.25);
-  --color-bg-code:        var(--fo3-deepwater);
-  --color-accent:         var(--fo1-fern);
-  --color-accent-hover:   var(--fo2-forest);
-  --color-accent-text:    var(--bm2-birch);
+  --color-bg: var(--bm2-birch);
 }
 
-[data-surface="dark"] {
+[data-theme="dark"] [data-surface="base"],
+[data-surface="base"][data-theme="dark"] {
   background: var(--in0-void);
-  --color-bg:             var(--in0-void);
-  --color-bg-elevated:    var(--in1-iron);
-  --color-bg-sunken:      var(--in0-void);
-  --color-text:           var(--bm2-birch);
-  --color-text-secondary: var(--bm1-mist);
-  --color-text-tertiary:  var(--bm0-sand);
-  --color-border:         var(--in2-slate);
-  --color-border-strong:  var(--bm0-sand);
-  --color-border-subtle:  rgba(75,85,99,0.25);
-  --color-ghost-border:   rgba(247,246,243,0.25);
-  --color-bg-code:        var(--in1-iron);
-  --color-accent:         var(--fo1-fern);
-  --color-accent-hover:   var(--fo0-sage);
-  --color-accent-text:    var(--bm2-birch);
+  --color-bg: var(--in0-void);
 }
 
-[data-surface="tinted"] {
-  background: var(--bm1-mist);
-  --color-bg:             var(--bm1-mist);
-  --color-bg-elevated:    var(--bm2-birch);
-  --color-bg-sunken:      var(--bm0-sand);
-  --color-text:           var(--in0-void);
-  --color-text-secondary: var(--in2-slate);
-  --color-text-tertiary:  var(--in3-ash);
-  --color-border:         var(--in3-ash);
-  --color-border-strong:  var(--in1-iron);
-  --color-border-subtle:  rgba(55,65,81,0.12);
-  --color-ghost-border:   rgba(55,65,81,0.25);
-  --color-bg-code:        var(--fo3-deepwater);
-  --color-accent:         var(--fo1-fern);
-  --color-accent-hover:   var(--fo2-forest);
-  --color-accent-text:    var(--bm2-birch);
+/* layer — cards, sidebars, panels */
+[data-surface="layer"] {
+  background:       var(--bm1-mist);
+  --color-bg:       var(--bm1-mist);
+  --color-bg-panel: var(--bm2-birch);
+}
+
+[data-theme="dark"] [data-surface="layer"],
+[data-surface="layer"][data-theme="dark"] {
+  background:       var(--in1-iron);
+  --color-bg:       var(--in1-iron);
+  --color-bg-panel: var(--in2-slate);
+  --color-bg-code:  var(--in2-slate);
+}
+
+/* overlay — modals, dropdowns, floating elements */
+[data-surface="overlay"] {
+  background: var(--bm0-sand);
+  --color-bg: var(--bm0-sand);
+}
+
+[data-theme="dark"] [data-surface="overlay"],
+[data-surface="overlay"][data-theme="dark"] {
+  background:       var(--in2-slate);
+  --color-bg:       var(--in2-slate);
+  --color-bg-panel: var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
+  --color-bg-inset: var(--in1-iron);
 }

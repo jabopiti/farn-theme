@@ -189,7 +189,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-19 · Symmetric surface system
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/task-t-05-AbCGl`
 
 **Gap:** The current surface model (`light`, `dark`, `tinted`) is asymmetric and ambiguous: "tinted" has no dark-mode counterpart, there is no sunken/recessed surface, and it is unclear whether surfaces are absolute or relative to the current theme.
 
@@ -204,10 +204,10 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 | `dark` | forced dark (override) | base dark bg |
 | `sunken` | recessed (inputs, code) | recessed (inputs, code) |
 
-- [ ] Audit `tokens/dark-light.css` and define the full symmetric token set for all surface contexts (bg, text, text-secondary, border, accent, accent-hover)
-- [ ] Rename `data-surface="tinted"` to `data-surface="elevated"` and add `data-surface="light-elevated"`, `data-surface="dark-elevated"`, and `data-surface="sunken"`
-- [ ] Verify that every semantic token (including link/accent colors and state colors) cascades correctly when a surface overrides the page theme
-- [ ] Update `CLAUDE.md` dark/light mode documentation and rebuild `dist/farn.css`
+- [x] Audit `tokens/dark-light.css` and define the full symmetric token set for all surface contexts (bg, text, text-secondary, border, accent, accent-hover)
+- [x] Replace asymmetric `light/dark/tinted` surfaces with symmetric `base/layer/overlay` model; make `[data-theme]` self-contained with `background: var(--color-bg)`; rename `--color-bg-elevated` → `--color-bg-panel` and `--color-bg-sunken` → `--color-bg-inset`
+- [x] Verify that every semantic token cascades correctly when a surface overrides the page theme
+- [x] Update `CLAUDE.md` dark/light mode documentation and rebuild `dist/farn.css`
 
 ---
 
@@ -359,7 +359,7 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 **Gap:** No table styles exist anywhere in the system; tabular data is one of the most common UI patterns and must be reinvented by every consumer.
 
 - [ ] Add `.table` base class with border, cell padding, and header styles consuming semantic tokens
-- [ ] Add `.table-striped` variant using `--color-bg-elevated` on alternating rows
+- [ ] Add `.table-striped` variant using `--color-bg-panel` on alternating rows
 - [ ] Document the `overflow-x: auto` scroll wrapper pattern for narrow viewports
 - [ ] Document on a tables component page
 
