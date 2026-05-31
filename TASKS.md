@@ -66,13 +66,13 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-07 · Full contrast matrix
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/t7-readiness-98re3`
 
 **Gap:** Individual contrast ratios are noted on the colors page but no complete matrix covers all semantic token pairs across both light and dark modes.
 
-- [ ] Add a full contrast matrix table to `site/src/pages/tokens/colors.astro` (or a dedicated accessibility page)
-- [ ] Cover every semantic foreground/background combination in light mode and dark mode
-- [ ] Mark each pair as WCAG AA pass / AAA pass / fail
+- [x] Add a full contrast matrix table to `site/src/pages/tokens/colors.astro` (or a dedicated accessibility page)
+- [x] Cover every semantic foreground/background combination in light mode and dark mode
+- [x] Mark each pair as WCAG AA pass / AAA pass / fail
 
 ---
 
