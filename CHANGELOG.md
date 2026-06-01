@@ -8,6 +8,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `dist/farn-components.css`: new opt-in component CSS artifact — ships component tokens (`--btn-*`, `--link-*`) and CSS classes (`.badge` + 7 variants); load alongside `farn.css` or `farn-tokens.css` (T-43, T-12)
+- `tokens/component-classes.css`: new source file for shipped CSS classes — `.badge` base class and `.badge-general`, `.badge-published`, `.badge-draft`, `.badge-archived`, `.badge-beta`, `.badge-research`, `.badge-category` variant modifiers using palette tokens directly (T-12)
+
+### Changed
+- `site/src/layouts/DocLayout.astro`: imports `tokens/component-classes.css` — docs site now dogfoods its own component classes (T-12)
+- `site/src/styles/site.css`: badge CSS removed; classes now sourced from `tokens/component-classes.css` (T-12)
+- `site/src/pages/components/badges.astro`: CSS reference section notes that badge classes are shipped in `dist/farn-components.css` (T-12)
+- `CLAUDE.md`: build command extended with step 3 for `farn-components.css`; repo structure and Track A section updated with resolved artifact decision; dogfood rule added (T-43)
 - `tokens/components.css`: new Tier-3 component token file with `--btn-*` tokens (radius, disabled-opacity, and per-variant bg/text/border/hover-bg for primary, secondary, ghost, and destructive) and `--link-*` tokens (color, hover-color, visited-color) (T-08)
 - `tokens/dark-light.css`: `--color-on-error` semantic token (text on error/destructive backgrounds; maps to `--bm2-birch` in both themes) and `--btn-s-hover-bg` dark-mode override (`var(--in2-slate)`) (T-08)
 - `tokens/index.css`: `@import './components.css'` added to the token import chain (T-08)

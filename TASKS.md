@@ -122,15 +122,15 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-12 · Badge component CSS
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/nifty-thompson-ukNhW`
 
-**Depends on T-43** — resolve the component CSS artifact structure first.
+**Depends on T-43** — resolved, merged into this task.
 
 **Gap:** Seven `.badge-*` variants exist only in `site/src/styles/site.css` and are not part of the distributed token system.
 
-- [ ] Add `.badge` base class and the 7 variant modifiers to the component CSS artifact
-- [ ] Ensure badge styles use palette tokens directly (as they do now) so variants remain visually distinct across themes
-- [ ] Document on the badges component page (T-06)
+- [x] Add `.badge` base class and the 7 variant modifiers to the component CSS artifact
+- [x] Ensure badge styles use palette tokens directly (as they do now) so variants remain visually distinct across themes
+- [x] Document on the badges component page (T-06)
 
 ---
 
@@ -500,12 +500,12 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 ---
 
 ## T-43 · Decide component CSS artifact structure
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/nifty-thompson-ukNhW`
 
-**Gap:** T-11–T-14 and T-30–T-40 all ship CSS classes, but it is unresolved whether these belong in the existing `tokens/components.css` or a new `dist/farn-components.css` artifact. This ambiguity blocks clean implementation of all downstream component tasks.
+**Merged into T-12.** Decision: separate `dist/farn-components.css` artifact. Classes source in `tokens/component-classes.css`. Tokens stay in `tokens/components.css` and `farn-tokens.css` remains class-free.
 
 **Gates: T-11, T-12, T-13, T-14**
 
-- [ ] Review tradeoffs: single `tokens/components.css` (simpler, already exists) vs separate `dist/farn-components.css` (opt-in, keeps tokens and classes separate) vs both
-- [ ] Document the decision in `CLAUDE.md` Track A (update the open question in the "Adding a component" section)
-- [ ] Update `CHANGELOG.md`
+- [x] Review tradeoffs: single `tokens/components.css` (simpler, already exists) vs separate `dist/farn-components.css` (opt-in, keeps tokens and classes separate) vs both
+- [x] Document the decision in `CLAUDE.md` Track A (update the open question in the "Adding a component" section)
+- [x] Update `CHANGELOG.md`
