@@ -79,17 +79,17 @@ import DocLayout from '../../layouts/DocLayout.astro';
     and <code>.card-footer</code> only.
   </p>
 
-  <div class="card-demo-anatomy">
+  <div class="card-demo-section">
     <div class="card" style="max-width: 360px;">
       <div class="card-media">
         <div class="card-media-placeholder" aria-hidden="true"></div>
       </div>
       <div class="card-header">
-        <h3 style="margin: 0; font-size: 1rem;">Fern Valley Trail</h3>
-        <p style="margin: var(--space-xs) 0 0; color: var(--color-text-secondary); font-size: 0.875rem;">3.2 km · Moderate</p>
+        <h3 class="demo-card-heading">Fern Valley Trail</h3>
+        <p class="demo-card-meta">3.2 km · Moderate</p>
       </div>
       <div class="card-body">
-        <p style="margin: 0; color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.6;">
+        <p class="demo-card-text">
           A shaded loop through old-growth forest with seasonal wildflower meadows along the ridge.
         </p>
       </div>
@@ -142,7 +142,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <tr>
         <td><code>.card-footer</code></td>
         <td>Actions row</td>
-        <td><code>margin-top: auto</code> pins to bottom. Divider appears when preceded by <code>.card-body</code>.</td>
+        <td><code>margin-top: auto</code> pins to bottom. <code>display: flex; flex-wrap: wrap</code> lays out buttons in a row. Divider appears when preceded by <code>.card-body</code>.</td>
       </tr>
     </tbody>
   </table>
@@ -188,18 +188,18 @@ import DocLayout from '../../layouts/DocLayout.astro';
     and collapse to a single column on narrow viewports. Minimum column width: 280px.
   </p>
 
-  <div class="card-grid card-demo-grid">
+  <div class="card-grid card-demo-section">
     <div class="card card-interactive">
-      <div class="card-header"><h3 style="margin:0; font-size:1rem;">Iron Night</h3></div>
-      <div class="card-body"><p style="margin:0; color:var(--color-text-secondary); font-size:0.875rem;">Dark palette — deep, structural, typographic.</p></div>
+      <div class="card-header"><h3 class="demo-card-heading">Iron Night</h3></div>
+      <div class="card-body"><p class="demo-card-text">Dark palette — deep, structural, typographic.</p></div>
     </div>
     <div class="card card-interactive">
-      <div class="card-header"><h3 style="margin:0; font-size:1rem;">Birch Mist</h3></div>
-      <div class="card-body"><p style="margin:0; color:var(--color-text-secondary); font-size:0.875rem;">Light palette — airy, open, editorial.</p></div>
+      <div class="card-header"><h3 class="demo-card-heading">Birch Mist</h3></div>
+      <div class="card-body"><p class="demo-card-text">Light palette — airy, open, editorial.</p></div>
     </div>
     <div class="card card-interactive">
-      <div class="card-header"><h3 style="margin:0; font-size:1rem;">Forest</h3></div>
-      <div class="card-body"><p style="margin:0; color:var(--color-text-secondary); font-size:0.875rem;">Accent palette — grounded, natural, purposeful.</p></div>
+      <div class="card-header"><h3 class="demo-card-heading">Forest</h3></div>
+      <div class="card-body"><p class="demo-card-text">Accent palette — grounded, natural, purposeful.</p></div>
     </div>
   </div>
 
@@ -249,7 +249,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
 /* Custom hover colour for a dark hero section */
 .hero &#123;
-  --card-hover-bg: var(--in2-slate);
+  --card-hover-bg: var(--color-bg-inset);
 &#125;</code></pre>
 
   <h2>CSS reference</h2>
@@ -291,7 +291,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 .card-media img     &#123; width: 100%; &#125;
 .card-header        &#123; padding: var(--card-padding); &#125;
 .card-body          &#123; padding: var(--card-padding); flex: 1; &#125;
-.card-footer        &#123; padding: var(--card-padding); margin-top: auto; &#125;
+.card-footer        &#123; padding: var(--card-padding); margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; &#125;
 .card-body + .card-footer &#123; border-top: 1px solid var(--color-border-subtle); &#125;</code></pre>
 </DocLayout>
 
@@ -309,16 +309,18 @@ import DocLayout from '../../layouts/DocLayout.astro';
     max-width: 320px;
   }
 
-  .demo-label {
+  /* more specific than global .doc-container p rule — no !important needed */
+  p.demo-label {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--color-text-tertiary);
-    margin-bottom: var(--space-xs) !important;
+    margin-bottom: var(--space-xs);
   }
 
-  .card-demo-anatomy {
+  /* shared margin for demo anatomy and grid sections */
+  .card-demo-section {
     margin-bottom: var(--space-lg);
   }
 
@@ -327,13 +329,22 @@ import DocLayout from '../../layouts/DocLayout.astro';
     background: linear-gradient(135deg, var(--fo3-deepwater) 0%, var(--fo1-fern) 60%, var(--fo0-sage) 100%);
   }
 
-  .card-demo-grid {
-    margin-bottom: var(--space-lg);
+  /* scoped typography for demo card content */
+  .demo-card-heading {
+    margin: 0;
+    font-size: 1rem;
   }
 
-  /* footer button row */
-  .card-footer {
-    display: flex;
-    gap: var(--space-xs);
+  .demo-card-meta {
+    margin: var(--space-xs) 0 0;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .demo-card-text {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.6;
   }
 </style>

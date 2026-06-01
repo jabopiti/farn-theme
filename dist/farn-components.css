@@ -255,5 +255,5 @@ input[type="radio"] {
 .card-media img     { width: 100%; } /* display:block already set by base.css reset */
 .card-header        { padding: var(--card-padding); }
 .card-body          { padding: var(--card-padding); flex: 1; }
-.card-footer        { padding: var(--card-padding); margin-top: auto; }
+.card-footer        { padding: var(--card-padding); margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
 .card-body + .card-footer { border-top: 1px solid var(--color-border-subtle); }
