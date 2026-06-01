@@ -32,6 +32,7 @@
   --color-bg-code:          var(--fo3-deepwater);
   --color-accent:           var(--fo1-fern);
   --color-accent-hover:     var(--fo2-forest);
+  --color-accent-active:    var(--fo3-deepwater);
   --color-accent-text:      var(--bm2-birch);
   --color-error:            var(--bl0-ember);
   --color-warning:          var(--bl2-grain);
@@ -61,6 +62,7 @@
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
   --btn-s-hover-bg:         var(--in3-ash);
+  --btn-g-active-bg:        var(--in0-void);  /* darker than ghost hover --in1-iron (#374151) */
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */

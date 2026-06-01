@@ -109,15 +109,15 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-11 · Button component CSS
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/laughing-franklin-tgp33`
 
 **Depends on T-43** — resolve the component CSS artifact structure first.
 
 **Gap:** No `.btn` CSS classes are shipped in `dist/farn.css`; every consumer must reimplement button styles from scratch using tokens with no reference implementation.
 
-- [ ] Add `.btn`, `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d` and size modifiers `.btn-sm`, `.btn-lg` to the existing `tokens/components.css` (or a separate `dist/farn-components.css` artifact — see T-43)
-- [ ] Button styles must consume T-08 component tokens (`--btn-*`) rather than referencing semantic tokens directly
-- [ ] Document variants, sizes, and states (hover, focus, active, disabled) on the buttons component page
+- [x] Add `.btn`, `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d` and size modifiers `.btn-sm`, `.btn-lg` to the existing `tokens/components.css` (or a separate `dist/farn-components.css` artifact — see T-43)
+- [x] Button styles must consume T-08 component tokens (`--btn-*`) rather than referencing semantic tokens directly
+- [x] Document variants, sizes, and states (hover, focus, active, disabled) on the buttons component page
 
 ---
 

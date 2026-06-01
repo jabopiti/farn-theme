@@ -16,7 +16,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </nav>
 
   <h1>Buttons</h1>
-  <span class="badge badge-beta">beta</span>
+  <span class="badge badge-published">stable</span>
   <p>
     Buttons trigger actions. Four variants cover the full intent spectrum from primary confirmation
     to destructive operations. All variants share a base class and consume Tier-3 <code>--btn-*</code>
@@ -90,8 +90,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <h2 id="states">States</h2>
   <p>
-    Hover and focus states are handled natively by the browser using the token values. Disabled
-    buttons reduce opacity via <code>--btn-disabled-opacity</code> and suppress pointer events.
+    Hover, active (pressed), and focus states are driven by <code>--btn-*</code> token values.
+    Focus uses the global <code>:focus-visible</code> outline from <code>base.css</code>.
+    Disabled buttons reduce opacity via <code>--btn-disabled-opacity</code> and suppress pointer events.
   </p>
 
   <div class="btn-demo" role="group" aria-label="Live button state examples">
@@ -157,21 +158,25 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <tr><td><code>--btn-p-text</code></td><td><code>var(--color-accent-text)</code></td><td>Primary text colour</td></tr>
       <tr><td><code>--btn-p-border</code></td><td><code>transparent</code></td><td>Primary border colour</td></tr>
       <tr><td><code>--btn-p-hover-bg</code></td><td><code>var(--color-accent-hover)</code></td><td>Primary hover background</td></tr>
+      <tr><td><code>--btn-p-active-bg</code></td><td><code>var(--fo3-deepwater)</code></td><td>Primary pressed background</td></tr>
       <tr><td colspan="3"><em>Secondary</em></td></tr>
       <tr><td><code>--btn-s-bg</code></td><td><code>var(--color-bg-inset)</code></td><td>Secondary background</td></tr>
       <tr><td><code>--btn-s-text</code></td><td><code>var(--color-text)</code></td><td>Secondary text colour</td></tr>
       <tr><td><code>--btn-s-border</code></td><td><code>transparent</code></td><td>Secondary border colour</td></tr>
-      <tr><td><code>--btn-s-hover-bg</code></td><td><code>var(--color-bg-panel)</code> / dark: <code>var(--in2-slate)</code></td><td>Secondary hover background</td></tr>
+      <tr><td><code>--btn-s-hover-bg</code></td><td><code>var(--color-bg-panel)</code> / dark: <code>var(--in3-ash)</code></td><td>Secondary hover background</td></tr>
+      <tr><td><code>--btn-s-active-bg</code></td><td><code>var(--bm0-sand)</code> / dark: <code>var(--in2-slate)</code></td><td>Secondary pressed background</td></tr>
       <tr><td colspan="3"><em>Ghost</em></td></tr>
       <tr><td><code>--btn-g-bg</code></td><td><code>transparent</code></td><td>Ghost background</td></tr>
       <tr><td><code>--btn-g-text</code></td><td><code>var(--color-text)</code></td><td>Ghost text colour</td></tr>
       <tr><td><code>--btn-g-border</code></td><td><code>var(--color-border)</code></td><td>Ghost border colour</td></tr>
       <tr><td><code>--btn-g-hover-bg</code></td><td><code>var(--color-bg-panel)</code></td><td>Ghost hover background</td></tr>
+      <tr><td><code>--btn-g-active-bg</code></td><td><code>var(--bm0-sand)</code> / dark: <code>var(--in0-void)</code></td><td>Ghost pressed background</td></tr>
       <tr><td colspan="3"><em>Destructive</em></td></tr>
       <tr><td><code>--btn-d-bg</code></td><td><code>var(--color-error)</code></td><td>Destructive background</td></tr>
       <tr><td><code>--btn-d-text</code></td><td><code>var(--color-on-error)</code></td><td>Destructive text colour</td></tr>
       <tr><td><code>--btn-d-border</code></td><td><code>transparent</code></td><td>Destructive border colour</td></tr>
       <tr><td><code>--btn-d-hover-bg</code></td><td><code>var(--in0-void)</code></td><td>Destructive hover background (theme-invariant)</td></tr>
+      <tr><td><code>--btn-d-active-bg</code></td><td><code>var(--in0-void)</code></td><td>Destructive pressed background (same as hover — darkest available token)</td></tr>
       <tr><td colspan="3"><em>Links</em></td></tr>
       <tr><td><code>--link-color</code></td><td><code>var(--color-accent)</code></td><td>Naked link colour</td></tr>
       <tr><td><code>--link-hover-color</code></td><td><code>var(--color-accent-hover)</code></td><td>Naked link hover colour</td></tr>

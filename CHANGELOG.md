@@ -8,6 +8,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `dist/farn-components.css`: button classes shipped — `.btn` (base), `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d` (variants), `.btn-sm`, `.btn-lg` (size modifiers); all states (hover, active/pressed, disabled) driven by `--btn-*` tokens (T-11)
+- `tokens/components.css`: `--btn-p-active-bg`, `--btn-s-active-bg`, `--btn-g-active-bg`, `--btn-d-active-bg` pressed-state tokens (T-11)
+- `tokens/dark-light.css`: `--color-accent-active` semantic token (`--fo3-deepwater`; theme-invariant); `--btn-g-active-bg` dark-mode override (`--in0-void`) for pressed ghost button (T-11)
+
+### Changed
+- `site/src/pages/components/buttons.astro`: status upgraded from beta to stable; states section updated to document active/pressed state; token reference table updated with `--btn-*-active-bg` rows; secondary hover token corrected from `--in2-slate` to `--in3-ash` (T-11)
+- `site/src/styles/site.css`: removed duplicate `.btn` block — button classes now sourced from `tokens/component-classes.css` via `DocLayout.astro` (T-11)
+- `dist/farn-tokens.css`, `dist/farn.css`, `dist/farn-components.css`: rebuilt (T-11)
+
+---
+
+### Added
 - `tokens/components.css`: `--card-*` Tier-3 tokens — `--card-bg` (`--color-bg-panel`), `--card-hover-bg` (`--color-bg-inset`), `--card-border` (`transparent`), `--card-radius` (`--radius-lg`), `--card-padding` (`--space-md` / 24px) — card surfaces are now overridable without touching semantic tokens (T-09)
 - `tokens/components.css`: `--input-*` Tier-3 form tokens — `--input-radius`, `--input-bg`, `--input-bg-active`, `--input-border`, `--input-border-focus`, `--input-border-error`, `--input-focus-shadow` (adaptive glow via `color-mix()`), `--input-text`, `--input-placeholder`, `--input-disabled-opacity` (T-10)
 
