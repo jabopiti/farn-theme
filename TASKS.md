@@ -259,8 +259,6 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 5. T-27 Diagonal cut — energetic CTA use; Tier 2 animation
 6. T-28 Stacked card reveal — deferred until T-15 (site restructure removes sidebar)
 
-Stacked card reveal determination: the current docs site uses a fixed sidebar layout incompatible with full-viewport sticky sections. T-28 depends on T-15 removing the sidebar before a live demo is viable.
-
 ---
 
 ## T-21 · Section transition color tokens
@@ -351,7 +349,7 @@ Stacked card reveal determination: the current docs site uses a fixed sidebar la
 ## T-28 · Stacked card reveal
 `status: backlog` `effort: S`
 
-**Depends on T-15** — requires the sidebar-free site structure from the T-15 restructure before a live demo is viable (full-viewport sticky sections are incompatible with the current sidebar layout).
+**Depends on T-15** — the T-15 IA restructure must explicitly include sidebar removal before this pattern is viable; full-viewport sticky sections (`height: 100vh` per section) are incompatible with the current sidebar layout. Confirm sidebar removal is in T-15's approved outline before picking up T-28.
 
 **Gap:** No stacked card reveal pattern; the cinematic depth effect is the highest-drama transition in the spec, suited to long scrolling pages with 3–5 landmark sections.
 
