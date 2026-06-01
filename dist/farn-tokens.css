@@ -154,7 +154,7 @@
   background:               var(--color-bg);
   --color-bg:               var(--in0-void);
   --color-bg-panel:         var(--in1-iron);
-  --color-bg-inset:         var(--in0-void);
+  --color-bg-inset:         var(--in2-slate);
   --color-text:             var(--bm2-birch);
   --color-text-secondary:   var(--bm1-mist);
   --color-text-tertiary:    var(--bm0-sand);
@@ -170,7 +170,7 @@
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
-  --btn-s-hover-bg:         var(--in2-slate);
+  --btn-s-hover-bg:         var(--in3-ash);
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */
@@ -266,4 +266,16 @@
   --card-border:   transparent;
   --card-radius:   var(--radius-lg);
   --card-padding:  var(--space-md);
+
+  /* ── Input tokens ───────────────────────────────────────────────────── */
+  --input-radius:           var(--radius-md);
+  --input-bg:               var(--color-bg-panel);
+  --input-bg-active:        var(--color-bg-inset);   /* hover + focus */
+  --input-border:           transparent;
+  --input-border-focus:     var(--color-accent);
+  --input-border-error:     var(--color-error);
+  --input-focus-shadow:     0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
+  --input-text:             var(--color-text);
+  --input-placeholder:      var(--color-text-tertiary);
+  --input-disabled-opacity: 0.4;
 }

@@ -9,6 +9,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ### Added
 - `tokens/components.css`: `--card-*` Tier-3 tokens — `--card-bg` (`--color-bg-panel`), `--card-hover-bg` (`--color-bg-inset`), `--card-border` (`transparent`), `--card-radius` (`--radius-lg`), `--card-padding` (`--space-md` / 24px) — card surfaces are now overridable without touching semantic tokens (T-09)
+- `tokens/components.css`: `--input-*` Tier-3 form tokens — `--input-radius`, `--input-bg`, `--input-bg-active`, `--input-border`, `--input-border-focus`, `--input-border-error`, `--input-focus-shadow` (adaptive glow via `color-mix()`), `--input-text`, `--input-placeholder`, `--input-disabled-opacity` (T-10)
+
+### Changed
+- `tokens/dark-light.css`: Fixed `--color-bg-inset` in dark mode — was `var(--in0-void)` (same as page bg, invisible in dark); now `var(--in2-slate)`, restoring the three-step surface ramp (void/iron/slate) to mirror light mode (birch/mist/sand). `--btn-s-hover-bg` dark override updated from `var(--in2-slate)` to `var(--in3-ash)` to step forward from the corrected resting state (T-10)
+- `site/src/pages/index.astro`: `.field-input` styles updated to consume `--input-*` tokens; hardcoded `[data-theme="dark"]` overrides removed; switched to `:focus-visible`; focus state shows `--input-focus-shadow` glow; hover+focus-visible background combined into `:is()` selector (T-10)
+- `dist/farn-tokens.css`, `dist/farn.css`, `dist/farn-components.css`: rebuilt (T-09, T-10)
+
+---
+
+### Added
 - `dist/farn-components.css`: new opt-in component CSS artifact — ships component tokens (`--btn-*`, `--link-*`) and CSS classes (`.badge` + 7 variants); load alongside `farn.css` or `farn-tokens.css` (T-43, T-12)
 - `tokens/component-classes.css`: new source file for shipped CSS classes — `.badge` base class and `.badge-general`, `.badge-published`, `.badge-draft`, `.badge-archived`, `.badge-beta`, `.badge-research`, `.badge-category` variant modifiers using palette tokens directly (T-12)
 
