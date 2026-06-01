@@ -20,3 +20,43 @@
 .badge-beta      { background: var(--bl4-heather); color: var(--color-accent-text); }
 .badge-research  { background: var(--bl1-ochre);   color: var(--color-accent-text); }
 .badge-category  { background: var(--fo2-forest);  color: var(--color-accent-text); }
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: var(--btn-radius);
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  appearance: none;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: var(--btn-disabled-opacity);
+  pointer-events: none;
+}
+
+/* Variants — each sets its own scoped hover/active bg for the shared interaction rules below */
+.btn-p { background: var(--btn-p-bg); color: var(--btn-p-text); border-color: var(--btn-p-border); --btn-hover-bg: var(--btn-p-hover-bg); --btn-active-bg: var(--btn-p-active-bg); }
+.btn-s { background: var(--btn-s-bg); color: var(--btn-s-text); border-color: var(--btn-s-border); --btn-hover-bg: var(--btn-s-hover-bg); --btn-active-bg: var(--btn-s-active-bg); }
+.btn-g { background: var(--btn-g-bg); color: var(--btn-g-text); border-color: var(--btn-g-border); --btn-hover-bg: var(--btn-g-hover-bg); --btn-active-bg: var(--btn-g-active-bg); }
+.btn-d { background: var(--btn-d-bg); color: var(--btn-d-text); border-color: var(--btn-d-border); --btn-hover-bg: var(--btn-d-hover-bg); --btn-active-bg: var(--btn-d-active-bg); }
+
+.btn:hover  { background: var(--btn-hover-bg); }
+.btn:active { background: var(--btn-active-bg); }
+
+/* Sizes */
+.btn-sm { height: 32px; padding: 0 12px; font-size: 12px; }
+.btn-lg { height: 48px; padding: 0 20px; font-size: 14px; }
