@@ -50,6 +50,8 @@
   --card-border:   transparent;
   --card-radius:   var(--radius-lg);
   --card-padding:  var(--space-md);
+  --card-highlight-bg:     var(--color-card-highlight-bg);
+  --card-highlight-border: var(--color-card-highlight-border);
 
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
