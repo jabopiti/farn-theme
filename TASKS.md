@@ -231,13 +231,35 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 ---
 
 ## T-20 · Review section divider spec
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/t-20-task-Hzhwj`
 
 **Gap:** `divider-spec.md` contains six patterns and per-pattern animation decisions that need a design pass before implementation — to confirm which patterns fit Farn's aesthetic, whether the animation tiers are right, and what the implementation order should be.
 
-- [ ] Read `divider-spec.md` in full
-- [ ] Decide which patterns to implement and in what order; annotate this task or the spec directly
-- [ ] Confirm whether the stacked card reveal fits the current site structure (requires full-viewport sections)
+- [x] Read `divider-spec.md` in full
+- [x] Decide which patterns to implement and in what order; annotate this task or the spec directly
+- [x] Confirm whether the stacked card reveal fits the current site structure (requires full-viewport sections)
+
+**Decisions:**
+
+All six patterns are confirmed for implementation. Animation tiers match the spec and need no changes.
+
+Aesthetic fitness for Farn (Iron Night / Birch Mist / Forest palette — organic, Nordic, restrained):
+- Sine wave ★★★ — organic, rhythmic; highest character fit
+- Convex arc ★★★ — quiet, refined; suits centred hero layouts
+- Layered overlap ★★★ — pure CSS depth; aligns with structural restraint
+- Organic blob ★★☆ — high-emphasis brand moments; path must be Figma-drawn
+- Stacked card reveal ★★☆ — cinematic; deferred (see below)
+- Diagonal cut ★☆☆ — weakest fit (directional/energetic vs. organic palette); include for CTA utility
+
+Implementation order for T-23–T-28 (after T-21 and T-22 are done):
+1. T-26 Layered overlap — pure CSS, no SVG, simplest entry point
+2. T-23 Sine wave — most versatile; best Farn character
+3. T-24 Convex arc — calm complement; Tier 2 animation
+4. T-25 Organic blob — special-occasion; requires Figma path export
+5. T-27 Diagonal cut — energetic CTA use; Tier 2 animation
+6. T-28 Stacked card reveal — deferred until T-15 (site restructure removes sidebar)
+
+Stacked card reveal determination: the current docs site uses a fixed sidebar layout incompatible with full-viewport sticky sections. T-28 depends on T-15 removing the sidebar before a live demo is viable.
 
 ---
 
@@ -328,6 +350,8 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 
 ## T-28 · Stacked card reveal
 `status: backlog` `effort: S`
+
+**Depends on T-15** — requires the sidebar-free site structure from the T-15 restructure before a live demo is viable (full-viewport sticky sections are incompatible with the current sidebar layout).
 
 **Gap:** No stacked card reveal pattern; the cinematic depth effect is the highest-drama transition in the spec, suited to long scrolling pages with 3–5 landmark sections.
 
