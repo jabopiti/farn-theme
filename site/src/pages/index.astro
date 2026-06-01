@@ -195,7 +195,7 @@ import Footer from '../components/Footer.astro';
     display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-xl);
   }
   @media (max-width: 640px) { .type-specimen { grid-template-columns: 1fr; } }
-  .specimen-card { background: var(--color-bg-panel); border-radius: var(--radius-lg); padding: var(--space-lg); }
+  .specimen-card { background: var(--card-bg); border-radius: var(--card-radius); padding: var(--space-lg); }
   .specimen-label {
     font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: var(--space-md);
@@ -226,10 +226,10 @@ import Footer from '../components/Footer.astro';
     display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl);
   }
   .card {
-    background: var(--color-bg-panel); border-radius: var(--radius-lg); padding: 20px;
-    transition: background-color 180ms ease; text-decoration: none; display: block; color: inherit;
+    background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--card-radius); padding: var(--card-padding);
+    transition: background-color var(--duration-base) var(--ease-default); text-decoration: none; display: block; color: inherit;
   }
-  .card:hover { background: var(--color-bg-inset); }
+  .card:hover { background: var(--card-hover-bg); }
   .card-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
   .card-title { font-size: 15px; font-weight: 600; color: var(--color-text); margin-bottom: 6px; line-height: 1.3; }
   .card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 14px; }
@@ -243,7 +243,7 @@ import Footer from '../components/Footer.astro';
   [data-theme="dark"] .card-icon-wrap { background: rgba(92,158,134,0.15); }
   .card-highlight-light { background: var(--in0-void); }
   .card-highlight-light:hover { background: var(--in1-iron); }
-  .card-highlight-dark { background: var(--in1-iron); border: 1px solid var(--in2-slate); }
+  .card-highlight-dark { background: var(--in1-iron); --card-border: var(--in2-slate); }
   .card-highlight-dark:hover { background: var(--in2-slate); }
   .card-highlight-light .card-title,
   .card-highlight-dark .card-title { color: var(--bm2-birch); }
@@ -377,7 +377,7 @@ import Footer from '../components/Footer.astro';
   .palette-divider { height: 1px; background: var(--color-border-subtle); margin: var(--space-4xl) 0; }
 
   .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-sm); }
-  .token-card { background: var(--color-bg-panel); border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 150ms ease; }
+  .token-card { background: var(--card-bg); border-radius: var(--card-radius); overflow: hidden; transition: box-shadow var(--duration-fast) var(--ease-default); }
   .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
   [data-theme="dark"] .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
   .token-color-strip { height: 56px; position: relative; }

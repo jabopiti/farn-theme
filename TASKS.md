@@ -87,13 +87,13 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-09 · Container component tokens — cards (Tier 3)
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/inspiring-feynman-RmCLb`
 
 **Gap:** Card styles reference semantic tokens directly with no component-level override points.
 
-- [ ] Add `--card-*` tokens (background, border, radius, padding) to `tokens/components.css` (created in T-08)
-- [ ] Update site card styles to consume these tokens
-- [ ] Rebuild `dist/farn.css` and update `CHANGELOG.md`
+- [x] Add `--card-*` tokens (background, border, radius, padding) to `tokens/components.css` (created in T-08)
+- [x] Update site card styles to consume these tokens
+- [x] Rebuild `dist/farn.css` and update `CHANGELOG.md`
 
 ---
 
