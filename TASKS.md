@@ -44,11 +44,9 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ## T-05 · Theming demo page
 `status: backlog` `effort: S`
 
-**Gap:** The `data-surface` system (light / dark / tinted overrides) is implemented in tokens but has no live documentation page; consumers cannot see it in action without reading source code.
+**Gap:** The `data-surface` system (`base`, `layer`, `overlay`) is implemented in tokens but has no live documentation page; consumers cannot see it in action without reading source code.
 
-**Depends on T-19** — implement the symmetric surface model first; otherwise this page documents the old `tinted` nomenclature and has to be rewritten.
-
-- [ ] Create `site/src/pages/tokens/theming.astro` with live `data-surface` examples showing all five surfaces nested within each other in both themes
+- [ ] Create `site/src/pages/tokens/theming.astro` with live `data-surface` examples showing all three surfaces (`base`, `layer`, `overlay`) nested within each other in both themes
 - [ ] Document the `data-theme` page-level toggle and the FOWT prevention pattern
 - [ ] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
 
@@ -113,9 +111,11 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ## T-11 · Button component CSS
 `status: backlog` `effort: M`
 
+**Depends on T-43** — resolve the component CSS artifact structure first.
+
 **Gap:** No `.btn` CSS classes are shipped in `dist/farn.css`; every consumer must reimplement button styles from scratch using tokens with no reference implementation.
 
-- [ ] Add `.btn`, `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d` and size modifiers `.btn-sm`, `.btn-lg` to a new `tokens/components.css` (or a separate `dist/farn-components.css` artifact)
+- [ ] Add `.btn`, `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d` and size modifiers `.btn-sm`, `.btn-lg` to the existing `tokens/components.css` (or a separate `dist/farn-components.css` artifact — see T-43)
 - [ ] Button styles must consume T-08 component tokens (`--btn-*`) rather than referencing semantic tokens directly
 - [ ] Document variants, sizes, and states (hover, focus, active, disabled) on the buttons component page
 
@@ -123,6 +123,8 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 ## T-12 · Badge component CSS
 `status: backlog` `effort: S`
+
+**Depends on T-43** — resolve the component CSS artifact structure first.
 
 **Gap:** Seven `.badge-*` variants exist only in `site/src/styles/site.css` and are not part of the distributed token system.
 
@@ -135,6 +137,8 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ## T-13 · Card component CSS
 `status: backlog` `effort: S`
 
+**Depends on T-43** — resolve the component CSS artifact structure first.
+
 **Gap:** No `.card` CSS class is shipped; consumers must build card layouts from scratch using T-09 component tokens with no reference implementation.
 
 - [ ] Add `.card` base class (and any surface/elevated variants) to the component CSS artifact
@@ -145,6 +149,8 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 ## T-14 · Form component CSS
 `status: backlog` `effort: M`
+
+**Depends on T-43** — resolve the component CSS artifact structure first.
 
 **Gap:** No form element CSS is shipped; consumers must style inputs, textareas, selects, and labels from scratch using T-10 component tokens.
 
@@ -182,9 +188,9 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 **Gap:** `dist/farn.css` bundles tokens and the base reset together; consumers who manage their own reset cannot import tokens in isolation.
 
-- [ ] Create `dist/farn-tokens.css` as a concatenation of `colors.css`, `typography.css`, `spacing.css`, and `dark-light.css` only (no `base.css`)
-- [ ] Update the build command in `CLAUDE.md` to produce both artifacts
-- [ ] Add both CDN paths to the getting-started page and `README.md`
+- [x] Create `dist/farn-tokens.css` as a concatenation of `colors.css`, `typography.css`, `spacing.css`, and `dark-light.css` only (no `base.css`)
+- [x] Update the build command in `CLAUDE.md` to produce both artifacts
+- [x] Add both CDN paths to the getting-started page and `README.md`
 
 ---
 
@@ -203,6 +209,8 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 | `dark-elevated` | forced dark raised | raised dark bg |
 | `dark` | forced dark (override) | base dark bg |
 | `sunken` | recessed (inputs, code) | recessed (inputs, code) |
+
+> **Implemented:** symmetric 3-surface model — `base` / `layer` / `overlay` — rather than the 6-surface spec above. See `tokens/dark-light.css` for the canonical definition.
 
 - [x] Audit `tokens/dark-light.css` and define the full symmetric token set for all surface contexts (bg, text, text-secondary, border, accent, accent-hover)
 - [x] Replace asymmetric `light/dark/tinted` surfaces with symmetric `base/layer/overlay` model; make `[data-theme]` self-contained with `background: var(--color-bg)`; rename `--color-bg-elevated` → `--color-bg-panel` and `--color-bg-sunken` → `--color-bg-inset`
@@ -467,3 +475,37 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 - [ ] Add `.modal`, `.modal-backdrop`, `.modal-header`, `.modal-body`, `.modal-footer` CSS classes with size variants (sm, md, lg)
 - [ ] Document the required JS responsibilities clearly: focus trap, `aria-modal="true"`, `role="dialog"`, `Escape` key handler — CSS owns appearance, JS owns behaviour
 - [ ] Document on a modal component page
+
+---
+
+## T-41 · Motion tokens documentation page
+`status: backlog` `effort: XS`
+
+**Gap:** `tokens/motion.css` was added in T-04 but no `site/src/pages/tokens/motion.astro` exists; `--duration-*` and `--ease-*` tokens are invisible to consumers browsing the documentation site.
+
+- [ ] Create `site/src/pages/tokens/motion.astro` with a table of all duration and easing tokens, descriptions, and usage guidance
+- [ ] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
+- [ ] Update `CHANGELOG.md`
+
+---
+
+## T-42 · Update palette SVG
+`status: backlog` `effort: XS`
+
+**Gap:** `.github/farn-palette.svg` (displayed in README) uses the old palette name "Parchment" for what is now "Birch" (`--bm2-birch`); misleads users reading the repository page.
+
+- [ ] Update SVG text labels to current palette names (Birch Mist: Sand, Mist, Birch)
+- [ ] Verify the image renders correctly in the README on GitHub
+
+---
+
+## T-43 · Decide component CSS artifact structure
+`status: backlog` `effort: XS`
+
+**Gap:** T-11–T-14 and T-30–T-40 all ship CSS classes, but it is unresolved whether these belong in the existing `tokens/components.css` or a new `dist/farn-components.css` artifact. This ambiguity blocks clean implementation of all downstream component tasks.
+
+**Gates: T-11, T-12, T-13, T-14**
+
+- [ ] Review tradeoffs: single `tokens/components.css` (simpler, already exists) vs separate `dist/farn-components.css` (opt-in, keeps tokens and classes separate) vs both
+- [ ] Document the decision in `CLAUDE.md` Track A (update the open question in the "Adding a component" section)
+- [ ] Update `CHANGELOG.md`

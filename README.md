@@ -96,14 +96,23 @@ Then use the tokens:
 | `--color-accent` | fern | fern |
 | `--color-accent-hover` | forest | sage |
 | `--color-accent-text` | birch | birch |
+| `--color-border-strong` | iron | sand |
+| `--color-border-subtle` | rgba(55,65,81,0.12) | rgba(75,85,99,0.25) |
+| `--color-ghost-border` | rgba(55,65,81,0.25) | rgba(247,246,243,0.25) |
+| `--color-bg-code` | deepwater | iron |
+| `--color-error` | ember | ember |
+| `--color-warning` | grain | grain |
+| `--color-success` | moss | moss |
+| `--color-on-error` | birch | birch |
 
-### Dark/light mode
+### Component tokens (Tier 3)
 
-Set `data-theme="dark"` or `data-theme="light"` on `<html>`. The FOWT prevention script above handles the initial state.
+Override these to retheme individual components without touching the semantic layer:
+`--btn-p-bg`, `--btn-p-text`, `--btn-p-hover-bg`, `--btn-g-border`, `--link-color` — see `tokens/components.css` for the full list.
 
-### Surface overrides
+### Theming
 
-Set a depth level on any element — all surfaces adapt to the current page theme automatically:
+Set `data-theme="dark"` or `data-theme="light"` on `<html>`. The FOWT prevention script above handles the initial state. Override depth on any element — all surfaces adapt to the current page theme automatically:
 
 ```html
 <section data-surface="base">Page-level bg (resets inside deeper surfaces)</section>
@@ -132,6 +141,21 @@ Set a depth level on any element — all surfaces adapt to the current page them
 
 ---
 
+## Motion
+
+| Token | Value | Use |
+|---|---|---|
+| `--duration-fast` | 80ms | Press / active states |
+| `--duration-base` | 120ms | Standard hover interactions |
+| `--duration-slow` | 200ms | Fill, colour, indicator transitions |
+| `--duration-enter` | 250ms | Drawers, nav hide/show |
+| `--duration-reveal` | 400ms | Content reveal, stagger |
+| `--ease-default` | ease | General transitions |
+| `--ease-out` | ease-out | Exit transitions |
+| `--ease-spring` | cubic-bezier(0.16,1,0.3,1) | Overshoot / spring |
+
+---
+
 ## Spacing scale
 
 | Token | Value |
@@ -145,27 +169,30 @@ Set a depth level on any element — all surfaces adapt to the current page them
 | `--space-3xl` | 72px |
 | `--space-4xl` | 96px |
 
+### Layout widths
+
+| Token | Value |
+|---|---|
+| `--width-content` | 1080px |
+| `--width-prose` | 70ch |
+| `--width-narrow` | 640px |
+
 ---
 
-## Browser support
-
-Farn uses [CSS custom properties](https://caniuse.com/css-variables) — supported in all modern browsers (Chrome 49+, Firefox 31+, Safari 9.1+, Edge 16+). No build step, no JavaScript required.
+Farn uses [CSS custom properties](https://caniuse.com/css-variables) — supported in all modern browsers (Chrome 49+, Firefox 31+, Safari 9.1+, Edge 16+). No build step required.
 
 ---
 
-## WCAG accessibility
+## Accessibility
 
-All semantic pairings meet WCAG 2.1 AA:
+All semantic pairings meet WCAG 2.1 AA. Key pairs:
 
-| Pair | Ratio | Result |
+| Pair | Ratio | |
 |---|---|---|
-| Parchment on Void | 13.07:1 | ✓ AA |
-| Fern on Parchment | 4.80:1 | ✓ AA |
-| Fern on Void | 4.68:1 | ✓ AA |
-| Sage on Void | 5.19:1 | ✓ AA |
-| All Bloom colors on Parchment | ≥ 4.47:1 | ✓ AA |
+| `--bm2-birch` on `--in0-void` | 17.51:1 | AAA |
+| `--fo1-fern` on `--bm2-birch` | 4.67:1 | AA |
 
-Full contrast matrix in the [documentation](https://farn.jbpt.de).
+[Full contrast matrix →](https://farn.jbpt.de)
 
 ---
 
