@@ -1,0 +1,316 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Theming" description="Farn data-surface and data-theme system — surfaces, dark mode, and FOWT prevention">
+  <nav slot="subnav" class="sub-nav filled" id="sub-nav-theming" aria-label="Section navigation">
+    <div class="sub-nav-inner">
+      <a href="#surface-system" class="sub-nav-link">Surface System</a>
+      <a href="#live-demo"      class="sub-nav-link">Live Demo</a>
+      <a href="#theme-toggle"   class="sub-nav-link">Theme Toggle</a>
+      <a href="#fowt"           class="sub-nav-link">FOWT Prevention</a>
+      <span class="sub-nav-indicator"></span>
+    </div>
+  </nav>
+
+  <h1>Theming</h1>
+  <span class="badge badge-published">stable</span>
+  <p>
+    Farn's theming system has two orthogonal axes. <code>data-theme</code> sets an absolute
+    light or dark context on any element. <code>data-surface</code> sets a relative depth
+    within that context — base, layer, or overlay — and resolves automatically to the correct
+    palette token for the current theme. They compose freely: a dark panel inside a light page
+    needs only one attribute pair.
+  </p>
+
+  <h2 id="surface-system">Surface System</h2>
+  <p>
+    Each surface overrides <code>--color-bg</code> (and where relevant <code>--color-bg-panel</code>)
+    so that any element using <code>background: var(--color-bg)</code> picks up the right depth
+    automatically. All other semantic tokens inherit from the current theme.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th><code>data-surface</code></th>
+        <th>Light <code>--color-bg</code></th>
+        <th>Dark <code>--color-bg</code></th>
+        <th>Light <code>--color-bg-panel</code></th>
+        <th>Dark <code>--color-bg-panel</code></th>
+        <th>Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>base</code></td>
+        <td><code>--bm2-birch</code> <span class="swatch" style="background:#F7F6F3"></span></td>
+        <td><code>--in0-void</code> <span class="swatch" style="background:#0D1117"></span></td>
+        <td><em>inherits</em></td>
+        <td><em>inherits</em></td>
+        <td>Resets to page bg; useful inside a deeper surface when you need to escape back up</td>
+      </tr>
+      <tr>
+        <td><code>layer</code></td>
+        <td><code>--bm1-mist</code> <span class="swatch" style="background:#E9E6DC"></span></td>
+        <td><code>--in1-iron</code> <span class="swatch" style="background:#374151"></span></td>
+        <td><code>--bm2-birch</code></td>
+        <td><code>--in2-slate</code></td>
+        <td>Cards, sidebars, panels — one step raised from the page</td>
+      </tr>
+      <tr>
+        <td><code>overlay</code></td>
+        <td><code>--bm0-sand</code> <span class="swatch" style="background:#D5D2C7"></span></td>
+        <td><code>--in2-slate</code> <span class="swatch" style="background:#4B5563"></span></td>
+        <td><em>inherits</em></td>
+        <td><code>--in2-slate</code> (capped)</td>
+        <td>Modals, dropdowns, floating elements — highest depth</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    The dark overlay ceiling: in dark mode <code>--color-bg-panel</code> inside an overlay is capped
+    at <code>--in2-slate</code> — the same as the overlay background itself — because slate is the
+    deepest available surface. Panels inside a dark overlay appear at the same shade; this is expected.
+  </p>
+
+  <h2 id="live-demo">Live Demo</h2>
+  <p>
+    The two columns below are forced to their respective themes via <code>data-theme</code> on the
+    column wrapper. Each surface renders as a sibling block so you can compare all three depths
+    side by side in both themes simultaneously.
+  </p>
+
+  <div class="demo-grid">
+    <div class="theme-col" data-theme="light">
+      <p class="section-eyebrow theme-label">Light theme</p>
+      <div class="surface-demo" data-surface="base">
+        <code class="surface-tag">base</code>
+        <p class="surface-desc">Page background — birch</p>
+      </div>
+      <div class="surface-demo" data-surface="layer">
+        <code class="surface-tag">layer</code>
+        <p class="surface-desc">Cards, panels — mist</p>
+      </div>
+      <div class="surface-demo" data-surface="overlay">
+        <code class="surface-tag">overlay</code>
+        <p class="surface-desc">Modals, dropdowns — sand</p>
+      </div>
+    </div>
+
+    <div class="theme-col" data-theme="dark">
+      <p class="section-eyebrow theme-label">Dark theme</p>
+      <div class="surface-demo" data-surface="base">
+        <code class="surface-tag">base</code>
+        <p class="surface-desc">Page background — void</p>
+      </div>
+      <div class="surface-demo" data-surface="layer">
+        <code class="surface-tag">layer</code>
+        <p class="surface-desc">Cards, panels — iron</p>
+      </div>
+      <div class="surface-demo" data-surface="overlay">
+        <code class="surface-tag">overlay</code>
+        <p class="surface-desc">Modals, dropdowns — slate</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Responds to the page toggle</h3>
+  <p>
+    Without a forced <code>data-theme</code> the surfaces adapt automatically. Use the moon/sun
+    button in the nav above to see all three levels update in place.
+  </p>
+
+  <div class="reactive-demo">
+    <p class="section-eyebrow theme-label">Current page theme</p>
+    <div class="reactive-inner">
+      <div class="surface-demo" data-surface="base">
+        <code class="surface-tag">base</code>
+        <p class="surface-desc">Page background</p>
+      </div>
+      <div class="surface-demo" data-surface="layer">
+        <code class="surface-tag">layer</code>
+        <p class="surface-desc">Cards, panels</p>
+      </div>
+      <div class="surface-demo" data-surface="overlay">
+        <code class="surface-tag">overlay</code>
+        <p class="surface-desc">Modals, dropdowns</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Composition</h3>
+  <p>
+    Combine <code>data-theme</code> and <code>data-surface</code> on the same element to create a
+    surface that is pinned to a specific theme regardless of the page. Both panels below stay constant
+    as you toggle the page theme.
+  </p>
+
+  <div class="composition-demo">
+    <div class="composed-panel" data-theme="dark" data-surface="layer">
+      <code class="surface-tag">data-theme="dark" data-surface="layer"</code>
+      <p class="surface-desc">Always a dark panel</p>
+    </div>
+    <div class="composed-panel" data-theme="light" data-surface="layer">
+      <code class="surface-tag">data-theme="light" data-surface="layer"</code>
+      <p class="surface-desc">Always a light panel</p>
+    </div>
+  </div>
+
+  <h2 id="theme-toggle">Theme Toggle</h2>
+  <p>
+    Set <code>data-theme="dark"</code> or <code>data-theme="light"</code> on <code>&lt;html&gt;</code>
+    to control the page theme. The same attribute on any descendant element overrides the theme locally —
+    all semantic tokens re-resolve inside that element.
+  </p>
+
+  <pre><code>&lt;!-- Page-level: set on &lt;html&gt; --&gt;
+&lt;html data-theme="dark"&gt;
+
+&lt;!-- Element-level: local override --&gt;
+&lt;section data-theme="dark"&gt;
+  Always dark, regardless of the page theme
+&lt;/section&gt;
+
+&lt;!-- Composed: pinned theme + explicit depth --&gt;
+&lt;section data-theme="dark" data-surface="layer"&gt;
+  Dark panel, card depth
+&lt;/section&gt;</code></pre>
+
+  <p>
+    The theme attribute is self-contained — every semantic token (<code>--color-bg</code>,
+    <code>--color-text</code>, <code>--color-border</code>, <code>--color-accent</code>, and all
+    others) re-declares inside <code>[data-theme]</code>, so a forced-theme element needs no extra
+    overrides.
+  </p>
+
+  <h2 id="fowt">FOWT Prevention</h2>
+  <p>
+    A Flash of Wrong Theme (FOWT) occurs when the browser renders a frame in the default light mode
+    before JavaScript runs and reads the stored preference. On a fast connection it is a brief flicker;
+    on a slow one it can persist for a noticeable moment.
+  </p>
+  <p>
+    The fix is a tiny synchronous inline script placed in <code>&lt;head&gt;</code> — before
+    <code>&lt;body&gt;</code> — that sets <code>data-theme</code> on <code>&lt;html&gt;</code> before
+    the browser paints anything:
+  </p>
+
+  <pre><code>&lt;script&gt;
+  (function () &#123;
+    const stored = localStorage.getItem('farn-theme');
+    const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', stored ?? system);
+  &#125;)();
+&lt;/script&gt;</code></pre>
+
+  <p>Three rules for the script to work:</p>
+  <ul>
+    <li><strong>Synchronous, not deferred.</strong> No <code>defer</code>, no <code>type="module"</code>. The script must execute before the first paint, which means it must block parsing briefly.</li>
+    <li><strong>In <code>&lt;head&gt;</code> before <code>&lt;body&gt;</code>.</strong> Any content painted before the script runs will flash in the wrong theme.</li>
+    <li><strong>localStorage key is <code>farn-theme</code>.</strong> The theme toggle must write to the same key. Falls back to <code>prefers-color-scheme</code> when no stored preference exists.</li>
+  </ul>
+  <p>
+    In Astro, use <code>is:inline</code> on the script tag to prevent bundling and ensure it remains
+    synchronous: <code>&lt;script is:inline&gt;...&lt;/script&gt;</code>.
+  </p>
+</DocLayout>
+
+<style>
+  .swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    border: 1px solid var(--color-border);
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+
+  /* Side-by-side forced-theme demo */
+  .demo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+  @media (max-width: 640px) {
+    .demo-grid { grid-template-columns: 1fr; }
+  }
+
+  .theme-col {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .theme-label {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    margin: 0;
+  }
+
+  /* Individual surface box */
+  .surface-demo {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin: var(--space-sm);
+  }
+
+  .surface-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    display: block;
+    margin-bottom: var(--space-xs);
+    background: none;
+    padding: 0;
+  }
+
+  .surface-desc {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* Page-reactive demo */
+  .reactive-demo {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--space-xl);
+  }
+
+  .reactive-inner {
+    display: flex;
+    flex-wrap: wrap;
+    padding: var(--space-xs);
+  }
+
+  .reactive-inner .surface-demo {
+    flex: 1;
+    min-width: 160px;
+  }
+
+  /* Composition demo */
+  .composition-demo {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xl);
+  }
+
+  .composed-panel {
+    flex: 1;
+    min-width: 220px;
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+</style>
