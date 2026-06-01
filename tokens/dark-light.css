@@ -56,6 +56,7 @@
   --color-bg-code:          var(--in1-iron);
   --color-accent:           var(--fo1-fern);
   --color-accent-hover:     var(--fo0-sage);
+  --color-accent-active:    var(--fo2-forest); /* darker than resting fern; stays in-palette unlike light's deepwater */
   --color-accent-text:      var(--bm2-birch);
   --color-error:            var(--bl0-ember);
   --color-warning:          var(--bl2-grain);

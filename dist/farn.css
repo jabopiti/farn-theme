@@ -166,6 +166,7 @@
   --color-bg-code:          var(--in1-iron);
   --color-accent:           var(--fo1-fern);
   --color-accent-hover:     var(--fo0-sage);
+  --color-accent-active:    var(--fo2-forest); /* darker than resting fern; stays in-palette unlike light's deepwater */
   --color-accent-text:      var(--bm2-birch);
   --color-error:            var(--bl0-ember);
   --color-warning:          var(--bl2-grain);
@@ -258,7 +259,7 @@
   --btn-d-hover-bg: var(--in0-void);
 
   /* Active / pressed — ghost has dark override in dark-light.css */
-  --btn-p-active-bg: var(--color-accent-active); /* semantic; maps to --fo3-deepwater in both themes */
+  --btn-p-active-bg: var(--color-accent-active); /* semantic; light: --fo3-deepwater · dark: --fo2-forest */
   --btn-s-active-bg: var(--color-bg-inset);      /* light: hover-sandwich (idle=active); dark: --in2-slate via semantic layer */
   --btn-g-active-bg: var(--bm0-sand);            /* light: darker than hover --bm1-mist; dark: --in0-void override */
   --btn-d-active-bg: var(--in0-void);            /* same as hover — no darker palette token exists */
