@@ -44,7 +44,7 @@
   background:               var(--color-bg);
   --color-bg:               var(--in0-void);
   --color-bg-panel:         var(--in1-iron);
-  --color-bg-inset:         var(--in0-void);
+  --color-bg-inset:         var(--in2-slate);
   --color-text:             var(--bm2-birch);
   --color-text-secondary:   var(--bm1-mist);
   --color-text-tertiary:    var(--bm0-sand);
@@ -60,8 +60,7 @@
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
-  --btn-s-hover-bg:         var(--in2-slate);
-  --input-bg-active:        var(--in2-slate);  /* inset resolves to void in dark; slate is the correct step */
+  --btn-s-hover-bg:         var(--in3-ash);
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */
