@@ -148,15 +148,15 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-14 · Form component CSS
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/t14-design-system-review-1cVkr`
 
 **Depends on T-43** — resolve the component CSS artifact structure first.
 
 **Gap:** No form element CSS is shipped; consumers must style inputs, textareas, selects, and labels from scratch using T-10 component tokens.
 
-- [ ] Add base styles for `input`, `textarea`, `select`, `label`, and a `.form-field` wrapper to the component CSS artifact
-- [ ] Styles must consume T-10 `--input-*` tokens
-- [ ] Document states (default, focus, error, disabled) on the forms component page
+- [x] Add base styles for `input`, `textarea`, `select`, `label`, and a `.form-field` wrapper to the component CSS artifact
+- [x] Styles must consume T-10 `--input-*` tokens
+- [x] Document states (default, focus, error, disabled) on the forms component page
 
 ---
 

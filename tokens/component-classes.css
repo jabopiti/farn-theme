@@ -60,3 +60,90 @@
 /* Sizes */
 .btn-sm { height: 32px; padding: 0 12px; font-size: 12px; }
 .btn-lg { height: 48px; padding: 0 20px; font-size: 14px; }
+
+/* ── Form fields ─────────────────────────────────────────────────────────── */
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  display: block;
+  width: 100%;
+  padding: 0 var(--space-sm);
+  height: 40px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  color: var(--input-text);
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1;
+  transition: background var(--duration-base) var(--ease-default),
+              border-color var(--duration-base) var(--ease-default),
+              box-shadow var(--duration-base) var(--ease-default);
+  appearance: none;
+}
+
+textarea {
+  height: auto;
+  padding: var(--space-sm);
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 80px;
+}
+
+:is(input, textarea, select):hover {
+  background: var(--input-bg-active);
+}
+
+:is(input, textarea, select):focus {
+  outline: none;
+  background: var(--input-bg-active);
+  border-color: var(--input-border-focus);
+  box-shadow: var(--input-focus-shadow);
+}
+
+:is(input, textarea, select):disabled {
+  opacity: var(--input-disabled-opacity);
+  cursor: not-allowed;
+}
+
+:is(input, textarea, select)::placeholder {
+  color: var(--input-placeholder);
+}
+
+/* Error state — both ARIA attribute (semantic) and BEM class (wrapper) */
+:is(input, textarea, select)[aria-invalid="true"],
+.form-field--error :is(input, textarea, select) {
+  border-color: var(--input-border-error);
+}
+
+.form-field--error label,
+.form-field--error .form-hint {
+  color: var(--color-error);
+}
+
+/* Checkbox and radio — accent colour only; sizing handled by browser defaults */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--color-accent);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-md);
+}
+
+.form-hint {
+  font-size: 0.8125rem;
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-xs);
+}

@@ -8,6 +8,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `dist/farn-components.css`: form element styles shipped — bare `input`, `textarea`, `select`, `label` selectors; `.form-field` wrapper (flex column, `--space-md` bottom margin); `.form-hint` helper text; `.form-field--error` BEM modifier; `[aria-invalid="true"]` error state; `accent-color` theming for `input[type="checkbox"]` and `input[type="radio"]`; all styles consume `--input-*` Tier-3 tokens (T-14)
+- `site/src/pages/components/forms.astro` — forms component documentation page with live element demos, states (default, error via ARIA + wrapper class, disabled), wrapper pattern, token reference table, and override examples (T-14)
+- `site/src/layouts/DocLayout.astro`: Forms link added to main nav and mobile drawer (T-14)
+- `dist/farn-tokens.css`, `dist/farn.css`, `dist/farn-components.css`: rebuilt (T-14)
 - `dist/farn-components.css`: button classes shipped — `.btn` (base), `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d` (variants), `.btn-sm`, `.btn-lg` (size modifiers); all states (hover, active/pressed, disabled) driven by `--btn-*` tokens (T-11)
 - `tokens/components.css`: `--btn-p-active-bg`, `--btn-s-active-bg`, `--btn-g-active-bg`, `--btn-d-active-bg` pressed-state tokens (T-11)
 - `tokens/dark-light.css`: `--color-accent-active` semantic token (`--fo3-deepwater`; theme-invariant); `--btn-g-active-bg` dark-mode override (`--in0-void`) for pressed ghost button (T-11)

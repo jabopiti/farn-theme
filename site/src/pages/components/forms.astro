@@ -1,0 +1,217 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Forms" description="Form element styles, states, and Tier-3 component tokens in the Farn design system">
+  <nav slot="subnav" class="sub-nav filled" id="sub-nav-forms" aria-label="Section navigation">
+    <div class="sub-nav-inner">
+      <a href="#elements" class="sub-nav-link">Elements</a>
+      <a href="#states" class="sub-nav-link">States</a>
+      <a href="#wrapper" class="sub-nav-link">Wrapper</a>
+      <a href="#tokens" class="sub-nav-link">Tokens</a>
+      <a href="#overriding" class="sub-nav-link">Overriding</a>
+      <span class="sub-nav-indicator"></span>
+    </div>
+  </nav>
+
+  <h1>Forms</h1>
+  <span class="badge badge-published">stable</span>
+  <p>
+    Form element styles ship as bare element selectors — no extra classes required on
+    <code>input</code>, <code>textarea</code>, or <code>select</code>. All styles consume
+    Tier-3 <code>--input-*</code> tokens so the full form palette can be rethemed in one
+    place without touching semantic tokens.
+  </p>
+
+  <h2 id="elements">Elements</h2>
+  <p>
+    Apply the styles by including <code>farn-components.css</code>. Every <code>input</code>,
+    <code>textarea</code>, and <code>select</code> on the page is styled automatically.
+    Use <code>.form-field</code> to group a label with its control.
+  </p>
+
+  <div class="form-demo">
+    <div class="form-field">
+      <label for="demo-text">Text input</label>
+      <input type="text" id="demo-text" placeholder="Placeholder text" />
+    </div>
+    <div class="form-field">
+      <label for="demo-select">Select</label>
+      <select id="demo-select">
+        <option value="">Choose an option</option>
+        <option value="fern">Fern</option>
+        <option value="forest">Forest</option>
+        <option value="deepwater">Deepwater</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="demo-textarea">Textarea</label>
+      <textarea id="demo-textarea" placeholder="Longer text…"></textarea>
+    </div>
+    <div class="form-field">
+      <label>
+        <input type="checkbox" /> Remember me
+      </label>
+    </div>
+  </div>
+
+  <pre><code>&lt;div class="form-field"&gt;
+  &lt;label for="name"&gt;Name&lt;/label&gt;
+  &lt;input type="text" id="name" placeholder="Jane Smith" /&gt;
+&lt;/div&gt;
+
+&lt;div class="form-field"&gt;
+  &lt;label for="role"&gt;Role&lt;/label&gt;
+  &lt;select id="role"&gt;
+    &lt;option value=""&gt;Choose a role&lt;/option&gt;
+    &lt;option value="admin"&gt;Admin&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;div class="form-field"&gt;
+  &lt;label for="bio"&gt;Bio&lt;/label&gt;
+  &lt;textarea id="bio"&gt;&lt;/textarea&gt;
+&lt;/div&gt;</code></pre>
+
+  <h2 id="states">States</h2>
+  <p>
+    Hover darkens the background to <code>--input-bg-active</code>. Focus adds a coloured
+    border and a soft glow ring driven by <code>--input-focus-shadow</code>. The global
+    <code>:focus-visible</code> outline from <code>base.css</code> is suppressed in favour of
+    the token-driven focus ring. Error state can be set either via <code>aria-invalid="true"</code>
+    on the input (preferred — screen readers announce the invalid state automatically) or via
+    <code>.form-field--error</code> on the wrapper (colours the label and hint text too).
+    Disabled inputs reduce opacity to <code>--input-disabled-opacity</code> and suppress pointer events.
+  </p>
+
+  <div class="form-demo">
+    <div class="form-field">
+      <label for="state-default">Default</label>
+      <input type="text" id="state-default" placeholder="Idle" />
+    </div>
+    <div class="form-field form-field--error">
+      <label for="state-error">Error (wrapper class)</label>
+      <input type="text" id="state-error" aria-invalid="true" value="bad@" />
+      <span class="form-hint">Enter a valid email address.</span>
+    </div>
+    <div class="form-field">
+      <label for="state-disabled">Disabled</label>
+      <input type="text" id="state-disabled" value="Cannot edit" disabled />
+    </div>
+  </div>
+
+  <pre><code>&lt;!-- Error via ARIA attribute — announced by screen readers --&gt;
+&lt;input type="email" aria-invalid="true" value="bad@" /&gt;
+
+&lt;!-- Error via wrapper — colours label and hint text too --&gt;
+&lt;div class="form-field form-field--error"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input type="email" id="email" aria-invalid="true" value="bad@" /&gt;
+  &lt;span class="form-hint"&gt;Enter a valid email address.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;input type="text" disabled value="Cannot edit" /&gt;</code></pre>
+
+  <h2 id="wrapper">Wrapper &amp; hint text</h2>
+  <p>
+    <code>.form-field</code> is a flex column that stacks label, control, and optional hint
+    text with consistent spacing. <code>.form-hint</code> renders helper or error text below
+    the control in a smaller, secondary colour.
+  </p>
+
+  <div class="form-demo">
+    <div class="form-field">
+      <label for="wrapper-name">Username</label>
+      <input type="text" id="wrapper-name" placeholder="jane_smith" />
+      <span class="form-hint">3–24 characters, letters and underscores only.</span>
+    </div>
+    <div class="form-field form-field--error">
+      <label for="wrapper-email">Email</label>
+      <input type="email" id="wrapper-email" aria-invalid="true" value="not-an-email" />
+      <span class="form-hint">Enter a valid email address.</span>
+    </div>
+  </div>
+
+  <pre><code>&lt;div class="form-field"&gt;
+  &lt;label for="username"&gt;Username&lt;/label&gt;
+  &lt;input type="text" id="username" /&gt;
+  &lt;span class="form-hint"&gt;3–24 characters.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Error variant — hint text turns red automatically --&gt;
+&lt;div class="form-field form-field--error"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input type="email" id="email" aria-invalid="true" /&gt;
+  &lt;span class="form-hint"&gt;Enter a valid email address.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+  <h2 id="tokens">Token reference</h2>
+  <p>All <code>--input-*</code> tokens are defined in <code>tokens/components.css</code>.</p>
+
+  <table>
+    <thead>
+      <tr><th>Token</th><th>Default</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>--input-radius</code></td><td><code>var(--radius-md)</code></td><td>Border radius for all form controls</td></tr>
+      <tr><td><code>--input-bg</code></td><td><code>var(--color-bg-panel)</code></td><td>Idle background</td></tr>
+      <tr><td><code>--input-bg-active</code></td><td><code>var(--color-bg-inset)</code></td><td>Hover and focus background</td></tr>
+      <tr><td><code>--input-border</code></td><td><code>transparent</code></td><td>Idle border colour (invisible by default)</td></tr>
+      <tr><td><code>--input-border-focus</code></td><td><code>var(--color-accent)</code></td><td>Focus border colour</td></tr>
+      <tr><td><code>--input-border-error</code></td><td><code>var(--color-error)</code></td><td>Error border colour</td></tr>
+      <tr><td><code>--input-focus-shadow</code></td><td><code>0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent)</code></td><td>Focus glow ring</td></tr>
+      <tr><td><code>--input-text</code></td><td><code>var(--color-text)</code></td><td>Input text colour</td></tr>
+      <tr><td><code>--input-placeholder</code></td><td><code>var(--color-text-tertiary)</code></td><td>Placeholder text colour</td></tr>
+      <tr><td><code>--input-disabled-opacity</code></td><td><code>0.4</code></td><td>Opacity applied to disabled controls</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="overriding">Overriding tokens</h2>
+  <p>
+    Override tokens on a scoped selector to retheme form controls in one section without
+    affecting the rest of the page. Because <code>--input-*</code> tokens sit above the
+    semantic layer, changes here have no effect on other elements that share the same
+    semantic colour.
+  </p>
+
+  <pre><code>/* Tighter radius for a dense data-entry panel */
+.data-panel &#123;
+  --input-radius: var(--radius-sm);
+&#125;
+
+/* Always show a visible idle border in a section with no panel background */
+.flat-form &#123;
+  --input-bg:     transparent;
+  --input-border: var(--color-border);
+&#125;</code></pre>
+
+  <h2>Anatomy</h2>
+  <pre><code>&lt;!-- Minimal — element selector handles all styling --&gt;
+&lt;input type="text" placeholder="…" /&gt;
+
+&lt;!-- With label --&gt;
+&lt;label for="x"&gt;Label&lt;/label&gt;
+&lt;input type="text" id="x" /&gt;
+
+&lt;!-- Full wrapper pattern --&gt;
+&lt;div class="form-field"&gt;
+  &lt;label for="y"&gt;Label&lt;/label&gt;
+  &lt;input type="text" id="y" /&gt;
+  &lt;span class="form-hint"&gt;Helper text.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+</DocLayout>
+
+<style>
+  .form-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--color-bg-panel);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    max-width: var(--width-prose);
+  }
+</style>
