@@ -263,19 +263,18 @@ import Footer from '../components/Footer.astro';
   .field-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); }
   .field-input {
     height: 48px; padding: 0 14px;
-    border: 1.5px solid transparent; border-radius: var(--radius-md);
-    background: var(--color-bg-panel); font-family: var(--font-body);
-    font-size: 14px; color: var(--color-text);
+    border: 1.5px solid var(--input-border); border-radius: var(--input-radius);
+    background: var(--input-bg); font-family: var(--font-body);
+    font-size: 14px; color: var(--input-text);
     transition: background 180ms ease, border-color 150ms ease, box-shadow 150ms ease; outline: none;
   }
-  .field-input::placeholder { color: var(--color-text-tertiary); }
-  .field-input:hover { background: var(--color-bg-inset); }
-  .field-input:focus {
-    background: var(--color-bg-inset); border-color: var(--color-accent);
+  .field-input::placeholder { color: var(--input-placeholder); }
+  .field-input:is(:hover, :focus-visible) { background: var(--input-bg-active); }
+  .field-input:focus-visible {
+    border-color: var(--input-border-focus);
+    box-shadow: var(--input-focus-shadow);
   }
-  [data-theme="dark"] .field-input:hover { background: var(--in2-slate); }
-  [data-theme="dark"] .field-input:focus { background: var(--in2-slate); }
-  .field-error .field-input { border-color: var(--color-error); }
+  .field-error .field-input { border-color: var(--input-border-error); }
   .field-hint { font-size: 11px; color: var(--color-text-tertiary); }
   .field-error-msg { font-size: 11px; color: var(--color-error); }
 

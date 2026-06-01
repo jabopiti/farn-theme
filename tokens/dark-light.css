@@ -61,6 +61,7 @@
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
   --btn-s-hover-bg:         var(--in2-slate);
+  --input-bg-active:        var(--in2-slate);  /* inset resolves to void in dark; slate is the correct step */
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */

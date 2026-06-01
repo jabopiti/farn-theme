@@ -44,6 +44,18 @@
   --card-border:   transparent;
   --card-radius:   var(--radius-lg);
   --card-padding:  var(--space-md);
+
+  /* ── Input tokens ───────────────────────────────────────────────────── */
+  --input-radius:           var(--radius-md);
+  --input-bg:               var(--color-bg-panel);
+  --input-bg-active:        var(--color-bg-inset);   /* hover + focus */
+  --input-border:           transparent;
+  --input-border-focus:     var(--color-accent);
+  --input-border-error:     var(--color-error);
+  --input-focus-shadow:     0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
+  --input-text:             var(--color-text);
+  --input-placeholder:      var(--color-text-tertiary);
+  --input-disabled-opacity: 0.4;
 }
 /* ── Farn — Component CSS classes ──────────────────────────────────────── */
 /* Requires palette + semantic tokens (farn-tokens.css or farn.css).         */

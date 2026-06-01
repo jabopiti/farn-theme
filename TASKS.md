@@ -98,13 +98,13 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-10 · Form component tokens (Tier 3)
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/festive-johnson-GM06K`
 
 **Gap:** Form element styles have no component-level tokens; inputs cannot be rethemed without overriding semantic-layer values that affect unrelated elements.
 
-- [ ] Add `--input-*` tokens (background, border, radius, focus-ring color) to `tokens/components.css` (created in T-08)
-- [ ] Update site form styles to consume these tokens
-- [ ] Rebuild `dist/farn.css` and update `CHANGELOG.md`
+- [x] Add `--input-*` tokens (background, border, radius, focus-ring color) to `tokens/components.css` (created in T-08)
+- [x] Update site form styles to consume these tokens
+- [x] Rebuild `dist/farn.css` and update `CHANGELOG.md`
 
 ---
 
