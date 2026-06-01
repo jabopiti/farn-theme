@@ -8,6 +8,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `tokens/components.css`: `--card-*` Tier-3 tokens — `--card-bg` (`--color-bg-panel`), `--card-hover-bg` (`--color-bg-inset`), `--card-border` (`transparent`), `--card-radius` (`--radius-lg`), `--card-padding` (`--space-md` / 24px) — card surfaces are now overridable without touching semantic tokens (T-09)
 - `dist/farn-components.css`: new opt-in component CSS artifact — ships component tokens (`--btn-*`, `--link-*`) and CSS classes (`.badge` + 7 variants); load alongside `farn.css` or `farn-tokens.css` (T-43, T-12)
 - `tokens/component-classes.css`: new source file for shipped CSS classes — `.badge` base class and `.badge-general`, `.badge-published`, `.badge-draft`, `.badge-archived`, `.badge-beta`, `.badge-research`, `.badge-category` variant modifiers using palette tokens directly (T-12)
 
@@ -27,6 +28,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `tokens/index.css`: `@import './motion.css'` added to the token import chain (T-04)
 
 ### Changed
+- `site/src/pages/index.astro`: `.card`, `.card:hover`, `.card-highlight-dark`, `.specimen-card`, `.token-card` updated to consume `--card-*` Tier-3 tokens; `.card-highlight-dark` now drives the border via scoped `--card-border` override rather than a hard `border` shorthand; `.card` and `.token-card` transitions migrated from hardcoded durations to `--duration-*`/`--ease-*` motion tokens (T-09)
+- `site/src/pages/getting-started.astro`: "Using Tokens" card example updated to demonstrate Tier-3 `--card-*` tokens (T-09)
 - `site/src/styles/site.css`: button variant rules updated to consume `--btn-*` Tier-3 tokens; `.btn` base class changed from `border: none` to `border: 1.5px solid transparent` so ghost border renders via token; dark-mode `[data-theme="dark"] .btn-s:hover` override removed (now handled by `--btn-s-hover-bg` in `dark-light.css`); disabled state added via `--btn-disabled-opacity` (T-08)
 - `tokens/base.css`: naked `<a>` rule updated to consume `--link-color`, `--link-hover-color`, and `--link-visited-color` tokens (T-08)
 - `CLAUDE.md`: build command updated to include `tokens/components.css` in the tokens-only artifact step (T-08)
