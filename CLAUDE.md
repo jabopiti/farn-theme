@@ -3,20 +3,22 @@
 ## Repo structure
 
 ```
-tokens/           CSS source — edit here, not in dist/
-  colors.css      Palette tokens (--in*, --bm*, --fo*, --bl*)
-  typography.css  Font imports + font-family tokens
-  spacing.css     Spacing scale, widths, radius, z-index
-  motion.css      Duration and easing tokens
-  dark-light.css  Semantic tokens + data-surface patterns
-  components.css  Tier-3 component tokens (--btn-*, --link-*)
-  base.css        Reset, focus, reduced-motion
-  index.css       @import chain (used by the site)
+tokens/                   CSS source — edit here, not in dist/
+  colors.css              Palette tokens (--in*, --bm*, --fo*, --bl*)
+  typography.css          Font imports + font-family tokens
+  spacing.css             Spacing scale, widths, radius, z-index
+  motion.css              Duration and easing tokens
+  dark-light.css          Semantic tokens + data-surface patterns
+  components.css          Tier-3 component tokens (--btn-*, --link-*)
+  component-classes.css   Shipped CSS classes (.badge, .btn, etc.) — no tokens
+  base.css                Reset, focus, reduced-motion
+  index.css               @import chain (used by the site)
 dist/
-  farn.css        Full bundle — tokens + base reset
-  farn-tokens.css Tokens only — no base reset (for consumers with their own reset)
-site/             Astro documentation site
-CHANGELOG.md      Updated on every token or component change
+  farn.css                Full bundle — tokens + base reset
+  farn-tokens.css         Tokens only — no base reset (for consumers with their own reset)
+  farn-components.css     Component tokens + classes — opt-in, load alongside farn.css
+site/                     Astro documentation site
+CHANGELOG.md              Updated on every token or component change
 ```
 
 ## Build command
@@ -27,9 +29,12 @@ cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css
 
 # Full bundle (tokens + reset) — appends base.css to the tokens-only output
 cat dist/farn-tokens.css tokens/base.css > dist/farn.css
+
+# Component classes (opt-in) — tokens + classes, no reset
+cat tokens/components.css tokens/component-classes.css > dist/farn-components.css
 ```
 
-Run both after any change to a `tokens/` file (in order — `farn-tokens.css` first).
+Run all three after any change to a `tokens/` file (in order — `farn-tokens.css` first).
 
 ## CSS naming conventions
 
@@ -60,6 +65,8 @@ h1 {
 
 **Tokens only:** Edit `tokens/` files, never `dist/farn.css` directly.
 
+**Dogfood:** The docs site is built with Farn. Every component shipped in `dist/farn-components.css` must also be imported by `DocLayout.astro` from `tokens/component-classes.css`. If it breaks the site, it breaks consumers — catch it here first.
+
 **CHANGELOG:** Update `CHANGELOG.md` with every token or component change.
 
 ## Dark/light mode
@@ -87,7 +94,7 @@ Two parallel tracks — both required for `stable` status.
 
 **Track A — Component tokens + CSS classes (shipped in dist)**
 1. Add `--<name>-*` Tier-3 tokens to `tokens/components.css`
-2. Add `.component` CSS classes consuming those tokens (currently in `tokens/components.css`; a separate `dist/farn-components.css` artifact is an open question in T-43)
+2. Add `.component` CSS classes to `tokens/component-classes.css` — these are built into `dist/farn-components.css`
 3. Run build command, update `CHANGELOG.md`
 
 **Track B — Documentation page**

@@ -42,6 +42,16 @@ jobs:
             exit 1
           fi
 
+      - name: Verify dist/farn-components.css is up-to-date
+        run: |
+          cat tokens/components.css tokens/component-classes.css > /tmp/farn-components-rebuilt.css
+          if ! diff -q dist/farn-components.css /tmp/farn-components-rebuilt.css > /dev/null; then
+            echo "dist/farn-components.css is out of sync with tokens/. Rebuild:"
+            echo "  cat tokens/components.css tokens/component-classes.css > dist/farn-components.css"
+            diff dist/farn-components.css /tmp/farn-components-rebuilt.css
+            exit 1
+          fi
+
       - uses: pnpm/action-setup@v6
         with:
           package_json_file: site/package.json
