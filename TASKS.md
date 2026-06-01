@@ -169,6 +169,8 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 - [ ] **Propose the new IA as a written outline and get explicit approval before making any structural changes** — nav hierarchy, page groupings, and URL changes affect all existing links
 - [ ] Implement the approved nav hierarchy and page groupings in `DocLayout.astro`
 - [ ] Ensure landing page, token reference pages, and component pages are clearly differentiated in purpose and navigation
+- [ ] Extract shared demo container styles — `.btn-demo`, `.badge-demo`, `.form-demo` in each component page's `<style>` block are nearly identical (flex, gap, padding, border-radius, border); consolidate into a single `.demo` base class in `site/src/styles/site.css` with modifiers as needed
+- [ ] Evaluate extracting a shared `DocComponentPage.astro` wrapper — badges, buttons, and forms all repeat the same subnav + h1 + badge + intro structure; a slot-based wrapper would make new component pages consistent by default
 
 ---
 
@@ -177,7 +179,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 **Gap:** Component pages show CSS snippets but no live demos; the relationship between tokens and rendered output is not visible.
 
-- [ ] Add live demo sections to the buttons and cards component pages using Farn token-driven HTML
+- [ ] Add live demo sections to the buttons, cards, and forms component pages using Farn token-driven HTML (note: forms page has basic demos from T-14; T-16 scope is richer interactive / token-visible demos)
 - [ ] Demos must work correctly in both light and dark mode via the `data-theme` mechanism
 - [ ] Consider a token inspector pattern showing which token drives each property
 
@@ -358,6 +360,7 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 - [ ] Add `.text-display`, `.text-h1`, `.text-h2`, `.text-h3`, `.text-body`, `.text-caption`, `.text-mono` classes consuming `--font-*` tokens and `clamp()` sizes from the documented type scale
 - [ ] Every Fraunces class must include `font-variation-settings: 'opsz' <value>` — this is a hard requirement per CLAUDE.md
 - [ ] Add to the component CSS artifact and document on the typography page
+- [ ] Introduce component-level typography tokens (`--input-font-size`, `--label-font-size`, `--btn-font-size`, `--btn-sm-font-size`, `--btn-lg-font-size`) in `tokens/components.css` and replace the hardcoded `font-size` values in `tokens/component-classes.css` — deferred from T-14 and T-11 because fixing one without the other creates inconsistency
 
 ---
 
