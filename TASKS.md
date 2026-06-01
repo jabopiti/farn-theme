@@ -42,7 +42,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-05 · Theming demo page
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/quirky-lamport-ItzsB`
 
 **Gap:** The `data-surface` system (`base`, `layer`, `overlay`) is implemented in tokens but has no live documentation page; consumers cannot see it in action without reading source code.
 
