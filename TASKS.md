@@ -490,12 +490,12 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 ---
 
 ## T-42 · Update palette SVG
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/serene-goldberg-NsJKD`
 
 **Gap:** `.github/farn-palette.svg` (displayed in README) uses the old palette name "Parchment" for what is now "Birch" (`--bm2-birch`); misleads users reading the repository page.
 
-- [ ] Update SVG text labels to current palette names (Birch Mist: Sand, Mist, Birch)
-- [ ] Verify the image renders correctly in the README on GitHub
+- [x] Update SVG text labels to current palette names (Birch Mist: Sand, Mist, Birch)
+- [x] Verify the image renders correctly in the README on GitHub
 
 ---
 

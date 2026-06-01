@@ -14,12 +14,12 @@
 
   <!-- Birch Mist -->
   <text x="20" y="128" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif" font-size="11" font-weight="500" fill="#374151">Birch Mist</text>
-  <rect x="132" y="100" width="184" height="48" rx="4" fill="#E4E2DA"/>
+  <rect x="132" y="100" width="184" height="48" rx="4" fill="#D5D2C7"/>
   <text x="224" y="162" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">sand</text>
-  <rect x="324" y="100" width="184" height="48" rx="4" fill="#EEEDE9"/>
-  <text x="416" y="162" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">linen</text>
-  <rect x="516" y="100" width="184" height="48" rx="4" fill="#F5F4F0" stroke="#E4E2DA" stroke-width="1"/>
-  <text x="608" y="162" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">parchment</text>
+  <rect x="324" y="100" width="184" height="48" rx="4" fill="#E9E6DC"/>
+  <text x="416" y="162" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">mist</text>
+  <rect x="516" y="100" width="184" height="48" rx="4" fill="#F7F6F3" stroke="#E9E6DC" stroke-width="1"/>
+  <text x="608" y="162" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="10" fill="#6B7280">birch</text>
 
   <!-- Forest -->
   <text x="20" y="208" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif" font-size="11" font-weight="500" fill="#374151">Forest</text>

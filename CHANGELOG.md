@@ -11,6 +11,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `tokens/components.css`: `--card-*` Tier-3 tokens — `--card-bg` (`--color-bg-panel`), `--card-hover-bg` (`--color-bg-inset`), `--card-border` (`transparent`), `--card-radius` (`--radius-lg`), `--card-padding` (`--space-md` / 24px) — card surfaces are now overridable without touching semantic tokens (T-09)
 - `tokens/components.css`: `--input-*` Tier-3 form tokens — `--input-radius`, `--input-bg`, `--input-bg-active`, `--input-border`, `--input-border-focus`, `--input-border-error`, `--input-focus-shadow` (adaptive glow via `color-mix()`), `--input-text`, `--input-placeholder`, `--input-disabled-opacity` (T-10)
 
+### Fixed
+- `.github/farn-palette.svg`: Birch Mist swatches updated — labels corrected from `linen`/`parchment` to `mist`/`birch`; hex values aligned to current tokens (`--bm0-sand`, `--bm1-mist`, `--bm2-birch`) (T-42)
+
 ### Changed
 - `tokens/dark-light.css`: Fixed `--color-bg-inset` in dark mode — was `var(--in0-void)` (same as page bg, invisible in dark); now `var(--in2-slate)`, restoring the three-step surface ramp (void/iron/slate) to mirror light mode (birch/mist/sand). `--btn-s-hover-bg` dark override updated from `var(--in2-slate)` to `var(--in3-ash)` to step forward from the corrected resting state (T-10)
 - `site/src/pages/index.astro`: `.field-input` styles updated to consume `--input-*` tokens; hardcoded `[data-theme="dark"]` overrides removed; switched to `:focus-visible`; focus state shows `--input-focus-shadow` glow; hover+focus-visible background combined into `:is()` selector (T-10)
