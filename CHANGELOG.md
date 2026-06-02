@@ -8,6 +8,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `site/src/pages/tokens/motion.astro` — Motion tokens documentation page with animated previews and tables for all `--duration-*` and `--ease-*` tokens; pairing guide and usage rules included (T-41)
+- `site/src/layouts/DocLayout.astro`: Motion link added to main nav and mobile drawer between Spacing and Theming (T-41)
 - `dist/farn-components.css`: form element styles shipped — bare `input`, `textarea`, `select`, `label` selectors; `.form-field` wrapper (flex column, `--space-md` bottom margin); `.form-hint` helper text; `.form-field--error` BEM modifier; `[aria-invalid="true"]` error state; `accent-color` theming for `input[type="checkbox"]` and `input[type="radio"]`; all styles consume `--input-*` Tier-3 tokens (T-14)
 - `site/src/pages/components/forms.astro` — forms component documentation page with live element demos, states (default, error via ARIA + wrapper class, disabled), wrapper pattern, token reference table, and override examples (T-14)
 - `site/src/layouts/DocLayout.astro`: Forms link added to main nav and mobile drawer (T-14)

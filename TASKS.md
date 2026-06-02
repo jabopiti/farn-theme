@@ -504,7 +504,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-41 · Motion tokens documentation page
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/beautiful-ramanujan-jaOUa`
 
 **Gap:** `tokens/motion.css` was added in T-04 but no `site/src/pages/tokens/motion.astro` exists; `--duration-*` and `--ease-*` tokens are invisible to consumers browsing the documentation site.
 
