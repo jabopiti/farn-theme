@@ -5,7 +5,8 @@ import DocLayout from '../layouts/DocLayout.astro';
 <DocLayout title="Getting Started" description="Install Farn and set up dark/light mode in your project">
   <nav slot="subnav" class="sub-nav filled" id="sub-nav-gs" aria-label="Section navigation">
     <div class="sub-nav-inner">
-      <a href="#cdn-install" class="sub-nav-link">Install</a>
+      <a href="#npm-install" class="sub-nav-link">npm</a>
+      <a href="#cdn-install" class="sub-nav-link">CDN</a>
       <a href="#what-gets-loaded" class="sub-nav-link">Layers</a>
       <a href="#load-fonts" class="sub-nav-link">Fonts</a>
       <a href="#fowt" class="sub-nav-link">FOWT</a>
@@ -19,7 +20,16 @@ import DocLayout from '../layouts/DocLayout.astro';
   </nav>
 
   <h1>Getting Started</h1>
-  <p>Farn ships as a single CSS file — no build step, no runtime, no framework assumptions. Add one <code>&lt;link&gt;</code> tag and you have all tokens.</p>
+  <p>Farn ships as a single CSS file — no build step, no runtime, no framework assumptions. Add one <code>&lt;link&gt;</code> tag or install from npm and you have all tokens.</p>
+
+  <h2 id="npm-install">npm Install</h2>
+  <pre><code>npm install farn-theme</code></pre>
+  <p>Then import in your bundler entry (Vite, webpack, Parcel, etc.):</p>
+  <pre><code>@import "farn-theme";             /* full bundle: tokens + base reset */
+@import "farn-theme/tokens";      /* tokens only — no reset */
+@import "farn-theme/components";  /* opt-in component classes */</code></pre>
+  <p>Three named export paths are available. The default (<code>"farn-theme"</code>) is the full bundle including the base reset. Use <code>farn-theme/tokens</code> if you manage your own reset.</p>
+  <p>No bundler? Use the CDN path below — a <code>&lt;link&gt;</code> tag requires no build step.</p>
 
   <h2 id="cdn-install">CDN Install</h2>
   <p>Link directly from jsDelivr. Replace <code>@0.1.0</code> with the latest version tag.</p>

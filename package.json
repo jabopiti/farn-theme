@@ -1,0 +1,25 @@
+{
+  "name": "farn-theme",
+  "version": "0.1.0",
+  "description": "A design system rooted in the forests of northern Germany — pure CSS token library",
+  "license": "MIT",
+  "author": "Jacob Lueg Tiedemann <bo@jbpt.de>",
+  "homepage": "https://farn.jbpt.de",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jabopiti/farn-theme.git"
+  },
+  "keywords": ["css", "design-system", "tokens", "dark-mode", "theming"],
+  "main": "./dist/farn.css",
+  "style": "./dist/farn.css",
+  "exports": {
+    ".":            { "style": "./dist/farn.css",            "default": "./dist/farn.css" },
+    "./tokens":     { "style": "./dist/farn-tokens.css",     "default": "./dist/farn-tokens.css" },
+    "./components": { "style": "./dist/farn-components.css", "default": "./dist/farn-components.css" }
+  },
+  "files": ["dist", "tokens", "README.md", "CHANGELOG.md", "LICENSE"],
+  "scripts": {
+    "build": "cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css && cat dist/farn-tokens.css tokens/base.css > dist/farn.css && cat tokens/components.css tokens/component-classes.css > dist/farn-components.css"
+  },
+  "sideEffects": true
+}

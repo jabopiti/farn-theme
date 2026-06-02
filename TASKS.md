@@ -222,13 +222,13 @@ Target model — 5 canonical surfaces, each with a clear dark/light equivalent:
 ---
 
 ## T-18 · npm package setup
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/t23-review-hliBr`
 
 **Gap:** No `package.json` at the repo root; Farn can only be consumed via CDN, not installed as a dependency.
 
-- [ ] Add root `package.json` with `name`, `version`, and `exports` pointing to `dist/farn.css` and `dist/farn-tokens.css`
-- [ ] Add npm installation instructions to `site/src/pages/getting-started.astro` and `README.md`
-- [ ] Verify the package installs cleanly and exports resolve correctly
+- [x] Add root `package.json` with `name`, `version`, and `exports` pointing to `dist/farn.css` and `dist/farn-tokens.css`
+- [x] Add npm installation instructions to `site/src/pages/getting-started.astro` and `README.md`
+- [x] Verify the package installs cleanly and exports resolve correctly
 
 ---
 
@@ -325,14 +325,14 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-26 · Layered overlap pattern
-`status: in-progress` `effort: S` `branch: claude/next-tasks-queue-veheg`
+`status: done` `effort: S` `branch: claude/next-tasks-queue-veheg`
 
 **Gap:** No layered overlap pattern; it is the only pure-CSS divider in the spec and creates depth without any SVG.
 
-- [ ] Implement both Option A (full section overlap) and Option B (card overlap) CSS per spec
-- [ ] Apply Tier 1 card lift animation (`translateY(40px)` → `0` + opacity + `box-shadow` grow) using T-22 infrastructure
-- [ ] Document the `overflow: visible` requirement on the preceding section to avoid the common clipping mistake
-- [ ] Document on the dividers component page (T-29)
+- [x] Implement both Option A (full section overlap) and Option B (card overlap) CSS per spec
+- [x] Apply Tier 1 card lift animation (`translateY(40px)` → `0` + opacity + `box-shadow` grow) using T-22 infrastructure
+- [x] Document the `overflow: visible` requirement on the preceding section to avoid the common clipping mistake
+- [x] Document on the dividers component page (T-29)
 
 ---
 
