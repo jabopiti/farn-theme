@@ -9,5 +9,5 @@ export function initScrollReveal({ threshold = 0.15 } = {}) {
       }
     });
   }, { threshold });
-  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.scroll-reveal, [data-scroll-reveal]').forEach(el => observer.observe(el));
 }

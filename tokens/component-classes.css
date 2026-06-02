@@ -198,6 +198,55 @@ input[type="radio"] {
 .card-footer        { padding: var(--card-padding); margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
 .card-body + .card-footer { border-top: 1px solid var(--color-border-subtle); }
 
+/* ── Layered overlap ─────────────────────────────────────────────────────── */
+
+/* Guardrail for the section preceding an .overlap-* element.
+   overflow:hidden on this element is the most common implementation mistake — it clips
+   the child that bleeds upward. overflow:visible is the browser default but this class
+   makes the intent explicit and prevents accidental overrides. */
+.overlap-preceding {
+  overflow: visible;
+  padding-bottom: var(--space-lg);
+}
+
+/* Option A — full section slides up over the preceding one.
+   Consumer sets background; this class only handles geometry. */
+.overlap-section {
+  position: relative;
+  z-index: var(--z-raised);
+  margin-top: calc(-1 * var(--overlap-section-offset));
+  border-radius: var(--overlap-section-radius) var(--overlap-section-radius) 0 0;
+  padding-top: calc(var(--overlap-section-offset) + var(--space-xl));
+}
+
+/* Option B — card floats up from the lower section into the one above.
+   Add data-scroll-reveal to trigger the entry animation via scroll-reveal.js. */
+.overlap-card {
+  position: relative;
+  z-index: var(--z-raised);
+  margin-top: calc(-1 * var(--overlap-card-offset));
+  border-radius: var(--overlap-card-radius);
+  background: var(--card-bg);
+  padding: var(--card-padding);
+  opacity: 0;
+  transform: translateY(40px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition-property: opacity, transform, box-shadow;
+  transition-duration: var(--overlap-card-duration);
+  transition-timing-function: var(--ease-out);
+  transition-delay: 0.05s;
+}
+
+.overlap-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: var(--overlap-card-shadow-raised);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlap-card { opacity: 1; transform: none; transition: none; }
+}
+
 /* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
 .breadcrumb {
   display: flex;
