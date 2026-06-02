@@ -8,6 +8,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `tokens/components.css`: `--overlap-*` Tier-3 tokens — `--overlap-section-radius`, `--overlap-section-offset`, `--overlap-card-radius`, `--overlap-card-offset`, `--overlap-card-duration`, `--overlap-card-shadow-raised` (T-26)
+- `tokens/dark-light.css`: `--overlap-card-shadow-raised` dark-mode override — deepened to `rgba(0,0,0,0.40)` so the lift shadow remains perceptible on dark backgrounds (T-26)
+- `dist/farn-components.css`: layered overlap classes shipped — `.overlap-preceding` (overflow guardrail), `.overlap-section` (Option A: full section slides up), `.overlap-card` (Option B: card floats up with Tier-1 entry animation — opacity + translateY(40px) + box-shadow growth) (T-26)
+- `site/src/scripts/scroll-reveal.js`: extended selector to `'.scroll-reveal, [data-scroll-reveal]'` — future divider patterns opt in via `data-scroll-reveal` attribute without requiring JS changes (T-26)
+- `site/src/pages/components/dividers.astro` — section dividers documentation page; covers layered overlap (both options), anatomy, overflow guardrail warning, token reference, and CSS reference; sidebar entry added (T-26)
+- `site/src/layouts/DocLayout.astro`: Dividers link added to desktop nav and mobile drawer (T-26)
 - `site/src/pages/tokens/motion.astro` — Motion tokens documentation page with animated previews and tables for all `--duration-*` and `--ease-*` tokens; pairing guide and usage rules included (T-41)
 - `site/src/layouts/DocLayout.astro`: Motion link added to main nav and mobile drawer between Spacing and Theming (T-41)
 - `site/src/scripts/scroll-reveal.js`: shared `initScrollReveal({ threshold })` module — `IntersectionObserver` with configurable threshold (default 0.15), unobserves after first reveal, skips observer entirely under `prefers-reduced-motion` as a performance optimization (T-22)

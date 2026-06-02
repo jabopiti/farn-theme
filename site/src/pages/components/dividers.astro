@@ -1,0 +1,343 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Dividers" description="Section divider patterns — layered overlap, and forthcoming wave, arc, blob, and diagonal transitions in the Farn design system">
+  <nav slot="subnav" class="sub-nav filled" id="sub-nav-dividers" aria-label="Section navigation">
+    <div class="sub-nav-inner">
+      <a href="#layered-overlap" class="sub-nav-link">Layered overlap</a>
+      <a href="#usage" class="sub-nav-link">Usage</a>
+      <a href="#anatomy" class="sub-nav-link">Anatomy</a>
+      <a href="#tokens" class="sub-nav-link">Tokens</a>
+      <a href="#css-reference" class="sub-nav-link">CSS</a>
+      <span class="sub-nav-indicator"></span>
+    </div>
+  </nav>
+
+  <h1>Dividers</h1>
+  <span class="badge badge-beta">beta</span>
+  <p>
+    Section dividers create intentional transitions between page sections — signalling a shift in
+    content, surface depth, or visual energy. Farn ships pure-CSS and SVG-backed patterns that all
+    consume the semantic token layer, so transitions stay coherent as the palette evolves.
+  </p>
+  <p>
+    The layered overlap pattern is <strong>stable</strong>. Additional patterns (sine wave, convex arc,
+    organic blob, diagonal cut, stacked card reveal) are planned and will be added as the system grows.
+    Use one primary divider type per page; introduce a second only for a single high-emphasis moment.
+  </p>
+
+  <h2 id="layered-overlap">Layered overlap</h2>
+  <p>
+    The only pure-CSS divider — no SVG required. The next section or a card bleeds upward into the
+    preceding section's space using a negative <code>margin-top</code>. Combined with <code>border-radius</code>
+    on the top corners, it creates a floating-panel illusion that implies z-axis depth.
+  </p>
+
+  <h3>Option A — full section overlap</h3>
+  <p>
+    The entire next section slides up over the preceding one. Use for major content transitions such
+    as a dark hero giving way to a light content area.
+  </p>
+
+  <div class="demo-overlap-a" role="group" aria-label="Section overlap live demo">
+    <div class="demo-section-before" data-theme="dark">
+      <p class="demo-section-label">Preceding section</p>
+      <p class="demo-section-desc">Dark hero or feature area. No <code>overflow: hidden</code> here.</p>
+    </div>
+    <div class="demo-section-after overlap-section">
+      <p class="demo-section-label">Overlapping section</p>
+      <p class="demo-section-desc">
+        Rounded top corners float over the section above. Consumer sets <code>background</code>.
+      </p>
+    </div>
+  </div>
+
+  <pre><code>&lt;section class="overlap-preceding hero-section"&gt;
+  &lt;!-- Hero content —  never add overflow:hidden to this element --&gt;
+&lt;/section&gt;
+
+&lt;section class="overlap-section" style="background: var(--color-bg-panel);"&gt;
+  &lt;!-- Content that slides up over the hero --&gt;
+&lt;/section&gt;</code></pre>
+
+  <h3>Option B — card floats up</h3>
+  <p>
+    A card bleeds upward from one section into the section above. Add <code>data-scroll-reveal</code>
+    to trigger the entry animation — the card rises with a growing shadow on first scroll-into-view.
+  </p>
+
+  <div class="demo-overlap-b" role="group" aria-label="Card overlap live demo">
+    <div class="demo-card-section" data-theme="dark">
+      <p class="demo-section-label">Background section</p>
+      <p class="demo-section-desc">Dark area — the card will float up into this space.</p>
+    </div>
+    <div class="demo-card-container">
+      <div class="overlap-card" data-scroll-reveal>
+        <p class="demo-section-label">Floating card</p>
+        <p class="demo-section-desc">
+          Rises with a shadow as it enters view. Background: <code>--card-bg</code>.
+          Negative <code>margin-top</code> bleeds into the section above.
+        </p>
+        <div class="demo-card-actions">
+          <button class="btn btn-p btn-sm">Primary action</button>
+          <button class="btn btn-g btn-sm">Secondary</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <pre><code>&lt;section class="overlap-preceding"&gt;
+  &lt;!-- Content that precedes the floating card --&gt;
+&lt;/section&gt;
+
+&lt;div class="overlap-card" data-scroll-reveal&gt;
+  &lt;!-- Card content --&gt;
+&lt;/div&gt;</code></pre>
+
+  <h2 id="usage">Usage guidance</h2>
+  <p><strong>Use one primary divider type per page.</strong> A second type is acceptable for one
+  high-emphasis moment — for example, sine waves throughout, with a single layered overlap at a CTA.
+  More than two distinct types creates visual noise.</p>
+
+  <p><strong>Option A vs Option B:</strong></p>
+  <table>
+    <thead>
+      <tr><th>Option</th><th>When to use</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Option A — section</td>
+        <td>Major theme transitions (dark hero → light content area). The entire following section shifts in context.</td>
+      </tr>
+      <tr>
+        <td>Option B — card</td>
+        <td>Featured content or CTA panels that need visual lift. Works especially well dark-over-light: a dark hero section with a light card bleeding up from below.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <strong>Dark over light works best.</strong> A dark preceding section with a light overlapping element
+    maximises the visual depth. The reverse (light over dark) works but is subtler.
+  </p>
+
+  <h2 id="anatomy">Anatomy</h2>
+  <p>
+    The pattern requires three elements: the preceding section (where the overlap visually occurs),
+    and the overlapping element itself.
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Class / attribute</th><th>Element</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>.overlap-preceding</code></td>
+        <td>Any block</td>
+        <td>
+          Applied to the section <em>before</em> the overlapping element.
+          Sets <code>overflow: visible</code> (the browser default, but made explicit to prevent
+          accidental <code>overflow: hidden</code> which clips the overlapping child).
+          Also adds <code>padding-bottom</code> to reserve space before the negative margin takes effect.
+        </td>
+      </tr>
+      <tr>
+        <td><code>.overlap-section</code></td>
+        <td><code>&lt;section&gt;</code>, <code>&lt;div&gt;</code></td>
+        <td>
+          Option A — the full section that slides up. Sets <code>z-index: 10</code>,
+          negative <code>margin-top</code>, and rounded top corners. <strong>Consumer sets
+          <code>background</code></strong> — the class does not prescribe it.
+        </td>
+      </tr>
+      <tr>
+        <td><code>.overlap-card</code></td>
+        <td><code>&lt;div&gt;</code>, <code>&lt;article&gt;</code></td>
+        <td>
+          Option B — a card that floats upward. Sets <code>background: var(--card-bg)</code>,
+          negative <code>margin-top</code>, and Tier-1 entry animation (opacity + translateY +
+          box-shadow grow).
+        </td>
+      </tr>
+      <tr>
+        <td><code>data-scroll-reveal</code></td>
+        <td><code>.overlap-card</code></td>
+        <td>
+          Opts the card into the shared IntersectionObserver from <code>scroll-reveal.js</code>.
+          The observer adds <code>.is-visible</code> on first entry, triggering the CSS transition.
+          Omit if the card should always be visible (e.g., above the fold).
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Critical: overflow on the preceding element</h3>
+  <p>
+    <code>overflow: hidden</code> on <code>.overlap-preceding</code> (or any of its ancestors) will
+    clip the overlapping element completely. <code>.overlap-preceding</code> makes the intent explicit,
+    but ensure no ancestor in the stacking context also sets <code>overflow: hidden</code>.
+  </p>
+
+  <pre><code>&lt;!-- Full anatomy — Option B --&gt;
+&lt;section class="overlap-preceding" data-theme="dark"&gt;
+  &lt;div class="hero-content"&gt;
+    &lt;h1&gt;Page heading&lt;/h1&gt;
+    &lt;p&gt;Hero description…&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;div class="overlap-card" data-scroll-reveal&gt;
+  &lt;h2&gt;Featured content&lt;/h2&gt;
+  &lt;p&gt;This card rises into the hero above on first scroll.&lt;/p&gt;
+  &lt;a href="/more" class="btn btn-p"&gt;Learn more&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+
+  <h2 id="tokens">Token reference</h2>
+  <p>
+    All <code>--overlap-*</code> tokens are defined in <code>tokens/components.css</code>.
+    The dark-mode shadow override lives in <code>tokens/dark-light.css</code>.
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Token</th><th>Default</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>--overlap-section-radius</code></td><td><code>var(--radius-xl)</code></td><td>Top corner radius on <code>.overlap-section</code></td></tr>
+      <tr><td><code>--overlap-section-offset</code></td><td><code>60px</code></td><td>How far <code>.overlap-section</code> bleeds upward</td></tr>
+      <tr><td><code>--overlap-card-radius</code></td><td><code>var(--card-radius)</code></td><td>Border radius on <code>.overlap-card</code> — inherits from card tokens</td></tr>
+      <tr><td><code>--overlap-card-offset</code></td><td><code>80px</code></td><td>How far <code>.overlap-card</code> bleeds upward</td></tr>
+      <tr><td><code>--overlap-card-duration</code></td><td><code>0.7s</code></td><td>Entry animation duration — longer than standard reveals to match the physical lift metaphor</td></tr>
+      <tr><td><code>--overlap-card-shadow-raised</code></td><td>Light: <code>rgba(0,0,0,0.14)</code> · Dark: <code>rgba(0,0,0,0.40)</code></td><td>Shadow in the raised (post-animation) state. Deepened in dark mode where light shadows are invisible.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Overriding tokens</h3>
+  <pre><code>/* Shallower overlap for a subtle transition */
+.my-section &#123;
+  --overlap-section-offset: 32px;
+&#125;
+
+/* More dramatic card lift */
+.hero-cta &#123;
+  --overlap-card-offset: 120px;
+  --overlap-card-duration: 0.9s;
+&#125;</code></pre>
+
+  <h2 id="css-reference">CSS reference</h2>
+  <p>
+    Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or
+    <code>farn-tokens.css</code>.
+  </p>
+
+  <pre><code>/* Guardrail — makes overflow:visible intent explicit */
+.overlap-preceding &#123;
+  overflow: visible;
+  padding-bottom: var(--space-lg);
+&#125;
+
+/* Option A — full section overlap */
+.overlap-section &#123;
+  position: relative;
+  z-index: 10;
+  margin-top: calc(-1 * var(--overlap-section-offset));
+  border-radius: var(--overlap-section-radius) var(--overlap-section-radius) 0 0;
+  padding-top: calc(var(--overlap-section-offset) + var(--space-xl));
+  /* consumer sets background */
+&#125;
+
+/* Option B — card floats up */
+.overlap-card &#123;
+  position: relative;
+  z-index: 10;
+  margin-top: calc(-1 * var(--overlap-card-offset));
+  border-radius: var(--overlap-card-radius);
+  background: var(--card-bg);
+  padding: var(--card-padding);
+  opacity: 0;
+  transform: translateY(40px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition-property: opacity, transform, box-shadow;
+  transition-duration: var(--overlap-card-duration);
+  transition-timing-function: var(--ease-out);
+  transition-delay: 0.05s;
+&#125;
+
+.overlap-card.is-visible &#123;
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: var(--overlap-card-shadow-raised);
+&#125;</code></pre>
+</DocLayout>
+
+<style>
+  /* Option A demo — overflow:hidden is safe here because there is no animation */
+  .demo-overlap-a {
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  /*
+    Option B demo — no overflow:hidden because .overlap-card starts at transform:translateY(40px)
+    and would be clipped at the container's bottom edge during the entry animation.
+    Instead each inner section carries its own borders to form the visual boundary.
+  */
+  .demo-overlap-b {
+    margin-bottom: var(--space-lg);
+  }
+
+  .demo-section-before,
+  .demo-card-section {
+    padding: var(--space-lg) var(--space-md) 80px; /* 80px bottom: space for the overlap to bleed into */
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .demo-card-section {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    border: 1px solid var(--color-border);
+    border-bottom: none;
+  }
+
+  /* Option A: the overlapping section inside the demo container */
+  .demo-section-after {
+    background: var(--color-bg-panel);
+  }
+
+  /* Option B: wraps the overlap-card and provides the bottom border */
+  .demo-card-container {
+    border: 1px solid var(--color-border);
+    border-top: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    background: var(--color-bg);
+    padding: 0 var(--space-md) var(--space-xl);
+  }
+
+  .demo-section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-tertiary);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .demo-section-desc {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .demo-card-actions {
+    display: flex;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+  }
+</style>

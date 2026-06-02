@@ -325,7 +325,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-26 · Layered overlap pattern
-`status: backlog` `effort: S`
+`status: in-progress` `effort: S` `branch: claude/next-tasks-queue-veheg`
 
 **Gap:** No layered overlap pattern; it is the only pure-CSS divider in the spec and creates depth without any SVG.
 

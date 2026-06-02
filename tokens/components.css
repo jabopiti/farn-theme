@@ -57,6 +57,14 @@
   --card-highlight-text-secondary: var(--bm1-mist);
   --card-highlight-text-tertiary:  var(--bm0-sand);
 
+  /* ── Layered overlap tokens ─────────────────────────────────────────── */
+  --overlap-section-radius:     var(--radius-xl);
+  --overlap-section-offset:     60px;
+  --overlap-card-radius:        var(--card-radius);
+  --overlap-card-offset:        80px;
+  --overlap-card-duration:      0.7s;
+  --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.14);
+
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);
