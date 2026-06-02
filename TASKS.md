@@ -375,14 +375,14 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-30 · Typography utility classes
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/t30-review-kaOPg`
 
 **Gap:** Font and size tokens exist but there are no utility classes; consumers must manually reapply the type scale (including the mandatory Fraunces `font-variation-settings`) every time they build a new surface.
 
-- [ ] Add `.text-display`, `.text-h1`, `.text-h2`, `.text-h3`, `.text-body`, `.text-caption`, `.text-mono` classes consuming `--font-*` tokens and `clamp()` sizes from the documented type scale
-- [ ] Every Fraunces class must include `font-variation-settings: 'opsz' <value>` — this is a hard requirement per CLAUDE.md
-- [ ] Add to the component CSS artifact and document on the typography page
-- [ ] Introduce component-level typography tokens (`--input-font-size`, `--label-font-size`, `--btn-font-size`, `--btn-sm-font-size`, `--btn-lg-font-size`) in `tokens/components.css` and replace the hardcoded `font-size` values in `tokens/component-classes.css` — deferred from T-14 and T-11 because fixing one without the other creates inconsistency
+- [x] Add `.text-display`, `.text-h1`, `.text-h2`, `.text-h3`, `.text-body`, `.text-caption`, `.text-mono` classes consuming `--font-*` tokens and `clamp()` sizes from the documented type scale
+- [x] Every Fraunces class must include `font-variation-settings: 'opsz' <value>` — this is a hard requirement per CLAUDE.md
+- [x] Add to the component CSS artifact and document on the typography page
+- [x] Introduce component-level typography tokens (`--input-font-size`, `--label-font-size`, `--btn-font-size`, `--btn-sm-font-size`, `--btn-lg-font-size`) in `tokens/components.css` and replace the hardcoded `font-size` values in `tokens/component-classes.css` — deferred from T-14 and T-11 because fixing one without the other creates inconsistency
 
 ---
 
