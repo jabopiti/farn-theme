@@ -10,6 +10,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ### Added
 - `site/src/pages/tokens/motion.astro` — Motion tokens documentation page with animated previews and tables for all `--duration-*` and `--ease-*` tokens; pairing guide and usage rules included (T-41)
 - `site/src/layouts/DocLayout.astro`: Motion link added to main nav and mobile drawer between Spacing and Theming (T-41)
+- `site/src/scripts/scroll-reveal.js`: shared `initScrollReveal({ threshold })` module — `IntersectionObserver` with configurable threshold (default 0.15), unobserves after first reveal, skips observer entirely under `prefers-reduced-motion` as a performance optimization (T-22)
+- `site/src/styles/site.css`: `.scroll-reveal` base class consuming `var(--duration-reveal)` and `var(--ease-out)`; `@media (prefers-reduced-motion: reduce)` guard rendering elements immediately visible with no animation (T-22)
+
+### Changed
+- `site/src/pages/index.astro`, `site/src/layouts/DocLayout.astro`: wired `initScrollReveal()` via module `<script>`; replaced inline `IntersectionObserver` in `index.astro` with shared module (T-22)
+- `site/src/styles/site.css`: renamed `.reveal` → `.scroll-reveal`; corrected scroll-reveal transform easing from `--ease-spring` to `--ease-out` — springs are discouraged for scroll-reveal per industry guidance (T-22)
 - `dist/farn-components.css`: `.breadcrumb` and `.breadcrumb-item` classes — CSS-only breadcrumb navigation; `›` separator via `::after` consuming `--color-text-secondary`; preceding items use `--color-text-secondary` with hover lift to `--color-text`; current page link styled via `a[aria-current="page"]` to `--color-text`; all colors adapt to `data-theme` / `data-surface` via semantic tokens (T-36)
 - `site/src/pages/components/breadcrumbs.astro` — breadcrumbs documentation page with live demo, anatomy, usage guidance, accessibility attribute reference, and CSS reference (T-36)
 - `site/src/layouts/DocLayout.astro`: Breadcrumbs link added to desktop nav and mobile drawer (T-36)
