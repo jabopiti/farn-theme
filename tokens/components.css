@@ -50,6 +50,12 @@
   --card-border:   transparent;
   --card-radius:   var(--radius-lg);
   --card-padding:  var(--space-md);
+  --card-highlight-bg:     var(--color-card-highlight-bg);
+  --card-highlight-border: var(--color-card-highlight-border);
+  /* highlight always renders on a dark bg — palette tokens are theme-invariant here */
+  --card-highlight-text:           var(--bm2-birch);
+  --card-highlight-text-secondary: var(--bm1-mist);
+  --card-highlight-text-tertiary:  var(--bm0-sand);
 
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);

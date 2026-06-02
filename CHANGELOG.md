@@ -12,6 +12,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/pages/components/forms.astro` — forms component documentation page with live element demos, states (default, error via ARIA + wrapper class, disabled), wrapper pattern, token reference table, and override examples (T-14)
 - `site/src/layouts/DocLayout.astro`: Forms link added to main nav and mobile drawer (T-14)
 - `dist/farn-tokens.css`, `dist/farn.css`, `dist/farn-components.css`: rebuilt (T-14)
+- `dist/farn-components.css`: card classes shipped — `.card` (base), `.card-outlined`, `.card-highlight` (variants), `.card-interactive` (hover/focus/active modifier), `.card-grid` (layout utility); anatomy classes `.card-media`, `.card-header`, `.card-body`, `.card-footer` with `:has()`-powered auto-padding (T-13)
+- `tokens/components.css`: `--card-highlight-bg` and `--card-highlight-border` Tier-3 tokens (T-13)
+- `tokens/dark-light.css`: `--color-card-highlight-bg` and `--color-card-highlight-border` semantic tokens — light: `--in0-void` / `transparent`; dark: `--in1-iron` / `--in2-slate` (T-13)
+- `site/src/pages/components/cards.astro`: Cards documentation page with live demos of all variants, full anatomy, interactive states, card grid, token reference, and CSS reference (T-13)
+
+### Changed
+- `site/src/pages/components/index.astro`: updated intro to reflect Farn's component layer direction; Cards section updated to reference shipped classes and anatomy (T-13)
+- `site/src/layouts/DocLayout.astro`: Cards link added to desktop nav and mobile drawer (T-13)
+- `dist/farn-tokens.css`, `dist/farn.css`, `dist/farn-components.css`: rebuilt (T-13)
+
+---
 - `dist/farn-components.css`: button classes shipped — `.btn` (base), `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d` (variants), `.btn-sm`, `.btn-lg` (size modifiers); all states (hover, active/pressed, disabled) driven by `--btn-*` tokens (T-11)
 - `tokens/components.css`: `--btn-p-active-bg`, `--btn-s-active-bg`, `--btn-g-active-bg`, `--btn-d-active-bg` pressed-state tokens (T-11)
 - `tokens/dark-light.css`: `--color-accent-active` semantic token (`--fo3-deepwater`; theme-invariant); `--btn-g-active-bg` dark-mode override (`--in0-void`) for pressed ghost button (T-11)

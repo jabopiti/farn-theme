@@ -135,15 +135,15 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-13 · Card component CSS
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/next-tasks-discussion-LxCfX`
 
 **Depends on T-43** — resolve the component CSS artifact structure first.
 
 **Gap:** No `.card` CSS class is shipped; consumers must build card layouts from scratch using T-09 component tokens with no reference implementation.
 
-- [ ] Add `.card` base class (and any surface/elevated variants) to the component CSS artifact
-- [ ] Card styles must consume T-09 `--card-*` tokens
-- [ ] Document on the cards component page with live examples
+- [x] Add `.card` base class (and any surface/elevated variants) to the component CSS artifact
+- [x] Card styles must consume T-09 `--card-*` tokens
+- [x] Document on the cards component page with live examples
 
 ---
 

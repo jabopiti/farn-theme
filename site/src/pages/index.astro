@@ -227,9 +227,8 @@ import Footer from '../components/Footer.astro';
   }
   .card {
     background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--card-radius); padding: var(--card-padding);
-    transition: background-color var(--duration-base) var(--ease-default); text-decoration: none; display: block; color: inherit;
+    text-decoration: none; display: block; color: inherit;
   }
-  .card:hover { background: var(--card-hover-bg); }
   .card-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
   .card-title { font-size: 15px; font-weight: 600; color: var(--color-text); margin-bottom: 6px; line-height: 1.3; }
   .card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 14px; }
@@ -619,19 +618,19 @@ import Footer from '../components/Footer.astro';
 
     <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em" class="reveal">Cards</h3>
     <div class="components-grid">
-      <a href="#" class="card reveal" style="text-decoration:none">
+      <a href="#" class="card card-interactive reveal" style="text-decoration:none">
         <div class="card-tag">Platform · 4 min</div>
         <div class="card-title">Platform thinking at scale</div>
         <div class="card-body">How internal platform teams shift from cost centre to product organisation.</div>
         <div class="card-meta"><span>12 Apr 2025</span><span class="card-arrow">Read →</span></div>
       </a>
-      <div class="card reveal card-highlight-light">
+      <div class="card card-interactive reveal card-highlight-light">
         <div class="card-tag">Featured</div>
         <div class="card-title">The product builder archetype</div>
         <div class="card-body">End-to-end ownership from strategy through shipped code — the emerging role.</div>
         <div class="card-meta"><span>2 May 2025</span><span class="card-arrow">Read →</span></div>
       </div>
-      <div class="card reveal">
+      <div class="card card-interactive reveal">
         <div class="card-icon-wrap"><i class="ti ti-layout-grid"></i></div>
         <div class="card-title">Composable layout</div>
         <div class="card-body">Build pages from reusable layout primitives, not fixed templates.</div>

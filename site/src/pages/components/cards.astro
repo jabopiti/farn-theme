@@ -1,0 +1,350 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Cards" description="Card component — variants, anatomy, interactive states, and Tier-3 tokens in the Farn design system">
+  <nav slot="subnav" class="sub-nav filled" id="sub-nav-cards" aria-label="Section navigation">
+    <div class="sub-nav-inner">
+      <a href="#variants" class="sub-nav-link">Variants</a>
+      <a href="#anatomy" class="sub-nav-link">Anatomy</a>
+      <a href="#interactive" class="sub-nav-link">Interactive</a>
+      <a href="#grid" class="sub-nav-link">Grid</a>
+      <a href="#tokens" class="sub-nav-link">Tokens</a>
+      <a href="#overriding" class="sub-nav-link">Overriding</a>
+      <span class="sub-nav-indicator"></span>
+    </div>
+  </nav>
+
+  <h1>Cards</h1>
+  <span class="badge badge-published">stable</span>
+  <p>
+    Cards are entry points — they surface content and invite action. The base <code>.card</code>
+    class sets background, border, and border-radius via <code>--card-*</code> Tier-3 tokens.
+    Add variant modifiers, anatomy classes, and the interactive modifier as needed.
+  </p>
+
+  <h2 id="variants">Variants</h2>
+  <p>
+    Apply <code>.card</code> first, then at most one variant modifier. All variants adapt to
+    dark/light mode automatically via the semantic token layer.
+  </p>
+
+  <div class="card-demo-row">
+    <div class="card card-demo-item">
+      <p class="demo-label">Default</p>
+      <p>Background fill, no visible border. Use for most card contexts.</p>
+    </div>
+    <div class="card card-outlined card-demo-item">
+      <p class="demo-label">Outlined</p>
+      <p>Adds a <code>--color-border</code> edge. Use when the card sits on a same-level surface.</p>
+    </div>
+    <div class="card card-highlight card-demo-item">
+      <p class="demo-label">Highlight</p>
+      <p>High-contrast background. Adapts per theme — toggle the page theme to see.</p>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>Class</th><th>Use</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Default</td>
+        <td><code>.card</code></td>
+        <td>Article lists, feature grids, project indexes. Background: <code>--card-bg</code> → <code>--color-bg-panel</code>.</td>
+      </tr>
+      <tr>
+        <td>Outlined</td>
+        <td><code>.card-outlined</code></td>
+        <td>Adds <code>var(--color-border)</code> edge. Use when the surrounding surface matches the card's background and needs a visible separator.</td>
+      </tr>
+      <tr>
+        <td>Highlight</td>
+        <td><code>.card-highlight</code></td>
+        <td>Featured or promoted content. Light mode: <code>--in0-void</code> (darkest tone). Dark mode: <code>--in1-iron</code> + <code>--in2-slate</code> border.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="anatomy">Anatomy</h2>
+  <p>
+    When anatomy children are present, the wrapper's padding is removed automatically via
+    <code>:has()</code> — each section carries its own <code>var(--card-padding)</code> (24px).
+    A bare <code>.card</code> without anatomy children keeps its 24px padding.
+  </p>
+  <p>
+    <strong>Order matters for <code>.card-media</code></strong> — it must be the first child so its
+    top border-radius matches the card's corners. A divider appears between <code>.card-body</code>
+    and <code>.card-footer</code> only.
+  </p>
+
+  <div class="card-demo-section">
+    <div class="card" style="max-width: 360px;">
+      <div class="card-media">
+        <div class="card-media-placeholder" aria-hidden="true"></div>
+      </div>
+      <div class="card-header">
+        <h3 class="demo-card-heading">Fern Valley Trail</h3>
+        <p class="demo-card-meta">3.2 km · Moderate</p>
+      </div>
+      <div class="card-body">
+        <p class="demo-card-text">
+          A shaded loop through old-growth forest with seasonal wildflower meadows along the ridge.
+        </p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-p btn-sm">View trail</button>
+        <button class="btn btn-g btn-sm">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <pre><code>&lt;div class="card"&gt;
+  &lt;!-- .card-media must be first child --&gt;
+  &lt;div class="card-media"&gt;
+    &lt;img src="trail.jpg" alt="Fern Valley Trail"&gt;
+  &lt;/div&gt;
+  &lt;div class="card-header"&gt;
+    &lt;h3&gt;Fern Valley Trail&lt;/h3&gt;
+    &lt;p&gt;3.2 km · Moderate&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;p&gt;A shaded loop through old-growth forest…&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="card-footer"&gt;
+    &lt;button class="btn btn-p btn-sm"&gt;View trail&lt;/button&gt;
+    &lt;button class="btn btn-g btn-sm"&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+  <h3>Anatomy reference</h3>
+  <table>
+    <thead>
+      <tr><th>Class</th><th>Purpose</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>.card-media</code></td>
+        <td>Top image / visual area</td>
+        <td>Must be first child. <code>overflow:hidden</code> clips image to card border-radius.</td>
+      </tr>
+      <tr>
+        <td><code>.card-header</code></td>
+        <td>Title and metadata row</td>
+        <td>Use semantic heading elements (<code>h2</code>–<code>h4</code>) inside.</td>
+      </tr>
+      <tr>
+        <td><code>.card-body</code></td>
+        <td>Main content area</td>
+        <td><code>flex: 1</code> — expands to fill in equal-height grids.</td>
+      </tr>
+      <tr>
+        <td><code>.card-footer</code></td>
+        <td>Actions row</td>
+        <td><code>margin-top: auto</code> pins to bottom. <code>display: flex; flex-wrap: wrap</code> lays out buttons in a row. Divider appears when preceded by <code>.card-body</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="interactive">Interactive cards</h2>
+  <p>
+    Add <code>.card-interactive</code> to any card that is a navigation target or action trigger.
+    It adds hover, focus, and active states. Works on both <code>&lt;div&gt;</code> (with <code>tabindex="0"</code>)
+    and <code>&lt;a&gt;</code> elements.
+  </p>
+
+  <div class="card-demo-row">
+    <div class="card card-interactive card-demo-item" tabindex="0" role="button">
+      <p class="demo-label">Interactive (default)</p>
+      <p>Hover or focus me. Background shifts to <code>--card-hover-bg</code>.</p>
+    </div>
+    <div class="card card-outlined card-interactive card-demo-item" tabindex="0" role="button">
+      <p class="demo-label">Interactive + outlined</p>
+      <p>Variants compose with the interactive modifier.</p>
+    </div>
+    <div class="card card-highlight card-interactive card-demo-item" tabindex="0" role="button">
+      <p class="demo-label">Interactive + highlight</p>
+      <p>Hover shifts to <code>--card-hover-bg</code> from the highlight base.</p>
+    </div>
+  </div>
+
+  <pre><code>&lt;!-- div card (needs tabindex for keyboard access) --&gt;
+&lt;div class="card card-interactive" tabindex="0"&gt; … &lt;/div&gt;
+
+&lt;!-- anchor card (whole card is the link) --&gt;
+&lt;a href="/trail/fern-valley" class="card card-interactive"&gt; … &lt;/a&gt;
+
+&lt;!-- combined with anatomy --&gt;
+&lt;a href="/article/01" class="card card-interactive"&gt;
+  &lt;div class="card-media"&gt;&lt;img src="…" alt="…"&gt;&lt;/div&gt;
+  &lt;div class="card-header"&gt;&lt;h3&gt;Article title&lt;/h3&gt;&lt;/div&gt;
+  &lt;div class="card-body"&gt;&lt;p&gt;Summary text…&lt;/p&gt;&lt;/div&gt;
+&lt;/a&gt;</code></pre>
+
+  <h2 id="grid">Card grid</h2>
+  <p>
+    <code>.card-grid</code> creates a responsive auto-fit grid. Cards expand to fill columns
+    and collapse to a single column on narrow viewports. Minimum column width: 280px.
+  </p>
+
+  <div class="card-grid card-demo-section">
+    <div class="card card-interactive">
+      <div class="card-header"><h3 class="demo-card-heading">Iron Night</h3></div>
+      <div class="card-body"><p class="demo-card-text">Dark palette — deep, structural, typographic.</p></div>
+    </div>
+    <div class="card card-interactive">
+      <div class="card-header"><h3 class="demo-card-heading">Birch Mist</h3></div>
+      <div class="card-body"><p class="demo-card-text">Light palette — airy, open, editorial.</p></div>
+    </div>
+    <div class="card card-interactive">
+      <div class="card-header"><h3 class="demo-card-heading">Forest</h3></div>
+      <div class="card-body"><p class="demo-card-text">Accent palette — grounded, natural, purposeful.</p></div>
+    </div>
+  </div>
+
+  <pre><code>&lt;div class="card-grid"&gt;
+  &lt;div class="card card-interactive"&gt; … &lt;/div&gt;
+  &lt;div class="card card-interactive"&gt; … &lt;/div&gt;
+  &lt;div class="card card-interactive"&gt; … &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+  <h2 id="tokens">Token reference</h2>
+  <p>
+    All <code>--card-*</code> tokens are defined in <code>tokens/components.css</code>.
+    The highlight tokens are resolved by <code>--color-card-highlight-*</code> semantic tokens
+    in <code>tokens/dark-light.css</code>.
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Token</th><th>Default</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>--card-bg</code></td><td><code>var(--color-bg-panel)</code></td><td>Default card background</td></tr>
+      <tr><td><code>--card-hover-bg</code></td><td><code>var(--color-bg-inset)</code></td><td>Background on hover (interactive cards)</td></tr>
+      <tr><td><code>--card-border</code></td><td><code>transparent</code></td><td>Border colour — transparent by default; <code>.card-outlined</code> overrides to <code>--color-border</code></td></tr>
+      <tr><td><code>--card-radius</code></td><td><code>var(--radius-lg)</code> (8px)</td><td>Border radius for card and media</td></tr>
+      <tr><td><code>--card-padding</code></td><td><code>var(--space-md)</code> (24px)</td><td>Padding for bare cards and all anatomy sections</td></tr>
+      <tr><td><code>--card-highlight-bg</code></td><td>Light: <code>--in0-void</code> · Dark: <code>--in1-iron</code></td><td>Background for <code>.card-highlight</code></td></tr>
+      <tr><td><code>--card-highlight-border</code></td><td>Light: <code>transparent</code> · Dark: <code>--in2-slate</code></td><td>Border for <code>.card-highlight</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="overriding">Overriding tokens</h2>
+  <p>
+    Override <code>--card-*</code> tokens on a scoped selector to retheme cards in one section
+    without affecting the rest of the page.
+  </p>
+
+  <pre><code>/* Tighter padding for a dense list layout */
+.article-list &#123;
+  --card-padding: var(--space-sm);
+&#125;
+
+/* Rounded cards in a marketing section */
+.feature-grid &#123;
+  --card-radius: var(--radius-xl);
+&#125;
+
+/* Custom hover colour for a dark hero section */
+.hero &#123;
+  --card-hover-bg: var(--color-bg-inset);
+&#125;</code></pre>
+
+  <h2>CSS reference</h2>
+  <pre><code>/* ── Card grid ── */
+.card-grid &#123;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+&#125;
+
+/* ── Card base ── */
+.card &#123;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+&#125;
+.card:has(&gt; .card-header, &gt; .card-body, &gt; .card-footer, &gt; .card-media) &#123;
+  padding: 0;
+&#125;
+
+/* ── Variants ── */
+.card-outlined  &#123; border-color: var(--color-border); &#125;
+.card-highlight &#123; background: var(--card-highlight-bg); border-color: var(--card-highlight-border); &#125;
+
+/* ── Interactive modifier ── */
+.card-interactive &#123;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+&#125;
+.card-interactive:hover         &#123; background: var(--card-hover-bg); &#125;
+.card-interactive:focus-visible &#123; outline: 2px solid var(--color-accent); outline-offset: 3px; &#125;
+.card-interactive:active        &#123; transform: scale(0.99); &#125;
+
+/* ── Anatomy ── */
+.card-media         &#123; overflow: hidden; border-radius: var(--card-radius) var(--card-radius) 0 0; &#125;
+.card-media img     &#123; width: 100%; &#125;
+.card-header        &#123; padding: var(--card-padding); &#125;
+.card-body          &#123; padding: var(--card-padding); flex: 1; &#125;
+.card-footer        &#123; padding: var(--card-padding); margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; &#125;
+.card-body + .card-footer &#123; border-top: 1px solid var(--color-border-subtle); &#125;</code></pre>
+</DocLayout>
+
+<style>
+  .card-demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .card-demo-item {
+    flex: 1;
+    min-width: 200px;
+    max-width: 320px;
+  }
+
+  /* more specific than global .doc-container p rule — no !important needed */
+  p.demo-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-xs);
+  }
+
+  /* shared margin for demo anatomy and grid sections */
+  .card-demo-section {
+    margin-bottom: var(--space-lg);
+  }
+
+  .card-media-placeholder {
+    height: 160px;
+    background: linear-gradient(135deg, var(--fo3-deepwater) 0%, var(--fo1-fern) 60%, var(--fo0-sage) 100%);
+  }
+
+  /* scoped typography for demo card content */
+  .demo-card-heading {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .demo-card-meta {
+    margin: var(--space-xs) 0 0;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .demo-card-text {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+</style>

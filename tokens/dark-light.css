@@ -38,6 +38,8 @@
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
+  --color-card-highlight-bg:     var(--in0-void);
+  --color-card-highlight-border: transparent;
 }
 
 /* ── Semantic tokens — dark ─────────────────────────────────────────── */
@@ -62,6 +64,8 @@
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
+  --color-card-highlight-bg:     var(--in1-iron);
+  --color-card-highlight-border: var(--in2-slate);
   --btn-s-hover-bg:         var(--in3-ash);
   --btn-g-active-bg:        var(--in0-void);  /* darker than ghost hover --in1-iron (#374151) */
 }

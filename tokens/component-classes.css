@@ -147,3 +147,53 @@ input[type="radio"] {
   color: var(--color-text-tertiary);
   margin-top: var(--space-xs);
 }
+
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border); /* transparent — keeps box model stable when variants add a border */
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);         /* safe default for bare card usage */
+}
+/* when anatomy children are present, they carry the padding */
+.card:has(> .card-header, > .card-body, > .card-footer, > .card-media) {
+  padding: 0;
+}
+
+/* Variants */
+.card-outlined  { border-color: var(--color-border); }
+.card-highlight {
+  background: var(--card-highlight-bg);
+  border-color: var(--card-highlight-border);
+  color: var(--card-highlight-text);
+  --color-text: var(--card-highlight-text);
+  --color-text-secondary: var(--card-highlight-text-secondary);
+  --color-text-tertiary: var(--card-highlight-text-tertiary);
+}
+
+/* Interactive modifier */
+.card-interactive {
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+.card-interactive:hover  { background: var(--card-hover-bg); }
+/* focus-visible: base.css global rule covers farn.css consumers;
+   explicit here for farn-components.css standalone use */
+.card-interactive:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.card-interactive:active        { transform: scale(0.99); }
+
+/* Anatomy — .card-media must be the first child for correct corner clipping */
+.card-media         { overflow: hidden; border-radius: var(--card-radius) var(--card-radius) 0 0; }
+.card-media img     { width: 100%; } /* display:block already set by base.css reset */
+.card-header        { padding: var(--card-padding); }
+.card-body          { padding: var(--card-padding); flex: 1; }
+.card-footer        { padding: var(--card-padding); margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+.card-body + .card-footer { border-top: 1px solid var(--color-border-subtle); }

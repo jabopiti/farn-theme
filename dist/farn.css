@@ -148,6 +148,8 @@
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
+  --color-card-highlight-bg:     var(--in0-void);
+  --color-card-highlight-border: transparent;
 }
 
 /* ── Semantic tokens — dark ─────────────────────────────────────────── */
@@ -172,6 +174,8 @@
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
+  --color-card-highlight-bg:     var(--in1-iron);
+  --color-card-highlight-border: var(--in2-slate);
   --btn-s-hover-bg:         var(--in3-ash);
   --btn-g-active-bg:        var(--in0-void);  /* darker than ghost hover --in1-iron (#374151) */
 }
@@ -275,6 +279,12 @@
   --card-border:   transparent;
   --card-radius:   var(--radius-lg);
   --card-padding:  var(--space-md);
+  --card-highlight-bg:     var(--color-card-highlight-bg);
+  --card-highlight-border: var(--color-card-highlight-border);
+  /* highlight always renders on a dark bg — palette tokens are theme-invariant here */
+  --card-highlight-text:           var(--bm2-birch);
+  --card-highlight-text-secondary: var(--bm1-mist);
+  --card-highlight-text-tertiary:  var(--bm0-sand);
 
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);

@@ -5,44 +5,34 @@ import DocLayout from '../../layouts/DocLayout.astro';
 <DocLayout title="Components" description="Farn component patterns — buttons, cards, forms, navigation, and more">
   <h1>Components</h1>
   <p>
-    Farn is a token system, not a component library. This reference specifies what
-    components should look like and how they should behave — using which tokens, with
-    which states, following which accessibility rules. Implementation lives in your project.
+    Farn is a design token system with an optional component layer. Tokens give you the
+    vocabulary; component classes give you a starting point — override the tokens to retheme
+    without touching the classes.
   </p>
-  <p>All components use semantic tokens only — never raw palette tokens. The surface declaration handles dark/light adaptation automatically.</p>
+  <p>All component classes consume semantic tokens so they adapt to dark/light mode and surface context automatically.</p>
 
   <h2>Cards</h2>
-  <p>Flat inset style — background fill, no border at rest. Cards are entry points, not content containers. Body text: 2–3 lines maximum.</p>
+  <p>Flat inset style — background fill, no visible border at rest. Cards use <code>--card-*</code> Tier-3 tokens and support optional anatomy classes for structured layouts. See the <a href="/components/cards">Cards documentation</a> for live demos and full CSS reference.</p>
 
   <h3>Variants</h3>
   <table>
-    <thead><tr><th>Variant</th><th>Background</th><th>Use</th></tr></thead>
+    <thead><tr><th>Variant</th><th>Class</th><th>Use</th></tr></thead>
     <tbody>
-      <tr><td>Default</td><td><code>--bm1-mist</code> / <code>--in1-iron</code> (dark)</td><td>Article lists, feature grids, project indexes</td></tr>
-      <tr><td>Highlight — light</td><td><code>--in0-void</code></td><td>Featured content on light backgrounds</td></tr>
-      <tr><td>Highlight — dark</td><td><code>--in1-iron</code> + 1px <code>--in2-slate</code> border</td><td>Featured content on dark backgrounds</td></tr>
+      <tr><td>Default</td><td><code>.card</code></td><td>Article lists, feature grids, project indexes</td></tr>
+      <tr><td>Outlined</td><td><code>.card.card-outlined</code></td><td>When the card sits on a same-level surface and needs a visible edge</td></tr>
+      <tr><td>Highlight</td><td><code>.card.card-highlight</code></td><td>Featured content — high contrast in both themes via semantic tokens</td></tr>
+      <tr><td>Interactive</td><td><code>.card.card-interactive</code></td><td>Add to any card that is a navigation target or action trigger</td></tr>
     </tbody>
   </table>
 
-  <h3>Grid &amp; Sizing</h3>
-  <pre><code>.card-grid &#123;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-md); /* 24px */
-&#125;
-
-.card &#123;
-  background: var(--color-bg-panel);
-  border-radius: var(--radius-lg);  /* 8px */
-  padding: 20px;
-&#125;
-
-/* Clickable card */
-.card:hover &#123; background: var(--color-bg-inset); &#125;
-.card:focus-visible &#123;
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-&#125;</code></pre>
+  <h3>Anatomy</h3>
+  <pre><code>&lt;div class="card"&gt;
+  &lt;div class="card-media"&gt;&lt;img src="…" alt="…"&gt;&lt;/div&gt;
+  &lt;div class="card-header"&gt;&lt;h3&gt;Title&lt;/h3&gt;&lt;/div&gt;
+  &lt;div class="card-body"&gt;&lt;p&gt;Description&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="card-footer"&gt;&lt;button class="btn btn-p"&gt;Action&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <p>When anatomy children (<code>.card-header</code>, <code>.card-body</code>, <code>.card-footer</code>, <code>.card-media</code>) are present, the wrapper's padding is removed automatically via <code>:has()</code> — each section carries its own <code>var(--card-padding)</code>. A bare <code>.card</code> without anatomy keeps its default 24px padding.</p>
 
   <h2>Buttons</h2>
   <p>Five variants, three sizes. Buttons adapt to surface context via semantic tokens — the surface declaration handles dark/light automatically, no conditional logic needed.</p>
