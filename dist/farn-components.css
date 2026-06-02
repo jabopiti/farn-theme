@@ -52,6 +52,10 @@
   --card-padding:  var(--space-md);
   --card-highlight-bg:     var(--color-card-highlight-bg);
   --card-highlight-border: var(--color-card-highlight-border);
+  /* highlight always renders on a dark bg — palette tokens are theme-invariant here */
+  --card-highlight-text:           var(--bm2-birch);
+  --card-highlight-text-secondary: var(--bm1-mist);
+  --card-highlight-text-tertiary:  var(--bm0-sand);
 
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
@@ -237,7 +241,14 @@ input[type="radio"] {
 
 /* Variants */
 .card-outlined  { border-color: var(--color-border); }
-.card-highlight { background: var(--card-highlight-bg); border-color: var(--card-highlight-border); }
+.card-highlight {
+  background: var(--card-highlight-bg);
+  border-color: var(--card-highlight-border);
+  color: var(--card-highlight-text);
+  --color-text: var(--card-highlight-text);
+  --color-text-secondary: var(--card-highlight-text-secondary);
+  --color-text-tertiary: var(--card-highlight-text-tertiary);
+}
 
 /* Interactive modifier */
 .card-interactive {

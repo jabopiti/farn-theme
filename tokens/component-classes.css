@@ -170,7 +170,14 @@ input[type="radio"] {
 
 /* Variants */
 .card-outlined  { border-color: var(--color-border); }
-.card-highlight { background: var(--card-highlight-bg); border-color: var(--card-highlight-border); }
+.card-highlight {
+  background: var(--card-highlight-bg);
+  border-color: var(--card-highlight-border);
+  color: var(--card-highlight-text);
+  --color-text: var(--card-highlight-text);
+  --color-text-secondary: var(--card-highlight-text-secondary);
+  --color-text-tertiary: var(--card-highlight-text-tertiary);
+}
 
 /* Interactive modifier */
 .card-interactive {
