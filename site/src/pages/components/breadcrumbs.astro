@@ -126,7 +126,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
 .breadcrumb-item:not(:last-child)::after &#123;
   content: '›' / '';
-  color: var(--color-text-secondary);
   margin: 0 var(--space-xs);
 &#125;
 
@@ -136,10 +135,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   transition: color var(--duration-fast) var(--ease-out);
 &#125;
 
-.breadcrumb-item a:hover &#123;
-  color: var(--color-text);
-&#125;
-
+.breadcrumb-item a:hover,
 .breadcrumb-item a[aria-current="page"] &#123;
   color: var(--color-text);
 &#125;</code></pre>
