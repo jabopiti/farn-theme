@@ -287,7 +287,8 @@ input[type="radio"] {
 }
 
 .breadcrumb-item:not(:last-child)::after {
-  content: '›' / '';
+  content: '›';        /* fallback: visible in all browsers */
+  content: '›' / '';   /* modern: suppresses screen-reader announcement */
   margin: 0 var(--space-xs);
 }
 

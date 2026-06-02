@@ -30,16 +30,16 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <div class="demo-surface">
     <nav aria-label="Breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Components</a></li>
-        <li class="breadcrumb-item"><a href="#" aria-current="page">Breadcrumbs</a></li>
+      <ol class="breadcrumb" role="list">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/components">Components</a></li>
+        <li class="breadcrumb-item"><a href="/components/breadcrumbs" aria-current="page">Breadcrumbs</a></li>
       </ol>
     </nav>
   </div>
 
   <pre><code>&lt;nav aria-label="Breadcrumb"&gt;
-  &lt;ol class="breadcrumb"&gt;
+  &lt;ol class="breadcrumb" role="list"&gt;
     &lt;li class="breadcrumb-item"&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
     &lt;li class="breadcrumb-item"&gt;&lt;a href="/components"&gt;Components&lt;/a&gt;&lt;/li&gt;
     &lt;li class="breadcrumb-item"&gt;&lt;a href="/components/breadcrumbs" aria-current="page"&gt;Breadcrumbs&lt;/a&gt;&lt;/li&gt;
@@ -89,6 +89,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <td>Distinguishes this <code>nav</code> landmark from the primary navigation when both appear on the same page.</td>
       </tr>
       <tr>
+        <td><code>role="list"</code></td>
+        <td><code>&lt;ol&gt;</code></td>
+        <td>Safari/VoiceOver removes list semantics (item count, list navigation) from any <code>&lt;ol&gt;</code> with <code>list-style: none</code>. <code>role="list"</code> restores them regardless of CSS. The <code>&lt;nav&gt;</code> wrapper mitigates this on modern Safari, but <code>role="list"</code> is the robust solution for all versions and wrapper contexts.</td>
+      </tr>
+      <tr>
         <td><code>aria-current="page"</code></td>
         <td>Last <code>&lt;a&gt;</code></td>
         <td>Tells screen readers which link represents the current page. Without it, sighted and non-sighted users get different information.</td>
@@ -125,7 +130,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &#125;
 
 .breadcrumb-item:not(:last-child)::after &#123;
-  content: '›' / '';
+  content: '›';        /* fallback: visible in all browsers */
+  content: '›' / '';   /* modern: suppresses screen-reader announcement */
   margin: 0 var(--space-xs);
 &#125;
 
@@ -144,7 +150,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 <style>
   .demo-surface {
     padding: var(--space-md);
-    background: var(--color-bg-elevated);
+    background: var(--color-bg-panel);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     margin-bottom: var(--space-md);
