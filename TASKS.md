@@ -264,13 +264,13 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-21 · Section transition color tokens
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/intelligent-planck-0UKbU`
 
 **Gap:** The divider spec references `--color-section-dark`, `--color-section-mid`, `--color-section-light` etc., which are not part of the token system; SVG fills and pseudo-element backgrounds would be hardcoded.
 
-- [ ] Add `--color-section-*` aliases to `tokens/dark-light.css` mapped to existing semantic tokens (e.g. `--color-section-dark: var(--color-bg)`)
-- [ ] Ensure aliases resolve correctly in both light and dark themes
-- [ ] Rebuild `dist/farn.css` and update `CHANGELOG.md`
+- [x] Add `--color-section-*` aliases to `tokens/dark-light.css` mapped to existing semantic tokens (e.g. `--color-section-dark: var(--color-bg)`)
+- [x] Ensure aliases resolve correctly in both light and dark themes
+- [x] Rebuild `dist/farn.css` and update `CHANGELOG.md`
 
 ---
 
@@ -446,7 +446,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-36 · Breadcrumbs
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/happy-albattani-RkUpI`
 
 **Gap:** No breadcrumb navigation pattern; a basic wayfinding component missing from any multi-level site.
 

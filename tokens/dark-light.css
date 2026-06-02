@@ -40,6 +40,14 @@
   --color-on-error:         var(--bm2-birch);
   --color-card-highlight-bg:     var(--in0-void);
   --color-card-highlight-border: transparent;
+
+  /* Section transition aliases — consumed by divider patterns (T-23–T-28) */
+  --color-section:         var(--color-bg);
+  /* override --color-section-next on the divider element to match the actual destination section */
+  --color-section-next:    var(--color-bg-panel);
+  --color-section-base:    var(--color-bg);
+  --color-section-layer:   var(--color-bg-panel);
+  --color-section-overlay: var(--color-bg-inset);
 }
 
 /* ── Semantic tokens — dark ─────────────────────────────────────────── */
