@@ -8,6 +8,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- Root `package.json` — Farn is now installable as an npm package (`npm install farn-theme`) with three named export paths: default (`farn-theme`) for the full bundle, `farn-theme/tokens` for tokens without the base reset, and `farn-theme/components` for opt-in component classes (T-18)
 - `tokens/components.css`: `--overlap-*` Tier-3 tokens — `--overlap-section-radius`, `--overlap-section-offset`, `--overlap-card-radius`, `--overlap-card-offset`, `--overlap-card-duration`, `--overlap-card-shadow-raised` (T-26)
 - `tokens/dark-light.css`: `--overlap-card-shadow-raised` dark-mode override — deepened to `rgba(0,0,0,0.40)` so the lift shadow remains perceptible on dark backgrounds (T-26)
 - `dist/farn-components.css`: layered overlap classes shipped — `.overlap-preceding` (overflow guardrail), `.overlap-section` (Option A: full section slides up), `.overlap-card` (Option B: card floats up with Tier-1 entry animation — opacity + translateY(40px) + box-shadow growth) (T-26)

@@ -20,9 +20,23 @@ Farn is a zero-dependency, pure CSS design token library for projects that want 
 
 ---
 
-## Quick start
+## Install
 
-Add one `<link>` to your HTML:
+**npm / pnpm / yarn**
+
+```sh
+npm install farn-theme
+```
+
+Then import in your bundler entry (Vite, webpack, Parcel, etc.):
+
+```css
+@import "farn-theme";             /* full bundle: tokens + base reset */
+@import "farn-theme/tokens";      /* tokens only — no reset */
+@import "farn-theme/components";  /* opt-in component classes */
+```
+
+**CDN (no build step)**
 
 ```html
 <!-- Full bundle: tokens + base reset -->
