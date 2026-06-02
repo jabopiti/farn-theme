@@ -65,6 +65,9 @@
   --overlap-card-duration:      0.7s;
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.14);
 
+  /* ── Sine wave tokens ───────────────────────────────────────────────── */
+  --wave-height: 80px;
+
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);

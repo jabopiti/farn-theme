@@ -289,14 +289,14 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-23 · Sine wave divider
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/next-task-discussion-ZE0nK`
 
 **Gap:** No section divider patterns exist in the system; the sine wave is the most versatile and character-appropriate organic transition for Farn's aesthetic.
 
-- [ ] Implement `.section-wave` CSS and two-path SVG markup per spec (depth layer first in source order)
-- [ ] Apply Tier 1 scroll-reveal animation (`translateY(24px)` → `0` + opacity, 0.1s delay) using T-22 infrastructure
-- [ ] Verify `preserveAspectRatio="none"` and `aria-hidden="true"` are present
-- [ ] Document on the dividers component page (T-29)
+- [x] Implement `.section-wave` CSS and two-path SVG markup per spec (depth layer first in source order)
+- [x] Apply Tier 1 scroll-reveal animation (`translateY(24px)` → `0` + opacity, 0.1s delay) using T-22 infrastructure
+- [x] Verify `preserveAspectRatio="none"` and `aria-hidden="true"` are present
+- [x] Document on the dividers component page (T-29)
 
 ---
 
