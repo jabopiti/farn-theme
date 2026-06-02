@@ -8,6 +8,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `site/src/pages/tokens/motion.astro` — Motion tokens documentation page with animated previews and tables for all `--duration-*` and `--ease-*` tokens; pairing guide and usage rules included (T-41)
+- `site/src/layouts/DocLayout.astro`: Motion link added to main nav and mobile drawer between Spacing and Theming (T-41)
 - `dist/farn-components.css`: `.breadcrumb` and `.breadcrumb-item` classes — CSS-only breadcrumb navigation; `›` separator via `::after` consuming `--color-text-secondary`; preceding items use `--color-text-secondary` with hover lift to `--color-text`; current page link styled via `a[aria-current="page"]` to `--color-text`; all colors adapt to `data-theme` / `data-surface` via semantic tokens (T-36)
 - `site/src/pages/components/breadcrumbs.astro` — breadcrumbs documentation page with live demo, anatomy, usage guidance, accessibility attribute reference, and CSS reference (T-36)
 - `site/src/layouts/DocLayout.astro`: Breadcrumbs link added to desktop nav and mobile drawer (T-36)
