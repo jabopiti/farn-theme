@@ -446,7 +446,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-36 · Breadcrumbs
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/happy-albattani-RkUpI`
 
 **Gap:** No breadcrumb navigation pattern; a basic wayfinding component missing from any multi-level site.
 
