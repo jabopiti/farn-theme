@@ -322,15 +322,18 @@
 }
 
 /* ── Reveal animations ────────────────────────────────────────────────────── */
-.reveal {
+.scroll-reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity var(--duration-reveal) var(--ease-out), transform var(--duration-reveal) var(--ease-spring);
+  transition: opacity var(--duration-reveal) var(--ease-out), transform var(--duration-reveal) var(--ease-out);
 }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
-.reveal:nth-child(2) { transition-delay: 60ms; }
-.reveal:nth-child(3) { transition-delay: 120ms; }
-.reveal:nth-child(4) { transition-delay: 180ms; }
+.scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
+.scroll-reveal:nth-child(2) { transition-delay: 60ms; }
+.scroll-reveal:nth-child(3) { transition-delay: 120ms; }
+.scroll-reveal:nth-child(4) { transition-delay: 180ms; }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal { opacity: 1; transform: none; transition: none; }
+}
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }

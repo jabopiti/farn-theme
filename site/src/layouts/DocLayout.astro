@@ -178,7 +178,9 @@ function isActive(route: string) {
 
     </script>
     <script>
+      import { initScrollReveal } from '../scripts/scroll-reveal.js';
       import { initSubNavTracker } from '../scripts/subnav-tracker.js';
+      initScrollReveal();
       initSubNavTracker(document.querySelector('.sub-nav'), {
         threshold: 0.1,
         activateFirst: true,

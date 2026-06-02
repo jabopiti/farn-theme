@@ -275,16 +275,16 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-22 · Scroll-reveal shared infrastructure
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/zen-euler-WclY9`
 
 **Gap:** No shared scroll-entry animation infrastructure exists; each animated element would need its own observer and transition logic, and the `prefers-reduced-motion` guard would have to be duplicated.
 
 **Depends on T-04** — `.scroll-reveal` transition values must consume `--duration-base` and `--ease-default` from the motion tokens rather than hardcoding `0.6s` and `cubic-bezier(0.4, 0, 0.2, 1)`.
 
-- [ ] Add `.scroll-reveal` base class consuming `var(--duration-base)` and `var(--ease-default)` from T-04 to `site/src/styles/site.css`
-- [ ] Add `@media (prefers-reduced-motion: reduce)` guard covering `.scroll-reveal` and its children
-- [ ] Create `site/src/scripts/scroll-reveal.js` with the shared `IntersectionObserver` (threshold: 0.15, unobserve after first reveal)
-- [ ] Wire the script into Astro's client-side loading
+- [x] Add `.scroll-reveal` base class consuming `var(--duration-reveal)` and `var(--ease-out)` from T-04 to `site/src/styles/site.css` (task spec token names corrected — `--duration-reveal` is the semantic match for content reveals; `--ease-out` per industry guidance)
+- [x] Add `@media (prefers-reduced-motion: reduce)` guard covering `.scroll-reveal`
+- [x] Create `site/src/scripts/scroll-reveal.js` with the shared `IntersectionObserver` (threshold: 0.15, configurable, unobserve after first reveal)
+- [x] Wire the script into Astro's client-side loading (DocLayout.astro + index.astro)
 
 ---
 
