@@ -197,3 +197,37 @@ input[type="radio"] {
 .card-body          { padding: var(--card-padding); flex: 1; }
 .card-footer        { padding: var(--card-padding); margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
 .card-body + .card-footer { border-top: 1px solid var(--color-border-subtle); }
+
+/* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+}
+
+.breadcrumb-item:not(:last-child)::after {
+  content: '›';        /* fallback: visible in all browsers */
+  content: '›' / '';   /* modern: suppresses screen-reader announcement */
+  margin: 0 var(--space-xs);
+}
+
+.breadcrumb-item a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.breadcrumb-item a:hover,
+.breadcrumb-item a[aria-current="page"] {
+  color: var(--color-text);
+}
