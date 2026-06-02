@@ -322,10 +322,10 @@ Reference for implementing organic section transitions. CSS-preferred; SVG noted
   <section class="stack-section" style="background: var(--color-section-base);">
     <!-- Section 1 content -->
   </section>
-  <section class="stack-section" style="background: var(--color-section-overlay);">
+  <section class="stack-section" style="background: var(--color-section-layer);">
     <!-- Section 2 content -->
   </section>
-  <section class="stack-section" style="background: var(--color-section-layer);">
+  <section class="stack-section" style="background: var(--color-section-overlay);">
     <!-- Section 3 content -->
   </section>
 </div>
