@@ -44,10 +44,10 @@ Reference for implementing organic section transitions. CSS-preferred; SVG noted
     <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
       <!-- depth layer first (renders behind) -->
       <path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z"
-            fill="var(--color-section-b)" opacity="0.4"/>
+            fill="var(--color-section-next)" opacity="0.4"/>
       <!-- main wave on top -->
       <path d="M0,45 C300,85 900,5 1200,45 L1200,80 L0,80 Z"
-            fill="var(--color-section-b)"/>
+            fill="var(--color-section-next)"/>
     </svg>
   </div>
 </div>
@@ -100,13 +100,13 @@ Reference for implementing organic section transitions. CSS-preferred; SVG noted
              C600,28 700,75 900,50
              C1050,28 1150,65 1200,45
              L1200,100 L0,100 Z"
-          fill="var(--color-section-b)" opacity="0.45"/>
+          fill="var(--color-section-next)" opacity="0.45"/>
     <!-- main blob -->
     <path d="M0,65 C150,30 200,85 400,60
              C600,33 700,80 900,55
              C1050,33 1150,70 1200,50
              L1200,100 L0,100 Z"
-          fill="var(--color-section-b)"/>
+          fill="var(--color-section-next)"/>
   </svg>
 </div>
 ```
@@ -157,7 +157,7 @@ Reference for implementing organic section transitions. CSS-preferred; SVG noted
 <div class="section-arc" aria-hidden="true">
   <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
     <path d="M0,80 Q600,0 1200,80 Z"
-          fill="var(--color-section-b)"/>
+          fill="var(--color-section-next)"/>
   </svg>
 </div>
 
@@ -165,7 +165,7 @@ Reference for implementing organic section transitions. CSS-preferred; SVG noted
 <div class="section-arc" aria-hidden="true">
   <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
     <path d="M0,0 Q600,80 1200,0 L1200,80 L0,80 Z"
-          fill="var(--color-section-b)"/>
+          fill="var(--color-section-next)"/>
   </svg>
 </div>
 ```
@@ -194,7 +194,7 @@ Reference for implementing organic section transitions. CSS-preferred; SVG noted
   z-index: 10;
   margin-top: -60px;
   border-radius: 24px 24px 0 0;
-  background: var(--color-section-b);
+  background: var(--color-section-next);
   /* padding-top must exceed the overlap amount */
   padding-top: 80px;
 }
@@ -267,7 +267,7 @@ Reference for implementing organic section transitions. CSS-preferred; SVG noted
      style="display:block; width:100%; height:60px;"
      aria-hidden="true">
   <polygon points="0,60 1200,0 1200,60"
-           fill="var(--color-section-b)"/>
+           fill="var(--color-section-next)"/>
 </svg>
 ```
 
@@ -319,13 +319,13 @@ Reference for implementing organic section transitions. CSS-preferred; SVG noted
 
 ```html
 <div class="stack-container">
-  <section class="stack-section" style="background: var(--color-section-dark);">
+  <section class="stack-section" style="background: var(--color-section-base);">
     <!-- Section 1 content -->
   </section>
-  <section class="stack-section" style="background: var(--color-section-mid);">
+  <section class="stack-section" style="background: var(--color-section-layer);">
     <!-- Section 2 content -->
   </section>
-  <section class="stack-section" style="background: var(--color-section-light);">
+  <section class="stack-section" style="background: var(--color-section-overlay);">
     <!-- Section 3 content -->
   </section>
 </div>
@@ -347,9 +347,11 @@ Reference for implementing organic section transitions. CSS-preferred; SVG noted
 
 ```css
 :root {
-  --color-section-dark:  var(--color-bg);        /* resolves per theme */
-  --color-section-mid:   var(--color-bg-sunken);
-  --color-section-light: var(--color-bg-elevated);
+  --color-section:         var(--color-bg);       /* current section bg */
+  --color-section-next:    var(--color-bg-panel); /* destination section bg — SVG wave fills; override per divider element to match actual next section */
+  --color-section-base:    var(--color-bg);       /* stacked card: page-level depth */
+  --color-section-layer:   var(--color-bg-panel); /* stacked card: panel depth */
+  --color-section-overlay: var(--color-bg-inset); /* stacked card: most distinct depth */
 }
 ```
 

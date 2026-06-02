@@ -12,7 +12,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/pages/components/breadcrumbs.astro` — breadcrumbs documentation page with live demo, anatomy, usage guidance, accessibility attribute reference, and CSS reference (T-36)
 - `site/src/layouts/DocLayout.astro`: Breadcrumbs link added to desktop nav and mobile drawer (T-36)
 - `dist/farn-tokens.css`, `dist/farn.css`, `dist/farn-components.css`: rebuilt (T-36)
-
+- `tokens/dark-light.css`: `--color-section`, `--color-section-next`, `--color-section-base`, `--color-section-layer`, `--color-section-overlay` semantic aliases — map to `--color-bg`, `--color-bg-panel`, and `--color-bg-inset`; no dark-mode overrides needed as the underlying tokens already adapt per theme; `divider-spec.md` updated to use new names (T-21)
 - `dist/farn-components.css`: form element styles shipped — bare `input`, `textarea`, `select`, `label` selectors; `.form-field` wrapper (flex column, `--space-md` bottom margin); `.form-hint` helper text; `.form-field--error` BEM modifier; `[aria-invalid="true"]` error state; `accent-color` theming for `input[type="checkbox"]` and `input[type="radio"]`; all styles consume `--input-*` Tier-3 tokens (T-14)
 - `site/src/pages/components/forms.astro` — forms component documentation page with live element demos, states (default, error via ARIA + wrapper class, disabled), wrapper pattern, token reference table, and override examples (T-14)
 - `site/src/layouts/DocLayout.astro`: Forms link added to main nav and mobile drawer (T-14)
