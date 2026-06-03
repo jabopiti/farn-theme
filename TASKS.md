@@ -301,14 +301,14 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-24 · Convex arc divider
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/affectionate-bohr-p4HDs`
 
 **Gap:** No arc divider; the quadratic bezier arc is calmer than the sine wave and suits refined, centred hero layouts.
 
-- [ ] Implement `.section-arc` CSS and both convex and concave SVG variants per spec
-- [ ] Apply Tier 2 `clip-path` expand animation with `animation-timeline: view()` and `@supports not` fallback (static arc)
-- [ ] Apply the concave bug fix: use `scaleY(-1)` on the `<svg>` element only, not the wrapper div
-- [ ] Document on the dividers component page (T-29)
+- [x] Implement `.section-arc` CSS and both convex and concave SVG variants per spec
+- [x] Apply Tier 2 `clip-path` expand animation with `animation-timeline: view()` and `@supports not` fallback (static arc)
+- [x] Apply the concave bug fix: redrawn path (`Q600,80` control point below baseline) instead of `scaleY(-1)` on wrapper; concave variant always static via `.section-arc--concave` modifier
+- [x] Document on the dividers component page (T-29)
 
 ---
 

@@ -282,6 +282,47 @@ input[type="radio"] {
   .section-wave { opacity: 1; transform: none; transition: none; }
 }
 
+/* ── Convex arc ──────────────────────────────────────────────────────────── */
+
+/* Parent section: position:relative; padding-bottom:var(--arc-height) */
+.section-arc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+}
+
+.section-arc svg {
+  display: block;
+  width: 100%;
+  height: var(--arc-height);
+}
+
+@supports (animation-timeline: view()) {
+  @keyframes arc-expand {
+    from { clip-path: polygon(0% 100%, 50% 100%, 100% 100%); }
+    to   { clip-path: polygon(0% 100%, 50% 0%,   100% 100%); }
+  }
+
+  .section-arc svg {
+    clip-path: polygon(0% 100%, 50% 100%, 100% 100%);
+    animation: arc-expand linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 60%;
+  }
+}
+
+/* Concave variant — bowl faces upward; always static, no scroll animation */
+.section-arc--concave svg {
+  clip-path: none;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-arc svg { clip-path: none; animation: none; }
+}
+
 /* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
 .breadcrumb {
   display: flex;

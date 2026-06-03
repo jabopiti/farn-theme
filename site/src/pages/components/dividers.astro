@@ -7,6 +7,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <div class="sub-nav-inner">
       <a href="#layered-overlap" class="sub-nav-link">Layered overlap</a>
       <a href="#sine-wave" class="sub-nav-link">Sine wave</a>
+      <a href="#convex-arc" class="sub-nav-link">Convex arc</a>
       <a href="#usage" class="sub-nav-link">Usage</a>
       <span class="sub-nav-indicator"></span>
     </div>
@@ -20,10 +21,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
     consume the semantic token layer, so transitions stay coherent as the palette evolves.
   </p>
   <p>
-    Two patterns are currently shipped: <strong>layered overlap</strong> (stable) and <strong>sine
-    wave</strong> (beta). Additional patterns (convex arc, organic blob, diagonal cut, stacked card
-    reveal) are planned. Use one primary divider type per page; introduce a second only for a single
-    high-emphasis moment.
+    Three patterns are currently shipped: <strong>layered overlap</strong> (stable), <strong>sine
+    wave</strong> (beta), and <strong>convex arc</strong> (beta). Additional patterns (organic blob,
+    diagonal cut, stacked card reveal) are planned. Use one primary divider type per page; introduce
+    a second only for a single high-emphasis moment.
   </p>
 
   <!-- ── Layered overlap ─────────────────────────────────────────────── -->
@@ -397,6 +398,218 @@ import DocLayout from '../../layouts/DocLayout.astro';
   .section-wave &#123; opacity: 1; transform: none; transition: none; &#125;
 &#125;</code></pre>
 
+  <!-- ── Convex arc ────────────────────────────────────────────────────── -->
+
+  <h2 id="convex-arc">Convex arc</h2>
+  <p>
+    A single quadratic bezier curve spanning the full width. Calmer than the sine wave — one smooth
+    dome rather than repeating crests — and naturally suited to centred hero layouts where the apex
+    draws the eye to content at the peak.
+  </p>
+  <p>
+    The convex (dome) variant uses a Tier 2 scroll-driven animation: as the section enters the
+    viewport the arc expands from a flat baseline to its full dome shape via
+    <code>animation-timeline: view()</code>. Browsers without scroll timeline support, and those
+    with <code>prefers-reduced-motion</code> set, show the full arc statically. The concave (bowl)
+    variant is always static.
+  </p>
+
+  <h3>Convex — dome upward</h3>
+  <div class="demo-arc" role="group" aria-label="Convex arc divider demo">
+    <div class="demo-arc-top" data-theme="dark">
+      <p class="demo-section-label">Preceding section</p>
+      <p class="demo-section-desc">Arc sits at the bottom — fill matches the section below.</p>
+      <div class="section-arc" aria-hidden="true">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+          <path d="M0,80 Q600,0 1200,80 Z"
+                fill="var(--color-section-next)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="demo-arc-bottom" data-theme="light">
+      <p class="demo-section-label">Next section</p>
+      <p class="demo-section-desc">Override <code>--color-section-next</code> to match this background.</p>
+    </div>
+  </div>
+
+  <pre><code>&lt;section style="position: relative; padding-bottom: var(--arc-height);
+              --color-section-next: var(--color-bg-panel);"&gt;
+  &lt;!-- Section content --&gt;
+  &lt;div class="section-arc" aria-hidden="true"&gt;
+    &lt;svg viewBox="0 0 1200 80" preserveAspectRatio="none"&gt;
+      &lt;path d="M0,80 Q600,0 1200,80 Z"
+            fill="var(--color-section-next)"/&gt;
+    &lt;/svg&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+  <h3>Concave — bowl upward</h3>
+  <p>
+    The concave variant redraws the path with the bezier control point below the baseline
+    (<code>Q600,80</code>) and closes with explicit bottom corners. It does not use
+    <code>scaleY(-1)</code> on the wrapper — that approach flips the fill colour in some
+    compositing contexts. Add the <code>.section-arc--concave</code> modifier to disable the
+    scroll animation (static only).
+  </p>
+  <div class="demo-arc-concave" role="group" aria-label="Concave arc divider demo">
+    <div class="demo-arc-top" data-theme="dark">
+      <p class="demo-section-label">Preceding section</p>
+      <p class="demo-section-desc">Bowl arc — fill still matches the section below.</p>
+      <div class="section-arc section-arc--concave" aria-hidden="true">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+          <path d="M0,0 Q600,80 1200,0 L1200,80 L0,80 Z"
+                fill="var(--color-section-next)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="demo-arc-bottom" data-theme="light">
+      <p class="demo-section-label">Next section</p>
+    </div>
+  </div>
+
+  <pre><code>&lt;!-- Concave — redraw path with control point below baseline --&gt;
+&lt;div class="section-arc section-arc--concave" aria-hidden="true"&gt;
+  &lt;svg viewBox="0 0 1200 80" preserveAspectRatio="none"&gt;
+    &lt;path d="M0,0 Q600,80 1200,0 L1200,80 L0,80 Z"
+          fill="var(--color-section-next)"/&gt;
+  &lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+
+  <h3>Anatomy</h3>
+  <table>
+    <thead>
+      <tr><th>Element / attribute</th><th>Role</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Parent <code>&lt;section&gt;</code></td>
+        <td>Arc host</td>
+        <td>
+          Must have <code>position: relative</code> and
+          <code>padding-bottom: var(--arc-height)</code> so content does not sit beneath the arc.
+          Set <code>--color-section-next</code> here to match the destination section's background.
+        </td>
+      </tr>
+      <tr>
+        <td><code>.section-arc</code></td>
+        <td>SVG container</td>
+        <td>
+          Absolutely positioned at the bottom of the parent. In supporting browsers the SVG
+          starts as a flat line and expands to the full arc shape during scroll.
+        </td>
+      </tr>
+      <tr>
+        <td><code>.section-arc--concave</code></td>
+        <td>Concave modifier</td>
+        <td>
+          Disables the scroll animation — the concave arc is always fully visible. Use alongside a
+          redrawn SVG path (<code>Q600,80</code>) rather than <code>scaleY(-1)</code> on the wrapper.
+        </td>
+      </tr>
+      <tr>
+        <td><code>aria-hidden="true"</code></td>
+        <td>Accessibility</td>
+        <td>The arc is purely decorative — hidden from assistive technology.</td>
+      </tr>
+      <tr>
+        <td><code>preserveAspectRatio="none"</code></td>
+        <td>SVG scaling</td>
+        <td>
+          Essential. Without it the arc does not stretch to fill the full viewport width.
+          The viewBox width (<code>1200</code>) is a coordinate space, not a rendered size.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Customisation</h3>
+  <p>
+    Move the control point horizontally to create an asymmetric arc: <code>Q400,0</code> instead
+    of <code>Q600,0</code> shifts the dome apex off-centre. Increase the viewBox height
+    (<code>0 0 1200 120</code>) for a more dramatic curve without changing the SVG's rendered height.
+  </p>
+  <p>
+    For a subtle depth effect, add a second path at <code>opacity="0.3"</code> with the control
+    point offset by ~10px: <code>Q600,10</code>. Put the depth path first in source order so SVG
+    paints it behind the main arc.
+  </p>
+
+  <h3>Token reference</h3>
+  <table>
+    <thead>
+      <tr><th>Token</th><th>Default</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--arc-height</code></td>
+        <td><code>80px</code></td>
+        <td>
+          SVG rendered height and the <code>padding-bottom</code> the parent section needs.
+          Override on the parent to scale the arc — change one value, both stay in sync.
+        </td>
+      </tr>
+      <tr>
+        <td><code>--color-section-next</code></td>
+        <td><code>var(--color-bg-panel)</code></td>
+        <td>
+          Fill colour for the arc. Set on the parent section to match the actual destination
+          background — the default is a fallback and will often be wrong.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pre><code>/* Taller arc for a more dramatic curve */
+.hero-section &#123;
+  --arc-height: 120px;
+  padding-bottom: var(--arc-height);
+  --color-section-next: var(--color-bg);
+&#125;</code></pre>
+
+  <h3>CSS reference</h3>
+  <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
+
+  <pre><code>.section-arc &#123;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+&#125;
+
+.section-arc svg &#123;
+  display: block;
+  width: 100%;
+  height: var(--arc-height);
+  clip-path: polygon(0% 100%, 50% 100%, 100% 100%);
+&#125;
+
+@supports (animation-timeline: view()) &#123;
+  @keyframes arc-expand &#123;
+    from &#123; clip-path: polygon(0% 100%, 50% 100%, 100% 100%); &#125;
+    to   &#123; clip-path: polygon(0% 100%, 50% 0%,   100% 100%); &#125;
+  &#125;
+
+  .section-arc svg &#123;
+    animation: arc-expand linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 60%;
+  &#125;
+&#125;
+
+@supports not (animation-timeline: view()) &#123;
+  .section-arc svg &#123; clip-path: none; &#125;
+&#125;
+
+.section-arc--concave svg &#123;
+  clip-path: none;
+  animation: none;
+&#125;
+
+@media (prefers-reduced-motion: reduce) &#123;
+  .section-arc svg &#123; clip-path: none; animation: none; &#125;
+&#125;</code></pre>
+
   <!-- ── Usage guidance ───────────────────────────────────────────────── -->
 
   <h2 id="usage">Usage guidance</h2>
@@ -418,6 +631,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <td>Sine wave</td>
         <td>Organic, rhythmic</td>
         <td>Repeated section breaks throughout a page; any transition needing a natural, flowing feel</td>
+      </tr>
+      <tr>
+        <td>Convex arc</td>
+        <td>Refined, quiet</td>
+        <td>Centred hero layouts; transitions needing calm, lens-like elegance rather than repeating rhythm</td>
       </tr>
     </tbody>
   </table>
@@ -498,6 +716,38 @@ import DocLayout from '../../layouts/DocLayout.astro';
   }
 
   .demo-wave-bottom {
+    padding: var(--space-md) var(--space-md) var(--space-lg);
+  }
+
+  /* ── Convex arc demo ────────────────────────────────────────────────── */
+
+  .demo-arc,
+  .demo-arc-concave {
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .demo-arc-top {
+    position: relative;
+    padding: var(--space-lg) var(--space-md);
+    padding-bottom: var(--arc-height);
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    --color-section-next: var(--bm2-birch); /* matches data-theme="light" bg */
+  }
+
+  /* Always show the arc in the demo regardless of scroll position */
+  .demo-arc .section-arc svg,
+  .demo-arc-concave .section-arc svg {
+    clip-path: none;
+    animation: none;
+  }
+
+  .demo-arc-bottom {
     padding: var(--space-md) var(--space-md) var(--space-lg);
   }
 
