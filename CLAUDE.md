@@ -17,6 +17,7 @@ dist/
   farn.css                Full bundle — tokens + base reset
   farn-tokens.css         Tokens only — no base reset (for consumers with their own reset)
   farn-components.css     Component tokens + classes — opt-in, load alongside farn.css
+  farn-typography.css     Typography utility classes — opt-in, load alongside farn.css or farn-tokens.css
 site/                     Astro documentation site
 CHANGELOG.md              Updated on every token or component change
 ```
@@ -32,9 +33,12 @@ cat dist/farn-tokens.css tokens/base.css > dist/farn.css
 
 # Component classes (opt-in) — tokens + classes, no reset
 cat tokens/components.css tokens/component-classes.css > dist/farn-components.css
+
+# Typography utility classes (opt-in) — requires farn.css or farn-tokens.css for --font-* tokens
+cat tokens/typography-classes.css > dist/farn-typography.css
 ```
 
-Run all three after any change to a `tokens/` file (in order — `farn-tokens.css` first).
+Run all four after any change to a `tokens/` file (in order — `farn-tokens.css` first).
 
 ## CSS naming conventions
 

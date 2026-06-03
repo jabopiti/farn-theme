@@ -9,7 +9,7 @@
   height: 22px;
   padding: 0 8px;
   border-radius: var(--radius-sm);
-  font-size: 11px;
+  font-size: var(--badge-font-size);
   font-weight: 600;
   letter-spacing: 0.04em;
 }
@@ -32,7 +32,7 @@
   padding: 0 16px;
   border-radius: var(--btn-radius);
   border: 1px solid transparent;
-  font-size: 13px;
+  font-size: var(--btn-font-size);
   font-weight: 600;
   font-family: inherit;
   line-height: 1;
@@ -58,14 +58,14 @@
 .btn:active { background: var(--btn-active-bg); }
 
 /* Sizes */
-.btn-sm { height: 32px; padding: 0 12px; font-size: 12px; }
-.btn-lg { height: 48px; padding: 0 20px; font-size: 14px; }
+.btn-sm { height: 32px; padding: 0 12px; font-size: var(--btn-sm-font-size); }
+.btn-lg { height: 48px; padding: 0 20px; font-size: var(--btn-lg-font-size); }
 
 /* ── Form fields ─────────────────────────────────────────────────────────── */
 
 label {
   display: block;
-  font-size: 0.875rem;
+  font-size: var(--label-font-size);
   font-weight: 500;
   color: var(--color-text);
   margin-bottom: var(--space-xs);
@@ -83,7 +83,7 @@ select {
   border-radius: var(--input-radius);
   color: var(--input-text);
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: var(--input-font-size);
   line-height: 1;
   transition: background var(--duration-base) var(--ease-default),
               border-color var(--duration-base) var(--ease-default),
@@ -143,7 +143,7 @@ input[type="radio"] {
 }
 
 .form-hint {
-  font-size: 0.8125rem;
+  font-size: var(--hint-font-size);
   color: var(--color-text-tertiary);
   margin-top: var(--space-xs);
 }
@@ -290,7 +290,7 @@ input[type="radio"] {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 0.875rem;
+  font-size: var(--breadcrumb-font-size);
 }
 
 .breadcrumb-item {

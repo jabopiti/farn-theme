@@ -8,9 +8,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `tokens/typography-classes.css` — new opt-in file shipping 12 typography utility classes: `.text-display`, `.text-h1`, `.text-h2`, `.text-h3`, `.text-h4`, `.text-h5`, `.text-body`, `.text-body-lg`, `.text-body-sm`, `.text-label`, `.text-caption`, `.text-mono`; Fraunces classes include mandatory `font-variation-settings: 'opsz'`; distributed as `dist/farn-typography.css` via `farn-theme/typography` export (T-30)
+- `tokens/components.css`: 8 component typography tokens — `--btn-font-size`, `--btn-sm-font-size`, `--btn-lg-font-size`, `--label-font-size`, `--input-font-size`, `--badge-font-size`, `--hint-font-size`, `--breadcrumb-font-size` — replacing all hardcoded `font-size` values in component classes (T-30)
+- `dist/farn-typography.css` — typography utility classes artifact; load alongside `farn.css` or `farn-tokens.css` (T-30)
+- `package.json`: `farn-theme/typography` export path for the new artifact (T-30)
+- `site/src/pages/tokens/typography.astro`: "Typography Utility Classes" section — import instructions, live previews, and CSS reference for all 12 utility classes (T-30)
 - `tokens/components.css`: `--wave-height: 80px` Tier-3 token — ties the SVG rendered height and the parent section's required `padding-bottom` to a single override point (T-23)
 - `dist/farn-components.css`: `.section-wave` class shipped — SVG sine wave divider; absolutely positioned at bottom of parent section; two-path SVG (depth layer first, main wave on top) fills `var(--color-section-next)`; Tier-1 entry animation via `data-scroll-reveal` (`translateY(24px)` → `0` + opacity fade, 0.1s delay, `prefers-reduced-motion` guard) (T-23)
 - `site/src/pages/components/dividers.astro`: Sine wave section added — live demo (dark → light transition), anatomy table, customisation notes (amplitude, direction reversal), token reference, CSS reference; subnav updated with Sine wave and Usage links; intro paragraph updated; usage guidance table compares both shipped patterns (T-23)
+
+### Changed
+- `tokens/component-classes.css`: replaced all hardcoded `font-size` values in `.badge`, `.btn`, `.btn-sm`, `.btn-lg`, `label`, `input/textarea/select`, `.form-hint`, `.breadcrumb` with `var(--*-font-size)` token references (T-30)
+- `site/src/layouts/DocLayout.astro`: imports `tokens/typography-classes.css` to dogfood utility classes on the docs site (T-30)
+- `dist/farn-tokens.css`, `dist/farn.css`, `dist/farn-components.css`: rebuilt (T-30)
+
 - Root `package.json` — Farn is now installable as an npm package (`npm install farn-theme`) with three named export paths: default (`farn-theme`) for the full bundle, `farn-theme/tokens` for tokens without the base reset, and `farn-theme/components` for opt-in component classes (T-18)
 - `tokens/components.css`: `--overlap-*` Tier-3 tokens — `--overlap-section-radius`, `--overlap-section-offset`, `--overlap-card-radius`, `--overlap-card-offset`, `--overlap-card-duration`, `--overlap-card-shadow-raised` (T-26)
 - `tokens/dark-light.css`: `--overlap-card-shadow-raised` dark-mode override — deepened to `rgba(0,0,0,0.40)` so the lift shadow remains perceptible on dark backgrounds (T-26)

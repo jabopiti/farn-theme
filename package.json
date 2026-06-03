@@ -13,13 +13,14 @@
   "main": "./dist/farn.css",
   "style": "./dist/farn.css",
   "exports": {
-    ".":            { "style": "./dist/farn.css",            "default": "./dist/farn.css" },
-    "./tokens":     { "style": "./dist/farn-tokens.css",     "default": "./dist/farn-tokens.css" },
-    "./components": { "style": "./dist/farn-components.css", "default": "./dist/farn-components.css" }
+    ".":            { "style": "./dist/farn.css",             "default": "./dist/farn.css" },
+    "./tokens":     { "style": "./dist/farn-tokens.css",      "default": "./dist/farn-tokens.css" },
+    "./components": { "style": "./dist/farn-components.css",  "default": "./dist/farn-components.css" },
+    "./typography": { "style": "./dist/farn-typography.css",  "default": "./dist/farn-typography.css" }
   },
   "files": ["dist", "tokens", "README.md", "CHANGELOG.md", "LICENSE"],
   "scripts": {
-    "build": "cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css && cat dist/farn-tokens.css tokens/base.css > dist/farn.css && cat tokens/components.css tokens/component-classes.css > dist/farn-components.css"
+    "build": "cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css && cat dist/farn-tokens.css tokens/base.css > dist/farn.css && cat tokens/components.css tokens/component-classes.css > dist/farn-components.css && cat tokens/typography-classes.css > dist/farn-typography.css"
   },
   "sideEffects": true
 }
