@@ -8,6 +8,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `tokens/components.css`: `--arc-height: 80px` Tier-3 token — ties the SVG rendered height and the parent section's required `padding-bottom` to a single override point (T-24)
+- `dist/farn-components.css`: `.section-arc` and `.section-arc--concave` classes shipped — SVG convex arc divider; absolutely positioned at bottom of parent section; single quadratic bezier dome fills `var(--color-section-next)`; Tier-2 scroll-driven animation (`clip-path` expands from flat baseline to dome via `animation-timeline: view()`) in supporting browsers; `@supports not` fallback shows full arc statically; concave variant (`--concave` modifier) redraws path with control point below baseline — static only (T-24)
+- `site/src/pages/components/dividers.astro`: Convex arc section added — live convex and concave demos, anatomy table, customisation notes (asymmetric apex, depth layer tip), token reference, CSS reference; subnav updated; intro paragraph updated; usage guidance table updated (T-24)
 - `tokens/typography-classes.css` — new opt-in file shipping 12 typography utility classes: `.text-display`, `.text-h1`, `.text-h2`, `.text-h3`, `.text-h4`, `.text-h5`, `.text-body`, `.text-body-lg`, `.text-body-sm`, `.text-label`, `.text-caption`, `.text-mono`; Fraunces classes include mandatory `font-variation-settings: 'opsz'`; distributed as `dist/farn-typography.css` via `farn-theme/typography` export (T-30)
 - `tokens/components.css`: 8 component typography tokens — `--btn-font-size`, `--btn-sm-font-size`, `--btn-lg-font-size`, `--label-font-size`, `--input-font-size`, `--badge-font-size`, `--hint-font-size`, `--breadcrumb-font-size` — replacing all hardcoded `font-size` values in component classes (T-30)
 - `dist/farn-typography.css` — typography utility classes artifact; load alongside `farn.css` or `farn-tokens.css` (T-30)

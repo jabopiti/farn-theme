@@ -68,6 +68,9 @@
   /* ── Sine wave tokens ───────────────────────────────────────────────── */
   --wave-height: 80px;
 
+  /* ── Convex arc tokens ──────────────────────────────────────────────── */
+  --arc-height: 80px;
+
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);
