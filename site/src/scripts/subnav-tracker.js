@@ -1,4 +1,23 @@
 /**
+ * positionIndicator
+ *
+ * Moves the `.sub-nav-indicator` pill under the active `.sub-nav-link`
+ * (falling back to the first link). Shared by both the scroll-spy page TOC
+ * and the static group sub-nav so the positioning math lives in one place.
+ *
+ * @param {Element} subNavEl  Container holding `.sub-nav-link`s and a `.sub-nav-indicator`.
+ */
+export function positionIndicator(subNavEl) {
+  if (!subNavEl) return;
+  const indicator = subNavEl.querySelector('.sub-nav-indicator');
+  const active = subNavEl.querySelector('.sub-nav-link.active') || subNavEl.querySelector('.sub-nav-link');
+  if (active && indicator) {
+    indicator.style.left = active.offsetLeft + 'px';
+    indicator.style.width = active.offsetWidth + 'px';
+  }
+}
+
+/**
  * initSubNavTracker
  *
  * Sets up an IntersectionObserver that tracks which section is in view and
@@ -25,15 +44,8 @@ export function initSubNavTracker(subNavEl, options = {}) {
   }
 
   const links = subNavEl.querySelectorAll('.sub-nav-link');
-  const indicator = subNavEl.querySelector('.sub-nav-indicator');
 
-  function updateIndicator() {
-    const active = subNavEl.querySelector('.sub-nav-link.active') || links[0];
-    if (active && indicator) {
-      indicator.style.left = active.offsetLeft + 'px';
-      indicator.style.width = active.offsetWidth + 'px';
-    }
-  }
+  const updateIndicator = () => positionIndicator(subNavEl);
 
   if (activateFirst && links[0]) {
     links[0].classList.add('active');

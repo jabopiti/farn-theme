@@ -9,13 +9,66 @@ interface Props {
 
 const { title, description = 'Farn design system documentation' } = Astro.props;
 const path = Astro.url.pathname;
+// Normalise trailing slash for matching (root excepted)
+const p = path !== '/' && path.endsWith('/') ? path.slice(0, -1) : path;
 
-function isActive(route: string) {
-  if (route === '/getting-started') return path === '/getting-started' || path.startsWith('/getting-started/');
-  if (route === '/tokens') return path.startsWith('/tokens/');
-  if (route === '/components') return path === '/components' || path.startsWith('/components/');
-  return path === route;
-}
+// ── Navigation model ──────────────────────────────────────────────────
+// Group sub-nav is derived from this map (T-15 D-3). It lists only pages
+// that exist so there are no dead links. URLs annotated "→" are
+// transitional and migrate in later T-15 phases (1b moves Styles to
+// /styles/*; Phase 2 / T-44 consolidates Components into group pages).
+const groups = [
+  {
+    id: 'foundations',
+    label: 'Foundations',
+    href: '/foundations',
+    pages: [
+      { label: 'Overview', href: '/foundations' },
+      // Surfaces / Layout / Responsive / Accessibility land in 1b + T-49–T-51
+    ],
+  },
+  {
+    id: 'styles',
+    label: 'Styles',
+    href: '/styles',
+    pages: [
+      { label: 'Overview', href: '/styles' },
+      { label: 'Color', href: '/tokens/colors' }, // → /styles/color (1b)
+      { label: 'Typography', href: '/tokens/typography' }, // → /styles/typography (1b)
+      { label: 'Spacing', href: '/tokens/spacing' }, // → /styles/spacing (1b)
+      { label: 'Motion', href: '/tokens/motion' }, // → /styles/motion (1b)
+      { label: 'Theming', href: '/tokens/theming' }, // split → Surfaces + /styles/theming (1b)
+    ],
+  },
+  {
+    id: 'components',
+    label: 'Components',
+    href: '/components',
+    pages: [
+      { label: 'Overview', href: '/components' },
+      { label: 'Badges', href: '/components/badges' }, // → group pages (Phase 2 / T-44)
+      { label: 'Buttons', href: '/components/buttons' },
+      { label: 'Cards', href: '/components/cards' },
+      { label: 'Forms', href: '/components/forms' },
+      { label: 'Breadcrumbs', href: '/components/breadcrumbs' },
+      { label: 'Dividers', href: '/components/dividers' },
+    ],
+  },
+];
+
+const ctas = [
+  { label: 'Demo', href: '/demo', primary: false },
+  { label: 'Get Started', href: '/getting-started', primary: true },
+];
+
+// The active group is derived from the data (single source of truth): a path
+// belongs to a group if it is the group root, sits under it, or matches one of
+// the group's page hrefs — which is how transitional /tokens/* pages resolve to
+// Styles without any special-casing.
+const activeGroup =
+  groups.find((g) => p === g.href || p.startsWith(g.href + '/') || g.pages.some((pg) => pg.href === p)) ?? null;
+
+const isPageActive = (href: string) => p === href;
 ---
 
 <!doctype html>
@@ -51,19 +104,9 @@ function isActive(route: string) {
       <div class="nav-inner">
         <a href="/" class="nav-logo"><LogoIcon />Farn<span>.</span></a>
         <ul class="nav-links">
-          <li><a href="/getting-started" class={isActive('/getting-started') ? 'active' : ''}>Getting Started</a></li>
-          <li><a href="/tokens/colors" class={isActive('/tokens') ? 'active' : ''}>Colors</a></li>
-          <li><a href="/tokens/typography" class={isActive('/tokens/typography') ? 'active' : ''}>Typography</a></li>
-          <li><a href="/tokens/spacing" class={isActive('/tokens/spacing') ? 'active' : ''}>Spacing</a></li>
-          <li><a href="/tokens/motion" class={isActive('/tokens/motion') ? 'active' : ''}>Motion</a></li>
-          <li><a href="/tokens/theming" class={isActive('/tokens/theming') ? 'active' : ''}>Theming</a></li>
-          <li><a href="/components" class={isActive('/components') ? 'active' : ''}>Components</a></li>
-          <li><a href="/components/badges" class={isActive('/components/badges') ? 'active' : ''}>Badges</a></li>
-          <li><a href="/components/buttons" class={isActive('/components/buttons') ? 'active' : ''}>Buttons</a></li>
-          <li><a href="/components/cards" class={isActive('/components/cards') ? 'active' : ''}>Cards</a></li>
-          <li><a href="/components/forms" class={isActive('/components/forms') ? 'active' : ''}>Forms</a></li>
-          <li><a href="/components/breadcrumbs" class={isActive('/components/breadcrumbs') ? 'active' : ''}>Breadcrumbs</a></li>
-          <li><a href="/components/dividers" class={isActive('/components/dividers') ? 'active' : ''}>Dividers</a></li>
+          {groups.map((g) => (
+            <li><a href={g.href} class={activeGroup?.id === g.id ? 'active' : ''}>{g.label}</a></li>
+          ))}
         </ul>
         <div class="nav-right">
           <a href="https://github.com/jabopiti/farn-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
@@ -72,7 +115,12 @@ function isActive(route: string) {
           <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
             <i class="ti ti-moon" id="themeIcon"></i>
           </button>
-          <a href="/" class="nav-cta">Docs</a>
+          {ctas.map((c) => (
+            <a
+              href={c.href}
+              class={c.primary ? 'nav-cta' : 'nav-cta nav-cta-ghost'}
+            >{c.label}</a>
+          ))}
           <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileDrawer">
             <i class="ti ti-menu-2" id="hamburgerIcon"></i>
           </button>
@@ -89,26 +137,37 @@ function isActive(route: string) {
         </button>
       </div>
       <nav class="drawer-nav">
-        <a href="/getting-started" class={`drawer-link${isActive('/getting-started') ? ' active' : ''}`}>Getting Started</a>
-        <a href="/tokens/colors" class={`drawer-link${isActive('/tokens') ? ' active' : ''}`}>Colors</a>
-        <a href="/tokens/typography" class={`drawer-link${isActive('/tokens/typography') ? ' active' : ''}`}>Typography</a>
-        <a href="/tokens/spacing" class={`drawer-link${isActive('/tokens/spacing') ? ' active' : ''}`}>Spacing</a>
-        <a href="/tokens/motion" class={`drawer-link${isActive('/tokens/motion') ? ' active' : ''}`}>Motion</a>
-        <a href="/tokens/theming" class={`drawer-link${isActive('/tokens/theming') ? ' active' : ''}`}>Theming</a>
-        <a href="/components" class={`drawer-link${isActive('/components') ? ' active' : ''}`}>Components</a>
-        <a href="/components/badges" class={`drawer-link${isActive('/components/badges') ? ' active' : ''}`}>Badges</a>
-        <a href="/components/buttons" class={`drawer-link${isActive('/components/buttons') ? ' active' : ''}`}>Buttons</a>
-        <a href="/components/cards" class={`drawer-link${isActive('/components/cards') ? ' active' : ''}`}>Cards</a>
-        <a href="/components/forms" class={`drawer-link${isActive('/components/forms') ? ' active' : ''}`}>Forms</a>
-        <a href="/components/breadcrumbs" class={`drawer-link${isActive('/components/breadcrumbs') ? ' active' : ''}`}>Breadcrumbs</a>
-        <a href="/components/dividers" class={`drawer-link${isActive('/components/dividers') ? ' active' : ''}`}>Dividers</a>
+        {groups.map((g) => (
+          <>
+            <span class="drawer-group-label">{g.label}</span>
+            {g.pages.map((pg) => (
+              <a href={pg.href} class={`drawer-link${isPageActive(pg.href) ? ' active' : ''}`}>{pg.label}</a>
+            ))}
+          </>
+        ))}
       </nav>
-      <a href="/" class="drawer-cta">Docs</a>
+      <div class="drawer-ctas">
+        {ctas.map((c) => (
+          <a href={c.href} class={c.primary ? 'drawer-cta' : 'drawer-cta drawer-cta-ghost'}>{c.label}</a>
+        ))}
+      </div>
     </div>
     <div class="drawer-overlay" id="drawerOverlay"></div>
 
-    <!-- Optional sub-nav (provided by individual pages via slot="subnav") -->
-    <slot name="subnav" />
+    <!-- Sub-nav: group navigation for grouped pages; otherwise a page-internal
+         TOC supplied by the page via slot="subnav" (standalone long pages). -->
+    {activeGroup && activeGroup.pages.length > 1 ? (
+      <nav class="sub-nav filled group-nav" aria-label="Section navigation">
+        <div class="sub-nav-inner">
+          {activeGroup.pages.map((pg) => (
+            <a href={pg.href} class={`sub-nav-link${isPageActive(pg.href) ? ' active' : ''}`}>{pg.label}</a>
+          ))}
+          <span class="sub-nav-indicator"></span>
+        </div>
+      </nav>
+    ) : (
+      <slot name="subnav" />
+    )}
 
     <!-- Page content -->
     <main class="doc-main">
@@ -181,13 +240,39 @@ function isActive(route: string) {
     </script>
     <script>
       import { initScrollReveal } from '../scripts/scroll-reveal.js';
-      import { initSubNavTracker } from '../scripts/subnav-tracker.js';
+      import { initSubNavTracker, positionIndicator } from '../scripts/subnav-tracker.js';
       initScrollReveal();
-      initSubNavTracker(document.querySelector('.sub-nav'), {
-        threshold: 0.1,
-        activateFirst: true,
-        setScrollPadding: true,
-      });
+
+      const groupNav = document.querySelector('.sub-nav.group-nav');
+      if (groupNav) {
+        // Group navigation: the pill marks the active PAGE (static), not scroll.
+        // A sticky sub-nav is present, so anchor jumps must clear nav + sub-nav
+        // (the page-TOC branch sets this via initSubNavTracker; mirror it here).
+        document.documentElement.style.scrollPaddingTop = 'var(--scroll-offset)';
+        const active = groupNav.querySelector('.sub-nav-link.active');
+        const reposition = () => positionIndicator(groupNav);
+        reposition();
+        window.addEventListener('resize', reposition);
+        // Web fonts load with display=swap, which changes link widths after first
+        // paint. Re-settle once they're ready: reposition the pill, and scroll the
+        // active link into view only when the bar actually overflows.
+        (document.fonts?.ready ?? Promise.resolve()).then(() => {
+          reposition();
+          if (active && groupNav.scrollWidth > groupNav.clientWidth) {
+            active.scrollIntoView({ inline: 'center', block: 'nearest' });
+          }
+        });
+      } else {
+        // Page-internal TOC (standalone long pages): keep scroll-spy tracking.
+        const subNav = document.querySelector('.sub-nav');
+        if (subNav) {
+          initSubNavTracker(subNav, {
+            threshold: 0.1,
+            activateFirst: true,
+            setScrollPadding: true,
+          });
+        }
+      }
     </script>
   </body>
 </html>

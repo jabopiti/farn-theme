@@ -160,17 +160,36 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 ---
 
-## T-15 · Audit & restructure site for target state
-`status: backlog` `effort: M`
+## T-15 · Restructure site into three-pillar IA (Phase 1)
+`status: in-progress` `effort: L` `branch: claude/magical-noether-gYvBG`
 
-**Gap:** Site navigation and page structure reflect the initial release; as the system grows toward Tier 3, the IA needs review to clearly separate token reference, component docs, and demo content.
+**Gap:** Site navigation and page structure reflect the initial release — a flat 13-item nav, token pages under `/tokens/*`, one page per component, and a landing page embedding a full palette browser. As Farn has grown into a token-first design system with shipped component classes, the IA no longer cleanly separates concepts, token reference, and components.
 
-- [ ] Audit current page structure against what a Tier 3 token system's docs should include (tokens, components, theming, getting started, changelog)
-- [ ] **Propose the new IA as a written outline and get explicit approval before making any structural changes** — nav hierarchy, page groupings, and URL changes affect all existing links
-- [ ] Implement the approved nav hierarchy and page groupings in `DocLayout.astro`
-- [ ] Ensure landing page, token reference pages, and component pages are clearly differentiated in purpose and navigation
-- [ ] Extract shared demo container styles — `.btn-demo`, `.badge-demo`, `.form-demo` in each component page's `<style>` block are nearly identical (flex, gap, padding, border-radius, border); consolidate into a single `.demo` base class in `site/src/styles/site.css` with modifiers as needed
-- [ ] Evaluate extracting a shared `DocComponentPage.astro` wrapper — badges, buttons, and forms all repeat the same subnav + h1 + badge + intro structure; a slot-based wrapper would make new component pages consistent by default
+**Outcome of the audit:** restructure into three pillars — **Foundations** (concepts), **Styles** (token reference), **Components** (shipped classes) — with group-based navigation. Full IA, the 24 decisions, and phasing are recorded in the planning doc. New follow-on work is split into T-44–T-52; the disclosure prerequisite is T-35.
+
+**This task = Phase 1**, shipped as three ordered PRs (1a → 1b → 1c). Clean-break URLs (no redirects). No dead links at any phase boundary — sub-nav lists only built pages.
+
+**Phase 1a — Nav mechanics** (this PR)
+- [ ] Rebuild top nav in `DocLayout.astro`: 3 group links (Foundations / Styles / Components) + 2 CTAs (Demo / Get Started); rework `isActive()` for group prefixes
+- [ ] Add group sub-nav rendered from a group→pages map (curated order; lists only built pages); active page highlighted with the sliding pill
+- [ ] Retire the group-sub-nav scrollspy; repurpose `subnav-tracker.js` for a page-internal TOC on long standalone pages (Getting Started)
+- [ ] Regroup the mobile drawer under the 3 group headings
+- [ ] Create three group overview pages: `/foundations`, `/styles`, `/components` (Components overview reframed)
+
+_Phase 1a note (transitional, by design D-3): grouped token/component pages now show the group sub-nav instead of their in-page `slot="subnav"` TOC. That slot markup is inert (not rendered) on those pages until reworked — remove it when each page is moved/consolidated (token + theming here in 1b; component pages in Phase 2 / T-44). The scroll-padding offset for sticky sub-navs is handled in `DocLayout`._
+
+**Phase 1b — Styles move + Theming split** (later PR)
+- [ ] Move `/tokens/{colors,typography,spacing,motion}` → `/styles/{color,typography,spacing,motion}`
+- [ ] Split `/tokens/theming` → `/foundations/surfaces` (concept) + `/styles/theming` (reference)
+- [ ] Remove the now-inert `slot="subnav"` anchor blocks from the moved token + theming pages; fix all internal links
+
+**Phase 1c — Home + positioning + README** (later PR)
+- [ ] Rework `index.astro` → linear Home + condensed palette taste; remove the `data-view="palette"` toggle + Palette View block; delete `about.astro`
+- [ ] Reconcile the naming collision: `index.astro` uses in-page anchors `#foundations`/`#components` that now clash with the canonical `/foundations` and `/components` group routes — update the landing nav/footer to the group routes
+- [ ] Update `index.astro`'s standalone nav to match the DocLayout group nav (the two nav systems diverge during 1a–1b)
+- [ ] Propagate positioning copy ("token-first design system + components") to package.json, README, hero, meta; lean README to ~60 lines
+- [ ] Build the Demo + Icons stubs
+- [ ] Extract shared demo container styles (`.btn-demo`/`.badge-demo`/`.form-demo` → single `.demo`) and evaluate a `DocComponentPage.astro` wrapper
 
 ---
 
@@ -534,3 +553,111 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 - [x] Review tradeoffs: single `tokens/components.css` (simpler, already exists) vs separate `dist/farn-components.css` (opt-in, keeps tokens and classes separate) vs both
 - [x] Document the decision in `CLAUDE.md` Track A (update the open question in the "Adding a component" section)
 - [x] Update `CHANGELOG.md`
+
+---
+
+## T-44 · Component group consolidation (T-15 Phase 2)
+`status: backlog` `effort: L`
+
+**Gap:** Under the three-pillar IA (T-15), the six per-component pages must consolidate into six component group pages with the confirmed template (preview + short notes visible; full anatomy/usage/CSS in a shipped-disclosure collapsible per section).
+
+**Gates: T-15, T-35**
+
+- [ ] Build the 6 group pages: `/components/{layout,navigation,actions,forms,data,status}` (curated order)
+- [ ] Absorb `buttons→actions`, `badges→data`, `cards→layout`, `forms→forms`, `breadcrumbs→navigation`, `dividers→layout`; rename Dividers → "Section Transitions"
+- [ ] Resolve "Links" first-class question (standalone link styling vs button variant; `--link-*` tokens exist)
+- [ ] Render coming-soon components inline in logical order with a "coming soon" `.badge`; Status group ships as an all-placeholder roadmap page
+- [ ] Component URL clean-break here; remove old per-component pages and fix internal links
+
+---
+
+## T-45 · llms.txt + Getting Started AI section
+`status: backlog` `effort: S`
+
+**Gap:** No machine-readable guide for AI agents building products *with* Farn (distinct from `CLAUDE.md`, which is for agents developing Farn).
+
+**Gates: T-15**
+
+- [ ] Create `llms.txt` at repo root (llmstxt.org format: pitch → install → core rules → linked docs)
+- [ ] Add `llms.txt` to `package.json` `files[]`; ensure it serves at `farn.jbpt.de/llms.txt`
+- [ ] Add a "For AI agents" section to Getting Started linking to it + a copyable sample prompt
+- [ ] (Optional) richer `llms-full.txt` with the complete token dump
+
+---
+
+## T-46 · Demo page — full guided tour
+`status: backlog` `effort: M`
+
+**Gap:** The `/demo` stub (built in T-15 Phase 1c) needs full content — a guided, end-to-end visual tour so humans can experience Farn before committing. (Distinct from T-16, which adds live demos to component pages.)
+
+**Gates: T-15**
+
+- [ ] Replace the stub with a guided tour: palette, typography, theming/surfaces, components in context
+- [ ] Works in both light and dark via `data-theme`; standalone page (no group sub-nav, page-internal TOC if long)
+
+---
+
+## T-47 · Quote / blockquote component
+`status: backlog` `effort: S`
+
+**Gap:** The landing page demos a blockquote/pullquote pattern but no `.quote` class ships in `farn-components.css`; it's undocumented.
+
+- [ ] Add `--quote-*` Tier-3 tokens to `tokens/components.css`; add `.quote` classes to `tokens/component-classes.css`
+- [ ] Run the 4-file build; update `CHANGELOG.md`
+- [ ] Document on a component group page (Data or Layout — decide during build)
+
+---
+
+## T-48 · Separator (content-level divider)
+`status: backlog` `effort: XS`
+
+**Gap:** Content-level horizontal rules are used throughout prose but not tokenised/documented (distinct from the section-transition divider patterns).
+
+- [ ] Add `<hr>` / `.separator` variants using border tokens to `tokens/component-classes.css`
+- [ ] Run the 4-file build; update `CHANGELOG.md`
+- [ ] Document in Components > Layout
+
+---
+
+## T-49 · Foundations > Accessibility page
+`status: backlog` `effort: S`
+
+**Gap:** Farn's accessibility commitments (WCAG 2.1 AA, focus styles, reduced motion, contrast-by-construction) are implemented but have no narrative documentation page.
+
+**Gates: T-15**
+
+- [ ] Create `site/src/pages/foundations/accessibility.astro`: WCAG AA commitment (Ash AA-large-only), `:focus-visible` ring, `prefers-reduced-motion`, don't-rely-on-colour-alone; link to the WCAG matrix on Styles > Color
+- [ ] No new CSS — documents existing `base.css` / `dark-light.css` behaviour
+
+---
+
+## T-50 · Foundations > Layout page
+`status: backlog` `effort: XS`
+
+**Gap:** Layout philosophy (content-first widths, page structure, grid-vs-flex, radius-as-hierarchy) is implicit in tokens but undocumented as a concept page.
+
+**Gates: T-15**
+
+- [ ] Create `site/src/pages/foundations/layout.astro` from existing `spacing.astro` content (widths, page-structure skeleton, grid pattern); concept here, values cross-linked to Styles > Spacing
+
+---
+
+## T-51 · Foundations > Responsive page
+`status: backlog` `effort: XS`
+
+**Gap:** Responsive philosophy (reflow-by-content, the three breakpoints, fluid `clamp()` type) is undocumented as a concept page.
+
+**Gates: T-15**
+
+- [ ] Create `site/src/pages/foundations/responsive.astro` from existing `spacing.astro` breakpoints + `typography.astro` clamp note; semantic meaning of each breakpoint, avoid fixed pixel breakpoints
+
+---
+
+## T-52 · Styles > Icons guide
+`status: backlog` `effort: XS`
+
+**Gap:** Farn ships no icon set; consumers have no guidance on using a third-party library with Farn tokens. The Phase-1 stub needs full content.
+
+**Gates: T-15**
+
+- [ ] Replace the stub with: rationale for not bundling icons, recommended libraries, and how to size/colour icons with `--space-*` / `--color-*` tokens

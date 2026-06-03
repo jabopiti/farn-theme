@@ -1,0 +1,30 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+// Transitional overview (T-15 Phase 1a). The "Coming soon" roster below mirrors
+// the Foundations group in DocLayout's nav model — when Surfaces/Layout/
+// Responsive/Accessibility land (1b, T-49–T-51), promote each to a real link
+// here and add it to the `groups` map in DocLayout.astro.
+---
+
+<DocLayout title="Foundations" description="The concepts behind Farn — how the system thinks before you build with it">
+  <h1>Foundations</h1>
+  <p>
+    Foundations is the concept layer. It explains <em>how Farn thinks</em> — the ideas and
+    rationale behind the system — before you reach for specific token values. For the concrete
+    values you look up while building, see <a href="/styles">Styles</a>.
+  </p>
+
+  <h2>What lives here</h2>
+  <p>These pages are being built out as part of the site restructure:</p>
+  <ul>
+    <li><strong>Surfaces</strong> — the theme + depth model (<code>data-theme</code> and <code>data-surface</code>), why it works the way it does, and how it aligns with the palette. <span class="badge badge-draft">Coming soon</span></li>
+    <li><strong>Layout</strong> — content-first widths, page structure, and grid-vs-flex guidance. <span class="badge badge-draft">Coming soon</span></li>
+    <li><strong>Responsive</strong> — reflow by content rather than device, and fluid typography. <span class="badge badge-draft">Coming soon</span></li>
+    <li><strong>Accessibility</strong> — Farn's WCAG&nbsp;AA commitment, focus styles, and reduced-motion approach. <span class="badge badge-draft">Coming soon</span></li>
+  </ul>
+  <p>
+    In the meantime, the surface and theming model is documented on the
+    <a href="/tokens/theming">Theming</a> page, and contrast data lives on
+    <a href="/tokens/colors">Colors</a>.
+  </p>
+</DocLayout>
