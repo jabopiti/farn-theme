@@ -13,6 +13,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `dist/farn-typography.css` — typography utility classes artifact; load alongside `farn.css` or `farn-tokens.css` (T-30)
 - `package.json`: `farn-theme/typography` export path for the new artifact (T-30)
 - `site/src/pages/tokens/typography.astro`: "Typography Utility Classes" section — import instructions, live previews, and CSS reference for all 12 utility classes (T-30)
+- `tokens/components.css`: `--wave-height: 80px` Tier-3 token — ties the SVG rendered height and the parent section's required `padding-bottom` to a single override point (T-23)
+- `dist/farn-components.css`: `.section-wave` class shipped — SVG sine wave divider; absolutely positioned at bottom of parent section; two-path SVG (depth layer first, main wave on top) fills `var(--color-section-next)`; Tier-1 entry animation via `data-scroll-reveal` (`translateY(24px)` → `0` + opacity fade, 0.1s delay, `prefers-reduced-motion` guard) (T-23)
+- `site/src/pages/components/dividers.astro`: Sine wave section added — live demo (dark → light transition), anatomy table, customisation notes (amplitude, direction reversal), token reference, CSS reference; subnav updated with Sine wave and Usage links; intro paragraph updated; usage guidance table compares both shipped patterns (T-23)
 
 ### Changed
 - `tokens/component-classes.css`: replaced all hardcoded `font-size` values in `.badge`, `.btn`, `.btn-sm`, `.btn-lg`, `label`, `input/textarea/select`, `.form-hint`, `.breadcrumb` with `var(--*-font-size)` token references (T-30)

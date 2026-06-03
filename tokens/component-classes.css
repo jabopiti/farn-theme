@@ -247,6 +247,41 @@ input[type="radio"] {
   .overlap-card { opacity: 1; transform: none; transition: none; }
 }
 
+/* ── Sine wave ───────────────────────────────────────────────────────────── */
+
+/* SVG wave sits absolutely at the bottom of its parent section.
+   Parent must have position:relative and padding-bottom:var(--wave-height).
+   Add data-scroll-reveal to trigger the entry animation. */
+.section-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  opacity: 0;
+  transform: translateY(24px);
+  transition-property: opacity, transform;
+  transition-duration: var(--duration-reveal);
+  transition-timing-function: var(--ease-out);
+}
+
+.section-wave svg {
+  display: block;
+  width: 100%;
+  height: var(--wave-height);
+}
+
+.section-wave.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-wave { opacity: 1; transform: none; transition: none; }
+}
+
 /* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
 .breadcrumb {
   display: flex;

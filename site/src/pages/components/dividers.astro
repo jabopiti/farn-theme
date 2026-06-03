@@ -2,14 +2,12 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Dividers" description="Section divider patterns — layered overlap, and forthcoming wave, arc, blob, and diagonal transitions in the Farn design system">
+<DocLayout title="Dividers" description="Section divider patterns — layered overlap, sine wave, and forthcoming arc, blob, and diagonal transitions in the Farn design system">
   <nav slot="subnav" class="sub-nav filled" id="sub-nav-dividers" aria-label="Section navigation">
     <div class="sub-nav-inner">
       <a href="#layered-overlap" class="sub-nav-link">Layered overlap</a>
+      <a href="#sine-wave" class="sub-nav-link">Sine wave</a>
       <a href="#usage" class="sub-nav-link">Usage</a>
-      <a href="#anatomy" class="sub-nav-link">Anatomy</a>
-      <a href="#tokens" class="sub-nav-link">Tokens</a>
-      <a href="#css-reference" class="sub-nav-link">CSS</a>
       <span class="sub-nav-indicator"></span>
     </div>
   </nav>
@@ -22,10 +20,13 @@ import DocLayout from '../../layouts/DocLayout.astro';
     consume the semantic token layer, so transitions stay coherent as the palette evolves.
   </p>
   <p>
-    The layered overlap pattern is <strong>stable</strong>. Additional patterns (sine wave, convex arc,
-    organic blob, diagonal cut, stacked card reveal) are planned and will be added as the system grows.
-    Use one primary divider type per page; introduce a second only for a single high-emphasis moment.
+    Two patterns are currently shipped: <strong>layered overlap</strong> (stable) and <strong>sine
+    wave</strong> (beta). Additional patterns (convex arc, organic blob, diagonal cut, stacked card
+    reveal) are planned. Use one primary divider type per page; introduce a second only for a single
+    high-emphasis moment.
   </p>
+
+  <!-- ── Layered overlap ─────────────────────────────────────────────── -->
 
   <h2 id="layered-overlap">Layered overlap</h2>
   <p>
@@ -95,39 +96,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   &lt;!-- Card content --&gt;
 &lt;/div&gt;</code></pre>
 
-  <h2 id="usage">Usage guidance</h2>
-  <p><strong>Use one primary divider type per page.</strong> A second type is acceptable for one
-  high-emphasis moment — for example, sine waves throughout, with a single layered overlap at a CTA.
-  More than two distinct types creates visual noise.</p>
-
-  <p><strong>Option A vs Option B:</strong></p>
-  <table>
-    <thead>
-      <tr><th>Option</th><th>When to use</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Option A — section</td>
-        <td>Major theme transitions (dark hero → light content area). The entire following section shifts in context.</td>
-      </tr>
-      <tr>
-        <td>Option B — card</td>
-        <td>Featured content or CTA panels that need visual lift. Works especially well dark-over-light: a dark hero section with a light card bleeding up from below.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>
-    <strong>Dark over light works best.</strong> A dark preceding section with a light overlapping element
-    maximises the visual depth. The reverse (light over dark) works but is subtler.
-  </p>
-
-  <h2 id="anatomy">Anatomy</h2>
-  <p>
-    The pattern requires three elements: the preceding section (where the overlap visually occurs),
-    and the overlapping element itself.
-  </p>
-
+  <h3 id="anatomy">Anatomy</h3>
+  <p>The pattern uses two or three elements: the preceding section (where the overlap visually occurs) and the overlapping element itself.</p>
   <table>
     <thead>
       <tr><th>Class / attribute</th><th>Element</th><th>Purpose</th></tr>
@@ -173,33 +143,14 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </tbody>
   </table>
 
-  <h3>Critical: overflow on the preceding element</h3>
+  <h4>Critical: overflow on the preceding element</h4>
   <p>
     <code>overflow: hidden</code> on <code>.overlap-preceding</code> (or any of its ancestors) will
     clip the overlapping element completely. <code>.overlap-preceding</code> makes the intent explicit,
     but ensure no ancestor in the stacking context also sets <code>overflow: hidden</code>.
   </p>
 
-  <pre><code>&lt;!-- Full anatomy — Option B --&gt;
-&lt;section class="overlap-preceding" data-theme="dark"&gt;
-  &lt;div class="hero-content"&gt;
-    &lt;h1&gt;Page heading&lt;/h1&gt;
-    &lt;p&gt;Hero description…&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;
-
-&lt;div class="overlap-card" data-scroll-reveal&gt;
-  &lt;h2&gt;Featured content&lt;/h2&gt;
-  &lt;p&gt;This card rises into the hero above on first scroll.&lt;/p&gt;
-  &lt;a href="/more" class="btn btn-p"&gt;Learn more&lt;/a&gt;
-&lt;/div&gt;</code></pre>
-
-  <h2 id="tokens">Token reference</h2>
-  <p>
-    All <code>--overlap-*</code> tokens are defined in <code>tokens/components.css</code>.
-    The dark-mode shadow override lives in <code>tokens/dark-light.css</code>.
-  </p>
-
+  <h3 id="tokens">Token reference</h3>
   <table>
     <thead>
       <tr><th>Token</th><th>Default</th><th>Purpose</th></tr>
@@ -210,7 +161,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <tr><td><code>--overlap-card-radius</code></td><td><code>var(--card-radius)</code></td><td>Border radius on <code>.overlap-card</code> — inherits from card tokens</td></tr>
       <tr><td><code>--overlap-card-offset</code></td><td><code>80px</code></td><td>How far <code>.overlap-card</code> bleeds upward</td></tr>
       <tr><td><code>--overlap-card-duration</code></td><td><code>0.7s</code></td><td>Entry animation duration — longer than standard reveals to match the physical lift metaphor</td></tr>
-      <tr><td><code>--overlap-card-shadow-raised</code></td><td>Light: <code>rgba(0,0,0,0.14)</code> · Dark: <code>rgba(0,0,0,0.40)</code></td><td>Shadow in the raised (post-animation) state. Deepened in dark mode where light shadows are invisible.</td></tr>
+      <tr><td><code>--overlap-card-shadow-raised</code></td><td>Light: <code>rgba(0,0,0,0.14)</code> · Dark: <code>rgba(0,0,0,0.40)</code></td><td>Shadow in the raised state. Deepened in dark mode where light shadows are invisible.</td></tr>
     </tbody>
   </table>
 
@@ -226,11 +177,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   --overlap-card-duration: 0.9s;
 &#125;</code></pre>
 
-  <h2 id="css-reference">CSS reference</h2>
-  <p>
-    Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or
-    <code>farn-tokens.css</code>.
-  </p>
+  <h3 id="css-reference">CSS reference</h3>
+  <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
 
   <pre><code>/* Guardrail — makes overflow:visible intent explicit */
 .overlap-preceding &#123;
@@ -270,6 +218,214 @@ import DocLayout from '../../layouts/DocLayout.astro';
   transform: translateY(0);
   box-shadow: var(--overlap-card-shadow-raised);
 &#125;</code></pre>
+
+  <!-- ── Sine wave ────────────────────────────────────────────────────── -->
+
+  <h2 id="sine-wave">Sine wave</h2>
+  <p>
+    An SVG divider using cubic bezier curves. Two layered paths — a depth layer behind and a main
+    wave on top — create the illusion of a receding tide. The most versatile and character-appropriate
+    pattern in Farn: organic, rhythmic, suited to any content transition.
+  </p>
+  <p>
+    The wave sits absolutely positioned at the bottom of its parent section. It fills in the
+    next section's background colour — set <code>--color-section-next</code> on the parent section
+    to match the actual destination background.
+  </p>
+
+  <div class="demo-wave" role="group" aria-label="Sine wave divider live demo">
+    <div class="demo-wave-top" data-theme="dark">
+      <p class="demo-section-label">Preceding section</p>
+      <p class="demo-section-desc">Wave sits at the bottom — fill matches the section below.</p>
+      <div class="section-wave" data-scroll-reveal aria-hidden="true">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+          <path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z"
+                fill="var(--color-section-next)" opacity="0.4"/>
+          <path d="M0,45 C300,85 900,5 1200,45 L1200,80 L0,80 Z"
+                fill="var(--color-section-next)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="demo-wave-bottom" data-theme="light">
+      <p class="demo-section-label">Next section</p>
+      <p class="demo-section-desc">Override <code>--color-section-next</code> to match this background.</p>
+    </div>
+  </div>
+
+  <pre><code>&lt;section style="position: relative; padding-bottom: var(--wave-height);
+              --color-section-next: var(--color-bg-panel);"&gt;
+  &lt;!-- Section content --&gt;
+  &lt;div class="section-wave" data-scroll-reveal aria-hidden="true"&gt;
+    &lt;svg viewBox="0 0 1200 80" preserveAspectRatio="none"&gt;
+      &lt;!-- depth layer first (SVG paints in document order) --&gt;
+      &lt;path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z"
+            fill="var(--color-section-next)" opacity="0.4"/&gt;
+      &lt;path d="M0,45 C300,85 900,5 1200,45 L1200,80 L0,80 Z"
+            fill="var(--color-section-next)"/&gt;
+    &lt;/svg&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+  <h3>Anatomy</h3>
+  <table>
+    <thead>
+      <tr><th>Element / attribute</th><th>Role</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Parent <code>&lt;section&gt;</code></td>
+        <td>Wave host</td>
+        <td>
+          Must have <code>position: relative</code> so the wave positions against it, and
+          <code>padding-bottom: var(--wave-height)</code> so content does not sit beneath the wave.
+          Set <code>--color-section-next</code> here to match the destination section's background.
+        </td>
+      </tr>
+      <tr>
+        <td><code>.section-wave</code></td>
+        <td>SVG container</td>
+        <td>
+          Absolutely positioned at the bottom of the parent. Starts hidden
+          (<code>opacity: 0</code>, translated down) and animates in when scrolled into view.
+        </td>
+      </tr>
+      <tr>
+        <td><code>data-scroll-reveal</code></td>
+        <td>Animation opt-in</td>
+        <td>
+          Registers the element with the shared IntersectionObserver. Adds <code>.is-visible</code>
+          on first entry, triggering the rise animation. Omit if the section is above the fold.
+        </td>
+      </tr>
+      <tr>
+        <td><code>aria-hidden="true"</code></td>
+        <td>Accessibility</td>
+        <td>The wave is purely decorative — hidden from assistive technology.</td>
+      </tr>
+      <tr>
+        <td><code>preserveAspectRatio="none"</code></td>
+        <td>SVG scaling</td>
+        <td>
+          Essential. Without it the wave does not stretch to fill the full viewport width.
+          The viewBox width (<code>1200</code>) is a coordinate space, not a rendered size.
+        </td>
+      </tr>
+      <tr>
+        <td>Depth path (<code>opacity="0.4"</code>)</td>
+        <td>Depth layer</td>
+        <td>
+          Must come <em>first</em> in SVG source order — SVG paints in document order, so this
+          renders behind the main wave. A slightly different Y offset creates the layered illusion.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Customisation</h3>
+  <p>
+    Change amplitude by adjusting the control point Y values. The paths use
+    <code>C300,<strong>80</strong> 900,<strong>0</strong></code> — equal and opposite offsets
+    produce a symmetric wave. Increase them for more drama; reduce for a subtler ripple.
+  </p>
+  <p>
+    To reverse direction (wave dips down rather than up), place <code>.section-wave</code> at the
+    top of the <em>next</em> section and apply <code>transform: scaleY(-1)</code> to the
+    <code>.section-wave</code> element. Do not use <code>rotateX</code> — it requires a 3D
+    rendering context.
+  </p>
+
+  <h3>Token reference</h3>
+  <table>
+    <thead>
+      <tr><th>Token</th><th>Default</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--wave-height</code></td>
+        <td><code>80px</code></td>
+        <td>
+          SVG rendered height and the minimum <code>padding-bottom</code> the parent section needs.
+          Override on the parent to scale the wave up or down — change one value, both stay in sync.
+        </td>
+      </tr>
+      <tr>
+        <td><code>--color-section-next</code></td>
+        <td><code>var(--color-bg-panel)</code></td>
+        <td>
+          Fill colour for both SVG paths. Set this on the parent section to match the actual
+          destination background — the default is a reasonable fallback but will often be wrong.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pre><code>/* Taller wave for a more dramatic transition */
+.hero-section &#123;
+  --wave-height: 120px;
+  padding-bottom: var(--wave-height);
+  --color-section-next: var(--color-bg);
+&#125;</code></pre>
+
+  <h3>CSS reference</h3>
+  <pre><code>.section-wave &#123;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  opacity: 0;
+  transform: translateY(24px);
+  transition-property: opacity, transform;
+  transition-duration: var(--duration-reveal);
+  transition-timing-function: var(--ease-out);
+&#125;
+
+.section-wave svg &#123;
+  display: block;
+  width: 100%;
+  height: var(--wave-height);
+&#125;
+
+.section-wave.is-visible &#123;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+&#125;
+
+@media (prefers-reduced-motion: reduce) &#123;
+  .section-wave &#123; opacity: 1; transform: none; transition: none; &#125;
+&#125;</code></pre>
+
+  <!-- ── Usage guidance ───────────────────────────────────────────────── -->
+
+  <h2 id="usage">Usage guidance</h2>
+  <p><strong>Use one primary divider type per page.</strong> A second type is acceptable for one
+  high-emphasis moment — for example, sine waves throughout with a single layered overlap at a CTA.
+  More than two distinct types creates visual noise.</p>
+
+  <table>
+    <thead>
+      <tr><th>Pattern</th><th>Character</th><th>Best for</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Layered overlap</td>
+        <td>Dimensional, modern</td>
+        <td>Major theme transitions (dark hero → light content); featured CTA panels</td>
+      </tr>
+      <tr>
+        <td>Sine wave</td>
+        <td>Organic, rhythmic</td>
+        <td>Repeated section breaks throughout a page; any transition needing a natural, flowing feel</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <strong>Dark over light works best</strong> for both patterns. A dark preceding section with a
+    lighter destination maximises the visual depth. The reverse works but is subtler.
+  </p>
 </DocLayout>
 
 <style>
@@ -291,12 +447,17 @@ import DocLayout from '../../layouts/DocLayout.astro';
   }
 
   .demo-section-before,
-  .demo-card-section {
-    padding: var(--space-lg) var(--space-md) 80px; /* 80px bottom: space for the overlap to bleed into */
+  .demo-card-section,
+  .demo-wave-top {
     min-height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+  }
+
+  .demo-section-before,
+  .demo-card-section {
+    padding: var(--space-lg) var(--space-md) 80px; /* 80px bottom: space for the overlap to bleed into */
   }
 
   .demo-card-section {
@@ -318,6 +479,29 @@ import DocLayout from '../../layouts/DocLayout.astro';
     background: var(--color-bg);
     padding: 0 var(--space-md) var(--space-xl);
   }
+
+  /* ── Sine wave demo ──────────────────────────────────────────────────── */
+
+  .demo-wave {
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    overflow: hidden; /* safe — no translateY animation escapes the container */
+  }
+
+  .demo-wave-top {
+    position: relative;
+    padding: var(--space-lg) var(--space-md);
+    padding-bottom: var(--wave-height);
+    /* wave fill matches data-theme="light" background (--bm2-birch) */
+    --color-section-next: var(--bm2-birch);
+  }
+
+  .demo-wave-bottom {
+    padding: var(--space-md) var(--space-md) var(--space-lg);
+  }
+
+  /* ── Shared demo typography ─────────────────────────────────────────── */
 
   .demo-section-label {
     font-size: 0.75rem;
