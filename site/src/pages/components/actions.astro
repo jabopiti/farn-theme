@@ -1,0 +1,234 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Actions" description="Action components in the Farn design system — buttons, links, and interactive triggers">
+  <h1>Actions</h1>
+  <p>
+    Components that trigger operations or navigate the user. Buttons are for in-page actions;
+    links are for navigation. Both consume Tier-3 tokens so the full action palette can be
+    rethemed in one place.
+  </p>
+
+  <!-- ── Buttons ──────────────────────────────────────────────────────── -->
+
+  <h2 id="buttons">Buttons <span class="badge badge-published">stable</span></h2>
+  <p>
+    Four variants cover the full intent spectrum from primary confirmation to destructive operations.
+    All variants share <code>.btn</code> as a base class and consume <code>--btn-*</code> Tier-3 tokens.
+  </p>
+
+  <div class="btn-demo demo-surface" role="group" aria-label="Live button variant examples">
+    <button class="btn btn-p">Primary</button>
+    <button class="btn btn-s">Secondary</button>
+    <button class="btn btn-g">Ghost</button>
+    <button class="btn btn-d">Destructive</button>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Buttons</summary>
+      <div class="accordion-panel">
+
+        <h3>Variants</h3>
+        <p>Apply <code>.btn</code> first, then exactly one variant modifier. Use the variant that matches the intent of the action — not its visual weight preference.</p>
+        <table>
+          <thead><tr><th>Variant</th><th>Class</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><button class="btn btn-p">Primary</button></td><td><code>.btn-p</code></td><td>The single most important action on a page or in a dialog. Use once per view.</td></tr>
+            <tr><td><button class="btn btn-s">Secondary</button></td><td><code>.btn-s</code></td><td>Supporting actions alongside a primary button — cancel, back, view details.</td></tr>
+            <tr><td><button class="btn btn-g">Ghost</button></td><td><code>.btn-g</code></td><td>Low-emphasis actions in toolbars, cards, or dense layouts where ink weight matters.</td></tr>
+            <tr><td><button class="btn btn-d">Destructive</button></td><td><code>.btn-d</code></td><td>Irreversible operations: delete, remove, revoke. Pair with a confirmation dialog.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Sizes</h3>
+        <p>Size modifiers adjust height and padding only. Font weight and variant colours are unaffected. Default fits most layouts; use <code>.btn-sm</code> for dense UIs and <code>.btn-lg</code> for hero CTAs.</p>
+        <div class="btn-demo demo-surface" role="group" aria-label="Live button size examples">
+          <button class="btn btn-p btn-sm">Small</button>
+          <button class="btn btn-p">Default</button>
+          <button class="btn btn-p btn-lg">Large</button>
+        </div>
+        <table>
+          <thead><tr><th>Size</th><th>Class</th><th>Height</th><th>Padding</th><th>Font size</th></tr></thead>
+          <tbody>
+            <tr><td>Small</td><td><code>.btn-sm</code></td><td>32px</td><td>0 12px</td><td>12px</td></tr>
+            <tr><td>Default</td><td>—</td><td>40px</td><td>0 16px</td><td>13px</td></tr>
+            <tr><td>Large</td><td><code>.btn-lg</code></td><td>48px</td><td>0 20px</td><td>14px</td></tr>
+          </tbody>
+        </table>
+
+        <h3>States</h3>
+        <div class="btn-demo demo-surface" role="group" aria-label="Live button state examples">
+          <button class="btn btn-p">Enabled</button>
+          <button class="btn btn-p" disabled>Disabled</button>
+          <button class="btn btn-s">Enabled</button>
+          <button class="btn btn-s" disabled>Disabled</button>
+          <button class="btn btn-g">Enabled</button>
+          <button class="btn btn-g" disabled>Disabled</button>
+          <button class="btn btn-d">Enabled</button>
+          <button class="btn btn-d" disabled>Disabled</button>
+        </div>
+        <p>Hover, active, and focus states are driven by <code>--btn-*</code> token values. Focus uses the global <code>:focus-visible</code> outline from <code>base.css</code>. Disabled buttons reduce opacity via <code>--btn-disabled-opacity</code> and suppress pointer events.</p>
+        <p>For <code>&lt;a&gt;</code> elements acting as disabled buttons, use <code>aria-disabled="true"</code> and <code>tabindex="-1"</code> with inline <code>opacity</code> and <code>pointer-events: none</code> — the <code>disabled</code> attribute has no effect on anchors.</p>
+        <pre><code>&lt;button class="btn btn-p" disabled&gt;Can't proceed&lt;/button&gt;
+
+&lt;!-- anchor disabled state --&gt;
+&lt;a class="btn btn-p" aria-disabled="true" tabindex="-1"
+   style="opacity: var(--btn-disabled-opacity); pointer-events: none;"&gt;
+  Can't proceed
+&lt;/a&gt;</code></pre>
+
+        <h3>Anatomy</h3>
+        <pre><code>&lt;!-- base class + variant modifier --&gt;
+&lt;button class="btn btn-p"&gt;Label&lt;/button&gt;
+
+&lt;!-- with size modifier --&gt;
+&lt;button class="btn btn-s btn-sm"&gt;Label&lt;/button&gt;
+
+&lt;!-- with icon (flexbox gap: 6px) --&gt;
+&lt;button class="btn btn-g"&gt;
+  &lt;i class="ti ti-download"&gt;&lt;/i&gt;
+  Download
+&lt;/button&gt;
+
+&lt;!-- link element acting as a button --&gt;
+&lt;a href="/docs" class="btn btn-p"&gt;Read the docs&lt;/a&gt;</code></pre>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--btn-radius</code></td><td><code>var(--radius-md)</code></td><td>Border radius for all button variants</td></tr>
+            <tr><td><code>--btn-disabled-opacity</code></td><td><code>0.5</code></td><td>Opacity applied to disabled buttons</td></tr>
+            <tr><td colspan="3"><em>Primary</em></td></tr>
+            <tr><td><code>--btn-p-bg</code></td><td><code>var(--color-accent)</code></td><td>Primary background</td></tr>
+            <tr><td><code>--btn-p-text</code></td><td><code>var(--color-accent-text)</code></td><td>Primary text colour</td></tr>
+            <tr><td><code>--btn-p-hover-bg</code></td><td><code>var(--color-accent-hover)</code></td><td>Primary hover background</td></tr>
+            <tr><td><code>--btn-p-active-bg</code></td><td><code>var(--color-accent-active)</code></td><td>Primary pressed background</td></tr>
+            <tr><td colspan="3"><em>Secondary</em></td></tr>
+            <tr><td><code>--btn-s-bg</code></td><td><code>var(--color-bg-inset)</code></td><td>Secondary background</td></tr>
+            <tr><td><code>--btn-s-text</code></td><td><code>var(--color-text)</code></td><td>Secondary text colour</td></tr>
+            <tr><td><code>--btn-s-hover-bg</code></td><td><code>var(--color-bg-panel)</code> / dark: <code>var(--in3-ash)</code></td><td>Secondary hover background</td></tr>
+            <tr><td colspan="3"><em>Ghost</em></td></tr>
+            <tr><td><code>--btn-g-bg</code></td><td><code>transparent</code></td><td>Ghost background</td></tr>
+            <tr><td><code>--btn-g-border</code></td><td><code>var(--color-border)</code></td><td>Ghost border colour</td></tr>
+            <tr><td><code>--btn-g-hover-bg</code></td><td><code>var(--color-bg-panel)</code></td><td>Ghost hover background</td></tr>
+            <tr><td colspan="3"><em>Destructive</em></td></tr>
+            <tr><td><code>--btn-d-bg</code></td><td><code>var(--color-error)</code></td><td>Destructive background</td></tr>
+            <tr><td><code>--btn-d-text</code></td><td><code>var(--color-on-error)</code></td><td>Destructive text colour</td></tr>
+            <tr><td><code>--btn-d-hover-bg</code></td><td><code>var(--in0-void)</code></td><td>Destructive hover background (theme-invariant)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Overriding tokens</h3>
+        <pre><code>/* Retheme the primary button for a promotional section */
+.promo-section &#123;
+  --btn-p-bg:       #7C3AED;
+  --btn-p-hover-bg: #6D28D9;
+  --btn-p-text:     #fff;
+&#125;
+
+/* Pill-shaped buttons in a card */
+.card &#123;
+  --btn-radius: var(--radius-full);
+&#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Links ────────────────────────────────────────────────────────── -->
+
+  <h2 id="links">Links <span class="badge badge-published">stable</span></h2>
+  <p>
+    Naked <code>&lt;a&gt;</code> elements inherit <code>--link-color</code>,
+    <code>--link-hover-color</code>, and <code>--link-visited-color</code> from
+    <code>tokens/base.css</code>. Override these tokens to retheme inline links without
+    touching <code>--color-accent</code>. Any <code>&lt;a&gt;</code> also accepts
+    <code>.btn</code> classes to render as a button.
+  </p>
+
+  <div class="demo-surface">
+    <p>
+      Inline <a href="#links">text link</a> — uses <code>--link-color</code> and underlines on hover.
+      <a href="#links">Visited links</a> use <code>--link-visited-color</code>.
+    </p>
+    <div class="btn-demo demo-surface link-btns" role="group" aria-label="Link element as button examples">
+      <a href="#links" class="btn btn-p">Link primary</a>
+      <a href="#links" class="btn btn-s">Link secondary</a>
+      <a href="#links" class="btn btn-g">Link ghost</a>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Links</summary>
+      <div class="accordion-panel">
+
+        <h3>Naked links</h3>
+        <p>Base link styles are applied globally via <code>tokens/base.css</code>. No class needed — just use <code>&lt;a href="…"&gt;</code>.</p>
+        <pre><code>&lt;p&gt;See the &lt;a href="/docs"&gt;full documentation&lt;/a&gt; for details.&lt;/p&gt;</code></pre>
+
+        <h3>Link buttons</h3>
+        <p>
+          Any <code>&lt;a&gt;</code> element accepts the <code>.btn</code> classes. The base
+          styles set <code>text-decoration: none</code> so links render identically to
+          <code>&lt;button&gt;</code> elements. Use <code>&lt;button&gt;</code> for in-page
+          actions and <code>&lt;a&gt;</code> for navigation.
+        </p>
+        <pre><code>&lt;a href="/docs" class="btn btn-p"&gt;Read the docs&lt;/a&gt;
+&lt;a href="/cancel" class="btn btn-s"&gt;Cancel&lt;/a&gt;</code></pre>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--link-color</code></td><td><code>var(--color-accent)</code></td><td>Naked link colour</td></tr>
+            <tr><td><code>--link-hover-color</code></td><td><code>var(--color-accent-hover)</code></td><td>Naked link hover colour</td></tr>
+            <tr><td><code>--link-visited-color</code></td><td><code>var(--color-accent)</code></td><td>Naked link visited colour</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Overriding tokens</h3>
+        <pre><code>/* Retheme inline links in a dark editorial section */
+.editorial &#123;
+  --link-color:       var(--fo0-sage);
+  --link-hover-color: var(--fo1-fern);
+&#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Tooltip ──────────────────────────────────────────────────────── -->
+
+  <h2 id="tooltip">Tooltip <span class="badge badge-draft">coming soon</span></h2>
+  <p>
+    CSS-only tooltip via <code>[data-tooltip]</code> attribute and <code>::before</code> /
+    <code>::after</code> pseudo-elements. <code>--tooltip-*</code> tokens for background,
+    text, and max-width. Note: CSS-only tooltips do not respond to keyboard focus — a JS
+    enhancement is needed for <code>focus-visible</code> support.
+  </p>
+
+</DocLayout>
+
+<style>
+  .btn-demo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    /* override .demo-surface's --space-md for section-level breathing room */
+    margin-bottom: var(--space-lg);
+  }
+
+  /* nested btn-demo inside the link-demo container — reset demo-surface styles */
+  .link-btns {
+    margin-top: var(--space-sm);
+    margin-bottom: 0;
+    border: none;
+    padding: 0;
+    background: none;
+  }
+</style>

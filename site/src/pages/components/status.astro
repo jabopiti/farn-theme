@@ -1,0 +1,45 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Status" description="Feedback and status components in the Farn design system — alerts, loading states, and modal dialogs">
+  <h1>Status</h1>
+  <p>
+    Components that communicate system feedback, async state, and high-priority interruptions.
+    All patterns are planned for a future release — state tokens for errors, warnings, and
+    success already exist in the token system.
+  </p>
+
+  <!-- ── Alert ─────────────────────────────────────────────────────────── -->
+
+  <h2 id="alert">Alert <span class="badge badge-draft">coming soon</span></h2>
+  <p>
+    Inline status messages consuming <code>--color-error</code>, <code>--color-warning</code>,
+    and <code>--color-success</code> semantic tokens. <code>--alert-*</code> Tier-3 tokens
+    (background, border, text, icon-color per variant) for independent retheme. Four variants:
+    info, success, warning, error — dismissible and non-dismissible.
+  </p>
+
+  <!-- ── Loading states ────────────────────────────────────────────────── -->
+
+  <h2 id="loading">Loading states <span class="badge badge-draft">coming soon</span></h2>
+  <p>
+    Two patterns for async and in-progress feedback. <strong>Spinner</strong> — a rotating ring
+    consuming <code>--color-accent</code> and <code>--duration-*</code> motion tokens.
+    <strong>Skeleton</strong> — a shimmer placeholder using a CSS gradient animation.
+    Both respect <code>prefers-reduced-motion</code>: spinner stops, skeleton renders as a
+    static tinted block.
+  </p>
+
+  <!-- ── Modal / dialog ────────────────────────────────────────────────── -->
+
+  <h2 id="modal">Modal / dialog <span class="badge badge-draft">coming soon</span></h2>
+  <p>
+    <code>--modal-*</code> tokens (background, backdrop, border-radius, shadow) and
+    <code>.modal</code>, <code>.modal-backdrop</code>, <code>.modal-header</code>,
+    <code>.modal-body</code>, <code>.modal-footer</code> classes with size variants (sm, md, lg).
+    CSS owns appearance; JavaScript is responsible for focus trap,
+    <code>aria-modal="true"</code>, <code>role="dialog"</code>, and <code>Escape</code> key handling.
+  </p>
+
+</DocLayout>

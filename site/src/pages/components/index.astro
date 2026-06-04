@@ -2,7 +2,7 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Components" description="Farn component patterns — buttons, cards, forms, navigation, and more">
+<DocLayout title="Components" description="Farn component patterns — layout, navigation, actions, forms, data display, and status feedback">
   <h1>Components</h1>
   <p>
     Farn is a design token system with an optional component layer. Tokens give you the
@@ -11,149 +11,37 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </p>
   <p>All component classes consume semantic tokens so they adapt to dark/light mode and surface context automatically.</p>
 
-  <h2>Cards</h2>
-  <p>Flat inset style — background fill, no visible border at rest. Cards use <code>--card-*</code> Tier-3 tokens and support optional anatomy classes for structured layouts. See the <a href="/components/cards">Cards documentation</a> for live demos and full CSS reference.</p>
-
-  <h3>Variants</h3>
-  <table>
-    <thead><tr><th>Variant</th><th>Class</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr><td>Default</td><td><code>.card</code></td><td>Article lists, feature grids, project indexes</td></tr>
-      <tr><td>Outlined</td><td><code>.card.card-outlined</code></td><td>When the card sits on a same-level surface and needs a visible edge</td></tr>
-      <tr><td>Highlight</td><td><code>.card.card-highlight</code></td><td>Featured content — high contrast in both themes via semantic tokens</td></tr>
-      <tr><td>Interactive</td><td><code>.card.card-interactive</code></td><td>Add to any card that is a navigation target or action trigger</td></tr>
-    </tbody>
-  </table>
-
-  <h3>Anatomy</h3>
-  <pre><code>&lt;div class="card"&gt;
-  &lt;div class="card-media"&gt;&lt;img src="…" alt="…"&gt;&lt;/div&gt;
-  &lt;div class="card-header"&gt;&lt;h3&gt;Title&lt;/h3&gt;&lt;/div&gt;
-  &lt;div class="card-body"&gt;&lt;p&gt;Description&lt;/p&gt;&lt;/div&gt;
-  &lt;div class="card-footer"&gt;&lt;button class="btn btn-p"&gt;Action&lt;/button&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-  <p>When anatomy children (<code>.card-header</code>, <code>.card-body</code>, <code>.card-footer</code>, <code>.card-media</code>) are present, the wrapper's padding is removed automatically via <code>:has()</code> — each section carries its own <code>var(--card-padding)</code>. A bare <code>.card</code> without anatomy keeps its default 24px padding.</p>
-
-  <h2>Buttons</h2>
-  <p>Five variants, three sizes. Buttons adapt to surface context via semantic tokens — the surface declaration handles dark/light automatically, no conditional logic needed.</p>
-
-  <h3>Variants</h3>
-  <table>
-    <thead><tr><th>Variant</th><th>Light bg</th><th>Dark bg</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr><td>Primary</td><td><code>--fo1-fern</code>, Parchment text</td><td><code>--fo1-fern</code>, Parchment text</td><td>The single strongest action per context</td></tr>
-      <tr><td>Secondary</td><td><code>--bm0-sand</code>, Void text</td><td><code>--in2-slate</code>, Parchment text</td><td>Second most important action</td></tr>
-      <tr><td>Ghost</td><td>Transparent, Iron border</td><td>Transparent, Slate border</td><td>Low-priority — cancel, back, dismiss</td></tr>
-      <tr><td>Destructive</td><td colspan="2"><code>--bl0-ember</code>, Parchment text (both modes)</td><td>Irreversible actions only</td></tr>
-      <tr><td>Text link</td><td><code>--fo1-fern</code> text, underline</td><td><code>--fo1-fern</code> text, underline</td><td>Tertiary actions in prose or UI text</td></tr>
-    </tbody>
-  </table>
-
-  <h3>Sizes</h3>
-  <table>
-    <thead><tr><th>Size</th><th>Height</th><th>H. Padding</th><th>Font</th></tr></thead>
-    <tbody>
-      <tr><td>Small</td><td>32px</td><td>12px</td><td>12px, weight 600</td></tr>
-      <tr><td>Default</td><td>40px</td><td>16px</td><td>13px, weight 600</td></tr>
-      <tr><td>Large</td><td>48px</td><td>20px</td><td>14px, weight 600</td></tr>
-    </tbody>
-  </table>
-  <p>All sizes: 6px border radius (<code>--radius-md</code>). One primary button per action context — two primaries compete and neither wins.</p>
-
-  <h3>States</h3>
-  <table>
-    <thead><tr><th>State</th><th>Treatment</th></tr></thead>
-    <tbody>
-      <tr><td>Hover</td><td>Background shift — <code>transition: background-color 120ms ease-out</code></td></tr>
-      <tr><td>Focus</td><td><code>outline: 2px solid var(--color-accent)</code>, <code>outline-offset: 3px</code></td></tr>
-      <tr><td>Active</td><td><code>transform: scale(0.98)</code></td></tr>
-      <tr><td>Disabled</td><td>40% opacity, <code>cursor: not-allowed</code></td></tr>
-    </tbody>
-  </table>
-
-  <h2>Forms &amp; Inputs</h2>
-  <p>Filled style, comfortable density (48px height). Chrome only appears when needed — borders emerge on focus and error, not by default.</p>
-
-  <h3>Input States (light surface)</h3>
-  <table>
-    <thead><tr><th>State</th><th>Background</th><th>Border</th></tr></thead>
-    <tbody>
-      <tr><td>Rest</td><td><code>--bm1-mist</code></td><td>none</td></tr>
-      <tr><td>Hover</td><td><code>--bm0-sand</code></td><td>none</td></tr>
-      <tr><td>Focus</td><td><code>--bm0-sand</code></td><td>1.5px <code>--fo1-fern</code> + Fern glow</td></tr>
-      <tr><td>Error</td><td><code>--bm2-birch</code></td><td>1.5px <code>--bl0-ember</code></td></tr>
-      <tr><td>Disabled</td><td><code>--bm2-birch</code></td><td>none, 40% opacity</td></tr>
-    </tbody>
-  </table>
-  <pre><code>input:focus &#123;
-  outline: none;
-  border: 1.5px solid var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(62, 122, 98, 0.15); /* Fern glow */
-&#125;</code></pre>
-
-  <h3>Validation</h3>
-  <p>Validate on blur — not on every keystroke. Show errors inline below the field. On submit, scroll to and focus the first errored field. Error messages are specific: &ldquo;Enter a valid email address&rdquo; not &ldquo;Invalid input&rdquo;.</p>
+  <h2>Layout</h2>
+  <p>Structural components for organising content. Cards surface discrete items in scannable grids; section transitions create intentional visual breaks between full-width areas. See <a href="/components/layout">Layout</a> for live demos and full CSS reference.</p>
 
   <h2>Navigation</h2>
+  <p>Components that help users orient and move through a site. Breadcrumbs show position in a hierarchy; accordions reveal content progressively without leaving the page. See <a href="/components/navigation">Navigation</a>.</p>
 
-  <h3>Main Nav</h3>
-  <p>Horizontal top bar, sticky. Hides on scroll down, reappears on scroll up. Transparent over hero, fills on scroll. Maximum 4–6 links.</p>
-  <table>
-    <thead><tr><th>Property</th><th>Value</th></tr></thead>
-    <tbody>
-      <tr><td>Height</td><td>64px</td></tr>
-      <tr><td>Nav link font</td><td><code>--font-body</code>, 14px, weight 500</td></tr>
-      <tr><td>Active link</td><td><code>--color-accent</code>, weight 600</td></tr>
-      <tr><td>Active link treatment</td><td>Colour + weight shift only — no background pill</td></tr>
-    </tbody>
-  </table>
+  <h2>Actions</h2>
+  <p>Components that trigger operations or navigate users. Four button variants cover the full intent spectrum; <code>--btn-*</code> Tier-3 tokens let the entire button palette be rethemed in one place. Inline links use <code>--link-*</code> tokens independently of <code>--color-accent</code>. See <a href="/components/actions">Actions</a>.</p>
 
-  <h3>In-Page Tab Navigation</h3>
-  <p>Horizontal tabs with underline active indicator. Switches views within a single screen — not routing between pages. Active indicator slides between tabs rather than appearing/disappearing.</p>
-  <pre><code>&lt;div role="tablist" aria-label="Content sections"&gt;
-  &lt;button role="tab" aria-selected="true"
-    aria-controls="panel-overview" id="tab-overview"&gt;Overview&lt;/button&gt;
-  &lt;button role="tab" aria-selected="false"
-    aria-controls="panel-details" id="tab-details" tabindex="-1"&gt;Details&lt;/button&gt;
-&lt;/div&gt;
-&lt;div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview"&gt; &hellip; &lt;/div&gt;
-&lt;div role="tabpanel" id="panel-details" aria-labelledby="tab-details" hidden&gt; &hellip; &lt;/div&gt;</code></pre>
+  <h2>Forms</h2>
+  <p>Form element styles ship as bare element selectors — no extra classes required on <code>input</code>, <code>textarea</code>, or <code>select</code>. All styles consume <code>--input-*</code> Tier-3 tokens. See <a href="/components/forms">Forms</a>.</p>
 
-  <h2>Badges &amp; Tags</h2>
-  <p>Seven semantic variants — informational only, never interactive. Each badge uses an opaque palette fill so it reads correctly on any surface without dark-mode overrides. See the <a href="/components/badges">Badges documentation</a> for live demos, usage guidance, and full CSS reference.</p>
+  <h2>Data</h2>
+  <p>Components for labelling and presenting structured information. Seven badge variants use opaque palette fills so they read on any surface without dark-mode overrides. See <a href="/components/data">Data</a>.</p>
 
-  <h2>Focus Styles</h2>
-  <p>A single consistent focus ring across all interactive elements — defined once in <code>base.css</code>, applied everywhere via <code>:focus-visible</code>. Never remove focus styles.</p>
-  <pre><code>:focus-visible &#123;
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-  border-radius: inherit;
-&#125;
+  <h2>Status</h2>
+  <p>Feedback components for async state and high-priority interruptions. Alerts, loading states, and modal dialogs are planned — state tokens for errors, warnings, and success already exist in the token system. See <a href="/components/status">Status</a>.</p>
 
-:focus:not(:focus-visible) &#123;
-  outline: none;
-&#125;</code></pre>
-  <p><code>focus-visible</code> ensures the ring only appears for keyboard navigation — not on mouse click. <code>border-radius: inherit</code> follows the element's shape automatically.</p>
+  <h3>Loading components</h3>
+  <p>All component classes ship in <code>dist/farn-components.css</code>. Load it alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
+  <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/farn-theme/dist/farn.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/farn-theme/dist/farn-components.css"&gt;</code></pre>
 
-  <h2>Surfaces and Theme Sections</h2>
-  <p>Full-width sections use <code>data-surface</code> for depth levels and <code>data-theme</code> for forced theme context. All child components inherit the correct tokens automatically.</p>
+  <h3>Surfaces and theme context</h3>
+  <p>All components inherit the correct tokens automatically when placed inside a <code>data-surface</code> or <code>data-theme</code> context.</p>
   <pre><code>&lt;!-- depth levels (relative to page theme) --&gt;
-&lt;section data-surface="base"&gt; &hellip; &lt;/section&gt;
-&lt;section data-surface="layer"&gt; &hellip; &lt;/section&gt;
-&lt;section data-surface="overlay"&gt; &hellip; &lt;/section&gt;
+&lt;section data-surface="base"&gt; … &lt;/section&gt;
+&lt;section data-surface="layer"&gt; … &lt;/section&gt;
+&lt;section data-surface="overlay"&gt; … &lt;/section&gt;
 
 &lt;!-- forced theme (sets background + all tokens) --&gt;
-&lt;section data-theme="dark"&gt; &hellip; &lt;/section&gt;
-&lt;section data-theme="dark" data-surface="layer"&gt; &hellip; &lt;/section&gt;</code></pre>
-  <table>
-    <thead><tr><th>Attribute</th><th>Background</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr><td><code>data-surface="base"</code></td><td><code>--color-bg</code></td><td>Page-level bg; resets context inside deeper surfaces.</td></tr>
-      <tr><td><code>data-surface="layer"</code></td><td>mist (light) / iron (dark)</td><td>Cards, sidebars, panels.</td></tr>
-      <tr><td><code>data-surface="overlay"</code></td><td>sand (light) / slate (dark)</td><td>Modals, dropdowns, floating elements.</td></tr>
-      <tr><td><code>data-theme="dark"</code></td><td><code>--in0-void</code></td><td>Force dark context on any element.</td></tr>
-      <tr><td><code>data-theme="light"</code></td><td><code>--bm2-birch</code></td><td>Force light context on any element.</td></tr>
-    </tbody>
-  </table>
-  <p>Sections are flush — no gap between them. The background change is the visual separator. Page rhythm example: <strong>dark hero &rarr; base features &rarr; layer aside &rarr; dark CTA</strong>.</p>
+&lt;section data-theme="dark"&gt; … &lt;/section&gt;
+&lt;section data-theme="dark" data-surface="layer"&gt; … &lt;/section&gt;</code></pre>
 </DocLayout>

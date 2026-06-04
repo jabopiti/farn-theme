@@ -1,0 +1,161 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Data" description="Data display components in the Farn design system — badges, tables, and structured content patterns">
+  <h1>Data</h1>
+  <p>
+    Components for labelling, categorising, and presenting structured information. Badges
+    communicate status at a glance; tables and code blocks are planned for a future release.
+  </p>
+
+  <!-- ── Badges ───────────────────────────────────────────────────────── -->
+
+  <h2 id="badges">Badges <span class="badge badge-published">stable</span></h2>
+  <p>
+    Informational labels — never interactive. Seven semantic variants use opaque palette fills
+    so they read clearly on any surface without dark-mode overrides.
+  </p>
+
+  <div class="badge-demo demo-surface" role="group" aria-label="Live badge examples">
+    <span class="badge badge-general">General</span>
+    <span class="badge badge-published">Published</span>
+    <span class="badge badge-draft">Draft</span>
+    <span class="badge badge-archived">Archived</span>
+    <span class="badge badge-beta">Beta</span>
+    <span class="badge badge-research">Research</span>
+    <span class="badge badge-category">Category</span>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Badges</summary>
+      <div class="accordion-panel">
+
+        <h3>Variants</h3>
+        <p>All seven variants share the same base dimensions. Mix freely within a layout — the distinct fills create their own visual hierarchy.</p>
+        <table>
+          <thead><tr><th>Label</th><th>Class</th><th>Background</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-general">General</span></td>
+              <td><code>.badge-general</code></td>
+              <td><code>--bm0-sand</code></td>
+              <td>Neutral, uncategorised content</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-published">Published</span></td>
+              <td><code>.badge-published</code></td>
+              <td><code>--bl3-moss</code></td>
+              <td>Active, live, stable, success state</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-draft">Draft</span></td>
+              <td><code>.badge-draft</code></td>
+              <td><code>--bl2-grain</code></td>
+              <td>In-progress, pending, warning state</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-archived">Archived</span></td>
+              <td><code>.badge-archived</code></td>
+              <td><code>--bl0-ember</code></td>
+              <td>Deprecated, removed, error state</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-beta">Beta</span></td>
+              <td><code>.badge-beta</code></td>
+              <td><code>--bl4-heather</code></td>
+              <td>Experimental feature, preview release</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-research">Research</span></td>
+              <td><code>.badge-research</code></td>
+              <td><code>--bl1-ochre</code></td>
+              <td>Discovery phase, annotation, exploration</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-category">Category</span></td>
+              <td><code>.badge-category</code></td>
+              <td><code>--fo2-forest</code></td>
+              <td>Primary content category label</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Usage guidance</h3>
+        <p>Choose variants by semantic meaning, not by colour preference.</p>
+        <table>
+          <thead><tr><th>Situation</th><th>Variant</th></tr></thead>
+          <tbody>
+            <tr><td>Content is live and visible to end users</td><td><span class="badge badge-published">Published</span></td></tr>
+            <tr><td>Content is being worked on and not yet live</td><td><span class="badge badge-draft">Draft</span></td></tr>
+            <tr><td>Content is no longer active, or an action has failed</td><td><span class="badge badge-archived">Archived</span></td></tr>
+            <tr><td>A feature is released but not yet stable</td><td><span class="badge badge-beta">Beta</span></td></tr>
+            <tr><td>Item is in a discovery or annotation phase</td><td><span class="badge badge-research">Research</span></td></tr>
+            <tr><td>Label indicates content type or taxonomy</td><td><span class="badge badge-category">Category</span></td></tr>
+            <tr><td>No meaningful status or category applies</td><td><span class="badge badge-general">General</span></td></tr>
+          </tbody>
+        </table>
+        <p><strong>One badge per item.</strong> Stacking multiple badges signals ambiguity in the data model — resolve it at the data level.</p>
+        <p><strong>Never make badges interactive.</strong> For clickable filters or dismissible tags, use a different component. A badge communicates state; it does not change it.</p>
+
+        <h3>Anatomy</h3>
+        <p>Apply the base <code>.badge</code> class first, then exactly one variant modifier.</p>
+        <pre><code>&lt;span class="badge badge-published"&gt;Published&lt;/span&gt;
+&lt;span class="badge badge-beta"&gt;Beta&lt;/span&gt;</code></pre>
+
+        <h3>CSS reference</h3>
+        <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
+        <pre><code>.badge &#123;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+&#125;
+
+.badge-general   &#123; background: var(--bm0-sand);    color: var(--in0-void); &#125;
+.badge-published &#123; background: var(--bl3-moss);    color: var(--color-accent-text); &#125;
+.badge-draft     &#123; background: var(--bl2-grain);   color: var(--color-accent-text); &#125;
+.badge-archived  &#123; background: var(--bl0-ember);   color: var(--color-accent-text); &#125;
+.badge-beta      &#123; background: var(--bl4-heather); color: var(--color-accent-text); &#125;
+.badge-research  &#123; background: var(--bl1-ochre);   color: var(--color-accent-text); &#125;
+.badge-category  &#123; background: var(--fo2-forest);  color: var(--color-accent-text); &#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Table ─────────────────────────────────────────────────────────── -->
+
+  <h2 id="table">Table <span class="badge badge-draft">coming soon</span></h2>
+  <p>
+    <code>.table</code> base class with border, cell padding, and header styles consuming
+    semantic tokens. <code>.table-striped</code> variant for alternating-row contrast.
+    Includes guidance on the <code>overflow-x: auto</code> scroll wrapper for narrow viewports.
+  </p>
+
+  <!-- ── Code block ────────────────────────────────────────────────────── -->
+
+  <h2 id="code-block">Code block <span class="badge badge-draft">coming soon</span></h2>
+  <p>
+    <code>.code-block</code> (block-level, scrollable) and <code>.inline-code</code> classes
+    consuming <code>--color-bg-code</code>, <code>--font-mono</code>, and <code>--radius-*</code>
+    tokens. <code>--code-*</code> Tier-3 tokens for independent retheme without touching the
+    semantic layer.
+  </p>
+
+</DocLayout>
+
+<style>
+  .badge-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    /* override .demo-surface's --space-md for section-level breathing room */
+    margin-bottom: var(--space-lg);
+  }
+</style>
