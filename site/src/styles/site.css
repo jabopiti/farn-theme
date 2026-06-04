@@ -452,3 +452,14 @@
   white-space: nowrap;
 }
 .footer-links a:hover { color: var(--color-text-secondary); }
+
+/* ── Demo container ──────────────────────────────────────────────────────── */
+.demo-surface {
+  padding: var(--space-md);
+  background: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+}
+
+.demo-surface p { margin: 0; }

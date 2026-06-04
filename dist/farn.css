@@ -367,6 +367,11 @@ img {
   display: block;
 }
 
+summary {
+  list-style: none;
+  display: block;
+}
+
 a {
   color: var(--link-color);
 }
