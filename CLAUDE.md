@@ -13,7 +13,7 @@ tokens/                   CSS source — edit here, not in dist/
   spacing.css             Spacing scale, widths, radius, z-index
   motion.css              Duration and easing tokens
   dark-light.css          Semantic tokens + data-surface patterns
-  components.css          Tier-3 component tokens (--btn-*, --link-*)
+  components.css          Tier-3 component tokens (--btn-*, --card-*, --badge-*, --accordion-*, --input-*, --link-*, --overlap-*, --wave-height, --arc-height)
   component-classes.css   Shipped CSS classes (.badge, .btn, etc.) — no tokens
   base.css                Reset, focus, reduced-motion
   index.css               @import chain (used by the site)
@@ -24,6 +24,7 @@ dist/
   farn-typography.css     Typography utility classes — opt-in, load alongside farn.css or farn-tokens.css
 site/                     Astro documentation site
 CHANGELOG.md              Updated on every token or component change
+TASKS.md                  Task backlog — pick up work here
 ```
 
 ## Build command
@@ -42,7 +43,9 @@ cat tokens/components.css tokens/component-classes.css > dist/farn-components.cs
 cat tokens/typography-classes.css > dist/farn-typography.css
 ```
 
-Run all four after any change to a `tokens/` file (in order — `farn-tokens.css` first).
+`tokens/typography-classes.css` is **not** in `tokens/index.css` — DocLayout imports it directly from source. Do not add it to the index chain.
+
+Run all four after any change to a `tokens/` file (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
 
 ## CSS naming conventions
 
@@ -57,7 +60,7 @@ Run all four after any change to a `tokens/` file (in order — `farn-tokens.css
 | `--font-*` | Font families | `--font-display`, `--font-body`, `--font-mono` |
 | `--radius-*` | Border radius | `--radius-sm` through `--radius-full` |
 | `--z-*` | Z-index | `--z-dropdown`, `--z-modal`, `--z-toast` |
-| `--btn-*`, `--link-*` | Component layer (Tier 3) | `--btn-p-bg`, `--btn-p-text`, `--link-color` |
+| `--btn-*`, `--card-*`, `--badge-*`, `--accordion-*`, `--input-*`, `--link-*`, `--overlap-*` | Component layer (Tier 3) | `--btn-p-bg`, `--card-bg`, `--badge-general-bg`, `--accordion-border`, `--input-border` |
 
 ## Hard rules
 
@@ -73,7 +76,7 @@ h1 {
 
 **Tokens only:** Edit `tokens/` files, never `dist/farn.css` directly.
 
-**Dogfood:** The docs site is built with Farn. Every component shipped in `dist/farn-components.css` must also be imported by `DocLayout.astro` from `tokens/component-classes.css`. If it breaks the site, it breaks consumers — catch it here first.
+**Dogfood:** The docs site loads `tokens/component-classes.css` directly — every shipped component class must render correctly there before being considered done. If it breaks the docs site, it breaks consumers.
 
 **CHANGELOG:** Update `CHANGELOG.md` with every token or component change.
 
@@ -86,7 +89,7 @@ h1 {
   - `layer` — card/panel level (mist in light, iron in dark)
   - `overlay` — modal/dropdown level (sand in light, slate in dark)
 - Compose: `<section data-theme="dark" data-surface="layer">` = dark panel regardless of page theme
-- FOWT prevention: see `tokens/dark-light.css`
+- FOWT prevention: `DocLayout.astro` has an inline `<script>` that reads `localStorage.getItem('farn-theme')` (falling back to `prefers-color-scheme`) and sets `data-theme` on `<html>` before first paint
 
 ## Adding a color token
 
@@ -136,6 +139,8 @@ Pick a `status: backlog` task (respect `Depends on`). Set `in-progress`, add `br
 - `CHANGELOG.md` update included?
 - `font-variation-settings: 'opsz' <value>` on every Fraunces usage?
 - Dark/light mode regression considered?
+- `:focus-visible` on every new interactive element (not just `:focus`)?
+- JS-disabled fallback for elements that start at `opacity: 0` (use `@media (scripting: none)` to show them)?
 
 **Complexity gate — get user approval if any apply:**
 - Effort `M` or `L`
