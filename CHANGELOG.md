@@ -8,6 +8,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `tokens/components.css`: `--accordion-*` Tier-3 tokens — `--accordion-border`, `--accordion-radius`, `--accordion-summary-bg`, `--accordion-summary-hover-bg`, `--accordion-panel-bg`, `--accordion-font-size` (T-35)
+- `dist/farn-components.css`: `.accordion` and `.accordion-panel` classes shipped — built on native `<details>`/`<summary>`; no JS required; `+` icon rotates 45° on open; animated height via `interpolate-size: allow-keywords` + `::details-content` in Chrome 131+; instant static-reveal fallback in older browsers; `prefers-reduced-motion` guard disables both transitions (T-35)
+- `site/src/pages/components/accordion.astro` — accordion documentation page with live demos (including default-open panel), anatomy, usage guidance table, animation notes, token reference, and CSS reference (T-35)
 - `tokens/components.css`: `--arc-height: 80px` Tier-3 token — ties the SVG rendered height and the parent section's required `padding-bottom` to a single override point (T-24)
 - `dist/farn-components.css`: `.section-arc` and `.section-arc--concave` classes shipped — SVG convex arc divider; absolutely positioned at bottom of parent section; single quadratic bezier dome fills `var(--color-section-next)`; Tier-2 scroll-driven animation (`clip-path` expands from flat baseline to dome via `animation-timeline: view()`) in supporting browsers; `@supports not` fallback shows full arc statically; concave variant (`--concave` modifier) redraws path with control point below baseline — static only (T-24)
 - `site/src/pages/components/dividers.astro`: Convex arc section added — live convex and concave demos, anatomy table, customisation notes (asymmetric apex, depth layer tip), token reference, CSS reference; subnav updated; intro paragraph updated; usage guidance table updated (T-24)

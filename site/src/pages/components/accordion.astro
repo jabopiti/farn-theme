@@ -1,0 +1,182 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Accordion" description="Accordion / disclosure component in the Farn design system — expandable content panels built on native details/summary">
+  <h1>Accordion</h1>
+  <span class="badge badge-published">stable</span>
+  <p>
+    Accordions reveal or hide content in place, keeping pages scannable without hiding essential information.
+    The component is built on native <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code> — no JavaScript
+    required for core functionality. In browsers that support <code>interpolate-size: allow-keywords</code>
+    (Chrome 131+) the panel animates open and closed; all other browsers get an instant reveal that is equally
+    functional.
+  </p>
+
+  <h2 id="anatomy">Anatomy</h2>
+  <p>
+    Wrap one or more <code>&lt;details&gt;</code> elements in a <code>.accordion</code> container.
+    Each <code>&lt;details&gt;</code> must contain exactly one <code>&lt;summary&gt;</code> (the trigger)
+    and a <code>.accordion-panel</code> div (the content).
+  </p>
+
+  <div class="demo-surface">
+    <div class="accordion">
+      <details>
+        <summary>What is Farn?</summary>
+        <div class="accordion-panel">
+          <p>
+            Farn is a token-first design system built around Iron Night and Birch Mist palettes.
+            It ships three CSS artifacts: a full bundle, a tokens-only build for teams with their own reset,
+            and an opt-in component classes file.
+          </p>
+        </div>
+      </details>
+      <details>
+        <summary>How do I install it?</summary>
+        <div class="accordion-panel">
+          <p>
+            Install via npm: <code>npm install farn-theme</code>. Then import the CSS bundle that matches
+            your setup — <code>farn-theme</code> for the full bundle or <code>farn-theme/tokens</code>
+            if you manage your own reset.
+          </p>
+        </div>
+      </details>
+      <details open>
+        <summary>Does it support dark mode?</summary>
+        <div class="accordion-panel">
+          <p>
+            Yes. Set <code>data-theme="dark"</code> or <code>data-theme="light"</code> on any element.
+            All semantic tokens update automatically — no additional class toggling required.
+          </p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <pre><code>&lt;div class="accordion"&gt;
+  &lt;details&gt;
+    &lt;summary&gt;Question one&lt;/summary&gt;
+    &lt;div class="accordion-panel"&gt;
+      &lt;p&gt;Answer text goes here.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/details&gt;
+  &lt;details&gt;
+    &lt;summary&gt;Question two&lt;/summary&gt;
+    &lt;div class="accordion-panel"&gt;
+      &lt;p&gt;Answer text goes here.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/details&gt;
+&lt;/div&gt;</code></pre>
+
+  <h2 id="open-by-default">Open by default</h2>
+  <p>
+    Add the <code>open</code> attribute to any <code>&lt;details&gt;</code> to render it expanded on load.
+    This is the standard HTML boolean attribute — no extra classes needed.
+  </p>
+
+  <pre><code>&lt;details open&gt;
+  &lt;summary&gt;Expanded on load&lt;/summary&gt;
+  &lt;div class="accordion-panel"&gt;...&lt;/div&gt;
+&lt;/details&gt;</code></pre>
+
+  <h2 id="usage">Usage guidance</h2>
+
+  <table>
+    <thead><tr><th>Situation</th><th>Guidance</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>FAQs and help content</td>
+        <td>Ideal fit. Users scan summaries to find the answer they need, then expand only the relevant panel.</td>
+      </tr>
+      <tr>
+        <td>Settings panels</td>
+        <td>Group related settings under a collapsible heading to reduce visual noise without burying options.</td>
+      </tr>
+      <tr>
+        <td>Progressive disclosure</td>
+        <td>Use when secondary details are genuinely optional — not to shorten a page that is already the right length.</td>
+      </tr>
+      <tr>
+        <td>Multiple open at once</td>
+        <td>
+          Native <code>&lt;details&gt;</code> allows any number of panels open simultaneously. To enforce
+          exclusive-open (one panel at a time), add a small JS listener that closes sibling
+          <code>&lt;details&gt;</code> elements on <code>toggle</code>.
+        </td>
+      </tr>
+      <tr>
+        <td>Critical content</td>
+        <td>Do not hide content that every user needs in a closed accordion. Use the <code>open</code> attribute for important panels, or consider a different layout.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="animation">Animation</h2>
+  <p>
+    In Chrome 131+ the panel height animates using <code>interpolate-size: allow-keywords</code> combined with
+    the <code>::details-content</code> pseudo-element. This enables a smooth <code>block-size: 0 → auto</code>
+    transition without JavaScript. Older browsers get an instant reveal — functional, no janky layout shift.
+  </p>
+  <p>
+    The <code>+</code> icon rotates 45° on open, creating an <code>×</code> close indicator.
+    Both transitions are disabled under <code>prefers-reduced-motion: reduce</code>.
+  </p>
+
+  <h2 id="tokens">Token reference</h2>
+  <table>
+    <thead><tr><th>Token</th><th>Default</th><th>Controls</th></tr></thead>
+    <tbody>
+      <tr><td><code>--accordion-border</code></td><td><code>var(--color-border)</code></td><td>Outer border and item dividers</td></tr>
+      <tr><td><code>--accordion-radius</code></td><td><code>var(--radius-md)</code></td><td>Outer corner radius</td></tr>
+      <tr><td><code>--accordion-summary-bg</code></td><td><code>transparent</code></td><td>Summary row background (idle)</td></tr>
+      <tr><td><code>--accordion-summary-hover-bg</code></td><td><code>var(--color-bg-panel)</code></td><td>Summary row background (hover)</td></tr>
+      <tr><td><code>--accordion-panel-bg</code></td><td><code>transparent</code></td><td>Panel content background</td></tr>
+      <tr><td><code>--accordion-font-size</code></td><td><code>0.9375rem</code></td><td>Summary text size</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="css-reference">CSS reference</h2>
+  <p>
+    Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or
+    <code>farn-tokens.css</code>. All colors are semantic — they adapt to <code>data-theme</code> and
+    <code>data-surface</code> automatically.
+  </p>
+
+  <pre><code>.accordion &#123;
+  border: 1px solid var(--accordion-border);
+  border-radius: var(--accordion-radius);
+  overflow: hidden;
+&#125;
+
+.accordion-panel &#123;
+  padding: 0 var(--space-md) var(--space-md);
+  background: var(--accordion-panel-bg);
+&#125;
+
+/* Animated height — Chrome 131+ */
+@supports (interpolate-size: allow-keywords) &#123;
+  .accordion &#123; interpolate-size: allow-keywords; &#125;
+  .accordion details::details-content &#123;
+    overflow: hidden;
+    transition: block-size var(--duration-base) var(--ease-out);
+  &#125;
+  .accordion details:not([open])::details-content &#123; block-size: 0; &#125;
+&#125;</code></pre>
+</DocLayout>
+
+<style>
+  .demo-surface {
+    padding: var(--space-md);
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .demo-surface p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+</style>

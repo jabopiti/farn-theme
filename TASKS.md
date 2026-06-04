@@ -455,14 +455,14 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-35 · Accordion / disclosure
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/lucid-volta-rTzVK`
 
 **Gap:** No expandable content pattern; accordions are ubiquitous for FAQs, settings panels, and nested navigation.
 
-- [ ] Build on native `<details>` / `<summary>` — no JS required for core functionality
-- [ ] Add `--accordion-*` Tier 3 tokens (border, summary-background, panel-background) to `tokens/components.css`
-- [ ] Include a CSS animated height transition using `interpolate-size: allow-keywords` with a static-reveal fallback for older browsers
-- [ ] Document on an accordion component page
+- [x] Build on native `<details>` / `<summary>` — no JS required for core functionality
+- [x] Add `--accordion-*` Tier 3 tokens (border, summary-background, panel-background) to `tokens/components.css`
+- [x] Include a CSS animated height transition using `interpolate-size: allow-keywords` with a static-reveal fallback for older browsers
+- [x] Document on an accordion component page
 
 ---
 
