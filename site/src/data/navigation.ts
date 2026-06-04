@@ -28,7 +28,7 @@ export const groups: NavGroup[] = [
       { label: 'Spacing',     href: '/styles/spacing' },
       { label: 'Motion',      href: '/styles/motion' },
       { label: 'Theming',     href: '/styles/theming' },
-      // Icons lands in T-52
+      { label: 'Icons',       href: '/styles/icons' },
     ],
   },
   {
