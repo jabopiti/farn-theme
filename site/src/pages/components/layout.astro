@@ -218,6 +218,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td>Layered overlap</td><td><code>.overlap-preceding</code> / <code>.overlap-section</code> / <code>.overlap-card</code></td><td>Dimensional, modern</td><td>Dark hero → light content; featured CTA panels</td></tr>
             <tr><td>Sine wave</td><td><code>.section-wave</code></td><td>Organic, rhythmic</td><td>Repeated section breaks; any natural flowing transition</td></tr>
             <tr><td>Convex arc</td><td><code>.section-arc</code></td><td>Refined, quiet</td><td>Centred hero layouts; calm lens-like elegance</td></tr>
+            <tr><td>Organic blob</td><td><code>.section-blob</code></td><td>Expressive, freeform</td><td>High-emphasis brand moments; one-off expressive breaks</td></tr>
           </tbody>
         </table>
         <p><strong>Use one primary type per page.</strong> A second type is acceptable for a single high-emphasis moment (e.g., sine waves throughout with one layered overlap at a CTA). More than two distinct types creates visual noise.</p>
@@ -336,10 +337,41 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </tbody>
         </table>
 
+        <!-- Organic blob -->
+        <h3 id="organic-blob">Organic blob</h3>
+        <p>
+          A freeform SVG boundary — no mathematical regularity. Two slightly offset paths
+          layered in document order soften the edge. The blob fades in on scroll (opacity only;
+          no translate or morph — irregular shapes look chaotic in motion). Use at most once per
+          page for a high-emphasis brand moment.
+        </p>
+        <pre><code>&lt;section style="position: relative; padding-bottom: var(--blob-height);
+             --color-section-next: var(--color-bg-panel);"&gt;
+  &lt;div class="section-blob" data-scroll-reveal aria-hidden="true"&gt;
+    &lt;svg viewBox="0 0 1200 100" preserveAspectRatio="none"&gt;
+      &lt;!-- depth layer first (SVG paints in document order) --&gt;
+      &lt;path d="M0,60 C150,25 200,80 400,55 C600,28 700,75 900,50 C1050,28 1150,65 1200,45 L1200,100 L0,100 Z"
+            fill="var(--color-section-next)" opacity="0.45"/&gt;
+      &lt;path d="M0,65 C150,30 200,85 400,60 C600,33 700,80 900,55 C1050,33 1150,70 1200,50 L1200,100 L0,100 Z"
+            fill="var(--color-section-next)"/&gt;
+    &lt;/svg&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--blob-height</code></td><td><code>100px</code></td><td>SVG rendered height and required parent <code>padding-bottom</code></td></tr>
+            <tr><td><code>--blob-duration</code></td><td><code>900ms</code></td><td>Fade-in duration — longer than other patterns to suit the organic character</td></tr>
+            <tr><td><code>--color-section-next</code></td><td><code>var(--color-bg-panel)</code></td><td>Fill colour — set on the parent to match the destination background</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Draw paths in Figma or Inkscape — do not hand-author blob paths.</strong> Export the <code>d</code> attribute directly from your design tool. The silhouette can echo a motif elsewhere in the design (a landscape, terrain, or product shape). The example paths above are illustrative; replace them with exported paths for production use.</p>
+
         <h3>Upcoming patterns</h3>
-        <p>Three additional patterns are planned:</p>
+        <p>Two additional patterns are planned:</p>
         <ul>
-          <li><strong>Organic blob</strong> — high-emphasis brand moments; paths drawn in Figma/Inkscape (T-25)</li>
           <li><strong>Diagonal cut</strong> — energetic directional transition for CTAs (T-27)</li>
           <li><strong>Stacked card reveal</strong> — cinematic depth for long 3–5 section pages (T-28)</li>
         </ul>
