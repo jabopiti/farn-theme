@@ -334,14 +334,14 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-25 · Organic blob divider
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/next-ready-task-kqPeX`
 
 **Gap:** No blob divider; the organic shape serves high-emphasis brand moments and one-off expressive transitions.
 
-- [ ] Implement `.section-blob` CSS and example two-path SVG per spec
-- [ ] Apply Tier 1 fade-only animation (opacity only — no translate, no morph) using T-22 infrastructure
-- [ ] Document that blob paths should be drawn in Figma/Inkscape and exported, not hand-authored
-- [ ] Document in the "Section Transitions" section of `/components/layout` (T-29 merged into T-44)
+- [x] Implement `.section-blob` CSS and example two-path SVG per spec
+- [x] Apply Tier 1 fade-only animation (opacity only — no translate, no morph) using T-22 infrastructure
+- [x] Document that blob paths should be drawn in Figma/Inkscape and exported, not hand-authored
+- [x] Document in the "Section Transitions" section of `/components/layout` (T-29 merged into T-44)
 
 ---
 

@@ -317,6 +317,10 @@
   /* ── Convex arc tokens ──────────────────────────────────────────────── */
   --arc-height: 80px;
 
+  /* ── Organic blob tokens ─────────────────────────────────────────────── */
+  --blob-height:   100px;
+  --blob-duration: 900ms; /* Intentionally longer than --duration-reveal; organic shapes reveal slowly */
+
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);
