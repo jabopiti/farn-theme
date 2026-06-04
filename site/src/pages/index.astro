@@ -5,6 +5,13 @@
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
 import { groups, ctas } from '../data/navigation';
+
+const principles = [
+  { title: 'Proximity signals relationship', body: 'The spacing scale encodes hierarchy — small gaps within components, large gaps between sections. Distance is meaning.' },
+  { title: 'Motion is functional', body: "Every transition communicates a state change. Decorative animation earns its place or it doesn't ship. When in doubt, don't animate." },
+  { title: 'Accessibility is built in', body: 'Every colour pair is tested for WCAG contrast. Focus rings are never removed. Touch targets stay at least 44×44px.' },
+  { title: 'Semantic tokens over raw palette', body: 'Components reference purpose-named tokens, never raw colours. Light, dark, and surface overrides resolve automatically.' },
+];
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -188,9 +195,11 @@ import { groups, ctas } from '../data/navigation';
     font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 6px;
   }
+  .about-etymology, .principle h3 {
+    font-family: var(--font-display); font-size: 17px; font-variation-settings: 'opsz' 18;
+  }
   .about-etymology {
-    font-family: var(--font-display); font-style: italic; font-variation-settings: 'opsz' 18;
-    font-size: 17px; color: var(--color-text-tertiary); margin-bottom: var(--space-md);
+    font-style: italic; color: var(--color-text-tertiary); margin-bottom: var(--space-md);
   }
 
   /* ── Principles ─────────────────────────────── */
@@ -198,9 +207,7 @@ import { groups, ctas } from '../data/navigation';
     display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);
   }
   .principle h3 {
-    font-family: var(--font-display); font-size: 17px; font-weight: 700;
-    font-variation-settings: 'opsz' 18; letter-spacing: -0.01em;
-    color: var(--color-text); margin-bottom: 8px;
+    font-weight: 700; letter-spacing: -0.01em; color: var(--color-text); margin-bottom: 8px;
   }
   .principle p { font-size: 14px; line-height: 1.65; color: var(--color-text-secondary); }
 
@@ -210,6 +217,7 @@ import { groups, ctas } from '../data/navigation';
     font-size: clamp(16px, 2vw, 19px); line-height: 1.7;
     color: var(--color-text-tertiary); margin-bottom: 0;
   }
+  #what .hero-actions { margin-top: var(--space-lg); }
 
   /* ── Typography specimen ────────────────────── */
   .type-specimen {
@@ -612,22 +620,12 @@ import { groups, ctas } from '../data/navigation';
     <h2 class="section-title scroll-reveal">Opinions, encoded.</h2>
     <p class="section-desc scroll-reveal">Four ideas the system holds to — and enforces through its tokens.</p>
     <div class="principles-grid">
-      <div class="principle scroll-reveal">
-        <h3>Proximity signals relationship</h3>
-        <p>The spacing scale encodes hierarchy — small gaps within components, large gaps between sections. Distance is meaning.</p>
-      </div>
-      <div class="principle scroll-reveal">
-        <h3>Motion is functional</h3>
-        <p>Every transition communicates a state change. Decorative animation earns its place or it doesn't ship. When in doubt, don't animate.</p>
-      </div>
-      <div class="principle scroll-reveal">
-        <h3>Accessibility is built in</h3>
-        <p>Every colour pair is tested for WCAG contrast. Focus rings are never removed. Touch targets stay at least 44&times;44px.</p>
-      </div>
-      <div class="principle scroll-reveal">
-        <h3>Semantic tokens over raw palette</h3>
-        <p>Components reference purpose-named tokens, never raw colours. Light, dark, and surface overrides resolve automatically.</p>
-      </div>
+      {principles.map(p => (
+        <div class="principle scroll-reveal">
+          <h3>{p.title}</h3>
+          <p>{p.body}</p>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -638,7 +636,7 @@ import { groups, ctas } from '../data/navigation';
     <p class="section-eyebrow scroll-reveal">What Farn is</p>
     <h2 class="section-title scroll-reveal">Tokens and classes. No framework.</h2>
     <p class="what-desc scroll-reveal">Farn is not a JavaScript component framework — no React or Vue components, no runtime, no required build step. It ships CSS: a two-layer token system plus an opt-in set of component classes you style with. Works with any stack, or none. No Tailwind, no CSS-in-JS — just custom properties.</p>
-    <div class="hero-actions scroll-reveal" style="margin-top:var(--space-lg)">
+    <div class="hero-actions scroll-reveal">
       <a href="/demo" class="btn-primary"><i class="ti ti-eye"></i> Explore the demo</a>
       <a href="/getting-started" class="btn-ghost"><i class="ti ti-book"></i> Get Started</a>
     </div>
