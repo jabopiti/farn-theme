@@ -42,6 +42,7 @@ export const groups: NavGroup[] = [
       { label: 'Cards',        href: '/components/cards' },        // → group pages (T-44)
       { label: 'Forms',        href: '/components/forms' },        // → group pages (T-44)
       { label: 'Breadcrumbs',  href: '/components/breadcrumbs' },  // → group pages (T-44)
+      { label: 'Accordion',    href: '/components/accordion' },    // → group pages (T-44)
       { label: 'Dividers',     href: '/components/dividers' },     // → group pages (T-44)
     ],
   },

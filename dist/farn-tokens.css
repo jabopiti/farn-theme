@@ -321,6 +321,14 @@
   --input-placeholder:      var(--color-text-tertiary);
   --input-disabled-opacity: 0.4;
 
+  /* ── Accordion tokens ──────────────────────────────────────────────── */
+  --accordion-border:           var(--color-border);
+  --accordion-radius:           var(--radius-md);
+  --accordion-summary-bg:       transparent;
+  --accordion-summary-hover-bg: var(--color-bg-panel);
+  --accordion-panel-bg:         transparent;
+  --accordion-font-size:        0.9375rem; /* 15px */
+
   /* ── Component typography tokens ────────────────────────────────────── */
   --btn-font-size:        0.8125rem; /* 13px */
   --btn-sm-font-size:     0.75rem;   /* 12px */

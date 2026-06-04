@@ -356,3 +356,74 @@ input[type="radio"] {
 .breadcrumb-item a[aria-current="page"] {
   color: var(--color-text);
 }
+
+/* ── Accordion ───────────────────────────────────────────────────────────── */
+.accordion {
+  border: 1px solid var(--accordion-border);
+  border-radius: var(--accordion-radius);
+  overflow: hidden;
+}
+
+.accordion details + details {
+  border-top: 1px solid var(--accordion-border);
+}
+
+.accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--accordion-summary-bg);
+  font-size: var(--accordion-font-size);
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.accordion summary::-webkit-details-marker,
+.accordion summary::marker { display: none; }
+
+.accordion summary:hover        { background: var(--accordion-summary-hover-bg); }
+.accordion summary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+
+.accordion summary::after {
+  content: '+' / '';
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.accordion details[open] > summary::after {
+  transform: rotate(45deg);
+}
+
+.accordion-panel {
+  padding: 0 var(--space-md) var(--space-md);
+  background: var(--accordion-panel-bg);
+}
+
+/* Animated height — interpolate-size + ::details-content (Chrome 131+).
+   Falls back to instant reveal on older browsers without visual degradation. */
+@supports (interpolate-size: allow-keywords) {
+  .accordion {
+    interpolate-size: allow-keywords;
+  }
+
+  .accordion details::details-content {
+    overflow: hidden;
+    transition: block-size var(--duration-base) var(--ease-out);
+  }
+
+  .accordion details:not([open])::details-content {
+    block-size: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion summary::after            { transition: none; }
+  .accordion details::details-content { transition: none; }
+}
