@@ -36,7 +36,7 @@ import { groups, ctas } from '../data/navigation';
   @import '../styles/site.css';
 
   /* ── Section spacing ──────────────────────────────── */
-  #about, #foundations, #components { padding: var(--space-3xl) 0; }
+  #about, #foundations, #components, #principles, #what { padding: var(--space-3xl) 0; }
 
   /* ── Hero ─────────────────────────────────────────── */
   .hero {
@@ -188,6 +188,28 @@ import { groups, ctas } from '../data/navigation';
     font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 6px;
   }
+  .about-etymology {
+    font-family: var(--font-display); font-style: italic; font-variation-settings: 'opsz' 18;
+    font-size: 17px; color: var(--color-text-tertiary); margin-bottom: var(--space-md);
+  }
+
+  /* ── Principles ─────────────────────────────── */
+  .principles-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);
+  }
+  .principle h3 {
+    font-family: var(--font-display); font-size: 17px; font-weight: 700;
+    font-variation-settings: 'opsz' 18; letter-spacing: -0.01em;
+    color: var(--color-text); margin-bottom: 8px;
+  }
+  .principle p { font-size: 14px; line-height: 1.65; color: var(--color-text-secondary); }
+
+  /* ── What Farn is (closing) ─────────────────── */
+  .what-inner { max-width: var(--width-prose); }
+  .what-desc {
+    font-size: clamp(16px, 2vw, 19px); line-height: 1.7;
+    color: var(--color-text-tertiary); margin-bottom: 0;
+  }
 
   /* ── Typography specimen ────────────────────── */
   .type-specimen {
@@ -336,111 +358,6 @@ import { groups, ctas } from '../data/navigation';
     border-radius: var(--radius-md); font-size: 12px; font-weight: 600; border: none; cursor: pointer;
   }
 
-  /* ── Palette view ───────────────────────────── */
-  .all-swatches {
-    display: flex; height: 48px; border-radius: var(--radius-lg);
-    overflow: hidden; margin-bottom: var(--space-3xl); cursor: default;
-  }
-  .all-swatches .sw { flex: 1; transition: flex 200ms ease; position: relative; }
-  .all-swatches .sw:hover { flex: 3; }
-  .all-swatches .sw .sw-tip {
-    position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
-    background: var(--in0-void); color: var(--bm2-birch); font-family: var(--font-mono);
-    font-size: 10px; padding: 4px 8px; border-radius: var(--radius-sm);
-    white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 120ms ease;
-  }
-  .all-swatches .sw:hover .sw-tip { opacity: 1; }
-
-  .palette-section { margin-bottom: var(--space-4xl); scroll-margin-top: var(--scroll-offset, 108px); }
-  .palette-header { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: start; margin-bottom: var(--space-xl); }
-  @media (max-width: 768px) { .palette-header { grid-template-columns: 1fr; } }
-  .palette-name {
-    font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 800;
-    font-variation-settings: 'opsz' 36; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: var(--space-sm);
-  }
-  .palette-concept { font-size: 15px; line-height: 1.7; color: var(--color-text-secondary); }
-  .palette-swatches { display: flex; gap: 6px; flex-wrap: wrap; }
-  .palette-swatch-large {
-    flex: 1; min-width: 64px; height: 72px; border-radius: var(--radius-md);
-    position: relative; cursor: pointer; transition: transform 150ms ease, box-shadow 150ms ease;
-  }
-  .palette-swatch-large:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-  .palette-swatch-large .swatch-hex {
-    position: absolute; bottom: 8px; left: 0; right: 0; text-align: center;
-    font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.02em;
-    opacity: 0; transition: opacity 150ms ease;
-  }
-  .palette-swatch-large:hover .swatch-hex { opacity: 1; }
-  .palette-divider { height: 1px; background: var(--color-border-subtle); margin: var(--space-4xl) 0; }
-
-  .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-sm); }
-  .token-card { background: var(--card-bg); border-radius: var(--card-radius); overflow: hidden; transition: box-shadow var(--duration-fast) var(--ease-default); }
-  .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  [data-theme="dark"] .token-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-  .token-color-strip { height: 56px; position: relative; }
-  .token-color-strip .copy-btn {
-    position: absolute; top: 50%; right: 8px; transform: translateY(-50%);
-    background: rgba(0,0,0,0.25); color: var(--bm2-birch); border: none; border-radius: var(--radius-sm);
-    padding: 4px 8px; font-size: 10px; font-family: var(--font-mono); cursor: pointer;
-    opacity: 0; transition: opacity 120ms ease, background 120ms ease;
-  }
-  .token-card:hover .copy-btn { opacity: 1; }
-  .copy-btn:hover { background: rgba(0,0,0,0.45); }
-  .copy-btn.copied { background: rgba(62,122,98,0.8); }
-  .token-info { padding: 14px 16px; }
-  .token-name { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--color-accent); margin-bottom: 4px; }
-  .token-hex { font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 8px; }
-  .token-role { font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 4px; }
-  .token-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; }
-  .token-usage { margin-top: 10px; display: flex; gap: 4px; flex-wrap: wrap; }
-  .usage-pill { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: var(--radius-sm); letter-spacing: 0.04em; }
-  /* usage-light: looks like a light surface (sandy, warm) */
-  .usage-light { background: var(--bm0-sand); color: var(--in1-iron); }
-  [data-theme="dark"] .usage-light { background: rgba(233,230,220,0.12); color: var(--bm0-sand); }
-  /* usage-dark: looks like a dark surface (charcoal, cool) */
-  .usage-dark  { background: var(--in1-iron); color: var(--bm0-sand); }
-  [data-theme="dark"] .usage-dark { background: var(--in0-void); color: var(--bm0-sand); }
-  /* usage-both: forest accent, signals universal applicability */
-  .usage-both  { background: rgba(62,122,98,0.1); color: var(--fo2-forest); }
-  [data-theme="dark"] .usage-both { background: rgba(92,158,134,0.12); color: var(--fo0-sage); }
-
-  .semantic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
-  @media (max-width: 640px) { .semantic-grid { grid-template-columns: 1fr; } }
-  .semantic-mode { background: var(--color-bg-panel); border-radius: var(--radius-lg); padding: var(--space-md); }
-  .semantic-mode-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-md); }
-  .semantic-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--color-border-subtle); }
-  .semantic-row:last-child { border-bottom: none; }
-  .semantic-dot { width: 20px; height: 20px; border-radius: var(--radius-sm); flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
-  .semantic-token-name { font-family: var(--font-mono); font-size: 11px; color: var(--color-accent); flex: 1; }
-  .semantic-resolves { font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); }
-
-  .wcag-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .wcag-table th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); border-bottom: 1px solid var(--color-border-subtle); }
-  .wcag-table td { padding: 10px 14px; border-bottom: 1px solid var(--color-border-subtle); color: var(--color-text-secondary); vertical-align: middle; }
-  .wcag-table tr:hover td { background: var(--color-bg-panel); }
-  .wcag-pair { display: flex; align-items: center; gap: 8px; }
-  .wcag-dot-wrap { display: flex; gap: 2px; }
-  .wcag-dot { width: 16px; height: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(0,0,0,0.08); }
-  .wcag-pass { color: var(--bl3-moss); font-weight: 600; }
-  .wcag-large { color: var(--bl2-grain); font-weight: 600; }
-  .wcag-ratio { font-family: var(--font-mono); font-size: 12px; }
-
-  .code-block {
-    background: var(--color-bg-code); border-radius: var(--radius-lg); padding: var(--space-md);
-    font-family: var(--font-mono); font-size: 12px; line-height: 1.7;
-    color: var(--bm2-birch); overflow-x: auto; position: relative;
-  }
-  .code-comment { color: var(--fo0-sage); opacity: 0.7; }
-  .code-prop { color: var(--bm0-sand); }
-  .code-val { color: var(--bm2-birch); }
-  .code-copy-btn {
-    position: absolute; top: 12px; right: 12px;
-    background: rgba(247,246,243,0.15); color: var(--bm2-birch); border: none;
-    border-radius: var(--radius-sm); padding: 4px 10px; font-size: 11px;
-    font-family: var(--font-body); font-weight: 600; cursor: pointer; transition: background 120ms ease;
-  }
-  .code-copy-btn:hover { background: rgba(247,246,243,0.25); }
-  .code-copy-btn.copied { background: rgba(86,122,55,0.5); }
 </style>
 </head>
 <body>
@@ -453,7 +370,7 @@ import { groups, ctas } from '../data/navigation';
   <div class="hero-inner">
     <p class="hero-eyebrow">Design System — v0.1.0</p>
     <h1 class="hero-title">Sharp.<br><em>Warm.</em><br>Intellectual.</h1>
-    <p class="hero-desc">A design system rooted in the forests of northern Germany. Framework-agnostic, token-first, built for brand, websites, and web apps.</p>
+    <p class="hero-desc">A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and components for brand, websites, and web apps.</p>
     <div class="hero-actions">
       <a href="/demo" class="btn-primary"><i class="ti ti-eye"></i> Explore the demo</a>
       <a href="/getting-started" class="btn-ghost"><i class="ti ti-book"></i> Get Started</a>
@@ -486,8 +403,9 @@ import { groups, ctas } from '../data/navigation';
       <div class="about-text">
         <p class="section-eyebrow">About</p>
         <h2 class="section-title">A design system that knows what it is.</h2>
+        <p class="about-etymology">From the Old Saxon <em>farn</em> — feather-leaf, forest floor, northern ground.</p>
         <p>Farn is built on a single conviction: that a design system should have a point of view. Not a collection of neutral components, but a coherent vocabulary — warm enough to feel human, sharp enough to feel considered.</p>
-        <p>Four token palettes. A two-layer semantic architecture. Framework-agnostic CSS custom properties. Component definitions, each with light and dark surface variants.</p>
+        <p>The name and palette draw from the forests of northern Germany — birch, fern, iron, ash. These aren't decorative references; they shaped the specific colour choices. Four token palettes, a two-layer semantic architecture, framework-agnostic custom properties, and component classes with light and dark surface variants.</p>
         <a href="/styles/color" class="btn-primary" style="width:fit-content">Explore the colour system →</a>
       </div>
       <div class="about-palettes">
@@ -685,6 +603,46 @@ import { groups, ctas } from '../data/navigation';
     </div>
   </div>
   <div style="padding-bottom:var(--space-3xl)"></div>
+</section>
+
+<!-- Principles -->
+<section id="principles" data-surface="layer">
+  <div class="container">
+    <p class="section-eyebrow scroll-reveal">Principles</p>
+    <h2 class="section-title scroll-reveal">Opinions, encoded.</h2>
+    <p class="section-desc scroll-reveal">Four ideas the system holds to — and enforces through its tokens.</p>
+    <div class="principles-grid">
+      <div class="principle scroll-reveal">
+        <h3>Proximity signals relationship</h3>
+        <p>The spacing scale encodes hierarchy — small gaps within components, large gaps between sections. Distance is meaning.</p>
+      </div>
+      <div class="principle scroll-reveal">
+        <h3>Motion is functional</h3>
+        <p>Every transition communicates a state change. Decorative animation earns its place or it doesn't ship. When in doubt, don't animate.</p>
+      </div>
+      <div class="principle scroll-reveal">
+        <h3>Accessibility is built in</h3>
+        <p>Every colour pair is tested for WCAG contrast. Focus rings are never removed. Touch targets stay at least 44&times;44px.</p>
+      </div>
+      <div class="principle scroll-reveal">
+        <h3>Semantic tokens over raw palette</h3>
+        <p>Components reference purpose-named tokens, never raw colours. Light, dark, and surface overrides resolve automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What Farn is — positioning + closing CTA -->
+<section id="what" data-theme="dark">
+  <div class="container what-inner">
+    <p class="section-eyebrow scroll-reveal">What Farn is</p>
+    <h2 class="section-title scroll-reveal">Tokens and classes. No framework.</h2>
+    <p class="what-desc scroll-reveal">Farn is not a JavaScript component framework — no React or Vue components, no runtime, no required build step. It ships CSS: a two-layer token system plus an opt-in set of component classes you style with. Works with any stack, or none. No Tailwind, no CSS-in-JS — just custom properties.</p>
+    <div class="hero-actions scroll-reveal" style="margin-top:var(--space-lg)">
+      <a href="/demo" class="btn-primary"><i class="ti ti-eye"></i> Explore the demo</a>
+      <a href="/getting-started" class="btn-ghost"><i class="ti ti-book"></i> Get Started</a>
+    </div>
+  </div>
 </section>
 
 

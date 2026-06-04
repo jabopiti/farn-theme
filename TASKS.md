@@ -161,7 +161,7 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 ---
 
 ## T-15 · Restructure site into three-pillar IA (Phase 1)
-`status: in-progress` `effort: L` `branch: claude/magical-noether-gYvBG`
+`status: done` `effort: L` `branch: claude/magical-noether-gYvBG`
 
 **Gap:** Site navigation and page structure reflect the initial release — a flat 13-item nav, token pages under `/tokens/*`, one page per component, and a landing page embedding a full palette browser. As Farn has grown into a token-first design system with shipped component classes, the IA no longer cleanly separates concepts, token reference, and components.
 
@@ -169,27 +169,29 @@ Design system enhancement backlog. Each task is independently completable. Pick 
 
 **This task = Phase 1**, shipped as three ordered PRs (1a → 1b → 1c). Clean-break URLs (no redirects). No dead links at any phase boundary — sub-nav lists only built pages.
 
-**Phase 1a — Nav mechanics** (this PR)
-- [ ] Rebuild top nav in `DocLayout.astro`: 3 group links (Foundations / Styles / Components) + 2 CTAs (Demo / Get Started); rework `isActive()` for group prefixes
-- [ ] Add group sub-nav rendered from a group→pages map (curated order; lists only built pages); active page highlighted with the sliding pill
-- [ ] Retire the group-sub-nav scrollspy; repurpose `subnav-tracker.js` for a page-internal TOC on long standalone pages (Getting Started)
-- [ ] Regroup the mobile drawer under the 3 group headings
-- [ ] Create three group overview pages: `/foundations`, `/styles`, `/components` (Components overview reframed)
+**Phase 1a — Nav mechanics** ✅ shipped (#... merged)
+- [x] Rebuild top nav in `DocLayout.astro`: 3 group links (Foundations / Styles / Components) + 2 CTAs (Demo / Get Started); rework `isActive()` for group prefixes
+- [x] Add group sub-nav rendered from a group→pages map (curated order; lists only built pages); active page highlighted with the sliding pill
+- [x] Retire the group-sub-nav scrollspy; repurpose `subnav-tracker.js` for a page-internal TOC on long standalone pages (Getting Started)
+- [x] Regroup the mobile drawer under the 3 group headings
+- [x] Create three group overview pages: `/foundations`, `/styles`, `/components` (Components overview reframed)
 
-_Phase 1a note (transitional, by design D-3): grouped token/component pages now show the group sub-nav instead of their in-page `slot="subnav"` TOC. That slot markup is inert (not rendered) on those pages until reworked — remove it when each page is moved/consolidated (token + theming here in 1b; component pages in Phase 2 / T-44). The scroll-padding offset for sticky sub-navs is handled in `DocLayout`._
+_Nav model later extracted to `site/src/data/navigation.ts` (single source of truth) and `SiteNav.astro` (shared by DocLayout + landing) in 1b. The inert `slot="subnav"` TOC markup has been removed from all moved/grouped pages (token + theming in 1b; component pages in 1c). The scroll-padding offset for sticky sub-navs is handled in `DocLayout`._
 
-**Phase 1b — Styles move + Theming split** (later PR)
-- [ ] Move `/tokens/{colors,typography,spacing,motion}` → `/styles/{color,typography,spacing,motion}`
-- [ ] Split `/tokens/theming` → `/foundations/surfaces` (concept) + `/styles/theming` (reference)
-- [ ] Remove the now-inert `slot="subnav"` anchor blocks from the moved token + theming pages; fix all internal links
+**Phase 1b — Styles move + Theming split** ✅ shipped (#68 merged)
+- [x] Move `/tokens/{colors,typography,spacing,motion}` → `/styles/{color,typography,spacing,motion}`
+- [x] Split `/tokens/theming` → `/foundations/surfaces` (concept) + `/styles/theming` (reference)
+- [x] Remove the now-inert `slot="subnav"` anchor blocks from the moved token + theming pages; fix all internal links
+- [x] _(pulled forward)_ Unify the landing + doc nav via shared `SiteNav.astro`; remove the `data-view="palette"` toggle + palette-browser markup from `index.astro`
 
-**Phase 1c — Home + positioning + README** (later PR)
-- [ ] Rework `index.astro` → linear Home + condensed palette taste; remove the `data-view="palette"` toggle + Palette View block; delete `about.astro`
-- [ ] Reconcile the naming collision: `index.astro` uses in-page anchors `#foundations`/`#components` that now clash with the canonical `/foundations` and `/components` group routes — update the landing nav/footer to the group routes
-- [ ] Update `index.astro`'s standalone nav to match the DocLayout group nav (the two nav systems diverge during 1a–1b)
-- [ ] Propagate positioning copy ("token-first design system + components") to package.json, README, hero, meta; lean README to ~60 lines
-- [ ] Build the Demo + Icons stubs
-- [ ] Extract shared demo container styles (`.btn-demo`/`.badge-demo`/`.form-demo` → single `.demo`) and evaluate a `DocComponentPage.astro` wrapper
+**Phase 1c — Home + positioning + README** (this PR)
+- [x] Rework `index.astro` → linear Home + condensed palette taste; remove the `data-view="palette"` toggle + Palette View block _(markup removed in 1b; orphaned palette-browser CSS cleaned in 1c)_
+- [x] Reconcile the naming collision between landing in-page anchors and the canonical `/foundations` / `/components` group routes — landing nav + footer now use the group routes (done with the SiteNav unification in 1b)
+- [x] Update `index.astro`'s standalone nav to match the DocLayout group nav _(done via shared `SiteNav.astro` in 1b)_
+- [x] Absorb the distinctive `about.astro` content (etymology, aesthetic direction, design principles, revised "what Farn is / isn't") into the Home; delete `about.astro`
+- [x] Propagate positioning copy ("token-first design system + components") to package.json, README, hero, meta; lean README to ~60 lines
+- [x] Build the Icons stub (`/styles/icons`); Demo stub already shipped in 1a
+- [ ] ~~Extract shared demo container styles + evaluate `DocComponentPage.astro` wrapper~~ → **deferred to T-44**: Phase 2 consolidates the six per-component pages into group pages, which rewrites this markup wholesale; extracting a shared `.demo` class / per-component wrapper now would be throwaway work superseded by that rework
 
 ---
 

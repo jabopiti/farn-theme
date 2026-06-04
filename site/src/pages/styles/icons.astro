@@ -1,0 +1,75 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Icons" description="How to use a third-party icon set with Farn — sizing and colour driven by Farn tokens">
+  <h1>Icons</h1>
+  <span class="badge badge-beta">guide</span>
+  <p>
+    Farn does not ship an icon set. Icons are a large, opinionated surface — hundreds of glyphs,
+    multiple weights, a release cadence of their own — and bundling one would tie Farn to choices
+    that belong to your project, not the token layer. Instead, Farn gives you the <em>sizing</em>
+    and <em>colour</em> tokens to make any third-party set feel native.
+  </p>
+
+  <h2>Recommended sets</h2>
+  <p>Any SVG or icon-font library works. These pair well with Farn's weight and warmth:</p>
+  <ul>
+    <li><a href="https://lucide.dev" target="_blank" rel="noopener noreferrer"><strong>Lucide</strong></a> — clean, consistent, MIT-licensed; great default.</li>
+    <li><a href="https://heroicons.com" target="_blank" rel="noopener noreferrer"><strong>Heroicons</strong></a> — outline + solid pairs, made by the Tailwind team.</li>
+    <li><a href="https://phosphoricons.com" target="_blank" rel="noopener noreferrer"><strong>Phosphor</strong></a> — six weights, flexible and characterful.</li>
+  </ul>
+  <p>
+    These docs themselves use <a href="https://tabler.io/icons" target="_blank" rel="noopener noreferrer">Tabler Icons</a>
+    via the icon font — proof that the approach is library-agnostic.
+  </p>
+
+  <h2>Size with spacing tokens</h2>
+  <p>
+    Drive icon dimensions from the spacing scale so icons track the rest of the system. As a rule of
+    thumb, an inline icon matches the cap height of its text; a standalone affordance sits a step up.
+  </p>
+  <pre><code>.icon &#123;
+  width: var(--space-md);   /* 24px — standalone / button icon */
+  height: var(--space-md);
+&#125;
+
+.icon-inline &#123;
+  width: 1em;               /* matches surrounding text size */
+  height: 1em;
+  vertical-align: -0.125em; /* optical baseline nudge */
+&#125;</code></pre>
+  <table>
+    <thead><tr><th>Context</th><th>Token</th><th>Size</th></tr></thead>
+    <tbody>
+      <tr><td>Inline with text</td><td><code>1em</code></td><td>tracks font-size</td></tr>
+      <tr><td>Button / input affordance</td><td><code>--space-md</code></td><td>24px</td></tr>
+      <tr><td>Standalone / feature</td><td><code>--space-lg</code></td><td>36px</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Colour with semantic tokens</h2>
+  <p>
+    Use <code>currentColor</code> so icons inherit their parent's text colour, then let Farn's
+    semantic tokens do the theming. SVG icons set to <code>fill: currentColor</code> (or
+    <code>stroke: currentColor</code>) adapt to light, dark, and surface contexts for free.
+  </p>
+  <pre><code>.icon &#123; fill: currentColor; &#125;
+
+/* Inherits --color-text by default; override per intent */
+.icon-accent  &#123; color: var(--color-accent); &#125;
+.icon-error   &#123; color: var(--color-error); &#125;
+.icon-muted   &#123; color: var(--color-text-tertiary); &#125;</code></pre>
+  <p>
+    Because semantic tokens already resolve per theme, an icon coloured with
+    <code>var(--color-text)</code> stays legible on every surface without a single dark-mode
+    override.
+  </p>
+
+  <h2>Accessibility</h2>
+  <ul>
+    <li>Decorative icons: add <code>aria-hidden="true"</code> so screen readers skip them.</li>
+    <li>Meaningful icons (icon-only buttons): give the control an <code>aria-label</code>.</li>
+    <li>Never signal state with colour alone — pair an icon or text with the semantic colour.</li>
+  </ul>
+</DocLayout>
