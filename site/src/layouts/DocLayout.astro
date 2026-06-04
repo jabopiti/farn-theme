@@ -1,6 +1,7 @@
 ---
-import LogoIcon from '../components/LogoIcon.astro';
+import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
+import { groups, ctas } from '../data/navigation';
 
 interface Props {
   title: string;
@@ -12,63 +13,12 @@ const path = Astro.url.pathname;
 // Normalise trailing slash for matching (root excepted)
 const p = path !== '/' && path.endsWith('/') ? path.slice(0, -1) : path;
 
-// ── Navigation model ──────────────────────────────────────────────────
-// Group sub-nav is derived from this map (T-15 D-3). It lists only pages
-// that exist so there are no dead links. URLs annotated "→" are
-// transitional and migrate in later T-15 phases (1b moves Styles to
-// /styles/*; Phase 2 / T-44 consolidates Components into group pages).
-const groups = [
-  {
-    id: 'foundations',
-    label: 'Foundations',
-    href: '/foundations',
-    pages: [
-      { label: 'Overview', href: '/foundations' },
-      // Surfaces / Layout / Responsive / Accessibility land in 1b + T-49–T-51
-    ],
-  },
-  {
-    id: 'styles',
-    label: 'Styles',
-    href: '/styles',
-    pages: [
-      { label: 'Overview', href: '/styles' },
-      { label: 'Color', href: '/tokens/colors' }, // → /styles/color (1b)
-      { label: 'Typography', href: '/tokens/typography' }, // → /styles/typography (1b)
-      { label: 'Spacing', href: '/tokens/spacing' }, // → /styles/spacing (1b)
-      { label: 'Motion', href: '/tokens/motion' }, // → /styles/motion (1b)
-      { label: 'Theming', href: '/tokens/theming' }, // split → Surfaces + /styles/theming (1b)
-    ],
-  },
-  {
-    id: 'components',
-    label: 'Components',
-    href: '/components',
-    pages: [
-      { label: 'Overview', href: '/components' },
-      { label: 'Badges', href: '/components/badges' }, // → group pages (Phase 2 / T-44)
-      { label: 'Buttons', href: '/components/buttons' },
-      { label: 'Cards', href: '/components/cards' },
-      { label: 'Forms', href: '/components/forms' },
-      { label: 'Breadcrumbs', href: '/components/breadcrumbs' },
-      { label: 'Dividers', href: '/components/dividers' },
-    ],
-  },
-];
-
-const ctas = [
-  { label: 'Demo', href: '/demo', primary: false },
-  { label: 'Get Started', href: '/getting-started', primary: true },
-];
-
-// The active group is derived from the data (single source of truth): a path
-// belongs to a group if it is the group root, sits under it, or matches one of
-// the group's page hrefs — which is how transitional /tokens/* pages resolve to
-// Styles without any special-casing.
+// Active group derived from data (single source of truth). A path belongs to
+// a group if it is the group root, sits under it, or matches one of the group's
+// page hrefs (handles any remaining transitional URLs cleanly).
 const activeGroup =
   groups.find((g) => p === g.href || p.startsWith(g.href + '/') || g.pages.some((pg) => pg.href === p)) ?? null;
 
-const isPageActive = (href: string) => p === href;
 ---
 
 <!doctype html>
@@ -99,60 +49,8 @@ const isPageActive = (href: string) => p === href;
   </head>
   <body>
 
-    <!-- Nav — always filled on doc pages -->
-    <nav class="nav filled" id="nav" aria-label="Main navigation">
-      <div class="nav-inner">
-        <a href="/" class="nav-logo"><LogoIcon />Farn<span>.</span></a>
-        <ul class="nav-links">
-          {groups.map((g) => (
-            <li><a href={g.href} class={activeGroup?.id === g.id ? 'active' : ''}>{g.label}</a></li>
-          ))}
-        </ul>
-        <div class="nav-right">
-          <a href="https://github.com/jabopiti/farn-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-            <i class="ti ti-brand-github"></i>
-          </a>
-          <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
-            <i class="ti ti-moon" id="themeIcon"></i>
-          </button>
-          {ctas.map((c) => (
-            <a
-              href={c.href}
-              class={c.primary ? 'nav-cta' : 'nav-cta nav-cta-ghost'}
-            >{c.label}</a>
-          ))}
-          <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileDrawer">
-            <i class="ti ti-menu-2" id="hamburgerIcon"></i>
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Mobile drawer -->
-    <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
-      <div class="drawer-header">
-        <span class="drawer-logo"><LogoIcon />Farn<span>.</span></span>
-        <button class="drawer-close" id="drawerClose" aria-label="Close menu">
-          <i class="ti ti-x"></i>
-        </button>
-      </div>
-      <nav class="drawer-nav">
-        {groups.map((g) => (
-          <>
-            <span class="drawer-group-label">{g.label}</span>
-            {g.pages.map((pg) => (
-              <a href={pg.href} class={`drawer-link${isPageActive(pg.href) ? ' active' : ''}`}>{pg.label}</a>
-            ))}
-          </>
-        ))}
-      </nav>
-      <div class="drawer-ctas">
-        {ctas.map((c) => (
-          <a href={c.href} class={c.primary ? 'drawer-cta' : 'drawer-cta drawer-cta-ghost'}>{c.label}</a>
-        ))}
-      </div>
-    </div>
-    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <!-- Nav + mobile drawer (always filled on doc pages) -->
+    <SiteNav {groups} {ctas} activeGroupId={activeGroup?.id} activePath={p} filled={true} />
 
     <!-- Sub-nav: group navigation for grouped pages; otherwise a page-internal
          TOC supplied by the page via slot="subnav" (standalone long pages). -->
@@ -160,7 +58,7 @@ const isPageActive = (href: string) => p === href;
       <nav class="sub-nav filled group-nav" aria-label="Section navigation">
         <div class="sub-nav-inner">
           {activeGroup.pages.map((pg) => (
-            <a href={pg.href} class={`sub-nav-link${isPageActive(pg.href) ? ' active' : ''}`}>{pg.label}</a>
+            <a href={pg.href} class={`sub-nav-link${p === pg.href ? ' active' : ''}`}>{pg.label}</a>
           ))}
           <span class="sub-nav-indicator"></span>
         </div>
@@ -178,66 +76,13 @@ const isPageActive = (href: string) => p === href;
 
     <!-- Footer -->
     <Footer>
-      <a href="/">Design System</a>
-      <a href="/getting-started">Getting Started</a>
-      <a href="/">Palette</a>
-      <a href="/tokens/colors">Colors</a>
+      <a href="/foundations">Foundations</a>
+      <a href="/styles">Styles</a>
       <a href="/components">Components</a>
+      <a href="/getting-started">Get Started</a>
       <a href="https://github.com/jabopiti/farn-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
     </Footer>
 
-    <script is:inline>
-      // Theme toggle
-      const themeToggle = document.getElementById('themeToggle');
-      const themeIcon = document.getElementById('themeIcon');
-      function syncThemeIcon() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        if (themeIcon) {
-          themeIcon.className = isDark ? 'ti ti-sun' : 'ti ti-moon';
-        }
-        if (themeToggle) {
-          themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-        }
-      }
-      syncThemeIcon();
-      themeToggle?.addEventListener('click', () => {
-        const html = document.documentElement;
-        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('farn-theme', next);
-        syncThemeIcon();
-      });
-
-      // Hamburger / mobile drawer
-      const hamburger = document.getElementById('hamburger');
-      const hamburgerIcon = document.getElementById('hamburgerIcon');
-      const mobileDrawer = document.getElementById('mobileDrawer');
-      const drawerOverlay = document.getElementById('drawerOverlay');
-      const drawerClose = document.getElementById('drawerClose');
-
-      function openDrawer() {
-        mobileDrawer?.classList.add('open');
-        drawerOverlay?.classList.add('active');
-        hamburger?.setAttribute('aria-expanded', 'true');
-        if (hamburgerIcon) hamburgerIcon.className = 'ti ti-x';
-        document.body.style.overflow = 'hidden';
-      }
-      function closeDrawer() {
-        mobileDrawer?.classList.remove('open');
-        drawerOverlay?.classList.remove('active');
-        hamburger?.setAttribute('aria-expanded', 'false');
-        if (hamburgerIcon) hamburgerIcon.className = 'ti ti-menu-2';
-        document.body.style.overflow = '';
-      }
-
-      hamburger?.addEventListener('click', () => {
-        const isOpen = mobileDrawer?.classList.contains('open');
-        isOpen ? closeDrawer() : openDrawer();
-      });
-      drawerClose?.addEventListener('click', closeDrawer);
-      drawerOverlay?.addEventListener('click', closeDrawer);
-
-    </script>
     <script>
       import { initScrollReveal } from '../scripts/scroll-reveal.js';
       import { initSubNavTracker, positionIndicator } from '../scripts/subnav-tracker.js';

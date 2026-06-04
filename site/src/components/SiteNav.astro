@@ -1,0 +1,114 @@
+---
+import LogoIcon from './LogoIcon.astro';
+import type { NavGroup, NavCta } from '../data/navigation';
+
+interface Props {
+  groups: NavGroup[];
+  ctas: NavCta[];
+  activeGroupId?: string | null;
+  activePath?: string;
+  /** Always-filled nav (doc pages). Landing starts unfilled and fills on scroll. */
+  filled?: boolean;
+}
+
+const { groups, ctas, activeGroupId = null, activePath = '', filled = false } = Astro.props;
+---
+
+<nav class={`nav${filled ? ' filled' : ''}`} id="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><LogoIcon />Farn<span>.</span></a>
+    <ul class="nav-links">
+      {groups.map((g) => (
+        <li><a href={g.href} class={activeGroupId === g.id ? 'active' : ''}>{g.label}</a></li>
+      ))}
+    </ul>
+    <div class="nav-right">
+      <a href="https://github.com/jabopiti/farn-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+        <i class="ti ti-brand-github"></i>
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+        <i class="ti ti-moon" id="themeIcon"></i>
+      </button>
+      {ctas.map((c) => (
+        <a href={c.href} class={c.primary ? 'nav-cta' : 'nav-cta nav-cta-ghost'}>{c.label}</a>
+      ))}
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileDrawer">
+        <i class="ti ti-menu-2" id="hamburgerIcon"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="drawer-header">
+    <span class="drawer-logo"><LogoIcon />Farn<span>.</span></span>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+      <i class="ti ti-x"></i>
+    </button>
+  </div>
+  <nav class="drawer-nav">
+    {groups.map((g) => (
+      <>
+        <span class="drawer-group-label">{g.label}</span>
+        {g.pages.map((pg) => (
+          <a href={pg.href} class={`drawer-link${activePath === pg.href ? ' active' : ''}`}>{pg.label}</a>
+        ))}
+      </>
+    ))}
+  </nav>
+  <div class="drawer-ctas">
+    {ctas.map((c) => (
+      <a href={c.href} class={c.primary ? 'drawer-cta' : 'drawer-cta drawer-cta-ghost'}>{c.label}</a>
+    ))}
+  </div>
+</div>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<script is:inline>
+  (function () {
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    function syncThemeIcon() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (themeIcon) themeIcon.className = isDark ? 'ti ti-sun' : 'ti ti-moon';
+      if (themeToggle) themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    syncThemeIcon();
+    themeToggle?.addEventListener('click', () => {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('farn-theme', next);
+      syncThemeIcon();
+    });
+
+    // Mobile drawer
+    const hamburger   = document.getElementById('hamburger');
+    const hamburgerIcon = document.getElementById('hamburgerIcon');
+    const mobileDrawer  = document.getElementById('mobileDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const drawerClose   = document.getElementById('drawerClose');
+
+    function openDrawer() {
+      mobileDrawer?.classList.add('open');
+      drawerOverlay?.classList.add('active');
+      hamburger?.setAttribute('aria-expanded', 'true');
+      if (hamburgerIcon) hamburgerIcon.className = 'ti ti-x';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer() {
+      mobileDrawer?.classList.remove('open');
+      drawerOverlay?.classList.remove('active');
+      hamburger?.setAttribute('aria-expanded', 'false');
+      if (hamburgerIcon) hamburgerIcon.className = 'ti ti-menu-2';
+      document.body.style.overflow = '';
+    }
+
+    hamburger?.addEventListener('click', () => {
+      mobileDrawer?.classList.contains('open') ? closeDrawer() : openDrawer();
+    });
+    drawerClose?.addEventListener('click', closeDrawer);
+    drawerOverlay?.addEventListener('click', closeDrawer);
+  })();
+</script>
