@@ -384,14 +384,14 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-29 · Section divider documentation page
-`status: backlog` `effort: M`
+`status: done` `effort: M` `merged: T-44`
 
-**Gap:** No documentation page for section transitions; the six patterns in `divider-spec.md` are invisible to consumers of the system.
+**Completed in T-44:** Section transitions documentation is now in `/components/layout.astro` as part of the group consolidation. The three shipped patterns (sine wave, convex arc, layered overlap) are documented with live demos, anatomy, token reference, and CSS reference under a "Section Transitions" `<h2>`. Status badge is `beta` — the remaining three patterns (organic blob T-25, diagonal cut T-27, stacked card reveal T-28) are coming-soon items in the same section.
 
-- [ ] Create `site/src/pages/components/dividers.astro` with a live demo of each implemented pattern
-- [ ] Include the animation for each pattern (not just static CSS snippets)
-- [ ] Add pattern-selection guidance: one primary type per page, when to use each
-- [ ] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
+- [x] Document each implemented pattern with live demos
+- [x] Include animation notes per pattern
+- [x] Add pattern-selection guidance
+- [x] Page accessible via sidebar nav (grouped under Components › Layout)
 
 ---
 
