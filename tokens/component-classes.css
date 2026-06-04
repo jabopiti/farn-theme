@@ -338,6 +338,42 @@ input[type="radio"] {
   .section-arc svg { clip-path: none; animation: none; }
 }
 
+/* ── Organic blob ────────────────────────────────────────────────────────── */
+
+/* SVG blob sits absolutely at the bottom of its parent section.
+   Parent must have position:relative and padding-bottom:var(--blob-height).
+   Blob paths must be drawn in Figma/Inkscape and exported — not hand-authored.
+   Add data-scroll-reveal to trigger the fade-in entry animation. */
+.section-blob {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  opacity: 0;
+  transition: opacity var(--blob-duration) var(--ease-out);
+}
+
+.section-blob svg {
+  display: block;
+  width: 100%;
+  height: var(--blob-height);
+}
+
+.section-blob.is-visible {
+  opacity: 1;
+  transition-delay: 0.05s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-blob { opacity: 1; transition: none; }
+}
+
+@media (scripting: none) {
+  .section-blob { opacity: 1; }
+}
+
 /* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
 .breadcrumb {
   display: flex;
