@@ -7,6 +7,26 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/component-classes.css`: `.btn` now has a `:focus-visible` outline (`2px solid var(--color-accent)`, offset 3px) — buttons were invisible to keyboard users when loaded via `farn-components.css` standalone
+- `tokens/component-classes.css`: `.breadcrumb-item a:focus-visible` added to the hover/current selector so keyboard navigation shows the text colour change
+- `tokens/component-classes.css`: Input focus now uses `:focus-visible` instead of `:focus`; `box-shadow` glow wrapped in `@supports (color: color-mix(...))` — older browsers fall back to the border-colour indicator
+- `tokens/component-classes.css`: `.section-wave` and `.overlap-card` are now visible when JavaScript is unavailable via `@media (scripting: none)` (Chrome 120+, Firefox 113+, Safari 17+)
+
+### Added
+- `tokens/dark-light.css`: `--color-on-success` and `--color-on-warning` semantic tokens (map to `--color-accent-text`; WCAG AA verified on moss/grain backgrounds)
+- `tokens/components.css`: Badge Tier-3 tokens — `--badge-height`, `--badge-padding`, `--badge-letter-spacing`, `--badge-{variant}-bg/text` for all 7 variants; badge classes now reference these tokens
+- `tokens/components.css`: Button spacing tokens — `--btn-gap`, `--btn-padding-x`, `--btn-sm-padding-x`, `--btn-lg-padding-x`; button classes updated to consume them
+- `tokens/components.css`: Accordion toggle tokens — `--accordion-toggle-size`, `--accordion-toggle-rotation`; accordion class updated
+
+### Changed
+- `tokens/dark-light.css`: `--color-border-subtle` and `--color-ghost-border` now use `color-mix()` instead of hardcoded `rgba()`, keeping them tied to palette tokens
+
+### Docs
+- `CLAUDE.md`: Navigation structure section added; Track B updated to reflect group-page workflow and `navigation.ts` as nav source of truth; color token doc path corrected to `site/src/pages/styles/color.astro`; complexity gate updated to reference `navigation.ts` instead of DocLayout.astro
+- `site/src/pages/getting-started.astro`: Fixed layer count (7 not 6 — `components.css` was omitted); all 4 npm import paths documented; CDN section now includes `farn-components.css` and `farn-typography.css` links; Tier-3 token override subsection added
+- `README.md`: Component classes and typography utilities mentioned in intro; 4th `@import "farn-theme/typography"` path added
+
 ### Added
 - `site/src/pages/components/layout.astro` — Layout group page: Cards (stable) with all variants, sizes, anatomy, token reference, and CSS reference; Section Transitions (beta) covering layered overlap, sine wave, and convex arc patterns; Separator (coming soon) (T-44)
 - `site/src/pages/components/navigation.astro` — Navigation group page: Breadcrumbs (stable) and Accordion (stable) with full reference disclosures; Tabs and Pagination (coming soon) (T-44)

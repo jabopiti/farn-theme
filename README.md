@@ -8,7 +8,7 @@
 
 ## Sharp. *Warm.* Intellectual.
 
-Farn is a zero-dependency, token-first CSS design system for projects that want a calm, intellectual aesthetic without a JavaScript framework. A single `<link>` gives you a two-layer token system — raw palette tokens plus semantic tokens for dark and light mode — and an opt-in set of component classes built on top. Inspired by [Nord Theme](https://nordtheme.com).
+Farn is a zero-dependency, token-first CSS design system for projects that want a calm, intellectual aesthetic without a JavaScript framework. A single `<link>` gives you a two-layer token system — raw palette tokens plus semantic tokens for dark and light mode — and opt-in component classes (buttons, cards, forms, badges, breadcrumbs, accordion) and typography utilities built on top. Inspired by [Nord Theme](https://nordtheme.com).
 
 ### 📖 Full documentation at **[farn.jbpt.de](https://farn.jbpt.de)**
 
@@ -32,6 +32,7 @@ npm install farn-theme
 @import "farn-theme";             /* full bundle: tokens + base reset */
 @import "farn-theme/tokens";      /* tokens only — no reset */
 @import "farn-theme/components";  /* opt-in component classes */
+@import "farn-theme/typography";  /* opt-in typography utility classes */
 ```
 
 **CDN (no build step)**

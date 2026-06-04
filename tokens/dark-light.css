@@ -27,8 +27,8 @@
   --color-text-tertiary:    var(--in3-ash);
   --color-border:           var(--in3-ash);
   --color-border-strong:    var(--in1-iron);
-  --color-border-subtle:    rgba(55,65,81,0.12);
-  --color-ghost-border:     rgba(55,65,81,0.25);
+  --color-border-subtle:    color-mix(in srgb, var(--in1-iron) 12%, transparent);
+  --color-ghost-border:     color-mix(in srgb, var(--in1-iron) 25%, transparent);
   --color-bg-code:          var(--fo3-deepwater);
   --color-accent:           var(--fo1-fern);
   --color-accent-hover:     var(--fo2-forest);
@@ -38,6 +38,8 @@
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
+  --color-on-success:       var(--color-accent-text);
+  --color-on-warning:       var(--color-accent-text);
   --color-card-highlight-bg:     var(--in0-void);
   --color-card-highlight-border: transparent;
 
@@ -61,8 +63,8 @@
   --color-text-tertiary:    var(--bm0-sand);
   --color-border:           var(--in2-slate);
   --color-border-strong:    var(--bm0-sand);
-  --color-border-subtle:    rgba(75,85,99,0.25);
-  --color-ghost-border:     rgba(247,246,243,0.25);
+  --color-border-subtle:    color-mix(in srgb, var(--in2-slate) 25%, transparent);
+  --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
   --color-bg-code:          var(--in1-iron);
   --color-accent:           var(--fo1-fern);
   --color-accent-hover:     var(--fo0-sage);
@@ -72,6 +74,8 @@
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
+  --color-on-success:       var(--color-accent-text);
+  --color-on-warning:       var(--color-accent-text);
   --color-card-highlight-bg:     var(--in1-iron);
   --color-card-highlight-border: var(--in2-slate);
   --btn-s-hover-bg:             var(--in3-ash);

@@ -8,6 +8,10 @@
   /* ── Button tokens ──────────────────────────────────────────────────── */
   --btn-radius:           var(--radius-md);
   --btn-disabled-opacity: 0.5;
+  --btn-gap:              6px;
+  --btn-padding-x:        16px;
+  --btn-sm-padding-x:     12px;
+  --btn-lg-padding-x:     20px;
 
   /* Primary */
   --btn-p-bg:       var(--color-accent);
@@ -90,6 +94,28 @@
   --accordion-summary-hover-bg: var(--color-bg-panel);
   --accordion-panel-bg:         transparent;
   --accordion-font-size:        0.9375rem; /* 15px */
+  --accordion-toggle-size:      1.25rem;
+  --accordion-toggle-rotation:  45deg;
+
+  /* ── Badge tokens ──────────────────────────────────────────────────── */
+  --badge-height:          22px;
+  --badge-padding:         0 8px;
+  --badge-letter-spacing:  0.04em;
+
+  --badge-general-bg:      var(--bm0-sand);
+  --badge-general-text:    var(--in0-void);
+  --badge-published-bg:    var(--bl3-moss);
+  --badge-published-text:  var(--color-accent-text);
+  --badge-draft-bg:        var(--bl2-grain);
+  --badge-draft-text:      var(--color-accent-text);
+  --badge-archived-bg:     var(--bl0-ember);
+  --badge-archived-text:   var(--color-accent-text);
+  --badge-beta-bg:         var(--bl4-heather);
+  --badge-beta-text:       var(--color-accent-text);
+  --badge-research-bg:     var(--bl1-ochre);
+  --badge-research-text:   var(--color-accent-text);
+  --badge-category-bg:     var(--fo2-forest);
+  --badge-category-text:   var(--color-accent-text);
 
   /* ── Component typography tokens ────────────────────────────────────── */
   --btn-font-size:        0.8125rem; /* 13px */
