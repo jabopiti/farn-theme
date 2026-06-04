@@ -1,9 +1,10 @@
 ---
 import LogoIcon from './LogoIcon.astro';
-import type { NavGroup, NavCta } from '../data/navigation';
+import type { NavGroup, NavLink, NavCta } from '../data/navigation';
 
 interface Props {
   groups: NavGroup[];
+  links?: NavLink[];
   ctas: NavCta[];
   activeGroupId?: string | null;
   activePath?: string;
@@ -11,7 +12,7 @@ interface Props {
   filled?: boolean;
 }
 
-const { groups, ctas, activeGroupId = null, activePath = '', filled = false } = Astro.props;
+const { groups, links = [], ctas, activeGroupId = null, activePath = '', filled = false } = Astro.props;
 ---
 
 <nav class={`nav${filled ? ' filled' : ''}`} id="nav" aria-label="Main navigation">
@@ -20,6 +21,9 @@ const { groups, ctas, activeGroupId = null, activePath = '', filled = false } = 
     <ul class="nav-links">
       {groups.map((g) => (
         <li><a href={g.href} class={activeGroupId === g.id ? 'active' : ''}>{g.label}</a></li>
+      ))}
+      {links.map((l) => (
+        <li><a href={l.href} class={activePath === l.href ? 'active' : ''}>{l.label}</a></li>
       ))}
     </ul>
     <div class="nav-right">
@@ -54,6 +58,9 @@ const { groups, ctas, activeGroupId = null, activePath = '', filled = false } = 
           <a href={pg.href} class={`drawer-link${activePath === pg.href ? ' active' : ''}`}>{pg.label}</a>
         ))}
       </>
+    ))}
+    {links.map((l) => (
+      <a href={l.href} class={`drawer-link${activePath === l.href ? ' active' : ''}`}>{l.label}</a>
     ))}
   </nav>
   <div class="drawer-ctas">

@@ -4,6 +4,7 @@
 
 export interface NavPage  { label: string; href: string; }
 export interface NavGroup { id: string; label: string; href: string; pages: NavPage[]; }
+export interface NavLink  { label: string; href: string; }
 export interface NavCta   { label: string; href: string; primary: boolean; }
 
 export const groups: NavGroup[] = [
@@ -47,7 +48,10 @@ export const groups: NavGroup[] = [
   },
 ];
 
+export const links: NavLink[] = [
+  { label: 'Demo', href: '/demo' },
+];
+
 export const ctas: NavCta[] = [
-  { label: 'Demo',        href: '/demo',            primary: false },
-  { label: 'Get Started', href: '/getting-started', primary: true  },
+  { label: 'Get Started', href: '/getting-started', primary: true },
 ];

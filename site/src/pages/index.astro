@@ -4,7 +4,7 @@
 // body layout and scroll behaviour handled below.
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
-import { groups, ctas } from '../data/navigation';
+import { groups, links, ctas } from '../data/navigation';
 
 const principles = [
   { title: 'Proximity signals relationship', body: 'The spacing scale encodes hierarchy — small gaps within components, large gaps between sections. Distance is meaning.' },
@@ -371,7 +371,7 @@ const principles = [
 <body>
 
 <!-- Nav + mobile drawer (shared with doc pages via SiteNav) -->
-<SiteNav {groups} {ctas} />
+<SiteNav {groups} {links} {ctas} />
 
 <!-- Hero -->
 <section class="hero" data-theme="dark" aria-label="Hero">

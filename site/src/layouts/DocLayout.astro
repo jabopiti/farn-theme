@@ -1,7 +1,7 @@
 ---
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
-import { groups, ctas } from '../data/navigation';
+import { groups, links, ctas } from '../data/navigation';
 
 interface Props {
   title: string;
@@ -50,7 +50,7 @@ const activeGroup =
   <body>
 
     <!-- Nav + mobile drawer (always filled on doc pages) -->
-    <SiteNav {groups} {ctas} activeGroupId={activeGroup?.id} activePath={p} filled={true} />
+    <SiteNav {groups} {links} {ctas} activeGroupId={activeGroup?.id} activePath={p} filled={true} />
 
     <!-- Sub-nav: group navigation for grouped pages; otherwise a page-internal
          TOC supplied by the page via slot="subnav" (standalone long pages). -->
