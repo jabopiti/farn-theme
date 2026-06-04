@@ -384,14 +384,14 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-29 · Section divider documentation page
-`status: backlog` `effort: M`
+`status: done` `effort: M` `merged: T-44`
 
-**Gap:** No documentation page for section transitions; the six patterns in `divider-spec.md` are invisible to consumers of the system.
+**Completed in T-44:** Section transitions documentation is now in `/components/layout.astro` as part of the group consolidation. The three shipped patterns (sine wave, convex arc, layered overlap) are documented with live demos, anatomy, token reference, and CSS reference under a "Section Transitions" `<h2>`. Status badge is `beta` — the remaining three patterns (organic blob T-25, diagonal cut T-27, stacked card reveal T-28) are coming-soon items in the same section.
 
-- [ ] Create `site/src/pages/components/dividers.astro` with a live demo of each implemented pattern
-- [ ] Include the animation for each pattern (not just static CSS snippets)
-- [ ] Add pattern-selection guidance: one primary type per page, when to use each
-- [ ] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
+- [x] Document each implemented pattern with live demos
+- [x] Include animation notes per pattern
+- [x] Add pattern-selection guidance
+- [x] Page accessible via sidebar nav (grouped under Components › Layout)
 
 ---
 
@@ -559,17 +559,17 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-44 · Component group consolidation (T-15 Phase 2)
-`status: backlog` `effort: L`
+`status: done` `effort: L` `branch: claude/bold-ride-uL9E1`
 
 **Gap:** Under the three-pillar IA (T-15), the six per-component pages must consolidate into six component group pages with the confirmed template (preview + short notes visible; full anatomy/usage/CSS in a shipped-disclosure collapsible per section).
 
 **Gates: T-15, T-35**
 
-- [ ] Build the 6 group pages: `/components/{layout,navigation,actions,forms,data,status}` (curated order)
-- [ ] Absorb `buttons→actions`, `badges→data`, `cards→layout`, `forms→forms`, `breadcrumbs→navigation`, `dividers→layout`; rename Dividers → "Section Transitions"
-- [ ] Resolve "Links" first-class question (standalone link styling vs button variant; `--link-*` tokens exist)
-- [ ] Render coming-soon components inline in logical order with a "coming soon" `.badge`; Status group ships as an all-placeholder roadmap page
-- [ ] Component URL clean-break here; remove old per-component pages and fix internal links
+- [x] Build the 6 group pages: `/components/{layout,navigation,actions,forms,data,status}` (curated order)
+- [x] Absorb `buttons→actions`, `badges→data`, `cards→layout`, `forms→forms`, `breadcrumbs→navigation`, `dividers→layout`; rename Dividers → "Section Transitions"
+- [x] Resolve "Links" first-class question (standalone link styling vs button variant; `--link-*` tokens exist)
+- [x] Render coming-soon components inline in logical order with a "coming soon" `.badge`; Status group ships as an all-placeholder roadmap page
+- [x] Component URL clean-break here; remove old per-component pages and fix internal links
 
 ---
 

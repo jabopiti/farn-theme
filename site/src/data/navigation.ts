@@ -36,14 +36,13 @@ export const groups: NavGroup[] = [
     label: 'Components',
     href: '/components',
     pages: [
-      { label: 'Overview',     href: '/components' },
-      { label: 'Badges',       href: '/components/badges' },       // → group pages (T-44)
-      { label: 'Buttons',      href: '/components/buttons' },      // → group pages (T-44)
-      { label: 'Cards',        href: '/components/cards' },        // → group pages (T-44)
-      { label: 'Forms',        href: '/components/forms' },        // → group pages (T-44)
-      { label: 'Breadcrumbs',  href: '/components/breadcrumbs' },  // → group pages (T-44)
-      { label: 'Accordion',    href: '/components/accordion' },    // → group pages (T-44)
-      { label: 'Dividers',     href: '/components/dividers' },     // → group pages (T-44)
+      { label: 'Overview',    href: '/components' },
+      { label: 'Layout',      href: '/components/layout' },
+      { label: 'Navigation',  href: '/components/navigation' },
+      { label: 'Actions',     href: '/components/actions' },
+      { label: 'Forms',       href: '/components/forms' },
+      { label: 'Data',        href: '/components/data' },
+      { label: 'Status',      href: '/components/status' },
     ],
   },
 ];

@@ -8,6 +8,21 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `site/src/pages/components/layout.astro` — Layout group page: Cards (stable) with all variants, sizes, anatomy, token reference, and CSS reference; Section Transitions (beta) covering layered overlap, sine wave, and convex arc patterns; Separator (coming soon) (T-44)
+- `site/src/pages/components/navigation.astro` — Navigation group page: Breadcrumbs (stable) and Accordion (stable) with full reference disclosures; Tabs and Pagination (coming soon) (T-44)
+- `site/src/pages/components/actions.astro` — Actions group page: Buttons (stable) and Links (stable, peer section with `--link-*` token reference); Tooltip (coming soon) (T-44)
+- `site/src/pages/components/data.astro` — Data group page: Badges (stable) with all 7 variants; Table and Code block (coming soon) (T-44)
+- `site/src/pages/components/status.astro` — Status group page: Alert, Loading states, and Modal/dialog (all coming soon) (T-44)
+
+### Changed
+- `site/src/pages/components/forms.astro` — rewritten as a group page with full accordion-wrapped reference section for form elements (T-44)
+- `site/src/pages/components/index.astro` — rewritten as a component overview page linking all 6 group pages; "Loading components" and "Surfaces and theme context" moved to `<h3>` (T-44)
+- `site/src/data/navigation.ts` — Components group updated to 6 group pages (`layout`, `navigation`, `actions`, `forms`, `data`, `status`), replacing the previous 7 per-component entries (T-44)
+
+### Removed
+- `site/src/pages/components/badges.astro`, `buttons.astro`, `cards.astro`, `breadcrumbs.astro`, `accordion.astro`, `dividers.astro` — consolidated into group pages; clean-break URL change (T-44)
+
+### Added
 - `tokens/components.css`: `--accordion-*` Tier-3 tokens — `--accordion-border`, `--accordion-radius`, `--accordion-summary-bg`, `--accordion-summary-hover-bg`, `--accordion-panel-bg`, `--accordion-font-size` (T-35)
 - `dist/farn-components.css`: `.accordion` and `.accordion-panel` classes shipped — built on native `<details>`/`<summary>`; no JS required; `+` icon rotates 45° on open; animated height via `interpolate-size: allow-keywords` + `::details-content` in Chrome 131+; instant static-reveal fallback in older browsers; `prefers-reduced-motion` guard disables both transitions (T-35)
 - `site/src/pages/components/accordion.astro` — accordion documentation page with live demos (including default-open panel), anatomy, usage guidance table, animation notes, token reference, and CSS reference (T-35)

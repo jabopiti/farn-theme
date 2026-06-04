@@ -1,0 +1,446 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Layout" description="Layout components in the Farn design system — cards, section transitions, and structural patterns">
+  <h1>Layout</h1>
+  <p>
+    Structural components for organising content on a page. Cards surface discrete pieces of
+    content in a scannable grid; section transitions create intentional visual breaks between
+    full-width areas.
+  </p>
+
+  <!-- ── Cards ─────────────────────────────────────────────────────────── -->
+
+  <h2 id="cards">Cards <span class="badge badge-published">stable</span></h2>
+  <p>
+    Entry points that surface content and invite action. Background, border, and border-radius
+    are driven by <code>--card-*</code> Tier-3 tokens — retheme in one place without touching
+    the semantic layer.
+  </p>
+
+  <div class="card-demo-row">
+    <div class="card card-demo-item">
+      <p class="demo-label">Default</p>
+      <p>Background fill, no visible border. Use for most card contexts.</p>
+    </div>
+    <div class="card card-outlined card-demo-item">
+      <p class="demo-label">Outlined</p>
+      <p>Adds a <code>--color-border</code> edge for same-level surfaces.</p>
+    </div>
+    <div class="card card-highlight card-demo-item">
+      <p class="demo-label">Highlight</p>
+      <p>High-contrast background — adapts per theme.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Cards</summary>
+      <div class="accordion-panel">
+
+        <h3>Variants</h3>
+        <table>
+          <thead><tr><th>Variant</th><th>Class</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td>Default</td><td><code>.card</code></td><td>Article lists, feature grids, project indexes. Background: <code>--card-bg</code> → <code>--color-bg-panel</code>.</td></tr>
+            <tr><td>Outlined</td><td><code>.card-outlined</code></td><td>Adds <code>var(--color-border)</code> edge when the surrounding surface matches the card's background.</td></tr>
+            <tr><td>Highlight</td><td><code>.card-highlight</code></td><td>Featured or promoted content. Light: <code>--in0-void</code>. Dark: <code>--in1-iron</code> + <code>--in2-slate</code> border.</td></tr>
+            <tr><td>Interactive</td><td><code>.card-interactive</code></td><td>Any card that is a navigation target or action trigger — adds hover, focus, and active states.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Anatomy</h3>
+        <p>
+          When anatomy children are present the wrapper's padding is removed automatically via
+          <code>:has()</code> — each section carries its own <code>var(--card-padding)</code>.
+          <strong><code>.card-media</code> must be the first child</strong> so its top corners
+          align with the card's border-radius.
+        </p>
+
+        <div class="card-demo-section">
+          <div class="card" style="max-width: 360px;">
+            <div class="card-media">
+              <div class="card-media-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="card-header">
+              <h3 class="demo-card-heading">Fern Valley Trail</h3>
+              <p class="demo-card-meta">3.2 km · Moderate</p>
+            </div>
+            <div class="card-body">
+              <p class="demo-card-text">A shaded loop through old-growth forest with seasonal wildflower meadows along the ridge.</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-p btn-sm">View trail</button>
+              <button class="btn btn-g btn-sm">Save</button>
+            </div>
+          </div>
+        </div>
+
+        <pre><code>&lt;div class="card"&gt;
+  &lt;div class="card-media"&gt;&lt;img src="trail.jpg" alt="…"&gt;&lt;/div&gt;
+  &lt;div class="card-header"&gt;&lt;h3&gt;Title&lt;/h3&gt;&lt;/div&gt;
+  &lt;div class="card-body"&gt;&lt;p&gt;Description&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="card-footer"&gt;
+    &lt;button class="btn btn-p btn-sm"&gt;Action&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <table>
+          <thead><tr><th>Class</th><th>Purpose</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>.card-media</code></td><td>Top image / visual area</td><td>Must be first child. <code>overflow:hidden</code> clips to card radius.</td></tr>
+            <tr><td><code>.card-header</code></td><td>Title and metadata row</td><td>Use semantic heading elements (<code>h2</code>–<code>h4</code>).</td></tr>
+            <tr><td><code>.card-body</code></td><td>Main content area</td><td><code>flex: 1</code> — expands to fill in equal-height grids.</td></tr>
+            <tr><td><code>.card-footer</code></td><td>Actions row</td><td><code>margin-top: auto</code> pins to bottom. Divider appears when preceded by <code>.card-body</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Interactive cards</h3>
+        <p>
+          Add <code>.card-interactive</code> to any card that is a navigation target or action trigger.
+          Works on both <code>&lt;div&gt;</code> (with <code>tabindex="0"</code>) and <code>&lt;a&gt;</code>.
+        </p>
+        <pre><code>&lt;!-- div card --&gt;
+&lt;div class="card card-interactive" tabindex="0"&gt; … &lt;/div&gt;
+
+&lt;!-- anchor card (whole card is the link) --&gt;
+&lt;a href="/trail/fern-valley" class="card card-interactive"&gt; … &lt;/a&gt;</code></pre>
+
+        <h3>Card grid</h3>
+        <p>
+          <code>.card-grid</code> creates a responsive auto-fit grid. Minimum column width: 280px.
+          Cards collapse to a single column on narrow viewports.
+        </p>
+        <pre><code>&lt;div class="card-grid"&gt;
+  &lt;div class="card card-interactive"&gt; … &lt;/div&gt;
+  &lt;div class="card card-interactive"&gt; … &lt;/div&gt;
+  &lt;div class="card card-interactive"&gt; … &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--card-bg</code></td><td><code>var(--color-bg-panel)</code></td><td>Default card background</td></tr>
+            <tr><td><code>--card-hover-bg</code></td><td><code>var(--color-bg-inset)</code></td><td>Background on hover (interactive cards)</td></tr>
+            <tr><td><code>--card-border</code></td><td><code>transparent</code></td><td>Border colour — <code>.card-outlined</code> overrides to <code>--color-border</code></td></tr>
+            <tr><td><code>--card-radius</code></td><td><code>var(--radius-lg)</code></td><td>Border radius for card and media</td></tr>
+            <tr><td><code>--card-padding</code></td><td><code>var(--space-md)</code></td><td>Padding for bare cards and all anatomy sections</td></tr>
+            <tr><td><code>--card-highlight-bg</code></td><td>Light: <code>--in0-void</code> · Dark: <code>--in1-iron</code></td><td>Background for <code>.card-highlight</code></td></tr>
+            <tr><td><code>--card-highlight-border</code></td><td>Light: <code>transparent</code> · Dark: <code>--in2-slate</code></td><td>Border for <code>.card-highlight</code></td></tr>
+          </tbody>
+        </table>
+
+        <h3>Overriding tokens</h3>
+        <pre><code>/* Tighter padding for a dense list layout */
+.article-list &#123;
+  --card-padding: var(--space-sm);
+&#125;
+
+/* Pill cards in a marketing section */
+.feature-grid &#123;
+  --card-radius: var(--radius-xl);
+&#125;</code></pre>
+
+        <h3>CSS reference</h3>
+        <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
+        <pre><code>.card-grid &#123;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+&#125;
+
+.card &#123;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+&#125;
+.card:has(&gt; .card-header, &gt; .card-body, &gt; .card-footer, &gt; .card-media) &#123;
+  padding: 0;
+&#125;
+
+.card-outlined  &#123; border-color: var(--color-border); &#125;
+.card-highlight &#123; background: var(--card-highlight-bg); border-color: var(--card-highlight-border); &#125;
+
+.card-interactive &#123;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+&#125;
+.card-interactive:hover         &#123; background: var(--card-hover-bg); &#125;
+.card-interactive:focus-visible &#123; outline: 2px solid var(--color-accent); outline-offset: 3px; &#125;
+.card-interactive:active        &#123; transform: scale(0.99); &#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Section Transitions ───────────────────────────────────────────── -->
+
+  <h2 id="section-transitions">Section Transitions <span class="badge badge-beta">beta</span></h2>
+  <p>
+    Intentional visual breaks between full-width page sections — signalling a shift in content,
+    depth, or energy. All patterns consume the semantic token layer so transitions stay coherent
+    as the palette evolves. Use one primary pattern per page.
+  </p>
+
+  <div class="demo-wave" role="group" aria-label="Sine wave divider live demo">
+    <div class="demo-wave-top" data-theme="dark">
+      <p class="demo-label">Preceding section</p>
+      <p class="demo-section-desc">Wave at the bottom — fill matches the section below.</p>
+      <div class="section-wave" data-scroll-reveal aria-hidden="true">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+          <path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z"
+                fill="var(--color-section-next)" opacity="0.4"/>
+          <path d="M0,45 C300,85 900,5 1200,45 L1200,80 L0,80 Z"
+                fill="var(--color-section-next)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="demo-wave-bottom" data-theme="light">
+      <p class="demo-label">Next section</p>
+      <p class="demo-section-desc">Override <code>--color-section-next</code> to match this background.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Section Transitions</summary>
+      <div class="accordion-panel">
+
+        <h3>Patterns</h3>
+        <table>
+          <thead><tr><th>Pattern</th><th>Classes</th><th>Character</th><th>Best for</th></tr></thead>
+          <tbody>
+            <tr><td>Layered overlap</td><td><code>.overlap-preceding</code> / <code>.overlap-section</code> / <code>.overlap-card</code></td><td>Dimensional, modern</td><td>Dark hero → light content; featured CTA panels</td></tr>
+            <tr><td>Sine wave</td><td><code>.section-wave</code></td><td>Organic, rhythmic</td><td>Repeated section breaks; any natural flowing transition</td></tr>
+            <tr><td>Convex arc</td><td><code>.section-arc</code></td><td>Refined, quiet</td><td>Centred hero layouts; calm lens-like elegance</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Use one primary type per page.</strong> A second type is acceptable for a single high-emphasis moment (e.g., sine waves throughout with one layered overlap at a CTA). More than two distinct types creates visual noise.</p>
+
+        <!-- Layered overlap -->
+        <h3 id="layered-overlap">Layered overlap</h3>
+        <p>
+          The only pure-CSS pattern — no SVG. The next section or a card bleeds upward into the
+          preceding section using a negative <code>margin-top</code> combined with
+          <code>border-radius</code> on the top corners.
+        </p>
+
+        <div class="demo-overlap-a" role="group" aria-label="Section overlap live demo">
+          <div class="demo-section-before" data-theme="dark">
+            <p class="demo-label">Preceding section</p>
+            <p class="demo-section-desc">Dark area — never add <code>overflow:hidden</code> here.</p>
+          </div>
+          <div class="demo-section-after overlap-section">
+            <p class="demo-label">Overlapping section</p>
+            <p class="demo-section-desc">Rounded top corners float over the section above.</p>
+          </div>
+        </div>
+
+        <pre><code>&lt;section class="overlap-preceding"&gt;
+  &lt;!-- Hero — never overflow:hidden --&gt;
+&lt;/section&gt;
+
+&lt;section class="overlap-section" style="background: var(--color-bg-panel);"&gt;
+  &lt;!-- Slides up over the hero --&gt;
+&lt;/section&gt;</code></pre>
+
+        <table>
+          <thead><tr><th>Class / attribute</th><th>Element</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>.overlap-preceding</code></td><td>Any block</td><td>Sets <code>overflow: visible</code> explicitly. Prevents accidental <code>overflow:hidden</code> clipping the overlap.</td></tr>
+            <tr><td><code>.overlap-section</code></td><td><code>&lt;section&gt;</code></td><td>Full section that slides up. Sets <code>z-index</code>, negative margin, rounded top corners. Consumer sets <code>background</code>.</td></tr>
+            <tr><td><code>.overlap-card</code></td><td><code>&lt;div&gt;</code></td><td>Card variant — floats upward with Tier-1 entry animation (opacity + translateY + shadow grow).</td></tr>
+            <tr><td><code>data-scroll-reveal</code></td><td><code>.overlap-card</code></td><td>Opts into the shared IntersectionObserver. Adds <code>.is-visible</code> on first entry.</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Critical:</strong> <code>overflow:hidden</code> on <code>.overlap-preceding</code> or any ancestor will clip the overlapping element entirely.</p>
+
+        <h4>Layered overlap tokens</h4>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--overlap-section-radius</code></td><td><code>var(--radius-xl)</code></td><td>Top corners on <code>.overlap-section</code></td></tr>
+            <tr><td><code>--overlap-section-offset</code></td><td><code>60px</code></td><td>How far <code>.overlap-section</code> bleeds upward</td></tr>
+            <tr><td><code>--overlap-card-radius</code></td><td><code>var(--card-radius)</code></td><td>Border radius on <code>.overlap-card</code></td></tr>
+            <tr><td><code>--overlap-card-offset</code></td><td><code>80px</code></td><td>How far <code>.overlap-card</code> bleeds upward</td></tr>
+            <tr><td><code>--overlap-card-duration</code></td><td><code>0.7s</code></td><td>Entry animation duration</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Sine wave -->
+        <h3 id="sine-wave">Sine wave</h3>
+        <p>
+          An SVG divider using cubic bezier curves. Two layered paths create the illusion of a
+          receding tide. The wave sits absolutely positioned at the bottom of its parent section
+          and fills in the next section's background colour.
+        </p>
+        <pre><code>&lt;section style="position: relative; padding-bottom: var(--wave-height);
+             --color-section-next: var(--color-bg-panel);"&gt;
+  &lt;div class="section-wave" data-scroll-reveal aria-hidden="true"&gt;
+    &lt;svg viewBox="0 0 1200 80" preserveAspectRatio="none"&gt;
+      &lt;!-- depth layer first (SVG paints in document order) --&gt;
+      &lt;path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z"
+            fill="var(--color-section-next)" opacity="0.4"/&gt;
+      &lt;path d="M0,45 C300,85 900,5 1200,45 L1200,80 L0,80 Z"
+            fill="var(--color-section-next)"/&gt;
+    &lt;/svg&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--wave-height</code></td><td><code>80px</code></td><td>SVG rendered height and required parent <code>padding-bottom</code></td></tr>
+            <tr><td><code>--color-section-next</code></td><td><code>var(--color-bg-panel)</code></td><td>Fill colour — set on the parent to match the destination background</td></tr>
+          </tbody>
+        </table>
+
+        <p>Change amplitude by adjusting control-point Y values. Equal and opposite offsets (<code>C300,80 900,0</code>) produce a symmetric wave. To reverse direction, place <code>.section-wave</code> at the top of the <em>next</em> section and apply <code>transform: scaleY(-1)</code> to it (not <code>rotateX</code>).</p>
+
+        <!-- Convex arc -->
+        <h3 id="convex-arc">Convex arc</h3>
+        <p>
+          A single quadratic bezier curve spanning the full width. Calmer than the sine wave —
+          one smooth dome suited to centred hero layouts. The convex variant animates with
+          <code>animation-timeline: view()</code> (static fallback for unsupported browsers and
+          <code>prefers-reduced-motion</code>). The concave variant is always static.
+        </p>
+        <pre><code>&lt;!-- Convex (dome) --&gt;
+&lt;section style="position: relative; padding-bottom: var(--arc-height);
+             --color-section-next: var(--color-bg-panel);"&gt;
+  &lt;div class="section-arc" aria-hidden="true"&gt;
+    &lt;svg viewBox="0 0 1200 80" preserveAspectRatio="none"&gt;
+      &lt;path d="M0,80 Q600,0 1200,80 Z" fill="var(--color-section-next)"/&gt;
+    &lt;/svg&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Concave (bowl) — redrawn path, always static --&gt;
+&lt;div class="section-arc section-arc--concave" aria-hidden="true"&gt;
+  &lt;svg viewBox="0 0 1200 80" preserveAspectRatio="none"&gt;
+    &lt;path d="M0,0 Q600,80 1200,0 L1200,80 L0,80 Z" fill="var(--color-section-next)"/&gt;
+  &lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--arc-height</code></td><td><code>80px</code></td><td>SVG rendered height and required parent <code>padding-bottom</code></td></tr>
+            <tr><td><code>--color-section-next</code></td><td><code>var(--color-bg-panel)</code></td><td>Fill colour — set on the parent to match the destination background</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Upcoming patterns</h3>
+        <p>Three additional patterns are planned:</p>
+        <ul>
+          <li><strong>Organic blob</strong> — high-emphasis brand moments; paths drawn in Figma/Inkscape (T-25)</li>
+          <li><strong>Diagonal cut</strong> — energetic directional transition for CTAs (T-27)</li>
+          <li><strong>Stacked card reveal</strong> — cinematic depth for long 3–5 section pages (T-28)</li>
+        </ul>
+
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Separator ─────────────────────────────────────────────────────── -->
+
+  <h2 id="separator">Separator <span class="badge badge-draft">coming soon</span></h2>
+  <p>
+    Content-level horizontal rules — distinct from section-transition patterns. Tokenised
+    <code>&lt;hr&gt;</code> and <code>.separator</code> variants for use within prose and
+    between content blocks.
+  </p>
+
+</DocLayout>
+
+<style>
+  /* ── Card demos ───────────────────────────────────────────────────────── */
+  .card-demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .card-demo-item {
+    flex: 1;
+    min-width: 200px;
+    max-width: 320px;
+  }
+
+  .card-demo-section {
+    margin-bottom: var(--space-lg);
+  }
+
+  .card-media-placeholder {
+    height: 160px;
+    background: linear-gradient(135deg, var(--fo3-deepwater) 0%, var(--fo1-fern) 60%, var(--fo0-sage) 100%);
+  }
+
+  .demo-card-heading { margin: 0; font-size: 1rem; }
+  .demo-card-meta    { margin: var(--space-xs) 0 0; color: var(--color-text-secondary); font-size: 0.875rem; }
+  .demo-card-text    { margin: 0; color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.6; }
+
+  /* ── Demo label — uppercase eyebrow for demo sections ────────────────── */
+  .demo-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-tertiary);
+    margin: 0 0 var(--space-xs);
+  }
+
+  /* ── Overlap demos ────────────────────────────────────────────────────── */
+  .demo-overlap-a {
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .demo-section-before {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-lg) var(--space-md) 80px;
+  }
+
+  .demo-section-after {
+    background: var(--color-bg-panel);
+  }
+
+  .demo-section-desc {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ── Sine wave demo ───────────────────────────────────────────────────── */
+  .demo-wave {
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .demo-wave-top {
+    position: relative;
+    padding: var(--space-lg) var(--space-md);
+    padding-bottom: var(--wave-height);
+    --color-section-next: var(--bm2-birch);
+  }
+
+  .demo-wave-bottom {
+    padding: var(--space-md) var(--space-md) var(--space-lg);
+  }
+
+</style>
