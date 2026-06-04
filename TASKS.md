@@ -660,15 +660,16 @@ Merged into T-49 (Complete Foundations section).
 
 **Gap:** The current `index.astro` is 7 sections long and tries to serve as both a marketing page and a component demo. It dilutes the first impression, and with T-46 (guided demo page) on the horizon the overlap becomes actively unhelpful. A focused editorial redesign will shorten the page, sharpen the message, and direct visitors to the right next step.
 
-**Target structure — 6 sections:**
+**Target structure — 7 sections:**
 1. **Hero** — value prop + 2 CTAs (Demo / Get Started); preserve animated fade-in and transparent-to-filled nav behaviour
-2. **The System** — 3-column: Tokens → Semantic layer → Components. Explains the architecture at a glance; replaces the prose-heavy "about" section
-3. **Palette + Typography** — condensed colour moment (swatches + palette names) + one Fraunces specimen line. Palette taste, not a full browser.
-4. **Tokens in action** — one component shown across `data-surface="base"`, `"layer"`, `"overlay"` with a live light/dark toggle; the "aha" for the token-first story
-5. **What you get** — 3 items: CSS tokens · Component classes · Zero dependencies
-6. **Closing CTA** — mirrors hero
+2. **About** — etymology ("from Old Saxon *farn*") + palette mood; condensed from current (2–3 sentences max + swatches), not removed
+3. **The System** — 3-column: Tokens → Semantic layer → Components. Explains the architecture at a glance
+4. **Palette + Typography** — condensed colour moment (swatches + palette names) + one Fraunces specimen line. Palette taste, not a full browser.
+5. **Tokens in action** — one component shown across `data-surface="base"`, `"layer"`, `"overlay"` with a live light/dark toggle; the "aha" for the token-first story
+6. **What you get** — 3 items: CSS tokens · Component classes · Zero dependencies
+7. **Closing CTA** — mirrors hero
 
-**Cut from current page:** spacing scale specimen, exhaustive component rows (buttons + badges + forms + dividers + quotes), surfaces grid, principles cards, etymology prose. This content belongs in the demo page and docs.
+**Cut from current page:** spacing scale specimen, exhaustive component rows (buttons + badges + forms + dividers + quotes), surfaces grid, principles cards. This content belongs in the demo page and docs.
 
 - [ ] Rework `index.astro` to the 6-section structure; remove all cut sections and their associated inline styles
 - [ ] "Tokens in action" section: light/dark toggle reuses `data-theme` toggle, no new JS
