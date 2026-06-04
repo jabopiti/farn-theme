@@ -195,14 +195,14 @@ _Nav model later extracted to `site/src/data/navigation.ts` (single source of tr
 
 ---
 
-## T-16 · Component demo pages with live token examples
-`status: backlog` `effort: M`
+## T-16 · Token inspector pattern on component pages
+`status: backlog` `effort: S`
 
-**Gap:** Component pages show CSS snippets but no live demos; the relationship between tokens and rendered output is not visible.
+**Gap:** Component group pages (T-44) show live demos but give no in-page signal about which token drives which visible property; the connection between the token system and rendered output is implicit. T-44 delivered demos — T-16 now delivers the annotation layer on top.
 
-- [ ] Add live demo sections to the buttons, cards, and forms component pages using Farn token-driven HTML (note: forms page has basic demos from T-14; T-16 scope is richer interactive / token-visible demos)
-- [ ] Demos must work correctly in both light and dark mode via the `data-theme` mechanism
-- [ ] Consider a token inspector pattern showing which token drives each property
+- [ ] Design a restrained annotation/callout pattern (e.g. a `[data-token]` attribute + `.token-label` overlay) that labels the key token for each property on a live demo
+- [ ] Apply to at least one canonical example per group page: a button (Actions), a card (Layout), an input (Forms)
+- [ ] Pattern must work in both light and dark mode and not interfere with scroll-reveal animations
 
 ---
 
@@ -341,7 +341,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 - [x] Implement `.section-blob` CSS and example two-path SVG per spec
 - [x] Apply Tier 1 fade-only animation (opacity only — no translate, no morph) using T-22 infrastructure
 - [x] Document that blob paths should be drawn in Figma/Inkscape and exported, not hand-authored
-- [x] Document on the dividers component page (T-29)
+- [x] Document in the "Section Transitions" section of `/components/layout` (T-29 merged into T-44)
 
 ---
 
@@ -365,21 +365,21 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 - [ ] Implement all three approaches from spec: `clip-path` polygon, `::before skewY`, and SVG triangle
 - [ ] Apply Tier 2 angle-flattening animation (`skewY(-5deg)` → `0deg`) with `animation-timeline: view()` and static fallback
 - [ ] Document the `clip-path` + `box-shadow` incompatibility and when to use the `::before` approach instead
-- [ ] Document on the dividers component page (T-29)
+- [ ] Document in the "Section Transitions" section of `/components/layout` (T-29 merged into T-44)
 
 ---
 
 ## T-28 · Stacked card reveal
 `status: backlog` `effort: S`
 
-**Depends on T-15** — the T-15 IA restructure must explicitly include sidebar removal before this pattern is viable; full-viewport sticky sections (`height: 100vh` per section) are incompatible with the current sidebar layout. Confirm sidebar removal is in T-15's approved outline before picking up T-28.
+**Note:** T-15 is complete. The site uses a top nav + group sub-nav — no traditional sidebar. Before picking up, verify that full-viewport sticky sections (`height: 100vh`) are compatible with the current layout (group sub-nav bar, scroll-padding offset).
 
 **Gap:** No stacked card reveal pattern; the cinematic depth effect is the highest-drama transition in the spec, suited to long scrolling pages with 3–5 landmark sections.
 
 - [ ] Implement `.stack-container` and `.stack-section` with `--stack-depth` and `--stack-index` CSS custom properties per spec
 - [ ] Verify sticky positioning behaviour across Chrome, Firefox, and Safari; document the `height: N×100vh` requirement
 - [ ] Document content-height constraint (sections must fit within `100vh`) and the 3–5 section limit
-- [ ] Document on the dividers component page (T-29)
+- [ ] Document in the "Section Transitions" section of `/components/layout` (T-29 merged into T-44)
 
 ---
 
@@ -471,9 +471,9 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 
 **Gap:** No breadcrumb navigation pattern; a basic wayfinding component missing from any multi-level site.
 
-- [ ] Add `.breadcrumb` and `.breadcrumb-item` styles with a CSS `::after` separator consuming `--color-text-secondary`
-- [ ] Current page item uses `--color-text`; preceding items use `--color-text-secondary` — both must adapt per surface
-- [ ] Document correct `aria-label="Breadcrumb"` and `aria-current="page"` markup on the component page
+- [x] Add `.breadcrumb` and `.breadcrumb-item` styles with a CSS `::after` separator consuming `--color-text-secondary`
+- [x] Current page item uses `--color-text`; preceding items use `--color-text-secondary` — both must adapt per surface
+- [x] Document correct `aria-label="Breadcrumb"` and `aria-current="page"` markup on the component page
 
 ---
 
@@ -529,9 +529,9 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 
 **Gap:** `tokens/motion.css` was added in T-04 but no `site/src/pages/tokens/motion.astro` exists; `--duration-*` and `--ease-*` tokens are invisible to consumers browsing the documentation site.
 
-- [ ] Create `site/src/pages/tokens/motion.astro` with a table of all duration and easing tokens, descriptions, and usage guidance
-- [ ] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
-- [ ] Update `CHANGELOG.md`
+- [x] Create `site/src/pages/tokens/motion.astro` with a table of all duration and easing tokens, descriptions, and usage guidance
+- [x] Add the page to the sidebar nav in `site/src/layouts/DocLayout.astro`
+- [x] Update `CHANGELOG.md`
 
 ---
 
@@ -578,8 +578,6 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 
 **Gap:** No machine-readable guide for AI agents building products *with* Farn (distinct from `CLAUDE.md`, which is for agents developing Farn).
 
-**Gates: T-15**
-
 - [ ] Create `llms.txt` at repo root (llmstxt.org format: pitch → install → core rules → linked docs)
 - [ ] Add `llms.txt` to `package.json` `files[]`; ensure it serves at `farn.jbpt.de/llms.txt`
 - [ ] Add a "For AI agents" section to Getting Started linking to it + a copyable sample prompt
@@ -590,9 +588,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ## T-46 · Demo page — full guided tour
 `status: backlog` `effort: M`
 
-**Gap:** The `/demo` stub (built in T-15 Phase 1c) needs full content — a guided, end-to-end visual tour so humans can experience Farn before committing. (Distinct from T-16, which adds live demos to component pages.)
-
-**Gates: T-15**
+**Gap:** The `/demo` stub (built in T-15 Phase 1c) needs full content — a guided, end-to-end visual tour so humans can experience Farn before committing. (T-16 adds a token inspector layer to the component doc pages — distinct from this experiential showcase.)
 
 - [ ] Replace the stub with a guided tour: palette, typography, theming/surfaces, components in context
 - [ ] Works in both light and dark via `data-theme`; standalone page (no group sub-nav, page-internal TOC if long)
@@ -621,37 +617,32 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 
 ---
 
-## T-49 · Foundations > Accessibility page
+## T-49 · Complete Foundations section
 `status: backlog` `effort: S`
 
-**Gap:** Farn's accessibility commitments (WCAG 2.1 AA, focus styles, reduced motion, contrast-by-construction) are implemented but have no narrative documentation page.
+**Gap:** Three concept pages are missing from Foundations — the overview links to them but they 404. All three are purely documentary (no new CSS) and are the same effort tier, so they ship together.
 
-**Gates: T-15**
+_(T-50 · Foundations > Layout and T-51 · Foundations > Responsive merged here.)_
 
 - [ ] Create `site/src/pages/foundations/accessibility.astro`: WCAG AA commitment (Ash AA-large-only), `:focus-visible` ring, `prefers-reduced-motion`, don't-rely-on-colour-alone; link to the WCAG matrix on Styles > Color
-- [ ] No new CSS — documents existing `base.css` / `dark-light.css` behaviour
+- [ ] Create `site/src/pages/foundations/layout.astro`: content-first widths, page-structure skeleton, grid pattern, radius-as-hierarchy; values cross-linked to Styles > Spacing
+- [ ] Create `site/src/pages/foundations/responsive.astro`: reflow-by-content, the three breakpoints, fluid `clamp()` type, semantic meaning per breakpoint
+- [ ] Add all three pages to `site/src/data/navigation.ts` under Foundations
+- [ ] No new CSS — documents existing token behaviour
 
 ---
 
 ## T-50 · Foundations > Layout page
-`status: backlog` `effort: XS`
+`status: done` `merged: T-49`
 
-**Gap:** Layout philosophy (content-first widths, page structure, grid-vs-flex, radius-as-hierarchy) is implicit in tokens but undocumented as a concept page.
-
-**Gates: T-15**
-
-- [ ] Create `site/src/pages/foundations/layout.astro` from existing `spacing.astro` content (widths, page-structure skeleton, grid pattern); concept here, values cross-linked to Styles > Spacing
+Merged into T-49 (Complete Foundations section).
 
 ---
 
 ## T-51 · Foundations > Responsive page
-`status: backlog` `effort: XS`
+`status: done` `merged: T-49`
 
-**Gap:** Responsive philosophy (reflow-by-content, the three breakpoints, fluid `clamp()` type) is undocumented as a concept page.
-
-**Gates: T-15**
-
-- [ ] Create `site/src/pages/foundations/responsive.astro` from existing `spacing.astro` breakpoints + `typography.astro` clamp note; semantic meaning of each breakpoint, avoid fixed pixel breakpoints
+Merged into T-49 (Complete Foundations section).
 
 ---
 
@@ -660,6 +651,27 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 
 **Gap:** Farn ships no icon set; consumers have no guidance on using a third-party library with Farn tokens. The Phase-1 stub needs full content.
 
-**Gates: T-15**
-
 - [ ] Replace the stub with: rationale for not bundling icons, recommended libraries, and how to size/colour icons with `--space-*` / `--color-*` tokens
+
+---
+
+## T-53 · Landing page redesign
+`status: backlog` `effort: M`
+
+**Gap:** The current `index.astro` is 7 sections long and tries to serve as both a marketing page and a component demo. It dilutes the first impression, and with T-46 (guided demo page) on the horizon the overlap becomes actively unhelpful. A focused editorial redesign will shorten the page, sharpen the message, and direct visitors to the right next step.
+
+**Target structure — 7 sections:**
+1. **Hero** — value prop + 2 CTAs (Demo / Get Started); preserve animated fade-in and transparent-to-filled nav behaviour
+2. **About** — etymology ("from Old Saxon *farn*") + palette mood; condensed from current (2–3 sentences max + swatches), not removed
+3. **The System** — 3-column: Tokens → Semantic layer → Components. Explains the architecture at a glance
+4. **Palette + Typography** — condensed colour moment (swatches + palette names) + one Fraunces specimen line. Palette taste, not a full browser.
+5. **Tokens in action** — one component shown across `data-surface="base"`, `"layer"`, `"overlay"` with a live light/dark toggle; the "aha" for the token-first story
+6. **What you get** — 3 items: CSS tokens · Component classes · Zero dependencies
+7. **Closing CTA** — mirrors hero
+
+**Cut from current page:** spacing scale specimen, exhaustive component rows (buttons + badges + forms + dividers + quotes), surfaces grid, principles cards. This content belongs in the demo page and docs.
+
+- [ ] Rework `index.astro` to the 6-section structure; remove all cut sections and their associated inline styles
+- [ ] "Tokens in action" section: light/dark toggle reuses `data-theme` toggle, no new JS
+- [ ] Carry forward all existing animation infrastructure (scroll-reveal, hero fade-in, transparent nav)
+- [ ] Ensure zero dead links after cleanup; update landing page meta description
