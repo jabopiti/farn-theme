@@ -1,5 +1,9 @@
 # Farn — Agent Guide
 
+## Navigation structure
+
+`site/src/data/navigation.ts` is the single source of truth for the top nav, sub-nav, and mobile drawer. Edit this file to add pages or groups. `DocLayout.astro` reads from it — do not add nav links directly to DocLayout.
+
 ## Repo structure
 
 ```
@@ -89,7 +93,7 @@ h1 {
 1. Add to the appropriate palette block in `tokens/colors.css`
 2. If semantic: add mapping in `tokens/dark-light.css` for both themes
 3. Run build command
-4. Add to `site/src/pages/tokens/colors.astro`
+4. Add to `site/src/pages/styles/color.astro`
 5. Update `CHANGELOG.md`
 
 ## Adding a component
@@ -102,8 +106,16 @@ Two parallel tracks — both required for `stable` status.
 3. Run build command, update `CHANGELOG.md`
 
 **Track B — Documentation page**
-1. Create `site/src/pages/components/<name>.astro` — description, anatomy, live demo, CSS snippet, status (`stable` / `beta`)
-2. Add to sidebar in `site/src/layouts/DocLayout.astro`
+
+*Adding to an existing group page (most common):*
+1. Find the relevant group page: `site/src/pages/components/{layout,navigation,actions,forms,data,status}.astro`
+2. Add an `<h2>` section with an `.accordion` disclosure: live preview, anatomy, token reference table, CSS reference
+3. No changes to `DocLayout.astro` or `navigation.ts` needed for within-group additions
+
+*Creating a new component group (rare — triggers complexity gate):*
+1. Add the group entry to `site/src/data/navigation.ts` (single source of truth for nav)
+2. Create `site/src/pages/components/<group>.astro` using an existing group page as template
+3. This is a structural change; apply full complexity gate review
 
 `site/` pages remain the canonical specification for each component.
 
@@ -129,7 +141,7 @@ Pick a `status: backlog` task (respect `Depends on`). Set `in-progress`, add `br
 - Effort `M` or `L`
 - `colors.css` or `dark-light.css` structure changes
 - `data-surface` pattern changes
-- `DocLayout.astro` sidebar or URL structure changes
+- `navigation.ts` structure changes or adding a new component group
 
 **Quality gates (always, never skip):**
 1. `/simplify`
