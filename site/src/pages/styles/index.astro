@@ -1,8 +1,6 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro';
-// Transitional overview (T-15 Phase 1a). Reference links still point at /tokens/*
-// until Phase 1b moves them to /styles/*; update these links and the `groups`
-// map in DocLayout.astro together when that move happens. Icons is a stub until T-52.
+// Icons is a stub until T-52.
 ---
 
 <DocLayout title="Styles" description="The token reference for Farn — the concrete values you look up while building">
@@ -15,15 +13,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <h2>Reference pages</h2>
   <ul>
-    <li><a href="/tokens/colors">Color</a> — the four palettes, semantic tokens, and the WCAG contrast matrix.</li>
-    <li><a href="/tokens/typography">Typography</a> — font stacks, the Fraunces <code>opsz</code> rule, and the type scale.</li>
-    <li><a href="/tokens/spacing">Spacing</a> — the spacing scale, border radius, and z-index.</li>
-    <li><a href="/tokens/motion">Motion</a> — duration and easing tokens with pairing guidance.</li>
-    <li><a href="/tokens/theming">Theming</a> — semantic token reference for dark/light and surfaces.</li>
+    <li><a href="/styles/color">Color</a> — the four palettes, semantic tokens, and the WCAG contrast matrix.</li>
+    <li><a href="/styles/typography">Typography</a> — font stacks, the Fraunces <code>opsz</code> rule, and the type scale.</li>
+    <li><a href="/styles/spacing">Spacing</a> — the spacing scale, border radius, and z-index.</li>
+    <li><a href="/styles/motion">Motion</a> — duration and easing tokens with pairing guidance.</li>
+    <li><a href="/styles/theming">Theming</a> — semantic token reference for dark/light and surfaces.</li>
     <li><strong>Icons</strong> — guidance for using a third-party icon set with Farn tokens. <span class="badge badge-draft">Coming soon</span></li>
   </ul>
-  <p>
-    Some reference pages still live under their original <code>/tokens/*</code> address while the
-    site restructure is in progress; they will move to <code>/styles/*</code> shortly.
-  </p>
 </DocLayout>

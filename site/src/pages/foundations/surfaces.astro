@@ -2,18 +2,8 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Theming" description="Farn data-surface and data-theme system — surfaces, dark mode, and FOWT prevention">
-  <nav slot="subnav" class="sub-nav filled" id="sub-nav-theming" aria-label="Section navigation">
-    <div class="sub-nav-inner">
-      <a href="#surface-system" class="sub-nav-link">Surface System</a>
-      <a href="#live-demo"      class="sub-nav-link">Live Demo</a>
-      <a href="#theme-toggle"   class="sub-nav-link">Theme Toggle</a>
-      <a href="#fowt"           class="sub-nav-link">FOWT Prevention</a>
-      <span class="sub-nav-indicator"></span>
-    </div>
-  </nav>
-
-  <h1>Theming</h1>
+<DocLayout title="Surfaces" description="Farn's theme and surface model — the two-axis system behind dark/light and depth">
+  <h1>Surfaces</h1>
   <span class="badge badge-published">stable</span>
   <p>
     Farn's theming system has two orthogonal axes. <code>data-theme</code> sets an absolute
@@ -22,22 +12,42 @@ import DocLayout from '../../layouts/DocLayout.astro';
     palette token for the current theme. They compose freely: a dark panel inside a light page
     needs only one attribute pair.
   </p>
+  <p>
+    For the token lookup table and copy-ready snippets, see
+    <a href="/styles/theming">Styles &rsaquo; Theming</a>.
+  </p>
 
-  <h2 id="surface-system">Surface System</h2>
+  <h2 id="surface-system">The Two-Axis Model</h2>
+  <p>
+    Most theming systems give you a single switch — light or dark. Farn gives you two independent
+    controls: an <em>absolute</em> theme axis and a <em>relative</em> depth axis.
+  </p>
+  <p>
+    The absolute axis (<code>data-theme</code>) sets the entire context for an element and all
+    its descendants. The relative axis (<code>data-surface</code>) expresses depth within
+    whatever theme context is currently active. Because depth is relative, a
+    <code>data-surface="layer"</code> on a dark panel resolves to Iron Night iron, and on a light
+    panel it resolves to Birch Mist mist — the same semantic intent, the right palette value.
+  </p>
+  <p>
+    This is why Farn palettes are designed in complementary pairs: Iron Night and Birch Mist
+    mirror each other's depth levels. Iron Night void = dark page; Birch Mist birch = light page.
+    Iron Night iron = dark card; Birch Mist mist = light card. The surface system is an
+    expression of the palette story, not a separate mechanism bolted on.
+  </p>
+
+  <h2 id="depth-table">Depth Reference</h2>
   <p>
     Each surface overrides <code>--color-bg</code> (and where relevant <code>--color-bg-panel</code>)
     so that any element using <code>background: var(--color-bg)</code> picks up the right depth
-    automatically. All other semantic tokens inherit from the current theme.
+    automatically.
   </p>
-
   <table>
     <thead>
       <tr>
         <th><code>data-surface</code></th>
         <th>Light <code>--color-bg</code></th>
         <th>Dark <code>--color-bg</code></th>
-        <th>Light <code>--color-bg-panel</code></th>
-        <th>Dark <code>--color-bg-panel</code></th>
         <th>Use</th>
       </tr>
     </thead>
@@ -46,34 +56,22 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <td><code>base</code></td>
         <td><code>--bm2-birch</code> <span class="swatch" style="background:#F7F6F3"></span></td>
         <td><code>--in0-void</code> <span class="swatch" style="background:#0D1117"></span></td>
-        <td><em>inherits</em></td>
-        <td><em>inherits</em></td>
         <td>Resets to page bg; useful inside a deeper surface when you need to escape back up</td>
       </tr>
       <tr>
         <td><code>layer</code></td>
         <td><code>--bm1-mist</code> <span class="swatch" style="background:#E9E6DC"></span></td>
         <td><code>--in1-iron</code> <span class="swatch" style="background:#374151"></span></td>
-        <td><code>--bm2-birch</code></td>
-        <td><code>--in2-slate</code></td>
         <td>Cards, sidebars, panels — one step raised from the page</td>
       </tr>
       <tr>
         <td><code>overlay</code></td>
         <td><code>--bm0-sand</code> <span class="swatch" style="background:#D5D2C7"></span></td>
         <td><code>--in2-slate</code> <span class="swatch" style="background:#4B5563"></span></td>
-        <td><em>inherits</em></td>
-        <td><code>--in2-slate</code> (capped)</td>
-        <td>Modals, dropdowns, floating elements — highest depth</td>
+        <td>Modals, dropdowns, floating elements — highest depth level</td>
       </tr>
     </tbody>
   </table>
-
-  <p>
-    The dark overlay ceiling: in dark mode <code>--color-bg-panel</code> inside an overlay is capped
-    at <code>--in2-slate</code> — the same as the overlay background itself — because slate is the
-    deepest available surface. Panels inside a dark overlay appear at the same shade; this is expected.
-  </p>
 
   <h2 id="live-demo">Live Demo</h2>
   <p>
@@ -158,33 +156,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </div>
   </div>
 
-  <h2 id="theme-toggle">Theme Toggle</h2>
-  <p>
-    Set <code>data-theme="dark"</code> or <code>data-theme="light"</code> on <code>&lt;html&gt;</code>
-    to control the page theme. The same attribute on any descendant element overrides the theme locally —
-    all semantic tokens re-resolve inside that element.
-  </p>
-
-  <pre><code>&lt;!-- Page-level: set on &lt;html&gt; --&gt;
-&lt;html data-theme="dark"&gt;
-
-&lt;!-- Element-level: local override --&gt;
-&lt;section data-theme="dark"&gt;
-  Always dark, regardless of the page theme
-&lt;/section&gt;
-
-&lt;!-- Composed: pinned theme + explicit depth --&gt;
-&lt;section data-theme="dark" data-surface="layer"&gt;
-  Dark panel, card depth
-&lt;/section&gt;</code></pre>
-
-  <p>
-    The theme attribute is self-contained — every semantic token (<code>--color-bg</code>,
-    <code>--color-text</code>, <code>--color-border</code>, <code>--color-accent</code>, and all
-    others) re-declares inside <code>[data-theme]</code>, so a forced-theme element needs no extra
-    overrides.
-  </p>
-
   <h2 id="fowt">FOWT Prevention</h2>
   <p>
     A Flash of Wrong Theme (FOWT) occurs when the browser renders a frame in the default light mode
@@ -212,8 +183,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <li><strong>localStorage key is <code>farn-theme</code>.</strong> The theme toggle must write to the same key. Falls back to <code>prefers-color-scheme</code> when no stored preference exists.</li>
   </ul>
   <p>
-    In Astro, use <code>is:inline</code> on the script tag to prevent bundling and ensure it remains
-    synchronous: <code>&lt;script is:inline&gt;...&lt;/script&gt;</code>.
+    In Astro, use <code>is:inline</code> on the script tag to prevent bundling:
+    <code>&lt;script is:inline&gt;...&lt;/script&gt;</code>.
+    For a practical setup walkthrough, see <a href="/getting-started#fowt">Getting Started &rsaquo; FOWT</a>.
   </p>
 </DocLayout>
 
@@ -228,7 +200,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     margin-left: 2px;
   }
 
-  /* Side-by-side forced-theme demo */
   .demo-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -252,7 +223,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     margin: 0;
   }
 
-  /* Individual surface box */
   .surface-demo {
     background: var(--color-bg);
     border: 1px solid var(--color-border);
@@ -278,7 +248,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     margin: 0;
   }
 
-  /* Page-reactive demo */
   .reactive-demo {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -297,7 +266,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     min-width: 160px;
   }
 
-  /* Composition demo */
   .composition-demo {
     display: flex;
     gap: var(--space-md);

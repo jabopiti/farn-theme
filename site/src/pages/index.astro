@@ -1,10 +1,13 @@
 ---
-// Standalone page — full landing experience, does not use DocLayout
-import LogoIcon from '../components/LogoIcon.astro';
+// Standalone page — full landing experience, does not use DocLayout.
+// Uses SiteNav for the nav bar (shared with DocLayout); landing-specific
+// body layout and scroll behaviour handled below.
+import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
+import { groups, ctas } from '../data/navigation';
 ---
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,21 +35,17 @@ import Footer from '../components/Footer.astro';
   @import '../../../tokens/base.css';
   @import '../styles/site.css';
 
-  /* ── Nav view-link cursor ─────────────────────────── */
-  .nav-view-link { cursor: pointer; }
-
   /* ── Section spacing ──────────────────────────────── */
   #about, #foundations, #components { padding: var(--space-3xl) 0; }
 
   /* ── Hero ─────────────────────────────────────────── */
   .hero {
-    min-height: calc(100vh + var(--subnav-height));
+    min-height: 100vh;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    margin-top: calc(-1 * var(--subnav-height));
-    padding-top: calc(var(--space-4xl) + var(--subnav-height));
+    padding-top: var(--space-4xl);
     padding-bottom: var(--space-4xl);
   }
   .hero::before {
@@ -446,59 +445,8 @@ import Footer from '../components/Footer.astro';
 </head>
 <body>
 
-<!-- Nav -->
-<nav class="nav" id="nav" aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo" data-view="design-system"><LogoIcon />Farn<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="#" data-view="design-system" class="nav-view-link active">Design System</a></li>
-      <li><a href="#" data-view="palette" class="nav-view-link">Palette</a></li>
-    </ul>
-    <div class="nav-right">
-      <a href="https://github.com/jabopiti/farn-theme" class="github-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-        <i class="ti ti-brand-github"></i>
-      </a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
-        <i class="ti ti-moon" id="themeIcon"></i>
-      </button>
-      <a href="/getting-started" class="nav-cta">Get Started</a>
-      <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileDrawer">
-        <i class="ti ti-menu-2" id="hamburgerIcon"></i>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<!-- Sub-nav -->
-<nav class="sub-nav" id="sub-nav" aria-label="Section navigation">
-  <div class="sub-nav-inner" id="subnav-ds">
-    <a href="#about" class="sub-nav-link">About</a>
-    <a href="#foundations" class="sub-nav-link">Foundations</a>
-    <a href="#components" class="sub-nav-link">Components</a>
-    <a href="#surfaces" class="sub-nav-link">Surfaces</a>
-    <span class="sub-nav-indicator" id="sub-nav-indicator-ds"></span>
-  </div>
-  <div class="sub-nav-inner" id="subnav-palette" style="display:none">
-    <a href="#iron-night" class="sub-nav-link">Iron Night</a>
-    <a href="#birch-mist" class="sub-nav-link">Birch Mist</a>
-    <a href="#forest" class="sub-nav-link">Forest</a>
-    <a href="#bloom" class="sub-nav-link">Bloom</a>
-    <a href="#semantic" class="sub-nav-link">Semantic</a>
-    <a href="#wcag" class="sub-nav-link">WCAG</a>
-    <a href="#css-vars" class="sub-nav-link">CSS Variables</a>
-    <span class="sub-nav-indicator" id="sub-nav-indicator-palette"></span>
-  </div>
-</nav>
-
-<!-- Mobile drawer -->
-<div class="mobile-drawer" id="mobileDrawer">
-  <a href="#" data-view="design-system" class="nav-view-link active">Design System</a>
-  <a href="#" data-view="palette" class="nav-view-link">Palette</a>
-  <a href="/getting-started" class="drawer-cta">Get Started</a>
-</div>
-
-<!-- Design System View -->
-<div id="view-ds">
+<!-- Nav + mobile drawer (shared with doc pages via SiteNav) -->
+<SiteNav {groups} {ctas} />
 
 <!-- Hero -->
 <section class="hero" data-theme="dark" aria-label="Hero">
@@ -507,8 +455,8 @@ import Footer from '../components/Footer.astro';
     <h1 class="hero-title">Sharp.<br><em>Warm.</em><br>Intellectual.</h1>
     <p class="hero-desc">A design system rooted in the forests of northern Germany. Framework-agnostic, token-first, built for brand, websites, and web apps.</p>
     <div class="hero-actions">
-      <a href="#" class="btn-primary" data-view="palette"><i class="ti ti-palette"></i> Explore palette</a>
-      <a href="/getting-started" class="btn-ghost"><i class="ti ti-book"></i> Getting Started</a>
+      <a href="/demo" class="btn-primary"><i class="ti ti-eye"></i> Explore the demo</a>
+      <a href="/getting-started" class="btn-ghost"><i class="ti ti-book"></i> Get Started</a>
     </div>
   </div>
   <div class="hero-palette-strip" aria-hidden="true">
@@ -540,7 +488,7 @@ import Footer from '../components/Footer.astro';
         <h2 class="section-title">A design system that knows what it is.</h2>
         <p>Farn is built on a single conviction: that a design system should have a point of view. Not a collection of neutral components, but a coherent vocabulary — warm enough to feel human, sharp enough to feel considered.</p>
         <p>Four token palettes. A two-layer semantic architecture. Framework-agnostic CSS custom properties. Component definitions, each with light and dark surface variants.</p>
-        <a href="#" class="btn-primary" data-view="palette" style="width:fit-content">Explore the colour system →</a>
+        <a href="/styles/color" class="btn-primary" style="width:fit-content">Explore the colour system →</a>
       </div>
       <div class="about-palettes">
         <div class="palette-label">Iron Night</div>
@@ -739,386 +687,39 @@ import Footer from '../components/Footer.astro';
   <div style="padding-bottom:var(--space-3xl)"></div>
 </section>
 
-</div><!-- /view-ds -->
-
-<!-- Palette View -->
-<div id="view-palette" hidden>
-  <div class="container">
-    <header class="page-header">
-      <p class="page-eyebrow">Farn Design System</p>
-      <h1 class="page-title">Colors &amp;<br><em>Palettes</em></h1>
-      <p class="page-desc">A warm, earthy colour system rooted in northern European forest landscapes. Seventeen carefully selected tokens across four named palettes — each with a distinct semantic role for dark and light surface design.</p>
-    </header>
-    <div class="all-swatches scroll-reveal" aria-hidden="true">
-      <div class="sw" style="background:#0D1117"><span class="sw-tip">void</span></div>
-      <div class="sw" style="background:#374151"><span class="sw-tip">iron</span></div>
-      <div class="sw" style="background:#4B5563"><span class="sw-tip">slate</span></div>
-      <div class="sw" style="background:#6B7280"><span class="sw-tip">ash</span></div>
-      <div class="sw" style="background:#D5D2C7"><span class="sw-tip">sand</span></div>
-      <div class="sw" style="background:#E9E6DC"><span class="sw-tip">mist</span></div>
-      <div class="sw" style="background:#F7F6F3"><span class="sw-tip">birch</span></div>
-      <div class="sw" style="background:#5C9E86"><span class="sw-tip">sage</span></div>
-      <div class="sw" style="background:#3E7A62"><span class="sw-tip">fern</span></div>
-      <div class="sw" style="background:#2D5E4A"><span class="sw-tip">forest</span></div>
-      <div class="sw" style="background:#254D5A"><span class="sw-tip">deepwater</span></div>
-      <div class="sw" style="background:#C5414C"><span class="sw-tip">ember</span></div>
-      <div class="sw" style="background:#AB5A2B"><span class="sw-tip">ochre</span></div>
-      <div class="sw" style="background:#8D6B20"><span class="sw-tip">grain</span></div>
-      <div class="sw" style="background:#567A37"><span class="sw-tip">moss</span></div>
-      <div class="sw" style="background:#885DB4"><span class="sw-tip">heather</span></div>
-    </div>
-
-    <section class="palette-section" id="iron-night">
-      <div class="palette-header scroll-reveal">
-        <div>
-          <h2 class="palette-name">Iron Night</h2>
-          <p class="palette-concept">Four progressively lighter dark tones — from the deepest void to a warm slate. The backbone of dark surface design. Used for backgrounds, elevated surfaces, active states, and secondary text. Never used as foreground text on light backgrounds.</p>
-        </div>
-        <div class="palette-swatches">
-          <div class="palette-swatch-large" style="background:#0D1117"><span class="swatch-hex" style="color:#6B7280">#0D1117</span></div>
-          <div class="palette-swatch-large" style="background:#374151"><span class="swatch-hex" style="color:var(--bm0-sand)">#374151</span></div>
-          <div class="palette-swatch-large" style="background:#4B5563"><span class="swatch-hex" style="color:var(--bm0-sand)">#4B5563</span></div>
-          <div class="palette-swatch-large" style="background:#6B7280"><span class="swatch-hex" style="color:var(--bm2-birch)">#6B7280</span></div>
-        </div>
-      </div>
-      <div class="token-grid">
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#0D1117"><button class="copy-btn" data-copy="#0D1117">copy</button></div><div class="token-info"><div class="token-name">--in0-void</div><div class="token-hex">#0D1117 · lum 0.0055</div><div class="token-role">Void</div><div class="token-desc">Primary dark background. Ink-black with a slight blue-green undertone.</div><div class="token-usage"><span class="usage-pill usage-dark">primary dark background</span><span class="usage-pill usage-light">primary text on light</span><span class="usage-pill usage-both">tooltip</span><span class="usage-pill usage-both">overlay / scrim</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#374151"><button class="copy-btn" data-copy="#374151">copy</button></div><div class="token-info"><div class="token-name">--in1-iron</div><div class="token-hex">#374151 · lum 0.0519</div><div class="token-role">Iron</div><div class="token-desc">Elevated dark surfaces — panels, cards, modals, floating popups. Border and state animations on light surfaces.</div><div class="token-usage"><span class="usage-pill usage-dark">elevated surface</span><span class="usage-pill usage-dark">status bars</span><span class="usage-pill usage-dark">panels</span><span class="usage-pill usage-dark">modals</span><span class="usage-pill usage-dark">floating popups</span><span class="usage-pill usage-dark">icon background</span><span class="usage-pill usage-light">border</span><span class="usage-pill usage-light">state animations</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#4B5563"><button class="copy-btn" data-copy="#4B5563">copy</button></div><div class="token-info"><div class="token-name">--in2-slate</div><div class="token-hex">#4B5563 · lum 0.0784</div><div class="token-role">Slate</div><div class="token-desc">Selection, input fills, and active states on dark surfaces. Secondary text on light surfaces.</div><div class="token-usage"><span class="usage-pill usage-dark">selection</span><span class="usage-pill usage-dark">text highlighting</span><span class="usage-pill usage-dark">border</span><span class="usage-pill usage-dark">tinted section</span><span class="usage-pill usage-dark">input fill</span><span class="usage-pill usage-dark">active states</span><span class="usage-pill usage-light">secondary text</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#6B7280"><button class="copy-btn" data-copy="#6B7280">copy</button></div><div class="token-info"><div class="token-name">--in3-ash</div><div class="token-hex">#6B7280 · lum 0.1329</div><div class="token-role">Ash</div><div class="token-desc">Tertiary text on light surfaces. Captions, placeholders, and disabled states. AA-large only — 18px+ or 14px bold.</div><div class="token-usage"><span class="usage-pill usage-light">tertiary text</span><span class="usage-pill usage-both">captions</span><span class="usage-pill usage-both">placeholders</span><span class="usage-pill usage-both">disabled</span></div></div></div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="birch-mist">
-      <div class="palette-header scroll-reveal">
-        <div>
-          <h2 class="palette-name">Birch Mist</h2>
-          <p class="palette-concept">Three warm off-white tones — not pure white, but the colour of aged parchment, linen, and river sand. The foundation of all light surface design.</p>
-        </div>
-        <div class="palette-swatches">
-          <div class="palette-swatch-large" style="background:#D5D2C7;border:1px solid rgba(0,0,0,0.06)"><span class="swatch-hex" style="color:#4B5563">#D5D2C7</span></div>
-          <div class="palette-swatch-large" style="background:#E9E6DC;border:1px solid rgba(0,0,0,0.06)"><span class="swatch-hex" style="color:#4B5563">#E9E6DC</span></div>
-          <div class="palette-swatch-large" style="background:#F7F6F3;border:1px solid rgba(0,0,0,0.06)"><span class="swatch-hex" style="color:#4B5563">#F7F6F3</span></div>
-        </div>
-      </div>
-      <div class="token-grid">
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#D5D2C7;border-bottom:1px solid rgba(0,0,0,0.06)"><button class="copy-btn" data-copy="#D5D2C7" style="color:#374151;background:rgba(0,0,0,0.1)">copy</button></div><div class="token-info"><div class="token-name">--bm0-sand</div><div class="token-hex">#D5D2C7 · lum 0.6436</div><div class="token-role">Sand</div><div class="token-desc">Input fills, hover and active states on light surfaces. Tertiary text on dark surfaces.</div><div class="token-usage"><span class="usage-pill usage-dark">tertiary text</span><span class="usage-pill usage-light">input fill</span><span class="usage-pill usage-light">hover</span><span class="usage-pill usage-light">active states</span><span class="usage-pill usage-light">selection</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#E9E6DC;border-bottom:1px solid rgba(0,0,0,0.06)"><button class="copy-btn" data-copy="#E9E6DC" style="color:#374151;background:rgba(0,0,0,0.1)">copy</button></div><div class="token-info"><div class="token-name">--bm1-mist</div><div class="token-hex">#E9E6DC · lum 0.7908</div><div class="token-role">Mist</div><div class="token-desc">Elevated surfaces, cards, and panels on light. Secondary text, hover, and state animations on dark.</div><div class="token-usage"><span class="usage-pill usage-dark">secondary text</span><span class="usage-pill usage-dark">state animations</span><span class="usage-pill usage-dark">hover</span><span class="usage-pill usage-light">elevated surface</span><span class="usage-pill usage-light">status bars</span><span class="usage-pill usage-light">panels</span><span class="usage-pill usage-light">modals</span><span class="usage-pill usage-light">floating popups</span><span class="usage-pill usage-light">text highlighting</span><span class="usage-pill usage-light">icon background</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#F7F6F3;border-bottom:1px solid rgba(0,0,0,0.06)"><button class="copy-btn" data-copy="#F7F6F3" style="color:#374151;background:rgba(0,0,0,0.1)">copy</button></div><div class="token-info"><div class="token-name">--bm2-birch</div><div class="token-hex">#F7F6F3 · lum 0.9216</div><div class="token-role">Birch</div><div class="token-desc">Primary light background. Primary text on dark surfaces. CTA/button text in both modes. 17.51:1 on Void.</div><div class="token-usage"><span class="usage-pill usage-dark">primary text on dark</span><span class="usage-pill usage-light">primary light background</span><span class="usage-pill usage-both">button / CTA text</span></div></div></div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="forest">
-      <div class="palette-header scroll-reveal">
-        <div>
-          <h2 class="palette-name">Forest</h2>
-          <p class="palette-concept">Four tones from calm sage through rich fern to a deep teal-inflected forest. The accent palette — every primary action, link, and interactive signal uses these tokens.</p>
-        </div>
-        <div class="palette-swatches">
-          <div class="palette-swatch-large" style="background:#5C9E86"><span class="swatch-hex" style="color:rgba(247,246,243,0.9)">#5C9E86</span></div>
-          <div class="palette-swatch-large" style="background:#3E7A62"><span class="swatch-hex" style="color:rgba(247,246,243,0.9)">#3E7A62</span></div>
-          <div class="palette-swatch-large" style="background:#2D5E4A"><span class="swatch-hex" style="color:rgba(247,246,243,0.9)">#2D5E4A</span></div>
-          <div class="palette-swatch-large" style="background:#254D5A"><span class="swatch-hex" style="color:rgba(247,246,243,0.9)">#254D5A</span></div>
-        </div>
-      </div>
-      <div class="token-grid">
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#5C9E86"><button class="copy-btn" data-copy="#5C9E86">copy</button></div><div class="token-info"><div class="token-name">--fo0-sage</div><div class="token-hex">#5C9E86 · lum 0.2492</div><div class="token-role">Sage</div><div class="token-desc">Supporting accent and dark-mode hover state for Fern. 5.19:1 on Void.</div><div class="token-usage"><span class="usage-pill usage-both">alternative primary accent</span><span class="usage-pill usage-both">supporting accent</span><span class="usage-pill usage-both">accent hover</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#3E7A62"><button class="copy-btn" data-copy="#3E7A62">copy</button></div><div class="token-info"><div class="token-name">--fo1-fern</div><div class="token-hex">#3E7A62 · lum 0.1302</div><div class="token-role">Fern — Primary Accent</div><div class="token-desc">The primary accent in both modes — every button, link, focus ring, and CTA. WCAG AA on Parchment (4.80:1) and Void (4.68:1).</div><div class="token-usage"><span class="usage-pill usage-both">primary accent</span><span class="usage-pill usage-both">primary CTA</span><span class="usage-pill usage-both">links</span><span class="usage-pill usage-both">focus ring</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#2D5E4A"><button class="copy-btn" data-copy="#2D5E4A">copy</button></div><div class="token-info"><div class="token-name">--fo2-forest</div><div class="token-hex">#2D5E4A · lum 0.0673</div><div class="token-role">Forest</div><div class="token-desc">Secondary accent depth. Accent hover in light mode. Badge text. 5.38:1 on Parchment.</div><div class="token-usage"><span class="usage-pill usage-both">secondary accent</span><span class="usage-pill usage-both">accent depth</span><span class="usage-pill usage-both">badge text</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#254D5A"><button class="copy-btn" data-copy="#254D5A">copy</button></div><div class="token-info"><div class="token-name">--fo3-deepwater</div><div class="token-hex">#254D5A · lum 0.0527</div><div class="token-role">Deepwater</div><div class="token-desc">Code block backgrounds on light pages. Blockquote border accent.</div><div class="token-usage"><span class="usage-pill usage-both">tertiary accent</span><span class="usage-pill usage-both">code block background</span><span class="usage-pill usage-both">blockquote accent</span></div></div></div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="bloom">
-      <div class="palette-header scroll-reveal">
-        <div>
-          <h2 class="palette-name">Bloom</h2>
-          <p class="palette-concept">Five semantic colours with fixed meanings that must not be repurposed. All five meet WCAG AA (4.5:1) on Parchment. Never used decoratively.</p>
-        </div>
-        <div class="palette-swatches">
-          <div class="palette-swatch-large" style="background:#C5414C"><span class="swatch-hex" style="color:rgba(247,246,243,0.9)">#C5414C</span></div>
-          <div class="palette-swatch-large" style="background:#AB5A2B"><span class="swatch-hex" style="color:rgba(247,246,243,0.9)">#AB5A2B</span></div>
-          <div class="palette-swatch-large" style="background:#8D6B20"><span class="swatch-hex" style="color:rgba(247,246,243,0.9)">#8D6B20</span></div>
-          <div class="palette-swatch-large" style="background:#567A37"><span class="swatch-hex" style="color:rgba(247,246,243,0.9)">#567A37</span></div>
-          <div class="palette-swatch-large" style="background:#885DB4"><span class="swatch-hex" style="color:rgba(247,246,243,0.9)">#885DB4</span></div>
-        </div>
-      </div>
-      <div class="token-grid">
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#C5414C"><button class="copy-btn" data-copy="#C5414C">copy</button></div><div class="token-info"><div class="token-name">--bl0-ember</div><div class="token-hex">#C5414C · on Parchment 4.51:1</div><div class="token-role">Ember — Error</div><div class="token-desc">Error states, destructive actions, form validation failures. The only red in the system.</div><div class="token-usage"><span class="usage-pill usage-both">error</span><span class="usage-pill usage-both">destructive</span><span class="usage-pill usage-both">form validation</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#AB5A2B"><button class="copy-btn" data-copy="#AB5A2B">copy</button></div><div class="token-info"><div class="token-name">--bl1-ochre</div><div class="token-hex">#AB5A2B · on Parchment 4.51:1</div><div class="token-role">Ochre — Annotation</div><div class="token-desc">Annotations, decorators, and informational callouts.</div><div class="token-usage"><span class="usage-pill usage-both">annotation</span><span class="usage-pill usage-both">decorators</span><span class="usage-pill usage-both">callouts</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#8D6B20"><button class="copy-btn" data-copy="#8D6B20">copy</button></div><div class="token-info"><div class="token-name">--bl2-grain</div><div class="token-hex">#8D6B20 · on Parchment 4.48:1</div><div class="token-role">Grain — Warning</div><div class="token-desc">Warning states, draft status, pending review.</div><div class="token-usage"><span class="usage-pill usage-both">warning</span><span class="usage-pill usage-both">draft</span><span class="usage-pill usage-both">pending</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#567A37"><button class="copy-btn" data-copy="#567A37">copy</button></div><div class="token-info"><div class="token-name">--bl3-moss</div><div class="token-hex">#567A37 · on Parchment 4.51:1</div><div class="token-role">Moss — Success</div><div class="token-desc">Success states, published status, confirmations.</div><div class="token-usage"><span class="usage-pill usage-both">success</span><span class="usage-pill usage-both">published</span><span class="usage-pill usage-both">active</span></div></div></div>
-        <div class="token-card scroll-reveal"><div class="token-color-strip" style="background:#885DB4"><button class="copy-btn" data-copy="#885DB4">copy</button></div><div class="token-info"><div class="token-name">--bl4-heather</div><div class="token-hex">#885DB4 · on Parchment 4.47:1</div><div class="token-role">Heather — Special</div><div class="token-desc">Uncommon or special states — beta features, research content. The only purple in the system.</div><div class="token-usage"><span class="usage-pill usage-both">beta</span><span class="usage-pill usage-both">research</span><span class="usage-pill usage-both">uncommon</span></div></div></div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="semantic">
-      <h2 class="palette-name scroll-reveal">Semantic Token Layer</h2>
-      <p class="palette-concept scroll-reveal" style="margin-bottom:var(--space-xl)">Components never reference palette tokens directly. They reference semantic aliases that resolve to the correct palette value per mode. When the theme switches, every component adapts automatically — no conditional logic needed.</p>
-      <div class="semantic-grid scroll-reveal">
-        <div class="semantic-mode">
-          <div class="semantic-mode-label" style="color:var(--color-accent)">Light mode</div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#F7F6F3"></div><span class="semantic-token-name">--color-bg</span><span class="semantic-resolves">→ birch</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#E9E6DC"></div><span class="semantic-token-name">--color-bg-panel</span><span class="semantic-resolves">→ mist</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#D5D2C7"></div><span class="semantic-token-name">--color-bg-inset</span><span class="semantic-resolves">→ sand</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-text</span><span class="semantic-resolves">→ void</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#4B5563"></div><span class="semantic-token-name">--color-text-secondary</span><span class="semantic-resolves">→ slate</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#6B7280"></div><span class="semantic-token-name">--color-text-tertiary</span><span class="semantic-resolves">→ ash</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#3E7A62"></div><span class="semantic-token-name">--color-accent</span><span class="semantic-resolves">→ fern</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#2D5E4A"></div><span class="semantic-token-name">--color-accent-hover</span><span class="semantic-resolves">→ forest</span></div>
-        </div>
-        <div class="semantic-mode" data-theme="dark">
-          <div class="semantic-mode-label" style="color:var(--color-accent)">Dark mode</div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#0D1117"></div><span class="semantic-token-name">--color-bg</span><span class="semantic-resolves">→ void</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#374151"></div><span class="semantic-token-name">--color-bg-panel</span><span class="semantic-resolves">→ iron</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#4B5563"></div><span class="semantic-token-name">--color-bg-inset</span><span class="semantic-resolves">→ slate</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#F7F6F3"></div><span class="semantic-token-name">--color-text</span><span class="semantic-resolves">→ birch</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#E9E6DC"></div><span class="semantic-token-name">--color-text-secondary</span><span class="semantic-resolves">→ mist</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#D5D2C7"></div><span class="semantic-token-name">--color-text-tertiary</span><span class="semantic-resolves">→ sand</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#3E7A62"></div><span class="semantic-token-name">--color-accent</span><span class="semantic-resolves">→ fern</span></div>
-          <div class="semantic-row"><div class="semantic-dot" style="background:#5C9E86"></div><span class="semantic-token-name">--color-accent-hover</span><span class="semantic-resolves">→ sage</span></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="wcag">
-      <h2 class="palette-name scroll-reveal">WCAG Contrast Reference</h2>
-      <p class="palette-concept scroll-reveal" style="margin-bottom:var(--space-xl)">Key contrast pairs across the system. All primary text combinations exceed AA (4.5:1). Ash is AA-large only.</p>
-      <div style="overflow-x:auto" class="scroll-reveal">
-        <table class="wcag-table">
-          <thead><tr><th>Pair</th><th>Ratio</th><th>Result</th></tr></thead>
-          <tbody>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#F7F6F3"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Parchment on Void</div></td><td class="wcag-ratio">17.51:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#D5D2C7"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Sand on Void</div></td><td class="wcag-ratio">12.50:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#6B7280"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Ash on Void</div></td><td class="wcag-ratio">3.35:1</td><td class="wcag-large">AA large only</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#0D1117"></div><div class="wcag-dot" style="background:#F7F6F3"></div></div>Void on Parchment</div></td><td class="wcag-ratio">17.51:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#374151"></div><div class="wcag-dot" style="background:#F7F6F3"></div></div>Iron on Parchment</div></td><td class="wcag-ratio">9.54:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#6B7280"></div><div class="wcag-dot" style="background:#F7F6F3"></div></div>Ash on Parchment</div></td><td class="wcag-ratio">4.47:1</td><td class="wcag-large">AA large only</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#3E7A62"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Fern on Void</div></td><td class="wcag-ratio">4.68:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#3E7A62"></div><div class="wcag-dot" style="background:#F7F6F3"></div></div>Fern on Parchment</div></td><td class="wcag-ratio">4.67:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#5C9E86"></div><div class="wcag-dot" style="background:#0D1117"></div></div>Sage on Void</div></td><td class="wcag-ratio">5.19:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#2D5E4A"></div><div class="wcag-dot" style="background:#F7F6F3"></div></div>Forest on Parchment</div></td><td class="wcag-ratio">6.91:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#C5414C"></div><div class="wcag-dot" style="background:#F7F6F3"></div></div>Ember on Parchment</div></td><td class="wcag-ratio">4.59:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#567A37"></div><div class="wcag-dot" style="background:#F7F6F3"></div></div>Moss on Parchment</div></td><td class="wcag-ratio">4.59:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#885DB4"></div><div class="wcag-dot" style="background:#F7F6F3"></div></div>Heather on Parchment</div></td><td class="wcag-ratio">4.55:1</td><td class="wcag-pass">✓ AA</td></tr>
-            <tr><td><div class="wcag-pair"><div class="wcag-dot-wrap"><div class="wcag-dot" style="background:#F7F6F3"></div><div class="wcag-dot" style="background:#3E7A62"></div></div>Parchment on Fern (btn text)</div></td><td class="wcag-ratio">4.67:1</td><td class="wcag-pass">✓ AA</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <div class="palette-divider"></div>
-
-    <section class="palette-section" id="css-vars">
-      <h2 class="palette-name scroll-reveal">CSS Variables</h2>
-      <p class="palette-concept scroll-reveal" style="margin-bottom:var(--space-xl)">Copy the full palette token block into your project's base CSS, or use the CDN link below.</p>
-      <div class="code-block scroll-reveal">
-        <button class="code-copy-btn" id="codeCopyBtn">Copy</button>
-        <pre id="cssCode"><span class="code-comment">/* Farn Design System — Palette Tokens v0.1.0 */</span>
-<span class="code-prop">:root</span> &#123;
-  <span class="code-comment">/* ── Iron Night ──────────────────────────── */</span>
-  <span class="code-prop">--in0-void</span>:        <span class="code-val">#0D1117</span>;   <span class="code-comment">/* Primary dark bg       */</span>
-  <span class="code-prop">--in1-iron</span>:        <span class="code-val">#374151</span>;   <span class="code-comment">/* Elevated surfaces      */</span>
-  <span class="code-prop">--in2-slate</span>:       <span class="code-val">#4B5563</span>;   <span class="code-comment">/* Active line, selections*/</span>
-  <span class="code-prop">--in3-ash</span>:         <span class="code-val">#6B7280</span>;   <span class="code-comment">/* Placeholders, guides   */</span>
-
-  <span class="code-comment">/* ── Birch Mist ──────────────────────────── */</span>
-  <span class="code-prop">--bm0-sand</span>:        <span class="code-val">#D5D2C7</span>;   <span class="code-comment">/* Elevated UI, dark text */</span>
-  <span class="code-prop">--bm1-mist</span>:       <span class="code-val">#E9E6DC</span>;   <span class="code-comment">/* Card fills, hover      */</span>
-  <span class="code-prop">--bm2-birch</span>:   <span class="code-val">#F7F6F3</span>;   <span class="code-comment">/* Primary bg / dark text */</span>
-
-  <span class="code-comment">/* ── Forest ──────────────────────────────── */</span>
-  <span class="code-prop">--fo0-sage</span>:        <span class="code-val">#5C9E86</span>;   <span class="code-comment">/* Dark accent, support   */</span>
-  <span class="code-prop">--fo1-fern</span>:        <span class="code-val">#3E7A62</span>;   <span class="code-comment">/* Primary accent         */</span>
-  <span class="code-prop">--fo2-forest</span>:      <span class="code-val">#2D5E4A</span>;   <span class="code-comment">/* Hover, badge text      */</span>
-  <span class="code-prop">--fo3-deepwater</span>:   <span class="code-val">#254D5A</span>;   <span class="code-comment">/* Code bg, selected dark */</span>
-
-  <span class="code-comment">/* ── Bloom ───────────────────────────────── */</span>
-  <span class="code-prop">--bl0-ember</span>:       <span class="code-val">#C5414C</span>;   <span class="code-comment">/* Error                  */</span>
-  <span class="code-prop">--bl1-ochre</span>:       <span class="code-val">#AB5A2B</span>;   <span class="code-comment">/* Annotation             */</span>
-  <span class="code-prop">--bl2-grain</span>:       <span class="code-val">#8D6B20</span>;   <span class="code-comment">/* Warning                */</span>
-  <span class="code-prop">--bl3-moss</span>:        <span class="code-val">#567A37</span>;   <span class="code-comment">/* Success                */</span>
-  <span class="code-prop">--bl4-heather</span>:     <span class="code-val">#885DB4</span>;   <span class="code-comment">/* Special                */</span>
-&#125;</pre>
-      </div>
-    </section>
-
-  </div>
-</div><!-- /view-palette -->
 
 <!-- Footer -->
 <Footer>
-  <a href="#foundations">Foundations</a>
-  <a href="#components">Components</a>
-  <a href="#" data-view="palette">Palette</a>
-  <a href="/getting-started">Getting Started</a>
+  <a href="/foundations">Foundations</a>
+  <a href="/styles">Styles</a>
+  <a href="/components">Components</a>
+  <a href="/getting-started">Get Started</a>
   <a href="https://github.com/jabopiti/farn-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
 </Footer>
 
 <script is:inline>
-// ── Theme ─────────────────────────────────────
-const toggle = document.getElementById('themeToggle');
-const icon = document.getElementById('themeIcon');
-function updateToggleIcon() {
-  const theme = document.documentElement.getAttribute('data-theme');
-  if (theme === 'dark') { icon.className = 'ti ti-sun'; toggle.setAttribute('aria-label', 'Switch to light mode'); }
-  else { icon.className = 'ti ti-moon'; toggle.setAttribute('aria-label', 'Switch to dark mode'); }
-}
-updateToggleIcon();
-toggle.addEventListener('click', () => {
-  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('farn-theme', next);
-  updateToggleIcon();
-});
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-  if (!localStorage.getItem('farn-theme')) {
-    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-    updateToggleIcon();
-  }
-});
-
-// ── View switching ─────────────────────────────
-const nav = document.getElementById('nav');
-const subNav = document.getElementById('sub-nav');
-const viewDs = document.getElementById('view-ds');
-const viewPalette = document.getElementById('view-palette');
-const subnavDs = document.getElementById('subnav-ds');
-const subnavPalette = document.getElementById('subnav-palette');
-let inPaletteView = false;
-
-function switchView(viewName, pushHistory) {
-  const isDs = viewName === 'design-system';
-  inPaletteView = !isDs;
-  viewDs.hidden = !isDs;
-  viewPalette.hidden = isDs;
-  subnavDs.style.display = isDs ? '' : 'none';
-  subnavPalette.style.display = isDs ? 'none' : '';
-  document.querySelectorAll('.nav-view-link').forEach(l => l.classList.toggle('active', l.dataset.view === viewName));
-  if (pushHistory !== false) history.pushState({ view: viewName }, '', isDs ? '#design-system' : '#palette');
-  window.scrollTo(0, 0);
-  if (!isDs) { nav.classList.add('filled'); subNav.classList.add('filled'); }
-  else if (window.scrollY <= 20) { nav.classList.remove('filled'); subNav.classList.remove('filled'); }
-  requestAnimationFrame(() => updateSubNavIndicator(isDs ? 'ds' : 'palette'));
-}
-
-document.querySelectorAll('[data-view]').forEach(el => {
-  el.addEventListener('click', e => { e.preventDefault(); switchView(el.dataset.view); });
-});
-window.addEventListener('popstate', e => {
-  switchView(e.state?.view ?? (window.location.hash === '#palette' ? 'palette' : 'design-system'), false);
-});
-if (window.location.hash === '#palette') switchView('palette', false);
-
-// ── Smart nav ──────────────────────────────────
-const cs = getComputedStyle(document.documentElement);
-const NAV_H    = parseInt(cs.getPropertyValue('--nav-height'));
-const SUBNAV_H = parseInt(cs.getPropertyValue('--subnav-height'));
-let lastY = 0;
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  nav.classList.toggle('filled', y > 20 || inPaletteView);
-  subNav.classList.toggle('filled', y > 20 || inPaletteView);
-  if (y < NAV_H) {
-    nav.classList.remove('hidden');
-    subNav.classList.remove('hidden');
-    document.documentElement.style.setProperty('--scroll-offset', (NAV_H + SUBNAV_H) + 'px');
-  } else if (y > lastY + 8) {
-    nav.classList.add('hidden');
-    subNav.classList.add('hidden');
-    document.documentElement.style.setProperty('--scroll-offset', SUBNAV_H + 'px');
-  } else if (y < lastY) {
-    nav.classList.remove('hidden');
-    subNav.classList.remove('hidden');
-    document.documentElement.style.setProperty('--scroll-offset', (NAV_H + SUBNAV_H) + 'px');
-  }
-  lastY = y;
-}, { passive: true });
-
-// ── Hamburger ──────────────────────────────────
-const hamburger = document.getElementById('hamburger');
-const hamburgerIcon = document.getElementById('hamburgerIcon');
-const drawer = document.getElementById('mobileDrawer');
-hamburger.addEventListener('click', () => {
-  const open = drawer.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded', open);
-  hamburgerIcon.className = open ? 'ti ti-x' : 'ti ti-menu-2';
-  document.body.style.overflow = open ? 'hidden' : '';
-});
-drawer.querySelectorAll('a:not(.drawer-cta)').forEach(a => {
-  a.addEventListener('click', () => {
-    drawer.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    hamburgerIcon.className = 'ti ti-menu-2';
-    document.body.style.overflow = '';
-  });
-});
-
-// ── Sub-nav indicator ──────────────────────────
-function updateSubNavIndicator(which) {
-  window.__subnavTrackers?.[which]?.();
-}
-
-// ── Palette sub-nav: scroll without hash change ─
-document.querySelectorAll('#subnav-palette .sub-nav-link').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const id = link.getAttribute('href').slice(1);
-    const target = document.getElementById(id);
-    if (target) {
-      const scrollOffset = parseInt(
-        getComputedStyle(document.documentElement).getPropertyValue('--scroll-offset')
-      ) || 108;
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - scrollOffset, behavior: 'smooth' });
+// Smart nav: transparent overlay over hero, fills + hides on scroll
+(function () {
+  const nav = document.getElementById('nav');
+  const NAV_H = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.classList.toggle('filled', y > 20);
+    if (y < NAV_H) {
+      nav.classList.remove('hidden');
+    } else if (y > lastY + 8) {
+      nav.classList.add('hidden');
+    } else if (y < lastY) {
+      nav.classList.remove('hidden');
     }
-  });
-});
-
-// ── Palette: copy hex buttons ──────────────────
-document.querySelectorAll('.copy-btn[data-copy]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    navigator.clipboard.writeText(btn.dataset.copy).then(() => {
-      btn.textContent = 'copied!'; btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1500);
-    });
-  });
-});
-
-// ── Palette: copy CSS block ────────────────────
-const codeCopyBtn = document.getElementById('codeCopyBtn');
-const cssCodeEl = document.getElementById('cssCode');
-if (codeCopyBtn && cssCodeEl) {
-  codeCopyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(cssCodeEl.textContent).then(() => {
-      codeCopyBtn.textContent = 'Copied!'; codeCopyBtn.classList.add('copied');
-      setTimeout(() => { codeCopyBtn.textContent = 'Copy'; codeCopyBtn.classList.remove('copied'); }, 2000);
-    });
-  });
-}
+    lastY = y;
+  }, { passive: true });
+})();
 </script>
 <script>
   import { initScrollReveal } from '../scripts/scroll-reveal.js';
-  import { initSubNavTracker } from '../scripts/subnav-tracker.js';
   initScrollReveal();
-  const dsTracker = initSubNavTracker(document.getElementById('subnav-ds'), {
-    threshold: 0.3,
-    activateFirst: true,
-  });
-  const paletteTracker = initSubNavTracker(document.getElementById('subnav-palette'), {
-    threshold: 0.3,
-    activateFirst: false,
-  });
-  window.__subnavTrackers = { ds: dsTracker.updateIndicator, palette: paletteTracker.updateIndicator };
 </script>
 </body>
 </html>
