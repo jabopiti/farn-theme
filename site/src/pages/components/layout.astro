@@ -384,18 +384,18 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <h2 id="separator">Separator <span class="badge badge-published">stable</span></h2>
   <p>
-    Content-level horizontal rules — distinct from section-transition patterns. Tokenised
-    <code>&lt;hr&gt;</code> and <code>.separator</code> variants for use within prose and
-    between content blocks. A labeled variant handles text-between-lines patterns (sign-in
-    flows, form sections).
+    Content-level horizontal rules — distinct from section-transition patterns. Three
+    purpose-named variants cover the full range from tight list spacing to editorial
+    accent moments.
   </p>
 
   <div class="demo-surface">
-    <hr>
-    <hr class="separator-strong">
-    <hr class="separator-subtle">
-    <hr class="separator-ghost">
-    <div class="separator-labeled" role="separator">or</div>
+    <p class="demo-label">Hairline — between list items</p>
+    <hr class="hairline">
+    <p class="demo-label">Section — between content groups</p>
+    <hr class="section-divider">
+    <p class="demo-label">Decorative — editorial scene break</p>
+    <hr class="decorative">
   </div>
 
   <div class="accordion">
@@ -407,83 +407,45 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <table>
           <thead><tr><th>Class</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>hr</code> / <code>.separator</code></td><td>Default border strength</td></tr>
-            <tr><td><code>.separator-strong</code></td><td>High-contrast rule</td></tr>
-            <tr><td><code>.separator-subtle</code></td><td>Low-emphasis rule for dense layouts</td></tr>
-            <tr><td><code>.separator-ghost</code></td><td>Near-invisible structural hint</td></tr>
-            <tr><td><code>.separator-labeled</code></td><td>Text centred between two rules — use <code>&lt;div&gt;</code>, not <code>&lt;hr&gt;</code></td></tr>
+            <tr><td><code>.hairline</code></td><td>1px subtle rule — tight spacing; between list items or dense content</td></tr>
+            <tr><td><code>.section-divider</code></td><td>1px standard rule — medium spacing; between content groups</td></tr>
+            <tr><td><code>.decorative</code></td><td>2px accent-color rule, 32px wide — editorial scene break</td></tr>
           </tbody>
         </table>
 
         <h3>Anatomy</h3>
-        <pre><code>&lt;!-- Native element; no class required --&gt;
-&lt;hr&gt;
+        <pre><code>&lt;!-- Tight rule between list items --&gt;
+&lt;hr class="hairline"&gt;
 
-&lt;!-- Class-based variant (for non-hr elements) --&gt;
-&lt;div class="separator"&gt;&lt;/div&gt;
+&lt;!-- Standard rule between content groups --&gt;
+&lt;hr class="section-divider"&gt;
 
-&lt;!-- Strength modifiers --&gt;
-&lt;hr class="separator-strong"&gt;
-&lt;hr class="separator-subtle"&gt;
-&lt;hr class="separator-ghost"&gt;
-
-&lt;!-- Labeled: must be a block element — hr cannot have children --&gt;
-&lt;div class="separator-labeled" role="separator"&gt;or&lt;/div&gt;
-
-&lt;!-- Labeled + strength modifier --&gt;
-&lt;div class="separator-labeled separator-subtle" role="separator"&gt;continue with&lt;/div&gt;
+&lt;!-- Short accent rule for editorial breaks --&gt;
+&lt;hr class="decorative"&gt;
 
 &lt;!-- Purely decorative — hide from assistive tech --&gt;
-&lt;hr aria-hidden="true"&gt;</code></pre>
+&lt;hr class="decorative" aria-hidden="true"&gt;</code></pre>
 
         <h3>Token reference</h3>
         <p>Separator uses semantic tokens directly — no Tier-3 override layer.</p>
         <table>
           <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
-            <tr><td><code>--color-border</code></td><td>Light: <code>--in3-ash</code> · Dark: <code>--in2-slate</code></td><td>Default line color</td></tr>
-            <tr><td><code>--color-border-strong</code></td><td>Light: <code>--in1-iron</code> · Dark: <code>--bm0-sand</code></td><td>High-contrast variant</td></tr>
-            <tr><td><code>--color-border-subtle</code></td><td><code>color-mix()</code> at 12% / 25%</td><td>Low-emphasis variant</td></tr>
-            <tr><td><code>--color-ghost-border</code></td><td><code>color-mix()</code> at 25%</td><td>Near-invisible variant</td></tr>
-            <tr><td><code>--color-text-secondary</code></td><td>Light: <code>--in2-slate</code> · Dark: <code>--bm1-mist</code></td><td>Label text color</td></tr>
-            <tr><td><code>--space-md</code></td><td><code>1.5rem</code></td><td>Vertical margin</td></tr>
-            <tr><td><code>--space-sm</code></td><td><code>0.75rem</code></td><td>Gap between label and rules</td></tr>
-            <tr><td><code>--label-font-size</code></td><td><code>0.875rem</code></td><td>Label text size</td></tr>
+            <tr><td><code>--color-border-subtle</code></td><td><code>color-mix()</code> at 12% / 25%</td><td>Hairline color</td></tr>
+            <tr><td><code>--color-border</code></td><td>Light: <code>--in3-ash</code> · Dark: <code>--in2-slate</code></td><td>Section divider color</td></tr>
+            <tr><td><code>--color-accent</code></td><td>Light: <code>--fo1-fern</code> · Dark: <code>--fo0-sage</code></td><td>Decorative rule color</td></tr>
+            <tr><td><code>--space-sm</code></td><td><code>0.75rem</code></td><td>Hairline vertical margin</td></tr>
+            <tr><td><code>--space-md</code></td><td><code>1.5rem</code></td><td>Section / decorative vertical margin</td></tr>
           </tbody>
         </table>
 
         <h3>CSS reference</h3>
         <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
-        <pre><code>hr,
-.separator &#123;
-  --_sep-color: var(--color-border);
-  border: none;
-  border-top: 1px solid var(--_sep-color);
-  margin-block: var(--space-md);
-&#125;
+        <pre><code>hr &#123; border: none; &#125;
 
-.separator-labeled &#123;
-  --_sep-color: var(--color-border);
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-block: var(--space-md);
-  color: var(--color-text-secondary);
-  font-size: var(--label-font-size);
-&#125;
-
-.separator-labeled::before,
-.separator-labeled::after &#123;
-  content: '';
-  flex: 1;
-  height: 1px;
-  background-color: var(--_sep-color);
-&#125;
-
-/* Strength modifiers work on both hr/.separator and .separator-labeled */
-.separator-strong &#123; --_sep-color: var(--color-border-strong); &#125;
-.separator-subtle &#123; --_sep-color: var(--color-border-subtle); &#125;
-.separator-ghost  &#123; --_sep-color: var(--color-ghost-border); &#125;</code></pre>
+.hairline        &#123; border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; &#125;
+.section-divider &#123; border-top: 1px solid var(--color-border);        margin: var(--space-md) 0; &#125;
+.decorative      &#123; border-top: 2px solid var(--color-accent);        width: 32px; margin: var(--space-md) 0; &#125;</code></pre>
 
       </div>
     </details>
@@ -528,6 +490,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     color: var(--color-text-tertiary);
     margin: 0 0 var(--space-xs);
   }
+  hr + .demo-label { margin-top: var(--space-sm); }
 
   /* ── Overlap demos ────────────────────────────────────────────────────── */
   .demo-overlap-a {

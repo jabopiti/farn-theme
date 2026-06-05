@@ -482,34 +482,8 @@ input[type="radio"] {
 
 /* ── Separator ──────────────────────────────────────────────────────────── */
 
-hr,
-.separator {
-  --_sep-color: var(--color-border);
-  border: none;
-  border-top: 1px solid var(--_sep-color);
-  margin-block: var(--space-md);
-}
+hr { border: none; }
 
-/* Labeled: use <div role="separator">, not <hr> */
-.separator-labeled {
-  --_sep-color: var(--color-border);
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-block: var(--space-md);
-  color: var(--color-text-secondary);
-  font-size: var(--label-font-size);
-}
-
-.separator-labeled::before,
-.separator-labeled::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background-color: var(--_sep-color);
-}
-
-/* Strength modifiers — declared after base rules so they win at equal specificity */
-.separator-strong { --_sep-color: var(--color-border-strong); }
-.separator-subtle { --_sep-color: var(--color-border-subtle); }
-.separator-ghost  { --_sep-color: var(--color-ghost-border); }
+.hairline        { border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; }
+.section-divider { border-top: 1px solid var(--color-border);        margin: var(--space-md) 0; }
+.decorative      { border-top: 2px solid var(--color-accent);        width: 32px; margin: var(--space-md) 0; }

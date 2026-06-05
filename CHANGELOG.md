@@ -18,7 +18,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
-- **T-48** `tokens/component-classes.css`: `hr`/`.separator` with default, strong, subtle, ghost variants; `.separator-labeled` text-between-rules pattern using internal `--_sep-color` property so strength modifiers work on labeled variant too; documented in Components › Layout
+- **T-48** `tokens/component-classes.css`: `.hairline`, `.section-divider`, `.decorative` separator classes (replaces previous modifier-based API: `hr`/`.separator`, `.separator-strong/subtle/ghost`, `.separator-labeled` removed); `hr` gets a browser reset only — all variants require an explicit class; documented in Components › Layout
 - **T-25** `tokens/components.css`: `--blob-height` (100px) and `--blob-duration` (900ms) Tier-3 tokens; `tokens/component-classes.css`: `.section-blob` class with opacity-only fade-in via T-22 scroll-reveal infrastructure; documented in Components › Layout with token reference and Figma/Inkscape path guidance
 - `tokens/dark-light.css`: `--color-on-success` and `--color-on-warning` semantic tokens (map to `--color-accent-text`; WCAG AA verified on moss/grain backgrounds)
 - `tokens/components.css`: Badge Tier-3 tokens — `--badge-height`, `--badge-padding`, `--badge-letter-spacing`, `--badge-{variant}-bg/text` for all 7 variants; badge classes now reference these tokens
