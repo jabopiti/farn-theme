@@ -22,11 +22,9 @@
 }
 
 /* ── Nav ─────────────────────────────────────────────────────────────────── */
-/* Intentional transparent-overlay pattern:                                    */
-/* When the nav sits over the dark hero (unfilled state), rgba tints are used  */
-/* for border and link colours because no solid palette token can represent a  */
-/* semi-transparent overlay against an unknown background. Once the nav fills   */
-/* (class .filled), all colours switch to semantic tokens.                     */
+/* Transparent-overlay pattern: nav starts unfilled (transparent) over the     */
+/* hero and gains .filled on scroll. All colours use semantic tokens so the    */
+/* unfilled state adapts to the current light/dark theme automatically.        */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -38,10 +36,7 @@
 }
 .nav.filled {
   background: var(--color-bg);
-  border-bottom-color: rgba(55,65,81,0.2);
-}
-[data-theme="dark"] .nav.filled {
-  border-bottom-color: rgba(75,85,99,0.4);
+  border-bottom-color: var(--color-border-subtle);
 }
 .nav.hidden { transform: translateY(-100%); border-bottom-color: transparent !important; }
 .nav-inner {
@@ -60,14 +55,12 @@
   font-size: 22px;
   font-weight: 800;
   font-variation-settings: 'opsz' 20;
-  color: var(--bm2-birch);
+  color: var(--color-text);
   text-decoration: none;
   letter-spacing: -0.02em;
   transition: color var(--duration-slow) var(--ease-default);
 }
 .nav-logo span { color: var(--color-accent); }
-.nav.filled .nav-logo { color: var(--color-text); }
-.nav.filled .nav-logo span { color: var(--color-accent); }
 .nav-logo-icon {
   height: 40px;
   width: auto;
@@ -87,15 +80,12 @@
 .nav-links a {
   font-size: 14px;
   font-weight: 500;
-  color: rgba(247,246,243,0.7);
+  color: var(--color-text-secondary);
   text-decoration: none;
   transition: color var(--duration-base) var(--ease-default);
 }
-.nav-links a:hover { color: var(--bm2-birch); font-weight: 600; }
+.nav-links a:hover { color: var(--color-text); font-weight: 600; }
 .nav-links a.active { color: var(--color-accent); font-weight: 600; }
-.nav.filled .nav-links a { color: var(--color-text-secondary); }
-.nav.filled .nav-links a:hover,
-.nav.filled .nav-links a.active { color: var(--color-accent); font-weight: 600; }
 .nav-right {
   display: flex;
   align-items: center;
@@ -111,16 +101,14 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  color: rgba(247,246,243,0.6);
+  color: var(--color-text-tertiary);
   font-size: 20px;
   transition: background-color var(--duration-base) var(--ease-default), color var(--duration-base) var(--ease-default);
 }
 .theme-toggle:hover {
-  background: rgba(247,246,243,0.1);
-  color: var(--bm2-birch);
+  background: var(--color-bg-panel);
+  color: var(--color-text);
 }
-.nav.filled .theme-toggle { color: var(--color-text-tertiary); }
-.nav.filled .theme-toggle:hover { background: var(--color-bg-panel); color: var(--color-text); }
 .github-link {
   width: 36px; height: 36px;
   background: transparent;
@@ -129,25 +117,23 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  color: rgba(247,246,243,0.6);
+  color: var(--color-text-tertiary);
   font-size: 20px;
   text-decoration: none;
   transition: background-color var(--duration-base) var(--ease-default), color var(--duration-base) var(--ease-default);
 }
 .github-link:hover {
-  background: rgba(247,246,243,0.1);
-  color: var(--bm2-birch);
+  background: var(--color-bg-panel);
+  color: var(--color-text);
 }
-.nav.filled .github-link { color: var(--color-text-tertiary); }
-.nav.filled .github-link:hover { background: var(--color-bg-panel); color: var(--color-text); }
 .nav-cta {
   height: 36px;
   padding: 0 16px;
   margin-left: var(--space-xs);
-  background: transparent;
-  color: var(--bm2-birch);
+  background: var(--color-accent);
+  color: var(--color-accent-text);
   border-radius: var(--radius-md);
-  border: 1.5px solid rgba(247,246,243,0.35);
+  border: 1.5px solid transparent;
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
@@ -155,20 +141,14 @@
   align-items: center;
   transition: background-color var(--duration-base) var(--ease-default), border-color var(--duration-base) var(--ease-default);
 }
-.nav-cta:hover { background: rgba(247,246,243,0.1); border-color: rgba(247,246,243,0.6); color: var(--bm2-birch); }
-.nav.filled .nav-cta {
-  background: var(--color-accent);
-  color: var(--color-accent-text);
-  border-color: transparent;
-}
-.nav.filled .nav-cta:hover { background: var(--color-accent-hover); color: var(--color-accent-text); }
-/* Secondary (ghost) CTA — e.g. Demo. Placed after .nav-cta rules to win the tie. */
-.nav.filled .nav-cta-ghost {
+.nav-cta:hover { background: var(--color-accent-hover); color: var(--color-accent-text); }
+/* Secondary (ghost) CTA — overrides the accent base unconditionally. */
+.nav-cta-ghost {
   background: transparent;
   color: var(--color-text-secondary);
   border-color: var(--color-border);
 }
-.nav.filled .nav-cta-ghost:hover {
+.nav-cta-ghost:hover {
   background: var(--color-bg-panel);
   color: var(--color-text);
   border-color: var(--color-border-strong);
@@ -184,16 +164,14 @@
   gap: 5px;
   align-items: center;
   border-radius: var(--radius-md);
-  color: rgba(247,246,243,0.6);
+  color: var(--color-text-secondary);
   font-size: 22px;
   transition: background-color var(--duration-base) var(--ease-default), color var(--duration-base) var(--ease-default);
 }
 .hamburger:hover {
-  background: rgba(247,246,243,0.1);
-  color: var(--bm2-birch);
+  background: var(--color-bg-panel);
+  color: var(--color-text);
 }
-.nav.filled .hamburger { color: var(--color-text-secondary); }
-.nav.filled .hamburger:hover { background: var(--color-bg-panel); color: var(--color-text); }
 @media (max-width: 640px) {
   .hamburger { display: flex; }
   .nav-right { margin-left: auto; }
