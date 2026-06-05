@@ -36,10 +36,7 @@
 }
 .nav.filled {
   background: var(--color-bg);
-  border-bottom-color: rgba(55,65,81,0.2);
-}
-[data-theme="dark"] .nav.filled {
-  border-bottom-color: rgba(75,85,99,0.4);
+  border-bottom-color: var(--color-border-subtle);
 }
 .nav.hidden { transform: translateY(-100%); border-bottom-color: transparent !important; }
 .nav-inner {
@@ -145,13 +142,13 @@
   transition: background-color var(--duration-base) var(--ease-default), border-color var(--duration-base) var(--ease-default);
 }
 .nav-cta:hover { background: var(--color-accent-hover); color: var(--color-accent-text); }
-/* Secondary (ghost) CTA — e.g. Demo. Placed after .nav-cta rules to win the tie. */
-.nav.filled .nav-cta-ghost {
+/* Secondary (ghost) CTA — overrides the accent base unconditionally. */
+.nav-cta-ghost {
   background: transparent;
   color: var(--color-text-secondary);
   border-color: var(--color-border);
 }
-.nav.filled .nav-cta-ghost:hover {
+.nav-cta-ghost:hover {
   background: var(--color-bg-panel);
   color: var(--color-text);
   border-color: var(--color-border-strong);
