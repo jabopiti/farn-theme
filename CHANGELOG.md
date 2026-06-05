@@ -21,6 +21,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `tokens/components.css`: Accordion toggle tokens — `--accordion-toggle-size`, `--accordion-toggle-rotation`; accordion class updated
 
 ### Changed
+- `site/src/pages/index.astro`: Removed `data-theme="dark"` from the hero section — it now follows the page theme like any other section
+- `site/src/styles/site.css`: Nav unfilled state now uses semantic tokens throughout (`--color-text`, `--color-text-secondary`, `--color-text-tertiary`, `--color-accent`, `--color-accent-text`, `--color-bg-panel`) instead of hardcoded light-on-dark palette values; nav CTA always renders as a primary accent button regardless of scroll state
 - `tokens/dark-light.css`: `--color-border-subtle` and `--color-ghost-border` now use `color-mix()` instead of hardcoded `rgba()`, keeping them tied to palette tokens
 
 ### Docs
