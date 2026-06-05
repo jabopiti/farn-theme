@@ -8,10 +8,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Fixed
+- `tokens/base.css`: Global `a`, `a:visited`, and `a:hover` rules now use `:where()` (zero specificity) so component class selectors always win. Previously `a:visited` had specificity (0,1,1), beating single-class component rules like `.nav-cta` and `.btn-p`, causing visited CTA buttons to render green text on a green background (invisible) and the nav logo "Farn" to appear in accent colour instead of primary text colour.
 - `tokens/component-classes.css`: `.btn` now has a `:focus-visible` outline (`2px solid var(--color-accent)`, offset 3px) — buttons were invisible to keyboard users when loaded via `farn-components.css` standalone
 - `tokens/component-classes.css`: `.breadcrumb-item a:focus-visible` added to the hover/current selector so keyboard navigation shows the text colour change
 - `tokens/component-classes.css`: Input focus now uses `:focus-visible` instead of `:focus`; `box-shadow` glow wrapped in `@supports (color: color-mix(...))` — older browsers fall back to the border-colour indicator
 - `tokens/component-classes.css`: `.section-wave` and `.overlap-card` are now visible when JavaScript is unavailable via `@media (scripting: none)` (Chrome 120+, Firefox 113+, Safari 17+)
+
+### Changed
+- `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
 - **T-48** `tokens/component-classes.css`: `hr`/`.separator` with default, strong, subtle, ghost variants; `.separator-labeled` text-between-rules pattern using internal `--_sep-color` property so strength modifiers work on labeled variant too; documented in Components › Layout
