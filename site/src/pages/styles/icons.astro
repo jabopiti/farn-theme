@@ -127,8 +127,10 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
 
   <h2>Colour with semantic tokens</h2>
   <p>
-    Set <code>stroke="currentColor"</code> (Lucide's default) and control colour through the
-    parent's <code>color</code> property. Farn's semantic tokens already resolve per theme and
+    Control icon colour through the parent's <code>color</code> property — SVG icons inherit it
+    via <code>currentColor</code> regardless of whether they use stroke or fill. Lucide uses
+    <code>stroke="currentColor"</code> by default; Phosphor Fill and Tabler filled variants use
+    <code>fill="currentColor"</code>. Either way, Farn's semantic tokens resolve per theme and
     surface, so an icon coloured with <code>var(--color-text)</code> stays legible everywhere —
     no dark-mode overrides needed.
   </p>
@@ -253,7 +255,6 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
     display: flex;
     align-items: center;
     gap: var(--space-xs);
-    font-size: 1rem;
     color: var(--color-text);
   }
 
