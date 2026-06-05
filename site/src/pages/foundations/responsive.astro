@@ -1,0 +1,58 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Responsive" description="Farn's breakpoint tokens and mobile-first responsive conventions">
+  <h1>Responsive</h1>
+  <span class="badge badge-beta">beta</span>
+  <p>
+    Farn defines two breakpoint reference values as tokens: <code>--breakpoint-mobile</code> (640&thinsp;px)
+    and <code>--breakpoint-tablet</code> (768&thinsp;px). CSS custom properties cannot be used inside
+    <code>@media</code> conditions directly, so the tokens act as the canonical reference — every
+    media query in the codebase is annotated with the corresponding token name in a comment so the
+    connection is always visible and a project-wide search finds all breakpoint usage immediately.
+  </p>
+
+  <h2 id="breakpoints">Breakpoint tokens</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Token</th>
+        <th>Value</th>
+        <th>Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--breakpoint-mobile</code></td>
+        <td><code>640px</code></td>
+        <td>Single-column stack, mobile nav drawer, reduced padding</td>
+      </tr>
+      <tr>
+        <td><code>--breakpoint-tablet</code></td>
+        <td><code>768px</code></td>
+        <td>Multi-column grid collapse, reduced gap between sections</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="usage">Usage pattern</h2>
+  <p>
+    CSS custom properties are not supported inside <code>@media (...)</code> conditions by any browser.
+    Instead, write the literal pixel value and add an inline comment naming the token. This keeps
+    media queries greppable and ties each one back to the token system without requiring a build tool.
+  </p>
+  <pre><code>/* ✓ correct — literal value + token annotation */
+@media (max-width: 640px) /* --breakpoint-mobile */ &#123;
+  .grid &#123; grid-template-columns: 1fr; &#125;
+&#125;
+
+/* ✗ incorrect — custom properties do not work in @media */
+@media (max-width: var(--breakpoint-mobile)) &#123; ... &#125;</code></pre>
+  <p>
+    When you add a new media query, search for <code>--breakpoint-mobile</code> first to see how
+    existing rules are written, then follow the same comment pattern.
+  </p>
+
+  <!-- TODO T-49: expand with layout philosophy, fluid clamp() type scale, semantic meaning per breakpoint, reflow-by-content approach -->
+</DocLayout>

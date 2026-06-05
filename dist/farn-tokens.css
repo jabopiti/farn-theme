@@ -76,6 +76,10 @@
   --width-prose:   70ch;
   --width-narrow:  640px;
 
+  /* Breakpoints (reference values — CSS custom properties cannot be used in @media directly) */
+  --breakpoint-mobile:  640px;
+  --breakpoint-tablet:  768px;
+
   /* Border radius */
   --radius-sm:  4px;
   --radius-md:  6px;

@@ -17,7 +17,7 @@
   margin: 0 auto;
   padding: 0 var(--space-lg);
 }
-@media (max-width: 640px) {
+@media (max-width: 640px) /* --breakpoint-mobile */ {
   .container { padding: 0 var(--space-md); }
 }
 
@@ -76,7 +76,7 @@
   padding: 0;
   margin-left: auto;
 }
-@media (max-width: 640px) { .nav-links { display: none; } }
+@media (max-width: 640px) /* --breakpoint-mobile */ { .nav-links { display: none; } }
 .nav-links a {
   font-size: 14px;
   font-weight: 500;
@@ -172,7 +172,7 @@
   background: var(--color-bg-panel);
   color: var(--color-text);
 }
-@media (max-width: 640px) {
+@media (max-width: 640px) /* --breakpoint-mobile */ {
   .hamburger { display: flex; }
   .nav-right { margin-left: auto; }
   .nav-cta { display: none; }
