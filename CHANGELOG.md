@@ -14,6 +14,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `tokens/component-classes.css`: `.section-wave` and `.overlap-card` are now visible when JavaScript is unavailable via `@media (scripting: none)` (Chrome 120+, Firefox 113+, Safari 17+)
 
 ### Added
+- **T-48** `tokens/component-classes.css`: `hr`/`.separator` with default, strong, subtle, ghost variants; `.separator-labeled` text-between-rules pattern using internal `--_sep-color` property so strength modifiers work on labeled variant too; documented in Components › Layout
 - **T-25** `tokens/components.css`: `--blob-height` (100px) and `--blob-duration` (900ms) Tier-3 tokens; `tokens/component-classes.css`: `.section-blob` class with opacity-only fade-in via T-22 scroll-reveal infrastructure; documented in Components › Layout with token reference and Figma/Inkscape path guidance
 - `tokens/dark-light.css`: `--color-on-success` and `--color-on-warning` semantic tokens (map to `--color-accent-text`; WCAG AA verified on moss/grain backgrounds)
 - `tokens/components.css`: Badge Tier-3 tokens — `--badge-height`, `--badge-padding`, `--badge-letter-spacing`, `--badge-{variant}-bg/text` for all 7 variants; badge classes now reference these tokens
