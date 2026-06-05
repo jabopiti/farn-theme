@@ -18,6 +18,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
+- **T-54** `tokens/spacing.css`: `--breakpoint-mobile: 640px` and `--breakpoint-tablet: 768px` reference tokens; all 8 `@media (max-width: …)` queries in `site/` annotated with `/* --breakpoint-mobile */` / `/* --breakpoint-tablet */` comments; `site/src/pages/foundations/responsive.astro` stub documents the two tokens and the comment-annotation pattern; Responsive added to Foundations sub-nav
 - **T-48** `tokens/component-classes.css`: `.hairline`, `.section-divider`, `.decorative` separator classes (replaces previous modifier-based API: `hr`/`.separator`, `.separator-strong/subtle/ghost`, `.separator-labeled` removed); `hr` gets a browser reset only — all variants require an explicit class; documented in Components › Layout
 - **T-25** `tokens/components.css`: `--blob-height` (100px) and `--blob-duration` (900ms) Tier-3 tokens; `tokens/component-classes.css`: `.section-blob` class with opacity-only fade-in via T-22 scroll-reveal infrastructure; documented in Components › Layout with token reference and Figma/Inkscape path guidance
 - `tokens/dark-light.css`: `--color-on-success` and `--color-on-warning` semantic tokens (map to `--color-accent-text`; WCAG AA verified on moss/grain backgrounds)
