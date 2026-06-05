@@ -130,4 +130,27 @@
   --badge-font-size:      0.6875rem; /* 11px */
   --hint-font-size:       0.8125rem; /* 13px */
   --breadcrumb-font-size: 0.875rem;  /* 14px */
+
+  /* ── Quote tokens ──────────────────────────────────────────────────────── */
+  --quote-border-width:   3px;
+  --quote-border-color:   var(--color-accent);
+  --quote-text-color:     var(--color-text-secondary);
+  --quote-footer-color:   var(--color-text-tertiary);
+  --quote-padding:        var(--space-sm) 0 var(--space-sm) var(--space-lg);
+  --quote-margin-bottom:  var(--space-lg);
+  --quote-opsz:           16;
+
+  /* Pullquote */
+  --quote-pull-rule-width:  32px;
+  --quote-pull-rule-height: 2px;
+  --quote-pull-rule-color:  var(--color-accent);
+
+  /* Attribution card */
+  --quote-attr-bg:          var(--color-bg-panel);
+  --quote-attr-border:      var(--color-border-subtle);
+  --quote-attr-radius:      var(--radius-lg);
+  --quote-attr-padding:     var(--space-md) var(--space-lg);
+  --quote-attr-gap:         var(--space-md);
+  --quote-attr-avatar-size: 40px;
+  --quote-attr-avatar-bg:   color-mix(in srgb, var(--fo1-fern) 15%, transparent);
 }

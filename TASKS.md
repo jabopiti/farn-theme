@@ -574,7 +574,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-47 · Quote / blockquote component
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/next-task-planning-lyR12`
 
 **Gap:** The landing page demos a blockquote/pullquote pattern but no `.quote` class ships in `farn-components.css`; it's undocumented.
 

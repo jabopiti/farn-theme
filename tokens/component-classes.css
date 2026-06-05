@@ -487,3 +487,109 @@ hr { border: none; }
 .hairline        { border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; }
 .section-divider { border-top: 1px solid var(--color-border);        margin: var(--space-md) 0; }
 .decorative      { border-top: 2px solid var(--color-accent);        width: 32px; margin: var(--space-md) 0; }
+
+/* ── Quotes ──────────────────────────────────────────────────────────────── */
+
+/* Base: blockquote */
+.quote {
+  border-left: var(--quote-border-width) solid var(--quote-border-color);
+  padding: var(--quote-padding);
+  margin-bottom: var(--quote-margin-bottom);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: 'opsz' var(--quote-opsz);
+  color: var(--quote-text-color);
+}
+
+.quote footer {
+  display: block;
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--quote-footer-color);
+  margin-top: var(--space-xs);
+}
+
+.quote cite {
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--quote-footer-color);
+}
+
+/* Pullquote: figure */
+.quote-pull {
+  text-align: center;
+  padding: 0 var(--space-xl);
+  margin-bottom: var(--quote-margin-bottom);
+}
+
+.quote-pull::before {
+  content: '';
+  display: block;
+  width: var(--quote-pull-rule-width);
+  height: var(--quote-pull-rule-height);
+  background: var(--quote-pull-rule-color);
+  margin: 0 auto var(--space-sm);
+}
+
+.quote-pull p {
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' 20;
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.quote-pull figcaption {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-top: var(--space-xs);
+}
+
+/* Attribution card */
+.quote-attribution {
+  background: var(--quote-attr-bg);
+  border: 1px solid var(--quote-attr-border);
+  border-radius: var(--quote-attr-radius);
+  padding: var(--quote-attr-padding);
+  display: flex;
+  gap: var(--quote-attr-gap);
+  align-items: flex-start;
+  margin-bottom: var(--quote-margin-bottom);
+}
+
+.quote-attribution-avatar {
+  width: var(--quote-attr-avatar-size);
+  height: var(--quote-attr-avatar-size);
+  border-radius: var(--radius-full);
+  background: var(--quote-attr-avatar-bg);
+  display: grid;
+  place-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.quote-attribution-text {
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' 14;
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.quote-attribution-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: var(--space-xs);
+}
+
+.quote-attribution-role {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
