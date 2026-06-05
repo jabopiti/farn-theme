@@ -463,3 +463,12 @@
 }
 
 .demo-surface p { margin: 0; }
+
+/* Informational callout — pair with .demo-surface for the full treatment */
+.callout {
+  border-left: 3px solid var(--color-accent);
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.9em;
+  line-height: 1.6;
+  margin: var(--space-lg) 0;
+}

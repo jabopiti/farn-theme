@@ -647,11 +647,11 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-52 · Styles > Icons guide
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/epic-davinci-7sxTf`
 
 **Gap:** Farn ships no icon set; consumers have no guidance on using a third-party library with Farn tokens. The Phase-1 stub needs full content.
 
-- [ ] Replace the stub with: rationale for not bundling icons, recommended libraries, and how to size/colour icons with `--space-*` / `--color-*` tokens
+- [x] Replace the stub with: rationale for not bundling icons, recommended libraries, and how to size/colour icons with `--space-*` / `--color-*` tokens
 
 ---
 
@@ -675,3 +675,14 @@ Merged into T-49 (Complete Foundations section).
 - [ ] "Tokens in action" section: light/dark toggle reuses `data-theme` toggle, no new JS
 - [ ] Carry forward all existing animation infrastructure (scroll-reveal, hero fade-in, transparent nav)
 - [ ] Ensure zero dead links after cleanup; update landing page meta description
+
+---
+
+## T-54 · Breakpoint tokens
+`status: backlog` `effort: XS`
+
+**Gap:** `@media (max-width: 640px)` appears ~9 times across `site/src/styles/site.css` and individual page `<style>` blocks as a hardcoded pixel value. No corresponding token exists — changes to the mobile breakpoint require a site-wide grep-and-replace, and new pages add another hardcoded instance each time.
+
+- [ ] Add `--breakpoint-mobile: 640px` (and optionally `--breakpoint-tablet`) to `tokens/spacing.css`
+- [ ] Replace all `max-width: 640px` media query values in `site/src/styles/site.css` and page-scoped styles with the token (CSS `env()` / custom properties in `@media` require native support — use the token as a reference value in comments, or evaluate `postcss-custom-media` if the build supports it)
+- [ ] Document the breakpoints in `site/src/pages/foundations/responsive.astro` (T-49)
