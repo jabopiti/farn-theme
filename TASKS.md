@@ -679,10 +679,10 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-54 · Breakpoint tokens
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/t54-Z56eJ`
 
 **Gap:** `@media (max-width: 640px)` appears ~9 times across `site/src/styles/site.css` and individual page `<style>` blocks as a hardcoded pixel value. No corresponding token exists — changes to the mobile breakpoint require a site-wide grep-and-replace, and new pages add another hardcoded instance each time.
 
-- [ ] Add `--breakpoint-mobile: 640px` (and optionally `--breakpoint-tablet`) to `tokens/spacing.css`
-- [ ] Replace all `max-width: 640px` media query values in `site/src/styles/site.css` and page-scoped styles with the token (CSS `env()` / custom properties in `@media` require native support — use the token as a reference value in comments, or evaluate `postcss-custom-media` if the build supports it)
-- [ ] Document the breakpoints in `site/src/pages/foundations/responsive.astro` (T-49)
+- [x] Add `--breakpoint-mobile: 640px` (and optionally `--breakpoint-tablet`) to `tokens/spacing.css`
+- [x] Replace all `max-width: 640px` media query values in `site/src/styles/site.css` and page-scoped styles with the token (CSS `env()` / custom properties in `@media` require native support — use the token as a reference value in comments, or evaluate `postcss-custom-media` if the build supports it)
+- [x] Document the breakpoints in `site/src/pages/foundations/responsive.astro` (T-49)
