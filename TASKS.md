@@ -607,13 +607,13 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-48 · Separator (content-level divider)
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/confident-pascal-cjXcn`
 
 **Gap:** Content-level horizontal rules are used throughout prose but not tokenised/documented (distinct from the section-transition divider patterns).
 
-- [ ] Add `<hr>` / `.separator` variants using border tokens to `tokens/component-classes.css`
-- [ ] Run the 4-file build; update `CHANGELOG.md`
-- [ ] Document in Components > Layout
+- [x] Add `<hr>` / `.separator` variants using border tokens to `tokens/component-classes.css`
+- [x] Run the 4-file build; update `CHANGELOG.md`
+- [x] Document in Components > Layout
 
 ---
 

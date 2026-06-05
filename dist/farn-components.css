@@ -612,3 +612,40 @@ input[type="radio"] {
   .accordion summary::after            { transition: none; }
   .accordion details::details-content { transition: none; }
 }
+
+/* ── Separator ──────────────────────────────────────────────────────────── */
+
+hr,
+.separator {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin-block: var(--space-md);
+}
+
+.separator-strong { border-top-color: var(--color-border-strong); }
+.separator-subtle { border-top-color: var(--color-border-subtle); }
+.separator-ghost  { border-top-color: var(--color-ghost-border); }
+
+/* Labeled: use <div role="separator">, not <hr> */
+.separator-labeled {
+  --_sep-line: var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-block: var(--space-md);
+  color: var(--color-text-secondary);
+  font-size: var(--label-font-size);
+}
+
+/* Strength modifiers work on labeled variant via --_sep-line */
+.separator-labeled.separator-strong { --_sep-line: var(--color-border-strong); }
+.separator-labeled.separator-subtle { --_sep-line: var(--color-border-subtle); }
+.separator-labeled.separator-ghost  { --_sep-line: var(--color-ghost-border); }
+
+.separator-labeled::before,
+.separator-labeled::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--_sep-line);
+}
