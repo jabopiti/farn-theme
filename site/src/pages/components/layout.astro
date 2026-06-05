@@ -446,8 +446,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td><code>--color-border-subtle</code></td><td><code>color-mix()</code> at 12% / 25%</td><td>Low-emphasis variant</td></tr>
             <tr><td><code>--color-ghost-border</code></td><td><code>color-mix()</code> at 25%</td><td>Near-invisible variant</td></tr>
             <tr><td><code>--color-text-secondary</code></td><td>Light: <code>--in2-slate</code> · Dark: <code>--bm1-mist</code></td><td>Label text color</td></tr>
-            <tr><td><code>--space-md</code></td><td><code>var(--space-md)</code></td><td>Vertical margin</td></tr>
-            <tr><td><code>--space-sm</code></td><td><code>var(--space-sm)</code></td><td>Gap between label and rules</td></tr>
+            <tr><td><code>--space-md</code></td><td><code>1.5rem</code></td><td>Vertical margin</td></tr>
+            <tr><td><code>--space-sm</code></td><td><code>0.75rem</code></td><td>Gap between label and rules</td></tr>
             <tr><td><code>--label-font-size</code></td><td><code>0.875rem</code></td><td>Label text size</td></tr>
           </tbody>
         </table>
@@ -456,17 +456,14 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
         <pre><code>hr,
 .separator &#123;
+  --_sep-color: var(--color-border);
   border: none;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--_sep-color);
   margin-block: var(--space-md);
 &#125;
 
-.separator-strong &#123; border-top-color: var(--color-border-strong); &#125;
-.separator-subtle &#123; border-top-color: var(--color-border-subtle); &#125;
-.separator-ghost  &#123; border-top-color: var(--color-ghost-border); &#125;
-
 .separator-labeled &#123;
-  --_sep-line: var(--color-border);
+  --_sep-color: var(--color-border);
   display: flex;
   align-items: center;
   gap: var(--space-sm);
@@ -475,17 +472,18 @@ import DocLayout from '../../layouts/DocLayout.astro';
   font-size: var(--label-font-size);
 &#125;
 
-.separator-labeled.separator-strong &#123; --_sep-line: var(--color-border-strong); &#125;
-.separator-labeled.separator-subtle &#123; --_sep-line: var(--color-border-subtle); &#125;
-.separator-labeled.separator-ghost  &#123; --_sep-line: var(--color-ghost-border); &#125;
-
 .separator-labeled::before,
 .separator-labeled::after &#123;
   content: '';
   flex: 1;
   height: 1px;
-  background-color: var(--_sep-line);
-&#125;</code></pre>
+  background-color: var(--_sep-color);
+&#125;
+
+/* Strength modifiers work on both hr/.separator and .separator-labeled */
+.separator-strong &#123; --_sep-color: var(--color-border-strong); &#125;
+.separator-subtle &#123; --_sep-color: var(--color-border-subtle); &#125;
+.separator-ghost  &#123; --_sep-color: var(--color-ghost-border); &#125;</code></pre>
 
       </div>
     </details>

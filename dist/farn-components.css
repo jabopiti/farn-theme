@@ -617,18 +617,15 @@ input[type="radio"] {
 
 hr,
 .separator {
+  --_sep-color: var(--color-border);
   border: none;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--_sep-color);
   margin-block: var(--space-md);
 }
 
-.separator-strong { border-top-color: var(--color-border-strong); }
-.separator-subtle { border-top-color: var(--color-border-subtle); }
-.separator-ghost  { border-top-color: var(--color-ghost-border); }
-
 /* Labeled: use <div role="separator">, not <hr> */
 .separator-labeled {
-  --_sep-line: var(--color-border);
+  --_sep-color: var(--color-border);
   display: flex;
   align-items: center;
   gap: var(--space-sm);
@@ -637,15 +634,15 @@ hr,
   font-size: var(--label-font-size);
 }
 
-/* Strength modifiers work on labeled variant via --_sep-line */
-.separator-labeled.separator-strong { --_sep-line: var(--color-border-strong); }
-.separator-labeled.separator-subtle { --_sep-line: var(--color-border-subtle); }
-.separator-labeled.separator-ghost  { --_sep-line: var(--color-ghost-border); }
-
 .separator-labeled::before,
 .separator-labeled::after {
   content: '';
   flex: 1;
   height: 1px;
-  background-color: var(--_sep-line);
+  background-color: var(--_sep-color);
 }
+
+/* Strength modifiers — declared after base rules so they win at equal specificity */
+.separator-strong { --_sep-color: var(--color-border-strong); }
+.separator-subtle { --_sep-color: var(--color-border-subtle); }
+.separator-ghost  { --_sep-color: var(--color-ghost-border); }
