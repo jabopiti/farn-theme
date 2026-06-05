@@ -62,7 +62,7 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
   &lt;ArrowRight size=&#123;20&#125; aria-hidden="true" /&gt;
 &lt;/button&gt;</code></pre>
 
-  <div class="icon-aside">
+  <div class="demo-surface icon-aside">
     <strong>Need more?</strong>
     <a href="https://phosphoricons.com" target="_blank" rel="noopener noreferrer">Phosphor</a>
     offers six weights including duotone — the only free library with native two-tone icons.
@@ -77,7 +77,7 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
     thumb: inline icons match the surrounding cap height; standalone affordances sit one step up.
   </p>
 
-  <div class="icon-size-demo">
+  <div class="demo-surface icon-size-demo">
     <div class="size-row">
       <span class="size-label">Inline with text</span>
       <span class="size-preview">
@@ -133,7 +133,7 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
     no dark-mode overrides needed.
   </p>
 
-  <div class="icon-colour-demo">
+  <div class="demo-surface icon-colour-demo">
     <div class="colour-swatch colour-text">
       <svg class="swatch-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
@@ -223,25 +223,17 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
 
 <style>
   .icon-aside {
-    background: var(--color-bg-panel);
-    border: 1px solid var(--color-border);
     border-left: 3px solid var(--color-accent);
-    border-radius: var(--radius-md);
     padding: var(--space-sm) var(--space-md);
     font-size: 0.9em;
     line-height: 1.6;
     margin: var(--space-lg) 0;
   }
 
-  /* Sizing demo */
   .icon-size-demo {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    padding: var(--space-md);
-    background: var(--color-bg-panel);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
     margin: var(--space-md) 0;
   }
 
@@ -249,7 +241,6 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
     display: flex;
     align-items: center;
     gap: var(--space-md);
-    color: var(--color-text);
   }
 
   .size-label {
@@ -266,15 +257,10 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
     color: var(--color-text);
   }
 
-  /* Colour demo */
   .icon-colour-demo {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-lg);
-    padding: var(--space-md);
-    background: var(--color-bg-panel);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
     margin: var(--space-md) 0;
   }
 
