@@ -406,15 +406,15 @@ summary {
   display: block;
 }
 
-a {
+:where(a) {
   color: var(--link-color);
 }
 
-a:visited {
+:where(a:visited) {
   color: var(--link-visited-color);
 }
 
-a:hover {
+:where(a:hover) {
   color: var(--link-hover-color);
 }
 
