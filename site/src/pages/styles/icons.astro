@@ -12,35 +12,96 @@ import DocLayout from '../../layouts/DocLayout.astro';
     and <em>colour</em> tokens to make any third-party set feel native.
   </p>
 
-  <h2>Recommended sets</h2>
-  <p>Any SVG or icon-font library works. These pair well with Farn's weight and warmth:</p>
-  <ul>
-    <li><a href="https://lucide.dev" target="_blank" rel="noopener noreferrer"><strong>Lucide</strong></a> — clean, consistent, MIT-licensed; great default.</li>
-    <li><a href="https://heroicons.com" target="_blank" rel="noopener noreferrer"><strong>Heroicons</strong></a> — outline + solid pairs, made by the Tailwind team.</li>
-    <li><a href="https://phosphoricons.com" target="_blank" rel="noopener noreferrer"><strong>Phosphor</strong></a> — six weights, flexible and characterful.</li>
-  </ul>
+  <h2>Recommended library</h2>
   <p>
-    These docs themselves use <a href="https://tabler.io/icons" target="_blank" rel="noopener noreferrer">Tabler Icons</a>
-    via the icon font — proof that the approach is library-agnostic.
+    <a href="https://lucide.dev" target="_blank" rel="noopener noreferrer"><strong>Lucide</strong></a>
+    is the recommended default — 1,700+ icons, ISC licence, a clean stroke character that sits
+    naturally with Farn's restrained aesthetic, and every icon uses <code>currentColor</code> out
+    of the box. It is the only library in the space with an official <code>lucide-astro</code>
+    package, and the <code>lucide-static</code> package ships individual SVG files for any
+    framework or no framework at all.
   </p>
+
+  <h3>Install</h3>
+  <pre><code># Astro — official component package
+npm install lucide-astro
+
+# Vanilla / any bundler — individual SVG files
+npm install lucide-static</code></pre>
+
+  <h3>Inline SVG (vanilla)</h3>
+  <p>
+    Browse <a href="https://lucide.dev/icons" target="_blank" rel="noopener noreferrer">lucide.dev/icons</a>,
+    click an icon, and copy the <code>&lt;svg&gt;</code> markup. Paste it directly into your HTML.
+    The default <code>stroke="currentColor"</code> means the icon inherits the surrounding text
+    colour without any extra CSS.
+  </p>
+  <pre><code>&lt;!-- Paste any icon from lucide.dev — stroke="currentColor" is the default --&gt;
+&lt;svg xmlns="http://www.w3.org/2000/svg"
+     width="24" height="24" viewBox="0 0 24 24"
+     fill="none" stroke="currentColor" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round"
+     aria-hidden="true"&gt;
+  &lt;path d="M5 12h14"/&gt;
+  &lt;path d="m12 5 7 7-7 7"/&gt;
+&lt;/svg&gt;</code></pre>
+
+  <h3>Astro components</h3>
+  <pre><code>---
+import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
+---
+
+&lt;!-- Decorative icon next to a label --&gt;
+&lt;button&gt;
+  &lt;ArrowRight size=&#123;20&#125; aria-hidden="true" /&gt;
+  Continue
+&lt;/button&gt;
+
+&lt;!-- Icon-only control — label goes on the button, not the icon --&gt;
+&lt;button aria-label="Next page"&gt;
+  &lt;ArrowRight size=&#123;20&#125; aria-hidden="true" /&gt;
+&lt;/button&gt;</code></pre>
+
+  <div class="icon-aside">
+    <strong>Need more?</strong>
+    <a href="https://phosphoricons.com" target="_blank" rel="noopener noreferrer">Phosphor</a>
+    offers six weights including duotone — the only free library with native two-tone icons.
+    <a href="https://tabler.io/icons" target="_blank" rel="noopener noreferrer">Tabler</a>
+    (6,100+ icons) suits dashboards and data-heavy products.
+    Both use <code>currentColor</code> and work with the same sizing and colour patterns below.
+  </div>
 
   <h2>Size with spacing tokens</h2>
   <p>
-    Drive icon dimensions from the spacing scale so icons track the rest of the system. As a rule of
-    thumb, an inline icon matches the cap height of its text; a standalone affordance sits a step up.
+    Drive icon dimensions from the spacing scale so they track the rest of the system. As a rule of
+    thumb: inline icons match the surrounding cap height; standalone affordances sit one step up.
   </p>
-  <pre><code>.icon &#123;
-  width: var(--space-md);   /* 24px — standalone / button icon */
-  height: var(--space-md);
-&#125;
 
-.icon-inline &#123;
-  width: 1em;               /* matches surrounding text size */
-  height: 1em;
-  vertical-align: -0.125em; /* optical baseline nudge */
-&#125;</code></pre>
+  <div class="icon-size-demo">
+    <div class="size-row">
+      <span class="size-label">Inline with text</span>
+      <span class="size-preview">
+        Read the
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-0.125em"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        docs
+      </span>
+    </div>
+    <div class="size-row">
+      <span class="size-label">Button / input (<code>--space-md</code>, 24px)</span>
+      <span class="size-preview">
+        <svg xmlns="http://www.w3.org/2000/svg" style="width:var(--space-md);height:var(--space-md)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </span>
+    </div>
+    <div class="size-row">
+      <span class="size-label">Standalone / feature (<code>--space-lg</code>, 36px)</span>
+      <span class="size-preview">
+        <svg xmlns="http://www.w3.org/2000/svg" style="width:var(--space-lg);height:var(--space-lg)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </span>
+    </div>
+  </div>
+
   <table>
-    <thead><tr><th>Context</th><th>Token</th><th>Size</th></tr></thead>
+    <thead><tr><th>Context</th><th>Token</th><th>Value</th></tr></thead>
     <tbody>
       <tr><td>Inline with text</td><td><code>1em</code></td><td>tracks font-size</td></tr>
       <tr><td>Button / input affordance</td><td><code>--space-md</code></td><td>24px</td></tr>
@@ -48,28 +109,200 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </tbody>
   </table>
 
+  <pre><code>.icon &#123;
+  width: var(--space-md);   /* 24px — button and input icons */
+  height: var(--space-md);
+&#125;
+
+.icon-inline &#123;
+  width: 1em;               /* tracks surrounding text size */
+  height: 1em;
+  vertical-align: -0.125em; /* optical baseline nudge */
+&#125;
+
+.icon-feature &#123;
+  width: var(--space-lg);   /* 36px — standalone callout or feature icon */
+  height: var(--space-lg);
+&#125;</code></pre>
+
   <h2>Colour with semantic tokens</h2>
   <p>
-    Use <code>currentColor</code> so icons inherit their parent's text colour, then let Farn's
-    semantic tokens do the theming. SVG icons set to <code>fill: currentColor</code> (or
-    <code>stroke: currentColor</code>) adapt to light, dark, and surface contexts for free.
+    Set <code>stroke="currentColor"</code> (Lucide's default) and control colour through the
+    parent's <code>color</code> property. Farn's semantic tokens already resolve per theme and
+    surface, so an icon coloured with <code>var(--color-text)</code> stays legible everywhere —
+    no dark-mode overrides needed.
   </p>
-  <pre><code>.icon &#123; fill: currentColor; &#125;
 
-/* Inherits --color-text by default; override per intent */
-.icon-accent  &#123; color: var(--color-accent); &#125;
-.icon-error   &#123; color: var(--color-error); &#125;
-.icon-muted   &#123; color: var(--color-text-tertiary); &#125;</code></pre>
+  <div class="icon-colour-demo">
+    <div class="colour-swatch colour-text">
+      <svg class="swatch-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <code>--color-text</code>
+    </div>
+    <div class="colour-swatch colour-accent">
+      <svg class="swatch-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
+      </svg>
+      <code>--color-accent</code>
+    </div>
+    <div class="colour-swatch colour-secondary">
+      <svg class="swatch-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 16v-4"/>
+        <path d="M12 8h.01"/>
+      </svg>
+      <code>--color-text-secondary</code>
+    </div>
+    <div class="colour-swatch colour-error">
+      <svg class="swatch-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+        <path d="M12 9v4"/>
+        <path d="M12 17h.01"/>
+      </svg>
+      <code>--color-error</code>
+    </div>
+    <div class="colour-swatch colour-success">
+      <svg class="swatch-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+      <code>--color-success</code>
+    </div>
+  </div>
+
+  <pre><code>/* Drive icon colour through the parent — icons inherit currentColor */
+.icon-accent   &#123; color: var(--color-accent); &#125;
+.icon-muted    &#123; color: var(--color-text-secondary); &#125;
+.icon-error    &#123; color: var(--color-error); &#125;
+.icon-success  &#123; color: var(--color-success); &#125;</code></pre>
+
   <p>
-    Because semantic tokens already resolve per theme, an icon coloured with
-    <code>var(--color-text)</code> stays legible on every surface without a single dark-mode
-    override.
+    Toggle the page theme to verify — the demo icons above adapt to light, dark, and every
+    <code>data-surface</code> context automatically.
   </p>
 
   <h2>Accessibility</h2>
   <ul>
-    <li>Decorative icons: add <code>aria-hidden="true"</code> so screen readers skip them.</li>
-    <li>Meaningful icons (icon-only buttons): give the control an <code>aria-label</code>.</li>
-    <li>Never signal state with colour alone — pair an icon or text with the semantic colour.</li>
+    <li>
+      <strong>Decorative icon (next to a label)</strong> — add <code>aria-hidden="true"</code>.
+      The visible text already conveys the meaning; the icon is presentational.
+    </li>
+    <li>
+      <strong>Icon-only control (no visible label)</strong> — put the accessible name on the
+      interactive element (<code>aria-label</code> on the <code>&lt;button&gt;</code>),
+      and add <code>aria-hidden="true"</code> to the icon itself.
+    </li>
+    <li>
+      <strong>Standalone icon conveying meaning</strong> — use <code>role="img"</code> and
+      a <code>&lt;title&gt;</code> inside the SVG so screen readers announce it.
+    </li>
+    <li>
+      <strong>Colour alone</strong> — never use icon colour as the sole state signal. Pair a
+      semantic colour with a distinct shape or a visible label.
+    </li>
   </ul>
+
+  <pre><code>&lt;!-- Decorative — icon sits next to a text label --&gt;
+&lt;button&gt;
+  &lt;svg aria-hidden="true"&gt;...&lt;/svg&gt;
+  Save changes
+&lt;/button&gt;
+
+&lt;!-- Icon-only control — accessible name lives on the button --&gt;
+&lt;button aria-label="Close dialog"&gt;
+  &lt;svg aria-hidden="true"&gt;...&lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;!-- Standalone meaningful icon — title is read aloud --&gt;
+&lt;svg role="img" aria-labelledby="icon-title"&gt;
+  &lt;title id="icon-title"&gt;Warning&lt;/title&gt;
+  ...
+&lt;/svg&gt;</code></pre>
 </DocLayout>
+
+<style>
+  .icon-aside {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin: var(--space-lg) 0;
+  }
+
+  /* Sizing demo */
+  .icon-size-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin: var(--space-md) 0;
+  }
+
+  .size-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    color: var(--color-text);
+  }
+
+  .size-label {
+    color: var(--color-text-secondary);
+    font-size: 0.85em;
+    min-width: 280px;
+  }
+
+  .size-preview {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+
+  /* Colour demo */
+  .icon-colour-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin: var(--space-md) 0;
+  }
+
+  .colour-swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .colour-swatch code {
+    font-size: 0.75em;
+    color: var(--color-text-secondary);
+  }
+
+  .swatch-icon {
+    width: var(--space-lg);
+    height: var(--space-lg);
+  }
+
+  .colour-text     { color: var(--color-text); }
+  .colour-accent   { color: var(--color-accent); }
+  .colour-secondary { color: var(--color-text-secondary); }
+  .colour-error    { color: var(--color-error); }
+  .colour-success  { color: var(--color-success); }
+
+  @media (max-width: 640px) {
+    .size-label { min-width: 0; }
+    .size-row   { flex-direction: column; align-items: flex-start; }
+  }
+</style>

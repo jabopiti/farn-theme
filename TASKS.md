@@ -647,11 +647,11 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-52 · Styles > Icons guide
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/epic-davinci-7sxTf`
 
 **Gap:** Farn ships no icon set; consumers have no guidance on using a third-party library with Farn tokens. The Phase-1 stub needs full content.
 
-- [ ] Replace the stub with: rationale for not bundling icons, recommended libraries, and how to size/colour icons with `--space-*` / `--color-*` tokens
+- [x] Replace the stub with: rationale for not bundling icons, recommended libraries, and how to size/colour icons with `--space-*` / `--color-*` tokens
 
 ---
 
