@@ -384,18 +384,18 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <h2 id="separator">Separator <span class="badge badge-published">stable</span></h2>
   <p>
-    Content-level horizontal rules — distinct from section-transition patterns. Tokenised
-    <code>&lt;hr&gt;</code> and <code>.separator</code> variants for use within prose and
-    between content blocks. A labeled variant handles text-between-lines patterns (sign-in
-    flows, form sections).
+    Content-level horizontal rules — distinct from section-transition patterns. Three
+    purpose-named variants cover the full range from tight list spacing to editorial
+    accent moments.
   </p>
 
   <div class="demo-surface">
-    <hr>
-    <hr class="separator-strong">
-    <hr class="separator-subtle">
-    <hr class="separator-ghost">
-    <div class="separator-labeled" role="separator">or</div>
+    <p class="demo-label">Hairline — between list items</p>
+    <hr class="hairline">
+    <p class="demo-label">Section — between content groups</p>
+    <hr class="section-divider">
+    <p class="demo-label">Decorative — editorial scene break</p>
+    <hr class="decorative">
   </div>
 
   <div class="accordion">
@@ -407,83 +407,171 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <table>
           <thead><tr><th>Class</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td><code>hr</code> / <code>.separator</code></td><td>Default border strength</td></tr>
-            <tr><td><code>.separator-strong</code></td><td>High-contrast rule</td></tr>
-            <tr><td><code>.separator-subtle</code></td><td>Low-emphasis rule for dense layouts</td></tr>
-            <tr><td><code>.separator-ghost</code></td><td>Near-invisible structural hint</td></tr>
-            <tr><td><code>.separator-labeled</code></td><td>Text centred between two rules — use <code>&lt;div&gt;</code>, not <code>&lt;hr&gt;</code></td></tr>
+            <tr><td><code>.hairline</code></td><td>1px subtle rule — tight spacing; between list items or dense content</td></tr>
+            <tr><td><code>.section-divider</code></td><td>1px standard rule — medium spacing; between content groups</td></tr>
+            <tr><td><code>.decorative</code></td><td>2px accent-color rule, 32px wide — editorial scene break</td></tr>
           </tbody>
         </table>
 
         <h3>Anatomy</h3>
-        <pre><code>&lt;!-- Native element; no class required --&gt;
-&lt;hr&gt;
+        <pre><code>&lt;!-- Tight rule between list items --&gt;
+&lt;hr class="hairline"&gt;
 
-&lt;!-- Class-based variant (for non-hr elements) --&gt;
-&lt;div class="separator"&gt;&lt;/div&gt;
+&lt;!-- Standard rule between content groups --&gt;
+&lt;hr class="section-divider"&gt;
 
-&lt;!-- Strength modifiers --&gt;
-&lt;hr class="separator-strong"&gt;
-&lt;hr class="separator-subtle"&gt;
-&lt;hr class="separator-ghost"&gt;
-
-&lt;!-- Labeled: must be a block element — hr cannot have children --&gt;
-&lt;div class="separator-labeled" role="separator"&gt;or&lt;/div&gt;
-
-&lt;!-- Labeled + strength modifier --&gt;
-&lt;div class="separator-labeled separator-subtle" role="separator"&gt;continue with&lt;/div&gt;
+&lt;!-- Short accent rule for editorial breaks --&gt;
+&lt;hr class="decorative"&gt;
 
 &lt;!-- Purely decorative — hide from assistive tech --&gt;
-&lt;hr aria-hidden="true"&gt;</code></pre>
+&lt;hr class="decorative" aria-hidden="true"&gt;</code></pre>
 
         <h3>Token reference</h3>
         <p>Separator uses semantic tokens directly — no Tier-3 override layer.</p>
         <table>
           <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
-            <tr><td><code>--color-border</code></td><td>Light: <code>--in3-ash</code> · Dark: <code>--in2-slate</code></td><td>Default line color</td></tr>
-            <tr><td><code>--color-border-strong</code></td><td>Light: <code>--in1-iron</code> · Dark: <code>--bm0-sand</code></td><td>High-contrast variant</td></tr>
-            <tr><td><code>--color-border-subtle</code></td><td><code>color-mix()</code> at 12% / 25%</td><td>Low-emphasis variant</td></tr>
-            <tr><td><code>--color-ghost-border</code></td><td><code>color-mix()</code> at 25%</td><td>Near-invisible variant</td></tr>
-            <tr><td><code>--color-text-secondary</code></td><td>Light: <code>--in2-slate</code> · Dark: <code>--bm1-mist</code></td><td>Label text color</td></tr>
-            <tr><td><code>--space-md</code></td><td><code>1.5rem</code></td><td>Vertical margin</td></tr>
-            <tr><td><code>--space-sm</code></td><td><code>0.75rem</code></td><td>Gap between label and rules</td></tr>
-            <tr><td><code>--label-font-size</code></td><td><code>0.875rem</code></td><td>Label text size</td></tr>
+            <tr><td><code>--color-border-subtle</code></td><td><code>color-mix()</code> at 12% / 25%</td><td>Hairline color</td></tr>
+            <tr><td><code>--color-border</code></td><td>Light: <code>--in3-ash</code> · Dark: <code>--in2-slate</code></td><td>Section divider color</td></tr>
+            <tr><td><code>--color-accent</code></td><td>Light: <code>--fo1-fern</code> · Dark: <code>--fo0-sage</code></td><td>Decorative rule color</td></tr>
+            <tr><td><code>--space-sm</code></td><td><code>0.75rem</code></td><td>Hairline vertical margin</td></tr>
+            <tr><td><code>--space-md</code></td><td><code>1.5rem</code></td><td>Section / decorative vertical margin</td></tr>
           </tbody>
         </table>
 
         <h3>CSS reference</h3>
         <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
-        <pre><code>hr,
-.separator &#123;
-  --_sep-color: var(--color-border);
-  border: none;
-  border-top: 1px solid var(--_sep-color);
-  margin-block: var(--space-md);
+        <pre><code>hr &#123; border: none; &#125;
+
+.hairline        &#123; border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; &#125;
+.section-divider &#123; border-top: 1px solid var(--color-border);        margin: var(--space-md) 0; &#125;
+.decorative      &#123; border-top: 2px solid var(--color-accent);        width: 32px; margin: var(--space-md) 0; &#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Quotes ────────────────────────────────────────────────────────── -->
+
+  <h2 id="quotes">Quotes <span class="badge badge-published">stable</span></h2>
+  <p>
+    Three patterns for surfacing cited text, featured statements, and testimonials.
+    All variants consume <code>--quote-*</code> Tier-3 tokens — retheme in one place.
+  </p>
+
+  <div class="quote-demo-row">
+    <div class="quote-demo-col">
+      <p class="demo-label">Blockquote</p>
+      <blockquote class="quote">
+        <p>The platform is never finished. The moment you ship it, the next set of needs is already forming at the edges.</p>
+        <footer>— Teresa Torres, <cite>Continuous Discovery Habits</cite></footer>
+      </blockquote>
+    </div>
+    <div class="quote-demo-col">
+      <p class="demo-label">Pullquote</p>
+      <figure class="quote-pull">
+        <p>Good platform thinking starts with the developer, not the platform.</p>
+        <figcaption>Jacob Lueg Tiedemann</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="quote-demo-attribution">
+    <p class="demo-label">Attribution card</p>
+    <div class="quote-attribution">
+      <div class="quote-attribution-avatar" aria-hidden="true">MR</div>
+      <div class="quote-attribution-body">
+        <p class="quote-attribution-text">"Working this way changed how I think about internal tooling entirely. It stopped being infrastructure and started being product."</p>
+        <p class="quote-attribution-name">Maya Rodriguez</p>
+        <p class="quote-attribution-role">VP Engineering, Acme</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Quotes</summary>
+      <div class="accordion-panel">
+
+        <h3>Variants</h3>
+        <table>
+          <thead><tr><th>Variant</th><th>Element</th><th>Class</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td>Blockquote</td><td><code>&lt;blockquote&gt;</code></td><td><code>.quote</code></td><td>Inline prose citation with left accent border. Body text uses Fraunces italic.</td></tr>
+            <tr><td>Pullquote</td><td><code>&lt;figure&gt;</code></td><td><code>.quote-pull</code></td><td>Centred featured statement. Accent rule generated via <code>::before</code>. Caption via <code>&lt;figcaption&gt;</code>.</td></tr>
+            <tr><td>Attribution</td><td><code>&lt;div&gt;</code></td><td><code>.quote-attribution</code></td><td>Testimonial card with optional avatar initials. Flexbox layout with panel background.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Anatomy</h3>
+
+        <pre><code>&lt;!-- Blockquote --&gt;
+&lt;blockquote class="quote"&gt;
+  &lt;p&gt;Quote body text here.&lt;/p&gt;
+  &lt;footer&gt;— Author Name, &lt;cite&gt;Source Title&lt;/cite&gt;&lt;/footer&gt;
+&lt;/blockquote&gt;
+
+&lt;!-- Pullquote --&gt;
+&lt;figure class="quote-pull"&gt;
+  &lt;p&gt;Featured statement goes here.&lt;/p&gt;
+  &lt;figcaption&gt;Attribution name&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;!-- Attribution card --&gt;
+&lt;div class="quote-attribution"&gt;
+  &lt;div class="quote-attribution-avatar" aria-hidden="true"&gt;AB&lt;/div&gt;
+  &lt;div class="quote-attribution-body"&gt;
+    &lt;p class="quote-attribution-text"&gt;"Quote text here."&lt;/p&gt;
+    &lt;p class="quote-attribution-name"&gt;Full Name&lt;/p&gt;
+    &lt;p class="quote-attribution-role"&gt;Title, Company&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--quote-border-width</code></td><td><code>3px</code></td><td>Blockquote left accent bar width</td></tr>
+            <tr><td><code>--quote-border-color</code></td><td><code>--color-accent</code></td><td>Blockquote left accent bar color</td></tr>
+            <tr><td><code>--quote-text-color</code></td><td><code>--color-text-secondary</code></td><td>Body text color</td></tr>
+            <tr><td><code>--quote-footer-color</code></td><td><code>--color-text-tertiary</code></td><td>Footer / cite text color</td></tr>
+            <tr><td><code>--quote-padding</code></td><td><code>--space-sm 0 --space-sm --space-lg</code></td><td>Blockquote inset</td></tr>
+            <tr><td><code>--quote-margin-bottom</code></td><td><code>--space-lg</code></td><td>Spacing below all quote variants</td></tr>
+            <tr><td><code>--quote-opsz</code></td><td><code>16</code></td><td>Fraunces optical size for blockquote body text</td></tr>
+            <tr><td><code>--quote-pull-rule-width</code></td><td><code>32px</code></td><td>Pullquote decorative rule width</td></tr>
+            <tr><td><code>--quote-pull-rule-height</code></td><td><code>2px</code></td><td>Pullquote decorative rule height</td></tr>
+            <tr><td><code>--quote-pull-rule-color</code></td><td><code>--color-accent</code></td><td>Pullquote rule color</td></tr>
+            <tr><td><code>--quote-attr-bg</code></td><td><code>--color-bg-panel</code></td><td>Attribution card background</td></tr>
+            <tr><td><code>--quote-attr-border</code></td><td><code>--color-border-subtle</code></td><td>Attribution card border</td></tr>
+            <tr><td><code>--quote-attr-radius</code></td><td><code>--radius-lg</code></td><td>Attribution card corner radius</td></tr>
+            <tr><td><code>--quote-attr-padding</code></td><td><code>--space-md --space-lg</code></td><td>Attribution card inner spacing</td></tr>
+            <tr><td><code>--quote-attr-gap</code></td><td><code>--space-md</code></td><td>Gap between avatar and body</td></tr>
+            <tr><td><code>--quote-attr-avatar-size</code></td><td><code>40px</code></td><td>Avatar circle diameter</td></tr>
+            <tr><td><code>--quote-attr-avatar-bg</code></td><td><code>color-mix(fern 15%)</code></td><td>Avatar circle background tint</td></tr>
+          </tbody>
+        </table>
+
+        <h3>CSS reference</h3>
+        <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
+        <pre><code>.quote &#123;
+  border-left: var(--quote-border-width) solid var(--quote-border-color);
+  padding: var(--quote-padding);
+  margin-bottom: var(--quote-margin-bottom);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: 'opsz' var(--quote-opsz);
+  color: var(--quote-text-color);
 &#125;
 
-.separator-labeled &#123;
-  --_sep-color: var(--color-border);
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-block: var(--space-md);
-  color: var(--color-text-secondary);
-  font-size: var(--label-font-size);
-&#125;
+.quote-pull &#123; text-align: center; padding: 0 var(--space-xl); &#125;
+.quote-pull::before &#123; /* accent rule — width/height/color via tokens */ &#125;
+.quote-pull p &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; &#125;
 
-.separator-labeled::before,
-.separator-labeled::after &#123;
-  content: '';
-  flex: 1;
-  height: 1px;
-  background-color: var(--_sep-color);
-&#125;
-
-/* Strength modifiers work on both hr/.separator and .separator-labeled */
-.separator-strong &#123; --_sep-color: var(--color-border-strong); &#125;
-.separator-subtle &#123; --_sep-color: var(--color-border-subtle); &#125;
-.separator-ghost  &#123; --_sep-color: var(--color-ghost-border); &#125;</code></pre>
+.quote-attribution &#123; background: var(--quote-attr-bg); border-radius: var(--quote-attr-radius); &#125;
+.quote-attribution-avatar &#123; width: var(--quote-attr-avatar-size); border-radius: var(--radius-full); &#125;
+.quote-attribution-text &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 14; font-style: italic; &#125;
+.quote-attribution-name &#123; font-weight: 600; color: var(--color-text); &#125;
+.quote-attribution-role &#123; color: var(--color-text-secondary); &#125;</code></pre>
 
       </div>
     </details>
@@ -492,6 +580,24 @@ import DocLayout from '../../layouts/DocLayout.astro';
 </DocLayout>
 
 <style>
+  /* ── Quote demos ─────────────────────────────────────────────────────── */
+  .quote-demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .quote-demo-col {
+    flex: 1;
+    min-width: 260px;
+  }
+
+  .quote-demo-attribution {
+    margin-bottom: var(--space-lg);
+    max-width: 560px;
+  }
+
   /* ── Card demos ───────────────────────────────────────────────────────── */
   .card-demo-row {
     display: flex;
@@ -528,6 +634,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     color: var(--color-text-tertiary);
     margin: 0 0 var(--space-xs);
   }
+  hr + .demo-label { margin-top: var(--space-sm); }
 
   /* ── Overlap demos ────────────────────────────────────────────────────── */
   .demo-overlap-a {

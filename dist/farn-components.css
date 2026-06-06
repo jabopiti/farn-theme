@@ -131,6 +131,29 @@
   --hint-font-size:       0.8125rem; /* 13px */
   --breadcrumb-font-size: 0.875rem;  /* 14px */
 
+  /* ── Quote tokens ──────────────────────────────────────────────────────── */
+  --quote-border-width:   3px;
+  --quote-border-color:   var(--color-accent);
+  --quote-text-color:     var(--color-text-secondary);
+  --quote-footer-color:   var(--color-text-tertiary);
+  --quote-padding:        var(--space-sm) 0 var(--space-sm) var(--space-lg);
+  --quote-margin-bottom:  var(--space-lg);
+  --quote-opsz:           16;
+
+  /* Pullquote */
+  --quote-pull-rule-width:  32px;
+  --quote-pull-rule-height: 2px;
+  --quote-pull-rule-color:  var(--color-accent);
+
+  /* Attribution card */
+  --quote-attr-bg:          var(--color-bg-panel);
+  --quote-attr-border:      var(--color-border-subtle);
+  --quote-attr-radius:      var(--radius-lg);
+  --quote-attr-padding:     var(--space-md) var(--space-lg);
+  --quote-attr-gap:         var(--space-md);
+  --quote-attr-avatar-size: 40px;
+  --quote-attr-avatar-bg:   color-mix(in srgb, var(--fo1-fern) 15%, transparent);
+
   /* ── Code block tokens ──────────────────────────────────────────────── */
   --code-bg:          var(--color-bg-inset); /* surface-aware; override with --color-bg-code for always-dark */
   --code-text:        var(--color-text);
@@ -623,37 +646,117 @@ input[type="radio"] {
 
 /* ── Separator ──────────────────────────────────────────────────────────── */
 
-hr,
-.separator {
-  --_sep-color: var(--color-border);
-  border: none;
-  border-top: 1px solid var(--_sep-color);
-  margin-block: var(--space-md);
+hr { border: none; }
+
+.hairline        { border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; }
+.section-divider { border-top: 1px solid var(--color-border);        margin: var(--space-md) 0; }
+.decorative      { border-top: 2px solid var(--color-accent);        width: 32px; margin: var(--space-md) 0; }
+
+/* ── Quotes ──────────────────────────────────────────────────────────────── */
+
+/* Base: blockquote */
+.quote {
+  border-left: var(--quote-border-width) solid var(--quote-border-color);
+  padding: var(--quote-padding);
+  margin-bottom: var(--quote-margin-bottom);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: 'opsz' var(--quote-opsz);
+  color: var(--quote-text-color);
 }
 
-/* Labeled: use <div role="separator">, not <hr> */
-.separator-labeled {
-  --_sep-color: var(--color-border);
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-block: var(--space-md);
-  color: var(--color-text-secondary);
-  font-size: var(--label-font-size);
+.quote footer {
+  display: block;
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--quote-footer-color);
+  margin-top: var(--space-xs);
 }
 
-.separator-labeled::before,
-.separator-labeled::after {
+.quote cite {
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--quote-footer-color);
+}
+
+/* Pullquote: figure */
+.quote-pull {
+  text-align: center;
+  padding: 0 var(--space-xl);
+  margin-bottom: var(--quote-margin-bottom);
+}
+
+.quote-pull::before {
   content: '';
-  flex: 1;
-  height: 1px;
-  background-color: var(--_sep-color);
+  display: block;
+  width: var(--quote-pull-rule-width);
+  height: var(--quote-pull-rule-height);
+  background: var(--quote-pull-rule-color);
+  margin: 0 auto var(--space-sm);
 }
 
-/* Strength modifiers — declared after base rules so they win at equal specificity */
-.separator-strong { --_sep-color: var(--color-border-strong); }
-.separator-subtle { --_sep-color: var(--color-border-subtle); }
-.separator-ghost  { --_sep-color: var(--color-ghost-border); }
+.quote-pull p {
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' 20;
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.quote-pull figcaption {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-top: var(--space-xs);
+}
+
+/* Attribution card */
+.quote-attribution {
+  background: var(--quote-attr-bg);
+  border: 1px solid var(--quote-attr-border);
+  border-radius: var(--quote-attr-radius);
+  padding: var(--quote-attr-padding);
+  display: flex;
+  gap: var(--quote-attr-gap);
+  align-items: flex-start;
+  margin-bottom: var(--quote-margin-bottom);
+}
+
+.quote-attribution-avatar {
+  width: var(--quote-attr-avatar-size);
+  height: var(--quote-attr-avatar-size);
+  border-radius: var(--radius-full);
+  background: var(--quote-attr-avatar-bg);
+  display: grid;
+  place-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.quote-attribution-text {
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' 14;
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.quote-attribution-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: var(--space-xs);
+}
+
+.quote-attribution-role {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
 
 /* ── Code blocks ──────────────────────────────────────────────────────────── */
 

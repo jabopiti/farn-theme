@@ -148,8 +148,9 @@ Pick a `status: backlog` task (respect `Depends on`). Set `in-progress`, add `br
 - `data-surface` pattern changes
 - `navigation.ts` structure changes or adding a new component group
 
-**Quality gates (always, never skip):**
-1. `/simplify`
-2. `/review` — low for `XS`; medium for `S`; high for `M`/`L`; bump one level if touching `dark-light.css` or `colors.css`
-
-**Close out:** Mark `done` in TASKS.md, push, open a PR.
+**Close-out checklist — run in this order before marking done or pushing:**
+- [ ] `/simplify` — apply all suggested cleanups
+- [ ] `/review` at the correct level: low `XS` · medium `S` · high `M`/`L`; bump one level if touching `dark-light.css` or `colors.css`
+- [ ] `CHANGELOG.md` updated
+- [ ] Build command run if any `tokens/` file changed
+- [ ] Mark `done` in TASKS.md, push, open a PR

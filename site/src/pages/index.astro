@@ -159,7 +159,7 @@ const principles = [
     opacity: 0;
     animation: fadeIn 1000ms ease-out 700ms forwards;
   }
-  @media (max-width: 900px) { .hero-palette-strip { display: none; } }
+  @media (max-width: 900px) /* custom: palette strip visibility */ { .hero-palette-strip { display: none; } }
   .palette-swatch {
     width: 8px;
     height: 28px;
@@ -173,7 +173,7 @@ const principles = [
     gap: var(--space-4xl);
     align-items: center;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 768px) /* --breakpoint-tablet */ {
     .about-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
   }
   .about-text p {
@@ -223,7 +223,7 @@ const principles = [
   .type-specimen {
     display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-xl);
   }
-  @media (max-width: 640px) { .type-specimen { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) /* --breakpoint-mobile */ { .type-specimen { grid-template-columns: 1fr; } }
   .specimen-card { background: var(--card-bg); border-radius: var(--card-radius); padding: var(--space-lg); }
   .specimen-label {
     font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
@@ -309,51 +309,13 @@ const principles = [
   /* ── Dividers ───────────────────────────────── */
   .divider-demo { margin-bottom: var(--space-lg); }
   .divider-demo p { font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
-  hr.hairline { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; }
-  hr.section-divider { border: none; border-top: 1px solid var(--color-border); margin: var(--space-md) 0; }
-  hr.decorative { border: none; border-top: 2px solid var(--color-accent); width: 32px; margin: var(--space-md) 0; }
-
-  /* ── Quotes ─────────────────────────────────── */
-  .blockquote-demo { border-left: 3px solid var(--color-accent); padding: 4px 0 4px 20px; margin-bottom: var(--space-lg); }
-  .blockquote-demo p {
-    font-family: var(--font-display); font-style: italic; font-variation-settings: 'opsz' 16;
-    font-size: 16px; color: var(--color-text-secondary); line-height: 1.7;
-  }
-  .blockquote-demo footer { font-size: 12px; color: var(--color-text-tertiary); margin-top: 8px; }
-  .pullquote-demo { text-align: center; padding: 0 var(--space-xl); margin-bottom: var(--space-lg); }
-  .pullquote-rule { width: 32px; height: 2px; background: var(--color-accent); margin: 0 auto var(--space-md); }
-  .pullquote-demo p {
-    font-family: var(--font-display); font-style: italic; font-variation-settings: 'opsz' 20;
-    font-size: clamp(18px, 3vw, 24px); color: var(--color-text); line-height: 1.4; letter-spacing: -0.01em;
-  }
-  .pullquote-demo figcaption {
-    margin-top: var(--space-md); font-size: 11px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent);
-  }
-  .attribution-demo {
-    background: var(--color-bg-panel); border-radius: var(--radius-lg);
-    padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start;
-  }
-  [data-theme="dark"] .attribution-demo { border: 1px solid var(--color-border); }
-  .attribution-avatar {
-    width: 40px; height: 40px; border-radius: var(--radius-full);
-    background: rgba(62,122,98,0.15); display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 600; color: var(--fo2-forest); flex-shrink: 0;
-  }
-  [data-theme="dark"] .attribution-avatar { background: rgba(92,158,134,0.15); color: var(--fo0-sage); }
-  .attribution-quote {
-    font-family: var(--font-display); font-style: italic; font-variation-settings: 'opsz' 14;
-    font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; margin-bottom: 8px;
-  }
-  .attribution-name { font-size: 13px; font-weight: 600; color: var(--color-text); }
-  .attribution-role { font-size: 12px; color: var(--color-text-secondary); }
 
   /* ── Surface demo ───────────────────────────── */
   .surface-demo-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
     border-radius: var(--radius-lg); overflow: hidden;
   }
-  @media (max-width: 640px) { .surface-demo-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) /* --breakpoint-mobile */ { .surface-demo-grid { grid-template-columns: 1fr; } }
   .surface-demo-cell { padding: var(--space-lg); }
   .surface-demo-cell h4 {
     font-family: var(--font-display); font-size: 16px; font-weight: 700;
@@ -561,23 +523,20 @@ const principles = [
     </div>
 
     <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="scroll-reveal">Quotes</h3>
-    <div class="scroll-reveal" style="margin-bottom:var(--space-md)">
-      <blockquote class="blockquote-demo">
-        <p>The platform is never finished. The moment you ship it, the next set of needs is already forming at the edges.</p>
-        <footer>— Teresa Torres, <cite>Continuous Discovery Habits</cite></footer>
-      </blockquote>
-    </div>
-    <figure class="pullquote-demo scroll-reveal">
-      <div class="pullquote-rule"></div>
+    <blockquote class="quote scroll-reveal">
+      <p>The platform is never finished. The moment you ship it, the next set of needs is already forming at the edges.</p>
+      <footer>— Teresa Torres, <cite>Continuous Discovery Habits</cite></footer>
+    </blockquote>
+    <figure class="quote-pull scroll-reveal">
       <p>Good platform thinking starts with the developer, not the platform.</p>
       <figcaption>Jacob Lueg Tiedemann</figcaption>
     </figure>
-    <div class="attribution-demo scroll-reveal">
-      <div class="attribution-avatar" aria-hidden="true">MR</div>
-      <div>
-        <p class="attribution-quote">"Working this way changed how I think about internal tooling entirely. It stopped being infrastructure and started being product."</p>
-        <p class="attribution-name">Maya Rodriguez</p>
-        <p class="attribution-role">VP Engineering, Acme</p>
+    <div class="quote-attribution scroll-reveal">
+      <div class="quote-attribution-avatar" aria-hidden="true">MR</div>
+      <div class="quote-attribution-body">
+        <p class="quote-attribution-text">"Working this way changed how I think about internal tooling entirely. It stopped being infrastructure and started being product."</p>
+        <p class="quote-attribution-name">Maya Rodriguez</p>
+        <p class="quote-attribution-role">VP Engineering, Acme</p>
       </div>
     </div>
   </div>

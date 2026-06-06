@@ -419,17 +419,6 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 
 ---
 
-## T-32 · Alert / notification component
-`status: backlog` `effort: S`
-
-**Gap:** State tokens (`--color-error`, `--color-warning`, `--color-success`) exist but no `.alert` component consumes them; status messages cannot be expressed consistently across projects.
-
-- [ ] Add `--alert-*` Tier 3 tokens (background, border, text, icon-color per variant) to `tokens/components.css`
-- [ ] Add `.alert` base class and `.alert-info`, `.alert-success`, `.alert-warning`, `.alert-error` variants to the component CSS artifact
-- [ ] Verify all variants work correctly in both light and dark modes
-- [ ] Document on an alerts component page with dismissible and non-dismissible examples
-
----
 
 ## T-33 · Code block styles
 `status: done` `effort: S` `branch: claude/code-block-copy-button-gHUyY`
@@ -512,17 +501,6 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 
 ---
 
-## T-40 · Modal / dialog
-`status: backlog` `effort: M`
-
-**Gap:** No modal or dialog pattern; the most common overlay component is entirely absent from the system.
-
-- [ ] Add `--modal-*` Tier 3 tokens (background, backdrop-color, border-radius, shadow) to `tokens/components.css`
-- [ ] Add `.modal`, `.modal-backdrop`, `.modal-header`, `.modal-body`, `.modal-footer` CSS classes with size variants (sm, md, lg)
-- [ ] Document the required JS responsibilities clearly: focus trap, `aria-modal="true"`, `role="dialog"`, `Escape` key handler — CSS owns appearance, JS owns behaviour
-- [ ] Document on a modal component page
-
----
 
 ## T-41 · Motion tokens documentation page
 `status: done` `effort: XS` `branch: claude/beautiful-ramanujan-jaOUa`
@@ -596,7 +574,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-47 · Quote / blockquote component
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/next-task-planning-lyR12`
 
 **Gap:** The landing page demos a blockquote/pullquote pattern but no `.quote` class ships in `farn-components.css`; it's undocumented.
 
@@ -679,10 +657,10 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-54 · Breakpoint tokens
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/t54-Z56eJ`
 
 **Gap:** `@media (max-width: 640px)` appears ~9 times across `site/src/styles/site.css` and individual page `<style>` blocks as a hardcoded pixel value. No corresponding token exists — changes to the mobile breakpoint require a site-wide grep-and-replace, and new pages add another hardcoded instance each time.
 
-- [ ] Add `--breakpoint-mobile: 640px` (and optionally `--breakpoint-tablet`) to `tokens/spacing.css`
-- [ ] Replace all `max-width: 640px` media query values in `site/src/styles/site.css` and page-scoped styles with the token (CSS `env()` / custom properties in `@media` require native support — use the token as a reference value in comments, or evaluate `postcss-custom-media` if the build supports it)
-- [ ] Document the breakpoints in `site/src/pages/foundations/responsive.astro` (T-49)
+- [x] Add `--breakpoint-mobile: 640px` (and optionally `--breakpoint-tablet`) to `tokens/spacing.css`
+- [x] Replace all `max-width: 640px` media query values in `site/src/styles/site.css` and page-scoped styles with the token (CSS `env()` / custom properties in `@media` require native support — use the token as a reference value in comments, or evaluate `postcss-custom-media` if the build supports it)
+- [x] Document the breakpoints in `site/src/pages/foundations/responsive.astro` (T-49)
