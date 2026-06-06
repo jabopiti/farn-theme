@@ -399,6 +399,14 @@
   --quote-attr-gap:         var(--space-md);
   --quote-attr-avatar-size: 40px;
   --quote-attr-avatar-bg:   color-mix(in srgb, var(--fo1-fern) 15%, transparent);
+
+  /* ── Code block tokens ──────────────────────────────────────────────── */
+  --code-bg:          var(--color-bg-inset); /* surface-aware; override with --color-bg-code for always-dark */
+  --code-text:        var(--color-text);
+  --code-border:      var(--color-border);
+  --code-radius:      var(--radius-md);
+  --code-copy-size:   32px;
+  --code-copy-radius: var(--radius-sm);
 }
 /* ── Farn — Base reset and global styles ──────────────────────────────── */
 

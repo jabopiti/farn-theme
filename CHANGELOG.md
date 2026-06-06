@@ -18,6 +18,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
+- **T-33** `tokens/components.css`: `--code-bg`, `--code-text`, `--code-border`, `--code-radius`, `--code-copy-size`, `--code-copy-radius` Tier-3 tokens for independent retheme of code blocks
+- **T-33** `tokens/component-classes.css`: `.code-block` (block-level, scrollable), `.inline-code` (inline), and `.code-copy-btn` (clipboard icon button) CSS classes shipped in `dist/farn-components.css`
+- **T-33** `site/src/scripts/code-copy.js`: Reference copy-to-clipboard implementation — injects `.code-copy-btn` into every `<pre>` element; 2-second checkmark feedback; graceful no-JS and no-clipboard-API fallback
 - **T-54** `tokens/spacing.css`: `--breakpoint-mobile: 640px` and `--breakpoint-tablet: 768px` reference tokens; all 8 `@media (max-width: …)` queries in `site/` annotated with `/* --breakpoint-mobile */` / `/* --breakpoint-tablet */` comments; `site/src/pages/foundations/responsive.astro` stub documents the two tokens and the comment-annotation pattern; Responsive added to Foundations sub-nav
 - **T-48** `tokens/component-classes.css`: `.hairline`, `.section-divider`, `.decorative` separator classes (replaces previous modifier-based API: `hr`/`.separator`, `.separator-strong/subtle/ghost`, `.separator-labeled` removed); `hr` gets a browser reset only — all variants require an explicit class; documented in Components › Layout
 - **T-47** `tokens/components.css`: `--quote-*`, `--quote-pull-*`, `--quote-attr-*` Tier-3 tokens; `tokens/component-classes.css`: `.quote` (blockquote), `.quote-pull` (pullquote figure), `.quote-attribution` (testimonial card) component classes; `site/src/pages/index.astro` updated to use shipped classes; documented in Components › Layout

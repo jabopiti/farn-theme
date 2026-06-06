@@ -6,8 +6,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h1>Data</h1>
   <p>
     Components for labelling, categorising, and presenting structured information. Badges
-    communicate status at a glance; tables and code blocks are planned for a future release.
-  </p>
+    communicate status at a glance; tables are planned for a future release.
+</p>
 
   <!-- ── Badges ───────────────────────────────────────────────────────── -->
 
@@ -140,13 +140,98 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <!-- ── Code block ────────────────────────────────────────────────────── -->
 
-  <h2 id="code-block">Code block <span class="badge badge-draft">coming soon</span></h2>
+  <h2 id="code-block">Code block <span class="badge badge-published">stable</span></h2>
   <p>
-    <code>.code-block</code> (block-level, scrollable) and <code>.inline-code</code> classes
-    consuming <code>--color-bg-code</code>, <code>--font-mono</code>, and <code>--radius-*</code>
-    tokens. <code>--code-*</code> Tier-3 tokens for independent retheme without touching the
-    semantic layer.
+    Shipped classes for block and inline code. Both consume <code>--code-*</code> Tier-3 tokens
+    so consumers can retheme code formatting independently without touching the semantic layer.
+    A copy-to-clipboard button is injected automatically by the reference JS module.
   </p>
+
+  <h3>Block code</h3>
+  <p>Apply <code>.code-block</code> to a <code>&lt;pre&gt;</code> element. Add <code>&lt;code&gt;</code> inside for proper semantics.</p>
+  <pre class="code-block"><code>.card &#123;
+  background: var(--color-bg-panel);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+&#125;</code></pre>
+
+  <h3>Inline code</h3>
+  <p style="font-size: 1rem; line-height: 1.7;">
+    Use <code class="inline-code">.inline-code</code> on a <code class="inline-code">&lt;code&gt;</code>
+    element within prose. It uses <code class="inline-code">font-size: 0.875em</code> so it scales
+    with the surrounding text size.
+  </p>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Code block</summary>
+      <div class="accordion-panel">
+
+        <h3>Anatomy</h3>
+        <pre><code>&lt;!-- Block code --&gt;
+&lt;pre class="code-block"&gt;&lt;code&gt;your code here&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- Inline code --&gt;
+&lt;p&gt;Set &lt;code class="inline-code"&gt;color: var(--color-text)&lt;/code&gt; for contrast.&lt;/p&gt;</code></pre>
+
+        <h3>Copy button</h3>
+        <p>
+          The <code>.code-copy-btn</code> class styles an icon button absolutely positioned
+          top-right inside a <code>.code-block</code>. The reference implementation injects it
+          automatically via JS:
+        </p>
+        <pre><code>import &#123; initCodeCopy &#125; from './code-copy.js';
+initCodeCopy(); // appends .code-copy-btn to every &lt;pre&gt; that contains &lt;code&gt;</code></pre>
+        <p>The button is only added when JS runs — no-script users never see an inert element.</p>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--code-bg</code></td><td><code>--color-bg-inset</code></td><td>Background of code blocks and inline code</td></tr>
+            <tr><td><code>--code-text</code></td><td><code>--color-text</code></td><td>Text color inside code blocks</td></tr>
+            <tr><td><code>--code-border</code></td><td><code>--color-border</code></td><td>Border around code blocks</td></tr>
+            <tr><td><code>--code-radius</code></td><td><code>--radius-md</code></td><td>Corner radius on code blocks</td></tr>
+            <tr><td><code>--code-copy-size</code></td><td><code>32px</code></td><td>Width and height of the copy button</td></tr>
+            <tr><td><code>--code-copy-radius</code></td><td><code>--radius-sm</code></td><td>Corner radius of the copy button</td></tr>
+          </tbody>
+        </table>
+        <p>
+          To use a consistently dark code block regardless of page theme, override
+          <code>--code-bg</code> and <code>--code-text</code> locally:
+        </p>
+        <pre><code>.my-editor &#123;
+  --code-bg:   var(--color-bg-code);  /* always dark */
+  --code-text: var(--bm2-birch);      /* always light */
+&#125;</code></pre>
+
+        <h3>CSS reference</h3>
+        <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
+        <pre><code>.code-block &#123;
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  background: var(--code-bg);
+  color: var(--code-text);
+  border: 1px solid var(--code-border);
+  border-radius: var(--code-radius);
+  padding: var(--space-md);
+  overflow-x: auto;
+  line-height: 1.6;
+&#125;
+
+.inline-code &#123;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+&#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
 
 </DocLayout>
 
