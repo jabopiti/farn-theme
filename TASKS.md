@@ -432,13 +432,13 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-33 · Code block styles
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/code-block-copy-button-gHUyY`
 
 **Gap:** `--color-bg-code` and `--font-mono` tokens exist but no `.code-block` or `.inline-code` CSS classes are shipped; code formatting is reinvented by every consumer.
 
-- [ ] Add `.code-block` (block-level, scrollable) and `.inline-code` (inline) CSS classes consuming `--color-bg-code`, `--font-mono`, and `--radius-*` tokens
-- [ ] Add `--code-*` Tier 3 tokens (background, text, border) to `tokens/components.css` so consumers can retheme code blocks independently
-- [ ] Document on the typography page or a dedicated code component page
+- [x] Add `.code-block` (block-level, scrollable) and `.inline-code` (inline) CSS classes consuming `--code-*` tokens, `--font-mono`, and `--radius-*` tokens
+- [x] Add `--code-*` Tier 3 tokens (background, text, border) to `tokens/components.css` so consumers can retheme code blocks independently
+- [x] Document on the Data component page; includes copy-to-clipboard button (`.code-copy-btn`) shipped in CSS + reference JS in `site/src/scripts/code-copy.js`
 
 ---
 

@@ -18,6 +18,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
+- **T-33** `tokens/components.css`: `--code-bg`, `--code-text`, `--code-border`, `--code-radius`, `--code-copy-size`, `--code-copy-radius` Tier-3 tokens for independent retheme of code blocks
+- **T-33** `tokens/component-classes.css`: `.code-block` (block-level, scrollable), `.inline-code` (inline), and `.code-copy-btn` (clipboard icon button) CSS classes shipped in `dist/farn-components.css`
+- **T-33** `site/src/scripts/code-copy.js`: Reference copy-to-clipboard implementation — injects `.code-copy-btn` into every `<pre>` element; 2-second checkmark feedback; graceful no-JS and no-clipboard-API fallback
 - **T-48** `tokens/component-classes.css`: `hr`/`.separator` with default, strong, subtle, ghost variants; `.separator-labeled` text-between-rules pattern using internal `--_sep-color` property so strength modifiers work on labeled variant too; documented in Components › Layout
 - **T-25** `tokens/components.css`: `--blob-height` (100px) and `--blob-duration` (900ms) Tier-3 tokens; `tokens/component-classes.css`: `.section-blob` class with opacity-only fade-in via T-22 scroll-reveal infrastructure; documented in Components › Layout with token reference and Figma/Inkscape path guidance
 - `tokens/dark-light.css`: `--color-on-success` and `--color-on-warning` semantic tokens (map to `--color-accent-text`; WCAG AA verified on moss/grain backgrounds)

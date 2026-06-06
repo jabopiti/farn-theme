@@ -86,7 +86,9 @@ const activeGroup =
     <script>
       import { initScrollReveal } from '../scripts/scroll-reveal.js';
       import { initSubNavTracker, positionIndicator } from '../scripts/subnav-tracker.js';
+      import { initCodeCopy } from '../scripts/code-copy.js';
       initScrollReveal();
+      initCodeCopy();
 
       const groupNav = document.querySelector('.sub-nav.group-nav');
       if (groupNav) {
@@ -207,6 +209,7 @@ const activeGroup =
   }
 
   .doc-container pre {
+    position: relative;
     font-family: var(--font-mono);
     font-size: 0.875rem;
     background: var(--color-bg-inset);
