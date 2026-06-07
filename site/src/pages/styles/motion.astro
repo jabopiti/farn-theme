@@ -6,7 +6,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h1>Motion</h1>
   <p>Motion communicates relationships and reinforces hierarchy. Use the right token for the right moment — fast for press states, slow for reveals — and combine duration with easing to shape how an element arrives or departs.</p>
 
-  <h2>Duration</h2>
+  <h2 id="duration">Duration</h2>
   <p>Five steps, each tuned to a specific interaction type. Heavier geometry and content reveals warrant longer durations; micro-interactions should be nearly invisible.</p>
 
   <table>
@@ -54,7 +54,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <li><strong>reveal</strong> — content that appears in stages (hero lines, staggered cards). Use sparingly.</li>
   </ul>
 
-  <h2>Easing</h2>
+  <h2 id="easing">Easing</h2>
   <p>All three easings are one-directional — they describe how something arrives, not how it oscillates. The preview below shows each curve in the direction it is designed to be used.</p>
 
   <table>
@@ -89,7 +89,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <li><strong>prefers-reduced-motion</strong> — <code>base.css</code> sets <code>transition-duration</code> and <code>animation-duration</code> to <code>0.01ms</code> when the user has requested reduced motion; no extra guard is needed if you import <code>farn.css</code>. In custom animation code, always add an explicit <code>@media (prefers-reduced-motion: reduce)</code> guard.</li>
   </ul>
 
-  <h2>Pairing guide</h2>
+  <h2 id="pairing">Pairing guide</h2>
   <table>
     <thead><tr><th>Situation</th><th>Duration</th><th>Easing</th></tr></thead>
     <tbody>
@@ -101,7 +101,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </tbody>
   </table>
 
-  <h2>Code example</h2>
+  <h2 id="code-example">Code example</h2>
   <pre><code>.panel &#123;
   transform: translateY(8px);
   opacity: 0;
