@@ -358,14 +358,14 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-27 · Diagonal cut divider
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/task-27-review-plan-Lx00z`
 
 **Gap:** No diagonal cut pattern; the energetic directional transition suits CTAs and momentum-forward page moments.
 
-- [ ] Implement all three approaches from spec: `clip-path` polygon, `::before skewY`, and SVG triangle
-- [ ] Apply Tier 2 angle-flattening animation (`skewY(-5deg)` → `0deg`) with `animation-timeline: view()` and static fallback
-- [ ] Document the `clip-path` + `box-shadow` incompatibility and when to use the `::before` approach instead
-- [ ] Document in the "Section Transitions" section of `/components/layout` (T-29 merged into T-44)
+- [x] Implement all three approaches from spec: `clip-path` polygon, `::before skewY`, and SVG triangle
+- [x] Apply Tier 2 angle-flattening animation (`skewY(-5deg)` → `0deg`) with `animation-timeline: view()` and static fallback
+- [x] Document the `clip-path` + `box-shadow` incompatibility and when to use the `::before` approach instead
+- [x] Document in the "Section Transitions" section of `/components/layout` (T-29 merged into T-44)
 
 ---
 

@@ -79,6 +79,10 @@
   --blob-height:   100px;
   --blob-duration: 900ms; /* Intentionally longer than --duration-reveal; organic shapes reveal slowly */
 
+  /* ── Diagonal cut tokens ─────────────────────────────────────────────── */
+  --diagonal-angle: -3deg; /* static display angle; keep between -2deg and -5deg */
+                           /* scroll-driven animation always starts from -5deg regardless */
+
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);

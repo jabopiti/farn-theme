@@ -18,6 +18,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
+- **T-27** `tokens/components.css`: `--diagonal-angle` (`-3deg`) Tier-3 token — adjusts the static display angle for the diagonal cut; `tokens/component-classes.css`: `.section-skew` class with `isolation: isolate`, `::before skewY` background, and Tier 2 `animation-timeline: view()` angle-flattening animation (`skewY(-5deg)` → `skewY(0deg)`); static fallback for unsupported browsers; all three approaches (clip-path polygon, `::before skewY`, SVG triangle) documented in Components › Layout including the `clip-path` + `box-shadow` incompatibility
 - **T-33** `tokens/components.css`: `--code-bg`, `--code-text`, `--code-border`, `--code-radius`, `--code-copy-size`, `--code-copy-radius` Tier-3 tokens for independent retheme of code blocks
 - **T-33** `tokens/component-classes.css`: `.code-block` (block-level, scrollable), `.inline-code` (inline), and `.code-copy-btn` (clipboard icon button) CSS classes shipped in `dist/farn-components.css`
 - **T-33** `site/src/scripts/code-copy.js`: Reference copy-to-clipboard implementation — injects `.code-copy-btn` into every `<pre>` element; 2-second checkmark feedback; graceful no-JS and no-clipboard-API fallback

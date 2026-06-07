@@ -79,6 +79,10 @@
   --blob-height:   100px;
   --blob-duration: 900ms; /* Intentionally longer than --duration-reveal; organic shapes reveal slowly */
 
+  /* ── Diagonal cut tokens ─────────────────────────────────────────────── */
+  --diagonal-angle: -3deg; /* static display angle; keep between -2deg and -5deg */
+                           /* scroll-driven animation always starts from -5deg regardless */
+
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);
@@ -536,6 +540,43 @@ input[type="radio"] {
 
 @media (scripting: none) {
   .section-blob { opacity: 1; }
+}
+
+/* ── Diagonal cut ────────────────────────────────────────────────────────── */
+
+/* Approach 2: skewY on ::before — background is skewed, content stays horizontal,
+   box-shadow works. Consumer sets --color-section on the element.
+   Parent preceding section must not have overflow:hidden. */
+.section-skew {
+  position: relative;
+  isolation: isolate; /* contains ::before z-index:-1 within this stacking context */
+}
+
+.section-skew::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-section);
+  transform: skewY(var(--diagonal-angle));
+  transform-origin: top left;
+  z-index: -1;
+}
+
+@supports (animation-timeline: view()) {
+  @keyframes diagonal-flatten {
+    from { transform: skewY(-5deg); }
+    to   { transform: skewY(0deg); }
+  }
+
+  .section-skew::before {
+    animation: diagonal-flatten linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-skew::before { animation: none; }
 }
 
 /* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
