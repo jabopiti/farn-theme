@@ -668,3 +668,60 @@ hr { border: none; }
   stroke-linejoin: round;
   pointer-events: none;
 }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+/* border-radius is intentionally omitted from .table — overflow:hidden on a
+   border-collapse:collapse table is cross-browser unreliable. For rounded
+   corners, wrap the table:
+     <div style="border-radius:var(--table-radius);overflow:hidden">
+       <table class="table">...</table>
+     </div>                                                                   */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--table-font-size);
+}
+
+.table th,
+.table td {
+  padding: var(--table-cell-padding);
+  text-align: left;
+  border-bottom: 1px solid var(--table-border);
+}
+
+.table thead th {
+  background: var(--table-header-bg);
+  color: var(--table-header-text);
+  font-weight: 600;
+  font-size: var(--table-header-font-size);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--table-border);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-striped tbody tr:nth-child(even) td {
+  background: var(--table-row-stripe-bg);
+}
+
+.table-hover td {
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.table-hover tbody tr:hover td {
+  background: var(--table-row-hover-bg);
+}
+
+.table-sm th,
+.table-sm td {
+  padding: var(--table-cell-padding-sm);
+}
+
+.table-lg th,
+.table-lg td {
+  padding: var(--table-cell-padding-lg);
+}

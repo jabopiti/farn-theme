@@ -5,9 +5,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
 <DocLayout title="Data" description="Data display components in the Farn design system — badges, tables, and structured content patterns">
   <h1>Data</h1>
   <p>
-    Components for labelling, categorising, and presenting structured information. Badges
-    communicate status at a glance; tables are planned for a future release.
-</p>
+    Components for labelling, categorising, and presenting structured information.
+    Badges communicate status at a glance; tables display structured tabular data.
+  </p>
 
   <!-- ── Badges ───────────────────────────────────────────────────────── -->
 
@@ -131,12 +131,190 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <!-- ── Table ─────────────────────────────────────────────────────────── -->
 
-  <h2 id="table">Table <span class="badge badge-draft">coming soon</span></h2>
+  <h2 id="table">Table <span class="badge badge-published">stable</span></h2>
   <p>
-    <code>.table</code> base class with border, cell padding, and header styles consuming
-    semantic tokens. <code>.table-striped</code> variant for alternating-row contrast.
-    Includes guidance on the <code>overflow-x: auto</code> scroll wrapper for narrow viewports.
+    A lightweight, token-driven table component. The <code>.table</code> base class handles
+    borders, cell padding, and header styling. Compose with <code>.table-striped</code>,
+    <code>.table-hover</code>, <code>.table-sm</code>, or <code>.table-lg</code> for
+    alternating rows, hover highlights, and density variants.
   </p>
+
+  <h3>Default</h3>
+  <div class="table-demo demo-surface" role="region" aria-label="Live default table example">
+    <table class="table">
+      <thead>
+        <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ada Lovelace</td><td>Engineer</td><td>Active</td></tr>
+        <tr><td>Grace Hopper</td><td>Architect</td><td>Active</td></tr>
+        <tr><td>Alan Turing</td><td>Researcher</td><td>On leave</td></tr>
+        <tr><td>Margaret Hamilton</td><td>Lead</td><td>Active</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Striped</h3>
+  <p>Add <code>.table-striped</code> for alternating row contrast using <code>--table-row-stripe-bg</code>.</p>
+  <div class="table-demo demo-surface" role="region" aria-label="Live striped table example">
+    <table class="table table-striped">
+      <thead>
+        <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ada Lovelace</td><td>Engineer</td><td>Active</td></tr>
+        <tr><td>Grace Hopper</td><td>Architect</td><td>Active</td></tr>
+        <tr><td>Alan Turing</td><td>Researcher</td><td>On leave</td></tr>
+        <tr><td>Margaret Hamilton</td><td>Lead</td><td>Active</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Hover</h3>
+  <p>Add <code>.table-hover</code> for a row highlight on pointer hover. Combines with <code>.table-striped</code>.</p>
+  <div class="table-demo demo-surface" role="region" aria-label="Live hover table example">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ada Lovelace</td><td>Engineer</td><td>Active</td></tr>
+        <tr><td>Grace Hopper</td><td>Architect</td><td>Active</td></tr>
+        <tr><td>Alan Turing</td><td>Researcher</td><td>On leave</td></tr>
+        <tr><td>Margaret Hamilton</td><td>Lead</td><td>Active</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Density</h3>
+  <p><code>.table-sm</code> reduces cell padding for dense data; <code>.table-lg</code> adds breathing room.</p>
+  <div class="table-demo demo-surface" role="region" aria-label="Live density table examples">
+    <p class="demo-label">Compact (.table-sm)</p>
+    <table class="table table-sm table-density-demo">
+      <thead>
+        <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ada Lovelace</td><td>Engineer</td><td>Active</td></tr>
+        <tr><td>Grace Hopper</td><td>Architect</td><td>Active</td></tr>
+        <tr><td>Alan Turing</td><td>Researcher</td><td>On leave</td></tr>
+        <tr><td>Margaret Hamilton</td><td>Lead</td><td>Active</td></tr>
+      </tbody>
+    </table>
+    <p class="demo-label">Comfortable (.table-lg)</p>
+    <table class="table table-lg">
+      <thead>
+        <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ada Lovelace</td><td>Engineer</td><td>Active</td></tr>
+        <tr><td>Grace Hopper</td><td>Architect</td><td>Active</td></tr>
+        <tr><td>Alan Turing</td><td>Researcher</td><td>On leave</td></tr>
+        <tr><td>Margaret Hamilton</td><td>Lead</td><td>Active</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Table</summary>
+      <div class="accordion-panel">
+
+        <h3>Rounded corners</h3>
+        <p>
+          <code>overflow: hidden</code> on a <code>border-collapse: collapse</code> table is
+          cross-browser unreliable. To get rounded corners, wrap the table in a container:
+        </p>
+        <pre><code>&lt;div style="border-radius: var(--table-radius); overflow: hidden"&gt;
+  &lt;table class="table"&gt;...&lt;/table&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Scroll wrapper (narrow viewports)</h3>
+        <p>Wrap with an <code>overflow-x: auto</code> container to allow horizontal scrolling
+        on narrow viewports without breaking the layout.</p>
+        <pre><code>&lt;div style="overflow-x: auto"&gt;
+  &lt;table class="table"&gt;...&lt;/table&gt;
+&lt;/div&gt;</code></pre>
+        <p>Both wrappers can be combined on a single div.</p>
+
+        <h3>Anatomy</h3>
+        <pre><code>&lt;!-- Base --&gt;
+&lt;table class="table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Role&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Ada Lovelace&lt;/td&gt;&lt;td&gt;Engineer&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- Striped + hover --&gt;
+&lt;table class="table table-striped table-hover"&gt;...&lt;/table&gt;
+
+&lt;!-- Compact --&gt;
+&lt;table class="table table-sm"&gt;...&lt;/table&gt;
+
+&lt;!-- Comfortable --&gt;
+&lt;table class="table table-lg"&gt;...&lt;/table&gt;</code></pre>
+
+        <h3>Token reference</h3>
+        <table class="table table-sm">
+          <thead><tr><th>Token</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>--table-border</code></td><td><code>--color-border</code></td><td>Cell and header border colour</td></tr>
+            <tr><td><code>--table-header-bg</code></td><td><code>--color-bg-inset</code></td><td>Header row background</td></tr>
+            <tr><td><code>--table-header-text</code></td><td><code>--color-text</code></td><td>Header row text colour</td></tr>
+            <tr><td><code>--table-row-stripe-bg</code></td><td><code>--color-bg-panel</code></td><td>Even row background in <code>.table-striped</code></td></tr>
+            <tr><td><code>--table-row-hover-bg</code></td><td><code>--color-bg-inset</code></td><td>Row background on hover in <code>.table-hover</code></td></tr>
+            <tr><td><code>--table-font-size</code></td><td><code>0.875rem</code></td><td>Body cell font size</td></tr>
+            <tr><td><code>--table-cell-padding</code></td><td><code>6px 12px</code></td><td>Default cell padding</td></tr>
+            <tr><td><code>--table-cell-padding-sm</code></td><td><code>3px 6px</code></td><td>Compact cell padding</td></tr>
+            <tr><td><code>--table-cell-padding-lg</code></td><td><code>12px 24px</code></td><td>Comfortable cell padding</td></tr>
+            <tr><td><code>--table-radius</code></td><td><code>--radius-md</code></td><td>Corner radius — apply to a wrapper element</td></tr>
+          </tbody>
+        </table>
+
+        <h3>CSS reference</h3>
+        <pre><code>.table &#123;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--table-font-size);
+&#125;
+
+.table th,
+.table td &#123;
+  padding: var(--table-cell-padding);
+  text-align: left;
+  border-bottom: 1px solid var(--table-border);
+&#125;
+
+.table thead th &#123;
+  background: var(--table-header-bg);
+  color: var(--table-header-text);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--table-border);
+&#125;
+
+.table tbody tr:last-child td &#123; border-bottom: none; &#125;
+
+.table-striped tbody tr:nth-child(even) td &#123;
+  background: var(--table-row-stripe-bg);
+&#125;
+
+.table-hover tbody tr:hover td &#123;
+  background: var(--table-row-hover-bg);
+  transition: background var(--duration-fast) var(--ease-out);
+&#125;
+
+.table-sm th, .table-sm td &#123; padding: var(--table-cell-padding-sm); &#125;
+.table-lg th, .table-lg td &#123; padding: var(--table-cell-padding-lg); &#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
 
   <!-- ── Code block ────────────────────────────────────────────────────── -->
 
@@ -185,7 +363,7 @@ initCodeCopy(); // appends .code-copy-btn to every &lt;pre&gt; that contains &lt
         <p>The button is only added when JS runs — no-script users never see an inert element.</p>
 
         <h3>Token reference</h3>
-        <table>
+        <table class="table table-sm">
           <thead><tr><th>Token</th><th>Default</th><th>Use</th></tr></thead>
           <tbody>
             <tr><td><code>--code-bg</code></td><td><code>--color-bg-inset</code></td><td>Background of code blocks and inline code</td></tr>
@@ -240,7 +418,19 @@ initCodeCopy(); // appends .code-copy-btn to every &lt;pre&gt; that contains &lt
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
-    /* override .demo-surface's --space-md for section-level breathing room */
     margin-bottom: var(--space-lg);
+  }
+
+  .demo-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .table-density-demo {
+    margin-bottom: var(--space-md);
   }
 </style>
