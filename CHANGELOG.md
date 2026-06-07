@@ -18,6 +18,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
+- **T-31** `tokens/components.css`: `--table-border`, `--table-header-bg`, `--table-header-text`, `--table-row-stripe-bg`, `--table-row-hover-bg`, `--table-font-size`, `--table-cell-padding`, `--table-cell-padding-sm`, `--table-cell-padding-lg`, `--table-radius` Tier-3 tokens for independent retheme of table components
+- **T-31** `tokens/component-classes.css`: `.table` (base), `.table-striped` (alternating rows), `.table-hover` (row hover highlight), `.table-sm` (compact padding), `.table-lg` (comfortable padding) CSS classes shipped in `dist/farn-components.css`
+- **T-31** `site/src/pages/components/data.astro`: Table section with live demos for all variants, token reference, anatomy, and CSS reference; scroll wrapper and rounded-corners wrapper patterns documented
 - **T-49** `site/src/pages/foundations/layout.astro`: new Foundations page — content-first widths (`--width-content/prose/narrow`), page structure skeleton, grid vs flex guidance, radius-as-hierarchy token table
 - **T-49** `site/src/pages/foundations/accessibility.astro`: new Foundations page — WCAG AA commitment, global `:focus-visible` ring, `prefers-reduced-motion` guard, colour-alone caveat; links to contrast matrix on Styles › Color
 - **T-49** `site/src/pages/foundations/responsive.astro`: expanded with reflow-by-content philosophy and fluid type callout
