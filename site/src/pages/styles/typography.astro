@@ -6,7 +6,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h1>Typography</h1>
   <p>Display serif for personality, humanist sans for readability, mono for code. The combination creates warmth without sacrificing legibility.</p>
 
-  <h2>Font Stacks</h2>
+  <h2 id="font-stacks">Font Stacks</h2>
   <table>
     <thead><tr><th>Token</th><th>Stack</th><th>Role</th></tr></thead>
     <tbody>
@@ -21,7 +21,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     feel cold. Together they create the &ldquo;familiar but differentiated&rdquo; quality the system aims for.
   </p>
 
-  <h2>Fraunces Optical Size — Critical Rule</h2>
+  <h2 id="optical-size">Fraunces Optical Size — Critical Rule</h2>
   <p>
     Fraunces is a variable font with an optical size axis (<code>opsz</code>).
     This axis <strong>must always be set explicitly</strong> — the font renders
@@ -53,7 +53,7 @@ h3 &#123;
   font-variation-settings: 'opsz' 20;  /* mandatory */
 &#125;</code></pre>
 
-  <h2>Type Scale</h2>
+  <h2 id="type-scale">Type Scale</h2>
   <p>A modular scale anchored at 16px base, stepping ~1.25&times; (major third).</p>
   <table>
     <thead><tr><th>rem</th><th>px</th><th>Use</th></tr></thead>
@@ -70,7 +70,7 @@ h3 &#123;
   </table>
   <p>Use <code>clamp()</code> for fluid heading sizes — no breakpoint jumps. The DocLayout already applies <code>clamp()</code> to all h1–h3 elements.</p>
 
-  <h2>Heading Styles</h2>
+  <h2 id="heading-styles">Heading Styles</h2>
   <table>
     <thead><tr><th>Element</th><th>Font</th><th>Weight</th><th>Size</th><th>opsz</th><th>Tracking</th></tr></thead>
     <tbody>
@@ -82,7 +82,7 @@ h3 &#123;
     </tbody>
   </table>
 
-  <h2>Body &amp; UI Styles</h2>
+  <h2 id="body-ui">Body &amp; UI Styles</h2>
   <table>
     <thead><tr><th>Role</th><th>Font</th><th>Weight</th><th>Size</th><th>Line height</th></tr></thead>
     <tbody>
@@ -96,7 +96,7 @@ h3 &#123;
     </tbody>
   </table>
 
-  <h2>Mono &amp; Code</h2>
+  <h2 id="mono-code">Mono &amp; Code</h2>
   <p>
     <code>--font-mono</code> is JetBrains Mono, loaded at weights 400 and 500.
     Use it exclusively for code — never decorative text.
@@ -136,7 +136,7 @@ h3 &#123;
   font-variation-settings: normal;
 &#125;</code></pre>
 
-  <h2>Letter Spacing</h2>
+  <h2 id="letter-spacing">Letter Spacing</h2>
   <table>
     <thead><tr><th>Value</th><th>Use</th></tr></thead>
     <tbody>
@@ -147,7 +147,7 @@ h3 &#123;
     </tbody>
   </table>
 
-  <h2>Responsive Typography</h2>
+  <h2 id="responsive">Responsive Typography</h2>
   <table>
     <thead><tr><th>Breakpoint</th><th>H1</th><th>H2</th><th>Body</th></tr></thead>
     <tbody>
@@ -157,7 +157,7 @@ h3 &#123;
     </tbody>
   </table>
 
-  <h2>Loading Fonts</h2>
+  <h2 id="loading">Loading Fonts</h2>
   <p>Load via a <code>&lt;link&gt;</code> tag in <code>&lt;head&gt;</code> — not via <code>@import url()</code> inside CSS. The import approach delays rendering.</p>
   <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
 &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
@@ -165,7 +165,7 @@ h3 &#123;
   href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
 /&gt;</code></pre>
 
-  <h2>Usage Rules</h2>
+  <h2 id="usage-rules">Usage Rules</h2>
   <ul>
     <li>Fraunces for h1–h3 and display copy only — never for body text, UI labels, or navigation.</li>
     <li><code>font-variation-settings: 'opsz'</code> is mandatory on every Fraunces usage: h1 &rarr; 72, h2 &rarr; 24, h3 &rarr; 20.</li>
@@ -175,7 +175,7 @@ h3 &#123;
     <li>Fraunces minimum size: 16px — never smaller.</li>
   </ul>
 
-  <h2>Typography Utility Classes</h2>
+  <h2 id="utility-classes">Typography Utility Classes</h2>
   <p>
     Opt-in utility classes that encode the full type scale — including mandatory Fraunces <code>font-variation-settings</code> —
     so consumers never have to look up opsz values or clamp ranges.

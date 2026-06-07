@@ -165,4 +165,17 @@
   --code-radius:      var(--radius-md);
   --code-copy-size:   32px;
   --code-copy-radius: var(--radius-sm);
+
+  /* ── Table tokens ────────────────────────────────────────────────────── */
+  --table-border:             var(--color-border);
+  --table-header-bg:          var(--color-bg-inset);
+  --table-header-text:        var(--color-text);
+  --table-header-font-size:   0.8125rem;
+  --table-row-stripe-bg:      var(--color-bg-panel);
+  --table-row-hover-bg:       var(--color-bg-inset);   /* deeper than both base+stripe */
+  --table-font-size:          0.875rem;
+  --table-cell-padding:       var(--space-xs) var(--space-sm);
+  --table-cell-padding-sm:    3px var(--space-xs);     /* 3px: sub-xs, no scale token available */
+  --table-cell-padding-lg:    var(--space-sm) var(--space-md);
+  --table-radius:             var(--radius-md);        /* apply to a wrapper, not the table */
 }

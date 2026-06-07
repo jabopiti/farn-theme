@@ -1,0 +1,83 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Accessibility" description="Farn's WCAG AA commitment, focus styles, reduced-motion support, and colour guidance">
+  <h1>Accessibility</h1>
+  <span class="badge badge-beta">beta</span>
+  <p>
+    Farn targets WCAG&nbsp;2.1 Level AA. The token system, focus styles, and motion controls are
+    designed to make accessible output the default rather than an afterthought.
+  </p>
+
+  <h2 id="wcag">WCAG AA commitment</h2>
+  <p>
+    All semantic foreground/background token pairs are chosen to meet at least 4.5:1 contrast
+    (AA for normal text) in both light and dark themes. One exception: <code>--in3-ash</code>
+    (Iron Night's lightest shade, used in light mode as tertiary text and border colour) achieves
+    3:1 against light backgrounds — AA-large only (18pt+ or 14pt+ bold). Avoid using Ash for
+    body copy or labels below that size.
+  </p>
+  <p>
+    The full contrast matrix — every semantic pair in both themes, with AA / AAA / fail markings —
+    is on <a href="/styles/color#accessibility">Styles &rsaquo; Color &rsaquo; Accessibility</a>.
+  </p>
+
+  <h2 id="focus">Focus styles</h2>
+  <p>
+    Farn ships a global focus ring in <code>tokens/base.css</code> that applies to every
+    focusable element without opt-in:
+  </p>
+  <pre><code>:focus-visible &#123;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: inherit;
+&#125;
+
+:focus:not(:focus-visible) &#123;
+  outline: none;
+&#125;</code></pre>
+  <p>
+    <code>:focus-visible</code> shows the ring only for keyboard and sequential navigation;
+    mouse clicks suppress it via <code>:focus:not(:focus-visible)</code>. This gives keyboard
+    users a clear indicator without adding visual noise for pointer users.
+  </p>
+  <p>
+    <code>border-radius: inherit</code> means the ring hugs the shape of buttons, inputs, and
+    cards rather than defaulting to a square. Component classes in <code>farn-components.css</code>
+    inherit this ring automatically — override only when a component needs a custom offset or
+    colour (see <code>--input-focus-shadow</code> in the <a href="/components/forms">Forms component</a>).
+  </p>
+
+  <h2 id="motion">Reduced motion</h2>
+  <p>
+    <code>tokens/base.css</code> includes a blanket reduced-motion rule:
+  </p>
+  <pre><code>@media (prefers-reduced-motion: reduce) &#123;
+  *,
+  *::before,
+  *::after &#123;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  &#125;
+&#125;</code></pre>
+  <p>
+    This covers all CSS animations and transitions globally. The <code>0.01ms</code> value — rather
+    than <code>0</code> — keeps animation events firing so JavaScript listeners do not stall waiting
+    for an <code>animationend</code> event that never comes.
+  </p>
+  <p>
+    Scroll-reveal elements (<code>.scroll-reveal</code>) additionally snap directly to their
+    revealed state in <code>site/src/styles/site.css</code>, bypassing the observer entirely for
+    users who prefer reduced motion.
+  </p>
+
+  <h2 id="colour-alone">Colour alone</h2>
+  <p>
+    Never use colour as the sole means of conveying information, indicating an action, prompting a
+    response, or distinguishing a visual element (WCAG 1.4.1). Pair every colour-coded signal with
+    at least one of: a text label, an icon, a pattern, or a position cue. Badge variants, for
+    example, combine colour with a text label — the label alone would be sufficient; the colour
+    reinforces but does not replace it.
+  </p>
+</DocLayout>
