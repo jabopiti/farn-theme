@@ -18,6 +18,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
+- **T-27** `tokens/components.css`: `--diagonal-angle` (`-3deg`) Tier-3 token — adjusts the static display angle for the diagonal cut; `tokens/component-classes.css`: `.section-skew` class with `isolation: isolate`, `::before skewY` background, and Tier 2 `animation-timeline: view()` angle-flattening animation (`skewY(-5deg)` → `skewY(0deg)`); static fallback for unsupported browsers; all three approaches (clip-path polygon, `::before skewY`, SVG triangle) documented in Components › Layout including the `clip-path` + `box-shadow` incompatibility
 - **T-31** `tokens/components.css`: `--table-border`, `--table-header-bg`, `--table-header-text`, `--table-row-stripe-bg`, `--table-row-hover-bg`, `--table-font-size`, `--table-cell-padding`, `--table-cell-padding-sm`, `--table-cell-padding-lg`, `--table-radius` Tier-3 tokens for independent retheme of table components
 - **T-31** `tokens/component-classes.css`: `.table` (base), `.table-striped` (alternating rows), `.table-hover` (row hover highlight), `.table-sm` (compact padding), `.table-lg` (comfortable padding) CSS classes shipped in `dist/farn-components.css`
 - **T-31** `site/src/pages/components/data.astro`: Table section with live demos for all variants, token reference, anatomy, and CSS reference; scroll wrapper and rounded-corners wrapper patterns documented

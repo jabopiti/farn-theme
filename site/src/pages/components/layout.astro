@@ -219,6 +219,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td>Sine wave</td><td><code>.section-wave</code></td><td>Organic, rhythmic</td><td>Repeated section breaks; any natural flowing transition</td></tr>
             <tr><td>Convex arc</td><td><code>.section-arc</code></td><td>Refined, quiet</td><td>Centred hero layouts; calm lens-like elegance</td></tr>
             <tr><td>Organic blob</td><td><code>.section-blob</code></td><td>Expressive, freeform</td><td>High-emphasis brand moments; one-off expressive breaks</td></tr>
+            <tr><td>Diagonal cut</td><td><code>.section-skew</code></td><td>Sharp, directional</td><td>CTA sections; forward-momentum transitions</td></tr>
           </tbody>
         </table>
         <p><strong>Use one primary type per page.</strong> A second type is acceptable for a single high-emphasis moment (e.g., sine waves throughout with one layered overlap at a CTA). More than two distinct types creates visual noise.</p>
@@ -369,10 +370,74 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
         <p><strong>Draw paths in Figma or Inkscape — do not hand-author blob paths.</strong> Export the <code>d</code> attribute directly from your design tool. The silhouette can echo a motif elsewhere in the design (a landscape, terrain, or product shape). The example paths above are illustrative; replace them with exported paths for production use.</p>
 
+        <!-- Diagonal cut -->
+        <h3 id="diagonal-cut">Diagonal cut</h3>
+        <p>
+          A single angled line divides two sections — sharp, directional, and energetic. Three
+          implementation approaches are available in increasing precision. Only approach 2 ships
+          as a CSS class; approaches 1 and 3 are code patterns to adapt.
+        </p>
+        <p>
+          <strong>Important:</strong> <code>clip-path</code> (approach 1) clips
+          <code>box-shadow</code> on the same element. If the section needs a drop shadow, use
+          the <code>::before</code> approach instead.
+        </p>
+
+        <div class="demo-diagonal" role="group" aria-label="Diagonal cut live demo">
+          <div class="section-skew demo-diagonal-top" data-theme="dark">
+            <p class="demo-label">Preceding section</p>
+            <p class="demo-section-desc">Background skewed via <code>::before</code> — content stays horizontal.</p>
+          </div>
+          <div class="demo-diagonal-bottom" data-theme="light">
+            <p class="demo-label">Next section</p>
+            <p class="demo-section-desc">Set <code>--color-section</code> to match the preceding section's background.</p>
+          </div>
+        </div>
+
+        <h4>Approach 1 — <code>clip-path</code> polygon</h4>
+        <p>Simplest option. GPU-accelerated. Does not work if the section needs <code>box-shadow</code>.</p>
+        <pre><code>&lt;section style="clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);"&gt;
+  &lt;!-- Section content --&gt;
+&lt;/section&gt;</code></pre>
+
+        <h4>Approach 2 — <code>::before</code> skew (shipped as <code>.section-skew</code>)</h4>
+        <p>
+          The background is applied to a skewed <code>::before</code> pseudo-element so the section's
+          content stays horizontal and <code>box-shadow</code> on the element still works. In
+          supporting browsers the angle flattens via <code>animation-timeline: view()</code> —
+          from <code>skewY(-5deg)</code> to <code>skewY(0deg)</code> as the section enters the
+          viewport. Static fallback for unsupported browsers: shows at
+          <code>var(--diagonal-angle)</code>.
+        </p>
+        <pre><code>&lt;section class="section-skew"
+         style="padding: 80px 0; --color-section: var(--color-bg-panel);"&gt;
+  &lt;!-- Content sits horizontally above the skewed ::before background --&gt;
+&lt;/section&gt;</code></pre>
+
+        <h4>Approach 3 — SVG triangle</h4>
+        <p>Precise pixel control. Place the SVG at the bottom of the preceding section.</p>
+        <pre><code>&lt;section style="position: relative; padding-bottom: 60px;"&gt;
+  &lt;svg viewBox="0 0 1200 60" preserveAspectRatio="none"
+       style="display:block; position:absolute; bottom:0; left:0; width:100%; height:60px;"
+       aria-hidden="true"&gt;
+    &lt;polygon points="0,60 1200,0 1200,60" fill="var(--color-section-next)"/&gt;
+  &lt;/svg&gt;
+&lt;/section&gt;</code></pre>
+
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--diagonal-angle</code></td><td><code>-3deg</code></td><td>Static display angle (approach 2). Keep between <code>-2deg</code> and <code>-5deg</code>. Scroll-driven animation always starts at <code>-5deg</code> regardless of this value.</td></tr>
+            <tr><td><code>--color-section</code></td><td><code>var(--color-bg)</code></td><td>Background fill for the <code>::before</code> pseudo-element (approach 2). Override to match the actual section background.</td></tr>
+            <tr><td><code>--color-section-next</code></td><td><code>var(--color-bg-panel)</code></td><td>SVG fill colour for the triangle approach. Set to match the destination section background.</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Direction carries meaning:</strong> bottom-left to top-right (<code>skewY</code> negative) reads as forward momentum. The reverse reads as stepping back. Be consistent within a page. Use at most one diagonal per scroll flow — two diagonals pointing opposite directions create visual conflict.</p>
+
         <h3>Upcoming patterns</h3>
-        <p>Two additional patterns are planned:</p>
+        <p>One additional pattern is planned:</p>
         <ul>
-          <li><strong>Diagonal cut</strong> — energetic directional transition for CTAs (T-27)</li>
           <li><strong>Stacked card reveal</strong> — cinematic depth for long 3–5 section pages (T-28)</li>
         </ul>
 
@@ -679,6 +744,22 @@ import DocLayout from '../../layouts/DocLayout.astro';
   }
 
   .demo-wave-bottom {
+    padding: var(--space-md) var(--space-md) var(--space-lg);
+  }
+
+  /* ── Diagonal cut demo ────────────────────────────────────────────────── */
+  .demo-diagonal {
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .demo-diagonal-top {
+    padding: var(--space-xl) var(--space-md) calc(var(--space-xl) + 30px);
+  }
+
+  .demo-diagonal-bottom {
     padding: var(--space-md) var(--space-md) var(--space-lg);
   }
 
