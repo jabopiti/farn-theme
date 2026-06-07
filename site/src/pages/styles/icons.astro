@@ -12,7 +12,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     and <em>colour</em> tokens to make any third-party set feel native.
   </p>
 
-  <h2>Recommended library</h2>
+  <h2 id="library">Recommended library</h2>
   <p>
     <a href="https://lucide.dev" target="_blank" rel="noopener noreferrer"><strong>Lucide</strong></a>
     is the recommended default — 1,700+ icons, ISC licence, a clean stroke character that sits
@@ -71,7 +71,7 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
     Both use <code>currentColor</code> and work with the same sizing and colour patterns below.
   </div>
 
-  <h2>Size with spacing tokens</h2>
+  <h2 id="sizing">Size with spacing tokens</h2>
   <p>
     Drive icon dimensions from the spacing scale so they track the rest of the system. As a rule of
     thumb: inline icons match the surrounding cap height; standalone affordances sit one step up.
@@ -125,7 +125,7 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
   height: var(--space-lg);
 &#125;</code></pre>
 
-  <h2>Colour with semantic tokens</h2>
+  <h2 id="colour">Colour with semantic tokens</h2>
   <p>
     Control icon colour through the parent's <code>color</code> property — SVG icons inherit it
     via <code>currentColor</code> regardless of whether they use stroke or fill. Lucide uses
@@ -184,7 +184,7 @@ import &#123; ArrowRight, Check, Info &#125; from 'lucide-astro';
     <code>data-surface</code> context automatically.
   </p>
 
-  <h2>Accessibility</h2>
+  <h2 id="accessibility">Accessibility</h2>
   <ul>
     <li>
       <strong>Decorative icon (next to a label)</strong> — add <code>aria-hidden="true"</code>.

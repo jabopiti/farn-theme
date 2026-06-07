@@ -6,7 +6,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h1>Spacing</h1>
   <p>Proximity signals relationship; distance signals importance. The spacing scale encodes this — small gaps within components, large gaps between sections.</p>
 
-  <h2>Space Scale</h2>
+  <h2 id="scale">Space Scale</h2>
   <p>Base unit is 12px. All tokens are multiples of 12, except <code>--space-xs</code> (6px = half-unit).</p>
 
   <div class="scale-preview" aria-hidden="true">
@@ -43,7 +43,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <li><strong>4xl</strong> — reserved for hero areas. More than one use per page usually signals restructuring is needed.</li>
   </ul>
 
-  <h2>Layout Widths</h2>
+  <h2 id="widths">Layout Widths</h2>
   <table>
     <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
     <tbody>
@@ -73,7 +73,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &#125;</code></pre>
   <p>Use CSS Grid for two-dimensional layouts, flexbox for one-dimensional. Never go beyond 3 columns at <code>--width-content</code>.</p>
 
-  <h2>Border Radius</h2>
+  <h2 id="radius">Border Radius</h2>
   <p>Each radius maps to a specific element type. The progression creates implicit hierarchy — larger surfaces have larger radii.</p>
   <table>
     <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
@@ -95,7 +95,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <div class="radius-chip" style="border-radius:9999px">9999px</div>
   </div>
 
-  <h2>Z-index Scale</h2>
+  <h2 id="z-index">Z-index Scale</h2>
   <p>Always reference a token — never use raw numbers. Never skip levels.</p>
   <table>
     <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
@@ -111,7 +111,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </table>
   <p>The nav (<code>--z-sticky: 200</code>) sits below overlays (<code>--z-overlay: 300</code>) — dropdowns triggered inside the nav render correctly above it without adjustment.</p>
 
-  <h2>Responsive Breakpoints</h2>
+  <h2 id="breakpoints">Responsive Breakpoints</h2>
   <table>
     <thead><tr><th>Breakpoint</th><th>Behaviour</th></tr></thead>
     <tbody>

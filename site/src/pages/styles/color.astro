@@ -10,7 +10,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     so components never need to know which theme mode they are in.
   </p>
 
-  <h2>Palette Tokens</h2>
+  <h2 id="palette-tokens">Palette Tokens</h2>
   <p>
     Raw palette tokens are defined once and never change. Use them directly only for
     brand moments and design showcases — all production components reference the
@@ -85,7 +85,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </tbody>
   </table>
 
-  <h2>Semantic Token Layer</h2>
+  <h2 id="semantic-tokens">Semantic Token Layer</h2>
   <p>Components always reference semantic tokens — never palette tokens directly. The semantic layer resolves to the correct palette value per theme mode automatically.</p>
 
   <h3>Light Mode (default)</h3>
@@ -138,7 +138,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &lt;section data-surface="overlay"&gt; &hellip; &lt;/section&gt; &lt;!-- modals, dropdowns --&gt;
 &lt;section data-theme="dark" data-surface="layer"&gt; &hellip; &lt;/section&gt; &lt;!-- forced dark panel --&gt;</code></pre>
 
-  <h2>Accessibility</h2>
+  <h2 id="accessibility">Accessibility</h2>
   <p>Full contrast matrix for all semantic foreground/background token pairs. Ratings follow WCAG 2.1: <strong>AAA</strong> ≥ 7:1 · <strong>AA</strong> ≥ 4.5:1 · <strong>AA Large</strong> ≥ 3:1 (≥ 24 px regular, or ≥ 19 px bold) · <strong>Fail</strong> &lt; 3:1.</p>
 
   <h3>Light mode</h3>
@@ -282,7 +282,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </div>
   <p>† <code>--color-accent-text</code> (light mode) is designed for text <em>on</em> <code>--color-accent</code> button backgrounds — Fail against page surfaces is by design. State tokens (error/warning/success) marked † fall below 3:1 on <code>--color-bg-elevated</code> in dark mode; pair with an icon or use on <code>--color-bg</code>/<code>--color-bg-sunken</code> instead. Note: in dark mode <code>--color-bg</code> and <code>--color-bg-sunken</code> both resolve to <code>--in0-void</code>, so those two columns are identical by design. <code>--color-text-tertiary</code> is AA Large only in all light-mode contexts — never use it for body-size text; restrict to ≥ 24 px regular or ≥ 19 px bold.</p>
 
-  <h2>Usage Rules</h2>
+  <h2 id="usage-rules">Usage Rules</h2>
   <ul>
     <li><strong>Never</strong> use Bloom colours as decorative accents — reserve them for semantic states only (error, warning, success, annotation).</li>
     <li>Iron Night tones must not appear as foreground text on light backgrounds — contrast is too low.</li>

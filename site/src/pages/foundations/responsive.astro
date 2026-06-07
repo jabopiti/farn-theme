@@ -54,5 +54,17 @@ import DocLayout from '../../layouts/DocLayout.astro';
     existing rules are written, then follow the same comment pattern.
   </p>
 
-  <!-- TODO T-49: expand with layout philosophy, fluid clamp() type scale, semantic meaning per breakpoint, reflow-by-content approach -->
+  <h2 id="reflow">Reflow-by-content</h2>
+  <p>
+    Before reaching for a breakpoint, lean on intrinsic sizing: <code>flex-wrap</code>,
+    <code>auto-fill</code>/<code>auto-fit</code> grid tracks, and <code>min-width: 0</code> on flex
+    children often reflow naturally without a media query. Breakpoints should express a deliberate
+    layout intent — switching from two columns to one, collapsing a nav drawer — not patch visual
+    overflow or spacing accidents.
+  </p>
+  <p>
+    Heading and body sizes use <code>clamp()</code> to scale fluidly between breakpoints without
+    any media queries at all. See <a href="/styles/typography">Styles &rsaquo; Typography</a> for the
+    full type scale and clamp values.
+  </p>
 </DocLayout>

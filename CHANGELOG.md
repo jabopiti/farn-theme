@@ -18,6 +18,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
+- **T-49** `site/src/pages/foundations/layout.astro`: new Foundations page — content-first widths (`--width-content/prose/narrow`), page structure skeleton, grid vs flex guidance, radius-as-hierarchy token table
+- **T-49** `site/src/pages/foundations/accessibility.astro`: new Foundations page — WCAG AA commitment, global `:focus-visible` ring, `prefers-reduced-motion` guard, colour-alone caveat; links to contrast matrix on Styles › Color
+- **T-49** `site/src/pages/foundations/responsive.astro`: expanded with reflow-by-content philosophy and fluid type callout
+- **T-49** `site/src/pages/foundations/index.astro`: Layout and Accessibility promoted from "Coming soon" to real links
+- **T-49** `site/src/data/navigation.ts`: Layout and Accessibility added to Foundations sub-nav (order: Surfaces → Layout → Responsive → Accessibility)
+- **T-49** `site/src/pages/styles/color.astro`: `id="accessibility"` added to the Accessibility `<h2>` to enable deep-linking
 - **T-33** `tokens/components.css`: `--code-bg`, `--code-text`, `--code-border`, `--code-radius`, `--code-copy-size`, `--code-copy-radius` Tier-3 tokens for independent retheme of code blocks
 - **T-33** `tokens/component-classes.css`: `.code-block` (block-level, scrollable), `.inline-code` (inline), and `.code-copy-btn` (clipboard icon button) CSS classes shipped in `dist/farn-components.css`
 - **T-33** `site/src/scripts/code-copy.js`: Reference copy-to-clipboard implementation — injects `.code-copy-btn` into every `<pre>` element; 2-second checkmark feedback; graceful no-JS and no-clipboard-API fallback
