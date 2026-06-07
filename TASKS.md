@@ -596,17 +596,17 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-49 · Complete Foundations section
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/practical-heisenberg-meRtl`
 
 **Gap:** Three concept pages are missing from Foundations — the overview links to them but they 404. All three are purely documentary (no new CSS) and are the same effort tier, so they ship together.
 
 _(T-50 · Foundations > Layout and T-51 · Foundations > Responsive merged here.)_
 
-- [ ] Create `site/src/pages/foundations/accessibility.astro`: WCAG AA commitment (Ash AA-large-only), `:focus-visible` ring, `prefers-reduced-motion`, don't-rely-on-colour-alone; link to the WCAG matrix on Styles > Color
-- [ ] Create `site/src/pages/foundations/layout.astro`: content-first widths, page-structure skeleton, grid pattern, radius-as-hierarchy; values cross-linked to Styles > Spacing
-- [ ] Create `site/src/pages/foundations/responsive.astro`: reflow-by-content, the three breakpoints, fluid `clamp()` type, semantic meaning per breakpoint
-- [ ] Add all three pages to `site/src/data/navigation.ts` under Foundations
-- [ ] No new CSS — documents existing token behaviour
+- [x] Create `site/src/pages/foundations/accessibility.astro`: WCAG AA commitment (Ash AA-large-only), `:focus-visible` ring, `prefers-reduced-motion`, don't-rely-on-colour-alone; link to the WCAG matrix on Styles > Color
+- [x] Create `site/src/pages/foundations/layout.astro`: content-first widths, page-structure skeleton, grid pattern, radius-as-hierarchy; values cross-linked to Styles > Spacing
+- [x] Expand `site/src/pages/foundations/responsive.astro`: reflow-by-content philosophy, fluid `clamp()` type callout
+- [x] Add Layout and Accessibility to `site/src/data/navigation.ts` under Foundations
+- [x] No new CSS — documents existing token behaviour
 
 ---
 

@@ -1,0 +1,166 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Layout" description="Content-first widths, page structure, and layout guidance for building with Farn">
+  <h1>Layout</h1>
+  <span class="badge badge-beta">beta</span>
+  <p>
+    Farn's layout philosophy is content-first: let the content determine the container size, not
+    the other way around. Width tokens give you three semantic slots. Structural HTML gives you
+    meaningful landmarks. Grid and flex each have a clear job.
+  </p>
+
+  <h2 id="widths">Content-first widths</h2>
+  <p>
+    Three width tokens cover the full range of layout needs. Apply them to the element that owns
+    the constraint — usually a wrapper <code>&lt;div&gt;</code> with <code>margin-inline: auto</code>.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Token</th>
+        <th>Value</th>
+        <th>Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--width-content</code></td>
+        <td><code>1080px</code></td>
+        <td>Outer page container — navigation, hero, section wrappers</td>
+      </tr>
+      <tr>
+        <td><code>--width-prose</code></td>
+        <td><code>70ch</code></td>
+        <td>Text column — articles, docs, any running prose</td>
+      </tr>
+      <tr>
+        <td><code>--width-narrow</code></td>
+        <td><code>640px</code></td>
+        <td>Tight containers — forms, dialogs, focused card layouts</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <code>70ch</code> is relative to the element's own font size, so prose columns naturally
+    widen slightly for display headings and narrow for captions — no extra math required.
+  </p>
+
+  <h2 id="structure">Page structure</h2>
+  <p>
+    Use semantic landmarks. Each landmark has a natural width token pairing:
+  </p>
+  <pre><code>&lt;body&gt;
+  &lt;header&gt;
+    &lt;!-- max-width: var(--width-content) --&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;!-- outer bound: var(--width-content) --&gt;
+
+    &lt;article&gt;
+      &lt;!-- prose column: var(--width-prose) --&gt;
+      &lt;h1&gt;...&lt;/h1&gt;
+      &lt;p&gt;...&lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;aside&gt;
+      &lt;!-- sidebar or supplemental: var(--width-narrow) --&gt;
+    &lt;/aside&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;!-- max-width: var(--width-content) --&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+
+  <h2 id="grid-flex">Grid vs flex</h2>
+  <p>
+    The rule of thumb: <strong>flex</strong> for one-dimensional alignment,
+    <strong>grid</strong> for two-dimensional layout.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Pattern</th>
+        <th>Use</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Flex row</td>
+        <td>Aligning items along a single axis</td>
+        <td>Nav links, button group, icon + label</td>
+      </tr>
+      <tr>
+        <td>Flex column</td>
+        <td>Stacking with controlled spacing</td>
+        <td>Form fields, card body</td>
+      </tr>
+      <tr>
+        <td>Grid columns</td>
+        <td>Placing items in explicit rows and columns</td>
+        <td>Card grid, two-column doc layout</td>
+      </tr>
+      <tr>
+        <td>Grid auto-fill</td>
+        <td>Responsive columns without breakpoints</td>
+        <td><code>repeat(auto-fill, minmax(240px, 1fr))</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Always use <code>gap: var(--space-*)</code> rather than margins between grid or flex children.
+    This keeps spacing in the token system and avoids margin-collapse edge cases.
+  </p>
+
+  <h2 id="radius">Radius as hierarchy</h2>
+  <p>
+    Border radius is not purely decorative — it signals depth and interactivity. Use the scale
+    consistently so elements at the same depth read as related.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Token</th>
+        <th>Value</th>
+        <th>Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--radius-sm</code></td>
+        <td><code>4px</code></td>
+        <td>Inset elements — code snippets, badges, table cells</td>
+      </tr>
+      <tr>
+        <td><code>--radius-md</code></td>
+        <td><code>6px</code></td>
+        <td>Interactive elements — buttons, inputs, select menus</td>
+      </tr>
+      <tr>
+        <td><code>--radius-lg</code></td>
+        <td><code>8px</code></td>
+        <td>Containers — cards, panels, modals</td>
+      </tr>
+      <tr>
+        <td><code>--radius-xl</code></td>
+        <td><code>12px</code></td>
+        <td>Prominent containers — hero cards, feature blocks</td>
+      </tr>
+      <tr>
+        <td><code>--radius-full</code></td>
+        <td><code>9999px</code></td>
+        <td>Pills, avatars, toggle switches</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Nest radii correctly: an inner element should have a smaller radius than its container,
+    roughly <code>container-radius - padding</code>. Matching radii at every level makes nested
+    surfaces look misaligned.
+  </p>
+</DocLayout>

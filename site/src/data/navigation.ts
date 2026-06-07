@@ -15,8 +15,9 @@ export const groups: NavGroup[] = [
     pages: [
       { label: 'Overview',      href: '/foundations' },
       { label: 'Surfaces',      href: '/foundations/surfaces' },
+      { label: 'Layout',        href: '/foundations/layout' },
       { label: 'Responsive',    href: '/foundations/responsive' },
-      // Layout / Accessibility land in T-49
+      { label: 'Accessibility', href: '/foundations/accessibility' },
     ],
   },
   {
