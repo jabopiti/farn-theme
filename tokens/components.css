@@ -182,6 +182,17 @@
   --pagination-radius:      var(--radius-md);
   --pagination-gap:         var(--space-xs);
 
+  /* ── Tab tokens ─────────────────────────────────────────────────────── */
+  --tab-idle-text:        var(--color-text-secondary);
+  --tab-hover-bg:         var(--color-bg-panel);
+  --tab-active-text:      var(--color-text);
+  --tab-indicator:        var(--color-accent);
+  --tab-border:           var(--color-border);
+  --tab-panel-bg:         transparent;
+  --tab-gap:              4px;
+  --tab-font-size:        0.875rem; /* 14px */
+  --tab-disabled-opacity: 0.4;
+
   /* ── Table tokens ────────────────────────────────────────────────────── */
   --table-border:             var(--color-border);
   --table-header-bg:          var(--color-bg-inset);

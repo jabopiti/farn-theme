@@ -22,6 +22,7 @@ dist/
   farn-tokens.css         Tokens only — no base reset (for consumers with their own reset)
   farn-components.css     Component tokens + classes — opt-in, load alongside farn.css
   farn-typography.css     Typography utility classes — opt-in, load alongside farn.css or farn-tokens.css
+  tabs.js                 Tab widget progressive-enhancement script — exported as farn-theme/scripts/tabs
 site/                     Astro documentation site
 CHANGELOG.md              Updated on every token or component change
 TASKS.md                  Task backlog — pick up work here
@@ -44,11 +45,14 @@ cat tokens/typography-classes.css > dist/farn-typography.css
 
 # Sync llms.txt to site/public so farn.jbpt.de/llms.txt stays current (root file is canonical)
 cp llms.txt site/public/llms.txt
+
+# Copy tabs script to dist so it ships as farn-theme/scripts/tabs
+cp site/src/scripts/tabs.js dist/tabs.js
 ```
 
 `tokens/typography-classes.css` is **not** in `tokens/index.css` — DocLayout imports it directly from source. Do not add it to the index chain.
 
-Run all five steps after any change to a `tokens/` file or `llms.txt` (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
+Run all six steps after any change to a `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
 
 ## CSS naming conventions
 

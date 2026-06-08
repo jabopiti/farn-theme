@@ -6,8 +6,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h1>Navigation</h1>
   <p>
     Components that help users orient themselves and move through a site or application.
-    All navigation components are CSS-only at their core — no JavaScript required for the
-    shipped functionality.
+    Most ship as pure CSS — Tabs adds a small progressive-enhancement script for keyboard
+    navigation and panel switching.
   </p>
 
   <!-- ── Breadcrumbs ──────────────────────────────────────────────────── -->
@@ -232,12 +232,207 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <!-- ── Tabs ──────────────────────────────────────────────────────────── -->
 
-  <h2 id="tabs">Tabs <span class="badge badge-draft">coming soon</span></h2>
+  <h2 id="tabs">Tabs <span class="badge badge-published">stable</span></h2>
   <p>
-    Horizontal tabs for switching between views within a single screen. CSS-only active state
-    via <code>:checked</code> radio inputs; ARIA <code>role="tablist"</code> JS enhancement
-    documented separately.
+    Horizontal tabs for switching between related views on the same screen. CSS drives all
+    visual states via <code>[aria-selected]</code>; a small script handles panel switching
+    and arrow-key navigation.
   </p>
+
+  <div class="demo-surface">
+    <div class="tabs">
+      <div class="tab-list" role="tablist" aria-label="Product details">
+        <button class="tab" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview" tabindex="0">Overview</button>
+        <button class="tab" role="tab" id="tab-specs" aria-selected="false" aria-controls="panel-specs" tabindex="-1">Specifications</button>
+        <button class="tab" role="tab" id="tab-reviews" aria-selected="false" aria-controls="panel-reviews" tabindex="-1">Reviews</button>
+        <button class="tab" role="tab" id="tab-disabled" aria-selected="false" aria-controls="panel-disabled" tabindex="-1" disabled>Unavailable</button>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
+        <p>A brief summary of the product, its key benefits, and who it's for. This panel is active by default.</p>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-specs" aria-labelledby="tab-specs" tabindex="0" hidden>
+        <p>Technical specifications: dimensions, weight, materials, and compatibility details.</p>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-reviews" aria-labelledby="tab-reviews" tabindex="0" hidden>
+        <p>Customer reviews and ratings appear here.</p>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="panel-disabled" aria-labelledby="tab-disabled" tabindex="0" hidden>
+        <p>This panel is not reachable — its tab is disabled.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion accordion-ref">
+    <details>
+      <summary>Full reference — Tabs</summary>
+      <div class="accordion-panel">
+
+        <h3>Anatomy</h3>
+        <p>
+          A <code>.tab-list</code> wrapper carries <code>role="tablist"</code> and an
+          <code>aria-label</code>. Each <code>.tab</code> button has <code>role="tab"</code>,
+          <code>aria-selected</code>, <code>aria-controls</code> pointing to its panel, and
+          an <code>id</code>. Each <code>.tab-panel</code> has <code>role="tabpanel"</code>
+          and <code>aria-labelledby</code> pointing back to its tab. Non-active panels carry
+          the HTML <code>hidden</code> attribute — the script toggles it on click; CSS reveals
+          all panels when scripting is unavailable.
+        </p>
+        <pre><code>&lt;div class="tabs"&gt;
+  &lt;div class="tab-list" role="tablist" aria-label="Section label"&gt;
+    &lt;button class="tab" role="tab"
+            id="tab-a" aria-selected="true"
+            aria-controls="panel-a" tabindex="0"&gt;First&lt;/button&gt;
+    &lt;button class="tab" role="tab"
+            id="tab-b" aria-selected="false"
+            aria-controls="panel-b" tabindex="-1"&gt;Second&lt;/button&gt;
+    &lt;button class="tab" role="tab"
+            id="tab-c" aria-selected="false"
+            aria-controls="panel-c" tabindex="-1" disabled&gt;Off&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel"
+       id="panel-a" aria-labelledby="tab-a" tabindex="0"&gt;
+    Panel A content.
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel"
+       id="panel-b" aria-labelledby="tab-b" tabindex="0" hidden&gt;
+    Panel B content.
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel"
+       id="panel-c" aria-labelledby="tab-c" tabindex="0" hidden&gt;
+    Panel C content.
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Script</h3>
+        <p>
+          <code>dist/tabs.js</code> exports <code>initTabs()</code> and ships as a named package
+          export. Call it once after the DOM is ready:
+        </p>
+        <pre><code>import &#123; initTabs &#125; from 'farn-theme/scripts/tabs';
+document.addEventListener('DOMContentLoaded', initTabs);</code></pre>
+        <p>
+          The Astro docs site calls it automatically via <code>DocLayout.astro</code>.
+          Without the script, panels with <code>hidden</code> are shown stacked
+          (via <code>@media (scripting: none)</code>) so no content is lost.
+        </p>
+
+        <h3>Keyboard navigation</h3>
+        <table>
+          <thead><tr><th>Key</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Tab</kbd></td><td>Moves focus into the tab list (to the active tab), then out to the panel.</td></tr>
+            <tr><td><kbd>→</kbd> / <kbd>←</kbd></td><td>Moves focus and activates the next/previous enabled tab.</td></tr>
+            <tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>Moves focus and activates the first/last enabled tab.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Usage guidance</h3>
+        <table>
+          <thead><tr><th>Situation</th><th>Guidance</th></tr></thead>
+          <tbody>
+            <tr><td>Content type</td><td>Use tabs only when panel content is parallel and mutually exclusive — overviews, specs, reviews. Avoid for sequential steps (use a stepper instead).</td></tr>
+            <tr><td>Number of tabs</td><td>2–6 tabs is the sweet spot. Fewer than two is not a tab pattern; more than six overwhelms the list even on desktop. Use overflow-scroll sparingly — prefer restructuring.</td></tr>
+            <tr><td>Active tab on load</td><td>Set <code>aria-selected="true"</code> and <code>tabindex="0"</code> on the first tab in the HTML; all others get <code>tabindex="-1"</code>. The script maintains this.</td></tr>
+            <tr><td>Disabled tabs</td><td>Use the HTML <code>disabled</code> attribute on the <code>&lt;button&gt;</code>. The tab renders at reduced opacity and is skipped by arrow-key navigation.</td></tr>
+            <tr><td>Tab labels</td><td>Keep labels short (1–3 words). Never use icons alone without a visible label — add <code>aria-label</code> if an icon is truly needed.</td></tr>
+            <tr><td>Panel content height</td><td>Panels can vary in height — the container grows naturally. Avoid fixed-height panels with scrollable content inside; users will struggle to reach content with keyboard.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Accessibility</h3>
+        <table>
+          <thead><tr><th>Attribute</th><th>Where</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><code>role="tablist"</code></td><td><code>.tab-list</code></td><td>Identifies the group of tabs as a tab widget to assistive technology.</td></tr>
+            <tr><td><code>aria-label</code></td><td><code>.tab-list</code></td><td>Names the tab group — required when multiple tab lists appear on the same page.</td></tr>
+            <tr><td><code>role="tab"</code></td><td><code>.tab</code></td><td>Marks each button as a tab control. Screen readers announce "Tab 1 of 3, selected" etc.</td></tr>
+            <tr><td><code>aria-selected="true/false"</code></td><td><code>.tab</code></td><td>Communicates active state to assistive technology. CSS reads this attribute for all visual styling.</td></tr>
+            <tr><td><code>aria-controls</code></td><td><code>.tab</code></td><td>Associates the tab with its panel via the panel's <code>id</code>.</td></tr>
+            <tr><td><code>tabindex="0/-1"</code></td><td><code>.tab</code></td><td>Roving tabindex — only the active tab is in the tab order; arrow keys move within the list.</td></tr>
+            <tr><td><code>role="tabpanel"</code></td><td><code>.tab-panel</code></td><td>Identifies the panel container for assistive technology.</td></tr>
+            <tr><td><code>aria-labelledby</code></td><td><code>.tab-panel</code></td><td>Links the panel back to its controlling tab label.</td></tr>
+            <tr><td><code>hidden</code></td><td>Inactive <code>.tab-panel</code></td><td>HTML attribute removes the panel from the accessibility tree and from layout. Toggled by the script.</td></tr>
+            <tr><td><code>tabindex="0"</code></td><td><code>.tab-panel</code> with no focusable children</td><td>If the panel contains no links, buttons, or inputs, add <code>tabindex="0"</code> so keyboard users can Tab into it after selecting a tab. Omit when the panel has focusable content — Tab will find it naturally.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Controls</th></tr></thead>
+          <tbody>
+            <tr><td><code>--tab-idle-text</code></td><td><code>var(--color-text-secondary)</code></td><td>Inactive tab label colour</td></tr>
+            <tr><td><code>--tab-hover-bg</code></td><td><code>var(--color-bg-panel)</code></td><td>Tab background on hover</td></tr>
+            <tr><td><code>--tab-active-text</code></td><td><code>var(--color-text)</code></td><td>Active (selected) tab label colour</td></tr>
+            <tr><td><code>--tab-indicator</code></td><td><code>var(--color-accent)</code></td><td>Underline indicator colour on the active tab</td></tr>
+            <tr><td><code>--tab-border</code></td><td><code>var(--color-border)</code></td><td>Full-width separator between the tab list and panel</td></tr>
+            <tr><td><code>--tab-panel-bg</code></td><td><code>transparent</code></td><td>Panel content area background</td></tr>
+            <tr><td><code>--tab-gap</code></td><td><code>4px</code></td><td>Gap between tab buttons</td></tr>
+            <tr><td><code>--tab-font-size</code></td><td><code>0.875rem</code></td><td>Tab label font size</td></tr>
+            <tr><td><code>--tab-disabled-opacity</code></td><td><code>0.4</code></td><td>Opacity of disabled tabs</td></tr>
+          </tbody>
+        </table>
+
+        <h3>CSS reference</h3>
+        <p>Shipped in <code>dist/farn-components.css</code>. All colours adapt to <code>data-theme</code> and <code>data-surface</code> automatically.</p>
+        <pre><code>.tab-list &#123;
+  display: flex;
+  gap: var(--tab-gap);
+  border-bottom: 1px solid var(--tab-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+&#125;
+
+.tab &#123;
+  position: relative;
+  flex-shrink: 0;
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  color: var(--tab-idle-text);
+  font-size: var(--tab-font-size);
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-out),
+              background var(--duration-fast) var(--ease-out);
+&#125;
+
+.tab::after &#123;
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0; right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background var(--duration-fast) var(--ease-out);
+&#125;
+
+.tab:hover &#123; background: var(--tab-hover-bg); color: var(--tab-active-text); &#125;
+.tab[aria-selected="true"] &#123; color: var(--tab-active-text); font-weight: 600; &#125;
+.tab[aria-selected="true"]::after &#123; background: var(--tab-indicator); &#125;
+.tab:focus-visible &#123; outline: 2px solid var(--color-accent); outline-offset: -2px; &#125;
+
+.tab:disabled,
+.tab[aria-disabled="true"] &#123;
+  opacity: var(--tab-disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+&#125;
+
+.tab-panel &#123;
+  padding-top: var(--space-md);
+  background: var(--tab-panel-bg);
+&#125;
+
+@media (scripting: none) &#123;
+  .tab-panel[hidden] &#123; display: block; &#125;
+&#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
 
   <!-- ── Pagination ────────────────────────────────────────────────────── -->
 
