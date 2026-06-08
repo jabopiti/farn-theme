@@ -15,6 +15,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `tokens/component-classes.css`: `.section-wave` and `.overlap-card` are now visible when JavaScript is unavailable via `@media (scripting: none)` (Chrome 120+, Firefox 113+, Safari 17+)
 
 ### Changed
+- `tokens/component-classes.css`: `.section-divider` border increased from 1px to 2px and margin increased from `--space-md` to `--space-lg` to visually distinguish it from `.hairline` (which remains 1px / `--space-sm`)
 - `site/src/styles/site.css`: Nav logo font-size increased from 22px to 28px; `font-variation-settings: 'opsz'` updated to match (28).
 
 ### Added
