@@ -166,6 +166,13 @@
   --code-copy-size:   32px;
   --code-copy-radius: var(--radius-sm);
 
+  /* ── Tooltip tokens ─────────────────────────────────────────────────── */
+  /* --tooltip-bg and --tooltip-text live in dark-light.css (theme-inverse) */
+  --tooltip-max-width:  220px;
+  --tooltip-radius:     var(--radius-sm);
+  --tooltip-padding:    4px 10px;
+  --tooltip-font-size:  0.75rem; /* 12px */
+
   /* ── Table tokens ────────────────────────────────────────────────────── */
   --table-border:             var(--color-border);
   --table-header-bg:          var(--color-bg-inset);
