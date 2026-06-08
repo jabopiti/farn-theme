@@ -83,6 +83,11 @@
   --diagonal-angle: -3deg; /* static display angle; keep between -2deg and -5deg */
                            /* scroll-driven animation always starts from -5deg regardless */
 
+  /* ── Stacked card tokens ─────────────────────────────────────────────── */
+  --stack-scale-step: 0.03;             /* scale reduction per depth level */
+  --stack-top:        0px;              /* sticky top offset — override to clear a fixed nav */
+  --stack-radius:     var(--radius-xl); /* top-corner radius on each section */
+
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);
@@ -633,6 +638,47 @@ input[type="radio"] {
 
 @media (prefers-reduced-motion: reduce) {
   .section-skew::before { animation: none; }
+}
+
+/* ── Stacked card reveal ─────────────────────────────────────────────────── */
+
+/* Wrapper: height = section-count × viewport height — sets the scroll distance.
+   Set --stack-count to match the number of .stack-section children (default 4). */
+.stack-container {
+  height: calc(var(--stack-count, 4) * 100vh);
+  height: calc(var(--stack-count, 4) * 100dvh); /* progressive: tracks mobile URL bar */
+  isolation: isolate; /* scopes child z-index — prevents cross-container stacking conflicts */
+}
+
+/* Each section pins to the viewport and scales by depth to simulate a card deck.
+   --stack-depth 0 = front card (full-size); higher = further back (smaller scale).
+   --stack-index controls paint order — higher renders on top.
+   Set both per-section in HTML, or rely on nth-last-child defaults (2–5 sections).
+   Content must fit within 100dvh — no vertical overflow. */
+.stack-section {
+  position: sticky;
+  top: var(--stack-top);
+  height: calc(100vh - var(--stack-top));
+  height: calc(100dvh - var(--stack-top)); /* progressive */
+  overflow: hidden;
+  border-radius: var(--stack-radius) var(--stack-radius) 0 0;
+  transform: scale(calc(1 - var(--stack-depth, 0) * var(--stack-scale-step)));
+  transform-origin: top center;
+  z-index: var(--stack-index, 1);
+}
+
+/* nth-last-child defaults: last child = depth 0 (full-size, on top).
+   Works for 2–5 sections; set inline for larger stacks or non-sequential depth. */
+.stack-container > .stack-section:nth-last-child(1) { --stack-depth: 0; --stack-index: 5; }
+.stack-container > .stack-section:nth-last-child(2) { --stack-depth: 1; --stack-index: 4; }
+.stack-container > .stack-section:nth-last-child(3) { --stack-depth: 2; --stack-index: 3; }
+.stack-container > .stack-section:nth-last-child(4) { --stack-depth: 3; --stack-index: 2; }
+.stack-container > .stack-section:nth-last-child(5) { --stack-depth: 4; --stack-index: 1; }
+
+/* The stack motion is user-initiated scroll — no CSS animation to suppress.
+   Remove the scale depth illusion for reduced-motion contexts. */
+@media (prefers-reduced-motion: reduce) {
+  .stack-section { transform: none; }
 }
 
 /* ── Pagination ──────────────────────────────────────────────────────────── */

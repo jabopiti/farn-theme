@@ -220,6 +220,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td>Convex arc</td><td><code>.section-arc</code></td><td>Refined, quiet</td><td>Centred hero layouts; calm lens-like elegance</td></tr>
             <tr><td>Organic blob</td><td><code>.section-blob</code></td><td>Expressive, freeform</td><td>High-emphasis brand moments; one-off expressive breaks</td></tr>
             <tr><td>Diagonal cut</td><td><code>.section-skew</code></td><td>Sharp, directional</td><td>CTA sections; forward-momentum transitions</td></tr>
+            <tr><td>Stacked card reveal</td><td><code>.stack-container</code> / <code>.stack-section</code></td><td>Cinematic, layered</td><td>Long scroll journeys with 3–5 landmark sections</td></tr>
           </tbody>
         </table>
         <p><strong>Use one primary type per page.</strong> A second type is acceptable for a single high-emphasis moment (e.g., sine waves throughout with one layered overlap at a CTA). More than two distinct types creates visual noise.</p>
@@ -435,11 +436,84 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
         <p><strong>Direction carries meaning:</strong> bottom-left to top-right (<code>skewY</code> negative) reads as forward momentum. The reverse reads as stepping back. Be consistent within a page. Use at most one diagonal per scroll flow — two diagonals pointing opposite directions create visual conflict.</p>
 
-        <h3>Upcoming patterns</h3>
-        <p>One additional pattern is planned:</p>
-        <ul>
-          <li><strong>Stacked card reveal</strong> — cinematic depth for long 3–5 section pages (T-28)</li>
-        </ul>
+        <!-- Stacked card reveal -->
+        <h3 id="stacked-card-reveal">Stacked card reveal</h3>
+        <p>
+          Cinematic depth for long scrolling pages. Each section uses <code>position: sticky</code>
+          to pin in the viewport; later sections slide on top of earlier ones as the user scrolls
+          through the container. A static <code>transform: scale()</code> per section creates the
+          physical card-deck illusion — the front (last) card is always full-size; cards behind it
+          are progressively smaller.
+        </p>
+        <p>
+          <strong>Constraints:</strong> content inside each section must fit within <code>100dvh</code>
+          — no vertical overflow. Use 3–5 sections. This pattern is its own transition; do not
+          combine it with other divider patterns within the same stack container.
+        </p>
+        <p>
+          <strong>Critical:</strong> <code>overflow: hidden</code> on any ancestor of
+          <code>.stack-container</code> will break <code>position: sticky</code> on the sections —
+          the same trap as <code>.overlap-preceding</code>. Keep ancestors at <code>overflow: visible</code>
+          (the default).
+        </p>
+
+        <div class="demo-stack-wrapper" role="group" aria-label="Stacked card reveal demo — scroll inside to reveal cards">
+          <div class="demo-stack-inner">
+            <div class="demo-stack-section" data-theme="dark"
+                 style="--stack-depth: 2; --stack-index: 3">
+              <p class="demo-label">Section 1</p>
+              <p class="demo-section-desc">Depth 2 — behind two cards, slightly shrunk.</p>
+            </div>
+            <div class="demo-stack-section" data-theme="light"
+                 style="--stack-depth: 1; --stack-index: 4">
+              <p class="demo-label">Section 2</p>
+              <p class="demo-section-desc">Depth 1 — behind one card.</p>
+            </div>
+            <div class="demo-stack-section" data-theme="dark" data-surface="layer"
+                 style="--stack-depth: 0; --stack-index: 5">
+              <p class="demo-label">Section 3 — top card</p>
+              <p class="demo-section-desc">Depth 0, full-size. Scroll up to peel back.</p>
+            </div>
+          </div>
+        </div>
+        <p class="demo-stack-hint">↓ Scroll inside the box to reveal cards</p>
+
+        <pre><code>&lt;div class="stack-container" style="--stack-count: 3;"&gt;
+  &lt;section class="stack-section" style="background: var(--color-section-base);"&gt;
+    &lt;!-- Section 1 — first in DOM, deepest in deck --&gt;
+  &lt;/section&gt;
+  &lt;section class="stack-section" style="background: var(--color-section-layer);"&gt;
+    &lt;!-- Section 2 --&gt;
+  &lt;/section&gt;
+  &lt;section class="stack-section" style="background: var(--color-section-overlay);"&gt;
+    &lt;!-- Section 3 — last in DOM, front of deck, full-size --&gt;
+  &lt;/section&gt;
+&lt;/div&gt;</code></pre>
+
+        <p>
+          The <code>nth-last-child</code> selectors in <code>dist/farn-components.css</code>
+          automatically assign <code>--stack-depth</code> (0 = front) and
+          <code>--stack-index</code> for stacks of 2–5 sections. Set them inline for larger
+          stacks or to override the defaults.
+        </p>
+        <p>
+          For sites with a fixed navigation bar, override <code>--stack-top</code> to clear
+          it — e.g. <code>style="--stack-top: 64px"</code> on <code>.stack-container</code>
+          or <code>:root</code>. The section height and sticky offset both adjust automatically.
+        </p>
+
+        <h4>Stacked card tokens</h4>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--stack-scale-step</code></td><td><code>0.03</code></td><td>Scale reduction per depth level. 0.03 = 3% smaller per card behind the front.</td></tr>
+            <tr><td><code>--stack-top</code></td><td><code>0px</code></td><td>Sticky <code>top</code> offset. Override to clear a fixed nav bar.</td></tr>
+            <tr><td><code>--stack-radius</code></td><td><code>var(--radius-xl)</code></td><td>Top-corner radius on each section — reinforces the card metaphor.</td></tr>
+            <tr><td><code>--stack-count</code></td><td><code>4</code></td><td>Number of sections — used by <code>.stack-container</code> to compute total scroll height.</td></tr>
+            <tr><td><code>--stack-depth</code></td><td>via <code>nth-last-child</code></td><td>Per-section depth. 0 = front (full-size). Set inline to override.</td></tr>
+            <tr><td><code>--stack-index</code></td><td>via <code>nth-last-child</code></td><td>Per-section <code>z-index</code>. Higher = renders on top. Set inline to override.</td></tr>
+          </tbody>
+        </table>
 
       </div>
     </details>
@@ -761,6 +835,51 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   .demo-diagonal-bottom {
     padding: var(--space-md) var(--space-md) var(--space-lg);
+  }
+
+  /* ── Stacked card demo ────────────────────────────────────────────────── */
+  /* Self-contained scrollable box — sticky sections pin within this wrapper,
+     not the page, so the demo works inside the docs without hijacking page scroll. */
+  .demo-stack-wrapper {
+    --_h: 280px; /* single source of truth for demo section height; inherited by children */
+    height: var(--_h);
+    overflow-y: scroll;
+    scrollbar-width: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-xs);
+    cursor: ns-resize;
+  }
+
+  .demo-stack-wrapper::-webkit-scrollbar { display: none; }
+
+  .demo-stack-inner {
+    height: calc(3 * var(--_h));
+  }
+
+  /* Mirrors .stack-section geometry at demo height instead of 100dvh */
+  .demo-stack-section {
+    position: sticky;
+    top: 0;
+    height: var(--_h);
+    overflow: hidden;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    transform: scale(calc(1 - var(--stack-depth, 0) * var(--stack-scale-step)));
+    transform-origin: top center;
+    z-index: var(--stack-index, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-md);
+    gap: var(--space-xs);
+  }
+
+  .demo-stack-hint {
+    font-size: 0.75rem;
+    color: var(--color-text-tertiary);
+    margin: 0 0 var(--space-lg);
   }
 
 </style>

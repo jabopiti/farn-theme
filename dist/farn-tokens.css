@@ -337,6 +337,11 @@
   --diagonal-angle: -3deg; /* static display angle; keep between -2deg and -5deg */
                            /* scroll-driven animation always starts from -5deg regardless */
 
+  /* ── Stacked card tokens ─────────────────────────────────────────────── */
+  --stack-scale-step: 0.03;             /* scale reduction per depth level */
+  --stack-top:        0px;              /* sticky top offset — override to clear a fixed nav */
+  --stack-radius:     var(--radius-xl); /* top-corner radius on each section */
+
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);
