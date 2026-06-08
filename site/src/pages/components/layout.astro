@@ -503,15 +503,23 @@ import DocLayout from '../../layouts/DocLayout.astro';
         </p>
 
         <h4>Stacked card tokens</h4>
+        <p>Tier-3 tokens pre-defined in <code>tokens/components.css</code> — override at <code>:root</code> or per instance:</p>
         <table>
           <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
             <tr><td><code>--stack-scale-step</code></td><td><code>0.03</code></td><td>Scale reduction per depth level. 0.03 = 3% smaller per card behind the front.</td></tr>
             <tr><td><code>--stack-top</code></td><td><code>0px</code></td><td>Sticky <code>top</code> offset. Override to clear a fixed nav bar.</td></tr>
             <tr><td><code>--stack-radius</code></td><td><code>var(--radius-xl)</code></td><td>Top-corner radius on each section — reinforces the card metaphor.</td></tr>
-            <tr><td><code>--stack-count</code></td><td><code>4</code></td><td>Number of sections — used by <code>.stack-container</code> to compute total scroll height.</td></tr>
-            <tr><td><code>--stack-depth</code></td><td>via <code>nth-last-child</code></td><td>Per-section depth. 0 = front (full-size). Set inline to override.</td></tr>
-            <tr><td><code>--stack-index</code></td><td>via <code>nth-last-child</code></td><td>Per-section <code>z-index</code>. Higher = renders on top. Set inline to override.</td></tr>
+            <tr><td><code>--stack-count</code></td><td><code>4</code></td><td>Number of sections — used by <code>.stack-container</code> to compute total scroll height. Set per instance to match actual child count.</td></tr>
+            <tr><td><code>--stack-height</code></td><td><code>100vh</code></td><td>Height of each section. Set to <code>100dvh</code> to track mobile browser URL bar collapse, or a fixed value (e.g. <code>600px</code>) for non-fullscreen stacks.</td></tr>
+          </tbody>
+        </table>
+        <p>Per-section variables — set via <code>nth-last-child</code> defaults or inline on each <code>.stack-section</code>:</p>
+        <table>
+          <thead><tr><th>Variable</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--stack-depth</code></td><td>via <code>nth-last-child</code></td><td>Depth in the deck. 0 = front card (full-size); higher = further back (smaller scale). Set inline to override.</td></tr>
+            <tr><td><code>--stack-index</code></td><td>via <code>nth-last-child</code></td><td><code>z-index</code> value. Higher = renders on top. Set inline to override.</td></tr>
           </tbody>
         </table>
 

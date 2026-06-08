@@ -87,6 +87,8 @@
   --stack-scale-step: 0.03;             /* scale reduction per depth level */
   --stack-top:        0px;              /* sticky top offset — override to clear a fixed nav */
   --stack-radius:     var(--radius-xl); /* top-corner radius on each section */
+  --stack-count:      4;                /* number of .stack-section children; set per instance */
+  --stack-height:     100vh;            /* section height; set to 100dvh for dynamic viewport tracking */
 
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
