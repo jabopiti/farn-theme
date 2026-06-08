@@ -41,11 +41,14 @@ cat tokens/components.css tokens/component-classes.css > dist/farn-components.cs
 
 # Typography utility classes (opt-in) — requires farn.css or farn-tokens.css for --font-* tokens
 cat tokens/typography-classes.css > dist/farn-typography.css
+
+# Sync llms.txt to site/public so farn.jbpt.de/llms.txt stays current (root file is canonical)
+cp llms.txt site/public/llms.txt
 ```
 
 `tokens/typography-classes.css` is **not** in `tokens/index.css` — DocLayout imports it directly from source. Do not add it to the index chain.
 
-Run all four after any change to a `tokens/` file (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
+Run all five steps after any change to a `tokens/` file or `llms.txt` (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
 
 ## CSS naming conventions
 

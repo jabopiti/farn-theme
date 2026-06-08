@@ -550,21 +550,21 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-45 · llms.txt + Getting Started AI section
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/epic-dijkstra-3Jl5c`
 
 **Gap:** No machine-readable guide for AI agents building products *with* Farn (distinct from `CLAUDE.md`, which is for agents developing Farn).
 
-- [ ] Create `llms.txt` at repo root (llmstxt.org format: pitch → install → core rules → linked docs)
-- [ ] Add `llms.txt` to `package.json` `files[]`; ensure it serves at `farn.jbpt.de/llms.txt`
-- [ ] Add a "For AI agents" section to Getting Started linking to it + a copyable sample prompt
-- [ ] (Optional) richer `llms-full.txt` with the complete token dump
+- [x] Create `llms.txt` at repo root (llmstxt.org format: pitch → install → core rules → linked docs)
+- [x] Add `llms.txt` to `package.json` `files[]`; ensure it serves at `farn.jbpt.de/llms.txt`
+- [x] Add a "For AI agents" section to Getting Started linking to it + a copyable sample prompt
+- [ ] (Optional) richer `llms-full.txt` with the complete token dump — deferred
 
 ---
 
 ## T-46 · Demo page — full guided tour
 `status: backlog` `effort: M`
 
-**Gap:** The `/demo` stub (built in T-15 Phase 1c) needs full content — a guided, end-to-end visual tour so humans can experience Farn before committing. (T-16 adds a token inspector layer to the component doc pages — distinct from this experiential showcase.)
+**Gap:** The `/demo` stub (built in T-15 Phase 1c) needs full content — a guided, end-to-end visual tour so humans can experience Farn before committing.
 
 - [ ] Replace the stub with a guided tour: palette, typography, theming/surfaces, components in context
 - [ ] Works in both light and dark via `data-theme`; standalone page (no group sub-nav, page-internal TOC if long)

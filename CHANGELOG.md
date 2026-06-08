@@ -7,6 +7,11 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Added
+- **T-45** `llms.txt` at repo root and `site/public/llms.txt` (served at `farn.jbpt.de/llms.txt`) — machine-readable guide for AI agents building with Farn; covers install, core rules (token hierarchy, Fraunces `opsz`, dark/light theming, surface depth, FOWT), token layer architecture, FOWT snippet, sample system prompt, and linked reference for all docs pages (llmstxt.org format)
+- **T-45** `package.json`: `llms.txt` added to `files[]` so it ships in the npm package alongside `dist/` and `tokens/`
+- **T-45** `site/src/pages/getting-started.astro`: "For AI Agents" callout card at top of page — links to `/llms.txt` and includes a copyable inline system prompt; sub-nav entry added
+
 ### Fixed
 - `tokens/base.css`: Global `a`, `a:visited`, and `a:hover` rules now use `:where()` (zero specificity) so component class selectors always win. Previously `a:visited` had specificity (0,1,1), beating single-class component rules like `.nav-cta` and `.btn-p`, causing visited CTA buttons to render green text on a green background (invisible) and the nav logo "Farn" to appear in accent colour instead of primary text colour.
 - `tokens/component-classes.css`: `.btn` now has a `:focus-visible` outline (`2px solid var(--color-accent)`, offset 3px) — buttons were invisible to keyboard users when loaded via `farn-components.css` standalone
