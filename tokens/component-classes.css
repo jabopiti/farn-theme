@@ -411,6 +411,46 @@ input[type="radio"] {
   .section-skew::before { animation: none; }
 }
 
+/* ── Stacked card reveal ─────────────────────────────────────────────────── */
+
+/* Wrapper: height = section-count × section-height — sets the scroll distance.
+   Override --stack-count per instance; override --stack-height for non-viewport sizing
+   or to opt into dynamic viewport units (--stack-height: 100dvh). */
+.stack-container {
+  height: calc(var(--stack-count) * var(--stack-height));
+  isolation: isolate; /* scopes child z-index — prevents cross-container stacking conflicts */
+}
+
+/* Each section pins to the viewport and scales by depth to simulate a card deck.
+   --stack-depth 0 = front card (full-size); higher = further back (smaller scale).
+   --stack-index controls paint order — higher renders on top.
+   Set both per-section in HTML, or rely on nth-last-child defaults (2–5 sections).
+   Content must fit within --stack-height — no vertical overflow. */
+.stack-section {
+  position: sticky;
+  top: var(--stack-top);
+  height: calc(var(--stack-height) - var(--stack-top));
+  overflow: hidden;
+  border-radius: var(--stack-radius) var(--stack-radius) 0 0;
+  transform: scale(calc(1 - var(--stack-depth, 0) * var(--stack-scale-step)));
+  transform-origin: top center;
+  z-index: var(--stack-index, 1);
+}
+
+/* nth-last-child defaults: last child = depth 0 (full-size, on top).
+   Works for 2–5 sections; set inline for larger stacks or non-sequential depth. */
+.stack-container > .stack-section:nth-last-child(1) { --stack-depth: 0; --stack-index: 5; }
+.stack-container > .stack-section:nth-last-child(2) { --stack-depth: 1; --stack-index: 4; }
+.stack-container > .stack-section:nth-last-child(3) { --stack-depth: 2; --stack-index: 3; }
+.stack-container > .stack-section:nth-last-child(4) { --stack-depth: 3; --stack-index: 2; }
+.stack-container > .stack-section:nth-last-child(5) { --stack-depth: 4; --stack-index: 1; }
+
+/* The stack motion is user-initiated scroll — no CSS animation to suppress.
+   Remove the scale depth illusion for reduced-motion contexts. */
+@media (prefers-reduced-motion: reduce) {
+  .stack-section { transform: none; }
+}
+
 /* ── Pagination ──────────────────────────────────────────────────────────── */
 .pagination {
   display: flex;
@@ -1046,3 +1086,11 @@ hr { border: none; }
 @media (scripting: none) {
   .tab-panel[hidden] { display: block; }
 }
+
+/* ── Utilities ───────────────────────────────────────────────────────────── */
+
+/* Hides scrollbar visually while preserving scroll functionality */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar { display: none; }

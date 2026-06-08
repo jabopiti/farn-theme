@@ -366,16 +366,16 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-28 · Stacked card reveal
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/dreamy-ride-I8Sqt`
 
 **Note:** T-15 is complete. The site uses a top nav + group sub-nav — no traditional sidebar. Before picking up, verify that full-viewport sticky sections (`height: 100vh`) are compatible with the current layout (group sub-nav bar, scroll-padding offset).
 
 **Gap:** No stacked card reveal pattern; the cinematic depth effect is the highest-drama transition in the spec, suited to long scrolling pages with 3–5 landmark sections.
 
-- [ ] Implement `.stack-container` and `.stack-section` with `--stack-depth` and `--stack-index` CSS custom properties per spec
-- [ ] Verify sticky positioning behaviour across Chrome, Firefox, and Safari; document the `height: N×100vh` requirement
-- [ ] Document content-height constraint (sections must fit within `100vh`) and the 3–5 section limit
-- [ ] Document in the "Section Transitions" section of `/components/layout` (T-29 merged into T-44)
+- [x] Implement `.stack-container` and `.stack-section` with `--stack-depth` and `--stack-index` CSS custom properties per spec
+- [x] Verify sticky positioning behaviour across Chrome, Firefox, and Safari; document the `height: N×100dvh` requirement
+- [x] Document content-height constraint (sections must fit within `100dvh`) and the 3–5 section limit
+- [x] Document in the "Section Transitions" section of `/components/layout` (T-29 merged into T-44)
 
 ---
 
