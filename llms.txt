@@ -1,0 +1,80 @@
+# Farn
+
+> Token-first CSS design system for the web. Palette tokens, semantic tokens, and opt-in component classes. Zero JavaScript, zero build step, zero framework assumptions.
+
+## Install
+
+```
+npm install farn-theme
+```
+
+Then import in your bundler (Vite, webpack, Parcel, etc.):
+
+```css
+@import "farn-theme";            /* full bundle: tokens + base reset */
+@import "farn-theme/tokens";     /* tokens only — no reset */
+@import "farn-theme/components"; /* opt-in: buttons, cards, forms, badges, accordion… */
+@import "farn-theme/typography"; /* opt-in: .text-h1, .text-body, .text-mono… */
+```
+
+Or link from CDN (replace `@0.1.0` with the latest tag):
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn.css">
+```
+
+## Core rules
+
+- **Token hierarchy**: always reference semantic tokens (`--color-*`, `--space-*`, `--font-*`, `--radius-*`). Never use raw palette tokens (`--in*`, `--bm*`, `--fo*`, `--bl*`) in component or page styles.
+- **Fraunces headings**: every Fraunces usage must include `font-variation-settings: 'opsz' <value>` — the font renders incorrectly without it. Use `72` for `h1`, `24` for `h2`, `20` for `h3`.
+- **Dark / light mode**: set `data-theme="dark"` or `data-theme="light"` on `<html>`. Toggle via JavaScript and persist to `localStorage` under the key `farn-theme`.
+- **Surface depth**: use `data-surface="base|layer|overlay"` on any element to set depth context. All children inherit re-scoped tokens automatically — `base` is page-level, `layer` is cards/panels, `overlay` is modals/dropdowns.
+- **Combine theme + surface**: `<section data-theme="dark" data-surface="layer">` renders a dark panel regardless of the page theme.
+- **FOWT prevention**: add an inline `<script>` in `<head>` before any CSS that reads `localStorage.getItem('farn-theme')` and sets `data-theme` on `<html>` before first paint.
+- **Load order**: `farn.css` (or `farn-tokens.css`) first, then `farn-components.css`, then `farn-typography.css`.
+
+## Token layers
+
+Farn uses a three-tier token architecture:
+
+1. **Palette** — raw color values; never reference directly. Prefixed `--in*` (Iron Night dark), `--bm*` (Birch Mist light), `--fo*` (Forest accent), `--bl*` (Bloom palette).
+2. **Semantic** — purpose-mapped, theme-aware aliases. Use these in all component and page styles: `--color-bg`, `--color-text`, `--color-text-secondary`, `--color-accent`, `--color-accent-hover`, `--color-border`, `--color-error`, `--color-success`, `--color-warning`, and surface variants `--color-bg-panel`, `--color-bg-inset`.
+3. **Component** (Tier 3) — per-component override points: `--btn-*`, `--card-*`, `--input-*`, `--badge-*`, `--accordion-*`, `--table-*`, `--code-*`, `--link-*`, `--quote-*`, `--pagination-*`, `--tooltip-*`, `--overlap-*`, `--wave-height`, `--arc-height`, `--blob-*`, `--diagonal-angle`. Override on `:root` for global rebrand or scope to any selector.
+
+## FOWT prevention snippet
+
+```html
+<script>
+  (function () {
+    const stored = localStorage.getItem('farn-theme');
+    const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', stored ?? system);
+  })();
+</script>
+```
+
+## Sample system prompt
+
+```
+This project uses the Farn design system.
+- Use semantic tokens (--color-*, --space-*), never palette tokens (--in*, --bm*, --fo*, --bl*)
+- Every Fraunces heading: font-variation-settings: 'opsz' <value>
+- data-theme="dark|light" on <html>, data-surface="base|layer|overlay" on elements
+Full reference: https://farn.jbpt.de/llms.txt
+```
+
+## Reference
+
+- [Getting Started](https://farn.jbpt.de/getting-started) — install, load order, FOWT, theming, minimal example
+- [Foundations](https://farn.jbpt.de/foundations) — design decisions, accessibility commitment, responsive approach
+- [Surfaces & theming](https://farn.jbpt.de/styles/theming) — full data-theme / data-surface reference with live examples
+- [Color tokens](https://farn.jbpt.de/styles/color) — palette + semantic token tables, WCAG contrast matrix
+- [Typography](https://farn.jbpt.de/styles/typography) — type scale, Fraunces opsz guidance, utility class reference
+- [Spacing](https://farn.jbpt.de/styles/spacing) — space scale, layout widths, border radius, z-index
+- [Motion](https://farn.jbpt.de/styles/motion) — duration + easing token reference
+- [Components › Actions](https://farn.jbpt.de/components/actions) — buttons (`.btn`, `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d`) + links
+- [Components › Layout](https://farn.jbpt.de/components/layout) — cards, section transitions, quotes, separators
+- [Components › Navigation](https://farn.jbpt.de/components/navigation) — breadcrumbs, accordion
+- [Components › Forms](https://farn.jbpt.de/components/forms) — inputs, textarea, select, labels, error states
+- [Components › Data](https://farn.jbpt.de/components/data) — badges (7 variants), tables, code blocks
+- [Components › Status](https://farn.jbpt.de/components/status) — alerts, loading states (coming soon)

@@ -5,6 +5,7 @@ import DocLayout from '../layouts/DocLayout.astro';
 <DocLayout title="Getting Started" description="Install Farn and set up dark/light mode in your project">
   <nav slot="subnav" class="sub-nav filled" id="sub-nav-gs" aria-label="Section navigation">
     <div class="sub-nav-inner">
+      <a href="#for-ai" class="sub-nav-link">For AI</a>
       <a href="#npm-install" class="sub-nav-link">npm</a>
       <a href="#cdn-install" class="sub-nav-link">CDN</a>
       <a href="#what-gets-loaded" class="sub-nav-link">Layers</a>
@@ -21,6 +22,16 @@ import DocLayout from '../layouts/DocLayout.astro';
 
   <h1>Getting Started</h1>
   <p>Farn ships as a single CSS file — no build step, no runtime, no framework assumptions. Add one <code>&lt;link&gt;</code> tag or install from npm and you have all tokens.</p>
+
+  <div class="callout">
+    <h2 id="for-ai">For AI Agents</h2>
+    <p>Farn ships an <a href="/llms.txt"><code>llms.txt</code></a> at the site root — a concise machine-readable reference covering install, core rules, token layers, and links to every docs page. Drop the sample prompt below into your system context before generating any Farn CSS:</p>
+    <pre><code>This project uses the Farn design system.
+- Use semantic tokens (--color-*, --space-*), never palette tokens (--in*, --bm*, --fo*, --bl*)
+- Every Fraunces heading: font-variation-settings: 'opsz' &lt;value&gt;
+- data-theme="dark|light" on &lt;html&gt;, data-surface="base|layer|overlay" on elements
+Full reference: https://farn.jbpt.de/llms.txt</code></pre>
+  </div>
 
   <h2 id="npm-install">npm Install</h2>
   <pre><code>npm install farn-theme</code></pre>
