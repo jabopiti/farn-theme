@@ -423,6 +423,15 @@
   --tooltip-padding:    4px 10px;
   --tooltip-font-size:  0.75rem; /* 12px */
 
+  /* ── Pagination tokens ──────────────────────────────────────────────── */
+  --pagination-active-bg:   var(--color-accent);
+  --pagination-active-text: var(--color-accent-text);
+  --pagination-hover-bg:    var(--color-bg-panel);
+  --pagination-hover-text:  var(--color-text);
+  --pagination-border:      var(--color-border);
+  --pagination-radius:      var(--radius-md);
+  --pagination-gap:         var(--space-xs);
+
   /* ── Table tokens ────────────────────────────────────────────────────── */
   --table-border:             var(--color-border);
   --table-header-bg:          var(--color-bg-inset);
