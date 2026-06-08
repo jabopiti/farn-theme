@@ -182,6 +182,17 @@
   --pagination-radius:      var(--radius-md);
   --pagination-gap:         var(--space-xs);
 
+  /* ── Tab tokens ─────────────────────────────────────────────────────── */
+  --tab-idle-text:        var(--color-text-secondary);
+  --tab-hover-bg:         var(--color-bg-panel);
+  --tab-active-text:      var(--color-text);
+  --tab-indicator:        var(--color-accent);
+  --tab-border:           var(--color-border);
+  --tab-panel-bg:         transparent;
+  --tab-gap:              4px;
+  --tab-font-size:        0.875rem; /* 14px */
+  --tab-disabled-opacity: 0.4;
+
   /* ── Table tokens ────────────────────────────────────────────────────── */
   --table-border:             var(--color-border);
   --table-header-bg:          var(--color-bg-inset);
@@ -1107,4 +1118,82 @@ hr { border: none; }
 .table-lg th,
 .table-lg td {
   padding: var(--table-cell-padding-lg);
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+
+.tab-list {
+  display: flex;
+  gap: var(--tab-gap);
+  border-bottom: 1px solid var(--tab-border);
+  overflow-x: auto;
+  scrollbar-width: none; /* hides scrollbar while allowing scroll on overflow */
+}
+
+.tab-list::-webkit-scrollbar { display: none; }
+
+.tab {
+  position: relative;
+  flex-shrink: 0;
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  color: var(--tab-idle-text);
+  font-size: var(--tab-font-size);
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-out),
+              background var(--duration-fast) var(--ease-out);
+}
+
+/* Underline indicator — sits on the tab-list border */
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.tab:hover {
+  background: var(--tab-hover-bg);
+  color: var(--tab-active-text);
+}
+
+.tab[aria-selected="true"] {
+  color: var(--tab-active-text);
+  font-weight: 600;
+}
+
+.tab[aria-selected="true"]::after {
+  background: var(--tab-indicator);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+  border-radius: var(--radius-sm);
+}
+
+.tab:disabled,
+.tab[aria-disabled="true"] {
+  opacity: var(--tab-disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.tab-panel {
+  padding-top: var(--space-md);
+  background: var(--tab-panel-bg);
+}
+
+/* Without JS, all panels are shown stacked (first already visible; others un-hidden) */
+@media (scripting: none) {
+  .tab-panel[hidden] { display: block; }
 }

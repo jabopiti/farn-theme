@@ -430,7 +430,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-34 · Tabs component
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/fervent-mendel-uaOMZ`
 
 **Gap:** Tabs are one of the three most common navigation components and are entirely absent from the system.
 

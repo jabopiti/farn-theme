@@ -8,6 +8,11 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- **T-34** `tokens/components.css`: `--tab-idle-text`, `--tab-hover-bg`, `--tab-active-text`, `--tab-indicator`, `--tab-border`, `--tab-panel-bg`, `--tab-gap`, `--tab-font-size`, `--tab-disabled-opacity` Tier-3 tokens for independent tab retheme
+- **T-34** `tokens/component-classes.css`: `.tab-list`, `.tab`, `.tab-panel` CSS classes with underline indicator, `[aria-selected]`-driven active state, hover/focus-visible/disabled, overflow-scroll, and `@media (scripting: none)` all-panels fallback — shipped in `dist/farn-components.css`
+- **T-34** `dist/tabs.js` + `package.json`: `initTabs()` progressive-enhancement script distributed as `farn-theme/scripts/tabs` — click switching, roving-tabindex keyboard navigation (← → Home End), skips disabled tabs
+- **T-34** `site/src/pages/components/navigation.astro`: Tabs section with live demo, full anatomy, script wiring guide, keyboard nav table, usage guidance, accessibility table (`tabindex="0"` guidance for empty panels), token reference, and CSS reference; status updated from `coming soon` to `stable`
+
 - **T-45** `llms.txt` at repo root and `site/public/llms.txt` (served at `farn.jbpt.de/llms.txt`) — machine-readable guide for AI agents building with Farn; covers install, core rules (token hierarchy, Fraunces `opsz`, dark/light theming, surface depth, FOWT), token layer architecture, FOWT snippet, sample system prompt, and linked reference for all docs pages (llmstxt.org format)
 - **T-45** `package.json`: `llms.txt` added to `files[]` so it ships in the npm package alongside `dist/` and `tokens/`
 - **T-45** `site/src/pages/getting-started.astro`: "For AI Agents" callout card at top of page — links to `/llms.txt` and includes a copyable inline system prompt; sub-nav entry added
