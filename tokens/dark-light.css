@@ -44,6 +44,7 @@
   --color-card-highlight-border: transparent;
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
+  --skeleton-shine:              var(--bm2-birch); /* birch (page bg) — lighter than panel (mist) */
 
   /* Section transition aliases — consumed by divider patterns (T-23–T-28) */
   --color-section:         var(--color-bg);
@@ -82,6 +83,7 @@
   --color-card-highlight-border: var(--in2-slate);
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
+  --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
   --btn-s-hover-bg:             var(--in3-ash);
   --btn-g-active-bg:            var(--in0-void);  /* darker than ghost hover --in1-iron (#374151) */
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);

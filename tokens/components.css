@@ -193,6 +193,22 @@
   --tab-font-size:        0.875rem; /* 14px */
   --tab-disabled-opacity: 0.4;
 
+  /* ── Spinner tokens ─────────────────────────────────────────────────── */
+  --spinner-color:     var(--color-accent);
+  --spinner-track:     color-mix(in srgb, var(--color-accent) 20%, transparent);
+  --spinner-size:      24px;
+  --spinner-sm-size:   16px;
+  --spinner-lg-size:   40px;
+  --spinner-border:    2px;
+  --spinner-lg-border: 3px;
+  --spinner-duration:  var(--duration-loop);
+
+  /* ── Skeleton tokens ─────────────────────────────────────────────────── */
+  /* --skeleton-shine lives in dark-light.css — per-theme palette value */
+  --skeleton-radius:   var(--radius-sm);
+  --skeleton-base:     var(--color-bg-panel);
+  --skeleton-duration: var(--duration-loop);
+
   /* ── Table tokens ────────────────────────────────────────────────────── */
   --table-border:             var(--color-border);
   --table-header-bg:          var(--color-bg-inset);

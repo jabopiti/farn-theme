@@ -488,14 +488,15 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-39 · Loading states — skeleton & spinner
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/hopeful-hamilton-4VDxg`
 
 **Gap:** Farn has no visual language for async or in-progress states; loading feedback must be built from scratch by every consumer.
 
-- [ ] Add `.spinner` (rotating ring) using `@keyframes` and consuming `--color-accent` and T-04 `--duration-*` tokens
-- [ ] Add `.skeleton` (shimmer placeholder) using a CSS gradient animation for the loading shimmer effect
-- [ ] Both must respect `prefers-reduced-motion`: spinner stops, skeleton renders as a static tinted block
-- [ ] Document on a feedback / loading states component page
+- [x] Add `.spinner` (rotating ring) using `@keyframes` and consuming `--color-accent` and T-04 `--duration-*` tokens; sm/lg size modifiers
+- [x] Add `.skeleton` (shimmer placeholder) using a CSS gradient animation for the loading shimmer effect; `.skeleton-circle` variant
+- [x] Both respect `prefers-reduced-motion`: spinner stops, skeleton renders as a static tinted block
+- [x] Add `.btn-loading` state modifier; documented in Components › Actions
+- [x] Document on Components › Status with live demos, anatomy, accessibility guidance, and token/CSS reference
 
 ---
 
