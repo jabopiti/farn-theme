@@ -196,13 +196,9 @@ _Nav model later extracted to `site/src/data/navigation.ts` (single source of tr
 ---
 
 ## T-16 · Token inspector pattern on component pages
-`status: backlog` `effort: S`
+`status: dropped`
 
-**Gap:** Component group pages (T-44) show live demos but give no in-page signal about which token drives which visible property; the connection between the token system and rendered output is implicit. T-44 delivered demos — T-16 now delivers the annotation layer on top.
-
-- [ ] Design a restrained annotation/callout pattern (e.g. a `[data-token]` attribute + `.token-label` overlay) that labels the key token for each property on a live demo
-- [ ] Apply to at least one canonical example per group page: a button (Actions), a card (Layout), an input (Forms)
-- [ ] Pattern must work in both light and dark mode and not interfere with scroll-reveal animations
+**Dropped:** The click-to-copy / hover-overlay pattern is a human browsing behaviour with modest value. Farn is primarily consumed by AI agents, which read source files directly — the token-to-property mapping already exists in `tokens/components.css` and is redundant to restate as visual annotations. The agent-facing information gap (usage rules, HTML patterns, theming recipes) belongs in T-45 (llms.txt), not as DOM overlays.
 
 ---
 
