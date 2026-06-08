@@ -465,13 +465,13 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-37 · Pagination
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/vibrant-turing-7y1Ar`
 
 **Gap:** No pagination pattern; any list or data view spanning multiple pages has no reference implementation.
 
-- [ ] Add `--pagination-*` Tier 3 tokens (active-background, active-text, border) to `tokens/components.css`
-- [ ] Add `.pagination`, `.page-item`, and `.page-link` CSS classes with active, hover, focus, and disabled states
-- [ ] Document on a pagination component page with previous/next and numbered variants
+- [x] Add `--pagination-*` Tier 3 tokens (active-background, active-text, border, radius, gap) to `tokens/components.css`
+- [x] Add `.pagination`, `.page-item`, and `.page-link` CSS classes with active (`aria-current="page"`), hover, focus-visible, disabled (`aria-disabled="true"`) states; `.pagination-outlined` variant; `.page-ellipsis` for truncated ranges
+- [x] Document in Components › Navigation with numbered, ellipsis, prev/next, and outlined live demos; full anatomy, accessibility, token reference, and CSS reference
 
 ---
 

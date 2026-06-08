@@ -241,12 +241,193 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <!-- ── Pagination ────────────────────────────────────────────────────── -->
 
-  <h2 id="pagination">Pagination <span class="badge badge-draft">coming soon</span></h2>
+  <h2 id="pagination">Pagination <span class="badge badge-published">stable</span></h2>
   <p>
-    Previous/next and numbered page controls. <code>--pagination-*</code> tokens for
-    active background, active text, and border; <code>.pagination</code>, <code>.page-item</code>,
-    and <code>.page-link</code> classes with active, hover, focus, and disabled states.
+    Numbered and prev/next page controls for navigating multi-page content. CSS-only —
+    no JavaScript required. Active state driven by <code>aria-current="page"</code>;
+    disabled state by <code>aria-disabled="true"</code>.
   </p>
+
+  <h3>Numbered</h3>
+  <div class="demo-surface">
+    <nav aria-label="Pagination">
+      <ol class="pagination" role="list">
+        <li class="page-item"><a class="page-link" href="#" aria-label="Previous page">← Prev</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#" aria-current="page">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">5</a></li>
+        <li class="page-item"><a class="page-link" href="#" aria-label="Next page">Next →</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <h3>With ellipsis</h3>
+  <div class="demo-surface">
+    <nav aria-label="Pagination">
+      <ol class="pagination" role="list">
+        <li class="page-item"><a class="page-link" href="#" aria-label="Previous page">← Prev</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item" aria-hidden="true"><span class="page-ellipsis">…</span></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#" aria-current="page">5</a></li>
+        <li class="page-item"><a class="page-link" href="#">6</a></li>
+        <li class="page-item" aria-hidden="true"><span class="page-ellipsis">…</span></li>
+        <li class="page-item"><a class="page-link" href="#">12</a></li>
+        <li class="page-item"><a class="page-link" href="#" aria-label="Next page">Next →</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <h3>Previous / next only</h3>
+  <div class="demo-surface">
+    <nav aria-label="Pagination">
+      <ol class="pagination" role="list">
+        <li class="page-item"><a class="page-link" href="#" aria-disabled="true" aria-label="Previous page">← Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#" aria-label="Next page">Next →</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <h3>Outlined variant</h3>
+  <div class="demo-surface">
+    <nav aria-label="Pagination">
+      <ol class="pagination pagination-outlined" role="list">
+        <li class="page-item"><a class="page-link" href="#" aria-label="Previous page">← Prev</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#" aria-current="page">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#" aria-label="Next page">Next →</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="accordion accordion-ref">
+    <details>
+      <summary>Full reference — Pagination</summary>
+      <div class="accordion-panel">
+
+        <h3>Anatomy</h3>
+        <p>
+          Wrap an <code>&lt;ol&gt;</code> in a <code>&lt;nav&gt;</code> with
+          <code>aria-label="Pagination"</code>. Each <code>&lt;li&gt;</code> gets
+          <code>.page-item</code>; each link gets <code>.page-link</code>. The active
+          page carries <code>aria-current="page"</code> on its <code>&lt;a&gt;</code> —
+          no extra class needed. Disabled controls carry <code>aria-disabled="true"</code>.
+        </p>
+        <pre><code>&lt;nav aria-label="Pagination"&gt;
+  &lt;ol class="pagination" role="list"&gt;
+    &lt;li class="page-item"&gt;
+      &lt;a class="page-link" href="#" aria-disabled="true" aria-label="Previous page"&gt;← Prev&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="page-item"&gt;&lt;a class="page-link" href="/page/1"&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="page-item"&gt;
+      &lt;a class="page-link" href="/page/2" aria-current="page"&gt;2&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="page-item"&gt;&lt;a class="page-link" href="/page/3"&gt;3&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="page-item"&gt;
+      &lt;a class="page-link" href="/page/3" aria-label="Next page"&gt;Next →&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+
+        <h3>Ellipsis</h3>
+        <p>
+          For truncated ranges, use a <code>.page-ellipsis</code> <code>&lt;span&gt;</code>
+          inside a <code>.page-item</code> marked <code>aria-hidden="true"</code>. It is
+          decorative — screen readers skip it entirely.
+        </p>
+        <pre><code>&lt;li class="page-item" aria-hidden="true"&gt;
+  &lt;span class="page-ellipsis"&gt;…&lt;/span&gt;
+&lt;/li&gt;</code></pre>
+
+        <h3>Outlined variant</h3>
+        <p>Add <code>.pagination-outlined</code> to the <code>&lt;ol&gt;</code> to give every item a visible border. Active item retains the filled accent background.</p>
+        <pre><code>&lt;ol class="pagination pagination-outlined" role="list"&gt;…&lt;/ol&gt;</code></pre>
+
+        <h3>Usage guidance</h3>
+        <table>
+          <thead><tr><th>Situation</th><th>Guidance</th></tr></thead>
+          <tbody>
+            <tr><td>Active page</td><td>Add <code>aria-current="page"</code> to the link for the current page. CSS styles it automatically; screen readers announce it as the current page.</td></tr>
+            <tr><td>Disabled prev/next</td><td>Add <code>aria-disabled="true"</code> to the link. Do not remove <code>href</code> — keep the element an <code>&lt;a&gt;</code> so DOM order stays consistent.</td></tr>
+            <tr><td>Icon-only controls</td><td>Provide <code>aria-label="Previous page"</code> / <code>aria-label="Next page"</code> on icon-only links. Text labels are preferred for clarity.</td></tr>
+            <tr><td>Ellipsis</td><td>Use <code>aria-hidden="true"</code> on the <code>.page-item</code> wrapping the ellipsis span. Screen readers skip it; the surrounding numbered links provide sufficient context.</td></tr>
+            <tr><td>Very long ranges</td><td>Show the first page, last page, active page, and ±1–2 neighbours. Everything else becomes ellipsis. This pattern is purely HTML — no extra CSS needed.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Accessibility</h3>
+        <table>
+          <thead><tr><th>Attribute</th><th>Where</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><code>aria-label="Pagination"</code></td><td><code>&lt;nav&gt;</code></td><td>Distinguishes this landmark from site navigation when both appear on the page.</td></tr>
+            <tr><td><code>role="list"</code></td><td><code>&lt;ol&gt;</code></td><td>Restores list semantics in Safari/VoiceOver when <code>list-style: none</code> is applied.</td></tr>
+            <tr><td><code>aria-current="page"</code></td><td>Active <code>.page-link</code></td><td>Announces the current page to screen readers and drives the active style — no class needed.</td></tr>
+            <tr><td><code>aria-disabled="true"</code></td><td>Disabled <code>.page-link</code></td><td>Communicates disabled state to assistive technology; <code>pointer-events: none</code> prevents click.</td></tr>
+            <tr><td><code>aria-hidden="true"</code></td><td><code>.page-item</code> with ellipsis</td><td>Hides the decorative separator from the accessibility tree.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Controls</th></tr></thead>
+          <tbody>
+            <tr><td><code>--pagination-active-bg</code></td><td><code>var(--color-accent)</code></td><td>Active page item background</td></tr>
+            <tr><td><code>--pagination-active-text</code></td><td><code>var(--color-accent-text)</code></td><td>Active page item text color</td></tr>
+            <tr><td><code>--pagination-hover-bg</code></td><td><code>var(--color-bg-panel)</code></td><td>Hovered item background</td></tr>
+            <tr><td><code>--pagination-hover-text</code></td><td><code>var(--color-text)</code></td><td>Hovered item text color</td></tr>
+            <tr><td><code>--pagination-border</code></td><td><code>var(--color-border)</code></td><td>Border color used by <code>.pagination-outlined</code></td></tr>
+            <tr><td><code>--pagination-radius</code></td><td><code>var(--radius-md)</code></td><td>Corner radius on each page link</td></tr>
+            <tr><td><code>--pagination-gap</code></td><td><code>var(--space-xs)</code></td><td>Gap between page items</td></tr>
+          </tbody>
+        </table>
+
+        <h3>CSS reference</h3>
+        <p>Shipped in <code>dist/farn-components.css</code>. All colors adapt to <code>data-theme</code> and <code>data-surface</code> automatically.</p>
+        <pre><code>.pagination &#123;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pagination-gap);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+&#125;
+
+.page-link &#123;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 var(--space-xs);
+  border: 1px solid transparent;
+  border-radius: var(--pagination-radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+&#125;
+
+.page-link[aria-current="page"] &#123;
+  background: var(--pagination-active-bg);
+  color: var(--pagination-active-text);
+  font-weight: 600;
+  cursor: default;
+  pointer-events: none;
+&#125;
+
+.page-link[aria-disabled="true"] &#123;
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+&#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
 
 </DocLayout>
 

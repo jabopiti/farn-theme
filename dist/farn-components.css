@@ -173,6 +173,15 @@
   --tooltip-padding:    4px 10px;
   --tooltip-font-size:  0.75rem; /* 12px */
 
+  /* ── Pagination tokens ──────────────────────────────────────────────── */
+  --pagination-active-bg:   var(--color-accent);
+  --pagination-active-text: var(--color-accent-text);
+  --pagination-hover-bg:    var(--color-bg-panel);
+  --pagination-hover-text:  var(--color-text);
+  --pagination-border:      var(--color-border);
+  --pagination-radius:      var(--radius-md);
+  --pagination-gap:         var(--space-xs);
+
   /* ── Table tokens ────────────────────────────────────────────────────── */
   --table-border:             var(--color-border);
   --table-header-bg:          var(--color-bg-inset);
@@ -597,6 +606,83 @@ input[type="radio"] {
 
 @media (prefers-reduced-motion: reduce) {
   .section-skew::before { animation: none; }
+}
+
+/* ── Pagination ──────────────────────────────────────────────────────────── */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pagination-gap);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-item {
+  display: flex;
+}
+
+/* Shared sizing between interactive links and the decorative ellipsis */
+.page-link,
+.page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  font-size: 0.875rem;
+}
+
+.page-link {
+  padding: 0 var(--space-xs);
+  border: 1px solid transparent;
+  border-radius: var(--pagination-radius);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+}
+
+.page-link:hover {
+  background: var(--pagination-hover-bg);
+  color: var(--pagination-hover-text);
+}
+
+.page-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.page-link[aria-current="page"] {
+  background: var(--pagination-active-bg);
+  color: var(--pagination-active-text);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.page-link[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Outlined variant — border on all items; active item retains filled accent */
+.pagination-outlined .page-link {
+  border-color: var(--pagination-border);
+  transition: background var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
+}
+
+.pagination-outlined .page-link:hover {
+  background: var(--pagination-hover-bg);
+  border-color: var(--color-text-secondary);
+}
+
+/* Ellipsis placeholder — not a link, just a visual gap marker */
+.page-ellipsis {
+  color: var(--color-text-tertiary);
+  user-select: none;
 }
 
 /* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
