@@ -39,7 +39,7 @@ Farn uses a three-tier token architecture:
 
 1. **Palette** — raw color values; never reference directly. Prefixed `--in*` (Iron Night dark), `--bm*` (Birch Mist light), `--fo*` (Forest accent), `--bl*` (Bloom palette).
 2. **Semantic** — purpose-mapped, theme-aware aliases. Use these in all component and page styles: `--color-bg`, `--color-text`, `--color-text-secondary`, `--color-accent`, `--color-accent-hover`, `--color-border`, `--color-error`, `--color-success`, `--color-warning`, and surface variants `--color-bg-panel`, `--color-bg-inset`.
-3. **Component** (Tier 3) — per-component override points: `--btn-*`, `--card-*`, `--input-*`, `--badge-*`, `--accordion-*`, `--table-*`, `--code-*`, `--link-*`, `--quote-*`, `--overlap-*`, `--wave-height`, `--arc-height`, `--blob-*`, `--diagonal-angle`. Override on `:root` for global rebrand or scope to any selector.
+3. **Component** (Tier 3) — per-component override points: `--btn-*`, `--card-*`, `--input-*`, `--badge-*`, `--accordion-*`, `--table-*`, `--code-*`, `--link-*`, `--quote-*`, `--pagination-*`, `--tooltip-*`, `--overlap-*`, `--wave-height`, `--arc-height`, `--blob-*`, `--diagonal-angle`. Override on `:root` for global rebrand or scope to any selector.
 
 ## FOWT prevention snippet
 
