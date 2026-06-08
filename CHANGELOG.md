@@ -8,6 +8,11 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- **T-39** `tokens/motion.css`: `--duration-loop` (800ms) — named token for repeating cycle animations (spinner, skeleton shimmer); `--ease-in-out: ease-in-out` added to the easing scale
+- **T-39** `tokens/components.css`: `--spinner-color`, `--spinner-track`, `--spinner-size`, `--spinner-sm-size`, `--spinner-lg-size`, `--spinner-border`, `--spinner-lg-border`, `--spinner-duration`; `--skeleton-radius`, `--skeleton-base`, `--skeleton-duration` Tier-3 tokens; `tokens/dark-light.css`: `--skeleton-shine` defined per-theme — `--bm2-birch` in light (lighter than panel mist), `--in2-slate` in dark (lighter than panel iron)
+- **T-39** `tokens/component-classes.css`: `.spinner` (rotating ring, `farn-spin` keyframe), `.spinner-sm` / `.spinner-lg` size modifiers; `.skeleton` (shimmer gradient, `farn-shimmer` keyframe), `.skeleton-circle` variant; `.btn-loading` state modifier — all shipped in `dist/farn-components.css`; `prefers-reduced-motion` guards stop rotation / collapse shimmer to static block
+- **T-39** `site/src/pages/components/status.astro`: Loading states section promoted from `coming soon` to `stable` — live spinner + skeleton demos, button loading composition, full accessibility guidance, token reference, and CSS reference
+- **T-39** `site/src/pages/components/actions.astro`: "Loading state" subsection added to the Buttons accordion — `.btn-loading` usage, live demo, and `aria-label` / focus-restoration guidance
 - **T-34** `tokens/components.css`: `--tab-idle-text`, `--tab-hover-bg`, `--tab-active-text`, `--tab-indicator`, `--tab-border`, `--tab-panel-bg`, `--tab-gap`, `--tab-font-size`, `--tab-disabled-opacity` Tier-3 tokens for independent tab retheme
 - **T-34** `tokens/component-classes.css`: `.tab-list`, `.tab`, `.tab-panel` CSS classes with underline indicator, `[aria-selected]`-driven active state, hover/focus-visible/disabled, overflow-scroll, and `@media (scripting: none)` all-panels fallback — shipped in `dist/farn-components.css`
 - **T-34** `dist/tabs.js` + `package.json`: `initTabs()` progressive-enhancement script distributed as `farn-theme/scripts/tabs` — click switching, roving-tabindex keyboard navigation (← → Home End), skips disabled tabs

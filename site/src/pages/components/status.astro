@@ -2,13 +2,135 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Status" description="Feedback and status components in the Farn design system — alerts, loading states, and modal dialogs">
+<DocLayout title="Status" description="Feedback and status components in the Farn design system — loading states, alerts, and modal dialogs">
   <h1>Status</h1>
   <p>
-    Components that communicate system feedback, async state, and high-priority interruptions.
-    All patterns are planned for a future release — state tokens for errors, warnings, and
-    success already exist in the token system.
+    Components that communicate system feedback and async state. Loading patterns are stable;
+    alerts and modals are planned for a future release — semantic state tokens
+    (<code>--color-error</code>, <code>--color-warning</code>, <code>--color-success</code>)
+    already exist.
   </p>
+
+  <!-- ── Loading states ────────────────────────────────────────────────── -->
+
+  <h2 id="loading">Loading states <span class="badge badge-published">stable</span></h2>
+  <p>
+    Two complementary patterns for async and in-progress feedback. Use <strong>spinner</strong>
+    for determinate operations where the control point is known (a button, a small region).
+    Use <strong>skeleton</strong> for content areas that are loading — it preserves layout
+    and reduces perceived latency.
+  </p>
+
+  <div class="loading-demo demo-surface">
+    <div class="spinner-row" role="group" aria-label="Spinner size examples">
+      <span class="spinner spinner-sm" role="status" aria-label="Loading"></span>
+      <span class="spinner"           role="status" aria-label="Loading"></span>
+      <span class="spinner spinner-lg" role="status" aria-label="Loading"></span>
+    </div>
+
+    <div class="skeleton-row" role="group" aria-label="Skeleton placeholder examples">
+      <span class="skeleton skeleton-circle" style="width:40px;height:40px" aria-hidden="true"></span>
+      <div class="skeleton-lines">
+        <span class="skeleton" style="width:60%;height:14px" aria-hidden="true"></span>
+        <span class="skeleton" style="width:90%;height:12px" aria-hidden="true"></span>
+        <span class="skeleton" style="width:75%;height:12px" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="btn-loading-row" role="group" aria-label="Button loading state example">
+      <button class="btn btn-p btn-loading" aria-label="Saving">
+        <span class="spinner spinner-sm" aria-hidden="true"></span>
+        Saving…
+      </button>
+      <button class="btn btn-s btn-loading" aria-label="Loading">
+        <span class="spinner spinner-sm" aria-hidden="true"></span>
+        Loading
+      </button>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Loading states</summary>
+      <div class="accordion-panel">
+
+        <h3>Spinner</h3>
+        <p>A rotating ring that consumes <code>--spinner-color</code> (defaults to <code>--color-accent</code>) and <code>--spinner-track</code> (20% tint of accent). Apply <code>.spinner</code> alone for the default 24 px size; add <code>.spinner-sm</code> or <code>.spinner-lg</code> for 16 px or 40 px.</p>
+        <table>
+          <thead><tr><th>Class</th><th>Size</th><th>Border</th></tr></thead>
+          <tbody>
+            <tr><td><code>.spinner .spinner-sm</code></td><td>16px</td><td>2px</td></tr>
+            <tr><td><code>.spinner</code></td><td>24px</td><td>2px</td></tr>
+            <tr><td><code>.spinner .spinner-lg</code></td><td>40px</td><td>3px</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Accessibility — spinner</h3>
+        <p>A standalone spinner needs <code>role="status"</code> and <code>aria-label="Loading"</code> so screen readers announce it. When inside a button, the button label already describes the action — use <code>aria-hidden="true"</code> on the spinner element instead to avoid double-announcing.</p>
+        <pre><code>&lt;!-- Standalone spinner --&gt;
+&lt;span class="spinner" role="status" aria-label="Loading"&gt;&lt;/span&gt;
+
+&lt;!-- Spinner inside a button (button label carries the announcement) --&gt;
+&lt;button class="btn btn-p btn-loading" aria-label="Saving"&gt;
+  &lt;span class="spinner spinner-sm" aria-hidden="true"&gt;&lt;/span&gt;
+  Saving…
+&lt;/button&gt;</code></pre>
+
+        <h3>Skeleton</h3>
+        <p>Apply <code>.skeleton</code> to a <code>&lt;span&gt;</code> or <code>&lt;div&gt;</code> and set explicit <code>width</code> and <code>height</code> to match the content it stands in for. Add <code>.skeleton-circle</code> for avatar and icon placeholders.</p>
+        <pre><code>&lt;!-- Text line placeholders --&gt;
+&lt;span class="skeleton" style="display:block;width:60%;height:14px" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;span class="skeleton" style="display:block;width:90%;height:12px" aria-hidden="true"&gt;&lt;/span&gt;
+
+&lt;!-- Avatar placeholder --&gt;
+&lt;span class="skeleton skeleton-circle" style="width:40px;height:40px" aria-hidden="true"&gt;&lt;/span&gt;
+
+&lt;!-- Image card placeholder --&gt;
+&lt;span class="skeleton" style="display:block;width:100%;height:180px;border-radius:var(--radius-lg)" aria-hidden="true"&gt;&lt;/span&gt;</code></pre>
+
+        <h3>Accessibility — skeleton</h3>
+        <p>Mark all skeleton elements <code>aria-hidden="true"</code> — they are visual scaffolding, not content. Announce the loading state to screen readers with a separate live region:</p>
+        <pre><code>&lt;div aria-live="polite" aria-busy="true" class="sr-only"&gt;Loading content…&lt;/div&gt;
+&lt;!-- skeleton markup here --&gt;</code></pre>
+        <p>Remove or update the live region once content loads.</p>
+
+        <h3>Reduced motion</h3>
+        <p>Both components respect <code>prefers-reduced-motion: reduce</code>. The spinner stops rotating (ring remains visible as a static indicator). The skeleton disables the shimmer and renders as a static tinted block — both still communicate "something is here but not yet loaded."</p>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--spinner-color</code></td><td><code>var(--color-accent)</code></td><td>Active arc colour</td></tr>
+            <tr><td><code>--spinner-track</code></td><td>20% tint of accent</td><td>Background ring colour</td></tr>
+            <tr><td><code>--spinner-size</code></td><td><code>24px</code></td><td>Default spinner diameter</td></tr>
+            <tr><td><code>--spinner-sm-size</code></td><td><code>16px</code></td><td>Small spinner diameter</td></tr>
+            <tr><td><code>--spinner-lg-size</code></td><td><code>40px</code></td><td>Large spinner diameter</td></tr>
+            <tr><td><code>--spinner-border</code></td><td><code>2px</code></td><td>Default + sm ring width</td></tr>
+            <tr><td><code>--spinner-lg-border</code></td><td><code>3px</code></td><td>Large ring width</td></tr>
+            <tr><td><code>--spinner-duration</code></td><td><code>var(--duration-loop)</code></td><td>Rotation cycle duration</td></tr>
+            <tr><td><code>--skeleton-radius</code></td><td><code>var(--radius-sm)</code></td><td>Placeholder corner radius</td></tr>
+            <tr><td><code>--skeleton-base</code></td><td><code>var(--color-bg-panel)</code></td><td>Placeholder base colour</td></tr>
+            <tr><td><code>--skeleton-shine</code></td><td><code>--bm2-birch</code> light / <code>--in2-slate</code> dark</td><td>Shimmer highlight colour — per-theme palette value</td></tr>
+            <tr><td><code>--skeleton-duration</code></td><td><code>var(--duration-loop)</code></td><td>Shimmer cycle duration</td></tr>
+          </tbody>
+        </table>
+
+        <h3>CSS reference</h3>
+        <table>
+          <thead><tr><th>Selector</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>.spinner</code></td><td>Default 24px rotating ring</td></tr>
+            <tr><td><code>.spinner-sm</code></td><td>16px size modifier (add to <code>.spinner</code>)</td></tr>
+            <tr><td><code>.spinner-lg</code></td><td>40px size modifier (add to <code>.spinner</code>)</td></tr>
+            <tr><td><code>.skeleton</code></td><td>Shimmer placeholder rectangle</td></tr>
+            <tr><td><code>.skeleton-circle</code></td><td>Makes skeleton circular (add to <code>.skeleton</code>)</td></tr>
+          </tbody>
+        </table>
+
+      </div>
+    </details>
+  </div>
 
   <!-- ── Alert ─────────────────────────────────────────────────────────── -->
 
@@ -18,17 +140,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     and <code>--color-success</code> semantic tokens. <code>--alert-*</code> Tier-3 tokens
     (background, border, text, icon-color per variant) for independent retheme. Four variants:
     info, success, warning, error — dismissible and non-dismissible.
-  </p>
-
-  <!-- ── Loading states ────────────────────────────────────────────────── -->
-
-  <h2 id="loading">Loading states <span class="badge badge-draft">coming soon</span></h2>
-  <p>
-    Two patterns for async and in-progress feedback. <strong>Spinner</strong> — a rotating ring
-    consuming <code>--color-accent</code> and <code>--duration-*</code> motion tokens.
-    <strong>Skeleton</strong> — a shimmer placeholder using a CSS gradient animation.
-    Both respect <code>prefers-reduced-motion</code>: spinner stops, skeleton renders as a
-    static tinted block.
   </p>
 
   <!-- ── Modal / dialog ────────────────────────────────────────────────── -->
@@ -43,3 +154,33 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </p>
 
 </DocLayout>
+
+<style>
+  .loading-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .spinner-row,
+  .skeleton-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .skeleton-lines {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .btn-loading-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+</style>

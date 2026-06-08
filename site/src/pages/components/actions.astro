@@ -79,6 +79,28 @@ import DocLayout from '../../layouts/DocLayout.astro';
   Can't proceed
 &lt;/a&gt;</code></pre>
 
+        <h3>Loading state</h3>
+        <p>Add <code>.btn-loading</code> to suppress pointer events and signal a busy cursor while an async operation runs. Place a <code>.spinner .spinner-sm</code> element inside the button; update <code>aria-label</code> on the button to describe what is happening.</p>
+        <div class="btn-demo demo-surface" role="group" aria-label="Button loading state examples">
+          <button class="btn btn-p btn-loading" aria-label="Saving">
+            <span class="spinner spinner-sm" aria-hidden="true"></span>
+            Saving…
+          </button>
+          <button class="btn btn-s btn-loading" aria-label="Loading">
+            <span class="spinner spinner-sm" aria-hidden="true"></span>
+            Loading
+          </button>
+          <button class="btn btn-g btn-loading" aria-label="Processing">
+            <span class="spinner spinner-sm" aria-hidden="true"></span>
+            Processing
+          </button>
+        </div>
+        <pre><code>&lt;button class="btn btn-p btn-loading" aria-label="Saving"&gt;
+  &lt;span class="spinner spinner-sm" aria-hidden="true"&gt;&lt;/span&gt;
+  Saving…
+&lt;/button&gt;</code></pre>
+        <p>The spinner is <code>aria-hidden</code> because the button's own label already describes the state. Toggle <code>.btn-loading</code> via JavaScript when the async operation starts and ends. Do not use the HTML <code>disabled</code> attribute for loading — it removes the button from the tab order and prevents focus restoration after the operation completes.</p>
+
         <h3>Anatomy</h3>
         <pre><code>&lt;!-- base class + variant modifier --&gt;
 &lt;button class="btn btn-p"&gt;Label&lt;/button&gt;

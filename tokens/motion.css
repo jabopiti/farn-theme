@@ -7,9 +7,11 @@
   --duration-slow:  200ms;   /* Fill, colour, and indicator transitions */
   --duration-enter: 250ms;   /* Enter / exit geometry (drawers, nav hide) */
   --duration-reveal: 400ms;  /* Content reveal and stagger animations */
+  --duration-loop:   800ms;  /* Repeating cycle animations — spinner, skeleton shimmer */
 
   /* Easing */
   --ease-default: ease;
   --ease-out:     ease-out;
+  --ease-in-out:  ease-in-out;
   --ease-spring:  cubic-bezier(0.16, 1, 0.3, 1); /* overshoot / spring out */
 }

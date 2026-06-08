@@ -912,6 +912,63 @@ hr { border: none; }
   padding: var(--table-cell-padding-lg);
 }
 
+/* ── Spinner ─────────────────────────────────────────────────────────────── */
+
+@keyframes farn-spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+  border-radius: 50%;
+  border: var(--spinner-border) solid var(--spinner-track);
+  border-top-color: var(--spinner-color);
+  animation: farn-spin var(--spinner-duration) linear infinite;
+}
+
+.spinner-sm { width: var(--spinner-sm-size); height: var(--spinner-sm-size); }
+.spinner-lg { width: var(--spinner-lg-size); height: var(--spinner-lg-size); border-width: var(--spinner-lg-border); }
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}
+
+/* ── Skeleton ────────────────────────────────────────────────────────────── */
+
+@keyframes farn-shimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+
+.skeleton {
+  display: block;
+  border-radius: var(--skeleton-radius);
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 25%,
+    var(--skeleton-shine) 50%,
+    var(--skeleton-base) 75%
+  );
+  background-size: 200% 100%;
+  animation: farn-shimmer var(--skeleton-duration) var(--ease-in-out) infinite;
+}
+
+.skeleton-circle { border-radius: 50%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; background: var(--skeleton-base); }
+}
+
+/* ── Button loading state ────────────────────────────────────────────────── */
+
+.btn-loading {
+  pointer-events: none;
+  cursor: wait;
+}
+
 /* ── Tabs ────────────────────────────────────────────────────────────────── */
 
 .tab-list {
