@@ -203,13 +203,106 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <!-- ── Tooltip ──────────────────────────────────────────────────────── -->
 
-  <h2 id="tooltip">Tooltip <span class="badge badge-draft">coming soon</span></h2>
+  <h2 id="tooltip">Tooltip <span class="badge badge-published">stable</span></h2>
   <p>
-    CSS-only tooltip via <code>[data-tooltip]</code> attribute and <code>::before</code> /
-    <code>::after</code> pseudo-elements. <code>--tooltip-*</code> tokens for background,
-    text, and max-width. Note: CSS-only tooltips do not respond to keyboard focus — a JS
-    enhancement is needed for <code>focus-visible</code> support.
+    Add <code>data-tooltip="…"</code> to any element to attach a tooltip bubble. CSS-only —
+    no script required. Shows on <code>:hover</code> and <code>:focus-visible</code> so
+    keyboard users see it without JavaScript.
   </p>
+
+  <div class="demo-surface btn-demo tooltip-demo" role="group" aria-label="Live tooltip examples">
+    <button class="btn btn-g" data-tooltip="Delete this item" aria-label="Delete this item">Delete</button>
+    <button class="btn btn-g" data-tooltip="Copy to clipboard" aria-label="Copy to clipboard">Copy</button>
+    <button class="btn btn-g" data-tooltip="Opens below the trigger" data-tooltip-placement="bottom" aria-label="Opens below the trigger">Bottom</button>
+    <abbr data-tooltip="World Wide Web Consortium" title="World Wide Web Consortium">W3C</abbr>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Tooltip</summary>
+      <div class="accordion-panel">
+
+        <h3>Placement</h3>
+        <p>Default placement is above the trigger. Add <code>data-tooltip-placement="bottom"</code> when the trigger sits near the top of the viewport and a top tooltip would overflow.</p>
+        <table>
+          <thead><tr><th>Attribute value</th><th>Placement</th></tr></thead>
+          <tbody>
+            <tr><td><em>(absent)</em></td><td>Above the trigger (default)</td></tr>
+            <tr><td><code>"bottom"</code></td><td>Below the trigger</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Anatomy</h3>
+        <p>Works on any element that supports pseudo-elements. <strong>Does not work</strong> on replaced/void elements: <code>&lt;input&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code>. Wrap them in a <code>&lt;span data-tooltip="…"&gt;</code> instead.</p>
+        <pre><code>&lt;!-- Icon button with tooltip (hover + keyboard focus) --&gt;
+&lt;button data-tooltip="Delete item" aria-label="Delete item"&gt;
+  &lt;svg aria-hidden="true"&gt;…&lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;!-- Below placement --&gt;
+&lt;button data-tooltip="More options"
+        data-tooltip-placement="bottom"
+        aria-label="More options"&gt;
+  ⋯
+&lt;/button&gt;
+
+&lt;!-- Replaced element: wrap in a span --&gt;
+&lt;span data-tooltip="Profile photo" style="display:inline-block"&gt;
+  &lt;img src="avatar.jpg" alt="Profile photo"&gt;
+&lt;/span&gt;
+
+&lt;!-- Abbreviation (hover only — not focusable) --&gt;
+&lt;abbr data-tooltip="Cascading Style Sheets"
+      title="Cascading Style Sheets"&gt;CSS&lt;/abbr&gt;</code></pre>
+
+        <h3>Accessibility</h3>
+        <p>
+          <code>content: attr(data-tooltip)</code> in CSS pseudo-elements is not exposed to the
+          accessibility tree. Always pair <code>data-tooltip</code> with <code>aria-label</code>
+          (interactive elements) or <code>title</code> (non-interactive elements such as
+          <code>&lt;abbr&gt;</code>) carrying the same text.
+        </p>
+        <p>
+          Tooltips respond to <code>:focus-visible</code> in CSS, so keyboard users see the bubble
+          on focus without JavaScript. Non-focusable elements are hover-only — add
+          <code>tabindex="0"</code> if keyboard access is needed for that element.
+        </p>
+        <p>
+          <strong>Touch devices:</strong> <code>:hover</code> is unreliable on mobile. If the
+          tooltip text is essential (not supplementary), surface it in visible UI rather than
+          relying on a tooltip.
+        </p>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Light default</th><th>Dark default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--tooltip-bg</code></td><td><code>var(--in0-void)</code></td><td><code>var(--bm1-mist)</code></td><td>Bubble background — theme-inverse for guaranteed contrast</td></tr>
+            <tr><td><code>--tooltip-text</code></td><td><code>var(--bm2-birch)</code></td><td><code>var(--in0-void)</code></td><td>Bubble text colour</td></tr>
+            <tr><td><code>--tooltip-max-width</code></td><td colspan="2"><code>220px</code></td><td>Maximum bubble width before text wraps</td></tr>
+            <tr><td><code>--tooltip-radius</code></td><td colspan="2"><code>var(--radius-sm)</code></td><td>Bubble corner radius</td></tr>
+            <tr><td><code>--tooltip-padding</code></td><td colspan="2"><code>4px 10px</code></td><td>Internal bubble padding</td></tr>
+            <tr><td><code>--tooltip-font-size</code></td><td colspan="2"><code>0.75rem</code></td><td>Bubble font size (12px)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Overriding tokens</h3>
+        <pre><code>/* Custom tooltip colour in a dark promo section */
+.promo &#123;
+  --tooltip-bg:   var(--fo2-forest);
+  --tooltip-text: var(--bm2-birch);
+&#125;</code></pre>
+
+        <h3>Known limitation — viewport edges</h3>
+        <p>
+          The bubble is centred on the trigger midpoint via <code>left: 50%; transform: translateX(-50%)</code>.
+          On triggers near the left or right edge of the viewport the bubble may overflow.
+          For fully collision-aware positioning use a JavaScript positioning library (e.g. Floating UI).
+        </p>
+
+      </div>
+    </details>
+  </div>
 
 </DocLayout>
 
@@ -230,5 +323,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
     border: none;
     padding: 0;
     background: none;
+  }
+
+  /* Extra vertical padding so tooltip bubbles clear the demo container edges */
+  .tooltip-demo {
+    padding-top: 52px;
+    padding-bottom: 52px;
   }
 </style>

@@ -411,6 +411,83 @@ input[type="radio"] {
   .section-skew::before { animation: none; }
 }
 
+/* ── Pagination ──────────────────────────────────────────────────────────── */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pagination-gap);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-item {
+  display: flex;
+}
+
+/* Shared sizing between interactive links and the decorative ellipsis */
+.page-link,
+.page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  font-size: 0.875rem;
+}
+
+.page-link {
+  padding: 0 var(--space-xs);
+  border: 1px solid transparent;
+  border-radius: var(--pagination-radius);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+}
+
+.page-link:hover {
+  background: var(--pagination-hover-bg);
+  color: var(--pagination-hover-text);
+}
+
+.page-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.page-link[aria-current="page"] {
+  background: var(--pagination-active-bg);
+  color: var(--pagination-active-text);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.page-link[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Outlined variant — border on all items; active item retains filled accent */
+.pagination-outlined .page-link {
+  border-color: var(--pagination-border);
+  transition: background var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
+}
+
+.pagination-outlined .page-link:hover {
+  background: var(--pagination-hover-bg);
+  border-color: var(--color-text-secondary);
+}
+
+/* Ellipsis placeholder — not a link, just a visual gap marker */
+.page-ellipsis {
+  color: var(--color-text-tertiary);
+  user-select: none;
+}
+
 /* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
 .breadcrumb {
   display: flex;
@@ -704,6 +781,78 @@ hr { border: none; }
   stroke-linecap: round;
   stroke-linejoin: round;
   pointer-events: none;
+}
+
+/* ── Tooltip ─────────────────────────────────────────────────────────────── */
+
+[data-tooltip] {
+  position: relative;
+}
+
+/* Shared: absolute placement, invisible by default, fade in */
+[data-tooltip]::before,
+[data-tooltip]::after {
+  position: absolute;
+  left: 50%;
+  pointer-events: none;
+  z-index: var(--z-dropdown);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+/* Bubble */
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 6px); /* 6px = 2px gap + 4px arrow height */
+  transform: translateX(-50%);
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  padding: var(--tooltip-padding);
+  border-radius: var(--tooltip-radius);
+  font-size: var(--tooltip-font-size);
+  font-weight: 500;
+  line-height: 1.4;
+  max-width: var(--tooltip-max-width);
+  white-space: normal;
+  text-align: center;
+}
+
+/* Arrow — downward-pointing triangle for top placement */
+[data-tooltip]::after {
+  content: '';
+  bottom: calc(100% + 2px);
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--tooltip-bg);
+}
+
+/* Show on hover and keyboard focus */
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::before,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+}
+
+/* Bottom placement — bubble below, arrow pointing upward */
+[data-tooltip][data-tooltip-placement="bottom"]::before,
+[data-tooltip][data-tooltip-placement="bottom"]::after {
+  bottom: auto;
+}
+
+[data-tooltip][data-tooltip-placement="bottom"]::before {
+  top: calc(100% + 6px);
+}
+
+[data-tooltip][data-tooltip-placement="bottom"]::after {
+  top: calc(100% + 2px);
+  border-top-color: transparent;
+  border-bottom-color: var(--tooltip-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-tooltip]::before,
+  [data-tooltip]::after { transition: none; }
 }
 
 /* ── Tables ──────────────────────────────────────────────────────────────── */
