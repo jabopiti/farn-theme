@@ -476,7 +476,7 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-38 · Tooltip
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/hopeful-darwin-geBKe`
 
 **Gap:** No tooltip pattern; a basic affordance used for labels, abbreviations, and icon-only buttons has no implementation.
 

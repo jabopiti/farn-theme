@@ -706,6 +706,78 @@ hr { border: none; }
   pointer-events: none;
 }
 
+/* ── Tooltip ─────────────────────────────────────────────────────────────── */
+
+[data-tooltip] {
+  position: relative;
+}
+
+/* Shared: absolute placement, invisible by default, fade in */
+[data-tooltip]::before,
+[data-tooltip]::after {
+  position: absolute;
+  left: 50%;
+  pointer-events: none;
+  z-index: var(--z-dropdown);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+/* Bubble */
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 6px); /* 6px = 2px gap + 4px arrow height */
+  transform: translateX(-50%);
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  padding: var(--tooltip-padding);
+  border-radius: var(--tooltip-radius);
+  font-size: var(--tooltip-font-size);
+  font-weight: 500;
+  line-height: 1.4;
+  max-width: var(--tooltip-max-width);
+  white-space: normal;
+  text-align: center;
+}
+
+/* Arrow — downward-pointing triangle for top placement */
+[data-tooltip]::after {
+  content: '';
+  bottom: calc(100% + 2px);
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--tooltip-bg);
+}
+
+/* Show on hover and keyboard focus */
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::before,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+}
+
+/* Bottom placement — bubble below, arrow pointing upward */
+[data-tooltip][data-tooltip-placement="bottom"]::before,
+[data-tooltip][data-tooltip-placement="bottom"]::after {
+  bottom: auto;
+}
+
+[data-tooltip][data-tooltip-placement="bottom"]::before {
+  top: calc(100% + 6px);
+}
+
+[data-tooltip][data-tooltip-placement="bottom"]::after {
+  top: calc(100% + 2px);
+  border-top-color: transparent;
+  border-bottom-color: var(--tooltip-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-tooltip]::before,
+  [data-tooltip]::after { transition: none; }
+}
+
 /* ── Tables ──────────────────────────────────────────────────────────────── */
 /* border-radius is intentionally omitted from .table — overflow:hidden on a
    border-collapse:collapse table is cross-browser unreliable. For rounded
