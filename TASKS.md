@@ -924,4 +924,35 @@ Merged into T-49 (Complete Foundations section).
 - [ ] Fix or rebuild the demos so each easing and duration token is shown with a moving element (a simple block or icon translating across a track)
 - [ ] Audit: list every animated element in the design system (spinners, skeletons, section transitions, btn-loading, scroll-reveal, tab indicator) and verify each is covered by a documented token
 - [ ] Add any missing tokens; update `CHANGELOG.md`
+## T-73 · Scroll indicator component
+`status: backlog` `effort: S`
 
+**Gap:** The landing page hero has no scroll affordance; visitors may not realise there is content below the fold. A reference scroll indicator exists at https://platform-as-a-product.jbpt.de/ (hero section) and should be extracted, adapted to Farn tokens, and shipped as a reusable component.
+
+- [ ] Add `--scroll-indicator-*` Tier-3 tokens to `tokens/components.css`
+- [ ] Add `.scroll-indicator` CSS class to `tokens/component-classes.css` — animated chevron/arrow, inherits theme via semantic tokens
+- [ ] Respect `prefers-reduced-motion` (show static indicator, no animation)
+- [ ] Element is `aria-hidden="true"` (decorative) or carries a descriptive label for screen readers
+- [ ] Works correctly in both light and dark mode
+- [ ] Documented on the relevant component group page
+- [ ] Used in `site/src/pages/index.astro` hero section
+- [ ] Run build command, update `CHANGELOG.md`
+
+---
+
+## T-74 · Section transition dividers — landing page
+`status: backlog` `effort: M`
+
+**Gap:** Section boundaries on the landing page are hard cuts; adding shaped transition dividers between key sections will improve visual flow and reinforce the Farn aesthetic.
+
+**Required transitions:**
+- Architecture (§3, light bg) → Palette (§4, `data-surface="layer"` / mist bg): **Arc**
+- Palette (§4) → Token Story (§5): **Sine wave**
+- Included (§6) → Ready to Build (§7, dark bg): **Blob**
+
+**ACs:**
+- [ ] Each divider SVG colour-matches the adjacent section backgrounds (both light and dark page themes)
+- [ ] Dividers are `aria-hidden="true"` and do not disrupt layout flow (`position:absolute` or negative margin pattern)
+- [ ] No new JS required — CSS-only shapes
+- [ ] All three dividers render correctly with the existing `--arc-height` / `--wave-height` tokens (or new tokens added for blob/sine)
+- [ ] Run build command if any `tokens/` file changed, update `CHANGELOG.md`

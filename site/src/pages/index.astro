@@ -91,6 +91,7 @@ import { groups, links, ctas } from '../data/navigation';
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--fo1-fern);
+    text-shadow: 0 1px 5px var(--color-bg);
     margin-bottom: var(--space-md);
     opacity: 0;
     animation: fadeUp 600ms ease-out 100ms forwards;
@@ -222,6 +223,17 @@ import { groups, links, ctas } from '../data/navigation';
   }
   .system-icon {
     font-size: 22px;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+  .system-tier {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--color-accent);
     margin-bottom: var(--space-xs);
   }
@@ -489,12 +501,15 @@ import { groups, links, ctas } from '../data/navigation';
     <h2 class="section-title scroll-reveal">Tokens all the way down.</h2>
     <p class="section-desc scroll-reveal">Three tiers, each building on the last. Swap a palette token and the entire system updates. Components never reference raw colours.</p>
 
-    <div class="system-grid scroll-reveal" style="margin-top:var(--space-2xl)">
+    <div class="section-actions scroll-reveal" style="margin-top:var(--space-lg)">
+      <a href="/styles" class="btn btn-g"><i class="ti ti-palette"></i> Browse Styles</a>
+    </div>
+
+    <div class="system-grid scroll-reveal" style="margin-top:var(--space-xl)">
       <!-- Tier 1 -->
       <div class="card system-card card-outlined">
         <div class="card-body">
-          <span class="badge badge-category">Tier 1</span>
-          <div class="system-icon"><i class="ti ti-color-swatch"></i></div>
+          <p class="system-tier"><i class="ti ti-color-swatch"></i> Tier 1</p>
           <h3>Palette tokens</h3>
           <p>Named colour, spacing, type, and motion values. The raw vocabulary — never referenced by components directly.</p>
           <div class="system-codes">
@@ -510,8 +525,7 @@ import { groups, links, ctas } from '../data/navigation';
       <!-- Tier 2 -->
       <div class="card system-card card-outlined">
         <div class="card-body">
-          <span class="badge badge-general">Tier 2</span>
-          <div class="system-icon"><i class="ti ti-layers-subtract"></i></div>
+          <p class="system-tier"><i class="ti ti-layers-subtract"></i> Tier 2</p>
           <h3>Semantic tokens</h3>
           <p>Purpose-named aliases that resolve per theme and surface. Light, dark, and surface overrides cascade automatically.</p>
           <div class="system-codes">
@@ -527,8 +541,7 @@ import { groups, links, ctas } from '../data/navigation';
       <!-- Tier 3 -->
       <div class="card system-card card-outlined">
         <div class="card-body">
-          <span class="badge badge-beta">Tier 3</span>
-          <div class="system-icon"><i class="ti ti-puzzle"></i></div>
+          <p class="system-tier"><i class="ti ti-puzzle"></i> Tier 3</p>
           <h3>Component tokens &amp; classes</h3>
           <p>Opt-in CSS classes built on top of semantic tokens. Override at the component level without touching the palette.</p>
           <div class="system-codes">
@@ -538,10 +551,6 @@ import { groups, links, ctas } from '../data/navigation';
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="section-actions scroll-reveal" style="margin-top:var(--space-xl)">
-      <a href="/styles" class="btn btn-g"><i class="ti ti-palette"></i> Browse Styles</a>
     </div>
   </div>
 </section>
@@ -610,7 +619,7 @@ import { groups, links, ctas } from '../data/navigation';
 </section>
 
 <!-- ── § 5 Tokens in action ───────────────────────────────────────── -->
-<section class="landing-section" id="tokens-demo" data-theme="light">
+<section class="landing-section" id="tokens-demo">
   <div class="container">
     <div class="tokens-demo-header">
       <div>
@@ -625,30 +634,24 @@ import { groups, links, ctas } from '../data/navigation';
 
     <div class="tokens-demo-cols">
       <div class="tokens-demo-col">
-        <p class="surface-label">Base</p>
         <div class="demo-card" data-surface="base">
-          <span class="badge badge-beta">Beta</span>
-          <h4>Composable layout</h4>
-          <p>Build pages from reusable layout primitives and surface tokens.</p>
-          <button class="btn btn-p btn-sm">Explore</button>
+          <h4>Base</h4>
+          <p>The page-level background. Every theming context starts here.</p>
+          <a href="/foundations/surfaces" class="btn btn-g btn-sm">More about Surfaces</a>
         </div>
       </div>
       <div class="tokens-demo-col">
-        <p class="surface-label">Layer</p>
         <div class="demo-card" data-surface="layer">
-          <span class="badge badge-beta">Beta</span>
-          <h4>Composable layout</h4>
-          <p>Build pages from reusable layout primitives and surface tokens.</p>
-          <button class="btn btn-p btn-sm">Explore</button>
+          <h4>Layer</h4>
+          <p>Cards, panels, sidebars. One step above the base — naturally elevated.</p>
+          <a href="/foundations/surfaces" class="btn btn-g btn-sm">More about Surfaces</a>
         </div>
       </div>
       <div class="tokens-demo-col">
-        <p class="surface-label">Overlay</p>
         <div class="demo-card" data-surface="overlay">
-          <span class="badge badge-beta">Beta</span>
-          <h4>Composable layout</h4>
-          <p>Build pages from reusable layout primitives and surface tokens.</p>
-          <button class="btn btn-p btn-sm">Explore</button>
+          <h4>Overlay</h4>
+          <p>Modals, dropdowns, tooltips. The topmost surface, floating above.</p>
+          <a href="/foundations/surfaces" class="btn btn-g btn-sm">More about Surfaces</a>
         </div>
       </div>
     </div>
@@ -671,7 +674,6 @@ import { groups, links, ctas } from '../data/navigation';
       </div>
       <div class="card get-card scroll-reveal">
         <div class="card-body">
-          <span class="badge badge-beta" style="margin-bottom:var(--space-xs)">Opt-in</span>
           <i class="ti ti-components get-icon"></i>
           <h3>Component classes</h3>
           <p>Shipped CSS classes for buttons, cards, badges, forms, and more. Load <code class="inline-code">farn-components.css</code> alongside the token bundle.</p>
@@ -701,10 +703,10 @@ import { groups, links, ctas } from '../data/navigation';
     <div class="cta-inner">
       <p class="section-eyebrow scroll-reveal">Ready to build</p>
       <h2 class="section-title scroll-reveal" style="font-size:clamp(36px,5vw,64px);font-variation-settings:'opsz' 48">Start building<br>with <em style="font-style:italic;color:var(--color-accent)">Farn.</em></h2>
-      <p class="section-desc scroll-reveal">CSS tokens and component classes. No runtime, no framework, no build step required.</p>
+      <p class="section-desc scroll-reveal">CSS tokens and component classes. No runtime, no framework, no build step. Add the stylesheet and start building.</p>
       <div class="section-actions scroll-reveal">
-        <a href="/demo" class="btn btn-p btn-lg"><i class="ti ti-eye"></i> Explore the demo</a>
-        <a href="/getting-started" class="btn btn-g btn-lg"><i class="ti ti-book"></i> Get Started</a>
+        <a href="/getting-started" class="btn btn-p btn-lg"><i class="ti ti-book"></i> Get Started</a>
+        <a href="/components" class="btn btn-g btn-lg"><i class="ti ti-components"></i> Discover Components</a>
       </div>
     </div>
   </div>
@@ -750,18 +752,29 @@ import { groups, links, ctas } from '../data/navigation';
 })();
 </script>
 
-<!-- Demo theme toggle (§5 — scoped to #tokens-demo only) -->
+<!-- Demo theme toggle (§5 — toggles global page theme) -->
 <script is:inline>
 (function () {
-  const section = document.getElementById('tokens-demo');
-  const btn     = document.getElementById('demo-theme-toggle');
-  if (!section || !btn) return;
-  btn.addEventListener('click', () => {
-    const isDark = section.getAttribute('data-theme') === 'dark';
-    section.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  const btn = document.getElementById('demo-theme-toggle');
+  if (!btn) return;
+  function syncBtn() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     btn.innerHTML = isDark
-      ? '<i class="ti ti-moon"></i> Switch to Dark'
-      : '<i class="ti ti-sun"></i> Switch to Light';
+      ? '<i class="ti ti-sun"></i> Switch to Light'
+      : '<i class="ti ti-moon"></i> Switch to Dark';
+  }
+  syncBtn();
+  btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('farn-theme', next);
+    syncBtn();
+    const themeIcon   = document.getElementById('themeIcon');
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeIcon) themeIcon.className = next === 'dark' ? 'ti ti-sun' : 'ti ti-moon';
+    if (themeToggle) themeToggle.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
   });
 })();
 </script>
