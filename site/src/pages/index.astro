@@ -185,6 +185,33 @@ import { groups, links, ctas } from '../data/navigation';
     transition: transform 150ms ease, flex 200ms ease;
   }
   .palette-row .swatch:hover { transform: scaleY(1.15); flex: 2; }
+  /* Swatch name overlay (palette section) */
+  .swatch-wrap { position: relative; flex: 1; transition: flex 200ms ease; }
+  .swatch-wrap:hover { flex: 2; }
+  .swatch-wrap .swatch { width: 100%; flex: unset; transition: transform 150ms ease; }
+  .swatch-wrap:hover .swatch { transform: scaleY(1.15); }
+  .swatch-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
+    padding-bottom: 4px;
+    color: rgba(255,255,255,0.95);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    opacity: 0;
+    transform: translateY(3px);
+    transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+    pointer-events: none;
+  }
+  .swatch-wrap:hover .swatch-name { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .swatch-name { transition: opacity 100ms; transform: none; }
+  }
   .palette-label {
     font-size: 11px;
     font-weight: 600;
@@ -228,14 +255,17 @@ import { groups, links, ctas } from '../data/navigation';
   }
   .system-tier {
     display: flex;
-    align-items: center;
-    gap: 6px;
+    flex-direction: column;
+    gap: 4px;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+  .system-tier i { font-size: 22px; }
+  .system-tier span {
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-accent);
-    margin-bottom: var(--space-xs);
   }
   .system-card h3 {
     font-family: var(--font-display);
@@ -509,7 +539,7 @@ import { groups, links, ctas } from '../data/navigation';
       <!-- Tier 1 -->
       <div class="card system-card card-outlined">
         <div class="card-body">
-          <p class="system-tier"><i class="ti ti-color-swatch"></i> Tier 1</p>
+          <div class="system-tier"><i class="ti ti-color-swatch"></i><span>Tier 1</span></div>
           <h3>Palette tokens</h3>
           <p>Named colour, spacing, type, and motion values. The raw vocabulary — never referenced by components directly.</p>
           <div class="system-codes">
@@ -525,7 +555,7 @@ import { groups, links, ctas } from '../data/navigation';
       <!-- Tier 2 -->
       <div class="card system-card card-outlined">
         <div class="card-body">
-          <p class="system-tier"><i class="ti ti-layers-subtract"></i> Tier 2</p>
+          <div class="system-tier"><i class="ti ti-layers-subtract"></i><span>Tier 2</span></div>
           <h3>Semantic tokens</h3>
           <p>Purpose-named aliases that resolve per theme and surface. Light, dark, and surface overrides cascade automatically.</p>
           <div class="system-codes">
@@ -541,7 +571,7 @@ import { groups, links, ctas } from '../data/navigation';
       <!-- Tier 3 -->
       <div class="card system-card card-outlined">
         <div class="card-body">
-          <p class="system-tier"><i class="ti ti-puzzle"></i> Tier 3</p>
+          <div class="system-tier"><i class="ti ti-puzzle"></i><span>Tier 3</span></div>
           <h3>Component tokens &amp; classes</h3>
           <p>Opt-in CSS classes built on top of semantic tokens. Override at the component level without touching the palette.</p>
           <div class="system-codes">
@@ -565,31 +595,31 @@ import { groups, links, ctas } from '../data/navigation';
         <div class="about-palettes" style="margin-top:var(--space-lg)">
           <div class="palette-label">Iron Night</div>
           <div class="palette-row">
-            <div class="swatch" style="background:#0D1117" title="void"></div>
-            <div class="swatch" style="background:#374151" title="iron"></div>
-            <div class="swatch" style="background:#4B5563" title="slate"></div>
-            <div class="swatch" style="background:#6B7280" title="ash"></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#0D1117"></div><span class="swatch-name">Void</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#374151"></div><span class="swatch-name">Iron</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#4B5563"></div><span class="swatch-name">Slate</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#6B7280"></div><span class="swatch-name">Ash</span></div>
           </div>
           <div class="palette-label" style="margin-top:12px">Birch Mist</div>
           <div class="palette-row">
-            <div class="swatch" style="background:#D5D2C7" title="sand"></div>
-            <div class="swatch" style="background:#E9E6DC" title="mist"></div>
-            <div class="swatch" style="background:#F7F6F3" title="birch"></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#D5D2C7"></div><span class="swatch-name">Sand</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#E9E6DC"></div><span class="swatch-name">Mist</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#F7F6F3"></div><span class="swatch-name">Birch</span></div>
           </div>
           <div class="palette-label" style="margin-top:12px">Forest</div>
           <div class="palette-row">
-            <div class="swatch" style="background:#5C9E86" title="sage"></div>
-            <div class="swatch" style="background:#3E7A62" title="fern"></div>
-            <div class="swatch" style="background:#2D5E4A" title="forest"></div>
-            <div class="swatch" style="background:#254D5A" title="deepwater"></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#5C9E86"></div><span class="swatch-name">Sage</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#3E7A62"></div><span class="swatch-name">Fern</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#2D5E4A"></div><span class="swatch-name">Forest</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#254D5A"></div><span class="swatch-name">Deepwater</span></div>
           </div>
           <div class="palette-label" style="margin-top:12px">Bloom</div>
           <div class="palette-row">
-            <div class="swatch" style="background:#C5414C" title="ember"></div>
-            <div class="swatch" style="background:#AB5A2B" title="ochre"></div>
-            <div class="swatch" style="background:#8D6B20" title="grain"></div>
-            <div class="swatch" style="background:#567A37" title="moss"></div>
-            <div class="swatch" style="background:#885DB4" title="heather"></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#C5414C"></div><span class="swatch-name">Ember</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#AB5A2B"></div><span class="swatch-name">Ochre</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#8D6B20"></div><span class="swatch-name">Grain</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#567A37"></div><span class="swatch-name">Moss</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#885DB4"></div><span class="swatch-name">Heather</span></div>
           </div>
         </div>
         <div class="section-actions" style="margin-top:var(--space-lg)">
@@ -703,7 +733,7 @@ import { groups, links, ctas } from '../data/navigation';
     <div class="cta-inner">
       <p class="section-eyebrow scroll-reveal">Ready to build</p>
       <h2 class="section-title scroll-reveal" style="font-size:clamp(36px,5vw,64px);font-variation-settings:'opsz' 48">Start building<br>with <em style="font-style:italic;color:var(--color-accent)">Farn.</em></h2>
-      <p class="section-desc scroll-reveal">CSS tokens and component classes. No runtime, no framework, no build step. Add the stylesheet and start building.</p>
+      <p class="section-desc scroll-reveal">CSS tokens and component classes. No runtime, no framework, no build step.<br>Just add the stylesheet and start building.</p>
       <div class="section-actions scroll-reveal">
         <a href="/getting-started" class="btn btn-p btn-lg"><i class="ti ti-book"></i> Get Started</a>
         <a href="/components" class="btn btn-g btn-lg"><i class="ti ti-components"></i> Discover Components</a>

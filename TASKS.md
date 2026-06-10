@@ -929,6 +929,8 @@ Merged into T-49 (Complete Foundations section).
 
 **Gap:** The landing page hero has no scroll affordance; visitors may not realise there is content below the fold. A reference scroll indicator exists at https://platform-as-a-product.jbpt.de/ (hero section) and should be extracted, adapted to Farn tokens, and shipped as a reusable component.
 
+**Before starting:** Ask the user (bo@jbpt.de) for a screenshot or accessible URL of the reference scroll indicator — the site returned 403 when fetched programmatically. Do not begin implementation until the reference is confirmed.
+
 - [ ] Add `--scroll-indicator-*` Tier-3 tokens to `tokens/components.css`
 - [ ] Add `.scroll-indicator` CSS class to `tokens/component-classes.css` — animated chevron/arrow, inherits theme via semantic tokens
 - [ ] Respect `prefers-reduced-motion` (show static indicator, no animation)
