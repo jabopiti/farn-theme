@@ -40,7 +40,7 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
-  --color-card-highlight-bg:     var(--in0-void);
+  --color-card-highlight-bg:     var(--fo3-deepwater);
   --color-card-highlight-border: transparent;
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
@@ -79,8 +79,6 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
-  --color-card-highlight-bg:     var(--in1-iron);
-  --color-card-highlight-border: var(--in2-slate);
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
@@ -113,6 +111,8 @@
   background:       var(--bm1-mist);
   --color-bg:       var(--bm1-mist);
   --color-bg-panel: var(--bm2-birch);
+  --skeleton-base:  var(--bm0-sand);
+  --skeleton-shine: var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="layer"],
@@ -121,12 +121,16 @@
   --color-bg:       var(--in1-iron);
   --color-bg-panel: var(--in2-slate);
   --color-bg-code:  var(--in2-slate);
+  --skeleton-base:  var(--in2-slate);
+  --skeleton-shine: var(--in3-ash);
 }
 
 /* overlay — modals, dropdowns, floating elements */
 [data-surface="overlay"] {
-  background: var(--bm0-sand);
-  --color-bg: var(--bm0-sand);
+  background:       var(--bm0-sand);
+  --color-bg:       var(--bm0-sand);
+  --skeleton-base:  var(--bm1-mist);
+  --skeleton-shine: var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="overlay"],
@@ -135,4 +139,6 @@
   --color-bg:       var(--in2-slate);
   --color-bg-panel: var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
   --color-bg-inset: var(--in1-iron);
+  --skeleton-base:  var(--in1-iron);
+  --skeleton-shine: var(--in3-ash);
 }

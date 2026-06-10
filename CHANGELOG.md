@@ -8,6 +8,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- **T-59** `tokens/components.css`: `--separator-section-weight` (3px), `--separator-decorative-width` (32px), `--separator-decorative-weight` (2px), `--separator-decorative-color` (`--color-accent`) Tier-3 tokens for separator visual hierarchy
+- **T-59** `tokens/components.css`: `--quote-pull-rule-*` tokens now reference `--separator-decorative-*` — single source of truth for accent rule dimensions shared between pullquote and decorative separator
+
+### Changed
+- **T-57** `tokens/dark-light.css`: `--color-card-highlight-bg` changed from `--in0-void` (light) / `--in1-iron` (dark) to `--fo3-deepwater` (both modes); `--color-card-highlight-border` dark value changed from `--in2-slate` to `transparent` — teal bg is visually distinct from all card variants across both themes without relying on border differentiation
+- **T-57** `tokens/components.css`: Updated comment — "bg is always dark teal — text tokens are palette-fixed for guaranteed light-on-dark contrast"
+- **T-57** `tokens/colors.css`: `--fo3-deepwater` description updated to include card highlight background use case
+- **T-59** `tokens/component-classes.css`: `.section-divider` and `.decorative` now consume `--separator-*` tokens; `.section-divider` weight increased from 2px to 3px for clear visual separation from `.hairline` (which retains `1px` directly)
+- **T-64** `tokens/components.css`: `--spinner-duration` changed from `var(--duration-loop)` (800ms) to `1.2s`; `--skeleton-duration` changed to `1.6s` — calmer, less anxious loading animations in keeping with Farn's character
+- **T-64** `tokens/dark-light.css`: `--skeleton-base` and `--skeleton-shine` per-surface overrides added to `layer` and `overlay` blocks (both themes) — fixes invisible shimmer bug where both tokens resolved to the same colour on non-base surfaces
+
 - **T-55** `site/src/pages/components/actions.astro`: Button sizes, states, and loading demos promoted outside the accordion — all live examples now visible without expanding any disclosure; accordion retained for anatomy HTML, token reference, and override snippets
 - **T-55** `site/src/pages/components/layout.astro`: Card anatomy demo (full card with `.card-media` / `.card-header` / `.card-body` / `.card-footer` slots) promoted outside the accordion with a visible `<h3>Anatomy</h3>` heading
 

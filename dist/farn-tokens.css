@@ -17,7 +17,7 @@
   --fo0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */
   --fo1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs     */
   --fo2-forest:    #2D5E4A;   /* Keywords, operators, secondary accent     */
-  --fo3-deepwater: #254D5A;   /* Pragmas, pre-processor, tertiary accent   */
+  --fo3-deepwater: #254D5A;   /* Tertiary accent; card highlight background */
 
   /* Bloom — semantic */
   --bl0-ember:     #C5414C;   /* Errors, deletions                         */
@@ -156,7 +156,7 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
-  --color-card-highlight-bg:     var(--in0-void);
+  --color-card-highlight-bg:     var(--fo3-deepwater);
   --color-card-highlight-border: transparent;
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
@@ -195,8 +195,6 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
-  --color-card-highlight-bg:     var(--in1-iron);
-  --color-card-highlight-border: var(--in2-slate);
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
@@ -229,6 +227,8 @@
   background:       var(--bm1-mist);
   --color-bg:       var(--bm1-mist);
   --color-bg-panel: var(--bm2-birch);
+  --skeleton-base:  var(--bm0-sand);
+  --skeleton-shine: var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="layer"],
@@ -237,12 +237,16 @@
   --color-bg:       var(--in1-iron);
   --color-bg-panel: var(--in2-slate);
   --color-bg-code:  var(--in2-slate);
+  --skeleton-base:  var(--in2-slate);
+  --skeleton-shine: var(--in3-ash);
 }
 
 /* overlay — modals, dropdowns, floating elements */
 [data-surface="overlay"] {
-  background: var(--bm0-sand);
-  --color-bg: var(--bm0-sand);
+  background:       var(--bm0-sand);
+  --color-bg:       var(--bm0-sand);
+  --skeleton-base:  var(--bm1-mist);
+  --skeleton-shine: var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="overlay"],
@@ -251,6 +255,8 @@
   --color-bg:       var(--in2-slate);
   --color-bg-panel: var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
   --color-bg-inset: var(--in1-iron);
+  --skeleton-base:  var(--in1-iron);
+  --skeleton-shine: var(--in3-ash);
 }
 /* ── Farn — Component tokens (Tier 3) ─────────────────────────────────── */
 /*                                                                           */
@@ -310,7 +316,7 @@
   --card-padding:  var(--space-md);
   --card-highlight-bg:     var(--color-card-highlight-bg);
   --card-highlight-border: var(--color-card-highlight-border);
-  /* highlight always renders on a dark bg — palette tokens are theme-invariant here */
+  /* bg is always dark teal — text tokens are palette-fixed for guaranteed light-on-dark contrast */
   --card-highlight-text:           var(--bm2-birch);
   --card-highlight-text-secondary: var(--bm1-mist);
   --card-highlight-text-tertiary:  var(--bm0-sand);
@@ -405,10 +411,10 @@
   --quote-margin-bottom:  var(--space-lg);
   --quote-opsz:           16;
 
-  /* Pullquote */
-  --quote-pull-rule-width:  32px;
-  --quote-pull-rule-height: 2px;
-  --quote-pull-rule-color:  var(--color-accent);
+  /* Pullquote — references separator decorative tokens as single source of truth */
+  --quote-pull-rule-width:  var(--separator-decorative-width);
+  --quote-pull-rule-height: var(--separator-decorative-weight);
+  --quote-pull-rule-color:  var(--separator-decorative-color);
 
   /* Attribution card */
   --quote-attr-bg:          var(--color-bg-panel);
@@ -462,13 +468,19 @@
   --spinner-lg-size:   40px;
   --spinner-border:    2px;
   --spinner-lg-border: 3px;
-  --spinner-duration:  var(--duration-loop);
+  --spinner-duration:  1.2s;
 
   /* ── Skeleton tokens ─────────────────────────────────────────────────── */
   /* --skeleton-shine lives in dark-light.css — per-theme palette value */
   --skeleton-radius:   var(--radius-sm);
   --skeleton-base:     var(--color-bg-panel);
-  --skeleton-duration: var(--duration-loop);
+  --skeleton-duration: 1.6s;
+
+  /* ── Separator tokens ──────────────────────────────────────────────────── */
+  --separator-section-weight:    3px;
+  --separator-decorative-width:  32px;
+  --separator-decorative-weight: 2px;
+  --separator-decorative-color:  var(--color-accent);
 
   /* ── Table tokens ────────────────────────────────────────────────────── */
   --table-border:             var(--color-border);
