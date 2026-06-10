@@ -34,9 +34,36 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </div>
   </div>
 
+  <h3>Anatomy</h3>
+  <p>
+    When anatomy children are present the wrapper's padding is removed automatically via
+    <code>:has()</code> — each section carries its own <code>var(--card-padding)</code>.
+    <strong><code>.card-media</code> must be the first child</strong> so its top corners
+    align with the card's border-radius.
+  </p>
+
+  <div class="card-demo-section">
+    <div class="card">
+      <div class="card-media">
+        <div class="card-media-placeholder" aria-hidden="true"></div>
+      </div>
+      <div class="card-header">
+        <p class="demo-card-heading">Fern Valley Trail</p>
+        <p class="demo-card-meta">3.2 km · Moderate</p>
+      </div>
+      <div class="card-body">
+        <p class="demo-card-text">A shaded loop through old-growth forest with seasonal wildflower meadows along the ridge.</p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-p btn-sm">View trail</button>
+        <button class="btn btn-g btn-sm">Save</button>
+      </div>
+    </div>
+  </div>
+
   <div class="accordion">
     <details>
-      <summary>Full reference — Cards</summary>
+      <summary>Reference — Cards</summary>
       <div class="accordion-panel">
 
         <h3>Variants</h3>
@@ -51,32 +78,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
         </table>
 
         <h3>Anatomy</h3>
-        <p>
-          When anatomy children are present the wrapper's padding is removed automatically via
-          <code>:has()</code> — each section carries its own <code>var(--card-padding)</code>.
-          <strong><code>.card-media</code> must be the first child</strong> so its top corners
-          align with the card's border-radius.
-        </p>
-
-        <div class="card-demo-section">
-          <div class="card" style="max-width: 360px;">
-            <div class="card-media">
-              <div class="card-media-placeholder" aria-hidden="true"></div>
-            </div>
-            <div class="card-header">
-              <h3 class="demo-card-heading">Fern Valley Trail</h3>
-              <p class="demo-card-meta">3.2 km · Moderate</p>
-            </div>
-            <div class="card-body">
-              <p class="demo-card-text">A shaded loop through old-growth forest with seasonal wildflower meadows along the ridge.</p>
-            </div>
-            <div class="card-footer">
-              <button class="btn btn-p btn-sm">View trail</button>
-              <button class="btn btn-g btn-sm">Save</button>
-            </div>
-          </div>
-        </div>
-
         <pre><code>&lt;div class="card"&gt;
   &lt;div class="card-media"&gt;&lt;img src="trail.jpg" alt="…"&gt;&lt;/div&gt;
   &lt;div class="card-header"&gt;&lt;h3&gt;Title&lt;/h3&gt;&lt;/div&gt;
@@ -762,6 +763,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
   .card-demo-section {
     margin-bottom: var(--space-lg);
   }
+  .card-demo-section > .card {
+    max-width: 360px;
+  }
 
   .card-media-placeholder {
     height: 160px;
@@ -769,19 +773,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
   }
 
   .demo-card-heading { margin: 0; font-size: 1rem; }
-  .demo-card-meta    { margin: var(--space-xs) 0 0; color: var(--color-text-secondary); font-size: 0.875rem; }
-  .demo-card-text    { margin: 0; color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.6; }
-
-  /* ── Demo label — uppercase eyebrow for demo sections ────────────────── */
-  .demo-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-text-tertiary);
-    margin: 0 0 var(--space-xs);
-  }
-  hr + .demo-label { margin-top: var(--space-sm); }
+  .demo-card-meta,
+  .demo-card-text    { color: var(--color-text-secondary); font-size: 0.875rem; }
+  .demo-card-meta    { margin: var(--space-xs) 0 0; }
+  .demo-card-text    { margin: 0; line-height: 1.6; }
 
   /* ── Overlap demos ────────────────────────────────────────────────────── */
   .demo-overlap-a {
