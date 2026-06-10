@@ -8,6 +8,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- **T-55** `site/src/pages/components/actions.astro`: Button sizes, states, and loading demos promoted outside the accordion — all live examples now visible without expanding any disclosure; accordion retained for anatomy HTML, token reference, and override snippets
+- **T-55** `site/src/pages/components/layout.astro`: Card anatomy demo (full card with `.card-media` / `.card-header` / `.card-body` / `.card-footer` slots) promoted outside the accordion with a visible `<h3>Anatomy</h3>` heading
+
+### Removed
+- **T-46 dropped** `site/src/pages/demo.astro`: Deleted — a separate demo page creates maintenance debt; the docs pages are the demo. `navigation.ts` Demo link removed. Home page CTAs updated to link to `/components`.
+
+
 - **T-28** `tokens/components.css`: `--stack-scale-step` (0.03), `--stack-top` (0px), `--stack-radius` (radius-xl), `--stack-count` (4), `--stack-height` (100vh) Tier-3 tokens for the stacked card reveal pattern
 - **T-28** `tokens/component-classes.css`: `.stack-container` and `.stack-section` CSS classes — pure sticky-scroll depth effect, no JS; `nth-last-child` defaults assign `--stack-depth`/`--stack-index` for 2–5 section stacks (last section = front card, full-size); `prefers-reduced-motion` removes scale transform; `--stack-height` token controls section height (`100dvh` opt-in for dynamic viewport tracking); `--stack-top` token for fixed-nav offset — shipped in `dist/farn-components.css`
 - **T-28** `tokens/component-classes.css`: `.scrollbar-none` utility class — hides scrollbar visually while preserving scroll functionality (`scrollbar-width: none` + `::-webkit-scrollbar` guard)

@@ -563,12 +563,9 @@ Implementation order for T-23–T-28 (after T-21 and T-22 are done):
 ---
 
 ## T-46 · Demo page — full guided tour
-`status: backlog` `effort: M`
+`status: dropped`
 
-**Gap:** The `/demo` stub (built in T-15 Phase 1c) needs full content — a guided, end-to-end visual tour so humans can experience Farn before committing.
-
-- [ ] Replace the stub with a guided tour: palette, typography, theming/surfaces, components in context
-- [ ] Works in both light and dark via `data-theme`; standalone page (no group sub-nav, page-internal TOC if long)
+**Dropped:** A separate demo page creates maintenance debt (must stay in sync with each component page). The better approach is to make the component docs pages themselves demo-first: live examples visible by default, technical reference in collapsibles. See T-55 for the rollout.
 
 ---
 
@@ -663,3 +660,17 @@ Merged into T-49 (Complete Foundations section).
 - [x] Add `--breakpoint-mobile: 640px` (and optionally `--breakpoint-tablet`) to `tokens/spacing.css`
 - [x] Replace all `max-width: 640px` media query values in `site/src/styles/site.css` and page-scoped styles with the token (CSS `env()` / custom properties in `@media` require native support — use the token as a reference value in comments, or evaluate `postcss-custom-media` if the build supports it)
 - [x] Document the breakpoints in `site/src/pages/foundations/responsive.astro` (T-49)
+
+---
+
+## T-55 · Demo-first docs — roll out to all component pages
+`status: in-progress` `effort: M` `branch: claude/optimistic-ritchie-41gm39`
+
+**Gap:** Following T-46 drop, the proof-of-concept on `actions.astro` and `layout.astro` (cards) establishes the pattern: live demos visible by default, technical reference (anatomy HTML, token tables, override snippets) in `<details>` collapsibles. Remaining component pages still bury some demos inside accordions.
+
+- [x] `components/actions.astro` — button sizes, states, loading demos moved outside accordion; variants table simplified (no inline live buttons)
+- [x] `components/layout.astro` — card anatomy demo (media/header/body/footer) moved outside accordion
+- [ ] `components/navigation.astro` — audit and promote hidden demos
+- [ ] `components/forms.astro` — audit and promote hidden demos
+- [ ] `components/data.astro` — audit and promote hidden demos
+- [ ] `components/status.astro` — audit and promote hidden demos

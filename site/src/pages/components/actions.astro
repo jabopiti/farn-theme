@@ -25,9 +25,46 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <button class="btn btn-d">Destructive</button>
   </div>
 
+  <h3>Sizes</h3>
+  <p>Size modifiers adjust height and padding only. Font weight and variant colours are unaffected. Default fits most layouts; use <code>.btn-sm</code> for dense UIs and <code>.btn-lg</code> for hero CTAs.</p>
+  <div class="btn-demo demo-surface" role="group" aria-label="Live button size examples">
+    <button class="btn btn-p btn-sm">Small</button>
+    <button class="btn btn-p">Default</button>
+    <button class="btn btn-p btn-lg">Large</button>
+  </div>
+
+  <h3>States</h3>
+  <div class="btn-demo demo-surface" role="group" aria-label="Live button state examples">
+    <button class="btn btn-p">Enabled</button>
+    <button class="btn btn-p" disabled>Disabled</button>
+    <button class="btn btn-s">Enabled</button>
+    <button class="btn btn-s" disabled>Disabled</button>
+    <button class="btn btn-g">Enabled</button>
+    <button class="btn btn-g" disabled>Disabled</button>
+    <button class="btn btn-d">Enabled</button>
+    <button class="btn btn-d" disabled>Disabled</button>
+  </div>
+
+  <h3>Loading</h3>
+  <p>Add <code>.btn-loading</code> to suppress pointer events and signal a busy cursor while an async operation runs. Place a <code>.spinner .spinner-sm</code> element inside the button; update <code>aria-label</code> on the button to describe what is happening.</p>
+  <div class="btn-demo demo-surface" role="group" aria-label="Button loading state examples">
+    <button class="btn btn-p btn-loading" aria-label="Saving">
+      <span class="spinner spinner-sm" aria-hidden="true"></span>
+      Saving…
+    </button>
+    <button class="btn btn-s btn-loading" aria-label="Loading">
+      <span class="spinner spinner-sm" aria-hidden="true"></span>
+      Loading
+    </button>
+    <button class="btn btn-g btn-loading" aria-label="Processing">
+      <span class="spinner spinner-sm" aria-hidden="true"></span>
+      Processing
+    </button>
+  </div>
+
   <div class="accordion">
     <details>
-      <summary>Full reference — Buttons</summary>
+      <summary>Reference — Buttons</summary>
       <div class="accordion-panel">
 
         <h3>Variants</h3>
@@ -35,20 +72,14 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <table>
           <thead><tr><th>Variant</th><th>Class</th><th>Use</th></tr></thead>
           <tbody>
-            <tr><td><button class="btn btn-p">Primary</button></td><td><code>.btn-p</code></td><td>The single most important action on a page or in a dialog. Use once per view.</td></tr>
-            <tr><td><button class="btn btn-s">Secondary</button></td><td><code>.btn-s</code></td><td>Supporting actions alongside a primary button — cancel, back, view details.</td></tr>
-            <tr><td><button class="btn btn-g">Ghost</button></td><td><code>.btn-g</code></td><td>Low-emphasis actions in toolbars, cards, or dense layouts where ink weight matters.</td></tr>
-            <tr><td><button class="btn btn-d">Destructive</button></td><td><code>.btn-d</code></td><td>Irreversible operations: delete, remove, revoke. Pair with a confirmation dialog.</td></tr>
+            <tr><td>Primary</td><td><code>.btn-p</code></td><td>The single most important action on a page or in a dialog. Use once per view.</td></tr>
+            <tr><td>Secondary</td><td><code>.btn-s</code></td><td>Supporting actions alongside a primary button — cancel, back, view details.</td></tr>
+            <tr><td>Ghost</td><td><code>.btn-g</code></td><td>Low-emphasis actions in toolbars, cards, or dense layouts where ink weight matters.</td></tr>
+            <tr><td>Destructive</td><td><code>.btn-d</code></td><td>Irreversible operations: delete, remove, revoke. Pair with a confirmation dialog.</td></tr>
           </tbody>
         </table>
 
         <h3>Sizes</h3>
-        <p>Size modifiers adjust height and padding only. Font weight and variant colours are unaffected. Default fits most layouts; use <code>.btn-sm</code> for dense UIs and <code>.btn-lg</code> for hero CTAs.</p>
-        <div class="btn-demo demo-surface" role="group" aria-label="Live button size examples">
-          <button class="btn btn-p btn-sm">Small</button>
-          <button class="btn btn-p">Default</button>
-          <button class="btn btn-p btn-lg">Large</button>
-        </div>
         <table>
           <thead><tr><th>Size</th><th>Class</th><th>Height</th><th>Padding</th><th>Font size</th></tr></thead>
           <tbody>
@@ -58,17 +89,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </tbody>
         </table>
 
-        <h3>States</h3>
-        <div class="btn-demo demo-surface" role="group" aria-label="Live button state examples">
-          <button class="btn btn-p">Enabled</button>
-          <button class="btn btn-p" disabled>Disabled</button>
-          <button class="btn btn-s">Enabled</button>
-          <button class="btn btn-s" disabled>Disabled</button>
-          <button class="btn btn-g">Enabled</button>
-          <button class="btn btn-g" disabled>Disabled</button>
-          <button class="btn btn-d">Enabled</button>
-          <button class="btn btn-d" disabled>Disabled</button>
-        </div>
+        <h3>Disabled state</h3>
         <p>Hover, active, and focus states are driven by <code>--btn-*</code> token values. Focus uses the global <code>:focus-visible</code> outline from <code>base.css</code>. Disabled buttons reduce opacity via <code>--btn-disabled-opacity</code> and suppress pointer events.</p>
         <p>For <code>&lt;a&gt;</code> elements acting as disabled buttons, use <code>aria-disabled="true"</code> and <code>tabindex="-1"</code> with inline <code>opacity</code> and <code>pointer-events: none</code> — the <code>disabled</code> attribute has no effect on anchors.</p>
         <pre><code>&lt;button class="btn btn-p" disabled&gt;Can't proceed&lt;/button&gt;
@@ -80,21 +101,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &lt;/a&gt;</code></pre>
 
         <h3>Loading state</h3>
-        <p>Add <code>.btn-loading</code> to suppress pointer events and signal a busy cursor while an async operation runs. Place a <code>.spinner .spinner-sm</code> element inside the button; update <code>aria-label</code> on the button to describe what is happening.</p>
-        <div class="btn-demo demo-surface" role="group" aria-label="Button loading state examples">
-          <button class="btn btn-p btn-loading" aria-label="Saving">
-            <span class="spinner spinner-sm" aria-hidden="true"></span>
-            Saving…
-          </button>
-          <button class="btn btn-s btn-loading" aria-label="Loading">
-            <span class="spinner spinner-sm" aria-hidden="true"></span>
-            Loading
-          </button>
-          <button class="btn btn-g btn-loading" aria-label="Processing">
-            <span class="spinner spinner-sm" aria-hidden="true"></span>
-            Processing
-          </button>
-        </div>
         <pre><code>&lt;button class="btn btn-p btn-loading" aria-label="Saving"&gt;
   &lt;span class="spinner spinner-sm" aria-hidden="true"&gt;&lt;/span&gt;
   Saving…
@@ -185,7 +191,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <div class="accordion">
     <details>
-      <summary>Full reference — Links</summary>
+      <summary>Reference — Links</summary>
       <div class="accordion-panel">
 
         <h3>Naked links</h3>
@@ -241,7 +247,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <div class="accordion">
     <details>
-      <summary>Full reference — Tooltip</summary>
+      <summary>Reference — Tooltip</summary>
       <div class="accordion-panel">
 
         <h3>Placement</h3>

@@ -50,9 +50,7 @@ export const groups: NavGroup[] = [
   },
 ];
 
-export const links: NavLink[] = [
-  { label: 'Demo', href: '/demo' },
-];
+export const links: NavLink[] = [];
 
 export const ctas: NavCta[] = [
   { label: 'Get Started', href: '/getting-started', primary: true },
