@@ -35,14 +35,14 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <h3>States</h3>
   <div class="btn-demo demo-surface" role="group" aria-label="Live button state examples">
-    <button class="btn btn-p">Enabled</button>
-    <button class="btn btn-p" disabled>Disabled</button>
-    <button class="btn btn-s">Enabled</button>
-    <button class="btn btn-s" disabled>Disabled</button>
-    <button class="btn btn-g">Enabled</button>
-    <button class="btn btn-g" disabled>Disabled</button>
-    <button class="btn btn-d">Enabled</button>
-    <button class="btn btn-d" disabled>Disabled</button>
+    <button class="btn btn-p" aria-label="Primary — enabled">Enabled</button>
+    <button class="btn btn-p" disabled aria-label="Primary — disabled">Disabled</button>
+    <button class="btn btn-s" aria-label="Secondary — enabled">Enabled</button>
+    <button class="btn btn-s" disabled aria-label="Secondary — disabled">Disabled</button>
+    <button class="btn btn-g" aria-label="Ghost — enabled">Enabled</button>
+    <button class="btn btn-g" disabled aria-label="Ghost — disabled">Disabled</button>
+    <button class="btn btn-d" aria-label="Destructive — enabled">Enabled</button>
+    <button class="btn btn-d" disabled aria-label="Destructive — disabled">Disabled</button>
   </div>
 
   <h3>Loading</h3>
@@ -79,7 +79,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </tbody>
         </table>
 
-        <h3>Sizes</h3>
+        <h3>Size tokens</h3>
         <table>
           <thead><tr><th>Size</th><th>Class</th><th>Height</th><th>Padding</th><th>Font size</th></tr></thead>
           <tbody>
