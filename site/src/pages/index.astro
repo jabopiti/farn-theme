@@ -4,6 +4,7 @@
 // body layout and scroll behaviour handled below.
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
+import FernMultiplaneHero from '../components/FernMultiplaneHero.astro';
 import { groups, links, ctas } from '../data/navigation';
 ---
 <!DOCTYPE html>
@@ -42,10 +43,6 @@ import { groups, links, ctas } from '../data/navigation';
   .landing-section { padding: var(--space-3xl) 0; }
 
   /* ── Keyframes ────────────────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
   @keyframes fadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -61,85 +58,23 @@ import { groups, links, ctas } from '../data/navigation';
     }
   }
 
-  /* ── Hero ─────────────────────────────────────────── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding-top: var(--space-4xl);
-    padding-bottom: calc(var(--space-4xl) + var(--wave-height));
-  }
-  /* Background radials — theme-aware */
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-  [data-theme="dark"]  .hero::before {
-    background:
-      radial-gradient(ellipse 60% 50% at 20% 60%, rgba(62,122,98,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 80% 30%, rgba(37,77,90,0.15) 0%, transparent 60%);
-  }
-  [data-theme="light"] .hero::before {
-    background:
-      radial-gradient(ellipse 60% 50% at 20% 60%, rgba(62,122,98,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 80% 30%, rgba(37,77,90,0.06) 0%, transparent 60%);
-  }
-  .hero-inner {
-    position: relative;
-    width: 100%;
-    max-width: var(--width-content);
-    margin: 0 auto;
-    padding: 0 var(--space-lg);
-  }
-  .hero-eyebrow {
-    display: inline-flex;
-    margin-bottom: var(--space-md);
-    opacity: 0;
-    animation: fadeUp 600ms ease-out 100ms forwards;
-  }
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(56px, 9vw, 112px);
-    font-weight: 800;
-    font-variation-settings: 'opsz' 72;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--color-text);
-    margin-bottom: var(--space-lg);
-    opacity: 0;
-    animation: fadeUp 700ms ease-out 200ms forwards;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--color-accent);
-  }
-  .hero-desc {
-    font-size: clamp(16px, 2vw, 20px);
-    line-height: 1.65;
-    color: var(--color-text-tertiary);
-    max-width: 52ch;
-    margin-bottom: var(--space-xl);
-    opacity: 0;
-    animation: fadeUp 700ms ease-out 350ms forwards;
-  }
+  /* ── Hero: make room for the wave divider at the bottom ── */
+  .farn-hero--multiplane { padding-bottom: var(--wave-height); }
+
+  /* ── Hero actions (in FernMultiplaneHero slot) ───── */
   .hero-actions {
     display: flex;
     gap: var(--space-sm);
     flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 700ms ease-out 450ms forwards;
   }
 
-  /* Palette strip */
+  /* ── Palette strip (in FernMultiplaneHero overlay slot) ── */
   .hero-palette-strip {
     position: absolute;
     right: var(--space-lg);
     top: 50%;
     transform: translateY(-50%);
+    z-index: 20;
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -159,9 +94,6 @@ import { groups, links, ctas } from '../data/navigation';
     /* --i set inline; staggered entrance */
     animation: swatchSlideIn 400ms ease-out calc(650ms + var(--i, 0) * 25ms) forwards;
   }
-
-  /* ── Wave divider (hero → about) ──────────────────── */
-  /* Parent hero has padding-bottom: var(--wave-height) already included above */
 
   /* ── About ────────────────────────────────────────── */
   .about-grid {
@@ -417,21 +349,17 @@ import { groups, links, ctas } from '../data/navigation';
 <SiteNav {groups} {links} {ctas} />
 
 <!-- ── § 1 Hero ──────────────────────────────────────────────────── -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span class="badge badge-general">Design System</span>
-    </div>
-    <h1 class="hero-title">Sharp.<br><em>Warm.</em><br>Intellectual.</h1>
-    <p class="hero-desc">A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes. Zero runtime, zero framework dependency.</p>
-    <div class="hero-actions">
-      <a href="/demo" class="btn btn-p btn-lg"><i class="ti ti-eye"></i> Explore the demo</a>
-      <a href="/getting-started" class="btn btn-g btn-lg"><i class="ti ti-book"></i> Get Started</a>
-    </div>
+<FernMultiplaneHero
+  eyebrow="Design System"
+  title="Sharp.<br /><em>Warm.</em><br />Intellectual."
+  lede="A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes. Zero runtime, zero framework dependency."
+>
+  <div class="hero-actions">
+    <a href="/demo" class="btn btn-p btn-lg"><i class="ti ti-eye"></i> Explore the demo</a>
+    <a href="/getting-started" class="btn btn-g btn-lg"><i class="ti ti-book"></i> Get Started</a>
   </div>
-
-  <!-- Palette strip — staggered entrance, gentle float -->
-  <div class="hero-palette-strip" aria-hidden="true" id="palette-strip">
+  <!-- Overlay slot: palette strip + wave, positioned relative to the section -->
+  <div slot="overlay" class="hero-palette-strip" aria-hidden="true" id="palette-strip">
     <div class="palette-swatch" style="background:#0D1117;height:28px;--i:0"></div>
     <div class="palette-swatch" style="background:#374151;height:28px;--i:1"></div>
     <div class="palette-swatch" style="background:#4B5563;height:28px;--i:2"></div>
@@ -449,17 +377,13 @@ import { groups, links, ctas } from '../data/navigation';
     <div class="palette-swatch" style="background:#567A37;height:28px;--i:14"></div>
     <div class="palette-swatch" style="background:#885DB4;height:28px;--i:15"></div>
   </div>
-
-  <!-- Wave divider — transitions hero into the dark About section -->
-  <div class="section-wave" data-scroll-reveal aria-hidden="true">
+  <div slot="overlay" class="section-wave" data-scroll-reveal aria-hidden="true">
     <svg viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Depth layer — slightly lighter than void -->
       <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,0 1200,40 L1200,80 L0,80 Z" fill="#1a2332" opacity="0.6"/>
-      <!-- Main fill — matches About section dark bg -->
       <path d="M0,55 C200,15 400,75 600,45 C800,15 1000,65 1200,35 L1200,80 L0,80 Z" fill="#0D1117"/>
     </svg>
   </div>
-</section>
+</FernMultiplaneHero>
 
 <!-- ── § 2 About ──────────────────────────────────────────────────── -->
 <section class="landing-section" data-theme="dark" id="about">
