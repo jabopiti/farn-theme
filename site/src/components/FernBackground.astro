@@ -3632,7 +3632,7 @@ l31 49 -23 13 c-44 22 -250 81 -417 117 -409 91 -539 140 -696 268 -101 82
 <style is:global>
 [data-fern] {
   --frond-far:      var(--bm0-sand);
-  --frond-mid:      var(--bm1-mist);
+  --frond-mid:      var(--in3-ash);
   --frond-fg-dark:  var(--fo2-forest);
   --frond-fg-deep:  var(--fo3-deepwater);
 }
@@ -3640,7 +3640,7 @@ l31 49 -23 13 c-44 22 -250 81 -417 117 -409 91 -539 140 -696 268 -101 82
   --frond-far:      var(--in3-ash);
   --frond-mid:      var(--in2-slate);
 }
-[data-fern] .scene { position:absolute; inset:0; pointer-events:none; }
+[data-fern] .scene { position:absolute; inset:0; pointer-events:none; transform:scaleX(-1); }
 [data-fern] .plane { position:absolute; inset:0; will-change:transform; }
 [data-fern] .plane-4{z-index:2}
 [data-fern] .plane-3{z-index:4}
@@ -3695,18 +3695,18 @@ document.documentElement.classList.add('js');
     ] },
     { sel: '.plane-2', baseDelay: 0.55, fronds: [
       { sprite:'fern-s2', color:'var(--bl3-moss)', edge:'bottom', a:12, off:6, w:22, rot:8 },
-      { sprite:'fern-s2', color:'var(--bl1-ochre)', edge:'bottom', a:80, off:6, w:22, rot:-8 },
       { sprite:'fern-s1', color:'var(--bl3-moss)', edge:'left', a:18, off:4, w:24, rot:56 },
       { sprite:'fern-s2', color:'var(--bl1-ochre)', edge:'right', a:26, off:4, w:22, rot:-64, flip:true }
     ] },
     { sel: '.plane-1', baseDelay: 0.78, fronds: [
-      { sprite:'fern-s2', color:'var(--fo1-fern)', edge:'bottom', a:36, off:6, w:22, rot:6 },
+      { sprite:'fern-d1', color:'var(--fo1-fern)', edge:'bottom', a:36, off:6, w:24, rot:6 },
       { sprite:'fern-s1', color:'var(--fo1-fern)', edge:'left', a:8, off:4, w:16, rot:48 },
       { sprite:'fern-s1', color:'var(--fo0-sage)', edge:'right', a:10, off:4, w:16, rot:-52, flip:true }
     ] },
     { sel: '.plane-0', baseDelay: 1.0, fronds: [
       { sprite:'fern-d1', color:'var(--frond-fg-deep)', edge:'bottom', a:27, off:10, w:21, rot:-7 },
       { sprite:'fern-d1', color:'var(--frond-fg-dark)', edge:'bottom', a:72, off:10, w:22, rot:6, flip:true },
+      { sprite:'fern-d1', color:'var(--fo1-fern)', edge:'left', a:62, off:4, w:26, rot:55 },
       { sprite:'fern-d1', color:'var(--frond-fg-dark)', edge:'left', a:7, off:5, w:19, rot:52 },
       { sprite:'fern-d1', color:'var(--frond-fg-deep)', edge:'right', a:9, off:5, w:19, rot:-56, flip:true }
     ] }
