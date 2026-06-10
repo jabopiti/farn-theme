@@ -900,7 +900,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-71 · Styles › spacing — visualise the scale
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/cool-gates-c2zoxl`
 
 **Gap:** The spacing page is a table of token names and rem values — nothing is rendered. Consumers cannot quickly understand the proportional relationships between steps or judge which token to reach for.
 
@@ -914,7 +914,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-72 · Styles › motion — fix broken previews and improve visualisation
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/cool-gates-c2zoxl`
 
 **Gap:** The motion page demos do not animate — nothing moves. Additionally the page only documents `--duration-*` and `--ease-*` tokens but does not confirm whether all in-use motion in the design system is covered.
 

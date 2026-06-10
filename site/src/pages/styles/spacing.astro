@@ -6,159 +6,561 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h1>Spacing</h1>
   <p>Proximity signals relationship; distance signals importance. The spacing scale encodes this — small gaps within components, large gaps between sections.</p>
 
-  <h2 id="scale">Space Scale</h2>
-  <p>Base unit is 12px. All tokens are multiples of 12, except <code>--space-xs</code> (6px = half-unit).</p>
+  <!-- ── Space Scale ──────────────────────────────────────────────────── -->
 
-  <div class="scale-preview" aria-hidden="true">
-    <div class="scale-bar" style="width:6px"  title="6px"></div>
-    <div class="scale-bar" style="width:12px" title="12px"></div>
-    <div class="scale-bar" style="width:24px" title="24px"></div>
-    <div class="scale-bar" style="width:36px" title="36px"></div>
-    <div class="scale-bar" style="width:48px" title="48px"></div>
-    <div class="scale-bar" style="width:60px" title="60px"></div>
-    <div class="scale-bar" style="width:72px" title="72px"></div>
-    <div class="scale-bar" style="width:96px" title="96px"></div>
+  <h2 id="scale">Space Scale</h2>
+  <p>Base unit is 12px. The scale runs from 6px (half-unit, for tight intra-component gaps) to 96px (hero breathing room).</p>
+
+  <div class="space-scale demo-surface" aria-hidden="true">
+    <div class="space-bar"><div class="bar-fill" style="height: var(--space-xs)"></div><div class="bar-label">xs<br>6px</div></div>
+    <div class="space-bar"><div class="bar-fill" style="height: var(--space-sm)"></div><div class="bar-label">sm<br>12px</div></div>
+    <div class="space-bar"><div class="bar-fill" style="height: var(--space-md)"></div><div class="bar-label">md<br>24px</div></div>
+    <div class="space-bar"><div class="bar-fill" style="height: var(--space-lg)"></div><div class="bar-label">lg<br>36px</div></div>
+    <div class="space-bar"><div class="bar-fill" style="height: var(--space-xl)"></div><div class="bar-label">xl<br>48px</div></div>
+    <div class="space-bar"><div class="bar-fill" style="height: var(--space-2xl)"></div><div class="bar-label">2xl<br>60px</div></div>
+    <div class="space-bar"><div class="bar-fill" style="height: var(--space-3xl)"></div><div class="bar-label">3xl<br>72px</div></div>
+    <div class="space-bar"><div class="bar-fill" style="height: var(--space-4xl)"></div><div class="bar-label">4xl<br>96px</div></div>
   </div>
 
-  <table>
-    <thead><tr><th>Token</th><th>rem</th><th>px</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr><td><code>--space-xs</code></td><td>0.375rem</td><td>6px</td><td>Icon-to-label gap, tag padding</td></tr>
-      <tr><td><code>--space-sm</code></td><td>0.75rem</td><td>12px</td><td>Tight grouping within a component</td></tr>
-      <tr><td><code>--space-md</code></td><td>1.5rem</td><td>24px</td><td>Standard gap — when in doubt, start here</td></tr>
-      <tr><td><code>--space-lg</code></td><td>2.25rem</td><td>36px</td><td>Between distinct content blocks</td></tr>
-      <tr><td><code>--space-xl</code></td><td>3rem</td><td>48px</td><td>Section breathing room, major transitions</td></tr>
-      <tr><td><code>--space-2xl</code></td><td>3.75rem</td><td>60px</td><td>Between page sections</td></tr>
-      <tr><td><code>--space-3xl</code></td><td>4.5rem</td><td>72px</td><td>Hero padding, top-of-page breathing room</td></tr>
-      <tr><td><code>--space-4xl</code></td><td>6rem</td><td>96px</td><td>Maximum section gap — use sparingly</td></tr>
-    </tbody>
-  </table>
+  <h3>Padding in context</h3>
+  <p>Each token applied as vertical padding around a content block, so you can judge the breathing room each step provides.</p>
 
-  <h3>Usage Rules</h3>
-  <ul>
-    <li><strong>xs / sm</strong> — intra-component only. Never use to separate independent elements.</li>
-    <li><strong>md</strong> — the default gap. When in doubt, start here.</li>
-    <li><strong>lg / xl</strong> — between content blocks within a section.</li>
-    <li><strong>2xl / 3xl</strong> — between named page sections. The visual pause that lets sections breathe.</li>
-    <li><strong>4xl</strong> — reserved for hero areas. More than one use per page usually signals restructuring is needed.</li>
-  </ul>
+  <div class="padding-context demo-surface" aria-hidden="true">
+    <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-xs)"><div class="pad-inner"></div></div><span class="pad-label">xs · 6px</span></div>
+    <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-sm)"><div class="pad-inner"></div></div><span class="pad-label">sm · 12px</span></div>
+    <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-md)"><div class="pad-inner"></div></div><span class="pad-label">md · 24px</span></div>
+    <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-lg)"><div class="pad-inner"></div></div><span class="pad-label">lg · 36px</span></div>
+    <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-xl)"><div class="pad-inner"></div></div><span class="pad-label">xl · 48px</span></div>
+    <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-2xl)"><div class="pad-inner"></div></div><span class="pad-label">2xl · 60px</span></div>
+    <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-3xl)"><div class="pad-inner"></div></div><span class="pad-label">3xl · 72px</span></div>
+    <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-4xl)"><div class="pad-inner"></div></div><span class="pad-label">4xl · 96px</span></div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — Space Scale</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead><tr><th>Token</th><th>rem</th><th>px</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--space-xs</code></td><td>0.375rem</td><td>6px</td><td>Icon-to-label gap, tag padding</td></tr>
+            <tr><td><code>--space-sm</code></td><td>0.75rem</td><td>12px</td><td>Tight grouping within a component</td></tr>
+            <tr><td><code>--space-md</code></td><td>1.5rem</td><td>24px</td><td>Standard gap — when in doubt, start here</td></tr>
+            <tr><td><code>--space-lg</code></td><td>2.25rem</td><td>36px</td><td>Between distinct content blocks</td></tr>
+            <tr><td><code>--space-xl</code></td><td>3rem</td><td>48px</td><td>Section breathing room, major transitions</td></tr>
+            <tr><td><code>--space-2xl</code></td><td>3.75rem</td><td>60px</td><td>Between page sections</td></tr>
+            <tr><td><code>--space-3xl</code></td><td>4.5rem</td><td>72px</td><td>Hero padding, top-of-page breathing room</td></tr>
+            <tr><td><code>--space-4xl</code></td><td>6rem</td><td>96px</td><td>Maximum section gap — use sparingly</td></tr>
+          </tbody>
+        </table>
+        <h3>Usage rules</h3>
+        <ul>
+          <li><strong>xs / sm</strong> — intra-component only. Never use to separate independent elements.</li>
+          <li><strong>md</strong> — the default gap. When in doubt, start here.</li>
+          <li><strong>lg / xl</strong> — between content blocks within a section.</li>
+          <li><strong>2xl / 3xl</strong> — between named page sections. The visual pause that lets sections breathe.</li>
+          <li><strong>4xl</strong> — reserved for hero areas. More than one use per page usually signals restructuring is needed.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Layout Widths ────────────────────────────────────────────────── -->
 
   <h2 id="widths">Layout Widths</h2>
-  <table>
-    <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr><td><code>--width-content</code></td><td>1080px</td><td>Outer page container</td></tr>
-      <tr><td><code>--width-prose</code></td><td>70ch</td><td>Body copy, articles, long-form text</td></tr>
-      <tr><td><code>--width-narrow</code></td><td>640px</td><td>Forms, focused UI, modals</td></tr>
-    </tbody>
-  </table>
-  <p>
-    The page container can be wide (<code>--width-content</code>), but readable text should always
-    be constrained to ~70ch (<code>--width-prose</code>). These two values operate independently.
-  </p>
+  <p>The page container can be wide, but readable text should always be constrained to ~70ch. These two values operate independently — a wide layout can contain narrow prose.</p>
 
-  <h3>Page Structure</h3>
-  <pre><code>[site header / nav]       — sticky or static, full-width
+  <div class="width-scale demo-surface" aria-hidden="true">
+    <div class="width-bar" style="--w: 100%">
+      <div class="width-fill"></div>
+      <span class="width-label"><code>--width-content</code> · 1080px · outer page container</span>
+    </div>
+    <div class="width-bar" style="--w: 64.8%">
+      <div class="width-fill"></div>
+      <span class="width-label"><code>--width-prose</code> · 70ch · body copy, articles, long-form text</span>
+    </div>
+    <div class="width-bar" style="--w: 59.3%">
+      <div class="width-fill"></div>
+      <span class="width-label"><code>--width-narrow</code> · 640px · forms, focused UI, modals</span>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — Layout Widths</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--width-content</code></td><td>1080px</td><td>Outer page container</td></tr>
+            <tr><td><code>--width-prose</code></td><td>70ch</td><td>Body copy, articles, long-form text</td></tr>
+            <tr><td><code>--width-narrow</code></td><td>640px</td><td>Forms, focused UI, modals</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Page Structure ───────────────────────────────────────────────── -->
+
+  <h2 id="structure">Page Structure</h2>
+  <p>A standard page skeleton with spacing tokens at each level. Use this as a starting blueprint — the gaps between sections give the page its rhythm.</p>
+
+  <div class="page-wireframe demo-surface" aria-label="Page structure wireframe">
+    <div class="wf-block wf-nav"><span>site header / nav <small>— sticky, full-width</small></span></div>
+    <div class="wf-gap"><code>padding-top: --space-3xl</code></div>
+    <div class="wf-block wf-hero"><span>hero / page header</span></div>
+    <div class="wf-gap"><code>--space-2xl</code> between sections</div>
+    <div class="wf-block wf-content"><span>content section <small>· max-width: --width-prose or --width-content</small></span></div>
+    <div class="wf-gap"><code>--space-2xl</code></div>
+    <div class="wf-block wf-content"><span>content section</span></div>
+    <div class="wf-gap"><code>padding-top: --space-xl</code></div>
+    <div class="wf-block wf-footer"><span>site footer</span></div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — Page Structure</summary>
+      <div class="accordion-panel">
+        <pre><code>[site header / nav]       — sticky or static, full-width
 [hero / page header]      — padding-top: --space-3xl
 [content sections]        — gap between sections: --space-2xl
   [section heading]
   [section body]          — max-width: --width-prose or --width-content
 [site footer]             — padding: --space-xl top</code></pre>
+      </div>
+    </details>
+  </div>
 
-  <h3>Grid Pattern</h3>
-  <pre><code>.card-grid &#123;
+  <!-- ── Grid Pattern ─────────────────────────────────────────────────── -->
+
+  <h2 id="grid">Grid Pattern</h2>
+  <p><code>auto-fit</code> with <code>minmax</code> produces a responsive layout without breakpoint queries. Resize your browser — the columns collapse automatically when there is not enough room.</p>
+
+  <div class="grid-demo demo-surface" aria-hidden="true">
+    <div class="grid-cell">A</div>
+    <div class="grid-cell">B</div>
+    <div class="grid-cell">C</div>
+    <div class="grid-cell">D</div>
+    <div class="grid-cell">E</div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — Grid Pattern</summary>
+      <div class="accordion-panel">
+        <pre><code>.card-grid &#123;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-md); /* 24px */
 &#125;</code></pre>
-  <p>Use CSS Grid for two-dimensional layouts, flexbox for one-dimensional. Never go beyond 3 columns at <code>--width-content</code>.</p>
-
-  <h2 id="radius">Border Radius</h2>
-  <p>Each radius maps to a specific element type. The progression creates implicit hierarchy — larger surfaces have larger radii.</p>
-  <table>
-    <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr><td><code>--radius-sm</code></td><td>4px</td><td>Badges, tags, nav link focus ring, checkboxes</td></tr>
-      <tr><td><code>--radius-md</code></td><td>6px</td><td>Buttons, inputs, selects, textarea, icon containers</td></tr>
-      <tr><td><code>--radius-lg</code></td><td>8px</td><td>Cards, dropdowns, popovers, drawers</td></tr>
-      <tr><td><code>--radius-xl</code></td><td>12px</td><td>Large panels, featured sections</td></tr>
-      <tr><td><code>--radius-full</code></td><td>9999px</td><td>Avatar circles (one-off use — not for badges)</td></tr>
-    </tbody>
-  </table>
-  <p>A badge (4px) sits inside a card (8px) — the radius difference signals containment without needing a border. The system does not use pill-shaped badges.</p>
-
-  <div class="radius-preview" aria-hidden="true">
-    <div class="radius-chip" style="border-radius:4px">4px</div>
-    <div class="radius-chip" style="border-radius:6px">6px</div>
-    <div class="radius-chip" style="border-radius:8px">8px</div>
-    <div class="radius-chip" style="border-radius:12px">12px</div>
-    <div class="radius-chip" style="border-radius:9999px">9999px</div>
+        <p>Use CSS Grid for two-dimensional layouts, flexbox for one-dimensional. Never go beyond 3 columns at <code>--width-content</code>.</p>
+      </div>
+    </details>
   </div>
 
-  <h2 id="z-index">Z-index Scale</h2>
-  <p>Always reference a token — never use raw numbers. Never skip levels.</p>
-  <table>
-    <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr><td><code>--z-base</code></td><td>0</td><td>Default page content</td></tr>
-      <tr><td><code>--z-raised</code></td><td>1</td><td>Sticky elements in flow (sub-nav tab row)</td></tr>
-      <tr><td><code>--z-dropdown</code></td><td>100</td><td>Dropdowns, popovers</td></tr>
-      <tr><td><code>--z-sticky</code></td><td>200</td><td>Sticky nav bar, fixed header</td></tr>
-      <tr><td><code>--z-overlay</code></td><td>300</td><td>Overlays, mobile nav drawer</td></tr>
-      <tr><td><code>--z-modal</code></td><td>400</td><td>Modals</td></tr>
-      <tr><td><code>--z-toast</code></td><td>500</td><td>Toast notifications</td></tr>
-    </tbody>
-  </table>
-  <p>The nav (<code>--z-sticky: 200</code>) sits below overlays (<code>--z-overlay: 300</code>) — dropdowns triggered inside the nav render correctly above it without adjustment.</p>
+  <!-- ── Border Radius ────────────────────────────────────────────────── -->
 
-  <h2 id="breakpoints">Responsive Breakpoints</h2>
-  <table>
-    <thead><tr><th>Breakpoint</th><th>Behaviour</th></tr></thead>
-    <tbody>
-      <tr><td>Mobile &lt; 640px</td><td>Single column. Horizontal padding: <code>--space-md</code> (24px)</td></tr>
-      <tr><td>Tablet 640–1079px</td><td>Single column, centered. Horizontal padding: <code>--space-lg</code> (36px)</td></tr>
-      <tr><td>Desktop &ge; 1080px</td><td>Centered container at <code>--width-content</code>, auto horizontal margins</td></tr>
-    </tbody>
-  </table>
-  <p>Avoid fixed pixel breakpoints inside components — use <code>min()</code>, <code>max()</code>, and <code>clamp()</code> where the content dictates the reflow point.</p>
+  <h2 id="radius">Border Radius</h2>
+  <p>Each radius maps to a specific element type. The progression creates implicit hierarchy — larger surfaces have larger radii, signalling containment without needing a border.</p>
+
+  <div class="radius-preview demo-surface" aria-hidden="true">
+    <div class="radius-item">
+      <div class="radius-chip" style="border-radius: var(--radius-sm)"></div>
+      <div class="radius-label"><code>--radius-sm</code><br>4px · badges, tags</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-chip" style="border-radius: var(--radius-md)"></div>
+      <div class="radius-label"><code>--radius-md</code><br>6px · buttons, inputs</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-chip" style="border-radius: var(--radius-lg)"></div>
+      <div class="radius-label"><code>--radius-lg</code><br>8px · cards, drawers</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-chip" style="border-radius: var(--radius-xl)"></div>
+      <div class="radius-label"><code>--radius-xl</code><br>12px · large panels</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-chip" style="border-radius: var(--radius-full)"></div>
+      <div class="radius-label"><code>--radius-full</code><br>9999px · avatars</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — Border Radius</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--radius-sm</code></td><td>4px</td><td>Badges, tags, nav link focus ring, checkboxes</td></tr>
+            <tr><td><code>--radius-md</code></td><td>6px</td><td>Buttons, inputs, selects, textarea, icon containers</td></tr>
+            <tr><td><code>--radius-lg</code></td><td>8px</td><td>Cards, dropdowns, popovers, drawers</td></tr>
+            <tr><td><code>--radius-xl</code></td><td>12px</td><td>Large panels, featured sections</td></tr>
+            <tr><td><code>--radius-full</code></td><td>9999px</td><td>Avatar circles (one-off use — not for badges)</td></tr>
+          </tbody>
+        </table>
+        <p>A badge (4px) sits inside a card (8px) — the radius difference signals containment. The system does not use pill-shaped badges.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Z-index Scale ─────────────────────────────────────────────────── -->
+
+  <h2 id="z-index">Z-index Scale</h2>
+  <p>Always reference a token — never use raw numbers. Each layer is designed to sit cleanly above the one before it. Never skip levels.</p>
+
+  <div class="z-stack demo-surface" aria-hidden="true">
+    <div class="z-layer" style="--depth: 7"><span class="z-token"><code>--z-toast</code></span><span class="z-val">500</span><span class="z-use">Toast notifications</span></div>
+    <div class="z-layer" style="--depth: 6"><span class="z-token"><code>--z-modal</code></span><span class="z-val">400</span><span class="z-use">Modals</span></div>
+    <div class="z-layer" style="--depth: 5"><span class="z-token"><code>--z-overlay</code></span><span class="z-val">300</span><span class="z-use">Overlays, mobile nav drawer</span></div>
+    <div class="z-layer" style="--depth: 4"><span class="z-token"><code>--z-sticky</code></span><span class="z-val">200</span><span class="z-use">Sticky nav bar, fixed header</span></div>
+    <div class="z-layer" style="--depth: 3"><span class="z-token"><code>--z-dropdown</code></span><span class="z-val">100</span><span class="z-use">Dropdowns, popovers</span></div>
+    <div class="z-layer" style="--depth: 2"><span class="z-token"><code>--z-content</code></span><span class="z-val">10</span><span class="z-use">Sticky sub-nav</span></div>
+    <div class="z-layer" style="--depth: 1"><span class="z-token"><code>--z-raised</code></span><span class="z-val">1</span><span class="z-use">Sticky elements in flow</span></div>
+    <div class="z-layer" style="--depth: 0"><span class="z-token"><code>--z-base</code></span><span class="z-val">0</span><span class="z-use">Default page content</span></div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — Z-index Scale</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--z-base</code></td><td>0</td><td>Default page content</td></tr>
+            <tr><td><code>--z-raised</code></td><td>1</td><td>Sticky elements in flow (sub-nav tab row)</td></tr>
+            <tr><td><code>--z-content</code></td><td>10</td><td>Sticky sub-nav — above page, below fixed nav</td></tr>
+            <tr><td><code>--z-dropdown</code></td><td>100</td><td>Dropdowns, popovers</td></tr>
+            <tr><td><code>--z-sticky</code></td><td>200</td><td>Sticky nav bar, fixed header</td></tr>
+            <tr><td><code>--z-overlay</code></td><td>300</td><td>Overlays, mobile nav drawer</td></tr>
+            <tr><td><code>--z-modal</code></td><td>400</td><td>Modals</td></tr>
+            <tr><td><code>--z-toast</code></td><td>500</td><td>Toast notifications</td></tr>
+          </tbody>
+        </table>
+        <p>The nav (<code>--z-sticky: 200</code>) sits below overlays (<code>--z-overlay: 300</code>) — dropdowns triggered inside the nav render correctly above it without adjustment.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Breakpoints ───────────────────────────────────────────────────── -->
+
+  <h2 id="breakpoints">Breakpoints</h2>
+  <p>Two reference values marking layout transitions. Use <code>min()</code>, <code>max()</code>, and <code>clamp()</code> within components — only reach for breakpoints at the page layout level.</p>
+
+  <div class="bp-ruler demo-surface" aria-hidden="true">
+    <div class="bp-zone bp-mobile">
+      <span class="bp-label">Mobile<br>&lt; 640px</span>
+    </div>
+    <div class="bp-tick">
+      <span>640px<br><code>--breakpoint-mobile</code></span>
+    </div>
+    <div class="bp-zone bp-tablet">
+      <span class="bp-label">Tablet<br>640 – 1079px</span>
+    </div>
+    <div class="bp-tick">
+      <span>1080px<br><code>--width-content</code></span>
+    </div>
+    <div class="bp-zone bp-desktop">
+      <span class="bp-label">Desktop<br>≥ 1080px</span>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — Breakpoints</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead><tr><th>Token</th><th>Value</th><th>Behaviour</th></tr></thead>
+          <tbody>
+            <tr><td><code>--breakpoint-mobile</code></td><td>640px</td><td>Single column; horizontal padding: <code>--space-md</code></td></tr>
+            <tr><td><code>--breakpoint-tablet</code></td><td>768px</td><td>Single column centered; horizontal padding: <code>--space-lg</code></td></tr>
+            <tr><td><em>(--width-content)</em></td><td>1080px</td><td>Centered container, auto horizontal margins</td></tr>
+          </tbody>
+        </table>
+        <p>CSS custom properties cannot be used directly in <code>@media</code> queries. Use the token value as a reference comment.</p>
+        <pre><code>/* --breakpoint-mobile: 640px */
+@media (max-width: 640px) &#123;
+  .layout &#123; flex-direction: column; &#125;
+&#125;</code></pre>
+      </div>
+    </details>
+  </div>
+
 </DocLayout>
 
 <style>
-  .scale-preview &#123;
+  /* ── Space Scale ────────────────────────────────────────────────────── */
+  .space-scale {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .space-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .bar-fill {
+    width: 28px;
+    background: var(--color-accent);
+    opacity: 0.75;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    min-height: 4px;
+  }
+
+  .bar-label {
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* ── Padding Context ─────────────────────────────────────────────────── */
+  .padding-context {
     display: flex;
     align-items: flex-end;
     gap: var(--space-sm);
-    margin: var(--space-md) 0;
-    height: 96px;
-  &#125;
-
-  .scale-bar &#123;
-    background: var(--color-accent);
-    opacity: 0.6;
-    height: 100%;
-    border-radius: var(--radius-sm);
-    min-width: 6px;
-    flex-shrink: 0;
-  &#125;
-
-  .radius-preview &#123;
-    display: flex;
-    align-items: center;
     flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin: var(--space-md) 0;
-  &#125;
+  }
 
-  .radius-chip &#123;
-    width: 64px;
-    height: 40px;
-    background: var(--color-bg-panel);
-    border: 1px solid var(--color-border);
+  .pad-example {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .pad-outer {
+    width: 56px;
+    background: var(--color-bg-inset);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .pad-inner {
+    width: 36px;
+    height: 18px;
+    background: var(--color-accent);
+    opacity: 0.55;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .pad-label {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* ── Layout Widths ───────────────────────────────────────────────────── */
+  .width-scale {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .width-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .width-fill {
+    height: 22px;
+    width: var(--w, 100%);
+    background: var(--color-accent);
+    opacity: 0.55;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .width-label {
     font-size: 0.75rem;
     font-family: var(--font-mono);
     color: var(--color-text-secondary);
-  &#125;
+    padding-left: 4px;
+  }
+
+  /* ── Page Structure ──────────────────────────────────────────────────── */
+  .page-wireframe {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .wf-block {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+  }
+
+  .wf-block small {
+    opacity: 0.7;
+    font-size: 0.75em;
+  }
+
+  .wf-nav  { background: var(--color-bg-inset); }
+  .wf-hero { background: var(--color-bg-panel); min-height: 52px; display: flex; align-items: center; }
+  .wf-content { background: var(--color-bg-panel); }
+  .wf-footer { background: var(--color-bg-inset); }
+
+  .wf-gap {
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-tertiary);
+    border-left: 2px dashed var(--color-border);
+    margin-left: var(--space-xl);
+  }
+
+  /* ── Grid Pattern ────────────────────────────────────────────────────── */
+  .grid-demo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .grid-cell {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Border Radius ───────────────────────────────────────────────────── */
+  .radius-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+
+  .radius-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .radius-chip {
+    width: 72px;
+    height: 48px;
+    background: var(--color-accent);
+    opacity: 0.3;
+    border: 2px solid var(--color-accent);
+  }
+
+  .radius-label {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ── Z-index Scale ───────────────────────────────────────────────────── */
+  .z-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .z-layer {
+    display: grid;
+    grid-template-columns: 10rem 3.5rem 1fr;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 6px var(--space-sm);
+    background: var(--color-bg-panel);
+    border-radius: var(--radius-sm);
+    border-left: calc(2px + var(--depth, 0) * 0.75px) solid var(--color-accent);
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    opacity: calc(0.45 + var(--depth, 0) * 0.08);
+  }
+
+  .z-val {
+    color: var(--color-text-secondary);
+    text-align: right;
+  }
+
+  .z-use {
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+  }
+
+  /* ── Breakpoints ─────────────────────────────────────────────────────── */
+  .bp-ruler {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow: hidden;
+    min-height: 80px;
+  }
+
+  .bp-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm);
+    flex: 1;
+  }
+
+  .bp-mobile  { background: color-mix(in srgb, var(--color-accent) 8%, transparent); flex: 2; }
+  .bp-tablet  { background: color-mix(in srgb, var(--color-accent) 14%, transparent); flex: 3; }
+  .bp-desktop { background: color-mix(in srgb, var(--color-accent) 20%, transparent); flex: 4; }
+
+  .bp-label {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--color-text);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .bp-tick {
+    width: 1px;
+    background: var(--color-accent);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .bp-tick span {
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 640px) {
+    .z-layer { grid-template-columns: 8rem 2.5rem 1fr; }
+    .bp-tick span { display: none; }
+    .width-label { font-size: 0.68rem; }
+  }
 </style>

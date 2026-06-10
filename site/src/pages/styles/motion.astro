@@ -6,102 +6,195 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h1>Motion</h1>
   <p>Motion communicates relationships and reinforces hierarchy. Use the right token for the right moment — fast for press states, slow for reveals — and combine duration with easing to shape how an element arrives or departs.</p>
 
+  <!-- ── Duration ─────────────────────────────────────────────────────── -->
+
   <h2 id="duration">Duration</h2>
   <p>Five steps, each tuned to a specific interaction type. Heavier geometry and content reveals warrant longer durations; micro-interactions should be nearly invisible.</p>
 
-  <table>
-    <thead><tr><th>Token</th><th>Value</th><th>Preview</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><code>--duration-fast</code></td>
-        <td>80ms</td>
-        <td><div class="motion-track" aria-hidden="true"><div class="motion-ball duration-ball" style="animation-duration: var(--duration-fast)"></div></div></td>
-        <td>Press / active states</td>
-      </tr>
-      <tr>
-        <td><code>--duration-base</code></td>
-        <td>120ms</td>
-        <td><div class="motion-track" aria-hidden="true"><div class="motion-ball duration-ball" style="animation-duration: var(--duration-base)"></div></div></td>
-        <td>Standard hover interactions</td>
-      </tr>
-      <tr>
-        <td><code>--duration-slow</code></td>
-        <td>200ms</td>
-        <td><div class="motion-track" aria-hidden="true"><div class="motion-ball duration-ball" style="animation-duration: var(--duration-slow)"></div></div></td>
-        <td>Fill, colour, and indicator transitions</td>
-      </tr>
-      <tr>
-        <td><code>--duration-enter</code></td>
-        <td>250ms</td>
-        <td><div class="motion-track" aria-hidden="true"><div class="motion-ball duration-ball" style="animation-duration: var(--duration-enter)"></div></div></td>
-        <td>Enter / exit geometry — drawers, panels</td>
-      </tr>
-      <tr>
-        <td><code>--duration-reveal</code></td>
-        <td>400ms</td>
-        <td><div class="motion-track" aria-hidden="true"><div class="motion-ball duration-ball" style="animation-duration: var(--duration-reveal)"></div></div></td>
-        <td>Content reveal and stagger animations</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="duration-demos demo-surface" aria-hidden="true">
+    <div class="dur-row">
+      <span class="dur-label"><code>--duration-fast</code> <em>80ms</em></span>
+      <div class="motion-track">
+        <div class="motion-ball duration-ball" style="--_dur: var(--duration-fast)"></div>
+      </div>
+      <span class="dur-use">Press / active states</span>
+    </div>
+    <div class="dur-row">
+      <span class="dur-label"><code>--duration-base</code> <em>120ms</em></span>
+      <div class="motion-track">
+        <div class="motion-ball duration-ball" style="--_dur: var(--duration-base)"></div>
+      </div>
+      <span class="dur-use">Standard hover interactions</span>
+    </div>
+    <div class="dur-row">
+      <span class="dur-label"><code>--duration-slow</code> <em>200ms</em></span>
+      <div class="motion-track">
+        <div class="motion-ball duration-ball" style="--_dur: var(--duration-slow)"></div>
+      </div>
+      <span class="dur-use">Fill, colour, and indicator transitions</span>
+    </div>
+    <div class="dur-row">
+      <span class="dur-label"><code>--duration-enter</code> <em>250ms</em></span>
+      <div class="motion-track">
+        <div class="motion-ball duration-ball" style="--_dur: var(--duration-enter)"></div>
+      </div>
+      <span class="dur-use">Enter / exit geometry</span>
+    </div>
+    <div class="dur-row">
+      <span class="dur-label"><code>--duration-reveal</code> <em>400ms</em></span>
+      <div class="motion-track">
+        <div class="motion-ball duration-ball" style="--_dur: var(--duration-reveal)"></div>
+      </div>
+      <span class="dur-use">Content reveal and stagger</span>
+    </div>
+  </div>
 
-  <h3>Usage rules</h3>
-  <ul>
-    <li><strong>fast</strong> — press and active states only. The user should feel the response, not watch it.</li>
-    <li><strong>base</strong> — the default for hover colour and background shifts.</li>
-    <li><strong>slow</strong> — fill and progress indicators; anything tracking a measured change.</li>
-    <li><strong>enter</strong> — panel slide-ins, drawer opens, nav transitions. The default for geometry.</li>
-    <li><strong>reveal</strong> — content that appears in stages (hero lines, staggered cards). Use sparingly.</li>
-  </ul>
+  <div class="accordion">
+    <details>
+      <summary>Reference — Duration</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--duration-fast</code></td><td>80ms</td><td>Press / active states. The user should feel the response, not watch it.</td></tr>
+            <tr><td><code>--duration-base</code></td><td>120ms</td><td>The default for hover colour and background shifts.</td></tr>
+            <tr><td><code>--duration-slow</code></td><td>200ms</td><td>Fill and progress indicators; anything tracking a measured change.</td></tr>
+            <tr><td><code>--duration-enter</code></td><td>250ms</td><td>Panel slide-ins, drawer opens, nav transitions. Default for geometry.</td></tr>
+            <tr><td><code>--duration-reveal</code></td><td>400ms</td><td>Content that appears in stages. Use sparingly.</td></tr>
+            <tr><td><code>--duration-loop</code></td><td>800ms</td><td>Repeating cycle animations — spinner, skeleton shimmer.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Easing ────────────────────────────────────────────────────────── -->
 
   <h2 id="easing">Easing</h2>
-  <p>All three easings are one-directional — they describe how something arrives, not how it oscillates. The preview below shows each curve in the direction it is designed to be used.</p>
+  <p>All three easings are one-directional — they describe how something arrives. The preview shows each curve in the direction it is designed to be used, then snaps back to reset.</p>
 
-  <table>
-    <thead><tr><th>Token</th><th>Value</th><th>Preview</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><code>--ease-default</code></td>
-        <td><code>ease</code></td>
-        <td><div class="motion-track" aria-hidden="true"><div class="motion-ball ease-ball" style="animation-timing-function: var(--ease-default)"></div></div></td>
-        <td>General transitions with no strong directional intent</td>
-      </tr>
-      <tr>
-        <td><code>--ease-out</code></td>
-        <td><code>ease-out</code></td>
-        <td><div class="motion-track" aria-hidden="true"><div class="motion-ball ease-ball" style="animation-timing-function: var(--ease-out)"></div></div></td>
-        <td>Elements entering the screen — decelerate into position</td>
-      </tr>
-      <tr>
-        <td><code>--ease-spring</code></td>
-        <td><code>cubic-bezier(0.16, 1, 0.3, 1)</code></td>
-        <td><div class="motion-track" aria-hidden="true"><div class="motion-ball ease-ball" style="animation-timing-function: var(--ease-spring)"></div></div></td>
-        <td>Expressive, high-attention moments — drawers, modals, reveals</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="easing-demos demo-surface" aria-hidden="true">
+    <div class="ease-row">
+      <span class="ease-label"><code>--ease-default</code> <em>ease</em></span>
+      <div class="motion-track">
+        <div class="motion-ball ease-ball" style="--_ease: var(--ease-default)"></div>
+      </div>
+      <span class="ease-use">General transitions, no strong directional intent</span>
+    </div>
+    <div class="ease-row">
+      <span class="ease-label"><code>--ease-out</code> <em>ease-out</em></span>
+      <div class="motion-track">
+        <div class="motion-ball ease-ball" style="--_ease: var(--ease-out)"></div>
+      </div>
+      <span class="ease-use">Elements entering the screen — decelerate into position</span>
+    </div>
+    <div class="ease-row">
+      <span class="ease-label"><code>--ease-spring</code> <em>cubic-bezier(0.16, 1, 0.3, 1)</em></span>
+      <div class="motion-track">
+        <div class="motion-ball ease-ball" style="--_ease: var(--ease-spring)"></div>
+      </div>
+      <span class="ease-use">Expressive, high-attention moments — drawers, modals</span>
+    </div>
+  </div>
 
-  <h3>Usage rules</h3>
-  <ul>
-    <li><strong>ease-default</strong> — safe choice when direction is neutral (colour shifts, opacity fades).</li>
-    <li><strong>ease-out</strong> — anything sliding or fading into view; the standard pairing with <code>--duration-enter</code>.</li>
-    <li><strong>ease-spring</strong> — use for one expressive moment per interaction. Not for loops or repeated micro-interactions.</li>
-    <li><strong>prefers-reduced-motion</strong> — <code>base.css</code> sets <code>transition-duration</code> and <code>animation-duration</code> to <code>0.01ms</code> when the user has requested reduced motion; no extra guard is needed if you import <code>farn.css</code>. In custom animation code, always add an explicit <code>@media (prefers-reduced-motion: reduce)</code> guard.</li>
-  </ul>
+  <div class="accordion">
+    <details>
+      <summary>Reference — Easing</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--ease-default</code></td><td><code>ease</code></td><td>Safe choice when direction is neutral (colour shifts, opacity fades).</td></tr>
+            <tr><td><code>--ease-out</code></td><td><code>ease-out</code></td><td>Anything sliding or fading into view; standard pairing with <code>--duration-enter</code>.</td></tr>
+            <tr><td><code>--ease-in-out</code></td><td><code>ease-in-out</code></td><td>Elements that travel a significant distance and need to feel settled at both ends.</td></tr>
+            <tr><td><code>--ease-spring</code></td><td><code>cubic-bezier(0.16, 1, 0.3, 1)</code></td><td>Use for one expressive moment per interaction. Not for loops or repeated micro-interactions.</td></tr>
+          </tbody>
+        </table>
+        <p><strong>prefers-reduced-motion:</strong> <code>base.css</code> sets <code>transition-duration</code> and <code>animation-duration</code> to <code>0.01ms</code> when the user has requested reduced motion; no extra guard is needed if you import <code>farn.css</code>. In custom animation code, always add an explicit <code>@media (prefers-reduced-motion: reduce)</code> guard.</p>
+      </div>
+    </details>
+  </div>
 
-  <h2 id="pairing">Pairing guide</h2>
-  <table>
-    <thead><tr><th>Situation</th><th>Duration</th><th>Easing</th></tr></thead>
-    <tbody>
-      <tr><td>Button press / active</td><td><code>--duration-fast</code></td><td><code>--ease-default</code></td></tr>
-      <tr><td>Hover colour shift</td><td><code>--duration-base</code></td><td><code>--ease-out</code></td></tr>
-      <tr><td>Panel / drawer enter</td><td><code>--duration-enter</code></td><td><code>--ease-spring</code></td></tr>
-      <tr><td>Panel / drawer exit</td><td><code>--duration-enter</code></td><td><code>--ease-out</code></td></tr>
-      <tr><td>Content reveal</td><td><code>--duration-reveal</code></td><td><code>--ease-out</code></td></tr>
-    </tbody>
-  </table>
+  <!-- ── Pairing Guide ─────────────────────────────────────────────────── -->
+
+  <h2 id="pairing">Pairing Guide</h2>
+  <p>Each scenario calls for a specific duration and easing combination. The demos below loop continuously to show the intended feel.</p>
+
+  <div class="pairing-grid">
+    <div class="pairing-card">
+      <div class="pairing-preview">
+        <button class="btn btn-p pairing-press" aria-hidden="true" tabindex="-1">Confirm</button>
+      </div>
+      <div class="pairing-info">
+        <span class="pairing-name">Button press / active</span>
+        <div class="pairing-tokens"><code>--duration-fast</code> + <code>--ease-default</code></div>
+      </div>
+    </div>
+
+    <div class="pairing-card">
+      <div class="pairing-preview">
+        <div class="pairing-hover-box pairing-hover" aria-hidden="true">Hover state</div>
+      </div>
+      <div class="pairing-info">
+        <span class="pairing-name">Hover colour shift</span>
+        <div class="pairing-tokens"><code>--duration-base</code> + <code>--ease-out</code></div>
+      </div>
+    </div>
+
+    <div class="pairing-card">
+      <div class="pairing-preview">
+        <div class="pairing-panel pairing-enter" aria-hidden="true">Panel entering</div>
+      </div>
+      <div class="pairing-info">
+        <span class="pairing-name">Panel / drawer enter</span>
+        <div class="pairing-tokens"><code>--duration-enter</code> + <code>--ease-spring</code></div>
+      </div>
+    </div>
+
+    <div class="pairing-card">
+      <div class="pairing-preview">
+        <div class="pairing-panel pairing-exit" aria-hidden="true">Panel exiting</div>
+      </div>
+      <div class="pairing-info">
+        <span class="pairing-name">Panel / drawer exit</span>
+        <div class="pairing-tokens"><code>--duration-enter</code> + <code>--ease-out</code></div>
+      </div>
+    </div>
+
+    <div class="pairing-card">
+      <div class="pairing-preview">
+        <p class="pairing-text pairing-reveal" aria-hidden="true">Content reveals</p>
+      </div>
+      <div class="pairing-info">
+        <span class="pairing-name">Content reveal</span>
+        <div class="pairing-tokens"><code>--duration-reveal</code> + <code>--ease-out</code></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — Pairing Guide</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead><tr><th>Situation</th><th>Duration</th><th>Easing</th></tr></thead>
+          <tbody>
+            <tr><td>Button press / active</td><td><code>--duration-fast</code></td><td><code>--ease-default</code></td></tr>
+            <tr><td>Hover colour shift</td><td><code>--duration-base</code></td><td><code>--ease-out</code></td></tr>
+            <tr><td>Panel / drawer enter</td><td><code>--duration-enter</code></td><td><code>--ease-spring</code></td></tr>
+            <tr><td>Panel / drawer exit</td><td><code>--duration-enter</code></td><td><code>--ease-out</code></td></tr>
+            <tr><td>Content reveal</td><td><code>--duration-reveal</code></td><td><code>--ease-out</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Code Example ──────────────────────────────────────────────────── -->
 
   <h2 id="code-example">Code example</h2>
+  <p>Combining duration and easing in a single <code>transition</code> declaration. Transform and opacity use different easing functions to feel natural — spring for the slide, ease-out for the fade.</p>
+
   <pre><code>.panel &#123;
   transform: translateY(8px);
   opacity: 0;
@@ -114,34 +207,20 @@ import DocLayout from '../../layouts/DocLayout.astro';
   transform: translateY(0);
   opacity: 1;
 &#125;</code></pre>
+
 </DocLayout>
 
 <style>
-  /* duration demos — back-and-forth, shows relative speed */
-  @keyframes slide {
-    to { transform: translateX(calc(100% - 16px)); }
-  }
-
-  /* easing demos — slide in → hold → snap back; shows one-directional curve */
-  @keyframes slide-one-way {
-    0%   { transform: translateX(0); }
-    30%  { transform: translateX(calc(100% - 16px)); }
-    80%  {
-      transform: translateX(calc(100% - 16px));
-      animation-timing-function: steps(1, end);
-    }
-    81%  { transform: translateX(0); }
-    100% { transform: translateX(0); }
-  }
-
+  /* ── Track layout shared by duration and easing ─────────────────────── */
   .motion-track {
-    width: 140px;
+    width: 200px;
     height: 20px;
-    background: var(--color-bg-panel);
+    background: var(--color-bg-inset);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
   }
 
   .motion-ball {
@@ -154,15 +233,234 @@ import DocLayout from '../../layouts/DocLayout.astro';
     left: 0;
   }
 
+  /* ── Duration demos ──────────────────────────────────────────────────── */
+
+  /* Pass --_dur via inline style; consume inside the shorthand so the
+     animation-duration is resolved from the custom property, not defaulted
+     to 0s by the shorthand. */
+  @keyframes slide-lr {
+    to { transform: translateX(184px); } /* 200px track − 16px ball */
+  }
+
   .duration-ball {
-    animation: slide infinite alternate;
+    animation: slide-lr var(--_dur, 300ms) linear infinite alternate;
+  }
+
+  .duration-demos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .dur-row {
+    display: grid;
+    grid-template-columns: 14rem 200px 1fr;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .dur-label {
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+  }
+
+  .dur-label em {
+    font-style: normal;
+    color: var(--color-text-secondary);
+    margin-left: var(--space-xs);
+  }
+
+  .dur-use {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* ── Easing demos ────────────────────────────────────────────────────── */
+
+  /* Pass --_ease via inline style; consume inside the shorthand.
+     Original bug: translateX(calc(100% - 16px)) used ball's own width (16px)
+     as 100%, resulting in zero travel. Fixed to use explicit pixel value. */
+  @keyframes slide-one-way {
+    0%   { transform: translateX(0); }
+    30%  { transform: translateX(184px); }
+    80%  { transform: translateX(184px); animation-timing-function: steps(1, end); }
+    81%  { transform: translateX(0); }
+    100% { transform: translateX(0); }
   }
 
   .ease-ball {
-    animation: slide-one-way 1800ms infinite;
+    animation: slide-one-way 1800ms var(--_ease, ease) infinite;
   }
 
+  .easing-demos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .ease-row {
+    display: grid;
+    grid-template-columns: 18rem 200px 1fr;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .ease-label {
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+  }
+
+  .ease-label em {
+    font-style: normal;
+    color: var(--color-text-secondary);
+    display: block;
+    font-size: 0.72rem;
+    margin-top: 2px;
+  }
+
+  .ease-use {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* ── Pairing guide ───────────────────────────────────────────────────── */
+  .pairing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .pairing-card {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .pairing-preview {
+    height: 96px;
+    background: var(--color-bg-inset);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .pairing-info {
+    padding: var(--space-sm) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .pairing-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .pairing-tokens {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    align-items: center;
+  }
+
+  .pairing-tokens code {
+    font-size: inherit;
+  }
+
+  /* Button press demo */
+  @keyframes anim-press {
+    0%, 55%, 100% { transform: scale(1); }
+    20%, 40%      { transform: scale(0.93); }
+  }
+  .pairing-press { animation: anim-press 3s var(--ease-default) infinite; }
+
+  /* Hover colour demo */
+  @keyframes anim-hover {
+    0%, 15%, 72%, 100% { background: var(--color-bg-panel); color: var(--color-text); }
+    28%, 60%           { background: var(--color-accent); color: var(--color-bg); }
+  }
+  .pairing-hover-box {
+    width: 120px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+  }
+  .pairing-hover { animation: anim-hover 3.5s var(--ease-out) infinite; }
+
+  /* Panel enter demo */
+  @keyframes anim-enter {
+    0%, 12%   { transform: translateY(14px); opacity: 0; }
+    28%, 72%  { transform: translateY(0); opacity: 1; }
+    82%, 100% { transform: translateY(0); opacity: 0; }
+  }
+  .pairing-panel {
+    width: 140px;
+    height: 52px;
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pairing-enter { animation: anim-enter 3s var(--ease-spring) infinite; }
+
+  /* Panel exit demo */
+  @keyframes anim-exit {
+    0%, 8%    { transform: translateY(0); opacity: 1; }
+    25%, 65%  { transform: translateY(-14px); opacity: 0; }
+    72%, 100% { transform: translateY(0); opacity: 1; }
+  }
+  .pairing-exit { animation: anim-exit 3s var(--ease-out) infinite; }
+
+  /* Content reveal demo */
+  @keyframes anim-reveal {
+    0%, 12%   { transform: translateY(22px); opacity: 0; }
+    38%, 72%  { transform: translateY(0); opacity: 1; }
+    84%, 100% { transform: translateY(0); opacity: 0; }
+  }
+  .pairing-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .pairing-reveal { animation: anim-reveal 4s var(--ease-out) infinite; }
+
+  /* ── Reduced motion ──────────────────────────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
-    .motion-ball { animation: none; }
+    .motion-ball,
+    .pairing-press,
+    .pairing-hover,
+    .pairing-enter,
+    .pairing-exit,
+    .pairing-reveal {
+      animation: none;
+    }
+  }
+
+  /* ── Responsive ──────────────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .dur-row  { grid-template-columns: 1fr; gap: var(--space-xs); }
+    .ease-row { grid-template-columns: 1fr; gap: var(--space-xs); }
+    .dur-use, .ease-use { display: none; }
+    .motion-track { width: 160px; }
   }
 </style>
