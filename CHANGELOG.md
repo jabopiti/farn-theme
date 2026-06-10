@@ -11,6 +11,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - **T-55** `site/src/pages/components/actions.astro`: Button sizes, states, and loading demos promoted outside the accordion — all live examples now visible without expanding any disclosure; accordion retained for anatomy HTML, token reference, and override snippets
 - **T-55** `site/src/pages/components/layout.astro`: Card anatomy demo (full card with `.card-media` / `.card-header` / `.card-body` / `.card-footer` slots) promoted outside the accordion with a visible `<h3>Anatomy</h3>` heading
 
+### Changed
+- `site/src/styles/site.css`: `.demo-surface` background fill removed — demo containers now render on the page base background so components appear in their true context; border and padding retained for visual grouping
+
 ### Removed
 - **T-46 dropped** `site/src/pages/demo.astro`: Deleted — a separate demo page creates maintenance debt; the docs pages are the demo. `navigation.ts` Demo link removed. Home page CTAs updated to link to `/components`.
 

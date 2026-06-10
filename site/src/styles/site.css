@@ -434,7 +434,6 @@
 /* ── Demo container ──────────────────────────────────────────────────────── */
 .demo-surface {
   padding: var(--space-md);
-  background: var(--color-bg-panel);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   margin-bottom: var(--space-md);
