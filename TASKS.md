@@ -630,7 +630,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-53 · Landing page redesign
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/hopeful-ride-2nxrag`
 
 **Gap:** The current `index.astro` is 7 sections long and tries to serve as both a marketing page and a component demo. It dilutes the first impression, and with T-46 (guided demo page) on the horizon the overlap becomes actively unhelpful. A focused editorial redesign will shorten the page, sharpen the message, and direct visitors to the right next step.
 
@@ -645,10 +645,10 @@ Merged into T-49 (Complete Foundations section).
 
 **Cut from current page:** spacing scale specimen, exhaustive component rows (buttons + badges + forms + dividers + quotes), surfaces grid, principles cards. This content belongs in the demo page and docs.
 
-- [ ] Rework `index.astro` to the 6-section structure; remove all cut sections and their associated inline styles
-- [ ] "Tokens in action" section: light/dark toggle reuses `data-theme` toggle, no new JS
-- [ ] Carry forward all existing animation infrastructure (scroll-reveal, hero fade-in, transparent nav)
-- [ ] Ensure zero dead links after cleanup; update landing page meta description
+- [x] Rework `index.astro` to the 7-section structure; remove all cut sections and their associated inline styles
+- [x] "Tokens in action" section: light/dark toggle reuses `data-theme` toggle, no new JS
+- [x] Carry forward all existing animation infrastructure (scroll-reveal, hero fade-in, transparent nav)
+- [x] Ensure zero dead links after cleanup; update landing page meta description
 
 ---
 
