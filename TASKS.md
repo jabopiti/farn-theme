@@ -674,3 +674,254 @@ Merged into T-49 (Complete Foundations section).
 - [ ] `components/forms.astro` — audit and promote hidden demos
 - [ ] `components/data.astro` — audit and promote hidden demos
 - [ ] `components/status.astro` — audit and promote hidden demos
+
+---
+
+## T-56 · Overview pages — live mini-demo card grid
+`status: backlog` `effort: M`
+
+**Gap:** The three group overview pages (`/foundations`, `/styles`, `/components`) are flat lists of headings and links — no visual hierarchy, no sense of what each page contains. Visitors can't quickly assess which section is relevant to their task.
+
+**Target:** A responsive card grid where each card renders a small live CSS preview of a representative component or concept, plus a headline and one-sentence description. The card acts as a link. No static screenshots — live renders only so cards never go stale.
+
+**Before coding:** Review how Radix Themes, shadcn/ui, Primer, and IBM Carbon structure their overview / getting-started gallery pages. Decide on card layout (2-col vs 3-col, whether previews are full-card-height or a top strip).
+
+- [ ] Implement live-preview card component (inline in overview pages or as a shared Astro component if reused across all three)
+- [ ] Apply to `site/src/pages/foundations/index.astro`, `styles/index.astro`, `components/index.astro`
+- [ ] Each card: group name, description, live CSS mini-demo, links to group page
+- [ ] Mobile: single column
+
+**Complexity gate:** Adds a new shared Astro component — review before coding.
+
+---
+
+## T-57 · Layout › card highlight dark-mode contrast fix
+`status: backlog` `effort: XS`
+
+**Gap:** `.card-highlight` in dark mode is visually indistinguishable from `.card-outlined` — both show `--in1-iron` background with a `--in2-slate` border. In light mode the high-contrast dark fill makes the variant immediately recognisable; in dark mode it blends in.
+
+- [ ] Review `--card-highlight-bg` and `--card-highlight-border` dark-mode values in `tokens/dark-light.css`
+- [ ] Increase dark-mode contrast for highlight variant — consider using `--in0-void` bg or a stronger border token
+- [ ] Verify light-mode appearance is unaffected; rebuild and update `CHANGELOG.md`
+
+---
+
+## T-58 · Layout › section transitions — promote demos + fix diagonal cut
+`status: backlog` `effort: S`
+
+**Gap:** Only the sine wave demo is visible outside the accordion. The layered overlap, diagonal cut, organic blob, and arc demos are buried inside the collapsible. Additionally, the diagonal cut demo appears broken in light mode (renders as a horizontal rule, no visible angle), and the "Approaches 1/2/3" language suggests the implementation may be partially documented as aspirational rather than shipped.
+
+**Before coding:** Audit which section-transition classes are actually shipped in `dist/farn-components.css`. Verify each demo renders correctly in both themes.
+
+- [ ] Move each pattern's sandbox demo outside the accordion, following the sine wave section as a template — each pattern gets its own `<h3>` subsection with a visible demo
+- [ ] Fix `.section-skew` in light mode — diagnose why the diagonal angle is not visible and correct the CSS or demo markup
+- [ ] Audit and correct any "Approach X" language that describes unimplemented variants; remove or mark as planned
+- [ ] Keep the accordion for code examples, token tables, and implementation notes only
+- [ ] Update `CHANGELOG.md`
+
+---
+
+## T-59 · Layout › separator visual hierarchy
+`status: backlog` `effort: XS`
+
+**Gap:** `.hairline` and `.section-divider` are visually identical. `.decorative` is only distinguishable by its short width and accent colour — its weight doesn't read as "accent" at a glance. The pullquote `::before` rule already produces a well-weighted decorative line; reusing it would improve consistency and reduce duplication.
+
+- [ ] Increase `.section-divider` visual weight — either border thickness (2px → 3px) or opacity, enough to clearly differ from `.hairline` at a glance
+- [ ] Make `.decorative` match the pullquote accent rule proportions — same thickness and visual weight, short width retained
+- [ ] Refactor: have `.quote-pull::before` consume the same tokens as `.decorative` so there is one source of truth for the accent rule style
+- [ ] Update token values in `tokens/components.css` and classes in `tokens/component-classes.css`; rebuild; update `CHANGELOG.md`
+
+---
+
+## T-60 · Layout › testimonial card rework
+`status: backlog` `effort: S`
+
+**Gap:** The `.quote-attribution` component (renamed `.testimonial` or `.quote-testimonial`) has visual issues: quote text in italic+bold is hard to read, name/role line spacing is excessive, and the layout feels unbalanced. The component name "attribution card" is non-standard and hard to discover.
+
+**Before coding:** Research testimonial card patterns in Flowbite, Tailwind UI, HyperUI, and Mantine. Note common patterns: avatar placement, quote text style (italic but not bold is most common), compact name+role stack, border/background treatment. Agree on the foundation before implementing.
+
+- [ ] Rename `.quote-attribution` → `.quote-testimonial` (or decide final name during research); update all usages in the docs site
+- [ ] Rework the card layout based on research findings — fix italic+bold quote text, tighten name/role spacing
+- [ ] Add `--quote-testimonial-*` tokens (or update existing `--quote-attr-*`) to `tokens/components.css`
+- [ ] Update `tokens/component-classes.css`; rebuild; update docs page and `CHANGELOG.md`
+
+**Complexity gate:** Component rename is a breaking change — document in CHANGELOG.
+
+---
+
+## T-61 · Navigation › remove pagination outline variant
+`status: backlog` `effort: XS`
+
+**Gap:** The pagination outline variant adds visual noise without a clear use case distinct from the default. Fewer variants reduces decision fatigue for consumers.
+
+- [ ] Remove `.pagination-outline` CSS class from `tokens/component-classes.css` and related tokens from `tokens/components.css`
+- [ ] Remove the outline variant demo and reference from `site/src/pages/components/navigation.astro`
+- [ ] Rebuild; update `CHANGELOG.md`
+
+---
+
+## T-62 · Forms › input border on non-base surfaces + state demos
+`status: backlog` `effort: S`
+
+**Gap:** Input field borders use `--color-border` which becomes invisible when an input sits on a `layer` or `overlay` surface (the border blends into the panel background). Additionally the forms docs only show the default state — focus, error, disabled, and readonly states are undocumented.
+
+**Before coding:** Check how Material Design, Primer, and Ant Design handle input borders across surfaces and document their approach. Note whether they use surface-relative border tokens or a fixed-contrast approach.
+
+- [ ] Fix: define surface-aware border behaviour for inputs — either via `--input-border` value in `data-surface` overrides in `tokens/dark-light.css`, or by using a higher-contrast base token
+- [ ] Extend the forms demo: add visible examples of focus, `aria-invalid` error, disabled, and readonly states — all outside the accordion
+- [ ] Update `tokens/components.css`, `tokens/component-classes.css`, and `site/src/pages/components/forms.astro`; rebuild; update `CHANGELOG.md`
+
+---
+
+## T-63 · Data › table striped/default distinction + density improvement
+`status: backlog` `effort: S`
+
+**Gap:** The default and striped table variants appear identical — the alternating row background either isn't rendering or lacks sufficient contrast. Additionally the compact/comfortable density difference is minimal and doesn't reflect standard table density conventions.
+
+**Before coding:** Check how Primer, IBM Carbon, Ant Design, and Material Data Tables implement striped rows and density tiers. Note typical padding values for each tier.
+
+- [ ] Diagnose the striped row rendering — verify `--table-stripe-bg` token value and whether `:nth-child(odd/even)` is firing correctly
+- [ ] Increase stripe contrast if needed; confirm it works on base, layer, and overlay surfaces
+- [ ] Revise compact/comfortable padding to match common conventions found in research (e.g. Carbon: compact 24px row, default 48px, spacious 64px)
+- [ ] Update demos to show all density tiers side-by-side outside the accordion
+- [ ] Update `tokens/components.css`, `tokens/component-classes.css`; rebuild; update `CHANGELOG.md`
+
+---
+
+## T-64 · Status › calm loading animations + fix skeleton surface colours
+`status: backlog` `effort: XS`
+
+**Gap:** The spinner rotates too fast and the skeleton shimmer animation is too quick — both feel anxious rather than calm, which conflicts with the Farn design system's "sharp, warm, intellectual" character. Skeleton colours are also fixed palette values rather than surface-relative, so they don't adapt on `layer`/`overlay` surfaces.
+
+**Before coding:** Note the animation speed used by GitHub, Linear, and Notion for their loading spinners and skeleton screens. Target a "calm but perceptible" speed.
+
+- [ ] Increase `--spinner-duration` (suggest 1.2s–1.5s; current value TBD from audit)
+- [ ] Increase skeleton shimmer duration to match
+- [ ] Make `--skeleton-base` and `--skeleton-shine` surface-aware — define per-surface overrides in `tokens/dark-light.css` so skeletons adapt on `layer`/`overlay` as they do on `base`
+- [ ] Update `tokens/components.css` and `tokens/dark-light.css`; rebuild; update `CHANGELOG.md`
+
+---
+
+## T-65 · Foundations › Surfaces + Theming merge and overhaul
+`status: backlog` `effort: M`
+
+**Gap:** The surface system is split across two pages — concept and demo in `/foundations/surfaces`, token reference in `/styles/theming` — which forces visitors to navigate between pages to understand the full picture. Additionally the current Surfaces page has a broken "composition" demo that forces dark/light theme regardless of page theme.
+
+**Decision:** Merge both pages. `/foundations/surfaces` becomes the single authoritative page covering concept, live demo, and token reference. `/styles/theming` is deleted (no redirect).
+
+**Before coding:** Audit both pages for content that must be preserved. Ensure nothing is lost in the merge.
+
+- [ ] Merge all content from `styles/theming.astro` into `foundations/surfaces.astro`
+- [ ] Delete `site/src/pages/styles/theming.astro`
+- [ ] Remove Theming from `site/src/data/navigation.ts` Styles group
+- [ ] Fix the composition demo — it should reflect the current page theme, not always force one mode
+- [ ] Make Surfaces demo-first: `data-surface="base/layer/overlay"` live examples visible outside accordion; include components (card, button) inside each surface to show cascade
+- [ ] Update all internal cross-links to `/styles/theming`; update `CHANGELOG.md`
+
+**Complexity gate:** `navigation.ts` structure change, effort M — review plan before coding.
+
+---
+
+## T-66 · Foundations › layout — review, research, and demo
+`status: backlog` `effort: M`
+
+**Gap:** The Layout foundations page documents existing patterns (card-grid, content widths, page structure) but has no live demos. Additionally the current layout system has not been systematically compared to what other design systems offer, so potential gaps (e.g. sidebar patterns, holy-grail layout, flexbox utility classes) are unknown.
+
+**Before coding:** Review layout documentation and live demos in Tailwind CSS, Bootstrap, IBM Carbon, and Primer. Identify patterns that are common but missing from Farn. Decide which gaps are worth filling vs. out of scope.
+
+- [ ] Audit current layout tokens and classes for completeness
+- [ ] Add live visual demos for each documented layout pattern outside any accordion
+- [ ] Document any decided additions; if new classes are added, add to `tokens/component-classes.css` and rebuild
+- [ ] Update `CHANGELOG.md`
+
+---
+
+## T-67 · Foundations › responsive — define strategy + breakpoint demos
+`status: backlog` `effort: S`
+
+**Gap:** The responsive page is text-only with no visual demos. Breakpoint tokens were added in T-54 but are not demonstrated. The responsive philosophy is stated but not illustrated.
+
+**Before coding:** Review how Bootstrap, Tailwind, and IBM Carbon document responsive systems — particularly whether they use live resize demos, iframe previews, or static breakpoint tables. Decide which approach is feasible within the Astro/CSS-only constraint.
+
+- [ ] Add a visual breakpoint scale — show `--breakpoint-mobile` and any tablet token as labelled bars (similar to spacing scale visualisation)
+- [ ] Add at least one live demo that changes visibly at the mobile breakpoint (e.g. a card-grid collapsing to single column)
+- [ ] Ensure the reflow-by-content philosophy is illustrated, not just stated
+- [ ] Update `CHANGELOG.md`
+
+---
+
+## T-68 · Foundations › accessibility — consolidate and make visual
+`status: backlog` `effort: S`
+
+**Gap:** Accessibility content is thin and spread across pages — the WCAG contrast matrix lives on the Color page, not on Accessibility. The key design system commitments (AA minimum, `focus-visible`, `prefers-reduced-motion`) are stated but not made prominent. No inline colour swatches exist alongside hex codes.
+
+**Before coding:** Review how Primer, USWDS (US Web Design System), and Atlassian structure their accessibility documentation. Note how they present contrast ratios visually.
+
+- [ ] Move the WCAG contrast matrix from `styles/color.astro` to `foundations/accessibility.astro` (Color page links to Accessibility for the full matrix)
+- [ ] Add inline colour preview chips alongside hex values in the contrast table — small CSS-rendered squares showing the actual colour
+- [ ] Make the three key commitments (AA, focus-visible, reduced-motion) visually prominent at the top of the page — not buried in a list
+- [ ] Update `CHANGELOG.md`
+
+---
+
+## T-69 · Styles › color page — visual palette redesign
+`status: backlog` `effort: M`
+
+**Gap:** The color page presents palettes as plain token tables — visually flat, hard to use as a design reference. Consumers want to see the colours, not read hex strings.
+
+**Target per palette section:** (1) A large rendered swatch strip with click-to-copy hex; (2) Below it: one card per colour showing the swatch, token name, hex value, and role tags (e.g. `bg` `text` `accent` `border` `interactive`).
+
+**Before coding:** Review how Tailwind, Radix, IBM Carbon, and Primer visualise their colour palettes. Decide on the role tag taxonomy — agree on a short fixed set of tags that apply across all tokens.
+
+- [ ] Implement click-to-copy for hex values (small JS snippet or CSS-only with `data-clipboard` approach)
+- [ ] Build the swatch strip and per-colour card layout
+- [ ] Define and apply role tags to every palette token
+- [ ] Preserve the existing semantic token mapping tables — move to an accordion Reference section
+- [ ] Update `CHANGELOG.md`
+
+**Complexity gate:** Effort M, involves `colors.css` cross-reference — review plan before coding.
+
+---
+
+## T-70 · Styles › typography — restructure and add visual demos
+`status: backlog` `effort: M`
+
+**Gap:** The typography page mixes reference tables and demos without a clear hierarchy. Font stacks are shown as a table rather than as rendered specimens. The type scale, heading styles, and body styles lack visible size/weight demonstrations.
+
+**Before coding:** Review how Primer, IBM Carbon, and Atlassian Typography pages are structured. Note how they show font families (as large rendered text) and the type scale (as a visual ladder of sizes).
+
+- [ ] Restructure page to follow the blueprint: all rendered demos outside accordion, code/tokens inside
+- [ ] Font stacks: replace the table with large rendered specimens — each font family shown at display size with its name and token
+- [ ] Type scale: show every step rendered at its actual size in a vertical ladder (not a table)
+- [ ] Heading styles, body styles, and utility classes: show each rendered, not just described
+- [ ] Ensure every Fraunces usage includes `font-variation-settings: 'opsz' <value>`
+- [ ] Update `CHANGELOG.md`
+
+---
+
+## T-71 · Styles › spacing — visualise the scale
+`status: backlog` `effort: S`
+
+**Gap:** The spacing page is a table of token names and rem values — nothing is rendered. Consumers cannot quickly understand the proportional relationships between steps or judge which token to reach for.
+
+**Before coding:** Review how IBM Carbon, Primer, and Tailwind visualise spacing scales. Common patterns: horizontal bars proportional to value, or a grid of boxes each labelled with its token.
+
+- [ ] Add a visual spacing scale: each token rendered as a proportional bar or box with the token name, rem value, and px value shown
+- [ ] Optionally: show each token in context (e.g. as padding inside a card-shaped container)
+- [ ] Keep the reference table in an accordion below the visual
+- [ ] Update `CHANGELOG.md`
+
+---
+
+## T-72 · Styles › motion — fix broken previews and improve visualisation
+`status: backlog` `effort: S`
+
+**Gap:** The motion page demos do not animate — nothing moves. Additionally the page only documents `--duration-*` and `--ease-*` tokens but does not confirm whether all in-use motion in the design system is covered.
+
+**Before coding:** Review how Material Design, Apple HIG web docs, and IBM Carbon demonstrate easing and duration. Note whether they use looping CSS animations, interactive sliders, or video.
+
+- [ ] Diagnose why animations are not firing on the motion page (likely a CSS scoping or `will-change`/`animation` conflict)
+- [ ] Fix or rebuild the demos so each easing and duration token is shown with a moving element (a simple block or icon translating across a track)
+- [ ] Audit: list every animated element in the design system (spinners, skeletons, section transitions, btn-loading, scroll-reveal, tab indicator) and verify each is covered by a documented token
+- [ ] Add any missing tokens; update `CHANGELOG.md`
+
