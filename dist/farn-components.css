@@ -56,7 +56,7 @@
   --card-padding:  var(--space-md);
   --card-highlight-bg:     var(--color-card-highlight-bg);
   --card-highlight-border: var(--color-card-highlight-border);
-  /* highlight always renders on a dark bg — palette tokens are theme-invariant here */
+  /* bg is always dark teal — text tokens are palette-fixed for guaranteed light-on-dark contrast */
   --card-highlight-text:           var(--bm2-birch);
   --card-highlight-text-secondary: var(--bm1-mist);
   --card-highlight-text-tertiary:  var(--bm0-sand);
@@ -151,10 +151,10 @@
   --quote-margin-bottom:  var(--space-lg);
   --quote-opsz:           16;
 
-  /* Pullquote */
-  --quote-pull-rule-width:  32px;
-  --quote-pull-rule-height: 2px;
-  --quote-pull-rule-color:  var(--color-accent);
+  /* Pullquote — references separator decorative tokens as single source of truth */
+  --quote-pull-rule-width:  var(--separator-decorative-width);
+  --quote-pull-rule-height: var(--separator-decorative-weight);
+  --quote-pull-rule-color:  var(--separator-decorative-color);
 
   /* Attribution card */
   --quote-attr-bg:          var(--color-bg-panel);
@@ -208,13 +208,20 @@
   --spinner-lg-size:   40px;
   --spinner-border:    2px;
   --spinner-lg-border: 3px;
-  --spinner-duration:  var(--duration-loop);
+  --spinner-duration:  1.2s;
 
   /* ── Skeleton tokens ─────────────────────────────────────────────────── */
   /* --skeleton-shine lives in dark-light.css — per-theme palette value */
   --skeleton-radius:   var(--radius-sm);
   --skeleton-base:     var(--color-bg-panel);
-  --skeleton-duration: var(--duration-loop);
+  --skeleton-duration: 1.6s;
+
+  /* ── Separator tokens ──────────────────────────────────────────────────── */
+  --separator-hairline-weight:   1px;
+  --separator-section-weight:    3px;
+  --separator-decorative-width:  32px;
+  --separator-decorative-weight: 2px;
+  --separator-decorative-color:  var(--color-accent);
 
   /* ── Table tokens ────────────────────────────────────────────────────── */
   --table-border:             var(--color-border);
@@ -869,9 +876,9 @@ input[type="radio"] {
 
 hr { border: none; }
 
-.hairline        { border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; }
-.section-divider { border-top: 2px solid var(--color-border);        margin: var(--space-lg) 0; }
-.decorative      { border-top: 2px solid var(--color-accent);        width: 32px; margin: var(--space-md) 0; }
+.hairline        { border-top: var(--separator-hairline-weight) solid var(--color-border-subtle);                          margin: var(--space-sm) 0; }
+.section-divider { border-top: var(--separator-section-weight) solid var(--color-border);                                  margin: var(--space-lg) 0; }
+.decorative      { border-top: var(--separator-decorative-weight) solid var(--separator-decorative-color); width: var(--separator-decorative-width); margin: var(--space-md) 0; }
 
 /* ── Quotes ──────────────────────────────────────────────────────────────── */
 
