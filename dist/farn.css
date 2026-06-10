@@ -195,8 +195,6 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
-  --color-card-highlight-bg:     var(--fo3-deepwater);
-  --color-card-highlight-border: transparent;
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
@@ -479,7 +477,6 @@
   --skeleton-duration: 1.6s;
 
   /* ── Separator tokens ──────────────────────────────────────────────────── */
-  --separator-hairline-weight:   1px;
   --separator-section-weight:    3px;
   --separator-decorative-width:  32px;
   --separator-decorative-weight: 2px;
