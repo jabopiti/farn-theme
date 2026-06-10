@@ -182,7 +182,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
       Inline <a href="#links">text link</a> — uses <code>--link-color</code> and underlines on hover.
       <a href="#links">Visited links</a> use <code>--link-visited-color</code>.
     </p>
-    <div class="btn-demo demo-surface link-btns" role="group" aria-label="Link element as button examples">
+    <div class="btn-demo link-btns" role="group" aria-label="Link element as button examples">
       <a href="#links" class="btn btn-p">Link primary</a>
       <a href="#links" class="btn btn-s">Link secondary</a>
       <a href="#links" class="btn btn-g">Link ghost</a>
@@ -344,13 +344,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
     margin-bottom: var(--space-lg);
   }
 
-  /* nested btn-demo inside the link-demo container — reset demo-surface styles */
   .link-btns {
     margin-top: var(--space-sm);
     margin-bottom: 0;
-    border: none;
-    padding: 0;
-    background: none;
   }
 
   /* Extra vertical padding so tooltip bubbles clear the demo container edges */

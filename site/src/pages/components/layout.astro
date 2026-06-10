@@ -43,7 +43,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </p>
 
   <div class="card-demo-section">
-    <div class="card" style="max-width: 360px;">
+    <div class="card">
       <div class="card-media">
         <div class="card-media-placeholder" aria-hidden="true"></div>
       </div>
@@ -763,6 +763,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
   .card-demo-section {
     margin-bottom: var(--space-lg);
   }
+  .card-demo-section > .card {
+    max-width: 360px;
+  }
 
   .card-media-placeholder {
     height: 160px;
@@ -770,19 +773,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
   }
 
   .demo-card-heading { margin: 0; font-size: 1rem; }
-  .demo-card-meta    { margin: var(--space-xs) 0 0; color: var(--color-text-secondary); font-size: 0.875rem; }
-  .demo-card-text    { margin: 0; color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.6; }
-
-  /* ── Demo label — uppercase eyebrow for demo sections ────────────────── */
-  .demo-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-text-tertiary);
-    margin: 0 0 var(--space-xs);
-  }
-  hr + .demo-label { margin-top: var(--space-sm); }
+  .demo-card-meta,
+  .demo-card-text    { color: var(--color-text-secondary); font-size: 0.875rem; }
+  .demo-card-meta    { margin: var(--space-xs) 0 0; }
+  .demo-card-text    { margin: 0; line-height: 1.6; }
 
   /* ── Overlap demos ────────────────────────────────────────────────────── */
   .demo-overlap-a {

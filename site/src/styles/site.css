@@ -441,6 +441,17 @@
 
 .demo-surface p { margin: 0; }
 
+/* Uppercase eyebrow label for demo sections */
+.demo-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-tertiary);
+  margin: 0 0 var(--space-xs);
+}
+hr + .demo-label { margin-top: var(--space-sm); }
+
 /* Informational callout — pair with .demo-surface for the full treatment */
 .callout {
   border-left: 3px solid var(--color-accent);
