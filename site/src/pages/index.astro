@@ -4,7 +4,7 @@
 // body layout and scroll behaviour handled below.
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
-import FernMultiplaneHero from '../components/FernMultiplaneHero.astro';
+import FernBackground from '../components/FernBackground.astro';
 import { groups, links, ctas } from '../data/navigation';
 ---
 <!DOCTYPE html>
@@ -43,6 +43,10 @@ import { groups, links, ctas } from '../data/navigation';
   .landing-section { padding: var(--space-3xl) 0; }
 
   /* ── Keyframes ────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
   @keyframes fadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -58,17 +62,64 @@ import { groups, links, ctas } from '../data/navigation';
     }
   }
 
-  /* ── Hero: make room for the wave divider at the bottom ── */
-  .farn-hero--multiplane { padding-bottom: var(--wave-height); }
-
-  /* ── Hero actions (in FernMultiplaneHero slot) ───── */
+  /* ── Hero ─────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: clip;
+    padding-top: var(--space-4xl);
+    padding-bottom: calc(var(--space-4xl) + var(--wave-height));
+    background: linear-gradient(180deg, var(--bm2-birch) 0%, var(--bm1-mist) 55%, var(--bm0-sand) 100%);
+    touch-action: pan-y;
+  }
+  [data-theme="dark"] .hero {
+    background: linear-gradient(180deg, var(--in0-void) 0%, var(--in1-iron) 60%, var(--in1-iron) 100%);
+  }
+  .hero-inner {
+    position: relative;
+    width: 100%;
+    max-width: var(--width-content);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    z-index: 40;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    margin-bottom: var(--space-md);
+    opacity: 0;
+    animation: fadeUp 600ms ease-out 100ms forwards;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 9vw, 112px);
+    font-weight: 800;
+    font-variation-settings: 'opsz' 72;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin-bottom: var(--space-lg);
+    opacity: 0;
+    animation: fadeUp 700ms ease-out 200ms forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--color-accent); }
+  .hero-desc {
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.65;
+    color: var(--color-text-tertiary);
+    max-width: 52ch;
+    margin-bottom: var(--space-xl);
+    opacity: 0;
+    animation: fadeUp 700ms ease-out 350ms forwards;
+  }
   .hero-actions {
     display: flex;
     gap: var(--space-sm);
     flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 700ms ease-out 450ms forwards;
   }
-
-  /* ── Palette strip (in FernMultiplaneHero overlay slot) ── */
   .hero-palette-strip {
     position: absolute;
     right: var(--space-lg);
@@ -91,7 +142,6 @@ import { groups, links, ctas } from '../data/navigation';
     width: 8px;
     border-radius: var(--radius-sm);
     opacity: 0;
-    /* --i set inline; staggered entrance */
     animation: swatchSlideIn 400ms ease-out calc(650ms + var(--i, 0) * 25ms) forwards;
   }
 
@@ -349,17 +399,20 @@ import { groups, links, ctas } from '../data/navigation';
 <SiteNav {groups} {links} {ctas} />
 
 <!-- ── § 1 Hero ──────────────────────────────────────────────────── -->
-<FernMultiplaneHero
-  eyebrow="Design System"
-  title="Sharp.<br /><em>Warm.</em><br />Intellectual."
-  lede="A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes. Zero runtime, zero framework dependency."
->
-  <div class="hero-actions">
-    <a href="/demo" class="btn btn-p btn-lg"><i class="ti ti-eye"></i> Explore the demo</a>
-    <a href="/getting-started" class="btn btn-g btn-lg"><i class="ti ti-book"></i> Get Started</a>
+<section class="hero" data-fern data-intro="3000" aria-label="Hero">
+  <FernBackground />
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="badge badge-general">Design System</span>
+    </div>
+    <h1 class="hero-title">Sharp.<br><em>Warm.</em><br>Intellectual.</h1>
+    <p class="hero-desc">A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes. Zero runtime, zero framework dependency.</p>
+    <div class="hero-actions">
+      <a href="/demo" class="btn btn-p btn-lg"><i class="ti ti-eye"></i> Explore the demo</a>
+      <a href="/getting-started" class="btn btn-g btn-lg"><i class="ti ti-book"></i> Get Started</a>
+    </div>
   </div>
-  <!-- Overlay slot: palette strip + wave, positioned relative to the section -->
-  <div slot="overlay" class="hero-palette-strip" aria-hidden="true" id="palette-strip">
+  <div class="hero-palette-strip" aria-hidden="true" id="palette-strip">
     <div class="palette-swatch" style="background:#0D1117;height:28px;--i:0"></div>
     <div class="palette-swatch" style="background:#374151;height:28px;--i:1"></div>
     <div class="palette-swatch" style="background:#4B5563;height:28px;--i:2"></div>
@@ -377,13 +430,13 @@ import { groups, links, ctas } from '../data/navigation';
     <div class="palette-swatch" style="background:#567A37;height:28px;--i:14"></div>
     <div class="palette-swatch" style="background:#885DB4;height:28px;--i:15"></div>
   </div>
-  <div slot="overlay" class="section-wave" data-scroll-reveal aria-hidden="true">
+  <div class="section-wave" data-scroll-reveal aria-hidden="true">
     <svg viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,0 1200,40 L1200,80 L0,80 Z" fill="#1a2332" opacity="0.6"/>
       <path d="M0,55 C200,15 400,75 600,45 C800,15 1000,65 1200,35 L1200,80 L0,80 Z" fill="#0D1117"/>
     </svg>
   </div>
-</FernMultiplaneHero>
+</section>
 
 <!-- ── § 2 About ──────────────────────────────────────────────────── -->
 <section class="landing-section" data-theme="dark" id="about">
