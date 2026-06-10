@@ -3628,6 +3628,7 @@ l31 49 -23 13 c-44 22 -250 81 -417 117 -409 91 -539 140 -696 268 -101 82
   <div class="plane plane-1" data-amp="2.0" data-pary="36" data-mx="18"></div>
   <div class="plane plane-0" data-amp="2.7" data-pary="54" data-mx="27"></div>
 </div>
+<div class="fern-overlay" aria-hidden="true"></div>
 
 <style is:global>
 [data-fern] {
@@ -3641,6 +3642,7 @@ l31 49 -23 13 c-44 22 -250 81 -417 117 -409 91 -539 140 -696 268 -101 82
   --frond-mid:      var(--in2-slate);
 }
 [data-fern] .scene { position:absolute; inset:0; pointer-events:none; transform:scaleX(-1); }
+[data-fern] .fern-overlay { position:absolute; inset:0; pointer-events:none; z-index:50; will-change:transform; }
 [data-fern] .plane { position:absolute; inset:0; will-change:transform; }
 [data-fern] .plane-4{z-index:2}
 [data-fern] .plane-3{z-index:4}
@@ -3684,13 +3686,13 @@ document.documentElement.classList.add('js');
       { sprite:'fern-s2', color:'var(--frond-far)', edge:'left', a:76, off:4, w:38, rot:88 },
       { sprite:'fern-s1', color:'var(--frond-far)', edge:'left', a:99, off:4, w:34, rot:98 },
       { sprite:'fern-s1', color:'var(--frond-far)', edge:'right', a:56, off:4, w:52, rot:-70, flip:true },
-      { sprite:'fern-s1', color:'var(--frond-far)', edge:'right', a:86, off:4, w:46, rot:-82, flip:true },
+      { sprite:'fern-s1', color:'var(--frond-mid)', edge:'right', a:86, off:4, w:46, rot:-82, flip:true },
       { sprite:'fern-s2', color:'var(--frond-far)', edge:'bottom', a:30, off:6, w:42, rot:-6 },
       { sprite:'fern-s1', color:'var(--frond-far)', edge:'bottom', a:68, off:5, w:50, rot:6 }
     ] },
     { sel: '.plane-3', baseDelay: 0.3, fronds: [
       { sprite:'fern-s1', color:'var(--frond-mid)', edge:'left', a:56, off:3.5, w:36, rot:62 },
-      { sprite:'fern-s2', color:'var(--frond-mid)', edge:'right', a:68, off:3.5, w:34, rot:-78, flip:true },
+      { sprite:'fern-s2', color:'var(--frond-far)', edge:'right', a:68, off:3.5, w:34, rot:-78, flip:true },
       { sprite:'fern-s1', color:'var(--frond-mid)', edge:'right', a:12, off:3.5, w:30, rot:-58, flip:true }
     ] },
     { sel: '.plane-2', baseDelay: 0.55, fronds: [
@@ -3706,7 +3708,7 @@ document.documentElement.classList.add('js');
     { sel: '.plane-0', baseDelay: 1.0, fronds: [
       { sprite:'fern-d1', color:'var(--frond-fg-deep)', edge:'bottom', a:27, off:10, w:21, rot:-7 },
       { sprite:'fern-d1', color:'var(--frond-fg-dark)', edge:'bottom', a:72, off:10, w:22, rot:6, flip:true },
-      { sprite:'fern-d1', color:'var(--fo1-fern)', edge:'left', a:50, off:3, w:24, rot:78 },
+      { sprite:'fern-d1', color:'var(--fo1-fern)', edge:'left', a:50, off:3, w:24, rot:78, overlay:true },
       { sprite:'fern-d1', color:'var(--frond-fg-dark)', edge:'left', a:7, off:5, w:19, rot:52 },
       { sprite:'fern-d1', color:'var(--frond-fg-deep)', edge:'right', a:9, off:5, w:19, rot:-56, flip:true }
     ] }
@@ -3752,19 +3754,63 @@ document.documentElement.classList.add('js');
     return el;
   }
 
+  /* Build a frond that lives outside .scene (no scaleX context), rendered above
+     hero copy. Positioning and rotation are the mirror image of the in-scene
+     version; the SVG artwork is always flipped to compensate. */
+  function buildOverlayFrond(containerEl, f, delay) {
+    var spr = SPRITES[f.sprite];
+    var bxe = 1 - spr.bx; // mirrored stem fraction → right-side appearance
+    var el = document.createElement('div');
+    el.className = 'frond';
+    el.style.left   = (100 + f.off - bxe * f.w).toFixed(2) + '%';
+    el.style.bottom = f.a.toFixed(2) + '%';
+    el.style.width  = f.w + '%';
+    el.style.transformOrigin = (bxe * 100).toFixed(1) + '% 100%';
+    el.style.transform = 'rotate(' + (-(f.rot || 0)) + 'deg)';
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('class', 'art');
+    svg.setAttribute('viewBox', '0 0 ' + spr.vw + ' ' + spr.vh);
+    svg.style.aspectRatio = spr.vw + ' / ' + spr.vh;
+    svg.style.color = f.color;
+    svg.style.transformOrigin = (bxe * 100).toFixed(1) + '% 100%';
+    svg.style.setProperty('--d', delay.toFixed(2) + 's');
+    var g = document.createElementNS(SVGNS, 'g');
+    g.setAttribute('transform', 'translate(' + spr.vw + ' 0) scale(-1 1)');
+    var use = document.createElementNS(SVGNS, 'use');
+    use.setAttributeNS(XLINK, 'href', '#' + f.sprite);
+    use.setAttribute('href', '#' + f.sprite);
+    g.appendChild(use); svg.appendChild(g);
+    el.appendChild(svg);
+    containerEl.appendChild(el);
+    return el;
+  }
+
   document.querySelectorAll('[data-fern]').forEach(function(hero){ initHero(hero); });
   function initHero(hero){
   var planes = [];
+  var overlayFronds = [];
+  var overlayContainer = hero.querySelector('.fern-overlay');
   try {
     PLANES.forEach(function (spec) {
       var planeEl = hero.querySelector(spec.sel);
-      var fronds = spec.fronds.map(function (f, i) {
+      var fronds = [];
+      spec.fronds.forEach(function (f, i) {
         var delay = spec.baseDelay + i * 0.07;
-        var el = buildFrond(planeEl, f, delay);
-        return { el: el, baseRot: f.rot || 0,
-                 phase: (i * 1.7 + spec.baseDelay * 9) % (Math.PI * 2),
-                 freq: 0.7 + ((i * 37) % 10) / 12,
-                 mult: 0.7 + ((i * 53) % 10) / 16 };
+        if (f.overlay) {
+          var el = buildOverlayFrond(overlayContainer, f, delay);
+          overlayFronds.push({ el: el, baseRot: -(f.rot || 0),
+            phase: (i * 1.7 + spec.baseDelay * 9) % (Math.PI * 2),
+            freq: 0.7 + ((i * 37) % 10) / 12,
+            mult: 0.7 + ((i * 53) % 10) / 16,
+            amp: parseFloat(planeEl.dataset.amp),
+            mxK: parseFloat(planeEl.dataset.mx) });
+        } else {
+          var el = buildFrond(planeEl, f, delay);
+          fronds.push({ el: el, baseRot: f.rot || 0,
+            phase: (i * 1.7 + spec.baseDelay * 9) % (Math.PI * 2),
+            freq: 0.7 + ((i * 37) % 10) / 12,
+            mult: 0.7 + ((i * 53) % 10) / 16 });
+        }
       });
       planes.push({
         el: planeEl, fronds: fronds,
@@ -3810,6 +3856,19 @@ document.documentElement.classList.add('js');
         f.el.style.transform = 'rotate(' + (f.baseRot + wind * pl.amp * f.mult * e).toFixed(3) + 'deg)';
       }
     });
+    /* Overlay fronds: same physics as plane-0 but px negated (no scaleX wrapper) */
+    if (overlayFronds.length > 0) {
+      var pl0 = planes[planes.length - 1];
+      var gust0 = Math.sin(windT * 0.5 + (planes.length - 1) * 0.7) * 0.3;
+      var px0 = clamp(mx * pl0.mxK, -MX_BUDGET, MX_BUDGET);
+      var py0 = pl0.parOffset + clamp(my * pl0.mxK * 0.3, -MX_BUDGET, MX_BUDGET);
+      overlayContainer.style.transform = 'translate3d(' + (-px0).toFixed(2) + 'px,' + py0.toFixed(2) + 'px,0)';
+      for (var j = 0; j < overlayFronds.length; j++) {
+        var of = overlayFronds[j];
+        var wov = Math.sin(windT * of.freq + of.phase) * 0.7 + Math.sin(windT * of.freq * 2.6 + of.phase * 1.3) * 0.3 + gust0;
+        of.el.style.transform = 'rotate(' + (of.baseRot - wov * of.amp * of.mult * e).toFixed(3) + 'deg)';
+      }
+    }
     return energy > 0.004 || Math.abs(tmx - mx) > 0.01 || Math.abs(tmy - my) > 0.01;
   }
 
