@@ -12,9 +12,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - **T-59** `tokens/components.css`: `--quote-pull-rule-*` tokens now reference `--separator-decorative-*` — single source of truth for accent rule dimensions shared between pullquote and decorative separator
 
 ### Changed
-- **T-57** `tokens/dark-light.css`: `--color-card-highlight-bg` changed from `--in0-void` (light) / `--in1-iron` (dark) to `--fo3-deepwater` (both modes); `--color-card-highlight-border` dark value changed from `--in2-slate` to `transparent` — teal bg is visually distinct from all card variants across both themes without relying on border differentiation
-- **T-57** `tokens/components.css`: Updated comment — "bg is always dark teal — text tokens are palette-fixed for guaranteed light-on-dark contrast"
-- **T-57** `tokens/colors.css`: `--fo3-deepwater` description updated to include card highlight background use case
+- **T-57** `tokens/dark-light.css`: `--color-card-highlight-bg` changed to `--fo2-forest` (light) / `--fo0-sage` (dark) — surfaces now adapt with theme; dark-mode overrides added for `--card-highlight-text` (void), `--card-highlight-text-secondary` (iron), `--card-highlight-text-tertiary` (slate) so text inverts correctly with the lighter Sage background
+- **T-57** `tokens/components.css`: Comment updated; light-mode text defaults remain birch/mist/sand for Forest bg contrast
+- **T-57** `tokens/colors.css`: Role comments updated — Sage and Forest now document card highlight background role (dark and light respectively); Deepwater role narrowed to code block bg and active accent state
 - **T-59** `tokens/component-classes.css`: `.section-divider` and `.decorative` now consume `--separator-*` tokens; `.section-divider` weight increased from 2px to 3px for clear visual separation from `.hairline` (which retains `1px` directly)
 - **T-64** `tokens/components.css`: `--spinner-duration` changed from `var(--duration-loop)` (800ms) to `1.2s`; `--skeleton-duration` changed to `1.6s` — calmer, less anxious loading animations in keeping with Farn's character
 - **T-64** `tokens/dark-light.css`: `--skeleton-base` and `--skeleton-shine` per-surface overrides added to `layer` and `overlay` blocks (both themes) — fixes invisible shimmer bug where both tokens resolved to the same colour on non-base surfaces

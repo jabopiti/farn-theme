@@ -14,10 +14,10 @@
   --bm2-birch:     #F7F6F3;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
-  --fo0-sage:      #5C9E86;   /* Supporting accent, dark-mode hover state  */
-  --fo1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs     */
-  --fo2-forest:    #2D5E4A;   /* Keywords, operators, secondary accent     */
-  --fo3-deepwater: #254D5A;   /* Tertiary accent; card highlight background */
+  --fo0-sage:      #5C9E86;   /* Supporting accent; card highlight bg (dark mode)  */
+  --fo1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs             */
+  --fo2-forest:    #2D5E4A;   /* Secondary accent; card highlight bg (light mode)  */
+  --fo3-deepwater: #254D5A;   /* Tertiary accent; code block bg (light pages)      */
 
   /* Bloom — semantic */
   --bl0-ember:     #C5414C;   /* Errors, deletions                         */
@@ -156,7 +156,7 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
-  --color-card-highlight-bg:     var(--fo3-deepwater);
+  --color-card-highlight-bg:     var(--fo2-forest);
   --color-card-highlight-border: transparent;
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
@@ -198,6 +198,10 @@
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
+  --color-card-highlight-bg:         var(--fo0-sage);
+  --card-highlight-text:             var(--in0-void);
+  --card-highlight-text-secondary:   var(--in1-iron);
+  --card-highlight-text-tertiary:    var(--in2-slate);
   --btn-s-hover-bg:             var(--in3-ash);
   --btn-g-active-bg:            var(--in0-void);  /* darker than ghost hover --in1-iron (#374151) */
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
@@ -316,7 +320,7 @@
   --card-padding:  var(--space-md);
   --card-highlight-bg:     var(--color-card-highlight-bg);
   --card-highlight-border: var(--color-card-highlight-border);
-  /* bg is always dark teal — text tokens are palette-fixed for guaranteed light-on-dark contrast */
+  /* light-mode defaults (forest bg needs light text); dark mode overrides in dark-light.css */
   --card-highlight-text:           var(--bm2-birch);
   --card-highlight-text-secondary: var(--bm1-mist);
   --card-highlight-text-tertiary:  var(--bm0-sand);

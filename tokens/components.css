@@ -56,7 +56,7 @@
   --card-padding:  var(--space-md);
   --card-highlight-bg:     var(--color-card-highlight-bg);
   --card-highlight-border: var(--color-card-highlight-border);
-  /* bg is always dark teal — text tokens are palette-fixed for guaranteed light-on-dark contrast */
+  /* light-mode defaults (forest bg needs light text); dark mode overrides in dark-light.css */
   --card-highlight-text:           var(--bm2-birch);
   --card-highlight-text-secondary: var(--bm1-mist);
   --card-highlight-text-tertiary:  var(--bm0-sand);
