@@ -86,7 +86,11 @@ import { groups, links, ctas } from '../data/navigation';
     z-index: 40;
   }
   .hero-eyebrow {
-    display: inline-flex;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fo1-fern);
     margin-bottom: var(--space-md);
     opacity: 0;
     animation: fadeUp 600ms ease-out 100ms forwards;
@@ -402,13 +406,11 @@ import { groups, links, ctas } from '../data/navigation';
 <section class="hero" data-fern data-intro="3000" aria-label="Hero">
   <FernBackground />
   <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span class="badge badge-general">Design System</span>
-    </div>
-    <h1 class="hero-title">Sharp.<br><em>Warm.</em><br>Intellectual.</h1>
-    <p class="hero-desc">A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes. Zero runtime, zero framework dependency.</p>
+    <p class="hero-eyebrow">Sharp · Warm · Intellectual</p>
+    <h1 class="hero-title">A design system<br>rooted in northern forests.</h1>
+    <p class="hero-desc">Created for a clean and lightweight design. Framework-agnostic tokens and component classes. Zero runtime, zero framework dependency.</p>
     <div class="hero-actions">
-      <a href="/demo" class="btn btn-p btn-lg"><i class="ti ti-eye"></i> Explore the demo</a>
+      <a href="#about" class="btn btn-p btn-lg"><i class="ti ti-eye"></i> Explore</a>
       <a href="/getting-started" class="btn btn-g btn-lg"><i class="ti ti-book"></i> Get Started</a>
     </div>
   </div>
@@ -429,12 +431,6 @@ import { groups, links, ctas } from '../data/navigation';
     <div class="palette-swatch" style="background:#8D6B20;height:28px;--i:13"></div>
     <div class="palette-swatch" style="background:#567A37;height:28px;--i:14"></div>
     <div class="palette-swatch" style="background:#885DB4;height:28px;--i:15"></div>
-  </div>
-  <div class="section-wave" data-scroll-reveal aria-hidden="true">
-    <svg viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,0 1200,40 L1200,80 L0,80 Z" fill="#1a2332" opacity="0.6"/>
-      <path d="M0,55 C200,15 400,75 600,45 C800,15 1000,65 1200,35 L1200,80 L0,80 Z" fill="#0D1117"/>
-    </svg>
   </div>
 </section>
 
