@@ -429,8 +429,8 @@ import { groups, links, ctas } from '../data/navigation';
   .cta-section { padding: var(--space-3xl) 0; }
   .cta-section .cta-inner { max-width: var(--width-prose); }
 
-  /* Arc fill must match featured-surface bg in dark mode (deepwater, not void) */
-  [data-theme="dark"] .section-arc path { fill: var(--fo3-deepwater); }
+  /* Arc inherits --color-bg from featured surface: void (light) or deepwater (dark) */
+  .section-arc path { fill: var(--color-bg); }
 
 </style>
 </head>
@@ -713,10 +713,10 @@ import { groups, links, ctas } from '../data/navigation';
     </div>
   </div>
 
-  <!-- Arc divider — transitions into the dark closing CTA -->
-  <div class="section-arc" aria-hidden="true">
+  <!-- Arc divider — transitions into the featured closing CTA; inherits its surface bg -->
+  <div class="section-arc" data-surface="featured" aria-hidden="true">
     <svg viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,80 Q600,0 1200,80 L1200,80 L0,80 Z" fill="#0D1117"/>
+      <path d="M0,80 Q600,0 1200,80 L1200,80 L0,80 Z" fill="none"/>
     </svg>
   </div>
 </section>

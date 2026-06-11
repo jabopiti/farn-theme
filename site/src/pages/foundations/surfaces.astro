@@ -197,7 +197,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <p>
     Toggle the page theme — the block below stays dark in both modes but shifts hue:
   </p>
-  <div class="featured-surface-demo" data-surface="featured">
+  <div class="surface-demo featured-surface-demo" data-surface="featured">
     <code class="surface-tag">data-surface="featured"</code>
     <p class="surface-desc">Light mode: void &nbsp;·&nbsp; Dark mode: deepwater</p>
     <p class="surface-contrast-note">
@@ -332,11 +332,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   }
 
   .featured-surface-demo {
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-    border: 1px solid var(--color-border);
-    background: var(--color-bg);
-    margin-bottom: var(--space-xl);
+    margin: 0 0 var(--space-xl) 0;
   }
 
   .surface-contrast-note {
