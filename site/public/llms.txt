@@ -17,10 +17,10 @@ Then import in your bundler (Vite, webpack, Parcel, etc.):
 @import "farn-theme/typography"; /* opt-in: .text-h1, .text-body, .text-mono… */
 ```
 
-Or link from CDN (replace `@0.1.0` with the latest tag):
+Or link from CDN (replace `@0.2.0` with the latest tag):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.1.0/dist/farn.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.2.0/dist/farn.css">
 ```
 
 ## Core rules
