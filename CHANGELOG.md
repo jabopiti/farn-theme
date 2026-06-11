@@ -7,6 +7,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Added
+- `site/src/components/FernMultiplaneHero.astro`: Gyroscope parallax — `deviceorientation` events now drive the same `tmx`/`tmy` plane-offset targets as pointer movement. Calibrates to the user's hold angle on first event; recalibrates on viewport re-entry. Accounts for landscape orientation by swapping axes when `screen.orientation.angle` is ±90°. Defers to pointer when a pointer event occurred within the last 2 s. Energy injected from angular velocity with a 0.3° dead zone to suppress sensor noise. iOS 13+ permission requested silently on first `touchstart`. Fully respects `prefers-reduced-motion` and the existing `inView` guard.
+
 ---
 
 ## [0.2.0] — 2026-06-11
