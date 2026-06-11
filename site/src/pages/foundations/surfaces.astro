@@ -7,8 +7,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <span class="badge badge-published">stable</span>
   <p>
     Farn's theming system has two orthogonal axes. <code>data-theme</code> sets an absolute
-    light or dark context on any element. <code>data-surface</code> sets a relative depth
-    within that context — base, layer, or overlay — and resolves automatically to the correct
+    light or dark context on any element. <code>data-surface</code> sets depth within that
+    context — base, layer, overlay, or featured — and resolves automatically to the correct
     palette token for the current theme. They compose freely: a dark panel inside a light page
     needs only one attribute pair.
   </p>
@@ -34,6 +34,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
     mirror each other's depth levels. Iron Night void = dark page; Birch Mist birch = light page.
     Iron Night iron = dark card; Birch Mist mist = light card. The surface system is an
     expression of the palette story, not a separate mechanism bolted on.
+  </p>
+  <p>
+    The <code>featured</code> surface opts out of theme-relativity by design. It is always dark
+    — void in light mode, deepwater in dark mode — and forces its own text and border tokens so
+    descendants inherit correct contrast without a <code>data-theme</code> attribute on the element.
   </p>
 
   <h2 id="depth-table">Depth Reference</h2>
@@ -70,6 +75,12 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <td><code>--in2-slate</code> <span class="swatch" style="background:#4B5563"></span></td>
         <td>Modals, dropdowns, floating elements — highest depth level</td>
       </tr>
+      <tr>
+        <td><code>featured</code></td>
+        <td><code>--in0-void</code> <span class="swatch" style="background:#0D1117"></span></td>
+        <td><code>--fo3-deepwater</code> <span class="swatch" style="background:#254D5A"></span></td>
+        <td>Hero sections, feature callouts — always dark; no <code>data-theme</code> needed</td>
+      </tr>
     </tbody>
   </table>
 
@@ -95,6 +106,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <code class="surface-tag">overlay</code>
         <p class="surface-desc">Modals, dropdowns — sand</p>
       </div>
+      <div class="surface-demo" data-surface="featured">
+        <code class="surface-tag">featured</code>
+        <p class="surface-desc">Hero sections — void</p>
+      </div>
     </div>
 
     <div class="theme-col" data-theme="dark">
@@ -110,6 +125,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <div class="surface-demo" data-surface="overlay">
         <code class="surface-tag">overlay</code>
         <p class="surface-desc">Modals, dropdowns — slate</p>
+      </div>
+      <div class="surface-demo" data-surface="featured">
+        <code class="surface-tag">featured</code>
+        <p class="surface-desc">Hero sections — deepwater</p>
       </div>
     </div>
   </div>
@@ -135,6 +154,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <code class="surface-tag">overlay</code>
         <p class="surface-desc">Modals, dropdowns</p>
       </div>
+      <div class="surface-demo" data-surface="featured">
+        <code class="surface-tag">featured</code>
+        <p class="surface-desc">Always dark</p>
+      </div>
     </div>
   </div>
 
@@ -154,6 +177,32 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <code class="surface-tag">data-theme="light" data-surface="layer"</code>
       <p class="surface-desc">Always a light panel</p>
     </div>
+  </div>
+
+  <h2 id="featured-surface">Featured Surface</h2>
+  <p>
+    The <code>featured</code> surface is intentionally theme-breaking. It always renders dark —
+    void (<code>#0D1117</code>) in light mode and deepwater (<code>#254D5A</code>) in dark mode —
+    giving hero sections and feature callouts visual weight that adapts without losing contrast.
+  </p>
+  <p>
+    Unlike <code>base</code>, <code>layer</code>, and <code>overlay</code>, it overrides text and
+    border tokens directly so descendants automatically inherit the right dark-palette values. Just
+    add <code>data-surface="featured"</code> — no <code>data-theme</code> composition required.
+  </p>
+  <pre><code>&lt;section data-surface="featured"&gt;
+  &lt;!-- text tokens are dark-palette: birch, mist, sand --&gt;
+  &lt;!-- bg: void in light mode, deepwater in dark mode   --&gt;
+&lt;/section&gt;</code></pre>
+  <p>
+    Toggle the page theme — the block below stays dark in both modes but shifts hue:
+  </p>
+  <div class="surface-demo featured-surface-demo" data-surface="featured">
+    <code class="surface-tag">data-surface="featured"</code>
+    <p class="surface-desc">Light mode: void &nbsp;·&nbsp; Dark mode: deepwater</p>
+    <p class="surface-contrast-note">
+      Primary text 8.5:1 (AAA) &nbsp;·&nbsp; Secondary 7.4:1 (AAA) &nbsp;·&nbsp; Tertiary 6.1:1 (AA)
+    </p>
   </div>
 
   <h2 id="fowt">FOWT Prevention</h2>
@@ -280,5 +329,15 @@ import DocLayout from '../../layouts/DocLayout.astro';
     padding: var(--space-md);
     border: 1px solid var(--color-border);
     background: var(--color-bg);
+  }
+
+  .featured-surface-demo {
+    margin: 0 0 var(--space-xl) 0;
+  }
+
+  .surface-contrast-note {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    margin: var(--space-xs) 0 0;
   }
 </style>

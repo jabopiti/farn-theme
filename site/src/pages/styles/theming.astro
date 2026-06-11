@@ -51,12 +51,26 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <td><code>--in2-slate</code> (capped)</td>
         <td>Modals, dropdowns, floating elements</td>
       </tr>
+      <tr>
+        <td><code>featured</code></td>
+        <td><code>--in0-void</code> <span class="swatch" style="background:#0D1117"></span></td>
+        <td><code>--fo3-deepwater</code> <span class="swatch" style="background:#254D5A"></span></td>
+        <td><code>--in1-iron</code></td>
+        <td><code>--in1-iron</code></td>
+        <td>Hero sections, feature callouts — always dark</td>
+      </tr>
     </tbody>
   </table>
   <p>
     The dark overlay ceiling: in dark mode <code>--color-bg-panel</code> inside an overlay is capped
     at <code>--in2-slate</code> — the same as the overlay background — because slate is the
     deepest available surface.
+  </p>
+  <p>
+    The <code>featured</code> surface also overrides text and border tokens (not just <code>--color-bg</code>)
+    so descendants inherit dark-palette values in both themes — no <code>data-theme</code> attribute
+    needed. See <a href="/foundations/surfaces#featured-surface">Foundations &rsaquo; Surfaces</a> for
+    the full token set and contrast ratios.
   </p>
 
   <h2 id="theme-toggle">Theme Toggle</h2>
