@@ -10,6 +10,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ### Added
 - `tokens/dark-light.css`: `data-surface="featured"` — fourth surface pattern. Always renders dark regardless of page theme: void (`#0D1117`) in light mode, deepwater (`#254D5A`) in dark mode. Overrides text, border, and bg-panel tokens to dark-palette values so descendants inherit correct contrast without a `data-theme` attribute. Text contrast on deepwater: primary 8.5:1 (AAA), secondary 7.4:1 (AAA), tertiary 6.1:1 (AA).
 - `tokens/colors.css`: Updated `--fo3-deepwater` comment to document its role as featured-surface background in dark mode.
+- `tokens/dark-light.css`: Added `--btn-g-text` and `--btn-s-text` to `[data-surface="featured"]` block — prevents ghost and secondary button text from inheriting void (dark) in light-mode pages, which would render invisible on the dark surface background.
+- `site/src/pages/index.astro`: About (§2) and Closing CTA (§7) sections converted from `data-theme="dark"` to `data-surface="featured"`. Arc divider fill updated via CSS to match deepwater in dark mode.
 - `site/src/pages/foundations/surfaces.astro`: Added `featured` to depth reference table, side-by-side live demo, reactive demo. New "Featured Surface" section with live demo block and contrast ratio callout.
 - `site/src/pages/styles/theming.astro`: Added `featured` row to Surface Depth table with note on extended token overrides.
 

@@ -296,6 +296,8 @@
   --color-bg-interactive-hover: var(--in3-ash);
   --skeleton-base:              var(--in1-iron);
   --skeleton-shine:             var(--in2-slate);
+  --btn-g-text:                 var(--bm2-birch);
+  --btn-s-text:                 var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="featured"] {
