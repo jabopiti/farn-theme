@@ -14,10 +14,10 @@
   --bm2-birch:     #F7F6F3;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
-  --fo0-sage:      #5C9E86;   /* Supporting accent; card highlight bg (dark mode)  */
+  --fo0-sage:      #5C9E86;   /* Supporting accent; dark-mode hover state          */
   --fo1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs             */
-  --fo2-forest:    #2D5E4A;   /* Secondary accent; card highlight bg (light mode)  */
-  --fo3-deepwater: #254D5A;   /* Tertiary accent; code block bg (light pages)      */
+  --fo2-forest:    #2D5E4A;   /* Secondary accent; card highlight bg (dark mode)   */
+  --fo3-deepwater: #254D5A;   /* Tertiary accent; code block bg + card highlight bg (light mode) */
 
   /* Bloom — semantic */
   --bl0-ember:     #C5414C;   /* Errors, deletions                         */
