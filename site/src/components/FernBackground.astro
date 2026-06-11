@@ -3714,6 +3714,28 @@ document.documentElement.classList.add('js');
     ] }
   ];
 
+  /* Shared SVG element builder used by both frond builders. */
+  function buildFrondSvg(spr, bxe, f, delay, flip) {
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('class', 'art');
+    svg.setAttribute('viewBox', '0 0 ' + spr.vw + ' ' + spr.vh);
+    svg.style.aspectRatio = spr.vw + ' / ' + spr.vh;
+    svg.style.color = f.color;
+    svg.style.transformOrigin = (bxe * 100).toFixed(1) + '% 100%';
+    svg.style.setProperty('--d', delay.toFixed(2) + 's');
+    var use = document.createElementNS(SVGNS, 'use');
+    use.setAttributeNS(XLINK, 'href', '#' + f.sprite);
+    use.setAttribute('href', '#' + f.sprite);
+    if (flip) {
+      var g = document.createElementNS(SVGNS, 'g');
+      g.setAttribute('transform', 'translate(' + spr.vw + ' 0) scale(-1 1)');
+      g.appendChild(use); svg.appendChild(g);
+    } else {
+      svg.appendChild(use);
+    }
+    return svg;
+  }
+
   /* Build one frond: an absolutely positioned element whose stem base sits
      exactly on its anchor (bottom edge, or just outside a side edge), so it
      can only ever grow into the frame. Rotation pivots at that base. */
@@ -3731,25 +3753,7 @@ document.documentElement.classList.add('js');
     el.style.width = f.w + '%';
     el.style.transformOrigin = (bxe * 100).toFixed(1) + '% 100%';
     el.style.transform = 'rotate(' + (f.rot || 0) + 'deg)';
-
-    var svg = document.createElementNS(SVGNS, 'svg');
-    svg.setAttribute('class', 'art');
-    svg.setAttribute('viewBox', '0 0 ' + spr.vw + ' ' + spr.vh);
-    svg.style.aspectRatio = spr.vw + ' / ' + spr.vh;
-    svg.style.color = f.color;
-    svg.style.transformOrigin = (bxe * 100).toFixed(1) + '% 100%';
-    svg.style.setProperty('--d', delay.toFixed(2) + 's');
-    var use = document.createElementNS(SVGNS, 'use');
-    use.setAttributeNS(XLINK, 'href', '#' + f.sprite);
-    use.setAttribute('href', '#' + f.sprite);
-    if (f.flip) {
-      var g = document.createElementNS(SVGNS, 'g');
-      g.setAttribute('transform', 'translate(' + spr.vw + ' 0) scale(-1 1)');
-      g.appendChild(use); svg.appendChild(g);
-    } else {
-      svg.appendChild(use);
-    }
-    el.appendChild(svg);
+    el.appendChild(buildFrondSvg(spr, bxe, f, delay, f.flip));
     planeEl.appendChild(el);
     return el;
   }
@@ -3767,20 +3771,7 @@ document.documentElement.classList.add('js');
     el.style.width  = f.w + '%';
     el.style.transformOrigin = (bxe * 100).toFixed(1) + '% 100%';
     el.style.transform = 'rotate(' + (-(f.rot || 0)) + 'deg)';
-    var svg = document.createElementNS(SVGNS, 'svg');
-    svg.setAttribute('class', 'art');
-    svg.setAttribute('viewBox', '0 0 ' + spr.vw + ' ' + spr.vh);
-    svg.style.aspectRatio = spr.vw + ' / ' + spr.vh;
-    svg.style.color = f.color;
-    svg.style.transformOrigin = (bxe * 100).toFixed(1) + '% 100%';
-    svg.style.setProperty('--d', delay.toFixed(2) + 's');
-    var g = document.createElementNS(SVGNS, 'g');
-    g.setAttribute('transform', 'translate(' + spr.vw + ' 0) scale(-1 1)');
-    var use = document.createElementNS(SVGNS, 'use');
-    use.setAttributeNS(XLINK, 'href', '#' + f.sprite);
-    use.setAttribute('href', '#' + f.sprite);
-    g.appendChild(use); svg.appendChild(g);
-    el.appendChild(svg);
+    el.appendChild(buildFrondSvg(spr, bxe, f, delay, true));
     containerEl.appendChild(el);
     return el;
   }
@@ -3793,6 +3784,9 @@ document.documentElement.classList.add('js');
   try {
     PLANES.forEach(function (spec) {
       var planeEl = hero.querySelector(spec.sel);
+      var amp  = parseFloat(planeEl.dataset.amp);
+      var parY = parseFloat(planeEl.dataset.pary);
+      var mxK  = parseFloat(planeEl.dataset.mx);
       var fronds = [];
       spec.fronds.forEach(function (f, i) {
         var delay = spec.baseDelay + i * 0.07;
@@ -3802,8 +3796,7 @@ document.documentElement.classList.add('js');
             phase: (i * 1.7 + spec.baseDelay * 9) % (Math.PI * 2),
             freq: 0.7 + ((i * 37) % 10) / 12,
             mult: 0.7 + ((i * 53) % 10) / 16,
-            amp: parseFloat(planeEl.dataset.amp),
-            mxK: parseFloat(planeEl.dataset.mx) });
+            amp: amp, mxK: mxK });
         } else {
           var el = buildFrond(planeEl, f, delay);
           fronds.push({ el: el, baseRot: f.rot || 0,
@@ -3814,9 +3807,7 @@ document.documentElement.classList.add('js');
       });
       planes.push({
         el: planeEl, fronds: fronds,
-        amp: parseFloat(planeEl.dataset.amp),
-        parY: parseFloat(planeEl.dataset.pary),
-        mxK: parseFloat(planeEl.dataset.mx),
+        amp: amp, parY: parY, mxK: mxK,
         parOffset: 0
       });
     });
@@ -3829,12 +3820,25 @@ document.documentElement.classList.add('js');
   var energy = 0, windT = 0, lastFrame = 0;
   var mx = 0, my = 0, tmx = 0, tmy = 0, lastPX = null, lastPY = null, lastY = window.scrollY;
 
+  /* Cached hero metrics — updated on resize, not on every scroll tick. */
+  var heroOffsetY = 0, heroHeight = 0;
+  function cacheHeroMetrics() {
+    var r = hero.getBoundingClientRect();
+    heroOffsetY = r.top + window.scrollY;
+    heroHeight = r.height;
+  }
+
   function applyParallax() {
-    var rect = hero.getBoundingClientRect();
     var vh = window.innerHeight || 1;
-    var progress = clamp((vh - rect.top) / (vh + rect.height), 0, 1);
+    var top = heroOffsetY - window.scrollY;
+    var progress = clamp((vh - top) / (vh + heroHeight), 0, 1);
     var offset = (progress - 0.5) * 2;
     planes.forEach(function (pl) { pl.parOffset = -offset * pl.parY; });
+  }
+
+  /* Wind sway formula — shared by in-scene and overlay fronds. */
+  function windSway(freq, phase, gust) {
+    return Math.sin(windT * freq + phase) * 0.7 + Math.sin(windT * freq * 2.6 + phase * 1.3) * 0.3 + gust;
   }
 
   function frame() {
@@ -3845,28 +3849,27 @@ document.documentElement.classList.add('js');
     mx += (tmx - mx) * Math.min(1, dt * 5);
     my += (tmy - my) * Math.min(1, dt * 5);
     var e = Math.pow(clamp(energy, 0, 1), 0.75);
+    var lastGust = 0;
     planes.forEach(function (pl, idx) {
       var gust = Math.sin(windT * 0.5 + idx * 0.7) * 0.3;
+      lastGust = gust;
       var px = clamp(mx * pl.mxK, -MX_BUDGET, MX_BUDGET);
       var py = pl.parOffset + clamp(my * pl.mxK * 0.3, -MX_BUDGET, MX_BUDGET);
       pl.el.style.transform = 'translate3d(' + px.toFixed(2) + 'px,' + py.toFixed(2) + 'px,0)';
       for (var i = 0; i < pl.fronds.length; i++) {
         var f = pl.fronds[i];
-        var wind = Math.sin(windT * f.freq + f.phase) * 0.7 + Math.sin(windT * f.freq * 2.6 + f.phase * 1.3) * 0.3 + gust;
-        f.el.style.transform = 'rotate(' + (f.baseRot + wind * pl.amp * f.mult * e).toFixed(3) + 'deg)';
+        f.el.style.transform = 'rotate(' + (f.baseRot + windSway(f.freq, f.phase, gust) * pl.amp * f.mult * e).toFixed(3) + 'deg)';
       }
     });
     /* Overlay fronds: same physics as plane-0 but px negated (no scaleX wrapper) */
     if (overlayFronds.length > 0) {
       var pl0 = planes[planes.length - 1];
-      var gust0 = Math.sin(windT * 0.5 + (planes.length - 1) * 0.7) * 0.3;
       var px0 = clamp(mx * pl0.mxK, -MX_BUDGET, MX_BUDGET);
       var py0 = pl0.parOffset + clamp(my * pl0.mxK * 0.3, -MX_BUDGET, MX_BUDGET);
       overlayContainer.style.transform = 'translate3d(' + (-px0).toFixed(2) + 'px,' + py0.toFixed(2) + 'px,0)';
       for (var j = 0; j < overlayFronds.length; j++) {
         var of = overlayFronds[j];
-        var wov = Math.sin(windT * of.freq + of.phase) * 0.7 + Math.sin(windT * of.freq * 2.6 + of.phase * 1.3) * 0.3 + gust0;
-        of.el.style.transform = 'rotate(' + (of.baseRot - wov * of.amp * of.mult * e).toFixed(3) + 'deg)';
+        of.el.style.transform = 'rotate(' + (of.baseRot - windSway(of.freq, of.phase, lastGust) * of.amp * of.mult * e).toFixed(3) + 'deg)';
       }
     }
     return energy > 0.004 || Math.abs(tmx - mx) > 0.01 || Math.abs(tmy - my) > 0.01;
@@ -3895,7 +3898,7 @@ document.documentElement.classList.add('js');
 
   if (prefersReduced || !('IntersectionObserver' in window)) {
     hero.classList.add('is-settled'); L.settled=true; setChip('still');
-    if (replayBtn) replayBtn.hidden = true; applyParallax();
+    if (replayBtn) replayBtn.hidden = true; cacheHeroMetrics(); applyParallax();
   } else {
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
@@ -3917,10 +3920,10 @@ document.documentElement.classList.add('js');
       if (lastPX!==null){ var sp=Math.hypot(e.clientX-lastPX,e.clientY-lastPY); energy=clamp(energy+Math.min(0.06,sp*0.0011),0,1); }
       lastPX=e.clientX; lastPY=e.clientY;
       if (L.settled && energy>0.02) setChip('wind'); startLoop();
-    });
-    hero.addEventListener('pointerleave', function(){ tmx=0; tmy=0; lastPX=null; lastPY=null; startLoop(); });
-    window.addEventListener('resize', applyParallax, { passive:true });
-    applyParallax();
+    }, { passive:true });
+    hero.addEventListener('pointerleave', function(){ tmx=0; tmy=0; lastPX=null; lastPY=null; startLoop(); }, { passive:true });
+    window.addEventListener('resize', function(){ cacheHeroMetrics(); applyParallax(); }, { passive:true });
+    cacheHeroMetrics(); applyParallax();
     if (replayBtn) replayBtn.addEventListener('click', playIntro);
   }
   }
