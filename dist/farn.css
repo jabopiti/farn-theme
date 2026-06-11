@@ -156,6 +156,7 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
+  --color-bg-interactive-hover:  var(--bm1-mist);  /* one step deeper than base bg (birch) */
   --color-card-highlight-bg:     var(--fo3-deepwater);
   --color-card-highlight-border: transparent;
   --tooltip-bg:                  var(--in0-void);
@@ -195,11 +196,11 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
+  --color-bg-interactive-hover:  var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
-  --btn-s-hover-bg:             var(--in3-ash);
-  --btn-g-active-bg:            var(--in0-void);  /* darker than ghost hover --in1-iron (#374151) */
+  --btn-g-active-bg:            var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
 }
 
@@ -224,39 +225,43 @@
 
 /* layer — cards, sidebars, panels */
 [data-surface="layer"] {
-  background:       var(--bm1-mist);
-  --color-bg:       var(--bm1-mist);
-  --color-bg-panel: var(--bm2-birch);
-  --skeleton-base:  var(--bm0-sand);
-  --skeleton-shine: var(--bm2-birch);
+  background:                   var(--bm1-mist);
+  --color-bg:                   var(--bm1-mist);
+  --color-bg-panel:             var(--bm2-birch);
+  --color-bg-interactive-hover: var(--bm0-sand);  /* go deeper from mist */
+  --skeleton-base:              var(--bm0-sand);
+  --skeleton-shine:             var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="layer"],
 [data-surface="layer"][data-theme="dark"] {
-  background:       var(--in1-iron);
-  --color-bg:       var(--in1-iron);
-  --color-bg-panel: var(--in2-slate);
-  --color-bg-code:  var(--in2-slate);
-  --skeleton-base:  var(--in2-slate);
-  --skeleton-shine: var(--in3-ash);
+  background:                   var(--in1-iron);
+  --color-bg:                   var(--in1-iron);
+  --color-bg-panel:             var(--in2-slate);
+  --color-bg-code:              var(--in2-slate);
+  --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in2-slate);
+  --skeleton-shine:             var(--in3-ash);
 }
 
 /* overlay — modals, dropdowns, floating elements */
 [data-surface="overlay"] {
-  background:       var(--bm0-sand);
-  --color-bg:       var(--bm0-sand);
-  --skeleton-base:  var(--bm1-mist);
-  --skeleton-shine: var(--bm2-birch);
+  background:                   var(--bm0-sand);
+  --color-bg:                   var(--bm0-sand);
+  --color-bg-interactive-hover: var(--bm2-birch);  /* go lighter — sand is the darkest light step */
+  --skeleton-base:              var(--bm1-mist);
+  --skeleton-shine:             var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="overlay"],
 [data-surface="overlay"][data-theme="dark"] {
-  background:       var(--in2-slate);
-  --color-bg:       var(--in2-slate);
-  --color-bg-panel: var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
-  --color-bg-inset: var(--in1-iron);
-  --skeleton-base:  var(--in1-iron);
-  --skeleton-shine: var(--in3-ash);
+  background:                   var(--in2-slate);
+  --color-bg:                   var(--in2-slate);
+  --color-bg-panel:             var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
+  --color-bg-inset:             var(--in1-iron);
+  --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in1-iron);
+  --skeleton-shine:             var(--in3-ash);
 }
 /* ── Farn — Component tokens (Tier 3) ─────────────────────────────────── */
 /*                                                                           */
@@ -283,13 +288,13 @@
   --btn-s-bg:       var(--color-bg-inset);
   --btn-s-text:     var(--color-text);
   --btn-s-border:   transparent;
-  --btn-s-hover-bg: var(--color-bg-panel); /* dark override: --btn-s-hover-bg in dark-light.css */
+  --btn-s-hover-bg: var(--color-bg-interactive-hover);
 
   /* Ghost */
   --btn-g-bg:       transparent;
   --btn-g-text:     var(--color-text);
   --btn-g-border:   var(--color-border);
-  --btn-g-hover-bg: var(--color-bg-panel);
+  --btn-g-hover-bg: var(--color-bg-interactive-hover);
 
   /* Destructive — hover is theme-invariant (always near-black for emphasis) */
   --btn-d-bg:       var(--color-error);
@@ -366,7 +371,7 @@
   --accordion-border:           var(--color-border);
   --accordion-radius:           var(--radius-md);
   --accordion-summary-bg:       transparent;
-  --accordion-summary-hover-bg: var(--color-bg-panel);
+  --accordion-summary-hover-bg: var(--color-bg-interactive-hover);
   --accordion-panel-bg:         transparent;
   --accordion-font-size:        0.9375rem; /* 15px */
   --accordion-toggle-size:      1.25rem;
@@ -443,7 +448,7 @@
   /* ── Pagination tokens ──────────────────────────────────────────────── */
   --pagination-active-bg:   var(--color-accent);
   --pagination-active-text: var(--color-accent-text);
-  --pagination-hover-bg:    var(--color-bg-panel);
+  --pagination-hover-bg:    var(--color-bg-interactive-hover);
   --pagination-hover-text:  var(--color-text);
   --pagination-border:      var(--color-border);
   --pagination-radius:      var(--radius-md);
@@ -451,7 +456,7 @@
 
   /* ── Tab tokens ─────────────────────────────────────────────────────── */
   --tab-idle-text:        var(--color-text-secondary);
-  --tab-hover-bg:         var(--color-bg-panel);
+  --tab-hover-bg:         var(--color-bg-interactive-hover);
   --tab-active-text:      var(--color-text);
   --tab-indicator:        var(--color-accent);
   --tab-border:           var(--color-border);
