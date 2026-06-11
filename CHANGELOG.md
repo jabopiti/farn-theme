@@ -7,6 +7,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/dark-light.css`: Hover states for secondary/ghost buttons, accordions, tabs, and pagination were invisible on `layer` surfaces (low-contrast adjacent palette steps) and broken on dark `overlay` surfaces (hover matched surface bg exactly). Root cause: all interactive hover tokens pointed to `--color-bg-panel`, which is repurposed per surface and no longer reliably contrasts with the surface background.
+
+### Added
+- `tokens/dark-light.css`: `--color-bg-interactive-hover` semantic token — defined at every surface/theme level to always provide legible contrast: light base → mist, light layer → sand, light overlay → birch (go lighter; sand is the palette endpoint), dark base/layer/overlay → ash (lightest dark step, contrasts all three dark surface levels). Token lives in the semantic layer alongside `--color-accent-hover` and other purpose-mapped tokens.
+- `tokens/components.css`: `--btn-s-hover-bg`, `--btn-g-hover-bg`, `--accordion-summary-hover-bg`, `--tab-hover-bg`, `--pagination-hover-bg` now reference `var(--color-bg-interactive-hover)` instead of `var(--color-bg-panel)`. Removes the now-redundant dark-mode `--btn-s-hover-bg` component override.
+- `site/src/styles/site.css`, `site/src/pages/index.astro`: Site-level nav and hero hover states updated to use `--color-bg-interactive-hover` for consistency.
+
 ### Added
 - **T-55** `site/src/pages/components/actions.astro`: Button sizes, states, and loading demos promoted outside the accordion — all live examples now visible without expanding any disclosure; accordion retained for anatomy HTML, token reference, and override snippets
 - **T-55** `site/src/pages/components/layout.astro`: Card anatomy demo (full card with `.card-media` / `.card-header` / `.card-body` / `.card-footer` slots) promoted outside the accordion with a visible `<h3>Anatomy</h3>` heading

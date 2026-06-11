@@ -40,6 +40,7 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
+  --color-bg-interactive-hover:  var(--bm1-mist);  /* one step deeper than base bg (birch) */
   --color-card-highlight-bg:     var(--in0-void);
   --color-card-highlight-border: transparent;
   --tooltip-bg:                  var(--in0-void);
@@ -79,13 +80,13 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
+  --color-bg-interactive-hover:  var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
   --color-card-highlight-bg:     var(--in1-iron);
   --color-card-highlight-border: var(--in2-slate);
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
-  --btn-s-hover-bg:             var(--in3-ash);
-  --btn-g-active-bg:            var(--in0-void);  /* darker than ghost hover --in1-iron (#374151) */
+  --btn-g-active-bg:            var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
 }
 
@@ -110,29 +111,33 @@
 
 /* layer — cards, sidebars, panels */
 [data-surface="layer"] {
-  background:       var(--bm1-mist);
-  --color-bg:       var(--bm1-mist);
-  --color-bg-panel: var(--bm2-birch);
+  background:                   var(--bm1-mist);
+  --color-bg:                   var(--bm1-mist);
+  --color-bg-panel:             var(--bm2-birch);
+  --color-bg-interactive-hover: var(--bm0-sand);  /* go deeper from mist */
 }
 
 [data-theme="dark"] [data-surface="layer"],
 [data-surface="layer"][data-theme="dark"] {
-  background:       var(--in1-iron);
-  --color-bg:       var(--in1-iron);
-  --color-bg-panel: var(--in2-slate);
-  --color-bg-code:  var(--in2-slate);
+  background:                   var(--in1-iron);
+  --color-bg:                   var(--in1-iron);
+  --color-bg-panel:             var(--in2-slate);
+  --color-bg-code:              var(--in2-slate);
+  --color-bg-interactive-hover: var(--in3-ash);
 }
 
 /* overlay — modals, dropdowns, floating elements */
 [data-surface="overlay"] {
-  background: var(--bm0-sand);
-  --color-bg: var(--bm0-sand);
+  background:                   var(--bm0-sand);
+  --color-bg:                   var(--bm0-sand);
+  --color-bg-interactive-hover: var(--bm2-birch);  /* go lighter — sand is the darkest light step */
 }
 
 [data-theme="dark"] [data-surface="overlay"],
 [data-surface="overlay"][data-theme="dark"] {
-  background:       var(--in2-slate);
-  --color-bg:       var(--in2-slate);
-  --color-bg-panel: var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
-  --color-bg-inset: var(--in1-iron);
+  background:                   var(--in2-slate);
+  --color-bg:                   var(--in2-slate);
+  --color-bg-panel:             var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
+  --color-bg-inset:             var(--in1-iron);
+  --color-bg-interactive-hover: var(--in3-ash);
 }
