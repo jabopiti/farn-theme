@@ -41,7 +41,7 @@
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
   --color-bg-interactive-hover:  var(--bm1-mist);  /* one step deeper than base bg (birch) */
-  --color-card-highlight-bg:     var(--in0-void);
+  --color-card-highlight-bg:     var(--fo3-deepwater);
   --color-card-highlight-border: transparent;
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
@@ -81,8 +81,6 @@
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
   --color-bg-interactive-hover:  var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
-  --color-card-highlight-bg:     var(--in1-iron);
-  --color-card-highlight-border: var(--in2-slate);
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
@@ -115,6 +113,8 @@
   --color-bg:                   var(--bm1-mist);
   --color-bg-panel:             var(--bm2-birch);
   --color-bg-interactive-hover: var(--bm0-sand);  /* go deeper from mist */
+  --skeleton-base:              var(--bm0-sand);
+  --skeleton-shine:             var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="layer"],
@@ -124,6 +124,8 @@
   --color-bg-panel:             var(--in2-slate);
   --color-bg-code:              var(--in2-slate);
   --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in2-slate);
+  --skeleton-shine:             var(--in3-ash);
 }
 
 /* overlay — modals, dropdowns, floating elements */
@@ -131,6 +133,8 @@
   background:                   var(--bm0-sand);
   --color-bg:                   var(--bm0-sand);
   --color-bg-interactive-hover: var(--bm2-birch);  /* go lighter — sand is the darkest light step */
+  --skeleton-base:              var(--bm1-mist);
+  --skeleton-shine:             var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="overlay"],
@@ -140,4 +144,6 @@
   --color-bg-panel:             var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
   --color-bg-inset:             var(--in1-iron);
   --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in1-iron);
+  --skeleton-shine:             var(--in3-ash);
 }

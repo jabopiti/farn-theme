@@ -696,7 +696,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-57 · Layout › card highlight dark-mode contrast fix
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/relaxed-lovelace-0o1jxn`
 
 **Gap:** `.card-highlight` in dark mode is visually indistinguishable from `.card-outlined` — both show `--in1-iron` background with a `--in2-slate` border. In light mode the high-contrast dark fill makes the variant immediately recognisable; in dark mode it blends in.
 
@@ -722,7 +722,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-59 · Layout › separator visual hierarchy
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/relaxed-lovelace-0o1jxn`
 
 **Gap:** `.hairline` and `.section-divider` are visually identical. `.decorative` is only distinguishable by its short width and accent colour — its weight doesn't read as "accent" at a glance. The pullquote `::before` rule already produces a well-weighted decorative line; reusing it would improve consistency and reduce duplication.
 
@@ -789,7 +789,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-64 · Status › calm loading animations + fix skeleton surface colours
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/relaxed-lovelace-0o1jxn`
 
 **Gap:** The spinner rotates too fast and the skeleton shimmer animation is too quick — both feel anxious rather than calm, which conflicts with the Farn design system's "sharp, warm, intellectual" character. Skeleton colours are also fixed palette values rather than surface-relative, so they don't adapt on `layer`/`overlay` surfaces.
 
@@ -875,7 +875,7 @@ Merged into T-49 (Complete Foundations section).
 
 - [ ] Implement click-to-copy for hex values (small JS snippet or CSS-only with `data-clipboard` approach)
 - [ ] Build the swatch strip and per-colour card layout
-- [ ] Define and apply role tags to every palette token
+- [ ] Define and apply role tags to every palette token — note: `--fo3-deepwater` role now includes **card highlight background** (added in T-57)
 - [ ] Preserve the existing semantic token mapping tables — move to an accordion Reference section
 - [ ] Update `CHANGELOG.md`
 

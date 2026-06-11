@@ -72,7 +72,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <tbody>
             <tr><td>Default</td><td><code>.card</code></td><td>Article lists, feature grids, project indexes. Background: <code>--card-bg</code> → <code>--color-bg-panel</code>.</td></tr>
             <tr><td>Outlined</td><td><code>.card-outlined</code></td><td>Adds <code>var(--color-border)</code> edge when the surrounding surface matches the card's background.</td></tr>
-            <tr><td>Highlight</td><td><code>.card-highlight</code></td><td>Featured or promoted content. Light: <code>--in0-void</code>. Dark: <code>--in1-iron</code> + <code>--in2-slate</code> border.</td></tr>
+            <tr><td>Highlight</td><td><code>.card-highlight</code></td><td>Featured or promoted content. Background: <code>--fo3-deepwater</code> (both modes) — dark teal with Birch Mist text, adapts to neither theme.</td></tr>
             <tr><td>Interactive</td><td><code>.card-interactive</code></td><td>Any card that is a navigation target or action trigger — adds hover, focus, and active states.</td></tr>
           </tbody>
         </table>
@@ -128,8 +128,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td><code>--card-border</code></td><td><code>transparent</code></td><td>Border colour — <code>.card-outlined</code> overrides to <code>--color-border</code></td></tr>
             <tr><td><code>--card-radius</code></td><td><code>var(--radius-lg)</code></td><td>Border radius for card and media</td></tr>
             <tr><td><code>--card-padding</code></td><td><code>var(--space-md)</code></td><td>Padding for bare cards and all anatomy sections</td></tr>
-            <tr><td><code>--card-highlight-bg</code></td><td>Light: <code>--in0-void</code> · Dark: <code>--in1-iron</code></td><td>Background for <code>.card-highlight</code></td></tr>
-            <tr><td><code>--card-highlight-border</code></td><td>Light: <code>transparent</code> · Dark: <code>--in2-slate</code></td><td>Border for <code>.card-highlight</code></td></tr>
+            <tr><td><code>--card-highlight-bg</code></td><td><code>--fo3-deepwater</code> (both modes)</td><td>Background for <code>.card-highlight</code></td></tr>
+            <tr><td><code>--card-highlight-border</code></td><td><code>transparent</code> (both modes)</td><td>Border for <code>.card-highlight</code></td></tr>
           </tbody>
         </table>
 
