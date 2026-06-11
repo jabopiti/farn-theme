@@ -169,12 +169,13 @@
   --btn-s-text:                  var(--in0-void);
 
   /* Section transition aliases — consumed by divider patterns (T-23–T-28) */
-  --color-section:         var(--color-bg);
+  --color-section:          var(--color-bg);
   /* override --color-section-next on the divider element to match the actual destination section */
-  --color-section-next:    var(--color-bg-panel);
-  --color-section-base:    var(--color-bg);
-  --color-section-layer:   var(--color-bg-panel);
-  --color-section-overlay: var(--color-bg-inset);
+  --color-section-next:     var(--color-bg-panel);
+  --color-section-base:     var(--color-bg);
+  --color-section-layer:    var(--color-bg-panel);
+  --color-section-overlay:  var(--color-bg-inset);
+  --color-section-featured: var(--in0-void);
 }
 
 /* ── Semantic tokens — dark ─────────────────────────────────────────── */
@@ -210,6 +211,7 @@
   --btn-g-text:                 var(--bm2-birch);
   --btn-s-text:                 var(--bm2-birch);
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
+  --color-section-featured: var(--fo3-deepwater);
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */
