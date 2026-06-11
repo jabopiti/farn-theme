@@ -40,9 +40,12 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
-  --color-bg-interactive-hover:  var(--bm1-mist);  /* one step deeper than base bg (birch) */
-  --color-card-highlight-bg:     var(--fo3-deepwater);
-  --color-card-highlight-border: transparent;
+  --color-bg-interactive-hover:          var(--bm1-mist);  /* one step deeper than base bg (birch) */
+  --color-card-highlight-bg:             var(--fo3-deepwater);
+  --color-card-highlight-border:         transparent;
+  --color-card-highlight-text:           var(--bm2-birch);
+  --color-card-highlight-text-secondary: var(--bm1-mist);
+  --color-card-highlight-text-tertiary:  var(--bm0-sand);
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
   --skeleton-shine:              var(--bm2-birch); /* birch (page bg) — lighter than panel (mist) */
@@ -80,7 +83,8 @@
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
-  --color-bg-interactive-hover:  var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
+  --color-bg-interactive-hover:          var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
+  --color-card-highlight-bg:             var(--fo2-forest);
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */

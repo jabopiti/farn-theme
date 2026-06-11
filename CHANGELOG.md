@@ -22,9 +22,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - **T-59** `tokens/components.css`: `--quote-pull-rule-*` tokens now reference `--separator-decorative-*` — single source of truth for accent rule dimensions shared between pullquote and decorative separator
 
 ### Changed
-- **T-57** `tokens/dark-light.css`: `--color-card-highlight-bg` changed from `--in0-void` (light) / `--in1-iron` (dark) to `--fo3-deepwater` (both modes); `--color-card-highlight-border` dark value changed from `--in2-slate` to `transparent` — teal bg is visually distinct from all card variants across both themes without relying on border differentiation
-- **T-57** `tokens/components.css`: Updated comment — "bg is always dark teal — text tokens are palette-fixed for guaranteed light-on-dark contrast"
-- **T-57** `tokens/colors.css`: `--fo3-deepwater` description updated to include card highlight background use case
+- **T-57** `tokens/dark-light.css`: `--color-card-highlight-bg` changed to `--fo3-deepwater` (light) / `--fo2-forest` (dark) — both are dark enough for Birch Mist text (8.6:1 and 6.7:1); `--color-card-highlight-text*` promoted to semantic layer in `:root` only (no dark override needed — text is always Birch Mist)
+- **T-57** `tokens/components.css`: `--card-highlight-text*` tokens now reference `--color-card-highlight-text*` semantic aliases
+- **T-57** `site/src/pages/index.astro`: Updated home page custom card-highlight classes to use deepwater/forest palette; removed unused `.card-highlight-dark` dead code; updated text colours from Iron Night to Birch Mist
+- **T-57** `tokens/colors.css`: Role comments updated — Sage and Forest now document card highlight background role (dark and light respectively); Deepwater role narrowed to code block bg and active accent state
 - **T-59** `tokens/component-classes.css`: `.section-divider` and `.decorative` now consume `--separator-*` tokens; `.section-divider` weight increased from 2px to 3px for clear visual separation from `.hairline` (which retains `1px` directly)
 - **T-64** `tokens/components.css`: `--spinner-duration` changed from `var(--duration-loop)` (800ms) to `1.2s`; `--skeleton-duration` changed to `1.6s` — calmer, less anxious loading animations in keeping with Farn's character
 - **T-64** `tokens/dark-light.css`: `--skeleton-base` and `--skeleton-shine` per-surface overrides added to `layer` and `overlay` blocks (both themes) — fixes invisible shimmer bug where both tokens resolved to the same colour on non-base surfaces
