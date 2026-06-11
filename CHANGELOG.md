@@ -12,8 +12,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - **T-59** `tokens/components.css`: `--quote-pull-rule-*` tokens now reference `--separator-decorative-*` — single source of truth for accent rule dimensions shared between pullquote and decorative separator
 
 ### Changed
-- **T-57** `tokens/dark-light.css`: `--color-card-highlight-bg` changed to `--fo2-forest` (light) / `--fo0-sage` (dark) — surfaces now adapt with theme; dark-mode overrides added for `--card-highlight-text` (void), `--card-highlight-text-secondary` (iron), `--card-highlight-text-tertiary` (slate) so text inverts correctly with the lighter Sage background
-- **T-57** `tokens/components.css`: Comment updated; light-mode text defaults remain birch/mist/sand for Forest bg contrast
+- **T-57** `tokens/dark-light.css`: `--color-card-highlight-bg` changed to `--fo2-forest` (light) / `--fo0-sage` (dark); `--color-card-highlight-text`, `-secondary`, `-tertiary` promoted to semantic layer — light: birch/mist/sand; dark: void/iron/slate — text inverts with the surface
+- **T-57** `tokens/components.css`: `--card-highlight-text*` tokens now reference `--color-card-highlight-text*` semantic aliases instead of raw palette tokens
 - **T-57** `tokens/colors.css`: Role comments updated — Sage and Forest now document card highlight background role (dark and light respectively); Deepwater role narrowed to code block bg and active accent state
 - **T-59** `tokens/component-classes.css`: `.section-divider` and `.decorative` now consume `--separator-*` tokens; `.section-divider` weight increased from 2px to 3px for clear visual separation from `.hairline` (which retains `1px` directly)
 - **T-64** `tokens/components.css`: `--spinner-duration` changed from `var(--duration-loop)` (800ms) to `1.2s`; `--skeleton-duration` changed to `1.6s` — calmer, less anxious loading animations in keeping with Farn's character
