@@ -14,6 +14,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/pages/index.astro`: About (§2) and Closing CTA (§7) sections converted from `data-theme="dark"` to `data-surface="featured"`. Arc divider fill updated via CSS to match deepwater in dark mode.
 - `site/src/pages/foundations/surfaces.astro`: Added `featured` to depth reference table, side-by-side live demo, reactive demo. New "Featured Surface" section with live demo block and contrast ratio callout.
 - `site/src/pages/styles/theming.astro`: Added `featured` row to Surface Depth table with note on extended token overrides.
+- `site/src/components/FernMultiplaneHero.astro`: Gyroscope parallax — `deviceorientation` events now drive the same `tmx`/`tmy` plane-offset targets as pointer movement. Calibrates to the user's hold angle on first event; recalibrates on viewport re-entry. Accounts for landscape orientation by swapping axes when `screen.orientation.angle` is ±90°. Defers to pointer when a pointer event occurred within the last 2 s. Energy injected from angular velocity with a 0.3° dead zone to suppress sensor noise. iOS 13+ permission requested silently on first `touchstart`. Fully respects `prefers-reduced-motion` and the existing `inView` guard.
 
 ---
 

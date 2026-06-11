@@ -3906,6 +3906,7 @@ document.documentElement.classList.add('js');
   var introMs = parseInt(hero.dataset.intro || '3000', 10);
   var L = { inView:false, settled:false, raf:null, introTimer:null };
   function setChip(t){ if(chip) chip.textContent = t; }
+  function addEnergy(delta) { energy = clamp(energy + delta, 0, 1); }
   function startLoop(){
     if (L.raf || prefersReduced) return;
     var step = function(){
@@ -3926,24 +3927,27 @@ document.documentElement.classList.add('js');
     hero.classList.add('is-settled'); L.settled=true; setChip('still');
     if (replayBtn) replayBtn.hidden = true; applyParallax();
   } else {
+    var gyroRef = null, lastPointerTime = 0;
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         L.inView = en.isIntersecting;
-        if (en.isIntersecting && !L.settled && !hero.classList.contains('is-intro')) playIntro();
+        if (!en.isIntersecting) gyroRef = null;
+        else if (!L.settled && !hero.classList.contains('is-intro')) playIntro();
       });
     }, { threshold: 0.3 });
     io.observe(hero);
     window.addEventListener('scroll', function(){
       var dy = window.scrollY - lastY; lastY = window.scrollY;
       if (!L.inView) return;
-      applyParallax(); energy = clamp(energy + Math.abs(dy)*0.005, 0, 1);
+      applyParallax(); addEnergy(Math.abs(dy)*0.005);
       if (L.settled) setChip('wind'); startLoop();
     }, { passive:true });
     hero.addEventListener('pointermove', function(e){
+      lastPointerTime = performance.now();
       var rect = hero.getBoundingClientRect();
       tmx = ((e.clientX-rect.left)/rect.width - 0.5)*2;
       tmy = ((e.clientY-rect.top)/rect.height - 0.5)*2;
-      if (lastPX!==null){ var sp=Math.hypot(e.clientX-lastPX,e.clientY-lastPY); energy=clamp(energy+Math.min(0.06,sp*0.0011),0,1); }
+      if (lastPX!==null){ var sp=Math.hypot(e.clientX-lastPX,e.clientY-lastPY); addEnergy(Math.min(0.06,sp*0.0011)); }
       lastPX=e.clientX; lastPY=e.clientY;
       if (L.settled && energy>0.02) setChip('wind'); startLoop();
     });
@@ -3951,6 +3955,39 @@ document.documentElement.classList.add('js');
     window.addEventListener('resize', applyParallax, { passive:true });
     applyParallax();
     if (replayBtn) replayBtn.addEventListener('click', playIntro);
+
+    if (window.DeviceOrientationEvent) {
+      var cachedOrientation = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
+      window.addEventListener('orientationchange', function() {
+        cachedOrientation = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
+      }, { passive:true });
+      var lastGamma = null, lastBeta = null;
+      function onGyro(e) {
+        if (!L.inView || e.gamma === null) return;
+        if (lastGamma !== null) {
+          var dg = e.gamma - lastGamma, db = e.beta - lastBeta;
+          if (Math.abs(dg) < 0.3 && Math.abs(db) < 0.3) return;
+          addEnergy(Math.hypot(dg, db) * 0.012);
+        }
+        lastGamma = e.gamma; lastBeta = e.beta;
+        if (!gyroRef) { gyroRef = { gamma: e.gamma, beta: e.beta }; }
+        if (performance.now() - lastPointerTime < 2000) return;
+        var dGamma = e.gamma - gyroRef.gamma, dBeta = e.beta - gyroRef.beta;
+        if (Math.abs(cachedOrientation) === 90) { var t = dGamma; dGamma = dBeta; dBeta = t; }
+        tmx = clamp(dGamma / 30, -1, 1); tmy = clamp(dBeta / 30, -1, 1);
+        if (L.settled && energy > 0.02) setChip('tilt');
+        startLoop();
+      }
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        hero.addEventListener('touchstart', function() {
+          DeviceOrientationEvent.requestPermission().then(function(perm) {
+            if (perm === 'granted') window.addEventListener('deviceorientation', onGyro, { passive:true });
+          }).catch(function(){});
+        }, { once:true, passive:true });
+      } else {
+        window.addEventListener('deviceorientation', onGyro, { passive:true });
+      }
+    }
   }
   }
 })();
