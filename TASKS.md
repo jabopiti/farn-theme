@@ -763,10 +763,13 @@ Merged into T-49 (Complete Foundations section).
 ## T-62 · Forms › input border on non-base surfaces + state demos
 `status: backlog` `effort: S`
 
-**Gap:** Input field borders use `--color-border` which becomes invisible when an input sits on a `layer` or `overlay` surface (the border blends into the panel background). Additionally the forms docs only show the default state — focus, error, disabled, and readonly states are undocumented.
+**Gap:** The idle input border is `transparent` by default (`--input-border: transparent` in `tokens/components.css`), so inputs are indistinguishable from plain text on low-contrast surfaces. Additionally, even when a visible border is set, `--color-border` becomes invisible on `layer` or `overlay` surfaces (border blends into panel background). The forms docs only show the default state — focus, error, disabled, and readonly states are undocumented.
+
+**Plan:** Change `--input-border` default to `var(--color-border)` so inputs have a visible boundary at rest. Then address surface-relative contrast as a separate concern.
 
 **Before coding:** Check how Material Design, Primer, and Ant Design handle input borders across surfaces and document their approach. Note whether they use surface-relative border tokens or a fixed-contrast approach.
 
+- [ ] Change `--input-border` default from `transparent` to `var(--color-border)` in `tokens/components.css`
 - [ ] Fix: define surface-aware border behaviour for inputs — either via `--input-border` value in `data-surface` overrides in `tokens/dark-light.css`, or by using a higher-contrast base token
 - [ ] Extend the forms demo: add visible examples of focus, `aria-invalid` error, disabled, and readonly states — all outside the accordion
 - [ ] Update `tokens/components.css`, `tokens/component-classes.css`, and `site/src/pages/components/forms.astro`; rebuild; update `CHANGELOG.md`

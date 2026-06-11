@@ -7,6 +7,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/component-classes.css`: Spinner inside a loading button now uses `currentColor` for its arc and track so it remains visible on all button variants, including primary (fern background with white text).
+
 ### Changed
 - `site/src/pages/components/forms.astro`: Promoted states (default / error / disabled) and wrapper + hint demos outside the reference accordion — demo-first pattern now applied to all component pages (T-55).
 - `site/src/pages/components/layout.astro`: Fixed Separator accordion summary label from `"Full reference"` to `"Full reference — Separator"` for consistency.
