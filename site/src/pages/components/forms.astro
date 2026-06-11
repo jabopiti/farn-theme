@@ -20,7 +20,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     label with its control and optional hint text.
   </p>
 
-  <div class="form-demo demo-surface">
+  <div class="form-demo demo-surface" role="group" aria-label="Form element examples">
     <div class="form-field">
       <label for="demo-text">Text input</label>
       <input type="text" id="demo-text" placeholder="Placeholder text" />
@@ -42,6 +42,39 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <label>
         <input type="checkbox" /> Remember me
       </label>
+    </div>
+  </div>
+
+  <h3>States</h3>
+  <p>Hover darkens to <code>--input-bg-active</code>. Focus adds a coloured border and glow ring via <code>--input-focus-shadow</code>. Error via <code>aria-invalid="true"</code> (preferred — screen readers announce it) or the <code>.form-field--error</code> wrapper, which also colours the label and hint. Disabled reduces opacity via <code>--input-disabled-opacity</code> and suppresses pointer events.</p>
+  <div class="form-demo demo-surface" role="group" aria-label="Form input state examples">
+    <div class="form-field">
+      <label for="state-default">Default</label>
+      <input type="text" id="state-default" placeholder="Idle" />
+    </div>
+    <div class="form-field form-field--error">
+      <label for="state-error">Error</label>
+      <input type="text" id="state-error" aria-invalid="true" aria-describedby="state-error-hint" value="bad@" />
+      <span class="form-hint" id="state-error-hint">Invalid value.</span>
+    </div>
+    <div class="form-field">
+      <label for="state-disabled">Disabled</label>
+      <input type="text" id="state-disabled" value="Cannot edit" disabled />
+    </div>
+  </div>
+
+  <h3>Wrapper + hint</h3>
+  <p><code>.form-field</code> stacks label, control, and optional hint text with consistent spacing. <code>.form-hint</code> renders helper or error text below the control in a smaller, secondary colour.</p>
+  <div class="form-demo demo-surface" role="group" aria-label="Form field wrapper and hint text examples">
+    <div class="form-field">
+      <label for="wrapper-name">Username</label>
+      <input type="text" id="wrapper-name" placeholder="jane_smith" />
+      <span class="form-hint">3–24 characters, letters and underscores only.</span>
+    </div>
+    <div class="form-field form-field--error">
+      <label for="wrapper-email">Email</label>
+      <input type="email" id="wrapper-email" aria-invalid="true" aria-describedby="wrapper-email-hint" value="not-an-email" />
+      <span class="form-hint" id="wrapper-email-hint">Enter a valid email address.</span>
     </div>
   </div>
 
@@ -69,62 +102,21 @@ import DocLayout from '../../layouts/DocLayout.astro';
   &lt;label for="username"&gt;Username&lt;/label&gt;
   &lt;input type="text" id="username" /&gt;
   &lt;span class="form-hint"&gt;3–24 characters, letters and underscores only.&lt;/span&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
 
-        <h3>States</h3>
-        <p>
-          Hover darkens to <code>--input-bg-active</code>. Focus adds a coloured border and soft
-          glow ring via <code>--input-focus-shadow</code>. Error state via <code>aria-invalid="true"</code>
-          (preferred — screen readers announce it) or <code>.form-field--error</code> wrapper
-          (also colours the label and hint). Disabled inputs reduce opacity to
-          <code>--input-disabled-opacity</code> and suppress pointer events.
-        </p>
-        <div class="form-demo demo-surface">
-          <div class="form-field">
-            <label for="state-default">Default</label>
-            <input type="text" id="state-default" placeholder="Idle" />
-          </div>
-          <div class="form-field form-field--error">
-            <label for="state-error">Error</label>
-            <input type="text" id="state-error" aria-invalid="true" value="bad@" />
-            <span class="form-hint">Enter a valid email address.</span>
-          </div>
-          <div class="form-field">
-            <label for="state-disabled">Disabled</label>
-            <input type="text" id="state-disabled" value="Cannot edit" disabled />
-          </div>
-        </div>
-        <pre><code>&lt;!-- Error via ARIA attribute --&gt;
+&lt;!-- Error via ARIA attribute --&gt;
 &lt;input type="email" aria-invalid="true" value="bad@" /&gt;
 
-&lt;!-- Error via wrapper — colours label and hint too --&gt;
+&lt;!-- Error via wrapper — colours label and hint too; aria-describedby links hint to input --&gt;
 &lt;div class="form-field form-field--error"&gt;
   &lt;label for="email"&gt;Email&lt;/label&gt;
-  &lt;input type="email" id="email" aria-invalid="true" value="bad@" /&gt;
-  &lt;span class="form-hint"&gt;Enter a valid email address.&lt;/span&gt;
+  &lt;input type="email" id="email" aria-invalid="true"
+         aria-describedby="email-hint" value="bad@" /&gt;
+  &lt;span class="form-hint" id="email-hint"&gt;Enter a valid email address.&lt;/span&gt;
 &lt;/div&gt;
 
 &lt;!-- Disabled --&gt;
 &lt;input type="text" disabled value="Cannot edit" /&gt;</code></pre>
-
-        <h3>Wrapper &amp; hint text</h3>
-        <p>
-          <code>.form-field</code> is a flex column that stacks label, control, and optional
-          hint text with consistent spacing. <code>.form-hint</code> renders helper or error
-          text below the control in a smaller, secondary colour.
-        </p>
-        <div class="form-demo demo-surface">
-          <div class="form-field">
-            <label for="wrapper-name">Username</label>
-            <input type="text" id="wrapper-name" placeholder="jane_smith" />
-            <span class="form-hint">3–24 characters, letters and underscores only.</span>
-          </div>
-          <div class="form-field form-field--error">
-            <label for="wrapper-email">Email</label>
-            <input type="email" id="wrapper-email" aria-invalid="true" value="not-an-email" />
-            <span class="form-hint">Enter a valid email address.</span>
-          </div>
-        </div>
 
         <h3>Token reference</h3>
         <p>All <code>--input-*</code> tokens are defined in <code>tokens/components.css</code>.</p>

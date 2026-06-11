@@ -664,16 +664,16 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-55 · Demo-first docs — roll out to all component pages
-`status: in-progress` `effort: M` `branch: claude/optimistic-ritchie-41gm39`
+`status: done` `effort: M` `branch: claude/dreamy-allen-uula6q`
 
 **Gap:** Following T-46 drop, the proof-of-concept on `actions.astro` and `layout.astro` (cards) establishes the pattern: live demos visible by default, technical reference (anatomy HTML, token tables, override snippets) in `<details>` collapsibles. Remaining component pages still bury some demos inside accordions.
 
 - [x] `components/actions.astro` — button sizes, states, loading demos moved outside accordion; variants table simplified (no inline live buttons)
 - [x] `components/layout.astro` — card anatomy demo (media/header/body/footer) moved outside accordion
-- [ ] `components/navigation.astro` — audit and promote hidden demos
-- [ ] `components/forms.astro` — audit and promote hidden demos
-- [ ] `components/data.astro` — audit and promote hidden demos
-- [ ] `components/status.astro` — audit and promote hidden demos
+- [x] `components/navigation.astro` — audited; all demos already outside accordions, no changes needed
+- [x] `components/forms.astro` — promoted states (default/error/disabled) and wrapper+hint demos outside accordion
+- [x] `components/data.astro` — audited; all demos already outside accordions, no changes needed
+- [x] `components/status.astro` — audited; loading states demo already outside accordion, no changes needed
 
 ---
 
