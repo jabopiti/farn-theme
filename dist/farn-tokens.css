@@ -17,7 +17,7 @@
   --fo0-sage:      #5C9E86;   /* Supporting accent; dark-mode hover state          */
   --fo1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs             */
   --fo2-forest:    #2D5E4A;   /* Secondary accent; card highlight bg (dark mode)   */
-  --fo3-deepwater: #254D5A;   /* Tertiary accent; code block bg + card highlight bg (light mode) */
+  --fo3-deepwater: #254D5A;   /* Tertiary accent; code block bg + card highlight bg (light mode); featured-surface bg (dark mode) */
 
   /* Bloom — semantic */
   --bl0-ember:     #C5414C;   /* Errors, deletions                         */
@@ -123,7 +123,7 @@
 /* Theme control:                                                             */
 /*   Page-level : data-theme="dark" or data-theme="light" on <html>         */
 /*   Any element: data-theme="dark|light" — sets background + all tokens    */
-/*   Depth      : data-surface="base|layer|overlay" — relative to theme     */
+/*   Depth      : data-surface="base|layer|overlay|featured" — relative to theme */
 /*                                                                           */
 /* FOWT prevention: add this inline script before <body>:                    */
 /*   const t = localStorage.getItem('farn-theme');                           */
@@ -213,11 +213,13 @@
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */
-/* All surfaces are relative — they adapt to the current data-theme.         */
+/* base/layer/overlay are relative — they adapt to the current data-theme.   */
+/* featured is the exception: always dark regardless of page theme.          */
 /* Only tokens that differ from the inherited theme values are declared.     */
-/* Each surface that changes in dark mode has two override selectors:        */
+/* Each relative surface that changes in dark mode has two override selectors:*/
 /*   [data-theme="dark"] [data-surface]  — theme on ancestor element         */
 /*   [data-surface][data-theme="dark"]   — theme on same element             */
+/* featured uses only the ancestor selector — see block comment below.       */
 
 /* base — resets to page-level bg (useful inside deeper surface contexts) */
 [data-surface="base"] {
@@ -270,6 +272,35 @@
   --color-bg-interactive-hover: var(--in3-ash);
   --skeleton-base:              var(--in1-iron);
   --skeleton-shine:             var(--in3-ash);
+}
+
+/* featured — always-dark section; void in light mode, deepwater in dark mode.
+   Explicitly overrides text/border tokens to dark-palette values so
+   descendants get correct contrast without needing data-theme on the element.
+   Only the ancestor selector is used for the dark override — the same-element
+   form would fire on data-theme="dark" data-surface="featured" even in light
+   mode, incorrectly setting deepwater when void is expected. */
+[data-surface="featured"] {
+  background:                   var(--in0-void);
+  --color-bg:                   var(--in0-void);
+  --color-bg-panel:             var(--in1-iron);
+  --color-bg-inset:             var(--in2-slate);
+  --color-bg-code:              var(--in1-iron);
+  --color-text:                 var(--bm2-birch);
+  --color-text-secondary:       var(--bm1-mist);
+  --color-text-tertiary:        var(--bm0-sand);
+  --color-border:               var(--in2-slate);
+  --color-border-strong:        var(--bm0-sand);
+  --color-border-subtle:        color-mix(in srgb, var(--in2-slate) 25%, transparent);
+  --color-ghost-border:         color-mix(in srgb, var(--bm2-birch) 25%, transparent);
+  --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in1-iron);
+  --skeleton-shine:             var(--in2-slate);
+}
+
+[data-theme="dark"] [data-surface="featured"] {
+  background:  var(--fo3-deepwater);
+  --color-bg:  var(--fo3-deepwater);
 }
 /* ── Farn — Component tokens (Tier 3) ─────────────────────────────────── */
 /*                                                                           */
