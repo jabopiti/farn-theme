@@ -4,14 +4,8 @@
 // body layout and scroll behaviour handled below.
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
+import FernBackground from '../components/FernBackground.astro';
 import { groups, links, ctas } from '../data/navigation';
-
-const principles = [
-  { title: 'Proximity signals relationship', body: 'The spacing scale encodes hierarchy — small gaps within components, large gaps between sections. Distance is meaning.' },
-  { title: 'Motion is functional', body: "Every transition communicates a state change. Decorative animation earns its place or it doesn't ship. When in doubt, don't animate." },
-  { title: 'Accessibility is built in', body: 'Every colour pair is tested for WCAG contrast. Focus rings are never removed. Touch targets stay at least 44×44px.' },
-  { title: 'Semantic tokens over raw palette', body: 'Components reference purpose-named tokens, never raw colours. Light, dark, and surface overrides resolve automatically.' },
-];
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +13,7 @@ const principles = [
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Farn — Design System</title>
+<meta name="description" content="A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes for any stack." />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" href="/fern_icon.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -36,14 +31,36 @@ const principles = [
 <style is:global>
   @import '../../../tokens/colors.css';
   @import '../../../tokens/spacing.css';
+  @import '../../../tokens/motion.css';
   @import '../../../tokens/dark-light.css';
   @import '../../../tokens/components.css';
   @import '../../../tokens/component-classes.css';
+  @import '../../../tokens/typography-classes.css';
   @import '../../../tokens/base.css';
   @import '../styles/site.css';
 
   /* ── Section spacing ──────────────────────────────── */
-  #about, #foundations, #components, #principles, #what { padding: var(--space-3xl) 0; }
+  .landing-section { padding: var(--space-3xl) 0; }
+
+  /* ── Keyframes ────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes swatchSlideIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes paletteFloat {
+      0%, 100% { transform: translateY(-50%); }
+      50%       { transform: translateY(calc(-50% - 5px)); }
+    }
+  }
 
   /* ── Hero ─────────────────────────────────────────── */
   .hero {
@@ -51,18 +68,14 @@ const principles = [
     display: flex;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    overflow: clip;
     padding-top: var(--space-4xl);
-    padding-bottom: var(--space-4xl);
+    padding-bottom: calc(var(--space-4xl) + var(--wave-height));
+    background: linear-gradient(180deg, var(--bm2-birch) 0%, var(--bm1-mist) 55%, var(--bm0-sand) 100%);
+    touch-action: pan-y;
   }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 20% 60%, rgba(62,122,98,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 80% 30%, rgba(37,77,90,0.15) 0%, transparent 60%);
-    pointer-events: none;
+  [data-theme="dark"] .hero {
+    background: linear-gradient(180deg, var(--in0-void) 0%, var(--in1-iron) 60%, var(--in1-iron) 100%);
   }
   .hero-inner {
     position: relative;
@@ -70,14 +83,15 @@ const principles = [
     max-width: var(--width-content);
     margin: 0 auto;
     padding: 0 var(--space-lg);
+    z-index: 40;
   }
   .hero-eyebrow {
-    font-family: var(--font-body);
-    font-size: 11px;
+    font-size: 0.78rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--fo1-fern);
+    text-shadow: 0 1px 5px var(--color-bg);
     margin-bottom: var(--space-md);
     opacity: 0;
     animation: fadeUp 600ms ease-out 100ms forwards;
@@ -94,14 +108,12 @@ const principles = [
     opacity: 0;
     animation: fadeUp 700ms ease-out 200ms forwards;
   }
-  .hero-title em {
-    font-style: italic;
-    color: var(--color-accent);
-  }
+  .hero-title em { font-style: italic; color: var(--color-accent); }
   .hero-desc {
     font-size: clamp(16px, 2vw, 20px);
     line-height: 1.65;
-    color: var(--color-text-tertiary);
+    color: var(--color-text-secondary);
+    text-shadow: 0 1px 5px var(--color-bg);
     max-width: 52ch;
     margin-bottom: var(--space-xl);
     opacity: 0;
@@ -114,66 +126,39 @@ const principles = [
     opacity: 0;
     animation: fadeUp 700ms ease-out 450ms forwards;
   }
-  .btn-primary {
-    height: 48px;
-    padding: 0 24px;
-    background: var(--color-accent);
-    color: var(--color-accent-text);
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 120ms ease;
-  }
-  .btn-primary:hover { background: var(--color-accent-hover); color: var(--bm2-birch); }
-  .btn-ghost {
-    height: 48px;
-    padding: 0 24px;
-    background: transparent;
-    color: var(--color-text);
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: 1.5px solid var(--color-ghost-border);
-    cursor: pointer;
-    transition: background-color 120ms ease, border-color 120ms ease;
-  }
-  .btn-ghost:hover { background: var(--color-bg-interactive-hover); border-color: var(--color-border); }
   .hero-palette-strip {
     position: absolute;
     right: var(--space-lg);
     top: 50%;
     transform: translateY(-50%);
+    z-index: 20;
     display: flex;
     flex-direction: column;
     gap: 3px;
     opacity: 0;
-    animation: fadeIn 1000ms ease-out 700ms forwards;
+    animation: fadeIn 800ms ease-out 600ms forwards;
   }
-  @media (max-width: 900px) /* custom: palette strip visibility */ { .hero-palette-strip { display: none; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-palette-strip.is-visible {
+      animation: paletteFloat 8s ease-in-out infinite;
+    }
+  }
+  @media (max-width: 900px) { .hero-palette-strip { display: none; } }
   .palette-swatch {
     width: 8px;
-    height: 28px;
     border-radius: var(--radius-sm);
+    opacity: 0;
+    animation: swatchSlideIn 400ms ease-out calc(650ms + var(--i, 0) * 25ms) forwards;
   }
 
-  /* ── About section ──────────────────────────── */
+  /* ── About ────────────────────────────────────────── */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-4xl);
     align-items: center;
   }
-  @media (max-width: 768px) /* --breakpoint-tablet */ {
+  @media (max-width: 768px) {
     .about-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
   }
   .about-text p {
@@ -183,144 +168,266 @@ const principles = [
     margin-bottom: var(--space-md);
   }
   .about-text p:last-child { margin-bottom: 0; }
+  .about-etymology {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-variation-settings: 'opsz' 18;
+    font-style: italic;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-md);
+  }
   .about-palettes { display: flex; flex-direction: column; gap: var(--space-sm); }
   .palette-row { display: flex; gap: 4px; }
   .palette-row .swatch {
-    height: 40px; flex: 1;
+    height: 40px;
+    flex: 1;
     border-radius: var(--radius-sm);
     transition: transform 150ms ease, flex 200ms ease;
   }
   .palette-row .swatch:hover { transform: scaleY(1.15); flex: 2; }
+  /* Swatch name overlay (palette section) */
+  .swatch-wrap { position: relative; flex: 1; transition: flex 200ms ease; }
+  .swatch-wrap:hover { flex: 2; }
+  .swatch-wrap .swatch { width: 100%; flex: unset; transition: transform 150ms ease; }
+  .swatch-wrap:hover .swatch { transform: scaleY(1.15); }
+  .swatch-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
+    padding-bottom: 4px;
+    color: rgba(255,255,255,0.95);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    opacity: 0;
+    transform: translateY(3px);
+    transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+    pointer-events: none;
+  }
+  .swatch-wrap:hover .swatch-name { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .swatch-name { transition: opacity 100ms; transform: none; }
+  }
   .palette-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 6px;
-  }
-  .about-etymology, .principle h3 {
-    font-family: var(--font-display); font-size: 17px; font-variation-settings: 'opsz' 18;
-  }
-  .about-etymology {
-    font-style: italic; color: var(--color-text-tertiary); margin-bottom: var(--space-md);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 6px;
   }
 
-  /* ── Principles ─────────────────────────────── */
-  .principles-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);
+  /* ── The System ───────────────────────────────────── */
+  .system-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: var(--space-md);
+    align-items: center;
   }
-  .principle h3 {
-    font-weight: 700; letter-spacing: -0.01em; color: var(--color-text); margin-bottom: 8px;
+  @media (max-width: 768px) {
+    .system-grid {
+      grid-template-columns: 1fr;
+    }
+    .system-arrow { display: none; }
   }
-  .principle p { font-size: 14px; line-height: 1.65; color: var(--color-text-secondary); }
+  .system-arrow {
+    font-size: 24px;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    user-select: none;
+  }
+  .system-card {
+    height: 100%;
+  }
+  .system-card .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .system-icon {
+    font-size: 22px;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+  .system-tier {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+  .system-tier i { font-size: 22px; }
+  .system-tier span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .system-card h3, .get-card h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    font-variation-settings: 'opsz' 18;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+  .system-card p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+  .system-codes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: auto;
+  }
 
-  /* ── What Farn is (closing) ─────────────────── */
-  .what-inner { max-width: var(--width-prose); }
-  .what-desc {
-    font-size: clamp(16px, 2vw, 19px); line-height: 1.7;
-    color: var(--color-text-tertiary); margin-bottom: 0;
+  /* ── Palette + Typography ─────────────────────────── */
+  .paltype-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4xl);
+    align-items: center;
   }
-  #what .hero-actions { margin-top: var(--space-lg); animation: none; }
-
-  /* ── Typography specimen ────────────────────── */
+  @media (max-width: 768px) {
+    .paltype-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
+  }
   .type-specimen {
-    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-xl);
-  }
-  @media (max-width: 640px) /* --breakpoint-mobile */ { .type-specimen { grid-template-columns: 1fr; } }
-  .specimen-card { background: var(--card-bg); border-radius: var(--card-radius); padding: var(--space-lg); }
-  .specimen-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
   }
   .specimen-display {
-    font-family: var(--font-display); font-size: clamp(32px, 5vw, 56px);
-    font-weight: 800; font-variation-settings: 'opsz' 48;
-    letter-spacing: -0.02em; line-height: 1.1; color: var(--color-text); margin-bottom: var(--space-sm);
+    font-family: var(--font-display);
+    font-size: clamp(80px, 14vw, 160px);
+    font-weight: 800;
+    font-variation-settings: 'opsz' 144;
+    font-style: italic;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--color-accent);
   }
-  .specimen-display em { font-style: italic; color: var(--color-accent); }
-  .specimen-body { font-size: 15px; line-height: 1.7; color: var(--color-text-secondary); }
-  .specimen-mono {
-    font-family: var(--font-mono); font-size: 13px;
-    background: var(--color-bg-code); color: var(--bm2-birch);
-    padding: var(--space-md); border-radius: var(--radius-md); line-height: 1.6;
+  .specimen-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .specimen-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+  }
+  .specimen-name {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    width: 80px;
+    flex-shrink: 0;
+  }
+  .specimen-sample-body {
+    font-size: 15px;
+    line-height: 1;
+    color: var(--color-text-secondary);
+  }
+  .specimen-sample-mono {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text-secondary);
   }
 
-  /* ── Spacing scale visual ───────────────────── */
-  .spacing-scale { display: flex; flex-direction: column; gap: var(--space-sm); }
-  .scale-row { display: flex; align-items: center; gap: var(--space-md); }
-  .scale-label { font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); width: 140px; flex-shrink: 0; }
-  .scale-bar-wrap { flex: 1; height: 24px; display: flex; align-items: center; }
-  .scale-bar { height: 8px; background: var(--color-accent); border-radius: var(--radius-sm); opacity: 0.7; transition: opacity 150ms ease; }
-  .scale-row:hover .scale-bar { opacity: 1; }
-
-  /* ── Components showcase ────────────────────── */
-  .components-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl);
+  /* ── Tokens in action ─────────────────────────────── */
+  .tokens-demo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
   }
-  .card {
-    background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--card-radius); padding: var(--card-padding);
-    text-decoration: none; display: block; color: inherit;
+  .tokens-demo-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
   }
-  .card-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
-  .card-title { font-size: 15px; font-weight: 600; color: var(--color-text); margin-bottom: 6px; line-height: 1.3; }
-  .card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 14px; }
-  .card-meta { font-size: 11px; color: var(--color-text-tertiary); display: flex; justify-content: space-between; align-items: center; }
-  .card-arrow { color: var(--color-accent); font-weight: 500; }
-  .card-icon-wrap {
-    width: 32px; height: 32px; border-radius: var(--radius-md);
-    background: rgba(62,122,98,0.12); display: flex; align-items: center;
-    justify-content: center; margin-bottom: 12px; font-size: 18px; color: var(--color-accent);
+  @media (max-width: 640px) {
+    .tokens-demo-cols { grid-template-columns: 1fr; }
   }
-  [data-theme="dark"] .card-icon-wrap { background: rgba(92,158,134,0.15); }
-  .card-highlight-light { background: var(--fo3-deepwater); }
-  .card-highlight-light:hover { background: var(--fo2-forest); }
-  .card-highlight-light .card-title { color: var(--bm2-birch); }
-  .card-highlight-light .card-body { color: var(--bm1-mist); }
-  .card-highlight-light .card-tag, .card-highlight-light .card-arrow { color: var(--fo0-sage); }
-  .card-highlight-light .card-meta { color: var(--bm0-sand); }
-
-  .btn-showcase { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-lg); align-items: center; }
-  .badge-showcase { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--space-lg); align-items: center; }
-
-  /* ── Inputs ─────────────────────────────────── */
-  .input-showcase { max-width: 400px; margin-bottom: var(--space-lg); }
-  .field { display: flex; flex-direction: column; gap: 4px; margin-bottom: var(--space-md); }
-  .field-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); }
-  .field-input {
-    height: 48px; padding: 0 14px;
-    border: 1.5px solid var(--input-border); border-radius: var(--input-radius);
-    background: var(--input-bg); font-family: var(--font-body);
-    font-size: 14px; color: var(--input-text);
-    transition: background 180ms ease, border-color 150ms ease, box-shadow 150ms ease; outline: none;
+  .tokens-demo-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
   }
-  .field-input::placeholder { color: var(--input-placeholder); }
-  .field-input:is(:hover, :focus-visible) { background: var(--input-bg-active); }
-  .field-input:focus-visible {
-    border-color: var(--input-border-focus);
-    box-shadow: var(--input-focus-shadow);
+  .surface-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-xs);
   }
-  .field-error .field-input { border-color: var(--input-border-error); }
-  .field-hint { font-size: 11px; color: var(--color-text-tertiary); }
-  .field-error-msg { font-size: 11px; color: var(--color-error); }
-
-  /* ── Dividers ───────────────────────────────── */
-  .divider-demo { margin-bottom: var(--space-lg); }
-  .divider-demo p { font-size: 14px; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
-
-  /* ── Surface demo ───────────────────────────── */
-  .surface-demo-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
-    border-radius: var(--radius-lg); overflow: hidden;
+  .demo-card {
+    padding: var(--space-lg);
+    border-radius: var(--card-radius);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    flex: 1;
   }
-  @media (max-width: 640px) /* --breakpoint-mobile */ { .surface-demo-grid { grid-template-columns: 1fr; } }
-  .surface-demo-cell { padding: var(--space-lg); }
-  .surface-demo-cell h4 {
-    font-family: var(--font-display); font-size: 16px; font-weight: 700;
-    font-variation-settings: 'opsz' 16; margin-bottom: 8px; letter-spacing: -0.01em;
+  .demo-card h4 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    font-variation-settings: 'opsz' 16;
+    letter-spacing: -0.01em;
     color: var(--color-text);
   }
-  .surface-demo-cell p { font-size: 13px; line-height: 1.6; margin-bottom: 14px; color: var(--color-text-secondary); }
-  .surface-demo-cell .mini-btn {
-    display: inline-flex; align-items: center; height: 32px; padding: 0 12px;
-    border-radius: var(--radius-md); font-size: 12px; font-weight: 600; border: none; cursor: pointer;
+  .demo-card p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    flex: 1;
   }
+
+  /* ── What you get ─────────────────────────────────── */
+  .get-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+  .get-icon {
+    font-size: 24px;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+  .get-card p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+  .get-card .badge {
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Section CTA row — same flex layout as hero-actions, no entrance animation */
+  .section-actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+  }
+
+  /* ── Closing CTA ──────────────────────────────────── */
+  .cta-section { padding: var(--space-3xl) 0; }
+  .cta-section .cta-inner { max-width: var(--width-prose); }
 
 </style>
 </head>
@@ -329,50 +436,52 @@ const principles = [
 <!-- Nav + mobile drawer (shared with doc pages via SiteNav) -->
 <SiteNav {groups} {links} {ctas} />
 
-<!-- Hero -->
-<section class="hero" aria-label="Hero">
+<!-- ── § 1 Hero ──────────────────────────────────────────────────── -->
+<section class="hero" data-fern data-intro="3000" aria-label="Hero">
+  <FernBackground />
   <div class="hero-inner">
-    <p class="hero-eyebrow">Design System — v0.1.0</p>
-    <h1 class="hero-title">Sharp.<br><em>Warm.</em><br>Intellectual.</h1>
-    <p class="hero-desc">A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and components for brand, websites, and web apps.</p>
+    <p class="hero-eyebrow">Sharp · Warm · Intellectual</p>
+    <h1 class="hero-title">A design system<br>rooted in northern forests.</h1>
+    <p class="hero-desc">Created for a clean and lightweight design. Framework-agnostic tokens and component classes. Zero runtime, zero framework dependency.</p>
     <div class="hero-actions">
-      <a href="/components" class="btn-primary"><i class="ti ti-components"></i> Browse components</a>
-      <a href="/getting-started" class="btn-ghost"><i class="ti ti-book"></i> Get Started</a>
+      <a href="#about" class="btn btn-p btn-lg"><i class="ti ti-eye"></i> Explore</a>
+      <a href="/getting-started" class="btn btn-s btn-lg"><i class="ti ti-book"></i> Get Started</a>
     </div>
   </div>
-  <div class="hero-palette-strip" aria-hidden="true">
-    <div class="palette-swatch" style="background:#0D1117"></div>
-    <div class="palette-swatch" style="background:#374151"></div>
-    <div class="palette-swatch" style="background:#4B5563"></div>
-    <div class="palette-swatch" style="background:#6B7280"></div>
-    <div class="palette-swatch" style="background:#D5D2C7"></div>
-    <div class="palette-swatch" style="background:#E9E6DC"></div>
-    <div class="palette-swatch" style="background:#F7F6F3"></div>
-    <div class="palette-swatch" style="background:#5C9E86"></div>
-    <div class="palette-swatch" style="background:#3E7A62"></div>
-    <div class="palette-swatch" style="background:#2D5E4A"></div>
-    <div class="palette-swatch" style="background:#254D5A"></div>
-    <div class="palette-swatch" style="background:#C5414C"></div>
-    <div class="palette-swatch" style="background:#AB5A2B"></div>
-    <div class="palette-swatch" style="background:#8D6B20"></div>
-    <div class="palette-swatch" style="background:#567A37"></div>
-    <div class="palette-swatch" style="background:#885DB4"></div>
+  <div class="hero-palette-strip" aria-hidden="true" id="palette-strip">
+    <div class="palette-swatch" style="background:#0D1117;height:28px;--i:0"></div>
+    <div class="palette-swatch" style="background:#374151;height:28px;--i:1"></div>
+    <div class="palette-swatch" style="background:#4B5563;height:28px;--i:2"></div>
+    <div class="palette-swatch" style="background:#6B7280;height:28px;--i:3"></div>
+    <div class="palette-swatch" style="background:#D5D2C7;height:28px;--i:4"></div>
+    <div class="palette-swatch" style="background:#E9E6DC;height:28px;--i:5"></div>
+    <div class="palette-swatch" style="background:#F7F6F3;height:28px;--i:6"></div>
+    <div class="palette-swatch" style="background:#5C9E86;height:28px;--i:7"></div>
+    <div class="palette-swatch" style="background:#3E7A62;height:28px;--i:8"></div>
+    <div class="palette-swatch" style="background:#2D5E4A;height:28px;--i:9"></div>
+    <div class="palette-swatch" style="background:#254D5A;height:28px;--i:10"></div>
+    <div class="palette-swatch" style="background:#C5414C;height:28px;--i:11"></div>
+    <div class="palette-swatch" style="background:#AB5A2B;height:28px;--i:12"></div>
+    <div class="palette-swatch" style="background:#8D6B20;height:28px;--i:13"></div>
+    <div class="palette-swatch" style="background:#567A37;height:28px;--i:14"></div>
+    <div class="palette-swatch" style="background:#885DB4;height:28px;--i:15"></div>
   </div>
 </section>
 
-<!-- About -->
-<section id="about" data-theme="dark">
+<!-- ── § 2 About ──────────────────────────────────────────────────── -->
+<section class="landing-section" data-theme="dark" id="about">
   <div class="container">
     <div class="about-grid">
       <div class="about-text">
-        <p class="section-eyebrow">About</p>
-        <h2 class="section-title">A design system that knows what it is.</h2>
-        <p class="about-etymology">From the Old Saxon <em>farn</em> — feather-leaf, forest floor, northern ground.</p>
-        <p>Farn is built on a single conviction: that a design system should have a point of view. Not a collection of neutral components, but a coherent vocabulary — warm enough to feel human, sharp enough to feel considered.</p>
-        <p>The name and palette draw from the forests of northern Germany — birch, fern, iron, ash. These aren't decorative references; they shaped the specific colour choices. Four token palettes, a two-layer semantic architecture, framework-agnostic custom properties, and component classes with light and dark surface variants.</p>
-        <a href="/styles/color" class="btn-primary" style="width:fit-content">Explore the colour system →</a>
+        <p class="section-eyebrow scroll-reveal">About</p>
+        <h2 class="section-title scroll-reveal">A design system that knows what it is.</h2>
+        <p class="about-etymology scroll-reveal">From the Old Saxon <em>farn</em> — feather-leaf, forest floor, northern ground.</p>
+        <p class="scroll-reveal">Farn is built on one conviction: a design system should have a point of view. Not neutral components, but a coherent vocabulary — warm enough to feel human, sharp enough to feel considered. Four token palettes, a two-layer semantic architecture, and component classes with light and dark surface variants.</p>
+        <div class="section-actions scroll-reveal">
+          <a href="/foundations" class="btn btn-g"><i class="ti ti-books"></i> Explore Foundations</a>
+        </div>
       </div>
-      <div class="about-palettes">
+      <div class="about-palettes scroll-reveal">
         <div class="palette-label">Iron Night</div>
         <div class="palette-row">
           <div class="swatch" style="background:#0D1117" title="void"></div>
@@ -406,196 +515,223 @@ const principles = [
   </div>
 </section>
 
-<!-- Foundations -->
-<section id="foundations">
+<!-- ── § 3 The System ─────────────────────────────────────────────── -->
+<section class="landing-section" id="system">
   <div class="container">
-    <p class="section-eyebrow scroll-reveal">Foundations</p>
-    <h2 class="section-title scroll-reveal">Typography &amp; Spacing</h2>
-    <p class="section-desc scroll-reveal">Fraunces for display — an optical-size variable serif with visible personality. Instrument Sans for body and UI — humanist enough to feel warm, geometric enough to feel clean. A 12px-base spacing scale where proximity signals relationship.</p>
+    <p class="section-eyebrow scroll-reveal">Architecture</p>
+    <h2 class="section-title scroll-reveal">Tokens all the way down.</h2>
+    <p class="section-desc scroll-reveal">Three tiers, each building on the last. Swap a palette token and the entire system updates. Components never reference raw colours.</p>
 
-    <div class="type-specimen scroll-reveal">
-      <div class="specimen-card">
-        <div class="specimen-label">Display — Fraunces 800</div>
-        <div class="specimen-display">Good<br><em>design</em><br>thinks.</div>
-        <p class="specimen-body" style="margin-top:16px">Fraunces brings personality to headings without sacrificing legibility. Optical size axis at large weights gives it warmth and confidence.</p>
-      </div>
-      <div class="specimen-card">
-        <div class="specimen-label">Body — Instrument Sans 400</div>
-        <p class="specimen-body" style="font-size:16px;margin-bottom:16px">The combination creates the "familiar but not like everything else" quality the system aims for. Geometric enough to feel clean, humanist enough to not feel cold.</p>
-        <div class="specimen-mono">const theme = stored ?? system;<br>document.documentElement<br>  .setAttribute('data-theme', theme);</div>
-      </div>
+    <div class="section-actions scroll-reveal" style="margin-top:var(--space-lg)">
+      <a href="/styles" class="btn btn-g"><i class="ti ti-palette"></i> Browse Styles</a>
     </div>
 
-    <div class="spacing-scale scroll-reveal">
-      <div class="scale-row"><span class="scale-label">--space-xs · 6px</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:6px"></div></div></div>
-      <div class="scale-row"><span class="scale-label">--space-sm · 12px</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:12px"></div></div></div>
-      <div class="scale-row"><span class="scale-label">--space-md · 24px</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:24px"></div></div></div>
-      <div class="scale-row"><span class="scale-label">--space-lg · 36px</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:36px"></div></div></div>
-      <div class="scale-row"><span class="scale-label">--space-xl · 48px</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:48px"></div></div></div>
-      <div class="scale-row"><span class="scale-label">--space-2xl · 60px</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:60px"></div></div></div>
-      <div class="scale-row"><span class="scale-label">--space-3xl · 72px</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:72px"></div></div></div>
-      <div class="scale-row"><span class="scale-label">--space-4xl · 96px</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:96px"></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- Components -->
-<section data-surface="layer" id="components">
-  <div class="container">
-    <p class="section-eyebrow scroll-reveal">Components</p>
-    <h2 class="section-title scroll-reveal">The building blocks</h2>
-    <p class="section-desc scroll-reveal">Every component is specified for both light and dark surfaces. Token-first — no hardcoded colours anywhere in the implementation.</p>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em" class="scroll-reveal">Cards</h3>
-    <div class="components-grid">
-      <a href="#" class="card card-interactive scroll-reveal" style="text-decoration:none">
-        <div class="card-tag">Platform · 4 min</div>
-        <div class="card-title">Platform thinking at scale</div>
-        <div class="card-body">How internal platform teams shift from cost centre to product organisation.</div>
-        <div class="card-meta"><span>12 Apr 2025</span><span class="card-arrow">Read →</span></div>
-      </a>
-      <div class="card card-interactive scroll-reveal card-highlight-light">
-        <div class="card-tag">Featured</div>
-        <div class="card-title">The product builder archetype</div>
-        <div class="card-body">End-to-end ownership from strategy through shipped code — the emerging role.</div>
-        <div class="card-meta"><span>2 May 2025</span><span class="card-arrow">Read →</span></div>
-      </div>
-      <div class="card card-interactive scroll-reveal">
-        <div class="card-icon-wrap"><i class="ti ti-layout-grid"></i></div>
-        <div class="card-title">Composable layout</div>
-        <div class="card-body">Build pages from reusable layout primitives, not fixed templates.</div>
-      </div>
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="scroll-reveal">Buttons</h3>
-    <div class="btn-showcase scroll-reveal">
-      <button class="btn btn-p"><i class="ti ti-arrow-right"></i> Primary</button>
-      <button class="btn btn-s">Secondary</button>
-      <button class="btn btn-g">Ghost</button>
-      <button class="btn btn-d"><i class="ti ti-trash"></i> Destructive</button>
-      <button class="btn btn-p btn-sm">Small</button>
-      <button class="btn btn-p btn-lg">Large</button>
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="scroll-reveal">Badges &amp; Tags</h3>
-    <div class="badge-showcase scroll-reveal">
-      <span class="badge badge-general">General</span>
-      <span class="badge badge-category">Category</span>
-      <span class="badge badge-published">Published</span>
-      <span class="badge badge-draft">Draft</span>
-      <span class="badge badge-archived">Archived</span>
-      <span class="badge badge-beta">Beta</span>
-      <span class="badge badge-research">Research</span>
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="scroll-reveal">Forms &amp; Inputs</h3>
-    <div class="input-showcase scroll-reveal">
-      <div class="field">
-        <label class="field-label" for="demo-name">Name</label>
-        <input class="field-input" id="demo-name" type="text" placeholder="Jacob Lueg Tiedemann" />
-      </div>
-      <div class="field field-error">
-        <label class="field-label" for="demo-email">Email</label>
-        <input class="field-input" id="demo-email" type="email" value="not-an-email" aria-invalid="true" aria-describedby="email-err" />
-        <span class="field-error-msg" id="email-err">Enter a valid email address</span>
-      </div>
-      <div class="field">
-        <label class="field-label" for="demo-msg">Message</label>
-        <input class="field-input" id="demo-msg" type="text" placeholder="What's on your mind?" />
-        <span class="field-hint">We'll get back to you within 2 business days</span>
-      </div>
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="scroll-reveal">Dividers</h3>
-    <div class="divider-demo scroll-reveal">
-      <p>Hairline — between list items</p>
-      <hr class="hairline" />
-      <p style="margin-top:12px">Section — between content groups</p>
-      <hr class="section-divider" />
-      <p style="margin-top:12px">Decorative — editorial scene break</p>
-      <hr class="decorative" />
-    </div>
-
-    <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;font-variation-settings:'opsz' 18;margin-bottom:var(--space-md);color:var(--color-text-secondary);letter-spacing:-0.01em;margin-top:var(--space-xl)" class="scroll-reveal">Quotes</h3>
-    <blockquote class="quote scroll-reveal">
-      <p>The platform is never finished. The moment you ship it, the next set of needs is already forming at the edges.</p>
-      <footer>— Teresa Torres, <cite>Continuous Discovery Habits</cite></footer>
-    </blockquote>
-    <figure class="quote-pull scroll-reveal">
-      <p>Good platform thinking starts with the developer, not the platform.</p>
-      <figcaption>Jacob Lueg Tiedemann</figcaption>
-    </figure>
-    <div class="quote-attribution scroll-reveal">
-      <div class="quote-attribution-avatar" aria-hidden="true">MR</div>
-      <div class="quote-attribution-body">
-        <p class="quote-attribution-text">"Working this way changed how I think about internal tooling entirely. It stopped being infrastructure and started being product."</p>
-        <p class="quote-attribution-name">Maya Rodriguez</p>
-        <p class="quote-attribution-role">VP Engineering, Acme</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Surface demo -->
-<section id="surfaces" style="padding:0;overflow:hidden">
-  <div style="max-width:var(--width-content);margin:0 auto;padding:0 var(--space-lg)">
-    <p class="section-eyebrow scroll-reveal" style="padding-top:var(--space-3xl)">Surfaces</p>
-    <h2 class="section-title scroll-reveal">Base, layer, overlay.</h2>
-    <p class="section-desc scroll-reveal">Three depth levels, all relative to the current theme. Apply <code>data-surface</code> to any element — tokens cascade automatically. Combine with <code>data-theme</code> to force a specific context.</p>
-  </div>
-  <div class="surface-demo-grid scroll-reveal">
-    <div class="surface-demo-cell" data-surface="base">
-      <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:8px">Base</p>
-      <h4>data-surface="base"</h4>
-      <p>Page-level background. Resets to base within any deeper surface context.</p>
-      <button class="mini-btn" style="background:var(--color-accent);color:var(--color-accent-text)">Primary</button>
-    </div>
-    <div class="surface-demo-cell" data-surface="layer">
-      <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:8px">Layer</p>
-      <h4>data-surface="layer"</h4>
-      <p>Cards, sidebars, panels. One depth level above the page.</p>
-      <button class="mini-btn" style="background:var(--color-accent);color:var(--color-accent-text)">Primary</button>
-    </div>
-    <div class="surface-demo-cell" data-surface="overlay">
-      <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:8px">Overlay</p>
-      <h4>data-surface="overlay"</h4>
-      <p>Modals, dropdowns, floating elements. Highest depth level.</p>
-      <button class="mini-btn" style="background:var(--color-accent);color:var(--color-accent-text)">Primary</button>
-    </div>
-  </div>
-  <div style="padding-bottom:var(--space-3xl)"></div>
-</section>
-
-<!-- Principles -->
-<section id="principles" data-surface="layer">
-  <div class="container">
-    <p class="section-eyebrow scroll-reveal">Principles</p>
-    <h2 class="section-title scroll-reveal">Opinions, encoded.</h2>
-    <p class="section-desc scroll-reveal">Four ideas the system holds to — and enforces through its tokens.</p>
-    <div class="principles-grid">
-      {principles.map(p => (
-        <div class="principle scroll-reveal">
-          <h3>{p.title}</h3>
-          <p>{p.body}</p>
+    <div class="system-grid scroll-reveal" style="margin-top:var(--space-xl)">
+      <!-- Tier 1 -->
+      <div class="card system-card card-outlined">
+        <div class="card-body">
+          <div class="system-tier"><i class="ti ti-color-swatch"></i><span>Tier 1</span></div>
+          <h3>Palette tokens</h3>
+          <p>Named colour, spacing, type, and motion values. The raw vocabulary — never referenced by components directly.</p>
+          <div class="system-codes">
+            <code class="inline-code">--fo1-fern</code>
+            <code class="inline-code">--in0-void</code>
+            <code class="inline-code">--space-md</code>
+          </div>
         </div>
-      ))}
+      </div>
+
+      <div class="system-arrow" aria-hidden="true">→</div>
+
+      <!-- Tier 2 -->
+      <div class="card system-card card-outlined">
+        <div class="card-body">
+          <div class="system-tier"><i class="ti ti-layers-subtract"></i><span>Tier 2</span></div>
+          <h3>Semantic tokens</h3>
+          <p>Purpose-named aliases that resolve per theme and surface. Light, dark, and surface overrides cascade automatically.</p>
+          <div class="system-codes">
+            <code class="inline-code">--color-bg</code>
+            <code class="inline-code">--color-accent</code>
+            <code class="inline-code">--color-text</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="system-arrow" aria-hidden="true">→</div>
+
+      <!-- Tier 3 -->
+      <div class="card system-card card-outlined">
+        <div class="card-body">
+          <div class="system-tier"><i class="ti ti-puzzle"></i><span>Tier 3</span></div>
+          <h3>Component tokens &amp; classes</h3>
+          <p>Opt-in CSS classes built on top of semantic tokens. Override at the component level without touching the palette.</p>
+          <div class="system-codes">
+            <code class="inline-code">.btn.btn-p</code>
+            <code class="inline-code">.card</code>
+            <code class="inline-code">.badge</code>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- What Farn is — positioning + closing CTA -->
-<section id="what" data-theme="dark">
-  <div class="container what-inner">
-    <p class="section-eyebrow scroll-reveal">What Farn is</p>
-    <h2 class="section-title scroll-reveal">Tokens and classes. No framework.</h2>
-    <p class="what-desc scroll-reveal">Farn is not a JavaScript component framework — no React or Vue components, no runtime, no required build step. It ships CSS: a two-layer token system plus an opt-in set of component classes you style with. Works with any stack, or none. No Tailwind, no CSS-in-JS — just custom properties.</p>
-    <div class="hero-actions scroll-reveal">
-      <a href="/components" class="btn-primary"><i class="ti ti-components"></i> Browse components</a>
-      <a href="/getting-started" class="btn-ghost"><i class="ti ti-book"></i> Get Started</a>
+<!-- ── § 4 Palette + Typography ───────────────────────────────────── -->
+<section class="landing-section" data-surface="layer" id="palette-type">
+  <div class="container">
+    <div class="paltype-grid">
+      <div class="scroll-reveal">
+        <p class="section-eyebrow">Palette</p>
+        <h2 class="section-title">Four palettes.<br>One vocabulary.</h2>
+        <div class="about-palettes" style="margin-top:var(--space-lg)">
+          <div class="palette-label">Iron Night</div>
+          <div class="palette-row">
+            <div class="swatch-wrap"><div class="swatch" style="background:#0D1117"></div><span class="swatch-name">Void</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#374151"></div><span class="swatch-name">Iron</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#4B5563"></div><span class="swatch-name">Slate</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#6B7280"></div><span class="swatch-name">Ash</span></div>
+          </div>
+          <div class="palette-label" style="margin-top:12px">Birch Mist</div>
+          <div class="palette-row">
+            <div class="swatch-wrap"><div class="swatch" style="background:#D5D2C7"></div><span class="swatch-name">Sand</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#E9E6DC"></div><span class="swatch-name">Mist</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#F7F6F3"></div><span class="swatch-name">Birch</span></div>
+          </div>
+          <div class="palette-label" style="margin-top:12px">Forest</div>
+          <div class="palette-row">
+            <div class="swatch-wrap"><div class="swatch" style="background:#5C9E86"></div><span class="swatch-name">Sage</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#3E7A62"></div><span class="swatch-name">Fern</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#2D5E4A"></div><span class="swatch-name">Forest</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#254D5A"></div><span class="swatch-name">Deepwater</span></div>
+          </div>
+          <div class="palette-label" style="margin-top:12px">Bloom</div>
+          <div class="palette-row">
+            <div class="swatch-wrap"><div class="swatch" style="background:#C5414C"></div><span class="swatch-name">Ember</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#AB5A2B"></div><span class="swatch-name">Ochre</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#8D6B20"></div><span class="swatch-name">Grain</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#567A37"></div><span class="swatch-name">Moss</span></div>
+            <div class="swatch-wrap"><div class="swatch" style="background:#885DB4"></div><span class="swatch-name">Heather</span></div>
+          </div>
+        </div>
+        <div class="section-actions" style="margin-top:var(--space-lg)">
+          <a href="/styles/color" class="btn btn-g"><i class="ti ti-color-filter"></i> Explore Colors</a>
+        </div>
+      </div>
+
+      <div class="type-specimen scroll-reveal">
+        <div class="specimen-display">Farn.</div>
+        <div class="specimen-meta">
+          <div class="specimen-row">
+            <span class="specimen-name">Display</span>
+            <span style="font-family:var(--font-display);font-size:15px;font-variation-settings:'opsz' 15;color:var(--color-text-secondary)">Fraunces — variable, optical size</span>
+          </div>
+          <div class="specimen-row">
+            <span class="specimen-name">Body</span>
+            <span class="specimen-sample-body">Instrument Sans — humanist, geometric</span>
+          </div>
+          <div class="specimen-row">
+            <span class="specimen-name">Mono</span>
+            <span class="specimen-sample-mono">JetBrains Mono — code, data</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ── § 5 Tokens in action ───────────────────────────────────────── -->
+<section class="landing-section" id="tokens-demo">
+  <div class="container">
+    <div class="tokens-demo-header">
+      <div>
+        <p class="section-eyebrow">The token story</p>
+        <h2 class="section-title" style="margin-bottom:0">One component. Every surface.</h2>
+      </div>
+      <button class="btn btn-g" id="demo-theme-toggle" aria-label="Toggle demo theme">
+        <i class="ti ti-moon"></i> Switch to Dark
+      </button>
+    </div>
+    <p class="section-desc scroll-reveal" style="margin-bottom:var(--space-xl)">Toggle the theme — tokens resolve automatically. The card, badge, and button below share no hardcoded colours.</p>
+
+    <div class="tokens-demo-cols">
+      <div class="tokens-demo-col">
+        <div class="demo-card" data-surface="base">
+          <h4>Base</h4>
+          <p>The page-level background. Every theming context starts here.</p>
+          <a href="/foundations/surfaces" class="btn btn-g btn-sm">More about Surfaces</a>
+        </div>
+      </div>
+      <div class="tokens-demo-col">
+        <div class="demo-card" data-surface="layer">
+          <h4>Layer</h4>
+          <p>Cards, panels, sidebars. One step above the base — naturally elevated.</p>
+          <a href="/foundations/surfaces" class="btn btn-g btn-sm">More about Surfaces</a>
+        </div>
+      </div>
+      <div class="tokens-demo-col">
+        <div class="demo-card" data-surface="overlay">
+          <h4>Overlay</h4>
+          <p>Modals, dropdowns, tooltips. The topmost surface, floating above.</p>
+          <a href="/foundations/surfaces" class="btn btn-g btn-sm">More about Surfaces</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── § 6 What you get ───────────────────────────────────────────── -->
+<section class="landing-section" id="what-you-get" style="position:relative;padding-bottom:calc(var(--space-3xl) + var(--arc-height))">
+  <div class="container">
+    <p class="section-eyebrow scroll-reveal">Included</p>
+    <h2 class="section-title scroll-reveal">The complete token system.</h2>
+
+    <div class="get-grid" style="margin-top:var(--space-2xl)">
+      <div class="card get-card scroll-reveal">
+        <div class="card-body">
+          <i class="ti ti-color-swatch get-icon"></i>
+          <h3>CSS tokens</h3>
+          <p>Two-layer architecture: palette → semantic. Custom properties that resolve automatically with <code class="inline-code">data-theme</code> and <code class="inline-code">data-surface</code>.</p>
+        </div>
+      </div>
+      <div class="card get-card scroll-reveal">
+        <div class="card-body">
+          <i class="ti ti-components get-icon"></i>
+          <h3>Component classes</h3>
+          <p>Shipped CSS classes for buttons, cards, badges, forms, and more. Load <code class="inline-code">farn-components.css</code> alongside the token bundle.</p>
+        </div>
+      </div>
+      <div class="card get-card scroll-reveal">
+        <div class="card-body">
+          <i class="ti ti-package get-icon"></i>
+          <h3>Zero dependencies</h3>
+          <p>Pure CSS custom properties. Load from CDN or install from npm. Works with any stack — React, Vue, Svelte, plain HTML, or none.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arc divider — transitions into the dark closing CTA -->
+  <div class="section-arc" aria-hidden="true">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 Q600,0 1200,80 L1200,80 L0,80 Z" fill="#0D1117"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ── § 7 Closing CTA ────────────────────────────────────────────── -->
+<section class="cta-section" data-theme="dark" id="closing-cta">
+  <div class="container">
+    <div class="cta-inner">
+      <p class="section-eyebrow scroll-reveal">Ready to build</p>
+      <h2 class="section-title scroll-reveal" style="font-size:clamp(36px,5vw,64px);font-variation-settings:'opsz' 48">Start building<br>with <em style="font-style:italic;color:var(--color-accent)">Farn.</em></h2>
+      <p class="section-desc scroll-reveal">CSS tokens and component classes. No runtime, no framework, no build step.<br>Just add the stylesheet and start building.</p>
+      <div class="section-actions scroll-reveal">
+        <a href="/getting-started" class="btn btn-p btn-lg"><i class="ti ti-book"></i> Get Started</a>
+        <a href="/components" class="btn btn-g btn-lg"><i class="ti ti-components"></i> Discover Components</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Footer -->
 <Footer>
@@ -606,8 +742,8 @@ const principles = [
   <a href="https://github.com/jabopiti/farn-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
 </Footer>
 
+<!-- Smart nav: transparent overlay over hero, fills + hides on scroll -->
 <script is:inline>
-// Smart nav: transparent overlay over hero, fills + hides on scroll
 (function () {
   const nav = document.getElementById('nav');
   const NAV_H = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));
@@ -626,6 +762,44 @@ const principles = [
   }, { passive: true });
 })();
 </script>
+
+<!-- Palette strip: trigger float animation after entrance completes -->
+<script is:inline>
+(function () {
+  const strip = document.getElementById('palette-strip');
+  if (!strip) return;
+  // After the last swatch finishes entrance (650ms base + 15 * 25ms = ~1025ms total)
+  setTimeout(() => strip.classList.add('is-visible'), 1100);
+})();
+</script>
+
+<!-- Demo theme toggle (§5 — toggles global page theme) -->
+<script is:inline>
+(function () {
+  const btn = document.getElementById('demo-theme-toggle');
+  if (!btn) return;
+  function syncBtn() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.innerHTML = isDark
+      ? '<i class="ti ti-sun"></i> Switch to Light'
+      : '<i class="ti ti-moon"></i> Switch to Dark';
+  }
+  syncBtn();
+  btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('farn-theme', next);
+    syncBtn();
+    const themeIcon   = document.getElementById('themeIcon');
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeIcon) themeIcon.className = next === 'dark' ? 'ti ti-sun' : 'ti ti-moon';
+    if (themeToggle) themeToggle.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  });
+})();
+</script>
+
 <script>
   import { initScrollReveal } from '../scripts/scroll-reveal.js';
   initScrollReveal();

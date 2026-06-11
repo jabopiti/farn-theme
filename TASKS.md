@@ -630,7 +630,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-53 · Landing page redesign
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/hopeful-ride-2nxrag`
 
 **Gap:** The current `index.astro` is 7 sections long and tries to serve as both a marketing page and a component demo. It dilutes the first impression, and with T-46 (guided demo page) on the horizon the overlap becomes actively unhelpful. A focused editorial redesign will shorten the page, sharpen the message, and direct visitors to the right next step.
 
@@ -645,10 +645,10 @@ Merged into T-49 (Complete Foundations section).
 
 **Cut from current page:** spacing scale specimen, exhaustive component rows (buttons + badges + forms + dividers + quotes), surfaces grid, principles cards. This content belongs in the demo page and docs.
 
-- [ ] Rework `index.astro` to the 6-section structure; remove all cut sections and their associated inline styles
-- [ ] "Tokens in action" section: light/dark toggle reuses `data-theme` toggle, no new JS
-- [ ] Carry forward all existing animation infrastructure (scroll-reveal, hero fade-in, transparent nav)
-- [ ] Ensure zero dead links after cleanup; update landing page meta description
+- [x] Rework `index.astro` to the 7-section structure; remove all cut sections and their associated inline styles
+- [x] "Tokens in action" section: light/dark toggle reuses `data-theme` toggle, no new JS
+- [x] Carry forward all existing animation infrastructure (scroll-reveal, hero fade-in, transparent nav)
+- [x] Ensure zero dead links after cleanup; update landing page meta description
 
 ---
 
@@ -924,4 +924,37 @@ Merged into T-49 (Complete Foundations section).
 - [ ] Fix or rebuild the demos so each easing and duration token is shown with a moving element (a simple block or icon translating across a track)
 - [ ] Audit: list every animated element in the design system (spinners, skeletons, section transitions, btn-loading, scroll-reveal, tab indicator) and verify each is covered by a documented token
 - [ ] Add any missing tokens; update `CHANGELOG.md`
+## T-73 · Scroll indicator component
+`status: backlog` `effort: S`
 
+**Gap:** The landing page hero has no scroll affordance; visitors may not realise there is content below the fold. A reference scroll indicator exists at https://platform-as-a-product.jbpt.de/ (hero section) and should be extracted, adapted to Farn tokens, and shipped as a reusable component.
+
+**Before starting:** Ask the user (bo@jbpt.de) for a screenshot or accessible URL of the reference scroll indicator — the site returned 403 when fetched programmatically. Do not begin implementation until the reference is confirmed.
+
+- [ ] Add `--scroll-indicator-*` Tier-3 tokens to `tokens/components.css`
+- [ ] Add `.scroll-indicator` CSS class to `tokens/component-classes.css` — animated chevron/arrow, inherits theme via semantic tokens
+- [ ] Respect `prefers-reduced-motion` (show static indicator, no animation)
+- [ ] Element is `aria-hidden="true"` (decorative) or carries a descriptive label for screen readers
+- [ ] Works correctly in both light and dark mode
+- [ ] Documented on the relevant component group page
+- [ ] Used in `site/src/pages/index.astro` hero section
+- [ ] Run build command, update `CHANGELOG.md`
+
+---
+
+## T-74 · Section transition dividers — landing page
+`status: backlog` `effort: M`
+
+**Gap:** Section boundaries on the landing page are hard cuts; adding shaped transition dividers between key sections will improve visual flow and reinforce the Farn aesthetic.
+
+**Required transitions:**
+- Architecture (§3, light bg) → Palette (§4, `data-surface="layer"` / mist bg): **Arc**
+- Palette (§4) → Token Story (§5): **Sine wave**
+- Included (§6) → Ready to Build (§7, dark bg): **Blob**
+
+**ACs:**
+- [ ] Each divider SVG colour-matches the adjacent section backgrounds (both light and dark page themes)
+- [ ] Dividers are `aria-hidden="true"` and do not disrupt layout flow (`position:absolute` or negative margin pattern)
+- [ ] No new JS required — CSS-only shapes
+- [ ] All three dividers render correctly with the existing `--arc-height` / `--wave-height` tokens (or new tokens added for blob/sine)
+- [ ] Run build command if any `tokens/` file changed, update `CHANGELOG.md`

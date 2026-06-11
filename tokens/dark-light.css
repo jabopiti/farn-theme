@@ -49,6 +49,8 @@
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
   --skeleton-shine:              var(--bm2-birch); /* birch (page bg) — lighter than panel (mist) */
+  --btn-g-text:                  var(--in0-void);
+  --btn-s-text:                  var(--in0-void);
 
   /* Section transition aliases — consumed by divider patterns (T-23–T-28) */
   --color-section:         var(--color-bg);
@@ -89,6 +91,8 @@
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
   --btn-g-active-bg:            var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
+  --btn-g-text:                 var(--bm2-birch);
+  --btn-s-text:                 var(--bm2-birch);
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
 }
 
