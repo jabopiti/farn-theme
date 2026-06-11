@@ -75,11 +75,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <div class="width-fill"></div>
       <span class="width-label"><code>--width-content</code> · 1080px · outer page container</span>
     </div>
-    <div class="width-bar" style="--w: 64.8%">
+    <div class="width-bar" style="--w: calc(700 / 1080 * 100%)">
       <div class="width-fill"></div>
       <span class="width-label"><code>--width-prose</code> · 70ch · body copy, articles, long-form text</span>
     </div>
-    <div class="width-bar" style="--w: 59.3%">
+    <div class="width-bar" style="--w: calc(640 / 1080 * 100%)">
       <div class="width-fill"></div>
       <span class="width-label"><code>--width-narrow</code> · 640px · forms, focused UI, modals</span>
     </div>
@@ -299,7 +299,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     flex-wrap: wrap;
   }
 
-  .space-bar {
+  .space-bar, .pad-example {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -314,11 +314,14 @@ import DocLayout from '../../layouts/DocLayout.astro';
     min-height: 4px;
   }
 
-  .bar-label {
-    font-size: 0.68rem;
+  .bar-label, .pad-label, .radius-label {
     font-family: var(--font-mono);
     color: var(--color-text-secondary);
     text-align: center;
+  }
+
+  .bar-label {
+    font-size: 0.68rem;
     line-height: 1.4;
   }
 
@@ -328,13 +331,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     align-items: flex-end;
     gap: var(--space-sm);
     flex-wrap: wrap;
-  }
-
-  .pad-example {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
   }
 
   .pad-outer {
@@ -358,9 +354,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   .pad-label {
     font-size: 0.65rem;
-    font-family: var(--font-mono);
-    color: var(--color-text-secondary);
-    text-align: center;
     white-space: nowrap;
   }
 
@@ -396,7 +389,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
   .page-wireframe {
     display: flex;
     flex-direction: column;
-    gap: 0;
   }
 
   .wf-block {
@@ -413,10 +405,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
     font-size: 0.75em;
   }
 
-  .wf-nav  { background: var(--color-bg-inset); }
-  .wf-hero { background: var(--color-bg-panel); min-height: 52px; display: flex; align-items: center; }
-  .wf-content { background: var(--color-bg-panel); }
-  .wf-footer { background: var(--color-bg-inset); }
+  .wf-nav, .wf-footer { background: var(--color-bg-inset); }
+  .wf-hero, .wf-content { background: var(--color-bg-panel); }
+  .wf-hero { min-height: 52px; display: flex; align-items: center; }
 
   .wf-gap {
     padding: var(--space-xs) var(--space-md);
@@ -473,9 +464,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   .radius-label {
     font-size: 0.7rem;
-    font-family: var(--font-mono);
-    color: var(--color-text-secondary);
-    text-align: center;
     line-height: 1.5;
   }
 
@@ -515,7 +503,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
   .bp-ruler {
     display: flex;
     align-items: stretch;
-    gap: 0;
     overflow: hidden;
     min-height: 80px;
   }
@@ -525,7 +512,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     align-items: center;
     justify-content: center;
     padding: var(--space-sm);
-    flex: 1;
   }
 
   .bp-mobile  { background: color-mix(in srgb, var(--color-accent) 8%, transparent); flex: 2; }

@@ -71,7 +71,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <!-- ── Easing ────────────────────────────────────────────────────────── -->
 
   <h2 id="easing">Easing</h2>
-  <p>All three easings are one-directional — they describe how something arrives. The preview shows each curve in the direction it is designed to be used, then snaps back to reset.</p>
+  <p>All easings are one-directional — they describe how something arrives. The preview shows each curve in the direction it is designed to be used, then snaps back to reset.</p>
 
   <div class="easing-demos demo-surface" aria-hidden="true">
     <div class="ease-row">
@@ -87,6 +87,13 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <div class="motion-ball ease-ball" style="--_ease: var(--ease-out)"></div>
       </div>
       <span class="ease-use">Elements entering the screen — decelerate into position</span>
+    </div>
+    <div class="ease-row">
+      <span class="ease-label"><code>--ease-in-out</code> <em>ease-in-out</em></span>
+      <div class="motion-track">
+        <div class="motion-ball ease-ball" style="--_ease: var(--ease-in-out)"></div>
+      </div>
+      <span class="ease-use">Long-distance travel — elements that need to feel settled at both ends</span>
     </div>
     <div class="ease-row">
       <span class="ease-label"><code>--ease-spring</code> <em>cubic-bezier(0.16, 1, 0.3, 1)</em></span>
@@ -213,6 +220,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 <style>
   /* ── Track layout shared by duration and easing ─────────────────────── */
   .motion-track {
+    --_travel: 184px; /* track width (200px) − ball width (16px) */
     width: 200px;
     height: 20px;
     background: var(--color-bg-inset);
@@ -239,7 +247,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
      animation-duration is resolved from the custom property, not defaulted
      to 0s by the shorthand. */
   @keyframes slide-lr {
-    to { transform: translateX(184px); } /* 200px track − 16px ball */
+    to { transform: translateX(var(--_travel)); }
   }
 
   .duration-ball {
@@ -252,25 +260,29 @@ import DocLayout from '../../layouts/DocLayout.astro';
     gap: var(--space-sm);
   }
 
-  .dur-row {
+  .dur-row, .ease-row {
     display: grid;
-    grid-template-columns: 14rem 200px 1fr;
     align-items: center;
     gap: var(--space-md);
   }
 
-  .dur-label {
+  .dur-row  { grid-template-columns: 14rem 200px 1fr; }
+  .ease-row { grid-template-columns: 18rem 200px 1fr; }
+
+  .dur-label, .ease-label {
     font-size: 0.78rem;
     font-family: var(--font-mono);
   }
 
-  .dur-label em {
+  .dur-label em, .ease-label em {
     font-style: normal;
     color: var(--color-text-secondary);
-    margin-left: var(--space-xs);
   }
 
-  .dur-use {
+  .dur-label em { margin-left: var(--space-xs); }
+  .ease-label em { display: block; font-size: 0.72rem; margin-top: 2px; }
+
+  .dur-use, .ease-use {
     font-size: 0.78rem;
     color: var(--color-text-secondary);
   }
@@ -282,8 +294,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
      as 100%, resulting in zero travel. Fixed to use explicit pixel value. */
   @keyframes slide-one-way {
     0%   { transform: translateX(0); }
-    30%  { transform: translateX(184px); }
-    80%  { transform: translateX(184px); animation-timing-function: steps(1, end); }
+    30%  { transform: translateX(var(--_travel)); }
+    80%  { transform: translateX(var(--_travel)); animation-timing-function: steps(1, end); }
     81%  { transform: translateX(0); }
     100% { transform: translateX(0); }
   }
@@ -296,31 +308,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-  }
-
-  .ease-row {
-    display: grid;
-    grid-template-columns: 18rem 200px 1fr;
-    align-items: center;
-    gap: var(--space-md);
-  }
-
-  .ease-label {
-    font-size: 0.78rem;
-    font-family: var(--font-mono);
-  }
-
-  .ease-label em {
-    font-style: normal;
-    color: var(--color-text-secondary);
-    display: block;
-    font-size: 0.72rem;
-    margin-top: 2px;
-  }
-
-  .ease-use {
-    font-size: 0.78rem;
-    color: var(--color-text-secondary);
   }
 
   /* ── Pairing guide ───────────────────────────────────────────────────── */
@@ -383,8 +370,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   /* Hover colour demo */
   @keyframes anim-hover {
-    0%, 15%, 72%, 100% { background: var(--color-bg-panel); color: var(--color-text); }
-    28%, 60%           { background: var(--color-accent); color: var(--color-bg); }
+    15%, 72% { background: var(--color-bg-panel); color: var(--color-text); }
+    28%, 60% { background: var(--color-accent); color: var(--color-bg); }
   }
   .pairing-hover-box {
     width: 120px;
@@ -461,6 +448,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     .dur-row  { grid-template-columns: 1fr; gap: var(--space-xs); }
     .ease-row { grid-template-columns: 1fr; gap: var(--space-xs); }
     .dur-use, .ease-use { display: none; }
-    .motion-track { width: 160px; }
+    .motion-track { --_travel: 144px; width: 160px; } /* 160px − 16px ball */
   }
 </style>
