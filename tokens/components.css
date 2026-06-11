@@ -23,13 +23,13 @@
   --btn-s-bg:       var(--color-bg-inset);
   --btn-s-text:     var(--color-text);
   --btn-s-border:   transparent;
-  --btn-s-hover-bg: var(--color-bg-panel); /* dark override: --btn-s-hover-bg in dark-light.css */
+  --btn-s-hover-bg: var(--color-bg-interactive-hover);
 
   /* Ghost */
   --btn-g-bg:       transparent;
   --btn-g-text:     var(--color-text);
   --btn-g-border:   var(--color-border);
-  --btn-g-hover-bg: var(--color-bg-panel);
+  --btn-g-hover-bg: var(--color-bg-interactive-hover);
 
   /* Destructive — hover is theme-invariant (always near-black for emphasis) */
   --btn-d-bg:       var(--color-error);
@@ -105,7 +105,7 @@
   --accordion-border:           var(--color-border);
   --accordion-radius:           var(--radius-md);
   --accordion-summary-bg:       transparent;
-  --accordion-summary-hover-bg: var(--color-bg-panel);
+  --accordion-summary-hover-bg: var(--color-bg-interactive-hover);
   --accordion-panel-bg:         transparent;
   --accordion-font-size:        0.9375rem; /* 15px */
   --accordion-toggle-size:      1.25rem;
@@ -182,7 +182,7 @@
   /* ── Pagination tokens ──────────────────────────────────────────────── */
   --pagination-active-bg:   var(--color-accent);
   --pagination-active-text: var(--color-accent-text);
-  --pagination-hover-bg:    var(--color-bg-panel);
+  --pagination-hover-bg:    var(--color-bg-interactive-hover);
   --pagination-hover-text:  var(--color-text);
   --pagination-border:      var(--color-border);
   --pagination-radius:      var(--radius-md);
@@ -190,7 +190,7 @@
 
   /* ── Tab tokens ─────────────────────────────────────────────────────── */
   --tab-idle-text:        var(--color-text-secondary);
-  --tab-hover-bg:         var(--color-bg-panel);
+  --tab-hover-bg:         var(--color-bg-interactive-hover);
   --tab-active-text:      var(--color-text);
   --tab-indicator:        var(--color-accent);
   --tab-border:           var(--color-border);

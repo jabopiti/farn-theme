@@ -7,6 +7,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/dark-light.css`: Hover states for secondary/ghost buttons, accordions, tabs, and pagination were invisible on `layer` surfaces (low-contrast adjacent palette steps) and broken on dark `overlay` surfaces (hover matched surface bg exactly). Root cause: all interactive hover tokens pointed to `--color-bg-panel`, which is repurposed per surface and no longer reliably contrasts with the surface background.
+
+### Added
+- `tokens/dark-light.css`: `--color-bg-interactive-hover` semantic token — defined at every surface/theme level to always provide legible contrast: light base → mist, light layer → sand, light overlay → birch (go lighter; sand is the palette endpoint), dark base/layer/overlay → ash (lightest dark step, contrasts all three dark surface levels). Token lives in the semantic layer alongside `--color-accent-hover` and other purpose-mapped tokens.
+- `tokens/components.css`: `--btn-s-hover-bg`, `--btn-g-hover-bg`, `--accordion-summary-hover-bg`, `--tab-hover-bg`, `--pagination-hover-bg` now reference `var(--color-bg-interactive-hover)` instead of `var(--color-bg-panel)`. Removes the now-redundant dark-mode `--btn-s-hover-bg` component override.
+- `site/src/styles/site.css`, `site/src/pages/index.astro`: Site-level nav and hero hover states updated to use `--color-bg-interactive-hover` for consistency.
+- **T-71** `site/src/pages/styles/spacing.astro`: Full visual rewrite — every section (Space Scale, Layout Widths, Page Structure, Grid Pattern, Border Radius, Z-index, Breakpoints) now has a live visual demo followed by a reference accordion. Space Scale: height-bar skyline with token labels + padding-in-context blocks. Layout Widths: proportional ruler bars. Page Structure and Grid Pattern promoted from h3 sub-sections to full h2 sections with wireframe and live grid demos. Border Radius chips redesigned for visibility (accent fill + border). Z-index: layered legend with depth-scaled left border. Breakpoints: annotated three-zone ruler.
+- **T-72** `site/src/pages/styles/motion.astro`: Fixed two bugs that prevented all animations from running: (1) `animation-duration` defaulted to `0s` in the shorthand — replaced with CSS custom property pattern (`--_dur` set via inline style, consumed in animation shorthand); (2) `translateX(calc(100% - 16px))` referenced ball's own width rather than track width — replaced with explicit `184px`. Easing and duration demos now animate correctly at actual token speeds. Pairing Guide section redesigned with five continuously-looping mini-demo cards (button press, hover colour, panel enter, panel exit, content reveal). All animations include `prefers-reduced-motion` guard.
+
 ### Added
 - **T-59** `tokens/components.css`: `--separator-section-weight` (3px), `--separator-decorative-width` (32px), `--separator-decorative-weight` (2px), `--separator-decorative-color` (`--color-accent`) Tier-3 tokens for separator visual hierarchy
 - **T-59** `tokens/components.css`: `--quote-pull-rule-*` tokens now reference `--separator-decorative-*` — single source of truth for accent rule dimensions shared between pullquote and decorative separator

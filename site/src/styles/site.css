@@ -106,7 +106,7 @@
   transition: background-color var(--duration-base) var(--ease-default), color var(--duration-base) var(--ease-default);
 }
 .theme-toggle:hover {
-  background: var(--color-bg-panel);
+  background: var(--color-bg-interactive-hover);
   color: var(--color-text);
 }
 .github-link {
@@ -123,7 +123,7 @@
   transition: background-color var(--duration-base) var(--ease-default), color var(--duration-base) var(--ease-default);
 }
 .github-link:hover {
-  background: var(--color-bg-panel);
+  background: var(--color-bg-interactive-hover);
   color: var(--color-text);
 }
 .nav-cta {
@@ -149,7 +149,7 @@
   border-color: var(--color-border);
 }
 .nav-cta-ghost:hover {
-  background: var(--color-bg-panel);
+  background: var(--color-bg-interactive-hover);
   color: var(--color-text);
   border-color: var(--color-border-strong);
 }
@@ -169,7 +169,7 @@
   transition: background-color var(--duration-base) var(--ease-default), color var(--duration-base) var(--ease-default);
 }
 .hamburger:hover {
-  background: var(--color-bg-panel);
+  background: var(--color-bg-interactive-hover);
   color: var(--color-text);
 }
 @media (max-width: 640px) /* --breakpoint-mobile */ {
@@ -201,7 +201,7 @@
   border-bottom: 1px solid var(--color-border-subtle);
   transition: background var(--duration-base) var(--ease-default), color var(--duration-base) var(--ease-default);
 }
-.mobile-drawer a:hover { background: var(--color-bg-panel); color: var(--color-accent); }
+.mobile-drawer a:hover { background: var(--color-bg-interactive-hover); color: var(--color-accent); }
 .mobile-drawer .drawer-cta {
   margin: var(--space-md);
   height: 48px;
@@ -231,7 +231,7 @@
   color: var(--color-text);
   border: 1.5px solid var(--color-border);
 }
-.mobile-drawer .drawer-cta-ghost:hover { background: var(--color-bg-panel); color: var(--color-accent); border-bottom: none; }
+.mobile-drawer .drawer-cta-ghost:hover { background: var(--color-bg-interactive-hover); color: var(--color-accent); border-bottom: none; }
 
 /* ── Sub-nav ──────────────────────────────────────────────────────────────── */
 :root {
