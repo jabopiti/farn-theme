@@ -131,8 +131,19 @@ Two parallel tracks — both required for `stable` status.
 
 ## Release
 
-1. Update `CHANGELOG.md` (move Unreleased items to new version)
-2. `git tag v<X.Y.Z> && git push origin v<X.Y.Z>`
+**Version bump — all files to update:**
+- `package.json` — `"version"` field
+- `CHANGELOG.md` — rename `## [Unreleased]` to `## [X.Y.Z] — YYYY-MM-DD`, add empty `## [Unreleased]` above it
+- `README.md` — CDN URL `@X.Y.Z` (the version badge on line 7 is dynamic — auto-updates from GitHub tags, no manual change needed)
+- `llms.txt` — CDN URL `@X.Y.Z`
+- `site/src/components/Footer.astro` — version badge `vX.Y.Z`
+- `site/src/pages/getting-started.astro` — all CDN URL occurrences (use replace_all)
+
+**Steps:**
+1. Make all version bumps above on a release branch
+2. Run `npm run build` (rebuilds `dist/` and syncs `site/public/llms.txt`)
+3. Commit, push, open a PR
+4. After merge: create a GitHub Release at `github.com/jabopiti/farn-theme/releases/new` — set tag `vX.Y.Z`, target `main`; GitHub creates the tag automatically and activates the jsDelivr CDN URL
 
 ## Task workflow
 
