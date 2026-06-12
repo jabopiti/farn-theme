@@ -7,89 +7,261 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <p>
     Four palettes — Iron Night, Birch Mist, Forest, Bloom — organised by role.
     A two-layer token architecture separates raw palette values from semantic aliases,
-    so components never need to know which theme mode they are in.
+    so components never reference a colour directly. Click any swatch to copy its hex value.
   </p>
 
   <h2 id="palette-tokens">Palette Tokens</h2>
   <p>
-    Raw palette tokens are defined once and never change. Use them directly only for
-    brand moments and design showcases — all production components reference the
-    semantic layer instead.
+    Raw palette tokens define the colour vocabulary. In production code, use the
+    <a href="#semantic-layer">semantic layer</a> instead — raw tokens are for brand
+    moments and design showcases only.
   </p>
 
   <h3>Iron Night — Dark Surfaces</h3>
-  <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip" style="background:#0D1117"></span><div><code>--in0-void</code><small>#0D1117</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#374151"></span><div><code>--in1-iron</code><small>#374151</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#4B5563"></span><div><code>--in2-slate</code><small>#4B5563</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#6B7280"></span><div><code>--in3-ash</code><small>#6B7280</small></div></div>
+  <div class="palette-grid">
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#0D1117" style="background:#0D1117" aria-label="Copy #0D1117">
+        <span class="swatch-hex">#0D1117</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--in0-void</code>
+        <p class="color-role">Primary bg (dark); primary text (light)</p>
+        <div class="color-tags">
+          <span class="badge badge-general">bg</span>
+          <span class="badge badge-general">text</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#374151" style="background:#374151" aria-label="Copy #374151">
+        <span class="swatch-hex">#374151</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--in1-iron</code>
+        <p class="color-role">Elevated dark surfaces; panels, cards</p>
+        <div class="color-tags">
+          <span class="badge badge-general">bg</span>
+          <span class="badge badge-general">border</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#4B5563" style="background:#4B5563" aria-label="Copy #4B5563">
+        <span class="swatch-hex">#4B5563</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--in2-slate</code>
+        <p class="color-role">Active lines, selections, highlights</p>
+        <div class="color-tags">
+          <span class="badge badge-general">bg</span>
+          <span class="badge badge-general">border</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#6B7280" style="background:#6B7280" aria-label="Copy #6B7280">
+        <span class="swatch-hex">#6B7280</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--in3-ash</code>
+        <p class="color-role">Secondary text, placeholders (AA large only)</p>
+        <div class="color-tags">
+          <span class="badge badge-general">text</span>
+          <span class="badge badge-general">border</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <table>
-    <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><code>--in0-void</code></td><td><code>#0D1117</code></td><td>Primary background (dark mode)</td></tr>
-      <tr><td><code>--in1-iron</code></td><td><code>#374151</code></td><td>Elevated surfaces — panels, cards on dark</td></tr>
-      <tr><td><code>--in2-slate</code></td><td><code>#4B5563</code></td><td>Active lines, selections, highlights</td></tr>
-      <tr><td><code>--in3-ash</code></td><td><code>#6B7280</code></td><td>Secondary text, placeholders (AA-large only)</td></tr>
-    </tbody>
-  </table>
 
   <h3>Birch Mist — Light Surfaces</h3>
-  <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip chip-light" style="background:#D5D2C7"></span><div><code>--bm0-sand</code><small>#D5D2C7</small></div></div>
-    <div class="swatch-chip"><span class="chip chip-light" style="background:#E9E6DC"></span><div><code>--bm1-mist</code><small>#E9E6DC</small></div></div>
-    <div class="swatch-chip"><span class="chip chip-light" style="background:#F7F6F3"></span><div><code>--bm2-birch</code><small>#F7F6F3</small></div></div>
+  <div class="palette-grid">
+    <div class="color-card swatch-light">
+      <button class="color-card-swatch" data-hex="#D5D2C7" style="background:#D5D2C7" aria-label="Copy #D5D2C7">
+        <span class="swatch-hex">#D5D2C7</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--bm0-sand</code>
+        <p class="color-role">Elevated light surface; inset fills; dark tertiary text</p>
+        <div class="color-tags">
+          <span class="badge badge-general">bg</span>
+          <span class="badge badge-general">text</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card swatch-light">
+      <button class="color-card-swatch" data-hex="#E9E6DC" style="background:#E9E6DC" aria-label="Copy #E9E6DC">
+        <span class="swatch-hex">#E9E6DC</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--bm1-mist</code>
+        <p class="color-role">Card fill, hover states; dark secondary text</p>
+        <div class="color-tags">
+          <span class="badge badge-general">bg</span>
+          <span class="badge badge-general">text</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card swatch-light">
+      <button class="color-card-swatch" data-hex="#F7F6F3" style="background:#F7F6F3" aria-label="Copy #F7F6F3">
+        <span class="swatch-hex">#F7F6F3</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--bm2-birch</code>
+        <p class="color-role">Primary light bg; primary dark text; accent text</p>
+        <div class="color-tags">
+          <span class="badge badge-general">bg</span>
+          <span class="badge badge-general">text</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <table>
-    <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><code>--bm0-sand</code></td><td><code>#D5D2C7</code></td><td>Elevated UI (light), input fills, sunken surfaces</td></tr>
-      <tr><td><code>--bm1-mist</code></td><td><code>#E9E6DC</code></td><td>Card fill, hover states, tinted sections</td></tr>
-      <tr><td><code>--bm2-birch</code></td><td><code>#F7F6F3</code></td><td>Primary background (light) / primary text (dark)</td></tr>
-    </tbody>
-  </table>
 
   <h3>Forest — Accent</h3>
-  <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip" style="background:#94C5AF"></span><div><code>--fo0-glade</code><small>#94C5AF</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#327A59"></span><div><code>--fo1-fern</code><small>#327A59</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#2D5E4A"></span><div><code>--fo2-forest</code><small>#2D5E4A</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#254D5A"></span><div><code>--fo3-deepwater</code><small>#254D5A</small></div></div>
+  <div class="palette-grid">
+    <div class="color-card swatch-light">
+      <button class="color-card-swatch" data-hex="#94C5AF" style="background:#94C5AF" aria-label="Copy #94C5AF">
+        <span class="swatch-hex">#94C5AF</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--fo0-glade</code>
+        <p class="color-role">Dark-mode primary accent — links, buttons (9.79:1 on void)</p>
+        <div class="color-tags">
+          <span class="badge badge-general">accent</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#327A59" style="background:#327A59" aria-label="Copy #327A59">
+        <span class="swatch-hex">#327A59</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--fo1-fern</code>
+        <p class="color-role">Light-mode primary accent — buttons, links, CTAs</p>
+        <div class="color-tags">
+          <span class="badge badge-general">accent</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#2D5E4A" style="background:#2D5E4A" aria-label="Copy #2D5E4A">
+        <span class="swatch-hex">#2D5E4A</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--fo2-forest</code>
+        <p class="color-role">Accent hover; card highlight bg (dark mode)</p>
+        <div class="color-tags">
+          <span class="badge badge-general">accent</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#254D5A" style="background:#254D5A" aria-label="Copy #254D5A">
+        <span class="swatch-hex">#254D5A</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--fo3-deepwater</code>
+        <p class="color-role">Code block bg (light); card highlight bg (light)</p>
+        <div class="color-tags">
+          <span class="badge badge-general">accent</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <table>
-    <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><code>--fo0-glade</code></td><td><code>#94C5AF</code></td><td><strong>Dark-mode primary accent</strong> — links, buttons, indicators (9.79:1 on void ✓)</td></tr>
-      <tr><td><code>--fo1-fern</code></td><td><code>#327A59</code></td><td><strong>Light-mode primary accent</strong> — buttons, links, CTAs; dark-mode hover/active state</td></tr>
-      <tr><td><code>--fo2-forest</code></td><td><code>#2D5E4A</code></td><td>Accent hover, secondary emphasis; card highlight background (dark mode)</td></tr>
-      <tr><td><code>--fo3-deepwater</code></td><td><code>#254D5A</code></td><td>Code block backgrounds (light pages), card highlight background (light mode), active accent state</td></tr>
-    </tbody>
-  </table>
 
   <h3>Bloom — Semantic States</h3>
-  <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip" style="background:#C5414C"></span><div><code>--bl0-ember</code><small>#C5414C</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#AB5A2B"></span><div><code>--bl1-ochre</code><small>#AB5A2B</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#8D6B20"></span><div><code>--bl2-grain</code><small>#8D6B20</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#567A37"></span><div><code>--bl3-moss</code><small>#567A37</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#885DB4"></span><div><code>--bl4-heather</code><small>#885DB4</small></div></div>
+  <div class="palette-grid">
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#C5414C" style="background:#C5414C" aria-label="Copy #C5414C">
+        <span class="swatch-hex">#C5414C</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--bl0-ember</code>
+        <p class="color-role">Error, destructive actions</p>
+        <div class="color-tags">
+          <span class="badge badge-general">state</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#AB5A2B" style="background:#AB5A2B" aria-label="Copy #AB5A2B">
+        <span class="swatch-hex">#AB5A2B</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--bl1-ochre</code>
+        <p class="color-role">Annotation, decorator-weight info</p>
+        <div class="color-tags">
+          <span class="badge badge-general">state</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#8D6B20" style="background:#8D6B20" aria-label="Copy #8D6B20">
+        <span class="swatch-hex">#8D6B20</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--bl2-grain</code>
+        <p class="color-role">Warning, draft, pending</p>
+        <div class="color-tags">
+          <span class="badge badge-general">state</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#567A37" style="background:#567A37" aria-label="Copy #567A37">
+        <span class="swatch-hex">#567A37</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--bl3-moss</code>
+        <p class="color-role">Success, published, active</p>
+        <div class="color-tags">
+          <span class="badge badge-general">state</span>
+        </div>
+      </div>
+    </div>
+    <div class="color-card">
+      <button class="color-card-swatch" data-hex="#885DB4" style="background:#885DB4" aria-label="Copy #885DB4">
+        <span class="swatch-hex">#885DB4</span>
+        <span class="swatch-copied">Copied!</span>
+      </button>
+      <div class="color-card-body">
+        <code class="color-token">--bl4-heather</code>
+        <p class="color-role">Special states, beta, experimental</p>
+        <div class="color-tags">
+          <span class="badge badge-general">state</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <table>
-    <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td><code>--bl0-ember</code></td><td><code>#C5414C</code></td><td>Error, destructive actions</td></tr>
-      <tr><td><code>--bl1-ochre</code></td><td><code>#AB5A2B</code></td><td>Annotation, decorator-weight info</td></tr>
-      <tr><td><code>--bl2-grain</code></td><td><code>#8D6B20</code></td><td>Warning, draft, pending</td></tr>
-      <tr><td><code>--bl3-moss</code></td><td><code>#567A37</code></td><td>Success, published, active</td></tr>
-      <tr><td><code>--bl4-heather</code></td><td><code>#885DB4</code></td><td>Special states, beta, experimental</td></tr>
-    </tbody>
-  </table>
 
-  <h2 id="semantic-tokens">Semantic Token Layer</h2>
-  <p>Components always reference semantic tokens — never palette tokens directly. The semantic layer resolves to the correct palette value per theme mode automatically.</p>
+  <h2 id="semantic-layer">Semantic Token Layer</h2>
+  <p>
+    Components always reference semantic tokens — never palette tokens directly.
+    The semantic layer resolves to the correct palette value per theme mode automatically.
+    Surface depth patterns (<code>data-surface</code>) are documented on
+    <a href="/foundations/surfaces">Foundations &rsaquo; Surfaces</a>.
+  </p>
 
-  <h3>Light Mode (default)</h3>
-  <pre><code>:root,
+  <div class="accordion">
+    <details>
+      <summary>Token reference — light &amp; dark</summary>
+      <div class="accordion-panel">
+        <h4>Light Mode (default)</h4>
+        <pre><code>:root,
 [data-theme="light"] &#123;
   --color-bg:             var(--bm2-birch);           /* Page background        */
   --color-bg-panel:       var(--bm1-mist);            /* Cards, panels          */
@@ -109,9 +281,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   --color-warning:        var(--bl2-grain);           /* Warning, draft         */
   --color-success:        var(--bl3-moss);            /* Success, published     */
 &#125;</code></pre>
-
-  <h3>Dark Mode</h3>
-  <pre><code>[data-theme="dark"] &#123;
+        <h4>Dark Mode</h4>
+        <pre><code>[data-theme="dark"] &#123;
   --color-bg:             var(--in0-void);
   --color-bg-panel:       var(--in1-iron);
   --color-bg-inset:       var(--in2-slate);
@@ -125,26 +296,21 @@ import DocLayout from '../../layouts/DocLayout.astro';
   --color-ghost-border:   rgba(247,246,243,0.25);
   --color-accent:         var(--fo0-glade);
   --color-accent-hover:   var(--fo1-fern);
-  --color-accent-text:    var(--bm2-birch);
+  --color-accent-text:    var(--in0-void);
   --color-error:          var(--bl0-ember);
   --color-warning:        var(--bl2-grain);
   --color-success:        var(--bl3-moss);
 &#125;</code></pre>
-
-  <h3>Surface Depth</h3>
-  <p>Apply <code>data-surface</code> to set a depth level on any element. All surfaces are relative — they adapt when the page theme switches. Use <code>data-theme</code> on an element to force a specific theme context.</p>
-  <pre><code>&lt;section data-surface="base"&gt; &hellip; &lt;/section&gt;    &lt;!-- page-level --&gt;
-&lt;section data-surface="layer"&gt; &hellip; &lt;/section&gt;   &lt;!-- cards, panels --&gt;
-&lt;section data-surface="overlay"&gt; &hellip; &lt;/section&gt; &lt;!-- modals, dropdowns --&gt;
-&lt;section data-theme="dark" data-surface="layer"&gt; &hellip; &lt;/section&gt; &lt;!-- forced dark panel --&gt;</code></pre>
+      </div>
+    </details>
+  </div>
 
   <h2 id="accessibility">Accessibility</h2>
   <p>
-    All semantic token pairs are chosen to meet at least 4.5:1 contrast (WCAG&nbsp;2.1 AA) in
-    both light and dark themes. One exception — <code>--color-text-tertiary</code> — is
-    AA&nbsp;Large only; see the full matrix for details. The complete foreground/background
-    contrast matrix, with colour chips and WCAG ratings for every pair, is on the
-    <a href="/foundations/accessibility#wcag">Foundations &rsaquo; Accessibility</a> page.
+    All semantic token pairs meet at least 4.5:1 contrast (WCAG&nbsp;2.1 AA) in both themes.
+    One exception — <code>--color-text-tertiary</code> — is AA&nbsp;Large only.
+    The complete foreground/background contrast matrix, with colour chips and WCAG ratings
+    for every pair, is on <a href="/foundations/accessibility#wcag">Foundations &rsaquo; Accessibility</a>.
   </p>
 
   <h2 id="usage-rules">Usage Rules</h2>
@@ -157,42 +323,102 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </ul>
 </DocLayout>
 
+<script>
+  document.querySelectorAll('.color-card-swatch').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(btn.dataset.hex).then(() => {
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 1200);
+      }).catch(() => {});
+    });
+  });
+</script>
+
 <style>
-  .swatch-row &#123;
-    display: flex;
-    flex-wrap: wrap;
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: var(--space-sm);
-    margin: var(--space-sm) 0 var(--space-md);
-  &#125;
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
 
-  .swatch-chip &#123;
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    font-size: 0.8125rem;
-  &#125;
+  .color-card {
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
 
-  .swatch-chip div &#123;
+  .color-card-swatch {
+    display: block;
+    width: 100%;
+    height: 80px;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: filter var(--duration-fast) var(--ease-default);
+  }
+
+  .color-card-swatch:hover {
+    filter: brightness(0.9);
+  }
+
+  .color-card-swatch:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
+  }
+
+  .swatch-hex,
+  .swatch-copied {
+    position: absolute;
+    bottom: var(--space-xs);
+    left: var(--space-xs);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--bm2-birch);
+    pointer-events: none;
+  }
+
+  /* Palette tokens used intentionally here — label contrast is tied to the
+     swatch's specific palette identity, not theme state */
+  .color-card.swatch-light .swatch-hex,
+  .color-card.swatch-light .swatch-copied {
+    background: rgba(255, 255, 255, 0.55);
+    color: var(--in0-void);
+  }
+
+  .swatch-hex { display: block; }
+  .swatch-copied { display: none; }
+  .color-card-swatch.copied .swatch-hex { display: none; }
+  .color-card-swatch.copied .swatch-copied { display: block; }
+
+  .color-card-body {
+    padding: var(--space-sm);
     display: flex;
     flex-direction: column;
-    gap: 2px;
-  &#125;
+    gap: 4px;
+  }
 
-  .chip &#123;
+  .color-token {
     display: block;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
-    flex-shrink: 0;
-  &#125;
-
-  .chip-light &#123; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); &#125;
-
-  .swatch-chip small &#123;
-    display: block;
-    color: var(--color-text-tertiary);
-    font-family: var(--font-mono);
     font-size: 0.75rem;
-  &#125;
+  }
 
+  .color-role {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .color-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+  }
 </style>
