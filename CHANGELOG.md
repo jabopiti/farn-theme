@@ -7,6 +7,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Added
+- **T-65** `site/src/pages/foundations/surfaces.astro`: Merged all content from `styles/theming.astro` into this page — now the single authoritative reference for the two-axis theming system. Token reference (surface depth, background, text, borders, accent & state tables; theme toggle snippet) moved into a collapsible accordion at page bottom. Demos reorganised demo-first: side-by-side forced-theme grid (with badges + buttons to show cascade), reactive (page-toggle) demo, and composition demo. Added badges and buttons inside each surface tile to show token cascade in context.
+- **T-65** `tokens/dark-light.css`: Added light-theme surface override rules (`[data-surface="x"][data-theme="light"]` and `[data-theme="light"] [data-surface="x"]:not([data-theme="dark"])`) for `base`, `layer`, and `overlay`. Fixes a CSS specificity gap where the ancestor dark rule (0-2-0) beat the default light surface rule (0-1-0), causing `data-theme="light" data-surface="layer"` to render dark when inside a dark page.
+- **T-66** `site/src/pages/foundations/layout.astro`: Added visual demos for all four layout concepts — proportional width bars (content / narrow / prose), a semantic-landmark wireframe (header / main+article / aside / footer), a live `auto-fill` card grid that reflows on narrow viewports, a radius hierarchy row showing all five `--radius-*` tokens, and a z-index stacking ladder for all eight `--z-*` tokens. Reference tables moved into accordions.
+
+### Changed
+- **T-65** `site/src/data/navigation.ts`: Removed Theming from the Styles sub-nav group (page deleted; content absorbed into Foundations › Surfaces).
+- **T-65** `site/src/pages/styles/index.astro`: Removed Theming list item; added a pointer paragraph to Foundations › Surfaces.
+- **T-65** Composition demo restructured: left panel follows page theme (no forced `data-theme`), right panel is always dark (`data-theme="dark"`). Toggling the page theme now makes the contrast visible — one panel flips, one stays.
+
+### Removed
+- **T-65** `site/src/pages/styles/theming.astro`: Deleted — all content absorbed into `foundations/surfaces.astro`.
+
+### Fixed
+- **T-65** `tokens/dark-light.css`: `data-theme="light" data-surface="layer/overlay/base"` composition now resolves to the correct light palette values when the element is inside a dark page. Previously the dark ancestor selector (0-2-0 specificity) silently overrode the light surface defaults (0-1-0).
+
 ### Changed
 - **T-67** `site/src/pages/foundations/responsive.astro`: Added visual breakpoint ruler (proportional zones: mobile/tablet/desktop), a live three-column card grid demo collapsing to single column at 640 px, and an `auto-fit minmax` intrinsic-sizing example. Removed `badge-beta`; breakpoint token table moved into accordion.
 - **T-68** `site/src/pages/foundations/accessibility.astro`: Added three commitment callout cards (WCAG AA / focus-visible / reduced-motion) at page top. Moved the full WCAG contrast matrix from `styles/color.astro` with corrected token column names (`--color-bg-elevated` → `--color-bg-panel`, `--color-bg-sunken` → `--color-bg-inset`), recalculated all dark-mode ratios (accent and accent-hover rows were using stale token values; entire third column was wrong — old footnote claimed bg-inset = void, but it now resolves to slate), and added inline colour chips for every foreground/background token. `Removed `badge-beta`.
