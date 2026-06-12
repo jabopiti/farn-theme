@@ -1245,6 +1245,11 @@ hr { border: none; }
   cursor: wait;
 }
 
+.btn-loading .spinner {
+  --spinner-color: currentColor;
+  --spinner-track: color-mix(in srgb, currentColor 20%, transparent);
+}
+
 /* ── Tabs ────────────────────────────────────────────────────────────────── */
 
 .tab-list {

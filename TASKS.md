@@ -664,16 +664,16 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-55 · Demo-first docs — roll out to all component pages
-`status: in-progress` `effort: M` `branch: claude/optimistic-ritchie-41gm39`
+`status: done` `effort: M` `branch: claude/dreamy-allen-uula6q`
 
 **Gap:** Following T-46 drop, the proof-of-concept on `actions.astro` and `layout.astro` (cards) establishes the pattern: live demos visible by default, technical reference (anatomy HTML, token tables, override snippets) in `<details>` collapsibles. Remaining component pages still bury some demos inside accordions.
 
 - [x] `components/actions.astro` — button sizes, states, loading demos moved outside accordion; variants table simplified (no inline live buttons)
 - [x] `components/layout.astro` — card anatomy demo (media/header/body/footer) moved outside accordion
-- [ ] `components/navigation.astro` — audit and promote hidden demos
-- [ ] `components/forms.astro` — audit and promote hidden demos
-- [ ] `components/data.astro` — audit and promote hidden demos
-- [ ] `components/status.astro` — audit and promote hidden demos
+- [x] `components/navigation.astro` — audited; all demos already outside accordions, no changes needed
+- [x] `components/forms.astro` — promoted states (default/error/disabled) and wrapper+hint demos outside accordion
+- [x] `components/data.astro` — audited; all demos already outside accordions, no changes needed
+- [x] `components/status.astro` — audited; loading states demo already outside accordion, no changes needed
 
 ---
 
@@ -763,10 +763,13 @@ Merged into T-49 (Complete Foundations section).
 ## T-62 · Forms › input border on non-base surfaces + state demos
 `status: backlog` `effort: S`
 
-**Gap:** Input field borders use `--color-border` which becomes invisible when an input sits on a `layer` or `overlay` surface (the border blends into the panel background). Additionally the forms docs only show the default state — focus, error, disabled, and readonly states are undocumented.
+**Gap:** The idle input border is `transparent` by default (`--input-border: transparent` in `tokens/components.css`), so inputs are indistinguishable from plain text on low-contrast surfaces. Additionally, even when a visible border is set, `--color-border` becomes invisible on `layer` or `overlay` surfaces (border blends into panel background). The forms docs only show the default state — focus, error, disabled, and readonly states are undocumented.
+
+**Plan:** Change `--input-border` default to `var(--color-border)` so inputs have a visible boundary at rest. Then address surface-relative contrast as a separate concern.
 
 **Before coding:** Check how Material Design, Primer, and Ant Design handle input borders across surfaces and document their approach. Note whether they use surface-relative border tokens or a fixed-contrast approach.
 
+- [ ] Change `--input-border` default from `transparent` to `var(--color-border)` in `tokens/components.css`
 - [ ] Fix: define surface-aware border behaviour for inputs — either via `--input-border` value in `data-surface` overrides in `tokens/dark-light.css`, or by using a higher-contrast base token
 - [ ] Extend the forms demo: add visible examples of focus, `aria-invalid` error, disabled, and readonly states — all outside the accordion
 - [ ] Update `tokens/components.css`, `tokens/component-classes.css`, and `site/src/pages/components/forms.astro`; rebuild; update `CHANGELOG.md`

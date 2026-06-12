@@ -7,6 +7,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/component-classes.css`: Spinner inside a loading button now uses `currentColor` for its arc and track so it remains visible on all button variants, including primary (fern background with white text).
+
+### Changed
+- `site/src/pages/components/forms.astro`: Promoted states (default / error / disabled) and wrapper + hint demos outside the reference accordion — demo-first pattern now applied to all component pages (T-55).
+- `site/src/pages/components/layout.astro`: Fixed Separator accordion summary label from `"Full reference"` to `"Full reference — Separator"` for consistency.
+
 ### Added
 - `tokens/dark-light.css`: `data-surface="featured"` — fourth surface pattern. Always renders dark regardless of page theme: void (`#0D1117`) in light mode, deepwater (`#254D5A`) in dark mode. Overrides text, border, and bg-panel tokens to dark-palette values so descendants inherit correct contrast without a `data-theme` attribute. Text contrast on deepwater: primary 8.5:1 (AAA), secondary 7.4:1 (AAA), tertiary 6.1:1 (AA).
 - `tokens/colors.css`: Updated `--fo3-deepwater` comment to document its role as featured-surface background in dark mode.
