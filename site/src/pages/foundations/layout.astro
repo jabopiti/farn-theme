@@ -144,22 +144,12 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </p>
 
   <div class="grid-demo">
-    <div class="grid-demo-card" data-surface="layer">
-      <span class="grid-card-label">Card 1</span>
-      <p class="grid-card-meta">Grid auto-fill</p>
-    </div>
-    <div class="grid-demo-card" data-surface="layer">
-      <span class="grid-card-label">Card 2</span>
-      <p class="grid-card-meta">Grid auto-fill</p>
-    </div>
-    <div class="grid-demo-card" data-surface="layer">
-      <span class="grid-card-label">Card 3</span>
-      <p class="grid-card-meta">Grid auto-fill</p>
-    </div>
-    <div class="grid-demo-card" data-surface="layer">
-      <span class="grid-card-label">Card 4</span>
-      <p class="grid-card-meta">Grid auto-fill</p>
-    </div>
+    {[1, 2, 3, 4].map(n => (
+      <div class="grid-demo-card" data-surface="layer">
+        <span class="grid-card-label">Card {n}</span>
+        <p class="grid-card-meta">Grid auto-fill</p>
+      </div>
+    ))}
   </div>
 
   <div class="accordion">
@@ -243,7 +233,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <h2 id="z-index">Stacking order</h2>
   <p>
-    Seven z-index tokens define a predictable stacking ladder. Never hardcode z-index values —
+    Eight z-index tokens define a predictable stacking ladder. Never hardcode z-index values —
     use the tokens so layers stay relative to each other as the system grows.
   </p>
 
@@ -348,15 +338,20 @@ import DocLayout from '../../layouts/DocLayout.astro';
   }
 
   .wf-header,
-  .wf-footer {
+  .wf-footer,
+  .wf-main {
     background: var(--color-bg-panel);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-md);
     display: flex;
+    gap: var(--space-sm);
+  }
+
+  .wf-header,
+  .wf-footer {
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-sm);
   }
 
   .wf-body {
@@ -366,13 +361,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   .wf-main {
     flex: 1;
-    background: var(--color-bg-panel);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-    display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
     min-height: 120px;
   }
 

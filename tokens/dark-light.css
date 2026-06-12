@@ -206,8 +206,9 @@
 
 [data-surface="base"][data-theme="light"],
 [data-theme="light"] [data-surface="base"]:not([data-theme="dark"]) {
-  background: var(--bm2-birch);
-  --color-bg: var(--bm2-birch);
+  background:        var(--bm2-birch);
+  --color-bg:        var(--bm2-birch);
+  --input-border:    var(--color-border);
 }
 
 [data-surface="layer"][data-theme="light"],
@@ -215,6 +216,7 @@
   background:                   var(--bm1-mist);
   --color-bg:                   var(--bm1-mist);
   --color-bg-panel:             var(--bm2-birch);
+  --color-bg-code:              var(--fo3-deepwater);
   --color-bg-interactive-hover: var(--bm0-sand);
   --skeleton-base:              var(--bm0-sand);
   --skeleton-shine:             var(--bm2-birch);
@@ -226,6 +228,7 @@
   background:                   var(--bm0-sand);
   --color-bg:                   var(--bm0-sand);
   --color-bg-inset:             var(--bm1-mist);
+  --color-bg-code:              var(--fo3-deepwater);
   --color-bg-interactive-hover: var(--bm2-birch);
   --skeleton-base:              var(--bm1-mist);
   --skeleton-shine:             var(--bm2-birch);
