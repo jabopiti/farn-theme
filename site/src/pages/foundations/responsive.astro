@@ -87,7 +87,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     to see the transition at the <code>--breakpoint-mobile</code> threshold.
   </p>
 
-  <div class="reflow-grid">
+  <div class="reflow-grid" aria-label="Three-column card grid that collapses to single column at 640px">
     <div class="card" data-surface="layer">
       <div class="card-body">
         <strong>Card one</strong>
@@ -108,10 +108,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </div>
   </div>
 
-  <details class="accordion" style="margin-top: var(--space-xs)">
-    <summary>CSS for this demo</summary>
-    <div class="accordion-panel">
-      <pre><code>.grid &#123;
+  <div class="accordion" style="margin-top: var(--space-xs)">
+    <details>
+      <summary>CSS for this demo</summary>
+      <div class="accordion-panel">
+        <pre><code>.grid &#123;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: var(--space-md);
@@ -120,8 +121,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
 @media (max-width: 640px) /* --breakpoint-mobile */ &#123;
   .grid &#123; grid-template-columns: 1fr; &#125;
 &#125;</code></pre>
-    </div>
-  </details>
+      </div>
+    </details>
+  </div>
 
   <h2 id="reflow">Reflow-by-content</h2>
   <p>
