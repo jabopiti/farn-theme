@@ -707,7 +707,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-58 · Layout › section transitions — promote demos + fix diagonal cut
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/relaxed-ramanujan-ox5i1u`
 
 **Gap:** Only the sine wave demo is visible outside the accordion. The layered overlap, diagonal cut, organic blob, and arc demos are buried inside the collapsible. Additionally, the diagonal cut demo appears broken in light mode (renders as a horizontal rule, no visible angle), and the "Approaches 1/2/3" language suggests the implementation may be partially documented as aspirational rather than shipped.
 
@@ -750,7 +750,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-61 · Navigation › remove pagination outline variant
-`status: backlog` `effort: XS`
+`status: done` `effort: XS` `branch: claude/relaxed-ramanujan-ox5i1u`
 
 **Gap:** The pagination outline variant adds visual noise without a clear use case distinct from the default. Fewer variants reduces decision fatigue for consumers.
 
@@ -761,7 +761,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-62 · Forms › input border on non-base surfaces + state demos
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/relaxed-ramanujan-ox5i1u`
 
 **Gap:** The idle input border is `transparent` by default (`--input-border: transparent` in `tokens/components.css`), so inputs are indistinguishable from plain text on low-contrast surfaces. Additionally, even when a visible border is set, `--color-border` becomes invisible on `layer` or `overlay` surfaces (border blends into panel background). The forms docs only show the default state — focus, error, disabled, and readonly states are undocumented.
 
@@ -777,7 +777,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-63 · Data › table striped/default distinction + density improvement
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/relaxed-ramanujan-ox5i1u`
 
 **Gap:** The default and striped table variants appear identical — the alternating row background either isn't rendering or lacks sufficient contrast. Additionally the compact/comfortable density difference is minimal and doesn't reflect standard table density conventions.
 

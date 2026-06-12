@@ -187,9 +187,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </div>
 
   <h3>Density</h3>
-  <p><code>.table-sm</code> reduces cell padding for dense data; <code>.table-lg</code> adds breathing room.</p>
+  <p><code>.table-sm</code> tightens cell padding for dense data views; the default suits most content; <code>.table-lg</code> adds breathing room for spacious layouts.</p>
   <div class="table-demo demo-surface" role="region" aria-label="Live density table examples">
-    <p class="demo-label">Compact (.table-sm)</p>
+    <p class="demo-label">Compact — <code>.table-sm</code> (4px / 6px padding)</p>
     <table class="table table-sm table-density-demo">
       <thead>
         <tr><th>Name</th><th>Role</th><th>Status</th></tr>
@@ -198,10 +198,20 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <tr><td>Ada Lovelace</td><td>Engineer</td><td>Active</td></tr>
         <tr><td>Grace Hopper</td><td>Architect</td><td>Active</td></tr>
         <tr><td>Alan Turing</td><td>Researcher</td><td>On leave</td></tr>
-        <tr><td>Margaret Hamilton</td><td>Lead</td><td>Active</td></tr>
       </tbody>
     </table>
-    <p class="demo-label">Comfortable (.table-lg)</p>
+    <p class="demo-label">Default — <code>.table</code> (12px / 12px padding)</p>
+    <table class="table table-density-demo">
+      <thead>
+        <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ada Lovelace</td><td>Engineer</td><td>Active</td></tr>
+        <tr><td>Grace Hopper</td><td>Architect</td><td>Active</td></tr>
+        <tr><td>Alan Turing</td><td>Researcher</td><td>On leave</td></tr>
+      </tbody>
+    </table>
+    <p class="demo-label">Comfortable — <code>.table-lg</code> (24px / 24px padding)</p>
     <table class="table table-lg">
       <thead>
         <tr><th>Name</th><th>Role</th><th>Status</th></tr>
@@ -210,7 +220,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <tr><td>Ada Lovelace</td><td>Engineer</td><td>Active</td></tr>
         <tr><td>Grace Hopper</td><td>Architect</td><td>Active</td></tr>
         <tr><td>Alan Turing</td><td>Researcher</td><td>On leave</td></tr>
-        <tr><td>Margaret Hamilton</td><td>Lead</td><td>Active</td></tr>
       </tbody>
     </table>
   </div>
@@ -264,12 +273,12 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td><code>--table-border</code></td><td><code>--color-border</code></td><td>Cell and header border colour</td></tr>
             <tr><td><code>--table-header-bg</code></td><td><code>--color-bg-inset</code></td><td>Header row background</td></tr>
             <tr><td><code>--table-header-text</code></td><td><code>--color-text</code></td><td>Header row text colour</td></tr>
-            <tr><td><code>--table-row-stripe-bg</code></td><td><code>--color-bg-panel</code></td><td>Even row background in <code>.table-striped</code></td></tr>
-            <tr><td><code>--table-row-hover-bg</code></td><td><code>--color-bg-inset</code></td><td>Row background on hover in <code>.table-hover</code></td></tr>
+            <tr><td><code>--table-row-stripe-bg</code></td><td><code>--color-bg-inset</code></td><td>Even row background in <code>.table-striped</code> — inset ensures visibility on panel-bg surfaces</td></tr>
+            <tr><td><code>--table-row-hover-bg</code></td><td><code>var(--table-row-stripe-bg)</code></td><td>Row background on hover in <code>.table-hover</code></td></tr>
             <tr><td><code>--table-font-size</code></td><td><code>0.875rem</code></td><td>Body cell font size</td></tr>
-            <tr><td><code>--table-cell-padding</code></td><td><code>6px 12px</code></td><td>Default cell padding</td></tr>
-            <tr><td><code>--table-cell-padding-sm</code></td><td><code>3px 6px</code></td><td>Compact cell padding</td></tr>
-            <tr><td><code>--table-cell-padding-lg</code></td><td><code>12px 24px</code></td><td>Comfortable cell padding</td></tr>
+            <tr><td><code>--table-cell-padding</code></td><td><code>12px 12px</code></td><td>Default cell padding (~38px rows)</td></tr>
+            <tr><td><code>--table-cell-padding-sm</code></td><td><code>4px 6px</code></td><td>Compact cell padding (~22px rows)</td></tr>
+            <tr><td><code>--table-cell-padding-lg</code></td><td><code>24px 24px</code></td><td>Comfortable cell padding (~62px rows)</td></tr>
             <tr><td><code>--table-radius</code></td><td><code>--radius-md</code></td><td>Corner radius — apply to a wrapper element</td></tr>
           </tbody>
         </table>
