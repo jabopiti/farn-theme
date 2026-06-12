@@ -255,12 +255,14 @@
   --color-bg-interactive-hover: var(--in3-ash);
   --skeleton-base:              var(--in2-slate);
   --skeleton-shine:             var(--in3-ash);
+  --input-border:               var(--in3-ash); /* ash visible on slate panel bg */
 }
 
 /* overlay — modals, dropdowns, floating elements */
 [data-surface="overlay"] {
   background:                   var(--bm0-sand);
   --color-bg:                   var(--bm0-sand);
+  --color-bg-inset:             var(--bm1-mist);   /* sand is the darkest light step — inset goes lighter for contrast */
   --color-bg-interactive-hover: var(--bm2-birch);  /* go lighter — sand is the darkest light step */
   --skeleton-base:              var(--bm1-mist);
   --skeleton-shine:             var(--bm2-birch);
@@ -275,6 +277,7 @@
   --color-bg-interactive-hover: var(--in3-ash);
   --skeleton-base:              var(--in1-iron);
   --skeleton-shine:             var(--in3-ash);
+  --input-border:               var(--in3-ash); /* ash visible on slate bg */
 }
 
 /* featured — always-dark section; void in light mode, deepwater in dark mode.
@@ -402,7 +405,7 @@
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);
   --input-bg-active:        var(--color-bg-inset);   /* hover + focus */
-  --input-border:           transparent;
+  --input-border:           var(--color-border);
   --input-border-focus:     var(--color-accent);
   --input-border-error:     var(--color-error);
   --input-focus-shadow:     0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
@@ -493,7 +496,6 @@
   --pagination-active-text: var(--color-accent-text);
   --pagination-hover-bg:    var(--color-bg-interactive-hover);
   --pagination-hover-text:  var(--color-text);
-  --pagination-border:      var(--color-border);
   --pagination-radius:      var(--radius-md);
   --pagination-gap:         var(--space-xs);
 
@@ -535,12 +537,12 @@
   --table-header-bg:          var(--color-bg-inset);
   --table-header-text:        var(--color-text);
   --table-header-font-size:   0.8125rem;
-  --table-row-stripe-bg:      var(--color-bg-panel);
-  --table-row-hover-bg:       var(--color-bg-inset);   /* deeper than both base+stripe */
+  --table-row-stripe-bg:      var(--color-bg-inset);   /* inset for visible contrast on panel-bg surfaces */
+  --table-row-hover-bg:       var(--table-row-stripe-bg);
   --table-font-size:          0.875rem;
-  --table-cell-padding:       var(--space-xs) var(--space-sm);
-  --table-cell-padding-sm:    3px var(--space-xs);     /* 3px: sub-xs, no scale token available */
-  --table-cell-padding-lg:    var(--space-sm) var(--space-md);
+  --table-cell-padding:       var(--space-sm) var(--space-sm);  /* 12px 12px */
+  --table-cell-padding-sm:    4px var(--space-xs);              /* 4px 6px — compact */
+  --table-cell-padding-lg:    var(--space-md) var(--space-md);  /* 24px 24px — comfortable */
   --table-radius:             var(--radius-md);        /* apply to a wrapper, not the table */
 }
 /* ── Farn — Base reset and global styles ──────────────────────────────── */

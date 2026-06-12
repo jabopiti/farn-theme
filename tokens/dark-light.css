@@ -139,12 +139,14 @@
   --color-bg-interactive-hover: var(--in3-ash);
   --skeleton-base:              var(--in2-slate);
   --skeleton-shine:             var(--in3-ash);
+  --input-border:               var(--in3-ash); /* ash visible on slate panel bg */
 }
 
 /* overlay — modals, dropdowns, floating elements */
 [data-surface="overlay"] {
   background:                   var(--bm0-sand);
   --color-bg:                   var(--bm0-sand);
+  --color-bg-inset:             var(--bm1-mist);   /* sand is the darkest light step — inset goes lighter for contrast */
   --color-bg-interactive-hover: var(--bm2-birch);  /* go lighter — sand is the darkest light step */
   --skeleton-base:              var(--bm1-mist);
   --skeleton-shine:             var(--bm2-birch);
@@ -159,6 +161,7 @@
   --color-bg-interactive-hover: var(--in3-ash);
   --skeleton-base:              var(--in1-iron);
   --skeleton-shine:             var(--in3-ash);
+  --input-border:               var(--in3-ash); /* ash visible on slate bg */
 }
 
 /* featured — always-dark section; void in light mode, deepwater in dark mode.

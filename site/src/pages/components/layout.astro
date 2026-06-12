@@ -191,6 +191,33 @@ import DocLayout from '../../layouts/DocLayout.astro';
     as the palette evolves. Use one primary pattern per page.
   </p>
 
+  <!-- Layered overlap -->
+  <h3 id="layered-overlap">Layered overlap</h3>
+  <p>
+    The only pure-CSS pattern — no SVG. The next section or a card bleeds upward into the
+    preceding one using a negative <code>margin-top</code> and rounded top corners.
+    <strong>Never add <code>overflow:hidden</code> to the preceding section</strong> — it clips the overlap entirely.
+  </p>
+
+  <div class="demo-overlap-a" role="group" aria-label="Section overlap live demo">
+    <div class="demo-section-before" data-theme="dark">
+      <p class="demo-label">Preceding section</p>
+      <p class="demo-section-desc">Dark area — never add <code>overflow:hidden</code> here.</p>
+    </div>
+    <div class="demo-section-after overlap-section">
+      <p class="demo-label">Overlapping section</p>
+      <p class="demo-section-desc">Rounded top corners float over the section above.</p>
+    </div>
+  </div>
+
+  <!-- Sine wave -->
+  <h3 id="sine-wave">Sine wave</h3>
+  <p>
+    An SVG divider using layered cubic bezier curves — two offset paths create the illusion
+    of a receding tide. Sits absolutely at the bottom of the parent section; fill matches
+    the next section's background.
+  </p>
+
   <div class="demo-wave" role="group" aria-label="Sine wave divider live demo">
     <div class="demo-wave-top" data-theme="dark">
       <p class="demo-label">Preceding section</p>
@@ -210,12 +237,112 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </div>
   </div>
 
+  <!-- Convex arc -->
+  <h3 id="convex-arc">Convex arc</h3>
+  <p>
+    A single quadratic bezier spanning the full width. Calmer than the sine wave — one smooth
+    dome suited to centred hero layouts. Animates via <code>animation-timeline: view()</code>
+    in supporting browsers; static fallback otherwise. The preview below shows the static state.
+  </p>
+
+  <div class="demo-arc" role="group" aria-label="Convex arc divider live demo">
+    <div class="demo-arc-top" data-theme="dark">
+      <p class="demo-label">Preceding section</p>
+      <p class="demo-section-desc">Arc at the bottom — fill matches the section below.</p>
+      <div class="section-arc" aria-hidden="true">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+          <path d="M0,80 Q600,0 1200,80 Z" fill="var(--color-section-next)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="demo-arc-bottom" data-theme="light">
+      <p class="demo-label">Next section</p>
+      <p class="demo-section-desc">Override <code>--color-section-next</code> on the parent to match this background.</p>
+    </div>
+  </div>
+
+  <!-- Organic blob -->
+  <h3 id="organic-blob">Organic blob</h3>
+  <p>
+    A freeform SVG boundary — no mathematical regularity. Two offset paths soften the edge.
+    Fade-only animation keeps the irregular shape from looking chaotic in motion.
+    Use at most once per page for a high-emphasis brand moment. Draw paths in Figma or
+    Inkscape — do not hand-author blob paths.
+  </p>
+
+  <div class="demo-blob" role="group" aria-label="Organic blob divider live demo">
+    <div class="demo-blob-top" data-theme="dark">
+      <p class="demo-label">Preceding section</p>
+      <p class="demo-section-desc">Blob at the bottom — replace the example paths with exported Figma paths for production.</p>
+      <div class="section-blob" data-scroll-reveal aria-hidden="true">
+        <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+          <path d="M0,60 C150,25 200,80 400,55 C600,28 700,75 900,50 C1050,28 1150,65 1200,45 L1200,100 L0,100 Z"
+                fill="var(--color-section-next)" opacity="0.45"/>
+          <path d="M0,65 C150,30 200,85 400,60 C600,33 700,80 900,55 C1050,33 1150,70 1200,50 L1200,100 L0,100 Z"
+                fill="var(--color-section-next)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="demo-blob-bottom" data-theme="light">
+      <p class="demo-label">Next section</p>
+    </div>
+  </div>
+
+  <!-- Diagonal cut -->
+  <h3 id="diagonal-cut">Diagonal cut</h3>
+  <p>
+    A skewed <code>::before</code> pseudo-element paints the section background at an angle —
+    content stays horizontal and <code>box-shadow</code> still works. In supporting browsers
+    the angle flattens via <code>animation-timeline: view()</code>.
+  </p>
+
+  <div class="demo-diagonal" role="group" aria-label="Diagonal cut live demo">
+    <div class="section-skew demo-diagonal-top" data-theme="dark" style="background: transparent;">
+      <p class="demo-label">Preceding section</p>
+      <p class="demo-section-desc">Background skewed via <code>::before</code> — content stays horizontal.</p>
+    </div>
+    <div class="demo-diagonal-bottom" data-theme="light">
+      <p class="demo-label">Next section</p>
+      <p class="demo-section-desc">Set <code>--color-section</code> on the element to match the preceding section's background.</p>
+    </div>
+  </div>
+
+  <!-- Stacked card reveal -->
+  <h3 id="stacked-card-reveal">Stacked card reveal</h3>
+  <p>
+    Cinematic depth for long scroll pages: sections use <code>position: sticky</code>
+    to pin in the viewport while later cards slide on top. A per-section
+    <code>transform: scale()</code> creates the card-deck illusion.
+    Content must fit within <code>100dvh</code> — no vertical overflow. Use 3–5 sections.
+  </p>
+
+  <div class="demo-stack-wrapper" role="group" aria-label="Stacked card reveal demo — scroll inside to reveal cards">
+    <div class="demo-stack-inner">
+      <div class="demo-stack-section" data-theme="dark"
+           style="--stack-depth: 2; --stack-index: 3">
+        <p class="demo-label">Section 1</p>
+        <p class="demo-section-desc">Depth 2 — behind two cards, slightly shrunk.</p>
+      </div>
+      <div class="demo-stack-section" data-theme="light"
+           style="--stack-depth: 1; --stack-index: 4">
+        <p class="demo-label">Section 2</p>
+        <p class="demo-section-desc">Depth 1 — behind one card.</p>
+      </div>
+      <div class="demo-stack-section" data-theme="dark" data-surface="layer"
+           style="--stack-depth: 0; --stack-index: 5">
+        <p class="demo-label">Section 3 — top card</p>
+        <p class="demo-section-desc">Depth 0, full-size. Scroll up to peel back.</p>
+      </div>
+    </div>
+  </div>
+  <p class="demo-stack-hint">↓ Scroll inside the box to reveal cards</p>
+
   <div class="accordion">
     <details>
       <summary>Full reference — Section Transitions</summary>
       <div class="accordion-panel">
 
-        <h3>Patterns</h3>
+        <h3>Pattern guide</h3>
         <table>
           <thead><tr><th>Pattern</th><th>Classes</th><th>Character</th><th>Best for</th></tr></thead>
           <tbody>
@@ -230,23 +357,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <p><strong>Use one primary type per page.</strong> A second type is acceptable for a single high-emphasis moment (e.g., sine waves throughout with one layered overlap at a CTA). More than two distinct types creates visual noise.</p>
 
         <!-- Layered overlap -->
-        <h3 id="layered-overlap">Layered overlap</h3>
-        <p>
-          The only pure-CSS pattern — no SVG. The next section or a card bleeds upward into the
-          preceding section using a negative <code>margin-top</code> combined with
-          <code>border-radius</code> on the top corners.
-        </p>
-
-        <div class="demo-overlap-a" role="group" aria-label="Section overlap live demo">
-          <div class="demo-section-before" data-theme="dark">
-            <p class="demo-label">Preceding section</p>
-            <p class="demo-section-desc">Dark area — never add <code>overflow:hidden</code> here.</p>
-          </div>
-          <div class="demo-section-after overlap-section">
-            <p class="demo-label">Overlapping section</p>
-            <p class="demo-section-desc">Rounded top corners float over the section above.</p>
-          </div>
-        </div>
+        <h3>Layered overlap — details</h3>
 
         <pre><code>&lt;section class="overlap-preceding"&gt;
   &lt;!-- Hero — never overflow:hidden --&gt;
@@ -266,9 +377,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </tbody>
         </table>
 
-        <p><strong>Critical:</strong> <code>overflow:hidden</code> on <code>.overlap-preceding</code> or any ancestor will clip the overlapping element entirely.</p>
-
-        <h4>Layered overlap tokens</h4>
         <table>
           <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
@@ -281,12 +389,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
         </table>
 
         <!-- Sine wave -->
-        <h3 id="sine-wave">Sine wave</h3>
-        <p>
-          An SVG divider using cubic bezier curves. Two layered paths create the illusion of a
-          receding tide. The wave sits absolutely positioned at the bottom of its parent section
-          and fills in the next section's background colour.
-        </p>
+        <h3>Sine wave — details</h3>
+
         <pre><code>&lt;section style="position: relative; padding-bottom: var(--wave-height);
              --color-section-next: var(--color-bg-panel);"&gt;
   &lt;div class="section-wave" data-scroll-reveal aria-hidden="true"&gt;
@@ -308,16 +412,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </tbody>
         </table>
 
-        <p>Change amplitude by adjusting control-point Y values. Equal and opposite offsets (<code>C300,80 900,0</code>) produce a symmetric wave. To reverse direction, place <code>.section-wave</code> at the top of the <em>next</em> section and apply <code>transform: scaleY(-1)</code> to it (not <code>rotateX</code>).</p>
+        <p>Change amplitude by adjusting control-point Y values. Equal and opposite offsets (<code>C300,80 900,0</code>) produce a symmetric wave. To reverse direction, place <code>.section-wave</code> at the top of the <em>next</em> section with <code>transform: scaleY(-1)</code>.</p>
 
         <!-- Convex arc -->
-        <h3 id="convex-arc">Convex arc</h3>
-        <p>
-          A single quadratic bezier curve spanning the full width. Calmer than the sine wave —
-          one smooth dome suited to centred hero layouts. The convex variant animates with
-          <code>animation-timeline: view()</code> (static fallback for unsupported browsers and
-          <code>prefers-reduced-motion</code>). The concave variant is always static.
-        </p>
+        <h3>Convex arc — details</h3>
+
         <pre><code>&lt;!-- Convex (dome) --&gt;
 &lt;section style="position: relative; padding-bottom: var(--arc-height);
              --color-section-next: var(--color-bg-panel);"&gt;
@@ -344,13 +443,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
         </table>
 
         <!-- Organic blob -->
-        <h3 id="organic-blob">Organic blob</h3>
-        <p>
-          A freeform SVG boundary — no mathematical regularity. Two slightly offset paths
-          layered in document order soften the edge. The blob fades in on scroll (opacity only;
-          no translate or morph — irregular shapes look chaotic in motion). Use at most once per
-          page for a high-emphasis brand moment.
-        </p>
+        <h3>Organic blob — details</h3>
+
         <pre><code>&lt;section style="position: relative; padding-bottom: var(--blob-height);
              --color-section-next: var(--color-bg-panel);"&gt;
   &lt;div class="section-blob" data-scroll-reveal aria-hidden="true"&gt;
@@ -373,31 +467,14 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </tbody>
         </table>
 
-        <p><strong>Draw paths in Figma or Inkscape — do not hand-author blob paths.</strong> Export the <code>d</code> attribute directly from your design tool. The silhouette can echo a motif elsewhere in the design (a landscape, terrain, or product shape). The example paths above are illustrative; replace them with exported paths for production use.</p>
-
         <!-- Diagonal cut -->
-        <h3 id="diagonal-cut">Diagonal cut</h3>
+        <h3>Diagonal cut — details</h3>
         <p>
-          A single angled line divides two sections — sharp, directional, and energetic. Three
-          implementation approaches are available in increasing precision. Only approach 2 ships
+          Three implementation approaches in increasing precision. Only approach 2 ships
           as a CSS class; approaches 1 and 3 are code patterns to adapt.
+          <strong>Note:</strong> <code>clip-path</code> (approach 1) clips <code>box-shadow</code>
+          on the same element — use the <code>::before</code> approach if the section needs a shadow.
         </p>
-        <p>
-          <strong>Important:</strong> <code>clip-path</code> (approach 1) clips
-          <code>box-shadow</code> on the same element. If the section needs a drop shadow, use
-          the <code>::before</code> approach instead.
-        </p>
-
-        <div class="demo-diagonal" role="group" aria-label="Diagonal cut live demo">
-          <div class="section-skew demo-diagonal-top" data-theme="dark">
-            <p class="demo-label">Preceding section</p>
-            <p class="demo-section-desc">Background skewed via <code>::before</code> — content stays horizontal.</p>
-          </div>
-          <div class="demo-diagonal-bottom" data-theme="light">
-            <p class="demo-label">Next section</p>
-            <p class="demo-section-desc">Set <code>--color-section</code> to match the preceding section's background.</p>
-          </div>
-        </div>
 
         <h4>Approach 1 — <code>clip-path</code> polygon</h4>
         <p>Simplest option. GPU-accelerated. Does not work if the section needs <code>box-shadow</code>.</p>
@@ -407,12 +484,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
         <h4>Approach 2 — <code>::before</code> skew (shipped as <code>.section-skew</code>)</h4>
         <p>
-          The background is applied to a skewed <code>::before</code> pseudo-element so the section's
-          content stays horizontal and <code>box-shadow</code> on the element still works. In
-          supporting browsers the angle flattens via <code>animation-timeline: view()</code> —
-          from <code>skewY(-5deg)</code> to <code>skewY(0deg)</code> as the section enters the
-          viewport. Static fallback for unsupported browsers: shows at
-          <code>var(--diagonal-angle)</code>.
+          The section element itself must have no background — only the <code>::before</code>
+          pseudo-element provides the background. In supporting browsers the angle flattens via
+          <code>animation-timeline: view()</code>. Static fallback shows <code>var(--diagonal-angle)</code>.
         </p>
         <pre><code>&lt;section class="section-skew"
          style="padding: 80px 0; --color-section: var(--color-bg-panel);"&gt;
@@ -432,55 +506,25 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <table>
           <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
-            <tr><td><code>--diagonal-angle</code></td><td><code>-3deg</code></td><td>Static display angle (approach 2). Keep between <code>-2deg</code> and <code>-5deg</code>. Scroll-driven animation always starts at <code>-5deg</code> regardless of this value.</td></tr>
-            <tr><td><code>--color-section</code></td><td><code>var(--color-bg)</code></td><td>Background fill for the <code>::before</code> pseudo-element (approach 2). Override to match the actual section background.</td></tr>
-            <tr><td><code>--color-section-next</code></td><td><code>var(--color-bg-panel)</code></td><td>SVG fill colour for the triangle approach. Set to match the destination section background.</td></tr>
+            <tr><td><code>--diagonal-angle</code></td><td><code>-3deg</code></td><td>Static display angle (approach 2). Keep between <code>-2deg</code> and <code>-5deg</code>. Scroll-driven animation always starts at <code>-5deg</code> regardless.</td></tr>
+            <tr><td><code>--color-section</code></td><td><code>var(--color-bg)</code></td><td>Background fill for the <code>::before</code> (approach 2). Set to match the section's intended background.</td></tr>
+            <tr><td><code>--color-section-next</code></td><td><code>var(--color-bg-panel)</code></td><td>SVG fill for the triangle approach. Set to match the destination section background.</td></tr>
           </tbody>
         </table>
-
-        <p><strong>Direction carries meaning:</strong> bottom-left to top-right (<code>skewY</code> negative) reads as forward momentum. The reverse reads as stepping back. Be consistent within a page. Use at most one diagonal per scroll flow — two diagonals pointing opposite directions create visual conflict.</p>
+        <p><strong>Direction carries meaning:</strong> negative <code>skewY</code> (bottom-left to top-right) reads as forward momentum. Be consistent within a page.</p>
 
         <!-- Stacked card reveal -->
-        <h3 id="stacked-card-reveal">Stacked card reveal</h3>
-        <p>
-          Cinematic depth for long scrolling pages. Each section uses <code>position: sticky</code>
-          to pin in the viewport; later sections slide on top of earlier ones as the user scrolls
-          through the container. A static <code>transform: scale()</code> per section creates the
-          physical card-deck illusion — the front (last) card is always full-size; cards behind it
-          are progressively smaller.
-        </p>
+        <h3>Stacked card reveal — details</h3>
         <p>
           <strong>Constraints:</strong> content inside each section must fit within <code>100dvh</code>
-          — no vertical overflow. Use 3–5 sections. This pattern is its own transition; do not
-          combine it with other divider patterns within the same stack container.
+          — no vertical overflow. Use 3–5 sections. Do not combine with other divider patterns
+          within the same stack container.
         </p>
         <p>
           <strong>Critical:</strong> <code>overflow: hidden</code> on any ancestor of
-          <code>.stack-container</code> will break <code>position: sticky</code> on the sections —
-          the same trap as <code>.overlap-preceding</code>. Keep ancestors at <code>overflow: visible</code>
-          (the default).
+          <code>.stack-container</code> breaks <code>position: sticky</code> — same trap as
+          <code>.overlap-preceding</code>.
         </p>
-
-        <div class="demo-stack-wrapper" role="group" aria-label="Stacked card reveal demo — scroll inside to reveal cards">
-          <div class="demo-stack-inner">
-            <div class="demo-stack-section" data-theme="dark"
-                 style="--stack-depth: 2; --stack-index: 3">
-              <p class="demo-label">Section 1</p>
-              <p class="demo-section-desc">Depth 2 — behind two cards, slightly shrunk.</p>
-            </div>
-            <div class="demo-stack-section" data-theme="light"
-                 style="--stack-depth: 1; --stack-index: 4">
-              <p class="demo-label">Section 2</p>
-              <p class="demo-section-desc">Depth 1 — behind one card.</p>
-            </div>
-            <div class="demo-stack-section" data-theme="dark" data-surface="layer"
-                 style="--stack-depth: 0; --stack-index: 5">
-              <p class="demo-label">Section 3 — top card</p>
-              <p class="demo-section-desc">Depth 0, full-size. Scroll up to peel back.</p>
-            </div>
-          </div>
-        </div>
-        <p class="demo-stack-hint">↓ Scroll inside the box to reveal cards</p>
 
         <pre><code>&lt;div class="stack-container" style="--stack-count: 3;"&gt;
   &lt;section class="stack-section" style="background: var(--color-section-base);"&gt;
@@ -497,33 +541,25 @@ import DocLayout from '../../layouts/DocLayout.astro';
         <p>
           The <code>nth-last-child</code> selectors in <code>dist/farn-components.css</code>
           automatically assign <code>--stack-depth</code> (0 = front) and
-          <code>--stack-index</code> for stacks of 2–5 sections. Set them inline for larger
-          stacks or to override the defaults.
-        </p>
-        <p>
-          For sites with a fixed navigation bar, override <code>--stack-top</code> to clear
-          it — e.g. <code>style="--stack-top: 64px"</code> on <code>.stack-container</code>
-          or <code>:root</code>. The section height and sticky offset both adjust automatically.
+          <code>--stack-index</code> for stacks of 2–5 sections. Set them inline to override.
+          For a fixed nav bar, set <code>--stack-top</code> to clear it.
         </p>
 
-        <h4>Stacked card tokens</h4>
-        <p>Tier-3 tokens pre-defined in <code>tokens/components.css</code> — override at <code>:root</code> or per instance:</p>
         <table>
           <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
-            <tr><td><code>--stack-scale-step</code></td><td><code>0.03</code></td><td>Scale reduction per depth level. 0.03 = 3% smaller per card behind the front.</td></tr>
-            <tr><td><code>--stack-top</code></td><td><code>0px</code></td><td>Sticky <code>top</code> offset. Override to clear a fixed nav bar.</td></tr>
-            <tr><td><code>--stack-radius</code></td><td><code>var(--radius-xl)</code></td><td>Top-corner radius on each section — reinforces the card metaphor.</td></tr>
-            <tr><td><code>--stack-count</code></td><td><code>4</code></td><td>Number of sections — used by <code>.stack-container</code> to compute total scroll height. Set per instance to match actual child count.</td></tr>
-            <tr><td><code>--stack-height</code></td><td><code>100vh</code></td><td>Height of each section. Set to <code>100dvh</code> to track mobile browser URL bar collapse, or a fixed value (e.g. <code>600px</code>) for non-fullscreen stacks.</td></tr>
+            <tr><td><code>--stack-scale-step</code></td><td><code>0.03</code></td><td>Scale reduction per depth level</td></tr>
+            <tr><td><code>--stack-top</code></td><td><code>0px</code></td><td>Sticky top offset — override to clear a fixed nav bar</td></tr>
+            <tr><td><code>--stack-radius</code></td><td><code>var(--radius-xl)</code></td><td>Top-corner radius on each section</td></tr>
+            <tr><td><code>--stack-count</code></td><td><code>4</code></td><td>Number of sections — set per instance to match actual child count</td></tr>
+            <tr><td><code>--stack-height</code></td><td><code>100vh</code></td><td>Height per section; use <code>100dvh</code> for dynamic viewport tracking</td></tr>
           </tbody>
         </table>
-        <p>Per-section variables — set via <code>nth-last-child</code> defaults or inline on each <code>.stack-section</code>:</p>
         <table>
-          <thead><tr><th>Variable</th><th>Default</th><th>Purpose</th></tr></thead>
+          <thead><tr><th>Per-section variable</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
-            <tr><td><code>--stack-depth</code></td><td>via <code>nth-last-child</code></td><td>Depth in the deck. 0 = front card (full-size); higher = further back (smaller scale). Set inline to override.</td></tr>
-            <tr><td><code>--stack-index</code></td><td>via <code>nth-last-child</code></td><td><code>z-index</code> value. Higher = renders on top. Set inline to override.</td></tr>
+            <tr><td><code>--stack-depth</code></td><td>via <code>nth-last-child</code></td><td>0 = front card (full-size); higher = further back (smaller scale)</td></tr>
+            <tr><td><code>--stack-index</code></td><td>via <code>nth-last-child</code></td><td><code>z-index</code> — higher renders on top</td></tr>
           </tbody>
         </table>
 
@@ -808,26 +844,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
     line-height: 1.5;
   }
 
-  /* ── Sine wave demo ───────────────────────────────────────────────────── */
-  .demo-wave {
-    margin-bottom: var(--space-lg);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border);
-    overflow: hidden;
-  }
-
-  .demo-wave-top {
-    position: relative;
-    padding: var(--space-lg) var(--space-md);
-    padding-bottom: var(--wave-height);
-    --color-section-next: var(--bm2-birch);
-  }
-
-  .demo-wave-bottom {
-    padding: var(--space-md) var(--space-md) var(--space-lg);
-  }
-
-  /* ── Diagonal cut demo ────────────────────────────────────────────────── */
+  /* ── SVG-divider + diagonal demos — shared wrapper structure ───────────── */
+  .demo-wave,
+  .demo-arc,
+  .demo-blob,
   .demo-diagonal {
     margin-bottom: var(--space-lg);
     border-radius: var(--radius-md);
@@ -835,6 +855,25 @@ import DocLayout from '../../layouts/DocLayout.astro';
     overflow: hidden;
   }
 
+  .demo-wave-top,
+  .demo-arc-top,
+  .demo-blob-top {
+    position: relative;
+    padding: var(--space-lg) var(--space-md);
+    --color-section-next: var(--bm2-birch);
+  }
+
+  .demo-wave-top   { padding-bottom: var(--wave-height); }
+  .demo-arc-top    { padding-bottom: var(--arc-height); }
+  .demo-blob-top   { padding-bottom: var(--blob-height); }
+
+  .demo-wave-bottom,
+  .demo-arc-bottom,
+  .demo-blob-bottom {
+    padding: var(--space-md) var(--space-md) var(--space-lg);
+  }
+
+  /* ── Diagonal cut demo ────────────────────────────────────────────────── */
   .demo-diagonal-top {
     padding: var(--space-xl) var(--space-md) calc(var(--space-xl) + 30px);
   }
@@ -887,5 +926,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     color: var(--color-text-tertiary);
     margin: 0 0 var(--space-lg);
   }
+
 
 </style>

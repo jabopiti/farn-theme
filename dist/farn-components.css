@@ -93,7 +93,7 @@
   --input-radius:           var(--radius-md);
   --input-bg:               var(--color-bg-panel);
   --input-bg-active:        var(--color-bg-inset);   /* hover + focus */
-  --input-border:           transparent;
+  --input-border:           var(--color-border);
   --input-border-focus:     var(--color-accent);
   --input-border-error:     var(--color-error);
   --input-focus-shadow:     0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
@@ -184,7 +184,6 @@
   --pagination-active-text: var(--color-accent-text);
   --pagination-hover-bg:    var(--color-bg-interactive-hover);
   --pagination-hover-text:  var(--color-text);
-  --pagination-border:      var(--color-border);
   --pagination-radius:      var(--radius-md);
   --pagination-gap:         var(--space-xs);
 
@@ -226,12 +225,12 @@
   --table-header-bg:          var(--color-bg-inset);
   --table-header-text:        var(--color-text);
   --table-header-font-size:   0.8125rem;
-  --table-row-stripe-bg:      var(--color-bg-panel);
-  --table-row-hover-bg:       var(--color-bg-inset);   /* deeper than both base+stripe */
+  --table-row-stripe-bg:      var(--color-bg-inset);   /* inset for visible contrast on panel-bg surfaces */
+  --table-row-hover-bg:       var(--table-row-stripe-bg);
   --table-font-size:          0.875rem;
-  --table-cell-padding:       var(--space-xs) var(--space-sm);
-  --table-cell-padding-sm:    3px var(--space-xs);     /* 3px: sub-xs, no scale token available */
-  --table-cell-padding-lg:    var(--space-sm) var(--space-md);
+  --table-cell-padding:       var(--space-sm) var(--space-sm);  /* 12px 12px */
+  --table-cell-padding-sm:    4px var(--space-xs);              /* 4px 6px — compact */
+  --table-cell-padding-lg:    var(--space-md) var(--space-md);  /* 24px 24px — comfortable */
   --table-radius:             var(--radius-md);        /* apply to a wrapper, not the table */
 }
 /* ── Farn — Component CSS classes ──────────────────────────────────────── */
@@ -356,6 +355,11 @@ textarea {
 :is(input, textarea, select):disabled {
   opacity: var(--input-disabled-opacity);
   cursor: not-allowed;
+}
+
+:is(input, textarea)[readonly] {
+  background: var(--color-bg);
+  cursor: default;
 }
 
 :is(input, textarea, select)::placeholder {
@@ -618,6 +622,7 @@ input[type="radio"] {
 .section-skew {
   position: relative;
   isolation: isolate; /* contains ::before z-index:-1 within this stacking context */
+  background: transparent; /* prevents data-theme on this element from painting over ::before */
 }
 
 .section-skew::before {
@@ -744,18 +749,6 @@ input[type="radio"] {
 .page-link[aria-disabled="true"] {
   opacity: 0.4;
   pointer-events: none;
-}
-
-/* Outlined variant — border on all items; active item retains filled accent */
-.pagination-outlined .page-link {
-  border-color: var(--pagination-border);
-  transition: background var(--duration-fast) var(--ease-out),
-              border-color var(--duration-fast) var(--ease-out);
-}
-
-.pagination-outlined .page-link:hover {
-  background: var(--pagination-hover-bg);
-  border-color: var(--color-text-secondary);
 }
 
 /* Ellipsis placeholder — not a link, just a visual gap marker */

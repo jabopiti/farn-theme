@@ -485,19 +485,6 @@ document.addEventListener('DOMContentLoaded', initTabs);</code></pre>
     </nav>
   </div>
 
-  <h3>Outlined variant</h3>
-  <div class="demo-surface">
-    <nav aria-label="Pagination">
-      <ol class="pagination pagination-outlined" role="list">
-        <li class="page-item"><a class="page-link" href="#" aria-label="Previous page">← Prev</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#" aria-current="page">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#" aria-label="Next page">Next →</a></li>
-      </ol>
-    </nav>
-  </div>
-
   <div class="accordion accordion-ref">
     <details>
       <summary>Full reference — Pagination</summary>
@@ -537,10 +524,6 @@ document.addEventListener('DOMContentLoaded', initTabs);</code></pre>
   &lt;span class="page-ellipsis"&gt;…&lt;/span&gt;
 &lt;/li&gt;</code></pre>
 
-        <h3>Outlined variant</h3>
-        <p>Add <code>.pagination-outlined</code> to the <code>&lt;ol&gt;</code> to give every item a visible border. Active item retains the filled accent background.</p>
-        <pre><code>&lt;ol class="pagination pagination-outlined" role="list"&gt;…&lt;/ol&gt;</code></pre>
-
         <h3>Usage guidance</h3>
         <table>
           <thead><tr><th>Situation</th><th>Guidance</th></tr></thead>
@@ -573,7 +556,6 @@ document.addEventListener('DOMContentLoaded', initTabs);</code></pre>
             <tr><td><code>--pagination-active-text</code></td><td><code>var(--color-accent-text)</code></td><td>Active page item text color</td></tr>
             <tr><td><code>--pagination-hover-bg</code></td><td><code>var(--color-bg-interactive-hover)</code></td><td>Hovered item background</td></tr>
             <tr><td><code>--pagination-hover-text</code></td><td><code>var(--color-text)</code></td><td>Hovered item text color</td></tr>
-            <tr><td><code>--pagination-border</code></td><td><code>var(--color-border)</code></td><td>Border color used by <code>.pagination-outlined</code></td></tr>
             <tr><td><code>--pagination-radius</code></td><td><code>var(--radius-md)</code></td><td>Corner radius on each page link</td></tr>
             <tr><td><code>--pagination-gap</code></td><td><code>var(--space-xs)</code></td><td>Gap between page items</td></tr>
           </tbody>

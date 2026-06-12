@@ -122,6 +122,11 @@ textarea {
   cursor: not-allowed;
 }
 
+:is(input, textarea)[readonly] {
+  background: var(--color-bg);
+  cursor: default;
+}
+
 :is(input, textarea, select)::placeholder {
   color: var(--input-placeholder);
 }
@@ -382,6 +387,7 @@ input[type="radio"] {
 .section-skew {
   position: relative;
   isolation: isolate; /* contains ::before z-index:-1 within this stacking context */
+  background: transparent; /* prevents data-theme on this element from painting over ::before */
 }
 
 .section-skew::before {
@@ -508,18 +514,6 @@ input[type="radio"] {
 .page-link[aria-disabled="true"] {
   opacity: 0.4;
   pointer-events: none;
-}
-
-/* Outlined variant — border on all items; active item retains filled accent */
-.pagination-outlined .page-link {
-  border-color: var(--pagination-border);
-  transition: background var(--duration-fast) var(--ease-out),
-              border-color var(--duration-fast) var(--ease-out);
-}
-
-.pagination-outlined .page-link:hover {
-  background: var(--pagination-hover-bg);
-  border-color: var(--color-text-secondary);
 }
 
 /* Ellipsis placeholder — not a link, just a visual gap marker */
