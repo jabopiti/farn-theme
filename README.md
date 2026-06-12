@@ -2,9 +2,9 @@
 
 # Farn
 
-[![CI](https://img.shields.io/github/actions/workflow/status/jabopiti/farn-theme/ci.yml?branch=main&label=CI&color=3E7A62)](https://github.com/jabopiti/farn-theme/actions/workflows/ci.yml)
-[![License](https://img.shields.io/badge/license-MIT-3E7A62)](LICENSE)
-[![Version](https://img.shields.io/github/v/tag/jabopiti/farn-theme?color=3E7A62&label=version&sort=semver)](https://github.com/jabopiti/farn-theme/releases)
+[![CI](https://img.shields.io/github/actions/workflow/status/jabopiti/farn-theme/ci.yml?branch=main&label=CI&color=327A59)](https://github.com/jabopiti/farn-theme/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-327A59)](LICENSE)
+[![Version](https://img.shields.io/github/v/tag/jabopiti/farn-theme?color=327A59&label=version&sort=semver)](https://github.com/jabopiti/farn-theme/releases)
 
 ## Sharp. *Warm.* Intellectual.
 

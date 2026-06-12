@@ -14,8 +14,8 @@
   --bm2-birch:     #F7F6F3;   /* Primary bg (light) / text (dark)         */
 
   /* Forest — accent */
-  --fo0-sage:      #5C9E86;   /* Supporting accent; dark-mode hover state          */
-  --fo1-fern:      #3E7A62;   /* Primary accent — buttons, links, CTAs             */
+  --fo0-glade:     #94C5AF;   /* Light accent; dark-mode primary accent (links, buttons, indicators) */
+  --fo1-fern:      #327A59;   /* Primary accent — light-mode buttons, links, CTAs; dark-mode hover  */
   --fo2-forest:    #2D5E4A;   /* Secondary accent; card highlight bg (dark mode)   */
   --fo3-deepwater: #254D5A;   /* Tertiary accent; code block bg + card highlight bg (light mode); featured-surface bg (dark mode) */
 

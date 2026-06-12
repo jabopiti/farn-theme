@@ -51,16 +51,16 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <h3>Forest — Accent</h3>
   <div class="swatch-row">
-    <div class="swatch-chip"><span class="chip" style="background:#5C9E86"></span><div><code>--fo0-sage</code><small>#5C9E86</small></div></div>
-    <div class="swatch-chip"><span class="chip" style="background:#3E7A62"></span><div><code>--fo1-fern</code><small>#3E7A62</small></div></div>
+    <div class="swatch-chip"><span class="chip" style="background:#94C5AF"></span><div><code>--fo0-glade</code><small>#94C5AF</small></div></div>
+    <div class="swatch-chip"><span class="chip" style="background:#327A59"></span><div><code>--fo1-fern</code><small>#327A59</small></div></div>
     <div class="swatch-chip"><span class="chip" style="background:#2D5E4A"></span><div><code>--fo2-forest</code><small>#2D5E4A</small></div></div>
     <div class="swatch-chip"><span class="chip" style="background:#254D5A"></span><div><code>--fo3-deepwater</code><small>#254D5A</small></div></div>
   </div>
   <table>
     <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
     <tbody>
-      <tr><td><code>--fo0-sage</code></td><td><code>#5C9E86</code></td><td>Supporting accent, dark-mode hover state for Fern</td></tr>
-      <tr><td><code>--fo1-fern</code></td><td><code>#3E7A62</code></td><td><strong>Primary accent</strong> — buttons, links, CTAs (both modes)</td></tr>
+      <tr><td><code>--fo0-glade</code></td><td><code>#94C5AF</code></td><td><strong>Dark-mode primary accent</strong> — links, buttons, indicators (9.79:1 on void ✓)</td></tr>
+      <tr><td><code>--fo1-fern</code></td><td><code>#327A59</code></td><td><strong>Light-mode primary accent</strong> — buttons, links, CTAs; dark-mode hover/active state</td></tr>
       <tr><td><code>--fo2-forest</code></td><td><code>#2D5E4A</code></td><td>Accent hover, secondary emphasis; card highlight background (dark mode)</td></tr>
       <tr><td><code>--fo3-deepwater</code></td><td><code>#254D5A</code></td><td>Code block backgrounds (light pages), card highlight background (light mode), active accent state</td></tr>
     </tbody>
@@ -123,8 +123,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   --color-border-strong:  var(--bm0-sand);
   --color-border-subtle:  rgba(75,85,99,0.25);
   --color-ghost-border:   rgba(247,246,243,0.25);
-  --color-accent:         var(--fo1-fern);
-  --color-accent-hover:   var(--fo0-sage);
+  --color-accent:         var(--fo0-glade);
+  --color-accent-hover:   var(--fo1-fern);
   --color-accent-text:    var(--bm2-birch);
   --color-error:          var(--bl0-ember);
   --color-warning:        var(--bl2-grain);
@@ -286,8 +286,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <ul>
     <li><strong>Never</strong> use Bloom colours as decorative accents — reserve them for semantic states only (error, warning, success, annotation).</li>
     <li>Iron Night tones must not appear as foreground text on light backgrounds — contrast is too low.</li>
-    <li>Primary CTA: <code>--fo1-fern</code> background with <code>--bm2-birch</code> text (4.67:1 &#10003;).</li>
-    <li>Dark mode accent shifts Fern &rarr; Sage automatically. Both are the same palette family — the shift is imperceptible as a brand change but improves legibility.</li>
+    <li>Light-mode CTA: <code>--fo1-fern</code> background with <code>--bm2-birch</code> text (4.78:1 ✓).</li>
+    <li>Dark-mode CTA: <code>--fo0-glade</code> background with <code>--in0-void</code> text (9.79:1 ✓). The accent token resolves to glade automatically — no per-component override needed.</li>
     <li>Components reference semantic tokens only. Palette tokens are for brand moments and one-off elements.</li>
   </ul>
 </DocLayout>

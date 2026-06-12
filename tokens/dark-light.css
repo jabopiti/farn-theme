@@ -76,10 +76,13 @@
   --color-border-subtle:    color-mix(in srgb, var(--in2-slate) 25%, transparent);
   --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
   --color-bg-code:          var(--in1-iron);
-  --color-accent:           var(--fo1-fern);
-  --color-accent-hover:     var(--fo0-sage);
-  --color-accent-active:    var(--fo2-forest); /* darker than resting fern; stays in-palette unlike light's deepwater */
+  --color-accent:           var(--fo0-glade);  /* glade: 9.79:1 on void, 5.33:1 on iron — passes AA on all dark surfaces */
+  --color-accent-hover:     var(--fo1-fern);   /* fern steps down to hover/active; collapses with active (see --btn-p-active-bg) */
+  --color-accent-active:    var(--fo2-forest);
   --color-accent-text:      var(--bm2-birch);
+  --btn-p-text:             var(--in0-void);   /* glade bg is light (L=0.49) — needs dark text */
+  --btn-p-active-bg:        var(--fo1-fern);   /* collapses active = hover; forest + void text fails at 2.53:1 */
+  --pagination-active-text: var(--in0-void);   /* active pagination bg = glade — same dark-text requirement */
   --color-error:            var(--bl0-ember);
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);

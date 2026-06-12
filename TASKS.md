@@ -878,7 +878,7 @@ Merged into T-49 (Complete Foundations section).
 
 - [ ] Implement click-to-copy for hex values (small JS snippet or CSS-only with `data-clipboard` approach)
 - [ ] Build the swatch strip and per-colour card layout
-- [ ] Define and apply role tags to every palette token — note: card highlight bg is `--fo2-forest` (light) and `--fo0-sage` (dark); `--fo3-deepwater` is code block bg + active accent state only
+- [ ] Define and apply role tags to every palette token — note: card highlight bg is `--fo2-forest` (light) and `--fo0-glade` (dark); `--fo3-deepwater` is code block bg + active accent state only
 - [ ] Preserve the existing semantic token mapping tables — move to an accordion Reference section
 - [ ] Update `CHANGELOG.md`
 

@@ -60,7 +60,7 @@ Run all six steps after any change to a `tokens/` file, `llms.txt`, or `site/src
 |---|---|---|
 | `--in` | Iron Night (dark) | `--in0-void`, `--in1-iron`, `--in2-slate`, `--in3-ash` |
 | `--bm` | Birch Mist (light) | `--bm0-sand`, `--bm1-mist`, `--bm2-birch` |
-| `--fo` | Forest (accent) | `--fo0-sage`, `--fo1-fern`, `--fo2-forest`, `--fo3-deepwater` |
+| `--fo` | Forest (accent) | `--fo0-glade`, `--fo1-fern`, `--fo2-forest`, `--fo3-deepwater` |
 | `--bl` | Bloom (semantic) | `--bl0-ember`, `--bl1-ochre`, `--bl2-grain`, `--bl3-moss`, `--bl4-heather` |
 | `--color-*` | Semantic layer | `--color-bg`, `--color-text`, `--color-accent` |
 | `--space-*` | Spacing scale | `--space-xs` through `--space-4xl` |
