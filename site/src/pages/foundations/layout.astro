@@ -16,32 +16,22 @@ import DocLayout from '../../layouts/DocLayout.astro';
     Three width tokens cover the full range of layout needs. Apply them to the element that owns
     the constraint — usually a wrapper <code>&lt;div&gt;</code> with <code>margin-inline: auto</code>.
   </p>
-  <table>
-    <thead>
-      <tr>
-        <th>Token</th>
-        <th>Value</th>
-        <th>Use</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>--width-content</code></td>
-        <td><code>1080px</code></td>
-        <td>Outer page container — navigation, hero, section wrappers</td>
-      </tr>
-      <tr>
-        <td><code>--width-prose</code></td>
-        <td><code>70ch</code></td>
-        <td>Text column — articles, docs, any running prose</td>
-      </tr>
-      <tr>
-        <td><code>--width-narrow</code></td>
-        <td><code>640px</code></td>
-        <td>Tight containers — forms, dialogs, focused card layouts</td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div class="width-demo">
+    <div class="width-bar width-bar--content">
+      <span class="width-label"><code>--width-content</code></span>
+      <span class="width-value">1080px · outer container</span>
+    </div>
+    <div class="width-bar width-bar--narrow">
+      <span class="width-label"><code>--width-narrow</code></span>
+      <span class="width-value">640px · forms, dialogs</span>
+    </div>
+    <div class="width-bar width-bar--prose">
+      <span class="width-label"><code>--width-prose</code></span>
+      <span class="width-value">70ch · running prose</span>
+    </div>
+  </div>
+
   <p>
     <code>70ch</code> is relative to the element's own font size, so prose columns naturally
     widen slightly for display headings and narrow for captions — no extra math required.
@@ -49,11 +39,76 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <a href="/styles/spacing">Styles &rsaquo; Spacing</a>.
   </p>
 
+  <div class="accordion">
+    <details>
+      <summary>Width token reference</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Value</th>
+              <th>Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--width-content</code></td>
+              <td><code>1080px</code></td>
+              <td>Outer page container — navigation, hero, section wrappers</td>
+            </tr>
+            <tr>
+              <td><code>--width-prose</code></td>
+              <td><code>70ch</code></td>
+              <td>Text column — articles, docs, any running prose</td>
+            </tr>
+            <tr>
+              <td><code>--width-narrow</code></td>
+              <td><code>640px</code></td>
+              <td>Tight containers — forms, dialogs, focused card layouts</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
   <h2 id="structure">Page structure</h2>
   <p>
-    Use semantic landmarks. Each landmark has a natural width token pairing:
+    Use semantic landmarks. The wireframe below shows a typical page skeleton and the natural
+    width token pairing for each landmark.
   </p>
-  <pre><code>&lt;body&gt;
+
+  <div class="wireframe">
+    <div class="wf-header">
+      <span class="wf-label">header</span>
+      <span class="wf-token">max-width: var(--width-content)</span>
+    </div>
+    <div class="wf-body">
+      <div class="wf-main">
+        <span class="wf-label">main</span>
+        <span class="wf-token">max-width: var(--width-content)</span>
+        <div class="wf-article">
+          <span class="wf-label">article</span>
+          <span class="wf-token">max-width: var(--width-prose)</span>
+        </div>
+      </div>
+      <div class="wf-aside">
+        <span class="wf-label">aside</span>
+        <span class="wf-token">var(--width-narrow)</span>
+      </div>
+    </div>
+    <div class="wf-footer">
+      <span class="wf-label">footer</span>
+      <span class="wf-token">max-width: var(--width-content)</span>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Page structure code</summary>
+      <div class="accordion-panel">
+        <pre><code>&lt;body&gt;
   &lt;header&gt;
     &lt;!-- max-width: var(--width-content) --&gt;
     &lt;nav&gt;...&lt;/nav&gt;
@@ -77,93 +132,394 @@ import DocLayout from '../../layouts/DocLayout.astro';
     &lt;!-- max-width: var(--width-content) --&gt;
   &lt;/footer&gt;
 &lt;/body&gt;</code></pre>
+      </div>
+    </details>
+  </div>
 
   <h2 id="grid-flex">Grid vs flex</h2>
   <p>
-    The rule of thumb: <strong>flex</strong> for one-dimensional alignment,
-    <strong>grid</strong> for two-dimensional layout.
+    Flex for one-dimensional alignment, grid for two-dimensional layout. The demo below uses
+    <code>repeat(auto-fill, minmax(180px, 1fr))</code> — columns appear as space allows,
+    collapsing to a single column on narrow viewports without a media query.
   </p>
-  <table>
-    <thead>
-      <tr>
-        <th>Pattern</th>
-        <th>Use</th>
-        <th>Example</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Flex row</td>
-        <td>Aligning items along a single axis</td>
-        <td>Nav links, button group, icon + label</td>
-      </tr>
-      <tr>
-        <td>Flex column</td>
-        <td>Stacking with controlled spacing</td>
-        <td>Form fields, card body</td>
-      </tr>
-      <tr>
-        <td>Grid columns</td>
-        <td>Placing items in explicit rows and columns</td>
-        <td>Card grid, two-column doc layout</td>
-      </tr>
-      <tr>
-        <td>Grid auto-fill</td>
-        <td>Responsive columns without breakpoints</td>
-        <td><code>repeat(auto-fill, minmax(240px, 1fr))</code></td>
-      </tr>
-    </tbody>
-  </table>
-  <p>
-    Always use <code>gap: var(--space-*)</code> rather than margins between grid or flex children.
-    This keeps spacing in the token system and avoids margin-collapse edge cases. See
-    <a href="/styles/spacing">Styles &rsaquo; Spacing</a> for the full scale.
-  </p>
+
+  <div class="grid-demo">
+    <div class="grid-demo-card" data-surface="layer">
+      <span class="grid-card-label">Card 1</span>
+      <p class="grid-card-meta">Grid auto-fill</p>
+    </div>
+    <div class="grid-demo-card" data-surface="layer">
+      <span class="grid-card-label">Card 2</span>
+      <p class="grid-card-meta">Grid auto-fill</p>
+    </div>
+    <div class="grid-demo-card" data-surface="layer">
+      <span class="grid-card-label">Card 3</span>
+      <p class="grid-card-meta">Grid auto-fill</p>
+    </div>
+    <div class="grid-demo-card" data-surface="layer">
+      <span class="grid-card-label">Card 4</span>
+      <p class="grid-card-meta">Grid auto-fill</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Grid vs flex pattern reference</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead>
+            <tr>
+              <th>Pattern</th>
+              <th>Use</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Flex row</td>
+              <td>Aligning items along a single axis</td>
+              <td>Nav links, button group, icon + label</td>
+            </tr>
+            <tr>
+              <td>Flex column</td>
+              <td>Stacking with controlled spacing</td>
+              <td>Form fields, card body</td>
+            </tr>
+            <tr>
+              <td>Grid columns</td>
+              <td>Placing items in explicit rows and columns</td>
+              <td>Card grid, two-column doc layout</td>
+            </tr>
+            <tr>
+              <td>Grid auto-fill</td>
+              <td>Responsive columns without breakpoints</td>
+              <td><code>repeat(auto-fill, minmax(240px, 1fr))</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Always use <code>gap: var(--space-*)</code> rather than margins between grid or flex children.
+          This keeps spacing in the token system and avoids margin-collapse edge cases.
+        </p>
+      </div>
+    </details>
+  </div>
 
   <h2 id="radius">Radius as hierarchy</h2>
   <p>
     Border radius is not purely decorative — it signals depth and interactivity. Use the scale
     consistently so elements at the same depth read as related.
   </p>
-  <table>
-    <thead>
-      <tr>
-        <th>Token</th>
-        <th>Value</th>
-        <th>Use</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>--radius-sm</code></td>
-        <td><code>4px</code></td>
-        <td>Inset elements — code snippets, badges, table cells</td>
-      </tr>
-      <tr>
-        <td><code>--radius-md</code></td>
-        <td><code>6px</code></td>
-        <td>Interactive elements — buttons, inputs, select menus</td>
-      </tr>
-      <tr>
-        <td><code>--radius-lg</code></td>
-        <td><code>8px</code></td>
-        <td>Containers — cards, panels, modals</td>
-      </tr>
-      <tr>
-        <td><code>--radius-xl</code></td>
-        <td><code>12px</code></td>
-        <td>Prominent containers — hero cards, feature blocks</td>
-      </tr>
-      <tr>
-        <td><code>--radius-full</code></td>
-        <td><code>9999px</code></td>
-        <td>Pills, avatars, toggle switches</td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div class="radius-demo">
+    <div class="radius-box" style="border-radius: var(--radius-sm)">
+      <code>--radius-sm</code>
+      <span>4px · badges, code</span>
+    </div>
+    <div class="radius-box" style="border-radius: var(--radius-md)">
+      <code>--radius-md</code>
+      <span>6px · buttons, inputs</span>
+    </div>
+    <div class="radius-box" style="border-radius: var(--radius-lg)">
+      <code>--radius-lg</code>
+      <span>8px · cards, panels</span>
+    </div>
+    <div class="radius-box" style="border-radius: var(--radius-xl)">
+      <code>--radius-xl</code>
+      <span>12px · hero cards</span>
+    </div>
+    <div class="radius-box" style="border-radius: var(--radius-full)">
+      <code>--radius-full</code>
+      <span>9999px · pills</span>
+    </div>
+  </div>
+
   <p>
     Nest radii correctly: an inner element should have a smaller radius than its container,
     roughly <code>container-radius - padding</code>. Matching radii at every level makes nested
-    surfaces look misaligned.
+    surfaces look misaligned. See <a href="/styles/spacing">Styles &rsaquo; Spacing</a> for the
+    full radius token reference.
+  </p>
+
+  <h2 id="z-index">Stacking order</h2>
+  <p>
+    Seven z-index tokens define a predictable stacking ladder. Never hardcode z-index values —
+    use the tokens so layers stay relative to each other as the system grows.
+  </p>
+
+  <div class="z-demo">
+    <div class="z-layer z-base">
+      <code>--z-base · 0</code>
+      <span>Normal flow</span>
+    </div>
+    <div class="z-layer z-raised">
+      <code>--z-raised · 1</code>
+      <span>Floated cards</span>
+    </div>
+    <div class="z-layer z-content">
+      <code>--z-content · 10</code>
+      <span>Sticky sub-nav</span>
+    </div>
+    <div class="z-layer z-dropdown">
+      <code>--z-dropdown · 100</code>
+      <span>Dropdowns, popovers</span>
+    </div>
+    <div class="z-layer z-sticky">
+      <code>--z-sticky · 200</code>
+      <span>Sticky header</span>
+    </div>
+    <div class="z-layer z-overlay">
+      <code>--z-overlay · 300</code>
+      <span>Modal backdrop</span>
+    </div>
+    <div class="z-layer z-modal">
+      <code>--z-modal · 400</code>
+      <span>Modal dialog</span>
+    </div>
+    <div class="z-layer z-toast">
+      <code>--z-toast · 500</code>
+      <span>Toasts, notifications</span>
+    </div>
+  </div>
+
+  <p>
+    The stacking order matches the visual hierarchy: page content sits at the bottom, transient
+    UI (toasts, modals) at the top. Never set a dropdown above a modal — if a component needs to
+    break this order, the design decision is worth questioning first.
   </p>
 </DocLayout>
+
+<style>
+  /* ── Width demo ─────────────────────────────────────────────────────── */
+  .width-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xl);
+  }
+
+  .width-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .width-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    opacity: 0.08;
+    border-radius: var(--radius-md);
+  }
+
+  .width-bar--content { width: 100%; }
+  .width-bar--narrow  { width: min(100%, 640px); }
+  .width-bar--prose   { width: min(100%, 70ch); }
+
+  .width-label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text);
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .width-value {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    position: relative;
+  }
+
+  /* ── Wireframe ──────────────────────────────────────────────────────── */
+  .wireframe {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xl);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .wf-header,
+  .wf-footer {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+
+  .wf-body {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .wf-main {
+    flex: 1;
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    min-height: 120px;
+  }
+
+  .wf-article {
+    flex: 1;
+    background: var(--color-bg-inset);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+
+  .wf-aside {
+    width: 140px;
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  @media (max-width: 640px) /* --breakpoint-mobile */ {
+    .wf-body { flex-direction: column; }
+    .wf-aside { width: auto; }
+  }
+
+  .wf-label {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .wf-token {
+    color: var(--color-text-secondary);
+    font-size: 11px;
+  }
+
+  /* ── Grid demo ──────────────────────────────────────────────────────── */
+  .grid-demo {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .grid-demo-card {
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .grid-card-label {
+    font-weight: 600;
+    color: var(--color-text);
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .grid-card-meta {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+  }
+
+  /* ── Radius demo ────────────────────────────────────────────────────── */
+  .radius-demo {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xl);
+  }
+
+  .radius-box {
+    flex: 1;
+    min-width: 100px;
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    padding: var(--space-md) var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    text-align: center;
+  }
+
+  .radius-box code {
+    font-size: 11px;
+    background: none;
+    padding: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .radius-box span {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+  }
+
+  /* ── Z-index demo ───────────────────────────────────────────────────── */
+  .z-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .z-layer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: color-mix(in srgb, var(--color-accent) var(--_z-bg), transparent);
+    border-color: color-mix(in srgb, var(--color-accent) var(--_z-border), transparent);
+  }
+
+  .z-layer code {
+    background: none;
+    padding: 0;
+    font-size: 12px;
+    color: var(--color-text);
+    white-space: nowrap;
+    min-width: 160px;
+  }
+
+  .z-layer span {
+    color: var(--color-text-secondary);
+  }
+
+  .z-base     { --_z-bg:  4%; --_z-border:  20%; }
+  .z-raised   { --_z-bg:  7%; --_z-border:  30%; }
+  .z-content  { --_z-bg: 10%; --_z-border:  40%; }
+  .z-dropdown { --_z-bg: 13%; --_z-border:  50%; }
+  .z-sticky   { --_z-bg: 16%; --_z-border:  60%; }
+  .z-overlay  { --_z-bg: 20%; --_z-border:  70%; }
+  .z-modal    { --_z-bg: 24%; --_z-border:  80%; }
+  .z-toast    { --_z-bg: 28%; --_z-border: 100%; }
+
+  @media (max-width: 640px) /* --breakpoint-mobile */ {
+    .z-layer { flex-wrap: wrap; }
+    .z-layer code { min-width: unset; }
+  }
+</style>

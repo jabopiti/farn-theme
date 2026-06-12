@@ -30,7 +30,6 @@ export const groups: NavGroup[] = [
       { label: 'Typography',  href: '/styles/typography' },
       { label: 'Spacing',     href: '/styles/spacing' },
       { label: 'Motion',      href: '/styles/motion' },
-      { label: 'Theming',     href: '/styles/theming' },
       { label: 'Icons',       href: '/styles/icons' },
     ],
   },

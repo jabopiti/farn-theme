@@ -12,83 +12,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
     palette token for the current theme. They compose freely: a dark panel inside a light page
     needs only one attribute pair.
   </p>
-  <p>
-    For the token lookup table and copy-ready snippets, see
-    <a href="/styles/theming">Styles &rsaquo; Theming</a>.
-  </p>
-
-  <h2 id="surface-system">The Two-Axis Model</h2>
-  <p>
-    Most theming systems give you a single switch — light or dark. Farn gives you two independent
-    controls: an <em>absolute</em> theme axis and a <em>relative</em> depth axis.
-  </p>
-  <p>
-    The absolute axis (<code>data-theme</code>) sets the entire context for an element and all
-    its descendants. The relative axis (<code>data-surface</code>) expresses depth within
-    whatever theme context is currently active. Because depth is relative, a
-    <code>data-surface="layer"</code> on a dark panel resolves to Iron Night iron, and on a light
-    panel it resolves to Birch Mist mist — the same semantic intent, the right palette value.
-  </p>
-  <p>
-    This is why Farn palettes are designed in complementary pairs: Iron Night and Birch Mist
-    mirror each other's depth levels. Iron Night void = dark page; Birch Mist birch = light page.
-    Iron Night iron = dark card; Birch Mist mist = light card. The surface system is an
-    expression of the palette story, not a separate mechanism bolted on.
-  </p>
-  <p>
-    The <code>featured</code> surface opts out of theme-relativity by design. It is always dark
-    — void in light mode, deepwater in dark mode — and forces its own text and border tokens so
-    descendants inherit correct contrast without a <code>data-theme</code> attribute on the element.
-  </p>
-
-  <h2 id="depth-table">Depth Reference</h2>
-  <p>
-    Each surface overrides <code>--color-bg</code> (and where relevant <code>--color-bg-panel</code>)
-    so that any element using <code>background: var(--color-bg)</code> picks up the right depth
-    automatically.
-  </p>
-  <table>
-    <thead>
-      <tr>
-        <th><code>data-surface</code></th>
-        <th>Light <code>--color-bg</code></th>
-        <th>Dark <code>--color-bg</code></th>
-        <th>Use</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>base</code></td>
-        <td><code>--bm2-birch</code> <span class="swatch" style="background:#F7F6F3"></span></td>
-        <td><code>--in0-void</code> <span class="swatch" style="background:#0D1117"></span></td>
-        <td>Resets to page bg; useful inside a deeper surface when you need to escape back up</td>
-      </tr>
-      <tr>
-        <td><code>layer</code></td>
-        <td><code>--bm1-mist</code> <span class="swatch" style="background:#E9E6DC"></span></td>
-        <td><code>--in1-iron</code> <span class="swatch" style="background:#374151"></span></td>
-        <td>Cards, sidebars, panels — one step raised from the page</td>
-      </tr>
-      <tr>
-        <td><code>overlay</code></td>
-        <td><code>--bm0-sand</code> <span class="swatch" style="background:#D5D2C7"></span></td>
-        <td><code>--in2-slate</code> <span class="swatch" style="background:#4B5563"></span></td>
-        <td>Modals, dropdowns, floating elements — highest depth level</td>
-      </tr>
-      <tr>
-        <td><code>featured</code></td>
-        <td><code>--in0-void</code> <span class="swatch" style="background:#0D1117"></span></td>
-        <td><code>--fo3-deepwater</code> <span class="swatch" style="background:#254D5A"></span></td>
-        <td>Hero sections, feature callouts — always dark; no <code>data-theme</code> needed</td>
-      </tr>
-    </tbody>
-  </table>
 
   <h2 id="live-demo">Live Demo</h2>
   <p>
-    The two columns below are forced to their respective themes via <code>data-theme</code> on the
-    column wrapper. Each surface renders as a sibling block so you can compare all three depths
-    side by side in both themes simultaneously.
+    Both columns below are pinned to their respective themes. Each surface renders at the same
+    depth so you can compare all four levels side by side.
   </p>
 
   <div class="demo-grid">
@@ -97,18 +25,38 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <div class="surface-demo" data-surface="base">
         <code class="surface-tag">base</code>
         <p class="surface-desc">Page background — birch</p>
+        <div class="surface-card-row">
+          <span class="badge">badge</span>
+          <button class="btn btn-p btn-sm">Primary</button>
+          <button class="btn btn-s btn-sm">Secondary</button>
+        </div>
       </div>
       <div class="surface-demo" data-surface="layer">
         <code class="surface-tag">layer</code>
         <p class="surface-desc">Cards, panels — mist</p>
+        <div class="surface-card-row">
+          <span class="badge badge-beta">beta</span>
+          <button class="btn btn-p btn-sm">Primary</button>
+          <button class="btn btn-s btn-sm">Secondary</button>
+        </div>
       </div>
       <div class="surface-demo" data-surface="overlay">
         <code class="surface-tag">overlay</code>
         <p class="surface-desc">Modals, dropdowns — sand</p>
+        <div class="surface-card-row">
+          <span class="badge badge-draft">draft</span>
+          <button class="btn btn-p btn-sm">Primary</button>
+          <button class="btn btn-s btn-sm">Secondary</button>
+        </div>
       </div>
       <div class="surface-demo" data-surface="featured">
         <code class="surface-tag">featured</code>
         <p class="surface-desc">Hero sections — void</p>
+        <div class="surface-card-row">
+          <span class="badge">badge</span>
+          <button class="btn btn-p btn-sm">Primary</button>
+          <button class="btn btn-s btn-sm">Secondary</button>
+        </div>
       </div>
     </div>
 
@@ -117,18 +65,38 @@ import DocLayout from '../../layouts/DocLayout.astro';
       <div class="surface-demo" data-surface="base">
         <code class="surface-tag">base</code>
         <p class="surface-desc">Page background — void</p>
+        <div class="surface-card-row">
+          <span class="badge">badge</span>
+          <button class="btn btn-p btn-sm">Primary</button>
+          <button class="btn btn-s btn-sm">Secondary</button>
+        </div>
       </div>
       <div class="surface-demo" data-surface="layer">
         <code class="surface-tag">layer</code>
         <p class="surface-desc">Cards, panels — iron</p>
+        <div class="surface-card-row">
+          <span class="badge badge-beta">beta</span>
+          <button class="btn btn-p btn-sm">Primary</button>
+          <button class="btn btn-s btn-sm">Secondary</button>
+        </div>
       </div>
       <div class="surface-demo" data-surface="overlay">
         <code class="surface-tag">overlay</code>
         <p class="surface-desc">Modals, dropdowns — slate</p>
+        <div class="surface-card-row">
+          <span class="badge badge-draft">draft</span>
+          <button class="btn btn-p btn-sm">Primary</button>
+          <button class="btn btn-s btn-sm">Secondary</button>
+        </div>
       </div>
       <div class="surface-demo" data-surface="featured">
         <code class="surface-tag">featured</code>
         <p class="surface-desc">Hero sections — deepwater</p>
+        <div class="surface-card-row">
+          <span class="badge">badge</span>
+          <button class="btn btn-p btn-sm">Primary</button>
+          <button class="btn btn-s btn-sm">Secondary</button>
+        </div>
       </div>
     </div>
   </div>
@@ -136,7 +104,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h3>Responds to the page toggle</h3>
   <p>
     Without a forced <code>data-theme</code> the surfaces adapt automatically. Use the moon/sun
-    button in the nav above to see all three levels update in place.
+    button in the nav above to see all four levels update in place.
   </p>
 
   <div class="reactive-demo">
@@ -161,23 +129,52 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </div>
   </div>
 
-  <h3>Composition</h3>
+  <h3>Override with <code>data-theme</code></h3>
   <p>
-    Combine <code>data-theme</code> and <code>data-surface</code> on the same element to create a
-    surface that is pinned to a specific theme regardless of the page. Both panels below stay constant
-    as you toggle the page theme.
+    Add <code>data-theme="dark"</code> (or <code>"light"</code>) to any element to pin it to a
+    specific theme regardless of the page. Toggle the page theme — the right panel stays dark
+    while the left follows the page.
   </p>
 
   <div class="composition-demo">
+    <div class="composed-panel" data-surface="layer">
+      <code class="surface-tag">data-surface="layer"</code>
+      <p class="surface-desc">Follows page theme</p>
+    </div>
     <div class="composed-panel" data-theme="dark" data-surface="layer">
       <code class="surface-tag">data-theme="dark" data-surface="layer"</code>
-      <p class="surface-desc">Always a dark panel</p>
-    </div>
-    <div class="composed-panel" data-theme="light" data-surface="layer">
-      <code class="surface-tag">data-theme="light" data-surface="layer"</code>
-      <p class="surface-desc">Always a light panel</p>
+      <p class="surface-desc">Always dark</p>
     </div>
   </div>
+
+  <pre><code>&lt;!-- Pinned theme + explicit depth --&gt;
+&lt;section data-theme="dark" data-surface="layer"&gt;
+  Dark panel regardless of page theme
+&lt;/section&gt;</code></pre>
+
+  <h2 id="surface-system">The Two-Axis Model</h2>
+  <p>
+    Most theming systems give you a single switch — light or dark. Farn gives you two independent
+    controls: an <em>absolute</em> theme axis and a <em>relative</em> depth axis.
+  </p>
+  <p>
+    The absolute axis (<code>data-theme</code>) sets the entire context for an element and all
+    its descendants. The relative axis (<code>data-surface</code>) expresses depth within
+    whatever theme context is currently active. Because depth is relative, a
+    <code>data-surface="layer"</code> on a dark panel resolves to Iron Night iron, and on a light
+    panel it resolves to Birch Mist mist — the same semantic intent, the right palette value.
+  </p>
+  <p>
+    This is why Farn palettes are designed in complementary pairs: Iron Night and Birch Mist
+    mirror each other's depth levels. Iron Night void = dark page; Birch Mist birch = light page.
+    Iron Night iron = dark card; Birch Mist mist = light card. The surface system is an
+    expression of the palette story, not a separate mechanism bolted on.
+  </p>
+  <p>
+    The <code>featured</code> surface opts out of theme-relativity by design. It is always dark
+    — void in light mode, deepwater in dark mode — and forces its own text and border tokens so
+    descendants inherit correct contrast without a <code>data-theme</code> attribute.
+  </p>
 
   <h2 id="featured-surface">Featured Surface</h2>
   <p>
@@ -186,9 +183,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
     giving hero sections and feature callouts visual weight that adapts without losing contrast.
   </p>
   <p>
-    Unlike <code>base</code>, <code>layer</code>, and <code>overlay</code>, it overrides text and
-    border tokens directly so descendants automatically inherit the right dark-palette values. Just
-    add <code>data-surface="featured"</code> — no <code>data-theme</code> composition required.
+    Unlike the three relative surfaces, it overrides text and border tokens directly so descendants
+    automatically inherit the right dark-palette values. Just add <code>data-surface="featured"</code>
+    — no <code>data-theme</code> composition required.
   </p>
   <pre><code>&lt;section data-surface="featured"&gt;
   &lt;!-- text tokens are dark-palette: birch, mist, sand --&gt;
@@ -208,13 +205,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h2 id="fowt">FOWT Prevention</h2>
   <p>
     A Flash of Wrong Theme (FOWT) occurs when the browser renders a frame in the default light mode
-    before JavaScript runs and reads the stored preference. On a fast connection it is a brief flicker;
-    on a slow one it can persist for a noticeable moment.
-  </p>
-  <p>
-    The fix is a tiny synchronous inline script placed in <code>&lt;head&gt;</code> — before
-    <code>&lt;body&gt;</code> — that sets <code>data-theme</code> on <code>&lt;html&gt;</code> before
-    the browser paints anything:
+    before JavaScript runs and reads the stored preference. The fix is a tiny synchronous inline
+    script placed in <code>&lt;head&gt;</code> — before <code>&lt;body&gt;</code> — that sets
+    <code>data-theme</code> on <code>&lt;html&gt;</code> before the browser paints anything:
   </p>
 
   <pre><code>&lt;script&gt;
@@ -227,7 +220,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <p>Three rules for the script to work:</p>
   <ul>
-    <li><strong>Synchronous, not deferred.</strong> No <code>defer</code>, no <code>type="module"</code>. The script must execute before the first paint, which means it must block parsing briefly.</li>
+    <li><strong>Synchronous, not deferred.</strong> No <code>defer</code>, no <code>type="module"</code>. The script must block parsing briefly to run before the first paint.</li>
     <li><strong>In <code>&lt;head&gt;</code> before <code>&lt;body&gt;</code>.</strong> Any content painted before the script runs will flash in the wrong theme.</li>
     <li><strong>localStorage key is <code>farn-theme</code>.</strong> The theme toggle must write to the same key. Falls back to <code>prefers-color-scheme</code> when no stored preference exists.</li>
   </ul>
@@ -236,6 +229,140 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <code>&lt;script is:inline&gt;...&lt;/script&gt;</code>.
     For a practical setup walkthrough, see <a href="/getting-started#fowt">Getting Started &rsaquo; FOWT</a>.
   </p>
+
+  <div class="accordion">
+    <details>
+      <summary>Token Reference</summary>
+      <div class="accordion-panel">
+
+        <h3>Surface Depth</h3>
+        <p>
+          Apply <code>data-surface</code> to set depth on any element. Tokens resolve automatically
+          for the active theme.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th><code>data-surface</code></th>
+              <th>Light <code>--color-bg</code></th>
+              <th>Dark <code>--color-bg</code></th>
+              <th>Light <code>--color-bg-panel</code></th>
+              <th>Dark <code>--color-bg-panel</code></th>
+              <th>Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>base</code></td>
+              <td><code>--bm2-birch</code> <span class="swatch" style="background:#F7F6F3"></span></td>
+              <td><code>--in0-void</code> <span class="swatch" style="background:#0D1117"></span></td>
+              <td><em>inherits</em></td>
+              <td><em>inherits</em></td>
+              <td>Resets to page bg inside a deeper surface</td>
+            </tr>
+            <tr>
+              <td><code>layer</code></td>
+              <td><code>--bm1-mist</code> <span class="swatch" style="background:#E9E6DC"></span></td>
+              <td><code>--in1-iron</code> <span class="swatch" style="background:#374151"></span></td>
+              <td><code>--bm2-birch</code></td>
+              <td><code>--in2-slate</code></td>
+              <td>Cards, sidebars, panels</td>
+            </tr>
+            <tr>
+              <td><code>overlay</code></td>
+              <td><code>--bm0-sand</code> <span class="swatch" style="background:#D5D2C7"></span></td>
+              <td><code>--in2-slate</code> <span class="swatch" style="background:#4B5563"></span></td>
+              <td><em>inherits</em></td>
+              <td><code>--in2-slate</code> (capped)</td>
+              <td>Modals, dropdowns, floating elements</td>
+            </tr>
+            <tr>
+              <td><code>featured</code></td>
+              <td><code>--in0-void</code> <span class="swatch" style="background:#0D1117"></span></td>
+              <td><code>--fo3-deepwater</code> <span class="swatch" style="background:#254D5A"></span></td>
+              <td><code>--in1-iron</code></td>
+              <td><code>--in1-iron</code></td>
+              <td>Hero sections, feature callouts — always dark</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Dark overlay ceiling: in dark mode <code>--color-bg-panel</code> inside an overlay is capped
+          at <code>--in2-slate</code> — the same as the overlay background — because slate is the
+          deepest available surface.
+        </p>
+
+        <h3>Theme Toggle</h3>
+        <p>
+          Set <code>data-theme</code> on any element to control its theme context.
+          All semantic tokens re-declare inside <code>[data-theme]</code> — no extra overrides needed.
+        </p>
+        <pre><code>&lt;!-- Page-level: set on &lt;html&gt; --&gt;
+&lt;html data-theme="dark"&gt;
+
+&lt;!-- Element-level: local override --&gt;
+&lt;section data-theme="dark"&gt;
+  Always dark, regardless of the page theme
+&lt;/section&gt;
+
+&lt;!-- Composed: pinned theme + explicit depth --&gt;
+&lt;section data-theme="dark" data-surface="layer"&gt;
+  Dark panel, card depth
+&lt;/section&gt;</code></pre>
+
+        <h3>Background</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--color-bg</code></td><td><code>--bm2-birch</code></td><td><code>--in0-void</code></td><td>Page background</td></tr>
+            <tr><td><code>--color-bg-panel</code></td><td><code>--bm1-mist</code></td><td><code>--in1-iron</code></td><td>Cards, panels</td></tr>
+            <tr><td><code>--color-bg-inset</code></td><td><code>--bm0-sand</code></td><td><code>--in2-slate</code></td><td>Input fills, sunken areas</td></tr>
+            <tr><td><code>--color-bg-code</code></td><td><code>--fo3-deepwater</code></td><td><code>--in1-iron</code></td><td>Code block background</td></tr>
+            <tr><td><code>--color-bg-interactive-hover</code></td><td><code>--bm1-mist</code></td><td><code>--in3-ash</code></td><td>Row hover, ghost button fill</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Text</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--color-text</code></td><td><code>--in0-void</code></td><td><code>--bm2-birch</code></td><td>Primary text</td></tr>
+            <tr><td><code>--color-text-secondary</code></td><td><code>--in2-slate</code></td><td><code>--bm1-mist</code></td><td>Supporting text</td></tr>
+            <tr><td><code>--color-text-tertiary</code></td><td><code>--in3-ash</code></td><td><code>--bm0-sand</code></td><td>Placeholders, captions (AA Large only)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Borders</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--color-border</code></td><td><code>--in3-ash</code></td><td><code>--in2-slate</code></td><td>Default border</td></tr>
+            <tr><td><code>--color-border-strong</code></td><td><code>--in1-iron</code></td><td><code>--bm0-sand</code></td><td>Prominent dividers</td></tr>
+            <tr><td><code>--color-border-subtle</code></td><td>rgba 55,65,81 12%</td><td>rgba 75,85,99 25%</td><td>Hairline borders</td></tr>
+            <tr><td><code>--color-ghost-border</code></td><td>rgba 55,65,81 25%</td><td>rgba 247,246,243 25%</td><td>Ghost button ring</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Accent &amp; State</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--color-accent</code></td><td><code>--fo1-fern</code></td><td><code>--fo0-glade</code></td><td>CTAs, links, focus ring</td></tr>
+            <tr><td><code>--color-accent-hover</code></td><td><code>--fo2-forest</code></td><td><code>--fo1-fern</code></td><td>Hover state</td></tr>
+            <tr><td><code>--color-accent-active</code></td><td><code>--fo3-deepwater</code></td><td><code>--fo2-forest</code></td><td>Active/pressed state</td></tr>
+            <tr><td><code>--color-accent-text</code></td><td><code>--bm2-birch</code></td><td><code>--in0-void</code></td><td>Text on accent backgrounds</td></tr>
+            <tr><td><code>--color-error</code></td><td><code>--bl0-ember</code></td><td><code>--bl0-ember</code></td><td>Error, destructive</td></tr>
+            <tr><td><code>--color-warning</code></td><td><code>--bl2-grain</code></td><td><code>--bl2-grain</code></td><td>Warning, draft</td></tr>
+            <tr><td><code>--color-success</code></td><td><code>--bl3-moss</code></td><td><code>--bl3-moss</code></td><td>Success, published</td></tr>
+            <tr><td><code>--color-on-error</code></td><td><code>--bm2-birch</code></td><td><code>--bm2-birch</code></td><td>Text on error backgrounds</td></tr>
+            <tr><td><code>--color-on-success</code></td><td><code>--bm2-birch</code></td><td><code>--bm2-birch</code></td><td>Text on success backgrounds</td></tr>
+            <tr><td><code>--color-on-warning</code></td><td><code>--bm2-birch</code></td><td><code>--bm2-birch</code></td><td>Text on warning backgrounds</td></tr>
+          </tbody>
+        </table>
+
+      </div>
+    </details>
+  </div>
 </DocLayout>
 
 <style>
@@ -269,7 +396,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     padding: var(--space-sm) var(--space-md);
     background: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
-    margin: 0;
   }
 
   .surface-demo {
@@ -294,7 +420,18 @@ import DocLayout from '../../layouts/DocLayout.astro';
   .surface-desc {
     font-size: 13px;
     color: var(--color-text-secondary);
-    margin: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .surface-desc:last-child {
+    margin-bottom: 0;
+  }
+
+  .surface-card-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
   }
 
   .reactive-demo {
@@ -312,14 +449,14 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   .reactive-inner .surface-demo {
     flex: 1;
-    min-width: 160px;
+    min-width: 140px;
   }
 
   .composition-demo {
     display: flex;
     gap: var(--space-md);
     flex-wrap: wrap;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-md);
   }
 
   .composed-panel {
@@ -332,12 +469,12 @@ import DocLayout from '../../layouts/DocLayout.astro';
   }
 
   .featured-surface-demo {
-    margin: 0 0 var(--space-xl) 0;
+    margin-bottom: var(--space-xl);
   }
 
   .surface-contrast-note {
     font-size: 12px;
     color: var(--color-text-tertiary);
-    margin: var(--space-xs) 0 0;
+    margin-top: var(--space-xs);
   }
 </style>
