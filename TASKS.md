@@ -864,7 +864,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-69 · Styles › color page — visual palette redesign
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/next-tasks-discussion-sdwgc6`
 
 **Gap:** The color page presents palettes as plain token tables — visually flat, hard to use as a design reference. Consumers want to see the colours, not read hex strings.
 
@@ -883,7 +883,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-70 · Styles › typography — restructure and add visual demos
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/next-tasks-discussion-sdwgc6`
 
 **Gap:** The typography page mixes reference tables and demos without a clear hierarchy. Font stacks are shown as a table rather than as rendered specimens. The type scale, heading styles, and body styles lack visible size/weight demonstrations.
 
