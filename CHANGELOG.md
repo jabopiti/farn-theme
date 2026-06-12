@@ -13,6 +13,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ### Changed
 - `site/src/pages/components/forms.astro`: Promoted states (default / error / disabled) and wrapper + hint demos outside the reference accordion — demo-first pattern now applied to all component pages (T-55).
 - `site/src/pages/components/layout.astro`: Fixed Separator accordion summary label from `"Full reference"` to `"Full reference — Separator"` for consistency.
+- `tokens/colors.css`: Renamed `--fo0-sage` (#5C9E86) to `--fo0-glade` (#94C5AF) — lighter green that passes AA contrast on all dark surfaces. Updated `--fo1-fern` from #3E7A62 to #327A59 for improved light-mode AA compliance.
+- `tokens/dark-light.css`: Dark mode `--color-accent` now resolves to `--fo0-glade` (was `--fo1-fern`); `--color-accent-hover` now resolves to `--fo1-fern` (was `--fo2-forest`); `--color-accent-active` now resolves to `--fo2-forest`. Light mode accent mapping is unchanged.
+- `tokens/dark-light.css`: `--color-accent-text` in dark mode set to `var(--in0-void)` — glade is a light color (L≈0.49) and requires dark text for AA compliance. `--btn-p-active-bg` collapses to fern (active = hover) to avoid void-on-forest at 2.53:1. `--color-on-success` and `--color-on-warning` fixed to `--bm2-birch` directly — bloom-palette backgrounds need light text (void fails at ~3.8:1). All `--badge-*-text` tokens set to `--bm2-birch` directly, separating "text on semantic-state background" from "text on accent background".
 
 ### Added
 - `tokens/dark-light.css`: `data-surface="featured"` — fourth surface pattern. Always renders dark regardless of page theme: void (`#0D1117`) in light mode, deepwater (`#254D5A`) in dark mode. Overrides text, border, and bg-panel tokens to dark-palette values so descendants inherit correct contrast without a `data-theme` attribute. Text contrast on deepwater: primary 8.5:1 (AAA), secondary 7.4:1 (AAA), tertiary 6.1:1 (AA).
