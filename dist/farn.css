@@ -193,18 +193,16 @@
   --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
   --color-bg-code:          var(--in1-iron);
   --color-accent:           var(--fo0-glade);  /* glade: 9.79:1 on void, 5.33:1 on iron — passes AA on all dark surfaces */
-  --color-accent-hover:     var(--fo1-fern);   /* fern steps down to hover/active; collapses with active (see --btn-p-active-bg) */
+  --color-accent-hover:     var(--fo1-fern);   /* hover; --btn-p-active-bg also collapses to fern — forest + void text = 2.53:1 fail */
   --color-accent-active:    var(--fo2-forest);
-  --color-accent-text:      var(--bm2-birch);
-  --btn-p-text:             var(--in0-void);   /* glade bg is light (L=0.49) — needs dark text */
+  --color-accent-text:      var(--in0-void);   /* glade bg is light (L=0.49) — dark text required; badge/success/warning text overrides below use --bm2-birch directly */
   --btn-p-active-bg:        var(--fo1-fern);   /* collapses active = hover; forest + void text fails at 2.53:1 */
-  --pagination-active-text: var(--in0-void);   /* active pagination bg = glade — same dark-text requirement */
   --color-error:            var(--bl0-ember);
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
-  --color-on-success:       var(--color-accent-text);
-  --color-on-warning:       var(--color-accent-text);
+  --color-on-success:       var(--bm2-birch);  /* bloom-palette bg (moss) needs light text; void = 3.81:1 fail */
+  --color-on-warning:       var(--bm2-birch);  /* bloom-palette bg (grain) needs light text; void = 3.84:1 fail */
   --color-bg-interactive-hover:          var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
   --color-card-highlight-bg:             var(--fo2-forest);
   --tooltip-bg:                  var(--bm1-mist);
@@ -430,17 +428,17 @@
   --badge-general-bg:      var(--bm0-sand);
   --badge-general-text:    var(--in0-void);
   --badge-published-bg:    var(--bl3-moss);
-  --badge-published-text:  var(--color-accent-text);
+  --badge-published-text:  var(--bm2-birch);  /* bloom bg: birch 4.59:1 ✓; void 3.81:1 fail */
   --badge-draft-bg:        var(--bl2-grain);
-  --badge-draft-text:      var(--color-accent-text);
+  --badge-draft-text:      var(--bm2-birch);  /* bloom bg: birch 4.56:1 ✓; void 3.84:1 fail */
   --badge-archived-bg:     var(--bl0-ember);
-  --badge-archived-text:   var(--color-accent-text);
+  --badge-archived-text:   var(--bm2-birch);  /* bloom bg: birch 4.59:1 ✓; void 3.82:1 fail */
   --badge-beta-bg:         var(--bl4-heather);
-  --badge-beta-text:       var(--color-accent-text);
+  --badge-beta-text:       var(--bm2-birch);  /* bloom bg: birch 4.55:1 ✓; void 3.84:1 fail */
   --badge-research-bg:     var(--bl1-ochre);
-  --badge-research-text:   var(--color-accent-text);
+  --badge-research-text:   var(--bm2-birch);  /* bloom bg: birch 4.60:1 ✓; void 3.80:1 fail */
   --badge-category-bg:     var(--fo2-forest);
-  --badge-category-text:   var(--color-accent-text);
+  --badge-category-text:   var(--bm2-birch);  /* forest bg: birch 6.91:1 ✓; void 2.53:1 fail */
 
   /* ── Component typography tokens ────────────────────────────────────── */
   --btn-font-size:        0.8125rem; /* 13px */

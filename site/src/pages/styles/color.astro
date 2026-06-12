@@ -287,7 +287,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <li><strong>Never</strong> use Bloom colours as decorative accents — reserve them for semantic states only (error, warning, success, annotation).</li>
     <li>Iron Night tones must not appear as foreground text on light backgrounds — contrast is too low.</li>
     <li>Light-mode CTA: <code>--fo1-fern</code> background with <code>--bm2-birch</code> text (4.78:1 ✓).</li>
-    <li>Dark-mode CTA: <code>--fo0-glade</code> background with <code>--in0-void</code> text (9.79:1 ✓). The accent token resolves to glade automatically — no per-component override needed.</li>
+    <li>Dark-mode CTA: <code>--fo0-glade</code> background with <code>--in0-void</code> text (9.79:1 ✓). Both <code>--color-accent</code> and <code>--color-accent-text</code> resolve correctly in dark mode — no consumer-side override needed.</li>
     <li>Components reference semantic tokens only. Palette tokens are for brand moments and one-off elements.</li>
   </ul>
 </DocLayout>

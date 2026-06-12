@@ -119,17 +119,17 @@
   --badge-general-bg:      var(--bm0-sand);
   --badge-general-text:    var(--in0-void);
   --badge-published-bg:    var(--bl3-moss);
-  --badge-published-text:  var(--color-accent-text);
+  --badge-published-text:  var(--bm2-birch);  /* bloom bg: birch 4.59:1 ✓; void 3.81:1 fail */
   --badge-draft-bg:        var(--bl2-grain);
-  --badge-draft-text:      var(--color-accent-text);
+  --badge-draft-text:      var(--bm2-birch);  /* bloom bg: birch 4.56:1 ✓; void 3.84:1 fail */
   --badge-archived-bg:     var(--bl0-ember);
-  --badge-archived-text:   var(--color-accent-text);
+  --badge-archived-text:   var(--bm2-birch);  /* bloom bg: birch 4.59:1 ✓; void 3.82:1 fail */
   --badge-beta-bg:         var(--bl4-heather);
-  --badge-beta-text:       var(--color-accent-text);
+  --badge-beta-text:       var(--bm2-birch);  /* bloom bg: birch 4.55:1 ✓; void 3.84:1 fail */
   --badge-research-bg:     var(--bl1-ochre);
-  --badge-research-text:   var(--color-accent-text);
+  --badge-research-text:   var(--bm2-birch);  /* bloom bg: birch 4.60:1 ✓; void 3.80:1 fail */
   --badge-category-bg:     var(--fo2-forest);
-  --badge-category-text:   var(--color-accent-text);
+  --badge-category-text:   var(--bm2-birch);  /* forest bg: birch 6.91:1 ✓; void 2.53:1 fail */
 
   /* ── Component typography tokens ────────────────────────────────────── */
   --btn-font-size:        0.8125rem; /* 13px */
