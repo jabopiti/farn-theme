@@ -7,6 +7,11 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Changed
+- **T-67** `site/src/pages/foundations/responsive.astro`: Added visual breakpoint ruler (proportional zones: mobile/tablet/desktop), a live three-column card grid demo collapsing to single column at 640 px, and an `auto-fit minmax` intrinsic-sizing example. Removed `badge-beta`; breakpoint token table moved into accordion.
+- **T-68** `site/src/pages/foundations/accessibility.astro`: Added three commitment callout cards (WCAG AA / focus-visible / reduced-motion) at page top. Moved the full WCAG contrast matrix from `styles/color.astro` with corrected token column names (`--color-bg-elevated` → `--color-bg-panel`, `--color-bg-sunken` → `--color-bg-inset`), recalculated all dark-mode ratios (accent and accent-hover rows were using stale token values; entire third column was wrong — old footnote claimed bg-inset = void, but it now resolves to slate), and added inline colour chips for every foreground/background token. `Removed `badge-beta`.
+- **T-68** `site/src/pages/styles/color.astro`: Accessibility section condensed to a summary paragraph linking to Foundations › Accessibility for the full matrix. Removed unused `.cr-*` and `.matrix-scroll` CSS.
+
 ### Fixed
 - `tokens/component-classes.css`: Spinner inside a loading button now uses `currentColor` for its arc and track so it remains visible on all button variants, including primary (fern background with white text).
 

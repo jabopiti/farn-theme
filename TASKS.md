@@ -840,30 +840,30 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-67 · Foundations › responsive — define strategy + breakpoint demos
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/stoic-mayer-wq9wz8`
 
 **Gap:** The responsive page is text-only with no visual demos. Breakpoint tokens were added in T-54 but are not demonstrated. The responsive philosophy is stated but not illustrated.
 
 **Before coding:** Review how Bootstrap, Tailwind, and IBM Carbon document responsive systems — particularly whether they use live resize demos, iframe previews, or static breakpoint tables. Decide which approach is feasible within the Astro/CSS-only constraint.
 
-- [ ] Add a visual breakpoint scale — show `--breakpoint-mobile` and any tablet token as labelled bars (similar to spacing scale visualisation)
-- [ ] Add at least one live demo that changes visibly at the mobile breakpoint (e.g. a card-grid collapsing to single column)
-- [ ] Ensure the reflow-by-content philosophy is illustrated, not just stated
-- [ ] Update `CHANGELOG.md`
+- [x] Add a visual breakpoint scale — show `--breakpoint-mobile` and any tablet token as labelled bars (similar to spacing scale visualisation)
+- [x] Add at least one live demo that changes visibly at the mobile breakpoint (e.g. a card-grid collapsing to single column)
+- [x] Ensure the reflow-by-content philosophy is illustrated, not just stated
+- [x] Update `CHANGELOG.md`
 
 ---
 
 ## T-68 · Foundations › accessibility — consolidate and make visual
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/stoic-mayer-wq9wz8`
 
 **Gap:** Accessibility content is thin and spread across pages — the WCAG contrast matrix lives on the Color page, not on Accessibility. The key design system commitments (AA minimum, `focus-visible`, `prefers-reduced-motion`) are stated but not made prominent. No inline colour swatches exist alongside hex codes.
 
 **Before coding:** Review how Primer, USWDS (US Web Design System), and Atlassian structure their accessibility documentation. Note how they present contrast ratios visually.
 
-- [ ] Move the WCAG contrast matrix from `styles/color.astro` to `foundations/accessibility.astro` (Color page links to Accessibility for the full matrix)
-- [ ] Add inline colour preview chips alongside hex values in the contrast table — small CSS-rendered squares showing the actual colour
-- [ ] Make the three key commitments (AA, focus-visible, reduced-motion) visually prominent at the top of the page — not buried in a list
-- [ ] Update `CHANGELOG.md`
+- [x] Move the WCAG contrast matrix from `styles/color.astro` to `foundations/accessibility.astro` (Color page links to Accessibility for the full matrix)
+- [x] Add inline colour preview chips alongside hex values in the contrast table — small CSS-rendered squares showing the actual colour
+- [x] Make the three key commitments (AA, focus-visible, reduced-motion) visually prominent at the top of the page — not buried in a list
+- [x] Update `CHANGELOG.md`
 
 ---
 
