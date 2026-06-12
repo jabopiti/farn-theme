@@ -4,7 +4,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
 <DocLayout title="Responsive" description="Farn's breakpoint tokens and mobile-first responsive conventions">
   <h1>Responsive</h1>
-  <span class="badge badge-beta">beta</span>
   <p>
     Farn defines two breakpoint reference values as tokens: <code>--breakpoint-mobile</code> (640&thinsp;px)
     and <code>--breakpoint-tablet</code> (768&thinsp;px). CSS custom properties cannot be used inside
@@ -13,28 +12,56 @@ import DocLayout from '../../layouts/DocLayout.astro';
     connection is always visible and a project-wide search finds all breakpoint usage immediately.
   </p>
 
-  <h2 id="breakpoints">Breakpoint tokens</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Token</th>
-        <th>Value</th>
-        <th>Use</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>--breakpoint-mobile</code></td>
-        <td><code>640px</code></td>
-        <td>Single-column stack, mobile nav drawer, reduced padding</td>
-      </tr>
-      <tr>
-        <td><code>--breakpoint-tablet</code></td>
-        <td><code>768px</code></td>
-        <td>Multi-column grid collapse, reduced gap between sections</td>
-      </tr>
-    </tbody>
-  </table>
+  <h2 id="breakpoints">Breakpoint scale</h2>
+  <p>
+    Two breakpoints divide the design space into three layout zones. Layouts are designed for the
+    widest context first and collapse inward at each threshold.
+  </p>
+
+  <div class="bp-scale" aria-label="Breakpoint scale: mobile below 640px, tablet 640–768px, desktop above 768px">
+    <div class="bp-zone bp-zone--mobile">
+      <b>Mobile</b>
+      <code>&lt;&nbsp;640px</code>
+    </div>
+    <div class="bp-zone bp-zone--tablet">
+      <b>Tablet</b>
+      <code>640–768px</code>
+    </div>
+    <div class="bp-zone bp-zone--desktop">
+      <b>Desktop</b>
+      <code>&gt;&nbsp;768px</code>
+    </div>
+  </div>
+  <div class="bp-ticks" aria-hidden="true">
+    <span></span>
+    <span><code>--breakpoint-mobile</code> · 640px</span>
+    <span><code>--breakpoint-tablet</code> · 768px</span>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — breakpoint tokens</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead>
+            <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--breakpoint-mobile</code></td>
+              <td><code>640px</code></td>
+              <td>Single-column stack, mobile nav drawer, reduced padding</td>
+            </tr>
+            <tr>
+              <td><code>--breakpoint-tablet</code></td>
+              <td><code>768px</code></td>
+              <td>Multi-column grid collapse, reduced gap between sections</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
 
   <h2 id="usage">Usage pattern</h2>
   <p>
@@ -54,6 +81,48 @@ import DocLayout from '../../layouts/DocLayout.astro';
     existing rules are written, then follow the same comment pattern.
   </p>
 
+  <h2 id="reflow-demo">Reflow in action</h2>
+  <p>
+    A three-column card grid that collapses to a single column at 640&thinsp;px. Resize the browser
+    to see the transition at the <code>--breakpoint-mobile</code> threshold.
+  </p>
+
+  <div class="reflow-grid">
+    <div class="card" data-surface="layer">
+      <div class="card-body">
+        <strong>Card one</strong>
+        <p>Three columns at desktop and tablet widths.</p>
+      </div>
+    </div>
+    <div class="card" data-surface="layer">
+      <div class="card-body">
+        <strong>Card two</strong>
+        <p>One column below 640&thinsp;px — a single breakpoint, one rule.</p>
+      </div>
+    </div>
+    <div class="card" data-surface="layer">
+      <div class="card-body">
+        <strong>Card three</strong>
+        <p>No intermediate states needed for this layout.</p>
+      </div>
+    </div>
+  </div>
+
+  <details class="accordion" style="margin-top: var(--space-xs)">
+    <summary>CSS for this demo</summary>
+    <div class="accordion-panel">
+      <pre><code>.grid &#123;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-md);
+&#125;
+
+@media (max-width: 640px) /* --breakpoint-mobile */ &#123;
+  .grid &#123; grid-template-columns: 1fr; &#125;
+&#125;</code></pre>
+    </div>
+  </details>
+
   <h2 id="reflow">Reflow-by-content</h2>
   <p>
     Before reaching for a breakpoint, lean on intrinsic sizing: <code>flex-wrap</code>,
@@ -63,8 +132,78 @@ import DocLayout from '../../layouts/DocLayout.astro';
     overflow or spacing accidents.
   </p>
   <p>
+    The example below uses <code>auto-fit</code> with a <code>minmax</code> track to reflow without
+    any media query at all:
+  </p>
+  <pre><code>.auto-grid &#123;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+&#125;</code></pre>
+  <p>
     Heading and body sizes use <code>clamp()</code> to scale fluidly between breakpoints without
-    any media queries at all. See <a href="/styles/typography">Styles &rsaquo; Typography</a> for the
+    any media queries. See <a href="/styles/typography">Styles &rsaquo; Typography</a> for the
     full type scale and clamp values.
   </p>
 </DocLayout>
+
+<style>
+  /* ── Breakpoint scale ───────────────────────────────────────── */
+  .bp-scale {
+    display: flex;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    height: 5rem;
+    margin-top: var(--space-md);
+  }
+
+  .bp-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-sm) var(--space-md);
+    gap: 4px;
+    border-right: 2px solid var(--color-border-strong);
+  }
+
+  .bp-zone:last-child { border-right: none; }
+
+  .bp-zone b    { font-size: 0.875rem; }
+  .bp-zone code { font-size: 0.6875rem; color: var(--color-text-secondary); white-space: nowrap; }
+
+  /* Proportional to actual pixel widths: 640 : 128 : 432 — keep in sync with .bp-ticks below */
+  .bp-zone--mobile  { flex: 640; background: color-mix(in srgb, var(--color-warning) 12%, var(--color-bg-panel)); }
+  .bp-zone--tablet  { flex: 128; background: color-mix(in srgb, var(--color-accent)  12%, var(--color-bg-panel)); }
+  .bp-zone--desktop { flex: 432; background: color-mix(in srgb, var(--color-success)  8%, var(--color-bg-panel)); }
+
+  .bp-ticks {
+    display: grid;
+    /* mirrors .bp-zone flex proportions above — keep in sync */
+    grid-template-columns: 640fr 128fr 432fr;
+    margin-bottom: var(--space-md);
+    padding: 0.25rem 0 0;
+  }
+
+  .bp-ticks span {
+    font-size: 0.6875rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    text-align: center;
+  }
+
+  .bp-ticks span:nth-child(2) { text-align: right; padding-right: 4px; }
+  .bp-ticks span:nth-child(3) { text-align: left;  padding-left:  4px; }
+
+  /* ── Reflow demo ────────────────────────────────────────────── */
+  .reflow-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-md);
+    margin: var(--space-md) 0 var(--space-sm);
+  }
+
+  @media (max-width: 640px) /* --breakpoint-mobile */ {
+    .reflow-grid { grid-template-columns: 1fr; }
+  }
+</style>

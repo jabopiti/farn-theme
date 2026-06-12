@@ -2,25 +2,203 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Accessibility" description="Farn's WCAG AA commitment, focus styles, reduced-motion support, and colour guidance">
+<DocLayout title="Accessibility" description="Farn's WCAG AA commitment, focus styles, reduced-motion support, and contrast matrix">
   <h1>Accessibility</h1>
-  <span class="badge badge-beta">beta</span>
   <p>
     Farn targets WCAG&nbsp;2.1 Level AA. The token system, focus styles, and motion controls are
     designed to make accessible output the default rather than an afterthought.
   </p>
 
-  <h2 id="wcag">WCAG AA commitment</h2>
+  <div class="card-grid" style="margin: var(--space-md) 0 var(--space-xl)">
+    <div class="card" data-surface="layer">
+      <div class="card-body">
+        <span class="a11y-badge">AA</span>
+        <h3>WCAG 2.1 Level AA</h3>
+        <p>All semantic foreground/background token pairs are chosen to meet at least 4.5:1
+        contrast in both light and dark themes. The one exception (<code>--color-text-tertiary</code>)
+        is documented explicitly in the matrix below.</p>
+      </div>
+    </div>
+    <div class="card" data-surface="layer">
+      <div class="card-body">
+        <span class="a11y-badge">:focus-visible</span>
+        <h3>Global focus ring</h3>
+        <p>A 2px focus ring using <code>--color-accent</code> applies to every focusable element
+        without opt-in. It shows only on keyboard navigation — mouse clicks suppress it via
+        <code>:focus:not(:focus-visible)</code>.</p>
+      </div>
+    </div>
+    <div class="card" data-surface="layer">
+      <div class="card-body">
+        <span class="a11y-badge">@media</span>
+        <h3>Reduced motion</h3>
+        <p>A blanket rule in <code>tokens/base.css</code> collapses all animation and transition
+        durations to 0.01&thinsp;ms when the OS motion preference is set — no per-component guard
+        required.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="wcag">WCAG contrast matrix</h2>
   <p>
-    All semantic foreground/background token pairs are chosen to meet at least 4.5:1 contrast
-    (AA for normal text) in both light and dark themes. One exception: <code>--in3-ash</code>
-    (Iron Night's lightest shade, used in light mode as tertiary text and border colour) achieves
-    3:1 against light backgrounds — AA-large only (18pt+ or 14pt+ bold). Avoid using Ash for
-    body copy or labels below that size.
+    Full contrast matrix for all semantic foreground/background token pairs. Ratings follow
+    WCAG&nbsp;2.1: <strong>AAA</strong> &ge;&nbsp;7:1 &middot; <strong>AA</strong>
+    &ge;&nbsp;4.5:1 &middot; <strong>AA&nbsp;Large</strong> &ge;&nbsp;3:1
+    (≥&nbsp;24&thinsp;px regular or &ge;&nbsp;19&thinsp;px bold) &middot;
+    <strong>Fail</strong> &lt;&nbsp;3:1.
   </p>
-  <p>
-    The full contrast matrix — every semantic pair in both themes, with AA / AAA / fail markings —
-    is on <a href="/styles/color#accessibility">Styles &rsaquo; Color &rsaquo; Accessibility</a>.
+
+  <h3>Light mode</h3>
+  <div class="matrix-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Foreground token</th>
+          <th><span class="cr-chip" style="background:#F7F6F3"></span><code>--color-bg</code></th>
+          <th><span class="cr-chip" style="background:#E9E6DC"></span><code>--color-bg-panel</code></th>
+          <th><span class="cr-chip" style="background:#D5D2C7"></span><code>--color-bg-inset</code></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="cr-chip" style="background:#0D1117"></span><code>--color-text</code></td>
+          <td><span class="cr cr-aaa">17.51:1 AAA</span></td>
+          <td><span class="cr cr-aaa">15.15:1 AAA</span></td>
+          <td><span class="cr cr-aaa">12.50:1 AAA</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#4B5563"></span><code>--color-text-secondary</code></td>
+          <td><span class="cr cr-aa">6.99:1 AA</span></td>
+          <td><span class="cr cr-aa">6.05:1 AA</span></td>
+          <td><span class="cr cr-aa">4.99:1 AA</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#6B7280"></span><code>--color-text-tertiary</code> †</td>
+          <td><span class="cr cr-aal">4.47:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.87:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.19:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#327A59"></span><code>--color-accent</code></td>
+          <td><span class="cr cr-aa">4.78:1 AA</span></td>
+          <td><span class="cr cr-aal">4.14:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.41:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#2D5E4A"></span><code>--color-accent-hover</code></td>
+          <td><span class="cr cr-aa">6.91:1 AA</span></td>
+          <td><span class="cr cr-aa">5.98:1 AA</span></td>
+          <td><span class="cr cr-aa">4.93:1 AA</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#F7F6F3"></span><code>--color-accent-text</code> ‡</td>
+          <td><span class="cr cr-fail">1.00:1 Fail</span></td>
+          <td><span class="cr cr-fail">1.16:1 Fail</span></td>
+          <td><span class="cr cr-fail">1.40:1 Fail</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#C5414C"></span><code>--color-error</code></td>
+          <td><span class="cr cr-aa">4.59:1 AA</span></td>
+          <td><span class="cr cr-aal">3.97:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.28:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#8D6B20"></span><code>--color-warning</code></td>
+          <td><span class="cr cr-aa">4.57:1 AA</span></td>
+          <td><span class="cr cr-aal">3.95:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.26:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#567A37"></span><code>--color-success</code></td>
+          <td><span class="cr cr-aa">4.59:1 AA</span></td>
+          <td><span class="cr cr-aal">3.97:1 AA Large</span></td>
+          <td><span class="cr cr-aal">3.28:1 AA Large</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Dark mode</h3>
+  <div class="matrix-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Foreground token</th>
+          <th><span class="cr-chip" style="background:#0D1117"></span><code>--color-bg</code></th>
+          <th><span class="cr-chip" style="background:#374151"></span><code>--color-bg-panel</code></th>
+          <th><span class="cr-chip" style="background:#4B5563"></span><code>--color-bg-inset</code></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="cr-chip" style="background:#F7F6F3"></span><code>--color-text</code></td>
+          <td><span class="cr cr-aaa">17.51:1 AAA</span></td>
+          <td><span class="cr cr-aaa">9.54:1 AAA</span></td>
+          <td><span class="cr cr-aa">6.99:1 AA</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#E9E6DC"></span><code>--color-text-secondary</code></td>
+          <td><span class="cr cr-aaa">15.15:1 AAA</span></td>
+          <td><span class="cr cr-aaa">8.25:1 AAA</span></td>
+          <td><span class="cr cr-aa">6.05:1 AA</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#D5D2C7"></span><code>--color-text-tertiary</code></td>
+          <td><span class="cr cr-aaa">12.50:1 AAA</span></td>
+          <td><span class="cr cr-aa">6.81:1 AA</span></td>
+          <td><span class="cr cr-aa">4.99:1 AA</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#94C5AF"></span><code>--color-accent</code></td>
+          <td><span class="cr cr-aaa">9.79:1 AAA</span></td>
+          <td><span class="cr cr-aa">5.33:1 AA</span></td>
+          <td><span class="cr cr-aal">3.91:1 AA Large</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#327A59"></span><code>--color-accent-hover</code> §</td>
+          <td><span class="cr cr-aal">3.66:1 AA Large</span></td>
+          <td><span class="cr cr-fail">1.99:1 Fail</span></td>
+          <td><span class="cr cr-fail">1.46:1 Fail</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#F7F6F3"></span><code>--color-accent-text</code></td>
+          <td><span class="cr cr-aaa">17.51:1 AAA</span></td>
+          <td><span class="cr cr-aaa">9.54:1 AAA</span></td>
+          <td><span class="cr cr-aa">6.99:1 AA</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#C5414C"></span><code>--color-error</code> §</td>
+          <td><span class="cr cr-aal">3.82:1 AA Large</span></td>
+          <td><span class="cr cr-fail">2.08:1 Fail</span></td>
+          <td><span class="cr cr-fail">1.52:1 Fail</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#8D6B20"></span><code>--color-warning</code> §</td>
+          <td><span class="cr cr-aal">3.84:1 AA Large</span></td>
+          <td><span class="cr cr-fail">2.09:1 Fail</span></td>
+          <td><span class="cr cr-fail">1.53:1 Fail</span></td>
+        </tr>
+        <tr>
+          <td><span class="cr-chip" style="background:#567A37"></span><code>--color-success</code> §</td>
+          <td><span class="cr cr-aal">3.82:1 AA Large</span></td>
+          <td><span class="cr cr-fail">2.08:1 Fail</span></td>
+          <td><span class="cr cr-fail">1.52:1 Fail</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="matrix-notes">
+    † <code>--color-text-tertiary</code> is AA&nbsp;Large only in all light-mode contexts —
+    never use it for body-size text; restrict to &ge;&nbsp;24&thinsp;px regular or
+    &ge;&nbsp;19&thinsp;px bold.<br>
+    ‡ <code>--color-accent-text</code> (light mode) is designed for text <em>on</em>
+    <code>--color-accent</code> button backgrounds — Fail against page surfaces is by design;
+    both tokens resolve correctly in dark mode (17.51:1 AAA on <code>--color-bg</code>).<br>
+    § Dark mode: <code>--color-accent-hover</code>, <code>--color-error</code>,
+    <code>--color-warning</code>, <code>--color-success</code> only meet AA&nbsp;Large on
+    <code>--color-bg</code>; they fail on panel and inset surfaces. Always pair these with a
+    text label or icon — never use colour alone to convey meaning.
   </p>
 
   <h2 id="focus">Focus styles</h2>
@@ -37,11 +215,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
 :focus:not(:focus-visible) &#123;
   outline: none;
 &#125;</code></pre>
-  <p>
-    <code>:focus-visible</code> shows the ring only for keyboard and sequential navigation;
-    mouse clicks suppress it via <code>:focus:not(:focus-visible)</code>. This gives keyboard
-    users a clear indicator without adding visual noise for pointer users.
-  </p>
   <p>
     <code>border-radius: inherit</code> means the ring hugs the shape of buttons, inputs, and
     cards rather than defaulting to a square. Component classes in <code>farn-components.css</code>
@@ -62,22 +235,81 @@ import DocLayout from '../../layouts/DocLayout.astro';
   &#125;
 &#125;</code></pre>
   <p>
-    This covers all CSS animations and transitions globally. The <code>0.01ms</code> value — rather
-    than <code>0</code> — keeps animation events firing so JavaScript listeners do not stall waiting
-    for an <code>animationend</code> event that never comes.
-  </p>
-  <p>
-    Scroll-reveal elements (<code>.scroll-reveal</code>) additionally snap directly to their
-    revealed state in <code>site/src/styles/site.css</code>, bypassing the observer entirely for
-    users who prefer reduced motion.
+    The <code>0.01ms</code> value — rather than <code>0</code> — keeps animation events firing
+    so JavaScript listeners do not stall waiting for an <code>animationend</code> event that
+    never comes. Scroll-reveal elements (<code>.scroll-reveal</code>) additionally snap directly
+    to their revealed state, bypassing the observer entirely.
   </p>
 
   <h2 id="colour-alone">Colour alone</h2>
   <p>
     Never use colour as the sole means of conveying information, indicating an action, prompting a
-    response, or distinguishing a visual element (WCAG 1.4.1). Pair every colour-coded signal with
-    at least one of: a text label, an icon, a pattern, or a position cue. Badge variants, for
+    response, or distinguishing a visual element (WCAG&nbsp;1.4.1). Pair every colour-coded signal
+    with at least one of: a text label, an icon, a pattern, or a position cue. Badge variants, for
     example, combine colour with a text label — the label alone would be sufficient; the colour
     reinforces but does not replace it.
   </p>
 </DocLayout>
+
+<style>
+  /* ── Commitment cards ──────────────────────────────────────── */
+  .card-body h3 { margin: var(--space-xs) 0; font-size: 1rem; }
+  .card-body p  { margin: 0; font-size: 0.875rem; }
+
+  /* ── Commitment card label ──────────────────────────────────── */
+  .a11y-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 12%, var(--color-bg));
+    padding: 0.2em 0.5em;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  /* ── Contrast matrix ────────────────────────────────────────── */
+  .matrix-scroll {
+    overflow-x: auto;
+    margin: var(--space-sm) 0 var(--space-md);
+  }
+
+  .cr-chip {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 0.35em;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+    flex-shrink: 0;
+  }
+
+  .cr {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 0.1em 0.45em;
+    border-radius: var(--radius-sm);
+  }
+
+  .cr-aaa  { background: color-mix(in srgb, var(--color-success) 15%, var(--color-bg)); color: var(--color-success); }
+  .cr-aa   { background: color-mix(in srgb, var(--color-accent)  15%, var(--color-bg)); color: var(--color-accent); }
+  .cr-aal  { background: color-mix(in srgb, var(--color-warning) 15%, var(--color-bg)); color: var(--color-warning); }
+  .cr-fail { background: color-mix(in srgb, var(--color-error)   15%, var(--color-bg)); color: var(--color-error); }
+
+  [data-theme="dark"] .cr-aaa  { background: color-mix(in srgb, var(--color-success) 35%, var(--color-bg)); }
+  [data-theme="dark"] .cr-aa   { background: color-mix(in srgb, var(--color-accent)  35%, var(--color-bg)); }
+  [data-theme="dark"] .cr-aal  { background: color-mix(in srgb, var(--color-warning) 35%, var(--color-bg)); }
+  [data-theme="dark"] .cr-fail { background: color-mix(in srgb, var(--color-error)   35%, var(--color-bg)); }
+
+  .matrix-notes {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-top: calc(-1 * var(--space-sm));
+  }
+</style>
