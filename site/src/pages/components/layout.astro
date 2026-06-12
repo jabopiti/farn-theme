@@ -222,7 +222,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <div class="demo-wave-top" data-theme="dark">
       <p class="demo-label">Preceding section</p>
       <p class="demo-section-desc">Wave at the bottom — fill matches the section below.</p>
-      <div class="section-wave" data-scroll-reveal aria-hidden="true">
+      <div class="section-wave" aria-hidden="true">
         <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
           <path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z"
                 fill="var(--color-section-next)" opacity="0.4"/>
@@ -274,7 +274,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <div class="demo-blob-top" data-theme="dark">
       <p class="demo-label">Preceding section</p>
       <p class="demo-section-desc">Blob at the bottom — replace the example paths with exported Figma paths for production.</p>
-      <div class="section-blob" data-scroll-reveal aria-hidden="true">
+      <div class="section-blob" aria-hidden="true">
         <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
           <path d="M0,60 C150,25 200,80 400,55 C600,28 700,75 900,50 C1050,28 1150,65 1200,45 L1200,100 L0,100 Z"
                 fill="var(--color-section-next)" opacity="0.45"/>
@@ -307,36 +307,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </div>
   </div>
 
-  <!-- Stacked card reveal -->
-  <h3 id="stacked-card-reveal">Stacked card reveal</h3>
-  <p>
-    Cinematic depth for long scroll pages: sections use <code>position: sticky</code>
-    to pin in the viewport while later cards slide on top. A per-section
-    <code>transform: scale()</code> creates the card-deck illusion.
-    Content must fit within <code>100dvh</code> — no vertical overflow. Use 3–5 sections.
-  </p>
-
-  <div class="demo-stack-wrapper" role="group" aria-label="Stacked card reveal demo — scroll inside to reveal cards">
-    <div class="demo-stack-inner">
-      <div class="demo-stack-section" data-theme="dark"
-           style="--stack-depth: 2; --stack-index: 3">
-        <p class="demo-label">Section 1</p>
-        <p class="demo-section-desc">Depth 2 — behind two cards, slightly shrunk.</p>
-      </div>
-      <div class="demo-stack-section" data-theme="light"
-           style="--stack-depth: 1; --stack-index: 4">
-        <p class="demo-label">Section 2</p>
-        <p class="demo-section-desc">Depth 1 — behind one card.</p>
-      </div>
-      <div class="demo-stack-section" data-theme="dark" data-surface="layer"
-           style="--stack-depth: 0; --stack-index: 5">
-        <p class="demo-label">Section 3 — top card</p>
-        <p class="demo-section-desc">Depth 0, full-size. Scroll up to peel back.</p>
-      </div>
-    </div>
-  </div>
-  <p class="demo-stack-hint">↓ Scroll inside the box to reveal cards</p>
-
   <div class="accordion">
     <details>
       <summary>Full reference — Section Transitions</summary>
@@ -351,7 +321,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td>Convex arc</td><td><code>.section-arc</code></td><td>Refined, quiet</td><td>Centred hero layouts; calm lens-like elegance</td></tr>
             <tr><td>Organic blob</td><td><code>.section-blob</code></td><td>Expressive, freeform</td><td>High-emphasis brand moments; one-off expressive breaks</td></tr>
             <tr><td>Diagonal cut</td><td><code>.section-skew</code></td><td>Sharp, directional</td><td>CTA sections; forward-momentum transitions</td></tr>
-            <tr><td>Stacked card reveal</td><td><code>.stack-container</code> / <code>.stack-section</code></td><td>Cinematic, layered</td><td>Long scroll journeys with 3–5 landmark sections</td></tr>
           </tbody>
         </table>
         <p><strong>Use one primary type per page.</strong> A second type is acceptable for a single high-emphasis moment (e.g., sine waves throughout with one layered overlap at a CTA). More than two distinct types creates visual noise.</p>
@@ -512,56 +481,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </tbody>
         </table>
         <p><strong>Direction carries meaning:</strong> negative <code>skewY</code> (bottom-left to top-right) reads as forward momentum. Be consistent within a page.</p>
-
-        <!-- Stacked card reveal -->
-        <h3>Stacked card reveal — details</h3>
-        <p>
-          <strong>Constraints:</strong> content inside each section must fit within <code>100dvh</code>
-          — no vertical overflow. Use 3–5 sections. Do not combine with other divider patterns
-          within the same stack container.
-        </p>
-        <p>
-          <strong>Critical:</strong> <code>overflow: hidden</code> on any ancestor of
-          <code>.stack-container</code> breaks <code>position: sticky</code> — same trap as
-          <code>.overlap-preceding</code>.
-        </p>
-
-        <pre><code>&lt;div class="stack-container" style="--stack-count: 3;"&gt;
-  &lt;section class="stack-section" style="background: var(--color-section-base);"&gt;
-    &lt;!-- Section 1 — first in DOM, deepest in deck --&gt;
-  &lt;/section&gt;
-  &lt;section class="stack-section" style="background: var(--color-section-layer);"&gt;
-    &lt;!-- Section 2 --&gt;
-  &lt;/section&gt;
-  &lt;section class="stack-section" style="background: var(--color-section-overlay);"&gt;
-    &lt;!-- Section 3 — last in DOM, front of deck, full-size --&gt;
-  &lt;/section&gt;
-&lt;/div&gt;</code></pre>
-
-        <p>
-          The <code>nth-last-child</code> selectors in <code>dist/farn-components.css</code>
-          automatically assign <code>--stack-depth</code> (0 = front) and
-          <code>--stack-index</code> for stacks of 2–5 sections. Set them inline to override.
-          For a fixed nav bar, set <code>--stack-top</code> to clear it.
-        </p>
-
-        <table>
-          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
-          <tbody>
-            <tr><td><code>--stack-scale-step</code></td><td><code>0.03</code></td><td>Scale reduction per depth level</td></tr>
-            <tr><td><code>--stack-top</code></td><td><code>0px</code></td><td>Sticky top offset — override to clear a fixed nav bar</td></tr>
-            <tr><td><code>--stack-radius</code></td><td><code>var(--radius-xl)</code></td><td>Top-corner radius on each section</td></tr>
-            <tr><td><code>--stack-count</code></td><td><code>4</code></td><td>Number of sections — set per instance to match actual child count</td></tr>
-            <tr><td><code>--stack-height</code></td><td><code>100vh</code></td><td>Height per section; use <code>100dvh</code> for dynamic viewport tracking</td></tr>
-          </tbody>
-        </table>
-        <table>
-          <thead><tr><th>Per-section variable</th><th>Default</th><th>Purpose</th></tr></thead>
-          <tbody>
-            <tr><td><code>--stack-depth</code></td><td>via <code>nth-last-child</code></td><td>0 = front card (full-size); higher = further back (smaller scale)</td></tr>
-            <tr><td><code>--stack-index</code></td><td>via <code>nth-last-child</code></td><td><code>z-index</code> — higher renders on top</td></tr>
-          </tbody>
-        </table>
 
       </div>
     </details>
@@ -878,53 +797,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
     padding: var(--space-xl) var(--space-md) calc(var(--space-xl) + 30px);
   }
 
+  /* Disable scroll-driven animation in the demo — shows static angle at all times */
+  .demo-diagonal-top::before { animation: none; }
+
   .demo-diagonal-bottom {
     padding: var(--space-md) var(--space-md) var(--space-lg);
-  }
-
-  /* ── Stacked card demo ────────────────────────────────────────────────── */
-  /* Self-contained scrollable box — sticky sections pin within this wrapper,
-     not the page, so the demo works inside the docs without hijacking page scroll. */
-  .demo-stack-wrapper {
-    --_h: 280px; /* single source of truth for demo section height; inherited by children */
-    height: var(--_h);
-    overflow-y: scroll;
-    scrollbar-width: none;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--space-xs);
-    cursor: ns-resize;
-  }
-
-  .demo-stack-wrapper::-webkit-scrollbar { display: none; }
-
-  .demo-stack-inner {
-    height: calc(3 * var(--_h));
-  }
-
-  /* Mirrors .stack-section geometry at demo height instead of 100dvh */
-  .demo-stack-section {
-    position: sticky;
-    top: 0;
-    height: var(--_h);
-    overflow: hidden;
-    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-    transform: scale(calc(1 - var(--stack-depth, 0) * var(--stack-scale-step)));
-    transform-origin: top center;
-    z-index: var(--stack-index, 1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: var(--space-md);
-    gap: var(--space-xs);
-  }
-
-  .demo-stack-hint {
-    font-size: 0.75rem;
-    color: var(--color-text-tertiary);
-    margin: 0 0 var(--space-lg);
   }
 
 
