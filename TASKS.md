@@ -923,21 +923,6 @@ Merged into T-49 (Complete Foundations section).
 - [ ] Fix or rebuild the demos so each easing and duration token is shown with a moving element (a simple block or icon translating across a track)
 - [ ] Audit: list every animated element in the design system (spinners, skeletons, section transitions, btn-loading, scroll-reveal, tab indicator) and verify each is covered by a documented token
 - [ ] Add any missing tokens; update `CHANGELOG.md`
-## T-73 · Scroll indicator component
-`status: backlog` `effort: S`
-
-**Gap:** The landing page hero has no scroll affordance; visitors may not realise there is content below the fold. A reference scroll indicator exists at https://platform-as-a-product.jbpt.de/ (hero section) and should be extracted, adapted to Farn tokens, and shipped as a reusable component.
-
-**Before starting:** Ask the user (bo@jbpt.de) for a screenshot or accessible URL of the reference scroll indicator — the site returned 403 when fetched programmatically. Do not begin implementation until the reference is confirmed.
-
-- [ ] Add `--scroll-indicator-*` Tier-3 tokens to `tokens/components.css`
-- [ ] Add `.scroll-indicator` CSS class to `tokens/component-classes.css` — animated chevron/arrow, inherits theme via semantic tokens
-- [ ] Respect `prefers-reduced-motion` (show static indicator, no animation)
-- [ ] Element is `aria-hidden="true"` (decorative) or carries a descriptive label for screen readers
-- [ ] Works correctly in both light and dark mode
-- [ ] Documented on the relevant component group page
-- [ ] Used in `site/src/pages/index.astro` hero section
-- [ ] Run build command, update `CHANGELOG.md`
 
 ---
 
