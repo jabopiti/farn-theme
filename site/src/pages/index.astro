@@ -47,21 +47,6 @@ import { groups, links, ctas } from '../data/navigation';
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @keyframes swatchSlideIn {
-    from { opacity: 0; transform: translateX(12px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    @keyframes paletteFloat {
-      0%, 100% { transform: translateY(-50%); }
-      50%       { transform: translateY(calc(-50% - 5px)); }
-    }
-  }
-
   /* ── Hero ─────────────────────────────────────────── */
   .hero {
     min-height: 100vh;
@@ -126,31 +111,6 @@ import { groups, links, ctas } from '../data/navigation';
     opacity: 0;
     animation: fadeUp 700ms ease-out 450ms forwards;
   }
-  .hero-palette-strip {
-    position: absolute;
-    right: var(--space-lg);
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    opacity: 0;
-    animation: fadeIn 800ms ease-out 600ms forwards;
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-palette-strip.is-visible {
-      animation: paletteFloat 8s ease-in-out infinite;
-    }
-  }
-  @media (max-width: 900px) { .hero-palette-strip { display: none; } }
-  .palette-swatch {
-    width: 8px;
-    border-radius: var(--radius-sm);
-    opacity: 0;
-    animation: swatchSlideIn 400ms ease-out calc(650ms + var(--i, 0) * 25ms) forwards;
-  }
-
   /* ── About ────────────────────────────────────────── */
   .about-grid {
     display: grid;
@@ -451,24 +411,6 @@ import { groups, links, ctas } from '../data/navigation';
       <a href="/getting-started" class="btn btn-s btn-lg"><i class="ti ti-book"></i> Get Started</a>
     </div>
   </div>
-  <div class="hero-palette-strip" aria-hidden="true" id="palette-strip">
-    <div class="palette-swatch" style="background:#0D1117;height:28px;--i:0"></div>
-    <div class="palette-swatch" style="background:#374151;height:28px;--i:1"></div>
-    <div class="palette-swatch" style="background:#4B5563;height:28px;--i:2"></div>
-    <div class="palette-swatch" style="background:#6B7280;height:28px;--i:3"></div>
-    <div class="palette-swatch" style="background:#D5D2C7;height:28px;--i:4"></div>
-    <div class="palette-swatch" style="background:#E9E6DC;height:28px;--i:5"></div>
-    <div class="palette-swatch" style="background:#F7F6F3;height:28px;--i:6"></div>
-    <div class="palette-swatch" style="background:#94C5AF;height:28px;--i:7"></div>
-    <div class="palette-swatch" style="background:#327A59;height:28px;--i:8"></div>
-    <div class="palette-swatch" style="background:#2D5E4A;height:28px;--i:9"></div>
-    <div class="palette-swatch" style="background:#254D5A;height:28px;--i:10"></div>
-    <div class="palette-swatch" style="background:#C5414C;height:28px;--i:11"></div>
-    <div class="palette-swatch" style="background:#AB5A2B;height:28px;--i:12"></div>
-    <div class="palette-swatch" style="background:#8D6B20;height:28px;--i:13"></div>
-    <div class="palette-swatch" style="background:#567A37;height:28px;--i:14"></div>
-    <div class="palette-swatch" style="background:#885DB4;height:28px;--i:15"></div>
-  </div>
 </section>
 
 <!-- ── § 2 About ──────────────────────────────────────────────────── -->
@@ -763,16 +705,6 @@ import { groups, links, ctas } from '../data/navigation';
     }
     lastY = y;
   }, { passive: true });
-})();
-</script>
-
-<!-- Palette strip: trigger float animation after entrance completes -->
-<script is:inline>
-(function () {
-  const strip = document.getElementById('palette-strip');
-  if (!strip) return;
-  // After the last swatch finishes entrance (650ms base + 15 * 25ms = ~1025ms total)
-  setTimeout(() => strip.classList.add('is-visible'), 1100);
 })();
 </script>
 
