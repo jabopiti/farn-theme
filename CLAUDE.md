@@ -9,7 +9,7 @@
 ```
 tokens/                   CSS source — edit here, not in dist/
   colors.css              Palette tokens (--in*, --bm*, --fo*, --bl*)
-  typography.css          Font imports + font-family tokens
+  typography.css          Font imports, font-family tokens, UI text scale (--text-*)
   spacing.css             Spacing scale, widths, radius, z-index
   motion.css              Duration and easing tokens
   dark-light.css          Semantic tokens + data-surface patterns
@@ -64,6 +64,7 @@ Run all six steps after any change to a `tokens/` file, `llms.txt`, or `site/src
 | `--bl` | Bloom (semantic) | `--bl0-ember`, `--bl1-ochre`, `--bl2-grain`, `--bl3-moss`, `--bl4-heather` |
 | `--color-*` | Semantic layer | `--color-bg`, `--color-text`, `--color-accent` |
 | `--space-*` | Spacing scale | `--space-xs` through `--space-4xl` |
+| `--text-*` | UI text scale | `--text-2xs` (11px), `--text-xs` (12px), `--text-sm` (14px), `--text-base` (16px) |
 | `--font-*` | Font families | `--font-display`, `--font-body`, `--font-mono` |
 | `--radius-*` | Border radius | `--radius-sm` through `--radius-full` |
 | `--z-*` | Z-index | `--z-dropdown`, `--z-modal`, `--z-toast` |

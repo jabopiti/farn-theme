@@ -107,7 +107,7 @@
   --accordion-summary-bg:       transparent;
   --accordion-summary-hover-bg: var(--color-bg-interactive-hover);
   --accordion-panel-bg:         transparent;
-  --accordion-font-size:        0.9375rem; /* 15px */
+  --accordion-font-size:        var(--text-base);
   --accordion-toggle-size:      1.25rem;
   --accordion-toggle-rotation:  45deg;
 
@@ -132,43 +132,53 @@
   --badge-category-text:   var(--bm2-birch);  /* forest bg: birch 6.91:1 ✓; void 2.53:1 fail */
 
   /* ── Component typography tokens ────────────────────────────────────── */
-  --btn-font-size:        0.8125rem; /* 13px */
-  --btn-sm-font-size:     0.75rem;   /* 12px */
-  --btn-lg-font-size:     0.875rem;  /* 14px */
-  --label-font-size:      0.875rem;  /* 14px */
-  --input-font-size:      0.875rem;  /* 14px */
-  --badge-font-size:      0.6875rem; /* 11px */
-  --hint-font-size:       0.8125rem; /* 13px */
-  --breadcrumb-font-size: 0.875rem;  /* 14px */
+  --btn-font-size:        var(--text-sm);
+  --btn-sm-font-size:     var(--text-xs);
+  --btn-lg-font-size:     var(--text-sm);
+  --label-font-size:      var(--text-sm);
+  --input-font-size:      var(--text-sm);
+  --badge-font-size:      var(--text-2xs);
+  --hint-font-size:       var(--text-sm);
+  --breadcrumb-font-size: var(--text-sm);
 
   /* ── Quote tokens ──────────────────────────────────────────────────────── */
   --quote-border-width:   3px;
   --quote-border-color:   var(--color-accent);
   --quote-text-color:     var(--color-text-secondary);
-  --quote-footer-color:   var(--color-text-tertiary);
+  --quote-footer-color:     var(--color-text-tertiary);
+  --quote-footer-font-size: var(--text-xs);
   --quote-padding:        var(--space-sm) 0 var(--space-sm) var(--space-lg);
   --quote-margin-bottom:  var(--space-lg);
   --quote-opsz:           16;
 
   /* Pullquote — references separator decorative tokens as single source of truth */
-  --quote-pull-rule-width:  var(--separator-decorative-width);
-  --quote-pull-rule-height: var(--separator-decorative-weight);
-  --quote-pull-rule-color:  var(--separator-decorative-color);
+  --quote-pull-rule-width:        var(--separator-decorative-width);
+  --quote-pull-rule-height:       var(--separator-decorative-weight);
+  --quote-pull-rule-color:        var(--separator-decorative-color);
+  --quote-pull-figcaption-size:   var(--text-2xs);
 
-  /* Attribution card */
-  --quote-attr-bg:          var(--color-bg-panel);
-  --quote-attr-border:      var(--color-border-subtle);
-  --quote-attr-radius:      var(--radius-lg);
-  --quote-attr-padding:     var(--space-md) var(--space-lg);
-  --quote-attr-gap:         var(--space-md);
-  --quote-attr-avatar-size: 40px;
-  --quote-attr-avatar-bg:   color-mix(in srgb, var(--fo1-fern) 15%, transparent);
+  /* Testimonial card (renamed from .quote-attribution in v0.x — breaking change) */
+  /* shell (bg, border-radius, display) comes from .card — add .card to the element */
+  --quote-testimonial-border:          var(--color-border-subtle); /* override: .card uses transparent */
+  --quote-testimonial-padding:         var(--space-lg);            /* override: .card uses --space-md */
+  --quote-testimonial-gap:             var(--space-sm);
+  --quote-testimonial-mark-color:      var(--color-accent);
+  --quote-testimonial-mark-size:       3rem;
+  --quote-testimonial-avatar-size:     2.5rem;
+  --quote-testimonial-avatar-bg:       var(--color-bg-inset);
+  --quote-testimonial-text-size:       var(--text-base);
+  --quote-testimonial-avatar-font:     var(--text-sm); /* initials size */
+  --quote-testimonial-name-size:       var(--text-sm);
+  --quote-testimonial-role-size:       var(--text-xs);
+  --quote-testimonial-attribution-gap: var(--space-sm);
+  --quote-testimonial-attribution-top: var(--space-xs);
 
   /* ── Code block tokens ──────────────────────────────────────────────── */
   --code-bg:          var(--color-bg-inset); /* surface-aware; override with --color-bg-code for always-dark */
   --code-text:        var(--color-text);
   --code-border:      var(--color-border);
   --code-radius:      var(--radius-md);
+  --code-font-size:   0.8125rem; /* 13px — midpoint between --text-xs and --text-sm; intentional for code readability */
   --code-copy-size:   32px;
   --code-copy-radius: var(--radius-sm);
 
@@ -177,7 +187,7 @@
   --tooltip-max-width:  220px;
   --tooltip-radius:     var(--radius-sm);
   --tooltip-padding:    4px 10px;
-  --tooltip-font-size:  0.75rem; /* 12px */
+  --tooltip-font-size:  var(--text-xs);
 
   /* ── Pagination tokens ──────────────────────────────────────────────── */
   --pagination-active-bg:   var(--color-accent);
@@ -186,6 +196,7 @@
   --pagination-hover-text:  var(--color-text);
   --pagination-radius:      var(--radius-md);
   --pagination-gap:         var(--space-xs);
+  --pagination-font-size:   var(--text-sm);
 
   /* ── Tab tokens ─────────────────────────────────────────────────────── */
   --tab-idle-text:        var(--color-text-secondary);
@@ -195,7 +206,7 @@
   --tab-border:           var(--color-border);
   --tab-panel-bg:         transparent;
   --tab-gap:              4px;
-  --tab-font-size:        0.875rem; /* 14px */
+  --tab-font-size:        var(--text-sm);
   --tab-disabled-opacity: 0.4;
 
   /* ── Spinner tokens ─────────────────────────────────────────────────── */
@@ -224,10 +235,10 @@
   --table-border:             var(--color-border);
   --table-header-bg:          var(--color-bg-inset);
   --table-header-text:        var(--color-text);
-  --table-header-font-size:   0.8125rem;
+  --table-header-font-size:   var(--text-sm);
   --table-row-stripe-bg:      var(--color-bg-inset);   /* inset for visible contrast on panel-bg surfaces */
   --table-row-hover-bg:       var(--table-row-stripe-bg);
-  --table-font-size:          0.875rem;
+  --table-font-size:          var(--text-sm);
   --table-cell-padding:       var(--space-sm) var(--space-sm);  /* 12px 12px */
   --table-cell-padding-sm:    4px var(--space-xs);              /* 4px 6px — compact */
   --table-cell-padding-lg:    var(--space-md) var(--space-md);  /* 24px 24px — comfortable */
@@ -715,7 +726,7 @@ input[type="radio"] {
   justify-content: center;
   min-width: 36px;
   height: 36px;
-  font-size: 0.875rem;
+  font-size: var(--pagination-font-size);
 }
 
 .page-link {
@@ -887,14 +898,14 @@ hr { border: none; }
 .quote footer {
   display: block;
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: var(--quote-footer-font-size);
   color: var(--quote-footer-color);
   margin-top: var(--space-xs);
 }
 
 .quote cite {
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: var(--quote-footer-font-size);
   color: var(--quote-footer-color);
 }
 
@@ -923,7 +934,7 @@ hr { border: none; }
 }
 
 .quote-pull figcaption {
-  font-size: 0.6875rem;
+  font-size: var(--quote-pull-figcaption-size);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -931,49 +942,68 @@ hr { border: none; }
   margin-top: var(--space-xs);
 }
 
-/* Attribution card */
-.quote-attribution {
-  background: var(--quote-attr-bg);
-  border: 1px solid var(--quote-attr-border);
-  border-radius: var(--quote-attr-radius);
-  padding: var(--quote-attr-padding);
-  display: flex;
-  gap: var(--quote-attr-gap);
-  align-items: flex-start;
+/* Testimonial card — compose with .card for the shell (bg, border, radius, flex-column) */
+.quote-testimonial {
+  border-color: var(--quote-testimonial-border);
+  padding: var(--quote-testimonial-padding);
+  gap: var(--quote-testimonial-gap);
   margin-bottom: var(--quote-margin-bottom);
 }
 
-.quote-attribution-avatar {
-  width: var(--quote-attr-avatar-size);
-  height: var(--quote-attr-avatar-size);
+.quote-testimonial::before {
+  content: '\201C';
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' 72;
+  font-size: var(--quote-testimonial-mark-size);
+  line-height: 0.8;
+  color: var(--quote-testimonial-mark-color);
+  align-self: flex-start;
+}
+
+.quote-testimonial-text {
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' 20;
+  font-style: italic;
+  font-size: var(--quote-testimonial-text-size);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.quote-testimonial-attribution {
+  display: flex;
+  align-items: center;
+  gap: var(--quote-testimonial-attribution-gap);
+  margin-top: var(--quote-testimonial-attribution-top);
+}
+
+.quote-testimonial-avatar {
+  width: var(--quote-testimonial-avatar-size);
+  height: var(--quote-testimonial-avatar-size);
   border-radius: var(--radius-full);
-  background: var(--quote-attr-avatar-bg);
+  background: var(--quote-testimonial-avatar-bg);
   display: grid;
   place-items: center;
-  font-size: 0.875rem;
+  font-size: var(--quote-testimonial-avatar-font);
   font-weight: 600;
   color: var(--color-accent);
   flex-shrink: 0;
 }
 
-.quote-attribution-text {
-  font-family: var(--font-display);
-  font-variation-settings: 'opsz' 14;
-  font-style: italic;
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-xs);
+.quote-testimonial-meta {
+  display: flex;
+  flex-direction: column;
 }
 
-.quote-attribution-name {
-  font-size: 0.8125rem;
+.quote-testimonial-name {
+  font-size: var(--quote-testimonial-name-size);
   font-weight: 600;
+  line-height: 1.3;
   color: var(--color-text);
-  margin-top: var(--space-xs);
 }
 
-.quote-attribution-role {
-  font-size: 0.75rem;
+.quote-testimonial-role {
+  font-size: var(--quote-testimonial-role-size);
+  line-height: 1.3;
   color: var(--color-text-secondary);
 }
 
@@ -982,7 +1012,7 @@ hr { border: none; }
 .code-block {
   position: relative;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: var(--code-font-size);
   background: var(--code-bg);
   color: var(--code-text);
   border: 1px solid var(--code-border);

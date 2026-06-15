@@ -583,15 +583,17 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </div>
 
   <div class="quote-demo-attribution">
-    <p class="demo-label">Attribution card</p>
-    <div class="quote-attribution">
-      <div class="quote-attribution-avatar" aria-hidden="true">MR</div>
-      <div class="quote-attribution-body">
-        <p class="quote-attribution-text">"Working this way changed how I think about internal tooling entirely. It stopped being infrastructure and started being product."</p>
-        <p class="quote-attribution-name">Maya Rodriguez</p>
-        <p class="quote-attribution-role">VP Engineering, Acme</p>
-      </div>
-    </div>
+    <p class="demo-label">Testimonial card</p>
+    <figure class="card quote-testimonial">
+      <p class="quote-testimonial-text">Working this way changed how I think about internal tooling entirely. It stopped being infrastructure and started being product.</p>
+      <figcaption class="quote-testimonial-attribution">
+        <div class="quote-testimonial-avatar" aria-hidden="true">MR</div>
+        <div class="quote-testimonial-meta">
+          <span class="quote-testimonial-name">Maya Rodriguez</span>
+          <span class="quote-testimonial-role">VP Engineering, Acme</span>
+        </div>
+      </figcaption>
+    </figure>
   </div>
 
   <div class="accordion">
@@ -605,7 +607,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <tbody>
             <tr><td>Blockquote</td><td><code>&lt;blockquote&gt;</code></td><td><code>.quote</code></td><td>Inline prose citation with left accent border. Body text uses Fraunces italic.</td></tr>
             <tr><td>Pullquote</td><td><code>&lt;figure&gt;</code></td><td><code>.quote-pull</code></td><td>Centred featured statement. Accent rule generated via <code>::before</code>. Caption via <code>&lt;figcaption&gt;</code>.</td></tr>
-            <tr><td>Attribution</td><td><code>&lt;div&gt;</code></td><td><code>.quote-attribution</code></td><td>Testimonial card with optional avatar initials. Flexbox layout with panel background.</td></tr>
+            <tr><td>Testimonial</td><td><code>&lt;figure&gt;</code></td><td><code>.quote-testimonial</code></td><td>Testimonial card with decorative quote mark, quote text, and an attribution row (avatar + name/role).</td></tr>
           </tbody>
         </table>
 
@@ -623,15 +625,17 @@ import DocLayout from '../../layouts/DocLayout.astro';
   &lt;figcaption&gt;Attribution name&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;!-- Attribution card --&gt;
-&lt;div class="quote-attribution"&gt;
-  &lt;div class="quote-attribution-avatar" aria-hidden="true"&gt;AB&lt;/div&gt;
-  &lt;div class="quote-attribution-body"&gt;
-    &lt;p class="quote-attribution-text"&gt;"Quote text here."&lt;/p&gt;
-    &lt;p class="quote-attribution-name"&gt;Full Name&lt;/p&gt;
-    &lt;p class="quote-attribution-role"&gt;Title, Company&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;!-- Testimonial card — .card provides the shell (bg, border, radius, flex-column) --&gt;
+&lt;figure class="card quote-testimonial"&gt;
+  &lt;p class="quote-testimonial-text"&gt;Quote text here.&lt;/p&gt;
+  &lt;figcaption class="quote-testimonial-attribution"&gt;
+    &lt;div class="quote-testimonial-avatar" aria-hidden="true"&gt;AB&lt;/div&gt;
+    &lt;div class="quote-testimonial-meta"&gt;
+      &lt;span class="quote-testimonial-name"&gt;Full Name&lt;/span&gt;
+      &lt;span class="quote-testimonial-role"&gt;Title, Company&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
 
         <h3>Token reference</h3>
         <table>
@@ -647,13 +651,15 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td><code>--quote-pull-rule-width</code></td><td><code>32px</code></td><td>Pullquote decorative rule width</td></tr>
             <tr><td><code>--quote-pull-rule-height</code></td><td><code>2px</code></td><td>Pullquote decorative rule height</td></tr>
             <tr><td><code>--quote-pull-rule-color</code></td><td><code>--color-accent</code></td><td>Pullquote rule color</td></tr>
-            <tr><td><code>--quote-attr-bg</code></td><td><code>--color-bg-panel</code></td><td>Attribution card background</td></tr>
-            <tr><td><code>--quote-attr-border</code></td><td><code>--color-border-subtle</code></td><td>Attribution card border</td></tr>
-            <tr><td><code>--quote-attr-radius</code></td><td><code>--radius-lg</code></td><td>Attribution card corner radius</td></tr>
-            <tr><td><code>--quote-attr-padding</code></td><td><code>--space-md --space-lg</code></td><td>Attribution card inner spacing</td></tr>
-            <tr><td><code>--quote-attr-gap</code></td><td><code>--space-md</code></td><td>Gap between avatar and body</td></tr>
-            <tr><td><code>--quote-attr-avatar-size</code></td><td><code>40px</code></td><td>Avatar circle diameter</td></tr>
-            <tr><td><code>--quote-attr-avatar-bg</code></td><td><code>color-mix(fern 15%)</code></td><td>Avatar circle background tint</td></tr>
+            <tr><td><code>--quote-testimonial-border</code></td><td><code>--color-border-subtle</code></td><td>Border color override (card default is transparent)</td></tr>
+            <tr><td><code>--quote-testimonial-padding</code></td><td><code>--space-lg</code></td><td>Padding override (card default is <code>--space-md</code>)</td></tr>
+            <tr><td><code>--quote-testimonial-gap</code></td><td><code>--space-sm</code></td><td>Gap between quote mark, text, and attribution row</td></tr>
+            <tr><td><code>--quote-testimonial-mark-color</code></td><td><code>--color-accent</code></td><td>Decorative opening quote mark color</td></tr>
+            <tr><td><code>--quote-testimonial-mark-size</code></td><td><code>3rem</code></td><td>Decorative opening quote mark font size</td></tr>
+            <tr><td><code>--quote-testimonial-avatar-size</code></td><td><code>2.5rem</code></td><td>Avatar circle diameter</td></tr>
+            <tr><td><code>--quote-testimonial-avatar-bg</code></td><td><code>color-mix(fern 15%)</code></td><td>Avatar circle background tint</td></tr>
+            <tr><td><code>--quote-testimonial-attribution-gap</code></td><td><code>--space-sm</code></td><td>Gap between avatar and name/role block</td></tr>
+            <tr><td><code>--quote-testimonial-attribution-top</code></td><td><code>--space-xs</code></td><td>Extra top margin on attribution row (adds to parent gap)</td></tr>
           </tbody>
         </table>
 
@@ -673,11 +679,13 @@ import DocLayout from '../../layouts/DocLayout.astro';
 .quote-pull::before &#123; /* accent rule — width/height/color via tokens */ &#125;
 .quote-pull p &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; &#125;
 
-.quote-attribution &#123; background: var(--quote-attr-bg); border-radius: var(--quote-attr-radius); &#125;
-.quote-attribution-avatar &#123; width: var(--quote-attr-avatar-size); border-radius: var(--radius-full); &#125;
-.quote-attribution-text &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 14; font-style: italic; &#125;
-.quote-attribution-name &#123; font-weight: 600; color: var(--color-text); &#125;
-.quote-attribution-role &#123; color: var(--color-text-secondary); &#125;</code></pre>
+.quote-testimonial &#123; /* compose with .card — adds border-color, padding, gap overrides */ border-color: var(--quote-testimonial-border); padding: var(--quote-testimonial-padding); gap: var(--quote-testimonial-gap); &#125;
+.quote-testimonial::before &#123; content: '\201C'; font-family: var(--font-display); font-variation-settings: 'opsz' 72; font-size: 3rem; line-height: 0.8; color: var(--quote-testimonial-mark-color); &#125;
+.quote-testimonial-text &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; font-style: italic; font-size: 1rem; &#125;
+.quote-testimonial-attribution &#123; display: flex; align-items: center; gap: var(--quote-testimonial-attribution-gap); &#125;
+.quote-testimonial-avatar &#123; width: var(--quote-testimonial-avatar-size); border-radius: var(--radius-full); &#125;
+.quote-testimonial-name &#123; font-weight: 600; color: var(--color-text); &#125;
+.quote-testimonial-role &#123; font-size: 0.75rem; color: var(--color-text-secondary); &#125;</code></pre>
 
       </div>
     </details>
