@@ -26,10 +26,10 @@ Or link from CDN (replace `@0.2.0` with the latest tag):
 ## Core rules
 
 - **Token hierarchy**: always reference semantic tokens (`--color-*`, `--space-*`, `--text-*`, `--font-*`, `--radius-*`). Never use raw palette tokens (`--in*`, `--bm*`, `--fo*`, `--bl*`) in component or page styles.
-- **Fraunces headings**: every Fraunces usage must include `font-variation-settings: 'opsz' <value>` — the font renders incorrectly without it. Use `72` for `h1`, `24` for `h2`, `20` for `h3`.
+- **Fraunces headings**: every Fraunces usage must include `font-variation-settings: 'opsz' <value>` — the font renders incorrectly without it. Use `72` for display/`h1`, `24` for `h2`, `20` for `h3` and pullquotes.
 - **Dark / light mode**: set `data-theme="dark"` or `data-theme="light"` on `<html>`. Toggle via JavaScript and persist to `localStorage` under the key `farn-theme`.
-- **Surface depth**: use `data-surface="base|layer|overlay"` on any element to set depth context. All children inherit re-scoped tokens automatically — `base` is page-level, `layer` is cards/panels, `overlay` is modals/dropdowns.
-- **Combine theme + surface**: `<section data-theme="dark" data-surface="layer">` renders a dark panel regardless of the page theme.
+- **Surface depth**: use `data-surface="base|layer|overlay|featured"` on any element to set depth context. All children inherit re-scoped tokens automatically — `base` is page-level, `layer` is cards/panels, `overlay` is modals/dropdowns, `featured` is always dark regardless of page theme (use for hero/brand sections).
+- **Combine theme + surface**: `<section data-theme="dark" data-surface="layer">` renders a dark panel regardless of the page theme. `featured` is self-contained — do not also set `data-theme="dark"` on the same element.
 - **FOWT prevention**: add an inline `<script>` in `<head>` before any CSS that reads `localStorage.getItem('farn-theme')` and sets `data-theme` on `<html>` before first paint.
 - **Load order**: `farn.css` (or `farn-tokens.css`) first, then `farn-components.css`, then `farn-typography.css`.
 
@@ -67,14 +67,14 @@ Full reference: https://farn.jbpt.de/llms.txt
 
 - [Getting Started](https://farn.jbpt.de/getting-started) — install, load order, FOWT, theming, minimal example
 - [Foundations](https://farn.jbpt.de/foundations) — design decisions, accessibility commitment, responsive approach
-- [Surfaces & theming](https://farn.jbpt.de/styles/theming) — full data-theme / data-surface reference with live examples
+- [Surfaces & theming](https://farn.jbpt.de/foundations/surfaces) — full data-theme / data-surface reference with live examples (base / layer / overlay / featured)
 - [Color tokens](https://farn.jbpt.de/styles/color) — palette + semantic token tables, WCAG contrast matrix
 - [Typography](https://farn.jbpt.de/styles/typography) — type scale, Fraunces opsz guidance, utility class reference
 - [Spacing](https://farn.jbpt.de/styles/spacing) — space scale, layout widths, border radius, z-index
 - [Motion](https://farn.jbpt.de/styles/motion) — duration + easing token reference
 - [Components › Actions](https://farn.jbpt.de/components/actions) — buttons (`.btn`, `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d`) + links
 - [Components › Layout](https://farn.jbpt.de/components/layout) — cards, section transitions, quotes, separators
-- [Components › Navigation](https://farn.jbpt.de/components/navigation) — breadcrumbs, accordion
+- [Components › Navigation](https://farn.jbpt.de/components/navigation) — breadcrumbs, accordion, pagination, tabs
 - [Components › Forms](https://farn.jbpt.de/components/forms) — inputs, textarea, select, labels, error states
-- [Components › Data](https://farn.jbpt.de/components/data) — badges (7 variants), tables, code blocks
-- [Components › Status](https://farn.jbpt.de/components/status) — alerts, loading states (coming soon)
+- [Components › Data](https://farn.jbpt.de/components/data) — badges (7 variants), tables, code blocks, tooltips
+- [Components › Status](https://farn.jbpt.de/components/status) — spinner, skeleton loader
