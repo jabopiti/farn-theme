@@ -155,14 +155,18 @@
   --quote-pull-rule-height: var(--separator-decorative-weight);
   --quote-pull-rule-color:  var(--separator-decorative-color);
 
-  /* Attribution card */
-  --quote-attr-bg:          var(--color-bg-panel);
-  --quote-attr-border:      var(--color-border-subtle);
-  --quote-attr-radius:      var(--radius-lg);
-  --quote-attr-padding:     var(--space-md) var(--space-lg);
-  --quote-attr-gap:         var(--space-md);
-  --quote-attr-avatar-size: 40px;
-  --quote-attr-avatar-bg:   color-mix(in srgb, var(--fo1-fern) 15%, transparent);
+  /* Testimonial card (renamed from .quote-attribution in v0.x — breaking change) */
+  --quote-testimonial-bg:              var(--color-bg-panel);
+  --quote-testimonial-border:          var(--color-border-subtle);
+  --quote-testimonial-radius:          var(--radius-lg);
+  --quote-testimonial-padding:         var(--space-lg);
+  --quote-testimonial-gap:             var(--space-sm);
+  --quote-testimonial-mark-color:      var(--color-accent);
+  --quote-testimonial-mark-size:       3rem;
+  --quote-testimonial-avatar-size:     2.5rem;
+  --quote-testimonial-avatar-bg:       color-mix(in srgb, var(--fo1-fern) 15%, transparent);
+  --quote-testimonial-attribution-gap: var(--space-sm);
+  --quote-testimonial-attribution-top: var(--space-xs);
 
   /* ── Code block tokens ──────────────────────────────────────────────── */
   --code-bg:          var(--color-bg-inset); /* surface-aware; override with --color-bg-code for always-dark */

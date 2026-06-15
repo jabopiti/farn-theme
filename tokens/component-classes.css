@@ -696,23 +696,49 @@ hr { border: none; }
   margin-top: var(--space-xs);
 }
 
-/* Attribution card */
-.quote-attribution {
-  background: var(--quote-attr-bg);
-  border: 1px solid var(--quote-attr-border);
-  border-radius: var(--quote-attr-radius);
-  padding: var(--quote-attr-padding);
+/* Testimonial card */
+.quote-testimonial {
+  background: var(--quote-testimonial-bg);
+  border: 1px solid var(--quote-testimonial-border);
+  border-radius: var(--quote-testimonial-radius);
+  padding: var(--quote-testimonial-padding);
   display: flex;
-  gap: var(--quote-attr-gap);
-  align-items: flex-start;
+  flex-direction: column;
+  gap: var(--quote-testimonial-gap);
   margin-bottom: var(--quote-margin-bottom);
 }
 
-.quote-attribution-avatar {
-  width: var(--quote-attr-avatar-size);
-  height: var(--quote-attr-avatar-size);
+.quote-testimonial::before {
+  content: '\201C';
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' 72;
+  font-size: var(--quote-testimonial-mark-size);
+  line-height: 0.8;
+  color: var(--quote-testimonial-mark-color);
+  align-self: flex-start;
+}
+
+.quote-testimonial-text {
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' 20;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.quote-testimonial-attribution {
+  display: flex;
+  align-items: center;
+  gap: var(--quote-testimonial-attribution-gap);
+  margin-top: var(--quote-testimonial-attribution-top);
+}
+
+.quote-testimonial-avatar {
+  width: var(--quote-testimonial-avatar-size);
+  height: var(--quote-testimonial-avatar-size);
   border-radius: var(--radius-full);
-  background: var(--quote-attr-avatar-bg);
+  background: var(--quote-testimonial-avatar-bg);
   display: grid;
   place-items: center;
   font-size: 0.875rem;
@@ -721,24 +747,21 @@ hr { border: none; }
   flex-shrink: 0;
 }
 
-.quote-attribution-text {
-  font-family: var(--font-display);
-  font-variation-settings: 'opsz' 14;
-  font-style: italic;
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-xs);
+.quote-testimonial-meta {
+  display: flex;
+  flex-direction: column;
 }
 
-.quote-attribution-name {
+.quote-testimonial-name {
   font-size: 0.8125rem;
   font-weight: 600;
+  line-height: 1.3;
   color: var(--color-text);
-  margin-top: var(--space-xs);
 }
 
-.quote-attribution-role {
+.quote-testimonial-role {
   font-size: 0.75rem;
+  line-height: 1.3;
   color: var(--color-text-secondary);
 }
 

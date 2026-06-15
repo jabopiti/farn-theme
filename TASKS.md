@@ -734,16 +734,16 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-60 · Layout › testimonial card rework
-`status: backlog` `effort: S`
+`status: done` `effort: S` `branch: claude/open-tasks-review-h6bf9t`
 
 **Gap:** The `.quote-attribution` component (renamed `.testimonial` or `.quote-testimonial`) has visual issues: quote text in italic+bold is hard to read, name/role line spacing is excessive, and the layout feels unbalanced. The component name "attribution card" is non-standard and hard to discover.
 
 **Before coding:** Research testimonial card patterns in Flowbite, Tailwind UI, HyperUI, and Mantine. Note common patterns: avatar placement, quote text style (italic but not bold is most common), compact name+role stack, border/background treatment. Agree on the foundation before implementing.
 
-- [ ] Rename `.quote-attribution` → `.quote-testimonial` (or decide final name during research); update all usages in the docs site
-- [ ] Rework the card layout based on research findings — fix italic+bold quote text, tighten name/role spacing
-- [ ] Add `--quote-testimonial-*` tokens (or update existing `--quote-attr-*`) to `tokens/components.css`
-- [ ] Update `tokens/component-classes.css`; rebuild; update docs page and `CHANGELOG.md`
+- [x] Rename `.quote-attribution` → `.quote-testimonial` (or decide final name during research); update all usages in the docs site
+- [x] Rework the card layout based on research findings — fix italic+bold quote text, tighten name/role spacing
+- [x] Add `--quote-testimonial-*` tokens (or update existing `--quote-attr-*`) to `tokens/components.css`
+- [x] Update `tokens/component-classes.css`; rebuild; update docs page and `CHANGELOG.md`
 
 **Complexity gate:** Component rename is a breaking change — document in CHANGELOG.
 
