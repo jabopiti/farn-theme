@@ -152,9 +152,10 @@
   --quote-opsz:           16;
 
   /* Pullquote — references separator decorative tokens as single source of truth */
-  --quote-pull-rule-width:  var(--separator-decorative-width);
-  --quote-pull-rule-height: var(--separator-decorative-weight);
-  --quote-pull-rule-color:  var(--separator-decorative-color);
+  --quote-pull-rule-width:        var(--separator-decorative-width);
+  --quote-pull-rule-height:       var(--separator-decorative-weight);
+  --quote-pull-rule-color:        var(--separator-decorative-color);
+  --quote-pull-figcaption-size:   var(--text-2xs);
 
   /* Testimonial card (renamed from .quote-attribution in v0.x — breaking change) */
   /* shell (bg, border-radius, display) comes from .card — add .card to the element */
@@ -165,6 +166,10 @@
   --quote-testimonial-mark-size:       3rem;
   --quote-testimonial-avatar-size:     2.5rem;
   --quote-testimonial-avatar-bg:       var(--color-bg-inset);
+  --quote-testimonial-text-size:       var(--text-base);
+  --quote-testimonial-avatar-font:     var(--text-sm); /* initials size */
+  --quote-testimonial-name-size:       var(--text-sm);
+  --quote-testimonial-role-size:       var(--text-xs);
   --quote-testimonial-attribution-gap: var(--space-sm);
   --quote-testimonial-attribution-top: var(--space-xs);
 
@@ -189,9 +194,9 @@
   --pagination-active-text: var(--color-accent-text);
   --pagination-hover-bg:    var(--color-bg-interactive-hover);
   --pagination-hover-text:  var(--color-text);
-  --pagination-font-size:   var(--text-sm);
   --pagination-radius:      var(--radius-md);
   --pagination-gap:         var(--space-xs);
+  --pagination-font-size:   var(--text-sm);
 
   /* ── Tab tokens ─────────────────────────────────────────────────────── */
   --tab-idle-text:        var(--color-text-secondary);

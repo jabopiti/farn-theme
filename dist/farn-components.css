@@ -152,9 +152,10 @@
   --quote-opsz:           16;
 
   /* Pullquote — references separator decorative tokens as single source of truth */
-  --quote-pull-rule-width:  var(--separator-decorative-width);
-  --quote-pull-rule-height: var(--separator-decorative-weight);
-  --quote-pull-rule-color:  var(--separator-decorative-color);
+  --quote-pull-rule-width:        var(--separator-decorative-width);
+  --quote-pull-rule-height:       var(--separator-decorative-weight);
+  --quote-pull-rule-color:        var(--separator-decorative-color);
+  --quote-pull-figcaption-size:   var(--text-2xs);
 
   /* Testimonial card (renamed from .quote-attribution in v0.x — breaking change) */
   /* shell (bg, border-radius, display) comes from .card — add .card to the element */
@@ -165,6 +166,10 @@
   --quote-testimonial-mark-size:       3rem;
   --quote-testimonial-avatar-size:     2.5rem;
   --quote-testimonial-avatar-bg:       var(--color-bg-inset);
+  --quote-testimonial-text-size:       var(--text-base);
+  --quote-testimonial-avatar-font:     var(--text-sm); /* initials size */
+  --quote-testimonial-name-size:       var(--text-sm);
+  --quote-testimonial-role-size:       var(--text-xs);
   --quote-testimonial-attribution-gap: var(--space-sm);
   --quote-testimonial-attribution-top: var(--space-xs);
 
@@ -189,9 +194,9 @@
   --pagination-active-text: var(--color-accent-text);
   --pagination-hover-bg:    var(--color-bg-interactive-hover);
   --pagination-hover-text:  var(--color-text);
-  --pagination-font-size:   var(--text-sm);
   --pagination-radius:      var(--radius-md);
   --pagination-gap:         var(--space-xs);
+  --pagination-font-size:   var(--text-sm);
 
   /* ── Tab tokens ─────────────────────────────────────────────────────── */
   --tab-idle-text:        var(--color-text-secondary);
@@ -929,7 +934,7 @@ hr { border: none; }
 }
 
 .quote-pull figcaption {
-  font-size: var(--text-2xs);
+  font-size: var(--quote-pull-figcaption-size);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -959,7 +964,7 @@ hr { border: none; }
   font-family: var(--font-display);
   font-variation-settings: 'opsz' 20;
   font-style: italic;
-  font-size: var(--text-base);
+  font-size: var(--quote-testimonial-text-size);
   line-height: 1.6;
   color: var(--color-text-secondary);
 }
@@ -978,7 +983,7 @@ hr { border: none; }
   background: var(--quote-testimonial-avatar-bg);
   display: grid;
   place-items: center;
-  font-size: var(--text-sm);
+  font-size: var(--quote-testimonial-avatar-font);
   font-weight: 600;
   color: var(--color-accent);
   flex-shrink: 0;
@@ -990,14 +995,14 @@ hr { border: none; }
 }
 
 .quote-testimonial-name {
-  font-size: var(--text-sm);
+  font-size: var(--quote-testimonial-name-size);
   font-weight: 600;
   line-height: 1.3;
   color: var(--color-text);
 }
 
 .quote-testimonial-role {
-  font-size: var(--text-xs);
+  font-size: var(--quote-testimonial-role-size);
   line-height: 1.3;
   color: var(--color-text-secondary);
 }
