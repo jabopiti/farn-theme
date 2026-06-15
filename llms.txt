@@ -25,7 +25,7 @@ Or link from CDN (replace `@0.2.0` with the latest tag):
 
 ## Core rules
 
-- **Token hierarchy**: always reference semantic tokens (`--color-*`, `--space-*`, `--font-*`, `--radius-*`). Never use raw palette tokens (`--in*`, `--bm*`, `--fo*`, `--bl*`) in component or page styles.
+- **Token hierarchy**: always reference semantic tokens (`--color-*`, `--space-*`, `--text-*`, `--font-*`, `--radius-*`). Never use raw palette tokens (`--in*`, `--bm*`, `--fo*`, `--bl*`) in component or page styles.
 - **Fraunces headings**: every Fraunces usage must include `font-variation-settings: 'opsz' <value>` — the font renders incorrectly without it. Use `72` for `h1`, `24` for `h2`, `20` for `h3`.
 - **Dark / light mode**: set `data-theme="dark"` or `data-theme="light"` on `<html>`. Toggle via JavaScript and persist to `localStorage` under the key `farn-theme`.
 - **Surface depth**: use `data-surface="base|layer|overlay"` on any element to set depth context. All children inherit re-scoped tokens automatically — `base` is page-level, `layer` is cards/panels, `overlay` is modals/dropdowns.
@@ -57,7 +57,7 @@ Farn uses a three-tier token architecture:
 
 ```
 This project uses the Farn design system.
-- Use semantic tokens (--color-*, --space-*), never palette tokens (--in*, --bm*, --fo*, --bl*)
+- Use semantic tokens (--color-*, --space-*, --text-*), never palette tokens (--in*, --bm*, --fo*, --bl*)
 - Every Fraunces heading: font-variation-settings: 'opsz' <value>
 - data-theme="dark|light" on <html>, data-surface="base|layer|overlay" on elements
 Full reference: https://farn.jbpt.de/llms.txt

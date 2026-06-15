@@ -362,6 +362,25 @@ import 'farn-theme/typography';
     </details>
   </div>
 
+  <h2 id="ui-text-scale">UI Text Scale</h2>
+  <p>
+    Four size tokens for component CSS — inputs, labels, buttons, badges, metadata.
+    Distinct from the heading/body utility classes above: those encode full typographic styles
+    (family, weight, opsz, line-height); these are raw size values for overriding in
+    component contexts. All component tokens (<code>--btn-font-size</code>,
+    <code>--input-font-size</code>, etc.) reference these. Defined in
+    <code>tokens/typography.css</code>.
+  </p>
+  <table>
+    <thead><tr><th>Token</th><th>Value</th><th>px</th><th>Used for</th></tr></thead>
+    <tbody>
+      <tr><td><code>--text-2xs</code></td><td><code>0.6875rem</code></td><td>11</td><td>Badge labels, overline captions (<code>--badge-font-size</code>)</td></tr>
+      <tr><td><code>--text-xs</code></td><td><code>0.75rem</code></td><td>12</td><td>Tooltips, metadata, small btn, role text (<code>--tooltip-font-size</code>, <code>--btn-sm-font-size</code>)</td></tr>
+      <tr><td><code>--text-sm</code></td><td><code>0.875rem</code></td><td>14</td><td>UI text: inputs, labels, buttons, tabs, tables (<code>--input-font-size</code>, <code>--btn-font-size</code>, <code>--tab-font-size</code>)</td></tr>
+      <tr><td><code>--text-base</code></td><td><code>1rem</code></td><td>16</td><td>Body text, accordion content (<code>--accordion-font-size</code>)</td></tr>
+    </tbody>
+  </table>
+
   <div class="accordion">
     <details>
       <summary>Loading fonts</summary>

@@ -45,14 +45,14 @@
 .text-h4 {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.4;
 }
 
 .text-h5 {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   letter-spacing: 0.04em;
   line-height: 1.4;
 }
@@ -62,7 +62,7 @@
 .text-body {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.7;
 }
 
@@ -76,20 +76,20 @@
 .text-body-sm {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   line-height: 1.7;
 }
 
 .text-label {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
 }
 
 .text-caption {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
   line-height: 1.6;
 }
 

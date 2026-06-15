@@ -480,7 +480,7 @@ input[type="radio"] {
   justify-content: center;
   min-width: 36px;
   height: 36px;
-  font-size: 0.875rem;
+  font-size: var(--pagination-font-size);
 }
 
 .page-link {
@@ -652,14 +652,14 @@ hr { border: none; }
 .quote footer {
   display: block;
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: var(--quote-footer-font-size);
   color: var(--quote-footer-color);
   margin-top: var(--space-xs);
 }
 
 .quote cite {
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: var(--quote-footer-font-size);
   color: var(--quote-footer-color);
 }
 
@@ -688,7 +688,7 @@ hr { border: none; }
 }
 
 .quote-pull figcaption {
-  font-size: 0.6875rem;
+  font-size: var(--text-2xs);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -718,7 +718,7 @@ hr { border: none; }
   font-family: var(--font-display);
   font-variation-settings: 'opsz' 20;
   font-style: italic;
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.6;
   color: var(--color-text-secondary);
 }
@@ -737,7 +737,7 @@ hr { border: none; }
   background: var(--quote-testimonial-avatar-bg);
   display: grid;
   place-items: center;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-accent);
   flex-shrink: 0;
@@ -749,14 +749,14 @@ hr { border: none; }
 }
 
 .quote-testimonial-name {
-  font-size: 0.8125rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   line-height: 1.3;
   color: var(--color-text);
 }
 
 .quote-testimonial-role {
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
   line-height: 1.3;
   color: var(--color-text-secondary);
 }
@@ -766,7 +766,7 @@ hr { border: none; }
 .code-block {
   position: relative;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: var(--code-font-size);
   background: var(--code-bg);
   color: var(--code-text);
   border: 1px solid var(--code-border);
