@@ -95,7 +95,7 @@ Run all six steps after any change to a `tokens/` file, `llms.txt`, or `site/src
 
 ## Hard rules
 
-**Typography — mandatory:** Every Fraunces usage must include `font-variation-settings: 'opsz' <value>`. Common opsz values: display/hero → `144`, h1 → `72`, h2 → `48`, h3 → `36`, body display/pullquote → `20`, small UI → `10`.
+**Typography — mandatory:** Every Fraunces usage must include `font-variation-settings: 'opsz' <value>`. Canonical opsz values from `tokens/typography-classes.css`: display/h1 → `72`, h2 → `24`, h3 → `20`. Use `20` for pullquotes and decorative display text.
 
 ```css
 h1 {
@@ -160,7 +160,24 @@ Two parallel tracks — both required for `stable` status.
 
 ## Release
 
-**Version bump — all files to update:**
+Farn has three core deliverables that must be aligned on every release:
+1. **CSS artifacts** — `dist/farn.css`, `dist/farn-tokens.css`, `dist/farn-components.css`, `dist/farn-typography.css`, `dist/tabs.js`
+2. **`llms.txt`** — machine-readable spec for AI agents building with Farn; root file is canonical, synced to `site/public/llms.txt` via build
+3. **Documentation site** — deployed to Cloudflare Pages; must match what ships in dist
+
+All three must reflect the same feature set and version on every release. A token added to dist but absent from llms.txt or the docs site is a broken release.
+
+### Pre-release alignment check
+
+Before bumping the version, verify these are in sync:
+- [ ] Every surface listed in `data-surface="..."` in `dark-light.css` is documented in `llms.txt` Core rules and in the docs (Foundations › Surfaces)
+- [ ] Every component listed in `package.json` exports has docs on the corresponding group page
+- [ ] All URLs in the `llms.txt` Reference section resolve (no 404s from page moves or renames)
+- [ ] `llms.txt` component lists and status page reflect current `done` / `coming soon` state
+- [ ] `CHANGELOG.md` `## [Unreleased]` captures all changes since the last tag
+
+### Version bump — files to update
+
 - `package.json` — `"version"` field
 - `CHANGELOG.md` — rename `## [Unreleased]` to `## [X.Y.Z] — YYYY-MM-DD`, add empty `## [Unreleased]` above it
 - `README.md` — CDN URL `@X.Y.Z` (the version badge on line 7 is dynamic — auto-updates from GitHub tags, no manual change needed)
@@ -168,11 +185,22 @@ Two parallel tracks — both required for `stable` status.
 - `site/src/components/Footer.astro` — version badge `vX.Y.Z`
 - `site/src/pages/getting-started.astro` — all CDN URL occurrences (use replace_all)
 
-**Steps:**
-1. Make all version bumps above on a release branch
-2. Run `npm run build` (rebuilds `dist/` and syncs `site/public/llms.txt`)
-3. Commit, push, open a PR
-4. After merge: create a GitHub Release at `github.com/jabopiti/farn-theme/releases/new` — set tag `vX.Y.Z`, target `main`; GitHub creates the tag automatically and activates the jsDelivr CDN URL
+### Release steps
+
+1. Complete the pre-release alignment check above; fix any gaps first
+2. Make all version bumps
+3. Run `npm run build` (rebuilds all dist/ artifacts and syncs `site/public/llms.txt`)
+4. Verify dist/ contains all 5 artifacts with updated content: `ls -la dist/`
+5. Commit, push, open a PR
+6. After merge: create a GitHub Release at `github.com/jabopiti/farn-theme/releases/new` — set tag `vX.Y.Z`, target `main`; GitHub creates the tag automatically and activates the jsDelivr CDN URL
+
+### Keeping llms.txt current (between releases)
+
+`llms.txt` is a living document — update it (content, not just version) whenever:
+- A new `data-surface` value is added or renamed
+- A component reaches `stable` status or is renamed/removed
+- A reference URL changes (page moves, IA restructures)
+- A core rule changes (token naming, opsz values, load order)
 
 ## Task workflow
 
