@@ -52,6 +52,33 @@ jobs:
             exit 1
           fi
 
+      - name: Verify dist/farn-typography.css is up-to-date
+        run: |
+          cat tokens/typography-classes.css > /tmp/farn-typography-rebuilt.css
+          if ! diff -q dist/farn-typography.css /tmp/farn-typography-rebuilt.css > /dev/null; then
+            echo "dist/farn-typography.css is out of sync with tokens/typography-classes.css. Rebuild:"
+            echo "  cat tokens/typography-classes.css > dist/farn-typography.css"
+            diff dist/farn-typography.css /tmp/farn-typography-rebuilt.css
+            exit 1
+          fi
+
+      - name: Verify dist/tabs.js is up-to-date
+        run: |
+          if ! diff -q dist/tabs.js site/src/scripts/tabs.js > /dev/null; then
+            echo "dist/tabs.js is out of sync with site/src/scripts/tabs.js. Rebuild:"
+            echo "  cp site/src/scripts/tabs.js dist/tabs.js"
+            exit 1
+          fi
+
+      - name: Verify site/public/llms.txt matches root llms.txt
+        run: |
+          if ! diff -q llms.txt site/public/llms.txt > /dev/null; then
+            echo "site/public/llms.txt is out of sync with llms.txt. Rebuild:"
+            echo "  cp llms.txt site/public/llms.txt"
+            diff llms.txt site/public/llms.txt
+            exit 1
+          fi
+
       - uses: pnpm/action-setup@v6
         with:
           package_json_file: site/package.json
