@@ -584,7 +584,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <div class="quote-demo-attribution">
     <p class="demo-label">Testimonial card</p>
-    <figure class="quote-testimonial">
+    <figure class="card quote-testimonial">
       <p class="quote-testimonial-text">Working this way changed how I think about internal tooling entirely. It stopped being infrastructure and started being product.</p>
       <figcaption class="quote-testimonial-attribution">
         <div class="quote-testimonial-avatar" aria-hidden="true">MR</div>
@@ -625,8 +625,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
   &lt;figcaption&gt;Attribution name&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;!-- Testimonial card --&gt;
-&lt;figure class="quote-testimonial"&gt;
+&lt;!-- Testimonial card — .card provides the shell (bg, border, radius, flex-column) --&gt;
+&lt;figure class="card quote-testimonial"&gt;
   &lt;p class="quote-testimonial-text"&gt;Quote text here.&lt;/p&gt;
   &lt;figcaption class="quote-testimonial-attribution"&gt;
     &lt;div class="quote-testimonial-avatar" aria-hidden="true"&gt;AB&lt;/div&gt;
@@ -651,10 +651,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td><code>--quote-pull-rule-width</code></td><td><code>32px</code></td><td>Pullquote decorative rule width</td></tr>
             <tr><td><code>--quote-pull-rule-height</code></td><td><code>2px</code></td><td>Pullquote decorative rule height</td></tr>
             <tr><td><code>--quote-pull-rule-color</code></td><td><code>--color-accent</code></td><td>Pullquote rule color</td></tr>
-            <tr><td><code>--quote-testimonial-bg</code></td><td><code>--color-bg-panel</code></td><td>Card background</td></tr>
-            <tr><td><code>--quote-testimonial-border</code></td><td><code>--color-border-subtle</code></td><td>Card border color</td></tr>
-            <tr><td><code>--quote-testimonial-radius</code></td><td><code>--radius-lg</code></td><td>Card corner radius</td></tr>
-            <tr><td><code>--quote-testimonial-padding</code></td><td><code>--space-lg</code></td><td>Card inner spacing</td></tr>
+            <tr><td><code>--quote-testimonial-border</code></td><td><code>--color-border-subtle</code></td><td>Border color override (card default is transparent)</td></tr>
+            <tr><td><code>--quote-testimonial-padding</code></td><td><code>--space-lg</code></td><td>Padding override (card default is <code>--space-md</code>)</td></tr>
             <tr><td><code>--quote-testimonial-gap</code></td><td><code>--space-sm</code></td><td>Gap between quote mark, text, and attribution row</td></tr>
             <tr><td><code>--quote-testimonial-mark-color</code></td><td><code>--color-accent</code></td><td>Decorative opening quote mark color</td></tr>
             <tr><td><code>--quote-testimonial-mark-size</code></td><td><code>3rem</code></td><td>Decorative opening quote mark font size</td></tr>
@@ -681,7 +679,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 .quote-pull::before &#123; /* accent rule — width/height/color via tokens */ &#125;
 .quote-pull p &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; &#125;
 
-.quote-testimonial &#123; background: var(--quote-testimonial-bg); border-radius: var(--quote-testimonial-radius); display: flex; flex-direction: column; gap: var(--quote-testimonial-gap); &#125;
+.quote-testimonial &#123; /* compose with .card — adds border-color, padding, gap overrides */ border-color: var(--quote-testimonial-border); padding: var(--quote-testimonial-padding); gap: var(--quote-testimonial-gap); &#125;
 .quote-testimonial::before &#123; content: '\201C'; font-family: var(--font-display); font-variation-settings: 'opsz' 72; font-size: 3rem; line-height: 0.8; color: var(--quote-testimonial-mark-color); &#125;
 .quote-testimonial-text &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; font-style: italic; font-size: 1rem; &#125;
 .quote-testimonial-attribution &#123; display: flex; align-items: center; gap: var(--quote-testimonial-attribution-gap); &#125;

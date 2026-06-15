@@ -8,8 +8,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
-- **T-60** `tokens/components.css`: Added `--quote-testimonial-*` tokens (bg, border, radius, padding, gap, mark-color, avatar-size, avatar-bg, attribution-gap) replacing the removed `--quote-attr-*` set.
-- **T-60** `tokens/component-classes.css`: Added `.quote-testimonial` and child classes (`.quote-testimonial-text`, `.quote-testimonial-attribution`, `.quote-testimonial-avatar`, `.quote-testimonial-meta`, `.quote-testimonial-name`, `.quote-testimonial-role`). New flex-column card layout: decorative `::before` opening quote mark in accent color (Fraunces opsz 72), full-width italic quote text at opsz 20, attribution row (avatar + stacked name/role) at bottom. Fixes opsz-14 weight issue, eliminates double margin between quote text and name, and balances the layout.
+- **T-60** `tokens/components.css`: Added `--quote-testimonial-*` tokens (border, padding, gap, mark-color, mark-size, avatar-size, avatar-bg, attribution-gap, attribution-top) replacing the removed `--quote-attr-*` set. Shell tokens (bg, radius) removed — provided by `.card`.
+- **T-60** `tokens/component-classes.css`: Added `.quote-testimonial` and child classes. Composes with `.card` for the shell (bg, border, radius, flex-column); `.quote-testimonial` only overrides border-color, padding, and gap. Decorative `::before` opening quote mark (Fraunces opsz 72, accent color), full-width italic quote text at opsz 20, attribution row (avatar + stacked name/role) at bottom.
 - **T-60** `site/src/pages/components/layout.astro`: Updated testimonial card demo, anatomy example, token reference table, and CSS reference to use the new `.quote-testimonial` classes and `<figure>`/`<figcaption>` semantic structure.
 
 ### Removed

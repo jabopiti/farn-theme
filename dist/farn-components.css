@@ -156,10 +156,9 @@
   --quote-pull-rule-color:  var(--separator-decorative-color);
 
   /* Testimonial card (renamed from .quote-attribution in v0.x — breaking change) */
-  --quote-testimonial-bg:              var(--color-bg-panel);
-  --quote-testimonial-border:          var(--color-border-subtle);
-  --quote-testimonial-radius:          var(--radius-lg);
-  --quote-testimonial-padding:         var(--space-lg);
+  /* shell (bg, border-radius, display) comes from .card — add .card to the element */
+  --quote-testimonial-border:          var(--color-border-subtle); /* override: .card uses transparent */
+  --quote-testimonial-padding:         var(--space-lg);            /* override: .card uses --space-md */
   --quote-testimonial-gap:             var(--space-sm);
   --quote-testimonial-mark-color:      var(--color-accent);
   --quote-testimonial-mark-size:       3rem;
@@ -935,14 +934,10 @@ hr { border: none; }
   margin-top: var(--space-xs);
 }
 
-/* Testimonial card */
+/* Testimonial card — compose with .card for the shell (bg, border, radius, flex-column) */
 .quote-testimonial {
-  background: var(--quote-testimonial-bg);
-  border: 1px solid var(--quote-testimonial-border);
-  border-radius: var(--quote-testimonial-radius);
+  border-color: var(--quote-testimonial-border);
   padding: var(--quote-testimonial-padding);
-  display: flex;
-  flex-direction: column;
   gap: var(--quote-testimonial-gap);
   margin-bottom: var(--quote-margin-bottom);
 }
