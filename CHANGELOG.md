@@ -8,6 +8,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- **T-56** `tokens/component-classes.css`: Added `.card-preview` — a modifier for `.card-media` that sets a fixed `9rem` height, flex-centres content, and clips overflow. Use to build overview grids where each card shows a live mini-demo above a title and description.
+- **T-56** `tokens/component-classes.css`: Added `a.card-interactive { color: inherit; text-decoration: none }` — suppresses browser link defaults when an `<a>` wraps a full card shell.
+- **T-56** `site/src/pages/components/layout.astro`: Documented the preview card pattern under Cards — live two-card demo, markup guide, and CSS reference.
+- **T-56** `site/src/pages/foundations/index.astro`: Replaced flat link list with a `.card-grid` of four preview cards (Surfaces, Layout, Responsive, Accessibility), each with a live CSS mini-demo.
+- **T-56** `site/src/pages/styles/index.astro`: Replaced flat link list with a `.card-grid` of five preview cards (Color, Typography, Spacing, Motion, Icons), each with a live CSS mini-demo.
+- **T-56** `site/src/pages/components/index.astro`: Replaced six flat `<h2>` group stubs with a `.card-grid` of six preview cards (Layout, Navigation, Actions, Forms, Data, Status), each with a live CSS mini-demo.
+
+### Added
 - **T-60** `tokens/typography.css`: Added UI text scale — four tokens (`--text-2xs` 11px, `--text-xs` 12px, `--text-sm` 14px, `--text-base` 16px) for use in component CSS. Distinct from the heading utility classes in `farn-typography.css`; these are the canonical values for all UI chrome (buttons, inputs, labels, badges, tabs, tooltips, tables, etc.).
 - **T-60** `tokens/components.css`: Added 13 component typography tokens (`--btn-font-size`, `--btn-sm-font-size`, `--btn-lg-font-size`, `--label-font-size`, `--input-font-size`, `--badge-font-size`, `--hint-font-size`, `--breadcrumb-font-size`, `--accordion-font-size`, `--tooltip-font-size`, `--tab-font-size`, `--table-header-font-size`, `--table-font-size`) all wired to the new `--text-*` scale. Previously hardcoded `rem` values in `component-classes.css`.
 - **T-60** `tokens/components.css`: Added `--pagination-font-size`, `--quote-footer-font-size`, `--quote-pull-figcaption-size`, `--code-font-size`, and four `--quote-testimonial-{text,avatar,name,role}-size` tokens — previously these font sizes were hardcoded directly in `component-classes.css`, bypassing the token override API.

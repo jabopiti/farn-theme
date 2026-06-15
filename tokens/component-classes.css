@@ -201,10 +201,23 @@ input[type="radio"] {
    explicit here for farn-components.css standalone use */
 .card-interactive:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 .card-interactive:active        { transform: scale(0.99); }
+/* When an <a> wraps the full card, suppress browser link defaults */
+a.card-interactive { color: inherit; text-decoration: none; }
 
 /* Anatomy — .card-media must be the first child for correct corner clipping */
 .card-media         { overflow: hidden; border-radius: var(--card-radius) var(--card-radius) 0 0; }
 .card-media img     { width: 100%; } /* display:block already set by base.css reset */
+
+/* Preview strip — fixed-height centred zone for live mini-demos.
+   Must pair with .card-media for correct corner clipping. */
+.card-preview {
+  height: var(--card-preview-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--space-sm);
+}
 .card-header        { padding: var(--card-padding); }
 .card-body          { padding: var(--card-padding); flex: 1; }
 .card-footer        { padding: var(--card-padding); margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
