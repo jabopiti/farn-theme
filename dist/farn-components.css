@@ -164,7 +164,7 @@
   --quote-testimonial-mark-color:      var(--color-accent);
   --quote-testimonial-mark-size:       3rem;
   --quote-testimonial-avatar-size:     2.5rem;
-  --quote-testimonial-avatar-bg:       color-mix(in srgb, var(--fo1-fern) 15%, transparent);
+  --quote-testimonial-avatar-bg:       var(--color-bg-inset);
   --quote-testimonial-attribution-gap: var(--space-sm);
   --quote-testimonial-attribution-top: var(--space-xs);
 
