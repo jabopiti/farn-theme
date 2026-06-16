@@ -927,7 +927,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-74 · Section transition dividers — landing page
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/open-tasks-53qoko`
 
 **Gap:** Section boundaries on the landing page are hard cuts; adding shaped transition dividers between key sections will improve visual flow and reinforce the Farn aesthetic.
 
@@ -937,8 +937,13 @@ Merged into T-49 (Complete Foundations section).
 - Included (§6) → Ready to Build (§7, dark bg): **Blob**
 
 **ACs:**
-- [ ] Each divider SVG colour-matches the adjacent section backgrounds (both light and dark page themes)
-- [ ] Dividers are `aria-hidden="true"` and do not disrupt layout flow (`position:absolute` or negative margin pattern)
-- [ ] No new JS required — CSS-only shapes
-- [ ] All three dividers render correctly with the existing `--arc-height` / `--wave-height` tokens (or new tokens added for blob/sine)
-- [ ] Run build command if any `tokens/` file changed, update `CHANGELOG.md`
+- [x] Each divider SVG colour-matches the adjacent section backgrounds (both light and dark page themes) — via `--color-section-next` token override per divider
+- [x] Dividers are `aria-hidden="true"` and do not disrupt layout flow (`position:absolute` or negative margin pattern)
+- [x] No new JS required — CSS-only shapes
+- [x] All three dividers render correctly with the existing `--arc-height` / `--wave-height` / `--blob-height` tokens — no new tokens needed
+- [x] Run build command if any `tokens/` file changed, update `CHANGELOG.md`
+
+**Also done (animation quality pass, scoped in after user request):**
+- [x] Reworked `.section-wave`/`.section-arc`/`.section-blob` reveal animations in `tokens/component-classes.css` to be shape-specific instead of a generic fade (wave: clip-path sweep; arc: exact `scaleY` reveal fixing a triangle-`clip-path` correctness bug, plus `ease-out` timing; blob: staggered cross-fade with corrected resting opacities)
+- [x] Fixed missing `data-scroll-reveal` on the wave/blob docs demos in `site/src/pages/components/layout.astro` (dogfood gap — they were rendering invisible)
+- [x] Relocated the arc divider to Architecture→Palette (was previously misplaced at Included→Ready-to-build) and hand-authored a new Blob for Included→Ready-to-build per spec
