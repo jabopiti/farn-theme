@@ -8,6 +8,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- **T-74** `site/src/pages/index.astro`: Added three section transition dividers — Arc (Architecture → Palette+Typography), Sine wave (Palette+Typography → Tokens in action), Blob (Included → Closing CTA, hand-authored organic path). All use the `--color-section-next` token pattern instead of the old `data-surface` + hardcoded fill workaround.
+
+### Changed
+- **T-74** `tokens/component-classes.css`: Reworked the scroll-reveal animation for `.section-wave`, `.section-arc`, and `.section-blob` — each now has a shape-appropriate reveal instead of a generic fade. Wave: left-to-right `clip-path` sweep, depth-layer path staggered ~80ms behind the main path. Arc: replaced a geometrically-incorrect 3-point triangle `clip-path` approximation of the curve with an exact `transform: scaleY(0→1)` reveal (`transform-origin: bottom`), and swapped `linear` timing for `var(--ease-out)`. Blob: staggered cross-fade — depth-layer path fades in first to its native resting opacity of `0.45`, main path follows ~80ms later to full opacity (previously both faded in together via a single wrapper-level opacity transition).
+- **T-74** `site/src/pages/components/layout.astro`: Added `data-scroll-reveal` to the Sine wave and Blob divider demos — both were missing the attribute and would never receive the `.is-visible` class under normal browsing, leaving them invisible (`opacity: 0`). Removed the now-redundant inline `opacity="0.45"` on the blob demo's depth-layer path — CSS now owns this resting value.
+
+### Added
 - **T-56** `tokens/component-classes.css`: Added `.card-preview` — a modifier for `.card-media` that sets a fixed `9rem` height, flex-centres content, and clips overflow. Use to build overview grids where each card shows a live mini-demo above a title and description.
 - **T-56** `tokens/component-classes.css`: Added `a.card-interactive { color: inherit; text-decoration: none }` — suppresses browser link defaults when an `<a>` wraps a full card shell.
 - **T-56** `site/src/pages/components/layout.astro`: Documented the preview card pattern under Cards — live two-card demo, markup guide, and CSS reference.

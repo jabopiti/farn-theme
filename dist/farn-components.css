@@ -527,7 +527,8 @@ a.card-interactive { color: inherit; text-decoration: none; }
 
 /* SVG wave sits absolutely at the bottom of its parent section.
    Parent must have position:relative and padding-bottom:var(--wave-height).
-   Add data-scroll-reveal to trigger the entry animation. */
+   Add data-scroll-reveal to trigger the entry animation — a left-to-right
+   clip-path sweep, with the depth-layer path trailing the main path. */
 .section-wave {
   position: absolute;
   bottom: 0;
@@ -535,11 +536,6 @@ a.card-interactive { color: inherit; text-decoration: none; }
   width: 100%;
   overflow: hidden;
   line-height: 0;
-  opacity: 0;
-  transform: translateY(24px);
-  transition-property: opacity, transform;
-  transition-duration: var(--duration-reveal);
-  transition-timing-function: var(--ease-out);
 }
 
 .section-wave svg {
@@ -548,23 +544,33 @@ a.card-interactive { color: inherit; text-decoration: none; }
   height: var(--wave-height);
 }
 
-.section-wave.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.1s;
+.section-wave svg path {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--duration-reveal) var(--ease-out);
+}
+
+.section-wave svg path:last-child {
+  transition-delay: 80ms;
+}
+
+.section-wave.is-visible svg path {
+  clip-path: inset(0 0 0 0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-wave { opacity: 1; transform: none; transition: none; }
+  .section-wave svg path { clip-path: none; transition: none; }
 }
 
 @media (scripting: none) {
-  .section-wave { opacity: 1; transform: none; }
+  .section-wave svg path { clip-path: none; }
 }
 
 /* ── Convex arc ──────────────────────────────────────────────────────────── */
 
-/* Parent section: position:relative; padding-bottom:var(--arc-height) */
+/* Parent section: position:relative; padding-bottom:var(--arc-height)
+   No data-scroll-reveal needed — the reveal runs on animation-timeline: view()
+   (CSS-only scroll-linked animation), unlike .section-wave/.section-blob which
+   are JS-driven via the .is-visible class from initScrollReveal(). */
 .section-arc {
   position: absolute;
   bottom: 0;
@@ -580,14 +586,15 @@ a.card-interactive { color: inherit; text-decoration: none; }
 }
 
 @supports (animation-timeline: view()) {
-  @keyframes arc-expand {
-    from { clip-path: polygon(0% 100%, 50% 100%, 100% 100%); }
-    to   { clip-path: polygon(0% 100%, 50% 0%,   100% 100%); }
+  @keyframes arc-reveal {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
   }
 
   .section-arc svg {
-    clip-path: polygon(0% 100%, 50% 100%, 100% 100%);
-    animation: arc-expand linear both;
+    transform-origin: bottom;
+    transform: scaleY(0);
+    animation: arc-reveal var(--ease-out) both;
     animation-timeline: view();
     animation-range: entry 20% cover 60%;
   }
@@ -595,12 +602,12 @@ a.card-interactive { color: inherit; text-decoration: none; }
 
 /* Concave variant — bowl faces upward; always static, no scroll animation */
 .section-arc--concave svg {
-  clip-path: none;
+  transform: none;
   animation: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-arc svg { clip-path: none; animation: none; }
+  .section-arc svg { transform: none; animation: none; }
 }
 
 /* ── Organic blob ────────────────────────────────────────────────────────── */
@@ -608,7 +615,9 @@ a.card-interactive { color: inherit; text-decoration: none; }
 /* SVG blob sits absolutely at the bottom of its parent section.
    Parent must have position:relative and padding-bottom:var(--blob-height).
    Blob paths must be drawn in Figma/Inkscape and exported — not hand-authored.
-   Add data-scroll-reveal to trigger the fade-in entry animation. */
+   Add data-scroll-reveal to trigger the entry animation — the depth-layer path
+   (first child) cross-fades in to its 0.45 resting opacity, the main path
+   (last child) follows ~80ms later up to full opacity. */
 .section-blob {
   position: absolute;
   bottom: 0;
@@ -616,8 +625,6 @@ a.card-interactive { color: inherit; text-decoration: none; }
   width: 100%;
   overflow: hidden;
   line-height: 0;
-  opacity: 0;
-  transition: opacity var(--blob-duration) var(--ease-out);
 }
 
 .section-blob svg {
@@ -626,17 +633,32 @@ a.card-interactive { color: inherit; text-decoration: none; }
   height: var(--blob-height);
 }
 
-.section-blob.is-visible {
+.section-blob svg path {
+  opacity: 0;
+  transition: opacity var(--blob-duration) var(--ease-out);
+}
+
+.section-blob svg path:last-child {
+  transition-delay: 80ms;
+}
+
+.section-blob.is-visible svg path:first-child {
+  opacity: 0.45;
+}
+
+.section-blob.is-visible svg path:last-child {
   opacity: 1;
-  transition-delay: 0.05s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-blob { opacity: 1; transition: none; }
+  .section-blob svg path { transition: none; }
+  .section-blob svg path:first-child { opacity: 0.45; }
+  .section-blob svg path:last-child { opacity: 1; }
 }
 
 @media (scripting: none) {
-  .section-blob { opacity: 1; }
+  .section-blob svg path:first-child { opacity: 0.45; }
+  .section-blob svg path:last-child { opacity: 1; }
 }
 
 /* ── Diagonal cut ────────────────────────────────────────────────────────── */
