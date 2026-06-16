@@ -10,16 +10,180 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <a href="/foundations">Foundations</a>.
   </p>
 
-  <h2>Reference pages</h2>
-  <ul>
-    <li><a href="/styles/color">Color</a> — the four palettes, semantic tokens, and the WCAG contrast matrix.</li>
-    <li><a href="/styles/typography">Typography</a> — font stacks, the Fraunces <code>opsz</code> rule, and the type scale.</li>
-    <li><a href="/styles/spacing">Spacing</a> — the spacing scale, border radius, and z-index.</li>
-    <li><a href="/styles/motion">Motion</a> — duration and easing tokens with pairing guidance.</li>
-    <li><a href="/styles/icons">Icons</a> — using a third-party icon set with Farn sizing and colour tokens.</li>
-  </ul>
+  <div class="card-grid">
+
+    <a class="card card-interactive card-outlined" href="/styles/color">
+      <div class="card-media card-preview st-preview-color" aria-hidden="true">
+        <div class="color-swatch" style="background: var(--in0-void)"></div>
+        <div class="color-swatch" style="background: var(--bm2-birch)"></div>
+        <div class="color-swatch" style="background: var(--fo1-fern)"></div>
+        <div class="color-swatch" style="background: var(--bl1-ochre)"></div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Color</p>
+        <p class="overview-card-desc">The four palettes, semantic tokens, and the WCAG contrast matrix.</p>
+      </div>
+    </a>
+
+    <a class="card card-interactive card-outlined" href="/styles/typography">
+      <div class="card-media card-preview st-preview-type" aria-hidden="true">
+        <p class="type-display-specimen">Farn</p>
+        <p class="type-body-specimen">Instrument Sans · body</p>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Typography</p>
+        <p class="overview-card-desc">Font stacks, the Fraunces <code>opsz</code> rule, and the type scale.</p>
+      </div>
+    </a>
+
+    <a class="card card-interactive card-outlined" href="/styles/spacing">
+      <div class="card-media card-preview st-preview-spacing" aria-hidden="true">
+        <div class="spacing-bars">
+          <div class="spacing-row"><div class="spacing-bar" style="width: var(--space-xs)"></div><span class="spacing-label">xs</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width: var(--space-sm)"></div><span class="spacing-label">sm</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width: var(--space-md)"></div><span class="spacing-label">md</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width: var(--space-lg)"></div><span class="spacing-label">lg</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width: var(--space-xl)"></div><span class="spacing-label">xl</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Spacing</p>
+        <p class="overview-card-desc">The spacing scale, border radius, and z-index.</p>
+      </div>
+    </a>
+
+    <a class="card card-interactive card-outlined" href="/styles/motion">
+      <div class="card-media card-preview st-preview-motion" aria-hidden="true">
+        <div class="motion-track" role="presentation">
+          <div class="motion-block"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Motion</p>
+        <p class="overview-card-desc">Duration and easing tokens with pairing guidance.</p>
+      </div>
+    </a>
+
+    <a class="card card-interactive card-outlined" href="/styles/icons">
+      <div class="card-media card-preview st-preview-icons" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+        <span class="icon-size-hint">var(--space-xl)</span>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Icons</p>
+        <p class="overview-card-desc">Using a third-party icon set with Farn sizing and colour tokens.</p>
+      </div>
+    </a>
+
+  </div>
+
   <p>
     For the theming system — <code>data-theme</code>, <code>data-surface</code>, and the full
-    semantic token reference — see <a href="/foundations/surfaces">Foundations &rsaquo; Surfaces</a>.
+    semantic token reference — see <a href="/foundations/surfaces">Foundations › Surfaces</a>.
   </p>
 </DocLayout>
+
+<style>
+  /* ── Color preview ─────────────────────────────────────────────────── */
+  .st-preview-color {
+    padding: 0;
+    gap: 0;
+  }
+  .color-swatch {
+    flex: 1;
+    height: 100%;
+  }
+
+  /* ── Typography preview ────────────────────────────────────────────── */
+  .st-preview-type {
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: flex-start;
+    padding-left: var(--space-md);
+  }
+  .type-display-specimen {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.5rem;
+    font-variation-settings: 'opsz' 72;
+    line-height: 1;
+    color: var(--color-text);
+  }
+  .type-body-specimen {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* ── Spacing preview ───────────────────────────────────────────────── */
+  .spacing-bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    width: 100%;
+  }
+  .spacing-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+  .spacing-bar {
+    height: 8px;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+  .spacing-label {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-tertiary);
+  }
+
+  /* ── Motion preview ────────────────────────────────────────────────── */
+  .st-preview-motion {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .motion-track {
+    width: 100%;
+    height: 24px;
+    border-radius: var(--radius-full);
+    background: var(--color-bg-inset);
+    position: relative;
+    overflow: hidden;
+  }
+  .motion-block {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    animation: farn-overview-motion var(--duration-slow, 0.8s) var(--ease-out, ease-out) infinite alternate;
+  }
+  @keyframes farn-overview-motion {
+    from { transform: translateX(0); }
+    to   { transform: translateX(4.5rem); } /* 72px — roughly 1/3 of typical track width */
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .motion-block { animation: none; }
+  }
+
+  /* ── Icons preview ─────────────────────────────────────────────────── */
+  .st-preview-icons {
+    flex-direction: column;
+    gap: var(--space-xs);
+    color: var(--color-accent);
+  }
+  .icon-size-hint {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-tertiary);
+  }
+</style>

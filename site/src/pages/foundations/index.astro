@@ -10,14 +10,183 @@ import DocLayout from '../../layouts/DocLayout.astro';
     values you look up while building, see <a href="/styles">Styles</a>.
   </p>
 
-  <h2>What lives here</h2>
-  <ul>
-    <li><a href="/foundations/surfaces"><strong>Surfaces</strong></a> — the theme + depth model (<code>data-theme</code> and <code>data-surface</code>), why it works the way it does, and how it aligns with the palette.</li>
-    <li><a href="/foundations/layout"><strong>Layout</strong></a> — content-first widths, page structure, and grid-vs-flex guidance.</li>
-    <li><a href="/foundations/responsive"><strong>Responsive</strong></a> — breakpoint tokens and the media query annotation convention.</li>
-    <li><a href="/foundations/accessibility"><strong>Accessibility</strong></a> — Farn's WCAG&nbsp;AA commitment, focus styles, and reduced-motion approach.</li>
-  </ul>
+  <div class="card-grid">
+
+    <a class="card card-interactive card-outlined" href="/foundations/surfaces">
+      <div class="card-media card-preview fo-preview-surfaces" aria-hidden="true">
+        <div class="surface-swatch" data-surface="base"><span>base</span></div>
+        <div class="surface-swatch" data-surface="layer"><span>layer</span></div>
+        <div class="surface-swatch" data-surface="overlay"><span>overlay</span></div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Surfaces</p>
+        <p class="overview-card-desc">The theme + depth model — <code>data-theme</code> and <code>data-surface</code> — and how it aligns with the palette.</p>
+      </div>
+    </a>
+
+    <a class="card card-interactive card-outlined" href="/foundations/layout">
+      <div class="card-media card-preview fo-preview-layout" aria-hidden="true">
+        <div class="preview-bar-list">
+          <div class="layout-bar layout-bar-nav"></div>
+          <div class="layout-bar layout-bar-content"></div>
+          <div class="layout-bar layout-bar-prose"></div>
+          <div class="layout-bar layout-bar-footer"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Layout</p>
+        <p class="overview-card-desc">Content-first widths, page structure, and grid-vs-flex guidance.</p>
+      </div>
+    </a>
+
+    <a class="card card-interactive card-outlined" href="/foundations/responsive">
+      <div class="card-media card-preview fo-preview-responsive" aria-hidden="true">
+        <div class="preview-bar-list">
+          <div class="resp-row">
+            <div class="resp-bar resp-bar-full"></div>
+            <span class="resp-label">all</span>
+          </div>
+          <div class="resp-row">
+            <div class="resp-bar resp-bar-tablet"></div>
+            <span class="resp-label">≤960px</span>
+          </div>
+          <div class="resp-row">
+            <div class="resp-bar resp-bar-mobile"></div>
+            <span class="resp-label">≤640px</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Responsive</p>
+        <p class="overview-card-desc">Breakpoint tokens and the reflow-by-content philosophy.</p>
+      </div>
+    </a>
+
+    <a class="card card-interactive card-outlined" href="/foundations/accessibility">
+      <div class="card-media card-preview fo-preview-a11y" aria-hidden="true">
+        <div class="a11y-demo">
+          <button class="a11y-focus-btn" tabindex="-1">Focus visible</button>
+          <div class="a11y-contrast-pair">
+            <span class="a11y-on-dark">Aa</span>
+            <span class="a11y-on-light">Aa</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Accessibility</p>
+        <p class="overview-card-desc">Farn's WCAG AA commitment, focus styles, and reduced-motion approach.</p>
+      </div>
+    </a>
+
+  </div>
+
   <p>
-    Contrast data for all semantic token pairs lives on <a href="/styles/color">Styles &rsaquo; Color</a>.
+    Contrast data for all semantic token pairs lives on <a href="/foundations/accessibility">Foundations › Accessibility</a>.
   </p>
 </DocLayout>
+
+<style>
+  /* ── Surfaces preview ──────────────────────────────────────────────── */
+  .fo-preview-surfaces {
+    flex-direction: column;
+    gap: var(--space-2xs, 4px);
+    padding: var(--space-sm);
+    align-items: stretch;
+  }
+  .surface-swatch {
+    flex: 1;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-sm);
+  }
+  .surface-swatch span {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+  }
+
+  /* ── Layout + Responsive previews ─────────────────────────────────── */
+  .fo-preview-layout {
+    align-items: flex-start;
+  }
+  .preview-bar-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    width: 100%;
+    padding: 0 var(--space-xs);
+  }
+  .layout-bar {
+    height: 10px;
+    border-radius: var(--radius-sm);
+    background: var(--color-border);
+  }
+  .layout-bar-nav     { width: 100%; }
+  .layout-bar-content { width: 80%; background: var(--color-accent); opacity: 0.7; height: 14px; }
+  .layout-bar-prose   { width: 60%; }
+  .layout-bar-footer  { width: 100%; opacity: 0.4; }
+
+  /* ── Responsive preview ────────────────────────────────────────────── */
+  .resp-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .resp-bar {
+    height: 10px;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    opacity: 0.65;
+  }
+  .resp-bar-full   { width: 100%; }
+  .resp-bar-tablet { width: 66%; }
+  .resp-bar-mobile { width: 40%; }
+  .resp-label {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-tertiary);
+    white-space: nowrap;
+  }
+
+  /* ── Accessibility preview ─────────────────────────────────────────── */
+
+  .a11y-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .a11y-focus-btn {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-panel);
+    color: var(--color-text);
+    cursor: default;
+    /* Forced focus ring — static demo, not interactive */
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .a11y-contrast-pair {
+    display: flex;
+    gap: var(--space-xs);
+  }
+  .a11y-on-dark,
+  .a11y-on-light {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .a11y-on-dark  { background: var(--in0-void);   color: var(--bm2-birch); }
+  .a11y-on-light { background: var(--bm2-birch);  color: var(--in0-void); border: 1px solid var(--color-border); }
+</style>

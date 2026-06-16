@@ -678,7 +678,7 @@ Merged into T-49 (Complete Foundations section).
 ---
 
 ## T-56 · Overview pages — live mini-demo card grid
-`status: backlog` `effort: M`
+`status: done` `effort: M` `branch: claude/next-task-planning-mfmahv`
 
 **Gap:** The three group overview pages (`/foundations`, `/styles`, `/components`) are flat lists of headings and links — no visual hierarchy, no sense of what each page contains. Visitors can't quickly assess which section is relevant to their task.
 
@@ -686,10 +686,10 @@ Merged into T-49 (Complete Foundations section).
 
 **Before coding:** Review how Radix Themes, shadcn/ui, Primer, and IBM Carbon structure their overview / getting-started gallery pages. Decide on card layout (2-col vs 3-col, whether previews are full-card-height or a top strip).
 
-- [ ] Implement live-preview card component (inline in overview pages or as a shared Astro component if reused across all three)
-- [ ] Apply to `site/src/pages/foundations/index.astro`, `styles/index.astro`, `components/index.astro`
-- [ ] Each card: group name, description, live CSS mini-demo, links to group page
-- [ ] Mobile: single column
+- [x] Implement live-preview card component (inline in overview pages or as a shared Astro component if reused across all three)
+- [x] Apply to `site/src/pages/foundations/index.astro`, `styles/index.astro`, `components/index.astro`
+- [x] Each card: group name, description, live CSS mini-demo, links to group page
+- [x] Mobile: single column
 
 **Complexity gate:** Adds a new shared Astro component — review before coding.
 

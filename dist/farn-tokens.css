@@ -407,11 +407,12 @@
   --link-visited-color: var(--color-accent);
 
   /* ── Card tokens ────────────────────────────────────────────────────── */
-  --card-bg:       var(--color-bg-panel);
-  --card-hover-bg: var(--color-bg-inset);
-  --card-border:   transparent;
-  --card-radius:   var(--radius-lg);
-  --card-padding:  var(--space-md);
+  --card-bg:             var(--color-bg-panel);
+  --card-hover-bg:       var(--color-bg-inset);
+  --card-border:         transparent;
+  --card-radius:         var(--radius-lg);
+  --card-padding:        var(--space-md);
+  --card-preview-height: 9rem;
   --card-highlight-bg:     var(--color-card-highlight-bg);
   --card-highlight-border: var(--color-card-highlight-border);
   --card-highlight-text:           var(--color-card-highlight-text);

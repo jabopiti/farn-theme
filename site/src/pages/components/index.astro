@@ -11,25 +11,86 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </p>
   <p>All component classes consume semantic tokens so they adapt to dark/light mode and surface context automatically.</p>
 
-  <h2>Layout</h2>
-  <p>Structural components for organising content. Cards surface discrete items in scannable grids; section transitions create intentional visual breaks between full-width areas. See <a href="/components/layout">Layout</a> for live demos and full CSS reference.</p>
+  <div class="card-grid">
 
-  <h2>Navigation</h2>
-  <p>Components that help users orient and move through a site. Breadcrumbs show position in a hierarchy; accordions reveal content progressively without leaving the page. See <a href="/components/navigation">Navigation</a>.</p>
+    <a class="card card-interactive card-outlined" href="/components/layout">
+      <div class="card-media card-preview co-preview-layout" aria-hidden="true">
+        <div class="card card-outlined co-mini-card">
+          <div class="co-mini-card-header"></div>
+          <div class="co-mini-card-body"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Layout</p>
+        <p class="overview-card-desc">Cards, section transitions, separators, and quotes — structural components for organising content.</p>
+      </div>
+    </a>
 
-  <h2>Actions</h2>
-  <p>Components that trigger operations or navigate users. Four button variants cover the full intent spectrum; <code>--btn-*</code> Tier-3 tokens let the entire button palette be rethemed in one place. Inline links use <code>--link-*</code> tokens independently of <code>--color-accent</code>. See <a href="/components/actions">Actions</a>.</p>
+    <a class="card card-interactive card-outlined" href="/components/navigation">
+      <div class="card-media card-preview co-preview-nav" aria-hidden="true">
+        <nav class="breadcrumb" aria-label="Breadcrumb example">
+          <ol>
+            <li class="breadcrumb-item"><a href="/components/navigation" tabindex="-1">Home</a></li>
+            <li class="breadcrumb-item"><a href="/components/navigation" tabindex="-1">Components</a></li>
+            <li class="breadcrumb-item" aria-current="page">Navigation</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Navigation</p>
+        <p class="overview-card-desc">Breadcrumbs, accordions, tabs, and pagination — components for orientation and movement.</p>
+      </div>
+    </a>
 
-  <h2>Forms</h2>
-  <p>Form element styles ship as bare element selectors — no extra classes required on <code>input</code>, <code>textarea</code>, or <code>select</code>. All styles consume <code>--input-*</code> Tier-3 tokens. See <a href="/components/forms">Forms</a>.</p>
+    <a class="card card-interactive card-outlined" href="/components/actions">
+      <div class="card-media card-preview co-preview-actions" aria-hidden="true">
+        <button class="btn btn-p" tabindex="-1">Primary</button>
+        <button class="btn btn-s" tabindex="-1">Secondary</button>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Actions</p>
+        <p class="overview-card-desc">Buttons and links — four variants cover the full intent spectrum from confirmation to destructive.</p>
+      </div>
+    </a>
 
-  <h2>Data</h2>
-  <p>Components for labelling and presenting structured information. Seven badge variants use opaque palette fills so they read on any surface without dark-mode overrides. See <a href="/components/data">Data</a>.</p>
+    <a class="card card-interactive card-outlined" href="/components/forms">
+      <div class="card-media card-preview co-preview-forms" aria-hidden="true">
+        <div class="co-form-demo" aria-hidden="true">
+          <label class="co-demo-label">Email</label>
+          <input type="email" placeholder="you@example.com" tabindex="-1">
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Forms</p>
+        <p class="overview-card-desc">Input, textarea, and select styles consuming <code>--input-*</code> tokens — no extra classes on native elements.</p>
+      </div>
+    </a>
 
-  <h2>Status</h2>
-  <p>Feedback components for async state and high-priority interruptions. Alerts, loading states, and modal dialogs are planned — state tokens for errors, warnings, and success already exist in the token system. See <a href="/components/status">Status</a>.</p>
+    <a class="card card-interactive card-outlined" href="/components/data">
+      <div class="card-media card-preview co-preview-data" aria-hidden="true">
+        <span class="badge badge-general">General</span>
+        <span class="badge badge-published">Published</span>
+        <span class="badge badge-draft">Draft</span>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Data</p>
+        <p class="overview-card-desc">Badges, tables, code blocks — seven badge variants and full table density tiers.</p>
+      </div>
+    </a>
 
-  <h3>Loading components</h3>
+    <a class="card card-interactive card-outlined" href="/components/status">
+      <div class="card-media card-preview co-preview-status" aria-hidden="true">
+        <span class="spinner" aria-hidden="true"></span>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Status</p>
+        <p class="overview-card-desc">Spinners, skeleton loaders, and tooltips — visual language for async state and feedback.</p>
+      </div>
+    </a>
+
+  </div>
+
+  <h2>Using component classes</h2>
   <p>All component classes ship in <code>dist/farn-components.css</code>. Load it alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
   <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/farn-theme/dist/farn.css"&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/farn-theme/dist/farn-components.css"&gt;</code></pre>
@@ -45,3 +106,55 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &lt;section data-theme="dark"&gt; … &lt;/section&gt;
 &lt;section data-theme="dark" data-surface="layer"&gt; … &lt;/section&gt;</code></pre>
 </DocLayout>
+
+<style>
+  /* ── Layout preview ────────────────────────────────────────────────── */
+  .co-mini-card {
+    width: 140px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    padding: 0;
+  }
+  .co-mini-card-header {
+    height: 36px;
+    background: linear-gradient(135deg, var(--fo3-deepwater) 0%, var(--fo1-fern) 100%);
+  }
+  .co-mini-card-body {
+    padding: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .co-mini-card-body::before,
+  .co-mini-card-body::after {
+    content: '';
+    display: block;
+    height: 6px;
+    border-radius: var(--radius-sm);
+    background: var(--color-border);
+  }
+  .co-mini-card-body::after { width: 70%; }
+
+  /* ── Navigation preview ────────────────────────────────────────────── */
+  .co-preview-nav { flex-direction: column; align-items: flex-start; }
+
+  /* ── Actions preview ───────────────────────────────────────────────── */
+  .co-preview-actions { gap: var(--space-sm); }
+
+  /* ── Forms preview ─────────────────────────────────────────────────── */
+  .co-form-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    width: 200px;
+  }
+  .co-demo-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  /* ── Data preview ──────────────────────────────────────────────────── */
+  .co-preview-data { gap: var(--space-xs); flex-wrap: wrap; }
+
+</style>

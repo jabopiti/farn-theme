@@ -431,6 +431,21 @@
 }
 .footer-links a:hover { color: var(--color-text-secondary); }
 
+/* ── Overview card typography ────────────────────────────────────────────── */
+/* Shared title/desc classes for preview card grids on overview pages.        */
+.overview-card-title {
+  margin: 0 0 var(--space-xs);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+.overview-card-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
 /* ── Demo container ──────────────────────────────────────────────────────── */
 .demo-surface {
   padding: var(--space-md);

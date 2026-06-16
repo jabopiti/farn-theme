@@ -176,7 +176,94 @@ import DocLayout from '../../layouts/DocLayout.astro';
 &#125;
 .card-interactive:hover         &#123; background: var(--card-hover-bg); &#125;
 .card-interactive:focus-visible &#123; outline: 2px solid var(--color-accent); outline-offset: 3px; &#125;
-.card-interactive:active        &#123; transform: scale(0.99); &#125;</code></pre>
+.card-interactive:active        &#123; transform: scale(0.99); &#125;
+a.card-interactive              &#123; color: inherit; text-decoration: none; &#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Preview card pattern ─────────────────────────────────────────── -->
+
+  <h2 id="preview-card">Preview card pattern <span class="badge badge-published">stable</span></h2>
+  <p>
+    A card with a fixed-height live-demo strip at the top — used for overview grids where each
+    card links to a section and gives a visual taste of its content. Composes the existing card
+    anatomy: <code>.card-media.card-preview</code> for the strip, <code>.card-body</code> for
+    the label and description.
+  </p>
+
+  <div class="card-grid preview-card-demo">
+    <a class="card card-interactive card-outlined" href="/styles/color">
+      <div class="card-media card-preview preview-demo-color" aria-hidden="true">
+        <div class="preview-swatch" style="background: var(--in0-void)"></div>
+        <div class="preview-swatch" style="background: var(--bm2-birch)"></div>
+        <div class="preview-swatch" style="background: var(--fo1-fern)"></div>
+        <div class="preview-swatch" style="background: var(--bl1-ochre)"></div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Color</p>
+        <p class="overview-card-desc">Palette tokens and semantic colour mappings.</p>
+      </div>
+    </a>
+    <a class="card card-interactive card-outlined" href="/components/actions">
+      <div class="card-media card-preview preview-demo-actions" aria-hidden="true">
+        <button class="btn btn-p" tabindex="-1">Primary</button>
+        <button class="btn btn-s" tabindex="-1">Secondary</button>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Actions</p>
+        <p class="overview-card-desc">Buttons and interactive triggers.</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Preview card</summary>
+      <div class="accordion-panel">
+
+        <h3>Markup</h3>
+        <pre><code>&lt;a class="card card-interactive card-outlined" href="/section"&gt;
+  &lt;div class="card-media card-preview" aria-hidden="true"&gt;
+    &lt;!-- live mini-demo content --&gt;
+  &lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;p&gt;Section title&lt;/p&gt;
+    &lt;p&gt;One-sentence description.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/a&gt;</code></pre>
+        <ul>
+          <li><code>.card-media</code> must be the first child for correct corner clipping.</li>
+          <li><code>.card-preview</code> sets <code>height: 9rem</code>, flex-centres content, and clips overflow.</li>
+          <li><code>a.card-interactive</code> suppresses default link colour and underline — child text renders in <code>--color-text</code>.</li>
+          <li>Add <code>aria-hidden="true"</code> to the preview strip — the link label comes from the card body, not the demo content.</li>
+          <li>Add <code>tabindex="-1"</code> to any interactive elements inside the preview strip so they are not keyboard-reachable.</li>
+        </ul>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--card-preview-height</code></td><td><code>9rem</code></td><td>Height of the preview strip. Override on a parent element to resize without touching the class.</td></tr>
+          </tbody>
+        </table>
+        <p>All other <code>--card-*</code> tokens apply — background and border are inherited from the card context.</p>
+
+        <h3>CSS reference</h3>
+        <pre><code>.card-preview &#123;
+  height: 9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--space-sm);
+&#125;
+
+a.card-interactive &#123;
+  color: inherit;
+  text-decoration: none;
+&#125;</code></pre>
 
       </div>
     </details>
@@ -711,6 +798,18 @@ import DocLayout from '../../layouts/DocLayout.astro';
     margin-bottom: var(--space-lg);
     max-width: 560px;
   }
+
+  /* ── Preview card demos ──────────────────────────────────────────────── */
+  .preview-card-demo { max-width: 640px; margin-bottom: var(--space-lg); }
+
+  .preview-demo-color {
+    display: flex;
+    padding: 0;
+    gap: 0;
+  }
+  .preview-swatch { flex: 1; height: 9rem; }
+
+  .preview-demo-actions { gap: var(--space-sm); }
 
   /* ── Card demos ───────────────────────────────────────────────────────── */
   .card-demo-row {
