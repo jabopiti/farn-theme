@@ -1,6 +1,6 @@
 # Farn — Agent Guide
 
-Token-first CSS design system: palette → semantic → component token layers, with opt-in shipped component classes. Source in `tokens/`, built to `dist/`, documented in `site/` (Astro). Pick up work from `TASKS.md`.
+Token-first CSS design system: palette → semantic → component token layers, with opt-in shipped component classes. Source in `tokens/`, built to `dist/`, documented in `site/` (Astro). Task backlog lives in GitHub Issues.
 
 ## Repo structure
 
@@ -39,7 +39,6 @@ site/
     status.astro                Group page — Spinner, Skeleton
 llms.txt                        Machine-readable guide for AI agents building *with* Farn (root is canonical; synced to site/public/)
 CHANGELOG.md                    Updated on every token or component change
-TASKS.md                        Task backlog — pick up work here
 ```
 
 ## Navigation structure
@@ -111,7 +110,7 @@ h1 {
 
 **CHANGELOG:** Update `CHANGELOG.md` with every token or component change. Mark breaking changes with ⚠️ **Breaking**.
 
-**No tech debt:** Do not leave TODO or FIXME comments in committed code — create a TASKS.md entry instead. No half-implemented features — a component needs both Track A (tokens + CSS) and Track B (docs) for `stable` status. In-progress or planned work is marked `badge-beta` or `badge-coming-soon` in the docs.
+**No tech debt:** Do not leave TODO or FIXME comments in committed code — open a GitHub issue for deferred work instead. No half-implemented features — a component needs both Track A (tokens + CSS) and Track B (docs) for `stable` status. In-progress or planned work is marked `badge-beta` or `badge-coming-soon` in the docs.
 
 **Demo-first docs:** Every component section on a group page shows a live demo outside any accordion. Token tables and code examples go inside `<details>` accordions.
 
@@ -202,40 +201,70 @@ Before bumping the version, verify these are in sync:
 - A reference URL changes (page moves, IA restructures)
 - A core rule changes (token naming, opsz values, load order)
 
-## Task workflow
+## Task lifecycle
 
-Tasks live in `TASKS.md`. Pick a `status: backlog` task (respect `Depends on`). Update the task block: change `status: backlog` → `status: in-progress`, add `branch: <branch-name>`, then create and push the branch.
+Tasks are tracked as GitHub Issues on `jabopiti/farn-theme`. The open issues list is the backlog.
 
-### Before planning
+### GitHub Issues conventions
 
-1. Read the full task spec and every source file it references before forming a plan.
-2. If the task includes a **"Before coding:"** research step — complete that research first and note findings before writing any code.
-3. Identify ambiguities. If the spec leaves a meaningful implementation or design choice unresolved, propose options via `AskUserQuestion` before writing code.
-4. Check complexity gate triggers below. If any apply, ask for approval before proceeding.
+- **Template:** `.github/ISSUE_TEMPLATE/task.yml` — use it for every new task issue
+- **Label:** `status:in-progress` is the only required repo label. Create it once via GitHub Settings → Labels or `gh label create "status:in-progress" --color "#0075ca"` locally. Open + no label = backlog · open + label = in progress · closed = done.
+- **PR linking:** every PR body must include `Closes #N` — GitHub auto-closes the issue on merge
+- **Projects board:** optional, user-maintained; if `gh` CLI is available locally, Claude also syncs status with `gh project item-edit` when picking up and completing work
+- **Bundling/splitting:** before picking up an issue, check the "Files likely touched" field against other open issues — heavy overlap means co-implement and close both from one PR (`Closes #A, Closes #B`); disjoint file lists are safe to parallelize in separate sessions
+- **Research findings and decisions:** post as issue comments (via GitHub MCP `add_issue_comment`, or `gh issue comment` locally) — not edited into the issue body — to preserve a timestamped trail
+- **Dropped work:** close the issue with reason "not planned" and an explanatory comment
+- **Superseded work:** comment "Merged into #N" on the superseded issue, then close it
 
-### When to ask the user (AskUserQuestion)
+### Create
+
+File an issue using the task template when a gap is noticed. **Required at filing:** Gap/Problem and Acceptance Criteria (a rough draft is fine — it will be refined before work starts). Scope, Risk, Files touched, and Depends on can be left blank and filled during Refine once the footprint is clearer.
+
+### Refine
+
+Before picking up any issue, do a triage pass:
+
+1. Confirm or fill in Scope, Risk, and Files touched now that the actual footprint is clearer.
+2. Check Files touched against other open issues — if heavy overlap, cross-reference both in a comment and plan to close them together in one PR; if disjoint, confirm they are safe to parallelize.
+3. If Risk is `high` (see Complexity gate below), note that `AskUserQuestion` is required before coding starts.
+
+### Pick
+
+Find an open issue without the `status:in-progress` label, respecting "Depends on" (all referenced issues must be closed). Then:
+
+1. Add the `status:in-progress` label and assign yourself
+2. Create and push the branch — include the issue number when you choose the name (e.g. `issue-123-short-slug`); in remote/web sessions where the branch name is auto-assigned by the harness, ensure the PR body links via `Closes #N`
+3. If `gh` is available: `gh project item-edit <item-id> --field-id <status-field-id> --single-select-option-id <in-progress-id>`
+
+### Implement
+
+1. Read the full issue body and every source file it references before forming a plan.
+2. If the issue has a "Before coding" section, complete that research first and post findings as an issue comment before writing any code.
+3. If Risk is `high`, use `AskUserQuestion` before writing any code.
+
+#### When to ask the user (AskUserQuestion)
 
 **Ask when:**
-- Any complexity gate condition applies (see below)
-- The task spec has an unresolved fork that meaningfully changes the output (e.g. new component vs. variant of an existing one)
+- Risk is `high` — always ask before writing code
+- The issue spec has an unresolved fork that meaningfully changes the output (e.g. new component vs. variant of an existing one)
 - A token name or class API will be public-facing and has more than one reasonable option
 - A "Before coding" research step surfaces a decision that changes the implementation direction
 
 **Do not ask about:**
-- Which files to edit — derive from the task and existing patterns
+- Which files to edit — derive from the issue and existing patterns
 - Whether to update CHANGELOG.md — always yes
 - Whether to run the build — always yes if any `tokens/` file changed
 - Implementation details resolvable by reading existing code patterns
 
-### Complexity gate — get user approval before proceeding if any apply
+#### Complexity gate — get user approval (Risk: high) if any apply
 
-- Effort `M` or `L` on a new feature (not a fix)
+- Scope `M` or `L` on a new feature (not a fix)
 - Structural changes to `colors.css` or `dark-light.css` (adding/removing a surface or palette)
 - Adding a new `data-surface` value
 - Structural changes to `navigation.ts` or adding a new component group page
 - Breaking rename of a token or class affecting consumers (mark ⚠️ Breaking in CHANGELOG)
 
-### Self-critique before executing
+#### Self-critique before executing
 
 - Editing `tokens/` (not `dist/` directly)?
 - Build command included if any `tokens/` file changed?
@@ -247,12 +276,15 @@ Tasks live in `TASKS.md`. Pick a `status: backlog` task (respect `Depends on`). 
 - JS-disabled fallback for elements that start at `opacity: 0` (use `@media (scripting: none)`)?
 - Demo-first: live demo visible outside the accordion, reference content inside?
 
-### Close-out checklist — run in this order before pushing
+### Complete
+
+Run in this order before pushing:
 
 - [ ] `/simplify` skill — apply all suggested cleanups before review
-- [ ] `/review` skill at the correct level: `XS` low · `S` medium · `M`/`L` high; bump one level if touching `dark-light.css` or `colors.css`
-- [ ] No TODO/FIXME comments in committed code — create a TASKS.md entry for deferred work instead
-- [ ] `CHANGELOG.md` updated with task ID and a description of every token, class, or behaviour change (⚠️ Breaking where applicable)
+- [ ] `/review` skill at the correct level: Scope `XS` → low · `S` → medium · `M`/`L` → high; bump one level if touching `dark-light.css` or `colors.css`
+- [ ] No TODO/FIXME comments in committed code — open a GitHub issue for deferred work instead
+- [ ] `CHANGELOG.md` updated with `#N` issue reference and a description of every token, class, or behaviour change (⚠️ Breaking where applicable)
 - [ ] Build command run (`npm run build`) if any `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` changed
-- [ ] Mark `status: done` in `TASKS.md` (update the task block; check off completed items)
-- [ ] Push branch and open a PR — PR description should reference the task ID and summarise the CHANGELOG entries
+- [ ] PR body includes `Closes #N` — the issue auto-closes when the PR merges
+- [ ] Push branch and open a PR — PR description should reference `#N` and summarise the CHANGELOG entries
+- [ ] If `gh` is available locally: sync the Project board item to Done
