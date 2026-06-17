@@ -7,6 +7,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/component-classes.css`: Added `font-family: var(--font-body)` and `font-variation-settings: normal` to `.badge` — badges placed inside heading elements (e.g. `<h2>`) were inheriting the Fraunces display font and its `opsz` axis, making them render incorrectly.
+- `tokens/components.css`: Reduced `--btn-font-size` from `--text-sm` (14px) to `--text-xs` (12px); `--btn-sm-font-size` from `--text-xs` to `--text-2xs` (11px). `--btn-lg-font-size` stays at `--text-sm` (14px) to preserve the small/default/large size hierarchy. Buttons and badges now read at the correct UI chrome scale.
+- `tokens/components.css`: Reduced `--breadcrumb-font-size` from `--text-sm` (14px) to `--text-xs` (12px) — aligns breadcrumbs with the sub-nav visual weight inside body content.
+- `tokens/components.css`: Changed `--separator-section-weight` from `3px` to `2px` for a more appropriate section divider weight.
+- `site/src/layouts/DocLayout.astro`: Fixed `hr` specificity bug — `.doc-container hr { border-top: 1px }` was outspecifying `.section-divider { border-top: var(--separator-section-weight) }`, making both separators appear as 1px. Added `:not(.hairline):not(.section-divider):not(.decorative)` guard to the prose `hr` rule so component separator classes win.
+- `site/src/scripts/code-copy.js` + `site/src/layouts/DocLayout.astro`: Fixed code copy button scrolling with content during horizontal scroll. Root cause: the button was `position: absolute` inside `<pre>` which is both the positioning context and the overflow scroll container; `right: X` resolved against the overflow content area rather than the visible edge. Fix: JS now wraps each `<pre>` in a `.code-copy-wrap` div (no overflow) and appends the button there; DocLayout adds `position: static; max-width: none; margin-bottom: 0` overrides for wrapped `<pre>` elements.
+- `site/src/pages/foundations/surfaces.astro`: Removed bare `.badge` (no variant class) elements from the surfaces live demo — they rendered as unstyled text in light mode because the base `.badge` class has no background or colour. Demo now shows only buttons.
+- `site/src/pages/components/layout.astro`: Updated separator docs — `.section-divider` description corrected from "1px" to "2px"; CSS reference and token table updated to reflect `var(--separator-section-weight)` and `--space-lg` margin.
+
+### Changed
+- `site/src/pages/components/index.astro`: Replaced blank navigation card preview (breadcrumb inside `.card-preview` was too small to render usefully) with a redesigned mini-demo showing a breadcrumb trail and a tab bar.
+- `site/src/pages/styles/index.astro`: Replaced the motion overview card's static bouncing-block animation with the hover colour shift demo from the Motion › Pairing Guide — animates between `--color-bg-panel` and `--color-accent` to show `--duration-base + --ease-out` in context.
+
 ### Added
 - **T-74** `site/src/pages/index.astro`: Added three section transition dividers — Arc (Architecture → Palette+Typography), Sine wave (Palette+Typography → Tokens in action), Blob (Included → Closing CTA, hand-authored organic path). All use the `--color-section-next` token pattern instead of the old `data-surface` + hardcoded fill workaround.
 

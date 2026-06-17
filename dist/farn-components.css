@@ -133,14 +133,14 @@
   --badge-category-text:   var(--bm2-birch);  /* forest bg: birch 6.91:1 ✓; void 2.53:1 fail */
 
   /* ── Component typography tokens ────────────────────────────────────── */
-  --btn-font-size:        var(--text-sm);
-  --btn-sm-font-size:     var(--text-xs);
+  --btn-font-size:        var(--text-xs);
+  --btn-sm-font-size:     var(--text-2xs);
   --btn-lg-font-size:     var(--text-sm);
   --label-font-size:      var(--text-sm);
   --input-font-size:      var(--text-sm);
   --badge-font-size:      var(--text-2xs);
   --hint-font-size:       var(--text-sm);
-  --breadcrumb-font-size: var(--text-sm);
+  --breadcrumb-font-size: var(--text-xs);
 
   /* ── Quote tokens ──────────────────────────────────────────────────────── */
   --quote-border-width:   3px;
@@ -227,7 +227,7 @@
   --skeleton-duration: 1.6s;
 
   /* ── Separator tokens ──────────────────────────────────────────────────── */
-  --separator-section-weight:    3px;
+  --separator-section-weight:    2px;
   --separator-decorative-width:  32px;
   --separator-decorative-weight: 2px;
   --separator-decorative-color:  var(--color-accent);
@@ -256,8 +256,10 @@
   height: var(--badge-height);
   padding: var(--badge-padding);
   border-radius: var(--radius-sm);
+  font-family: var(--font-body);
   font-size: var(--badge-font-size);
   font-weight: 600;
+  font-variation-settings: normal;
   letter-spacing: var(--badge-letter-spacing);
 }
 .badge-general   { background: var(--badge-general-bg);   color: var(--badge-general-text); }

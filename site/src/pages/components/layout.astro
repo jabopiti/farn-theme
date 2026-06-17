@@ -601,7 +601,7 @@ a.card-interactive &#123;
           <thead><tr><th>Class</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>.hairline</code></td><td>1px subtle rule — tight spacing; between list items or dense content</td></tr>
-            <tr><td><code>.section-divider</code></td><td>1px standard rule — medium spacing; between content groups</td></tr>
+            <tr><td><code>.section-divider</code></td><td>2px standard rule — medium spacing; between content groups</td></tr>
             <tr><td><code>.decorative</code></td><td>2px accent-color rule, 32px wide — editorial scene break</td></tr>
           </tbody>
         </table>
@@ -624,11 +624,13 @@ a.card-interactive &#123;
         <table>
           <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
+            <tr><td><code>--separator-section-weight</code></td><td><code>2px</code></td><td>Section divider border thickness</td></tr>
             <tr><td><code>--color-border-subtle</code></td><td><code>color-mix()</code> at 12% / 25%</td><td>Hairline color</td></tr>
             <tr><td><code>--color-border</code></td><td>Light: <code>--in3-ash</code> · Dark: <code>--in2-slate</code></td><td>Section divider color</td></tr>
             <tr><td><code>--color-accent</code></td><td>Light: <code>--fo1-fern</code> · Dark: <code>--fo0-glade</code></td><td>Decorative rule color</td></tr>
             <tr><td><code>--space-sm</code></td><td><code>0.75rem</code></td><td>Hairline vertical margin</td></tr>
-            <tr><td><code>--space-md</code></td><td><code>1.5rem</code></td><td>Section / decorative vertical margin</td></tr>
+            <tr><td><code>--space-lg</code></td><td><code>2rem</code></td><td>Section divider vertical margin</td></tr>
+            <tr><td><code>--space-md</code></td><td><code>1.5rem</code></td><td>Decorative rule vertical margin</td></tr>
           </tbody>
         </table>
 
@@ -637,7 +639,7 @@ a.card-interactive &#123;
         <pre><code>hr &#123; border: none; &#125;
 
 .hairline        &#123; border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; &#125;
-.section-divider &#123; border-top: 1px solid var(--color-border);        margin: var(--space-md) 0; &#125;
+.section-divider &#123; border-top: var(--separator-section-weight) solid var(--color-border); margin: var(--space-lg) 0; &#125;
 .decorative      &#123; border-top: 2px solid var(--color-accent);        width: 32px; margin: var(--space-md) 0; &#125;</code></pre>
 
       </div>

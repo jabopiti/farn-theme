@@ -210,6 +210,9 @@ const activeGroup =
     border-radius: var(--radius-sm);
   }
 
+  /* JS-disabled fallback: when code-copy.js hasn't run, <pre> handles its own
+     max-width, margin, and positioning. Once the wrapper is inserted these are
+     overridden by .code-copy-wrap and .code-copy-wrap > pre below. */
   .doc-container pre {
     position: relative;
     font-family: var(--font-mono);
@@ -222,6 +225,20 @@ const activeGroup =
     margin-bottom: var(--space-md);
     max-width: var(--width-prose);
     line-height: 1.6;
+  }
+
+  /* When code-copy.js wraps <pre> in a positioning div, the wrapper takes over
+     max-width/margin/positioning so the button stays fixed during horizontal scroll. */
+  .doc-container .code-copy-wrap {
+    position: relative;
+    max-width: var(--width-prose);
+    margin-bottom: var(--space-md);
+  }
+
+  .doc-container .code-copy-wrap > pre {
+    position: static;
+    max-width: none;
+    margin-bottom: 0;
   }
 
   .doc-container pre code {
@@ -278,7 +295,7 @@ const activeGroup =
 
   .doc-container tr:last-child td { border-bottom: none; }
 
-  .doc-container hr {
+  .doc-container hr:not([class]) {
     border: none;
     border-top: 1px solid var(--color-border);
     margin: var(--space-xl) 0;
