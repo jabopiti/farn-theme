@@ -9,8 +9,10 @@
   height: var(--badge-height);
   padding: var(--badge-padding);
   border-radius: var(--radius-sm);
+  font-family: var(--font-body);
   font-size: var(--badge-font-size);
   font-weight: 600;
+  font-variation-settings: normal;
   letter-spacing: var(--badge-letter-spacing);
 }
 .badge-general   { background: var(--badge-general-bg);   color: var(--badge-general-text); }
