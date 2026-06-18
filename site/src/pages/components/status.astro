@@ -2,18 +2,15 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Status" description="Feedback and status components in the Farn design system — loading states, alerts, and modal dialogs">
+<DocLayout title="Status" description="Feedback and status components in the Farn design system — loading states and async feedback patterns">
   <h1>Status</h1>
   <p>
-    Components that communicate system feedback and async state. Loading patterns are stable;
-    alerts and modals are planned for a future release — semantic state tokens
-    (<code>--color-error</code>, <code>--color-warning</code>, <code>--color-success</code>)
-    already exist.
+    Components that communicate system feedback and async state.
   </p>
 
   <!-- ── Loading states ────────────────────────────────────────────────── -->
 
-  <h2 id="loading">Loading states <span class="badge badge-published">stable</span></h2>
+  <h2 id="loading">Loading states</h2>
   <p>
     Two complementary patterns for async and in-progress feedback. Use <strong>spinner</strong>
     for determinate operations where the control point is known (a button, a small region).
@@ -132,26 +129,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </details>
   </div>
 
-  <!-- ── Alert ─────────────────────────────────────────────────────────── -->
-
-  <h2 id="alert">Alert <span class="badge badge-draft">coming soon</span></h2>
-  <p>
-    Inline status messages consuming <code>--color-error</code>, <code>--color-warning</code>,
-    and <code>--color-success</code> semantic tokens. <code>--alert-*</code> Tier-3 tokens
-    (background, border, text, icon-color per variant) for independent retheme. Four variants:
-    info, success, warning, error — dismissible and non-dismissible.
-  </p>
-
-  <!-- ── Modal / dialog ────────────────────────────────────────────────── -->
-
-  <h2 id="modal">Modal / dialog <span class="badge badge-draft">coming soon</span></h2>
-  <p>
-    <code>--modal-*</code> tokens (background, backdrop, border-radius, shadow) and
-    <code>.modal</code>, <code>.modal-backdrop</code>, <code>.modal-header</code>,
-    <code>.modal-body</code>, <code>.modal-footer</code> classes with size variants (sm, md, lg).
-    CSS owns appearance; JavaScript is responsible for focus trap,
-    <code>aria-modal="true"</code>, <code>role="dialog"</code>, and <code>Escape</code> key handling.
-  </p>
 
 </DocLayout>
 
