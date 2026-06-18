@@ -30,6 +30,17 @@ site/
     scroll-reveal.js            Shared IntersectionObserver for .scroll-reveal elements
     code-copy.js                Copy-to-clipboard for .code-block elements
     tabs.js                     Tab component progressive enhancement (source; dist/tabs.js is the built copy)
+  src/pages/foundations/
+    surfaces.astro              Surfaces deep-dive (data-surface values, base/layer/overlay/featured)
+    layout.astro                Layout foundations
+    responsive.astro            Responsive system
+    accessibility.astro         Accessibility guidelines
+  src/pages/styles/
+    color.astro                 Color palette + semantic token reference (edit here when adding color tokens)
+    typography.astro            Typography scale reference
+    spacing.astro               Spacing scale reference
+    motion.astro                Motion tokens reference
+    icons.astro                 Icon reference
   src/pages/components/
     layout.astro                Group page — Cards, Section Transitions, Separators, Quotes
     navigation.astro            Group page — Breadcrumbs, Pagination, Tabs
@@ -72,6 +83,14 @@ cp site/src/scripts/tabs.js dist/tabs.js
 `tokens/typography-classes.css` is **not** in `tokens/index.css` — DocLayout imports it directly from source. Do not add it to the index chain.
 
 Run all six steps after any change to a `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
+
+## Docs site dev server
+
+```bash
+cd site && npm run dev   # Astro dev server — http://localhost:4321
+```
+
+The docs site (`site/`) has its own `package.json` and dependencies. Run `npm install` inside `site/` once before first use.
 
 ## CSS naming conventions
 
