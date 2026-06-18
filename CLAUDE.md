@@ -203,46 +203,17 @@ Before bumping the version, verify these are in sync:
 
 ## Task lifecycle
 
-Tasks are tracked as GitHub Issues on `jabopiti/farn-theme`. The open issues list is the backlog.
+When creating, picking up, or closing a GitHub issue, or when documenting discovered or deferred work: invoke the `tracker` skill.
 
-### GitHub Issues conventions
+### Complexity gate — get user approval (Risk: high) if any apply
 
-- **Template:** `.github/ISSUE_TEMPLATE/task.yml` — use it for every new task issue
-- **Label:** `status:in-progress` is the only required repo label. Create it once via GitHub Settings → Labels or `gh label create "status:in-progress" --color "#0075ca"` locally. Open + no label = backlog · open + label = in progress · closed = done.
-- **PR linking:** every PR body must include `Closes #N` — GitHub auto-closes the issue on merge
-- **Projects board:** optional, user-maintained; if `gh` CLI is available locally, Claude also syncs status with `gh project item-edit` when picking up and completing work
-- **Bundling/splitting:** before picking up an issue, check the "Files likely touched" field against other open issues — heavy overlap means co-implement and close both from one PR (`Closes #A, Closes #B`); disjoint file lists are safe to parallelize in separate sessions
-- **Research findings and decisions:** post as issue comments (via GitHub MCP `add_issue_comment`, or `gh issue comment` locally) — not edited into the issue body — to preserve a timestamped trail
-- **Dropped work:** close the issue with reason "not planned" and an explanatory comment
-- **Superseded work:** comment "Merged into #N" on the superseded issue, then close it
+- Complexity `M` or `L` on a new feature (not a fix)
+- Structural changes to `colors.css` or `dark-light.css` (adding/removing a surface or palette)
+- Adding a new `data-surface` value
+- Structural changes to `navigation.ts` or adding a new component group page
+- Breaking rename of a token or class affecting consumers (mark ⚠️ Breaking in CHANGELOG)
 
-### Create
-
-File an issue using the task template when a gap is noticed. **Required at filing:** Gap/Problem and Acceptance Criteria (a rough draft is fine — it will be refined before work starts). Scope, Risk, Files touched, and Depends on can be left blank and filled during Refine once the footprint is clearer.
-
-### Refine
-
-Before picking up any issue, do a triage pass:
-
-1. Confirm or fill in Scope, Risk, and Files touched now that the actual footprint is clearer.
-2. Check Files touched against other open issues — if heavy overlap, cross-reference both in a comment and plan to close them together in one PR; if disjoint, confirm they are safe to parallelize.
-3. If Risk is `high` (see Complexity gate below), note that `AskUserQuestion` is required before coding starts.
-
-### Pick
-
-Find an open issue without the `status:in-progress` label, respecting "Depends on" (all referenced issues must be closed). Then:
-
-1. Add the `status:in-progress` label and assign yourself
-2. Create and push the branch — include the issue number when you choose the name (e.g. `issue-123-short-slug`); in remote/web sessions where the branch name is auto-assigned by the harness, ensure the PR body links via `Closes #N`
-3. If `gh` is available: `gh project item-edit <item-id> --field-id <status-field-id> --single-select-option-id <in-progress-id>`
-
-### Implement
-
-1. Read the full issue body and every source file it references before forming a plan.
-2. If the issue has a "Before coding" section, complete that research first and post findings as an issue comment before writing any code.
-3. If Risk is `high`, use `AskUserQuestion` before writing any code.
-
-#### When to ask the user (AskUserQuestion)
+### When to ask the user (AskUserQuestion)
 
 **Ask when:**
 - Risk is `high` — always ask before writing code
@@ -256,15 +227,7 @@ Find an open issue without the `status:in-progress` label, respecting "Depends o
 - Whether to run the build — always yes if any `tokens/` file changed
 - Implementation details resolvable by reading existing code patterns
 
-#### Complexity gate — get user approval (Risk: high) if any apply
-
-- Scope `M` or `L` on a new feature (not a fix)
-- Structural changes to `colors.css` or `dark-light.css` (adding/removing a surface or palette)
-- Adding a new `data-surface` value
-- Structural changes to `navigation.ts` or adding a new component group page
-- Breaking rename of a token or class affecting consumers (mark ⚠️ Breaking in CHANGELOG)
-
-#### Self-critique before executing
+### Self-critique before executing
 
 - Editing `tokens/` (not `dist/` directly)?
 - Build command included if any `tokens/` file changed?
@@ -278,13 +241,13 @@ Find an open issue without the `status:in-progress` label, respecting "Depends o
 
 ### Complete
 
-Run in this order before pushing:
-
-- [ ] `/simplify` skill — apply all suggested cleanups before review
-- [ ] `/review` skill at the correct level: Scope `XS` → low · `S` → medium · `M`/`L` → high; bump one level if touching `dark-light.css` or `colors.css`
+- [ ] `/simplify` — apply all suggested cleanups before review
+- [ ] `/review` at the correct level: Complexity `XS` → low · `S` → medium · `M`/`L` → high; bump one level if touching `dark-light.css` or `colors.css`
 - [ ] No TODO/FIXME comments in committed code — open a GitHub issue for deferred work instead
 - [ ] `CHANGELOG.md` updated with `#N` issue reference and a description of every token, class, or behaviour change (⚠️ Breaking where applicable)
-- [ ] Build command run (`npm run build`) if any `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` changed
+- [ ] `npm run build` if any `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` changed
 - [ ] PR body includes `Closes #N` — the issue auto-closes when the PR merges
-- [ ] Push branch and open a PR — PR description should reference `#N` and summarise the CHANGELOG entries
-- [ ] If `gh` is available locally: sync the Project board item to Done
+
+### Superseded work
+
+Comment "Merged into #N" on the superseded issue, then close it.

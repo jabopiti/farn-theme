@@ -12,10 +12,10 @@ body:
       required: true
 
   - type: dropdown
-    id: scope
+    id: complexity
     attributes:
-      label: Scope
-      description: "Footprint — how many files/areas does this touch? XS = 1 isolated file · S = 2–3 files in one area · M = cross-cutting across token layers or multiple components · L = structural (IA, navigation.ts, colors.css, dark-light.css surfaces)"
+      label: Complexity
+      description: "XS = 1 isolated file · S = 2–3 files in one area · M = cross-cutting across token layers or multiple components · L = structural (IA, navigation.ts, colors.css, dark-light.css surfaces)"
       options:
         - XS
         - S
@@ -28,7 +28,7 @@ body:
     id: risk
     attributes:
       label: Risk
-      description: "high = a complexity-gate trigger applies (breaking rename, new data-surface, structural IA/color/nav change, Scope M/L on a new feature) — requires user approval before coding. medium = has a Before-coding research step, or touches shared Tier-3 tokens consumed by multiple components. low = neither."
+      description: "high = a complexity-gate trigger applies (breaking token/class rename affecting consumers, new data-surface, structural change to colors.css/dark-light.css/navigation.ts, Complexity M/L on a new feature) — requires user approval before coding. medium = has a Before-coding research step, or touches shared Tier-3 tokens consumed by multiple components. low = neither."
       options:
         - low
         - medium
@@ -61,7 +61,28 @@ body:
     id: before-coding
     attributes:
       label: Before coding (research)
-      description: "If this task requires research before implementation, describe what to investigate. Complete the research and post findings as an issue comment before writing any code."
+      description: "Questions to answer before writing code. Complete research and post findings as an issue comment before implementation."
+    validations:
+      required: false
+
+  - type: textarea
+    id: open-questions
+    attributes:
+      label: Open Questions
+      description: "Things that must be resolved before this issue can move to Ready. Strike through each question when answered. When this list is empty, the issue may move to Ready."
+      placeholder: |
+        - [ ] Which approach should we take for X?
+        - [ ] Does Y need to change first?
+    validations:
+      required: false
+
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Decisions
+      description: "Resolved choices that shaped the approach. Updated as open questions are answered. Provides rationale for future reference."
+      placeholder: |
+        - Chose X over Y because Z
     validations:
       required: false
 
