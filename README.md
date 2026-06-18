@@ -72,6 +72,12 @@ Build bundles after any `tokens/` change with `npm run build`. Contributor conve
 
 ---
 
+## For AI assistants
+
+The [`farn-painter`](https://github.com/jabopiti/claude-skills/tree/main/skills/farn-painter) Claude Code skill applies Farn colors and typography to any visual output. Use `/farn-painter` in a Claude Code session when working on UI artifacts.
+
+A compact reference for AI-assisted coding is also available at [`llms.txt`](llms.txt).
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
