@@ -4,7 +4,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
 <DocLayout title="Surfaces" description="Farn's theme and surface model — the two-axis system behind dark/light and depth">
   <h1>Surfaces</h1>
-  <span class="badge badge-published">stable</span>
   <p>
     Farn's theming system has two orthogonal axes. <code>data-theme</code> sets an absolute
     light or dark context on any element. <code>data-surface</code> sets depth within that
@@ -22,7 +21,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <div class="demo-grid">
     <div class="theme-col" data-theme="light">
       <p class="section-eyebrow theme-label">Light theme</p>
-      <div class="surface-demo" data-surface="base">
+      <div class="surface-demo" data-surface="base" data-theme="light">
         <code class="surface-tag">base</code>
         <p class="surface-desc">Page background — birch</p>
         <div class="surface-card-row">
@@ -30,7 +29,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <button class="btn btn-s btn-sm">Secondary</button>
         </div>
       </div>
-      <div class="surface-demo" data-surface="layer">
+      <div class="surface-demo" data-surface="layer" data-theme="light">
         <code class="surface-tag">layer</code>
         <p class="surface-desc">Cards, panels — mist</p>
         <div class="surface-card-row">
@@ -38,7 +37,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <button class="btn btn-s btn-sm">Secondary</button>
         </div>
       </div>
-      <div class="surface-demo" data-surface="overlay">
+      <div class="surface-demo" data-surface="overlay" data-theme="light">
         <code class="surface-tag">overlay</code>
         <p class="surface-desc">Modals, dropdowns — sand</p>
         <div class="surface-card-row">
@@ -46,7 +45,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <button class="btn btn-s btn-sm">Secondary</button>
         </div>
       </div>
-      <div class="surface-demo" data-surface="featured">
+      <div class="surface-demo" data-surface="featured" data-theme="light">
         <code class="surface-tag">featured</code>
         <p class="surface-desc">Hero sections — void</p>
         <div class="surface-card-row">
@@ -58,7 +57,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
     <div class="theme-col" data-theme="dark">
       <p class="section-eyebrow theme-label">Dark theme</p>
-      <div class="surface-demo" data-surface="base">
+      <div class="surface-demo" data-surface="base" data-theme="dark">
         <code class="surface-tag">base</code>
         <p class="surface-desc">Page background — void</p>
         <div class="surface-card-row">
@@ -66,7 +65,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <button class="btn btn-s btn-sm">Secondary</button>
         </div>
       </div>
-      <div class="surface-demo" data-surface="layer">
+      <div class="surface-demo" data-surface="layer" data-theme="dark">
         <code class="surface-tag">layer</code>
         <p class="surface-desc">Cards, panels — iron</p>
         <div class="surface-card-row">
@@ -74,7 +73,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <button class="btn btn-s btn-sm">Secondary</button>
         </div>
       </div>
-      <div class="surface-demo" data-surface="overlay">
+      <div class="surface-demo" data-surface="overlay" data-theme="dark">
         <code class="surface-tag">overlay</code>
         <p class="surface-desc">Modals, dropdowns — slate</p>
         <div class="surface-card-row">
@@ -82,7 +81,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <button class="btn btn-s btn-sm">Secondary</button>
         </div>
       </div>
-      <div class="surface-demo" data-surface="featured">
+      <div class="surface-demo" data-surface="featured" data-theme="dark">
         <code class="surface-tag">featured</code>
         <p class="surface-desc">Hero sections — deepwater</p>
         <div class="surface-card-row">
@@ -462,6 +461,14 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   .featured-surface-demo {
     margin-bottom: var(--space-xl);
+  }
+
+  /* dark-light.css has no light-override for featured; without this, toggling
+     the page to dark mode would make [data-theme="dark"] [data-surface="featured"]
+     fire from <html> and switch the light-column card to deepwater. */
+  .theme-col[data-theme="light"] [data-surface="featured"] {
+    background: var(--in0-void);
+    --color-bg: var(--in0-void);
   }
 
   .surface-contrast-note {
