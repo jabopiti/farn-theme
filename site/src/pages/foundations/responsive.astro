@@ -19,15 +19,15 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </p>
 
   <div class="bp-scale" aria-label="Breakpoint scale: mobile below 640px, tablet 640–768px, desktop above 768px">
-    <div class="bp-zone bp-zone--mobile">
+    <div class="bp-zone bp-zone--mobile" data-theme="dark">
       <b>Mobile</b>
       <code>&lt;&nbsp;640px</code>
     </div>
-    <div class="bp-zone bp-zone--tablet">
+    <div class="bp-zone bp-zone--tablet" data-theme="dark">
       <b>Tablet</b>
       <code>640–768px</code>
     </div>
-    <div class="bp-zone bp-zone--desktop">
+    <div class="bp-zone bp-zone--desktop" data-theme="dark">
       <b>Desktop</b>
       <code>&gt;&nbsp;768px</code>
     </div>
@@ -172,12 +172,12 @@ import DocLayout from '../../layouts/DocLayout.astro';
   .bp-zone:last-child { border-right: none; }
 
   .bp-zone b    { font-size: 0.875rem; }
-  .bp-zone code { font-size: 0.6875rem; color: var(--color-text-secondary); white-space: nowrap; }
+  .bp-zone code { font-size: 0.6875rem; white-space: nowrap; }
 
   /* Proportional to actual pixel widths: 640 : 128 : 432 — keep in sync with .bp-ticks below */
-  .bp-zone--mobile  { flex: 640; background: color-mix(in srgb, var(--color-warning) 12%, var(--color-bg-panel)); }
-  .bp-zone--tablet  { flex: 128; background: color-mix(in srgb, var(--color-accent)  12%, var(--color-bg-panel)); }
-  .bp-zone--desktop { flex: 432; background: color-mix(in srgb, var(--color-success)  8%, var(--color-bg-panel)); }
+  .bp-zone--mobile  { flex: 640; background: var(--bl2-grain);     color: var(--color-text); }
+  .bp-zone--tablet  { flex: 128; background: var(--fo3-deepwater); color: var(--color-text); }
+  .bp-zone--desktop { flex: 432; background: var(--bl3-moss);      color: var(--color-text); }
 
   .bp-ticks {
     display: grid;
