@@ -84,6 +84,8 @@ cp site/src/scripts/tabs.js dist/tabs.js
 
 Run all six steps after any change to a `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
 
+A PostToolUse hook auto-runs `npm run build` after every `tokens/` edit — no need to run it manually between individual changes. For `llms.txt` or `site/src/scripts/tabs.js` changes, run it explicitly.
+
 ## Docs site dev server
 
 ```bash
@@ -178,6 +180,8 @@ Two parallel tracks — both required for `stable` status.
 
 ## Release
 
+Use the `/release-farn` skill to be guided through these steps.
+
 Farn has three core deliverables that must be aligned on every release:
 1. **CSS artifacts** — `dist/farn.css`, `dist/farn-tokens.css`, `dist/farn-components.css`, `dist/farn-typography.css`, `dist/tabs.js`
 2. **`llms.txt`** — machine-readable spec for AI agents building with Farn; root file is canonical, synced to `site/public/llms.txt` via build
@@ -264,7 +268,7 @@ When creating, picking up, or closing a GitHub issue, or when documenting discov
 - [ ] `/review` at the correct level: Complexity `XS` → low · `S` → medium · `M`/`L` → high; bump one level if touching `dark-light.css` or `colors.css`
 - [ ] No TODO/FIXME comments in committed code — open a GitHub issue for deferred work instead
 - [ ] `CHANGELOG.md` updated with `#N` issue reference and a description of every token, class, or behaviour change (⚠️ Breaking where applicable)
-- [ ] `npm run build` if any `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` changed
+- [ ] `npm run build` if `llms.txt` or `site/src/scripts/tabs.js` changed (tokens/ edits rebuild automatically via hook)
 - [ ] PR body includes `Closes #N` — the issue auto-closes when the PR merges
 
 ### Superseded work
