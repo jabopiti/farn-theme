@@ -1154,7 +1154,7 @@ hr { border: none; }
 
 .nav.hidden {
   transform: translateY(-100%);
-  border-bottom-color: transparent !important;
+  border-bottom-color: transparent;
 }
 
 /* When JS is disabled, data-nav-fill never fires — start filled so content is visible */
