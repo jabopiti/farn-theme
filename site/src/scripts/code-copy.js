@@ -4,9 +4,18 @@ const CHECK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" a
 export function initCodeCopy() {
   if (!navigator?.clipboard) return;
   document.querySelectorAll('pre').forEach(pre => {
-    if (pre.querySelector('.code-copy-btn')) return;
+    if (pre.closest('.code-copy-wrap')) return;
     const code = pre.querySelector('code');
     if (!code) return;
+
+    // Wrap <pre> in a positioning div so the button stays fixed in the top-right
+    // corner during horizontal scroll (position:absolute inside overflow-x:auto scrolls
+    // with the content; wrapping breaks that coupling).
+    const wrap = document.createElement('div');
+    wrap.className = 'code-copy-wrap';
+    pre.parentNode.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+
     const btn = document.createElement('button');
     btn.className = 'code-copy-btn';
     btn.setAttribute('aria-label', 'Copy code');
@@ -24,6 +33,6 @@ export function initCodeCopy() {
         }, 2000);
       } catch { /* clipboard unavailable — silent */ }
     });
-    pre.append(btn);
+    wrap.append(btn);
   });
 }

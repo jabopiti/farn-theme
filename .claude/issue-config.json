@@ -1,0 +1,35 @@
+{
+  "owner": "jabopiti",
+  "repo": "farn-theme",
+  "project_id": "PVT_kwHOAGUcUs4BbDYa",
+  "project_number": 2,
+  "fields": {
+    "Status": {
+      "id": "PVTSSF_lAHOAGUcUs4BbDYazhV2ofE",
+      "options": {
+        "Backlog": "7799668d",
+        "Ready": "07e21cb4",
+        "In progress": "bfcbb915",
+        "In review": "fb04be0a",
+        "Done": "d8f402e0"
+      }
+    },
+    "Complexity": {
+      "id": "PVTSSF_lAHOAGUcUs4BbDYazhV2pGk",
+      "options": {
+        "XS": "3ddc3916",
+        "S": "be1cbb58",
+        "M": "7f8a43a0",
+        "L": "17798b6b"
+      }
+    },
+    "Risk": {
+      "id": "PVTSSF_lAHOAGUcUs4BbDYazhV2pGo",
+      "options": {
+        "low": "62dcc49a",
+        "medium": "cca24a42",
+        "high": "4cad3832"
+      }
+    }
+  }
+}

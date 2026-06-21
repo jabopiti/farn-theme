@@ -2,17 +2,17 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Layout" description="Layout components in the Farn design system — cards, section transitions, and structural patterns">
+<DocLayout title="Layout" description="Layout components in the Farn design system — cards, section transitions, separators, quotes, and footer">
   <h1>Layout</h1>
   <p>
     Structural components for organising content on a page. Cards surface discrete pieces of
     content in a scannable grid; section transitions create intentional visual breaks between
-    full-width areas.
+    full-width areas; and the footer provides a reusable site-wide shell.
   </p>
 
   <!-- ── Cards ─────────────────────────────────────────────────────────── -->
 
-  <h2 id="cards">Cards <span class="badge badge-published">stable</span></h2>
+  <h2 id="cards">Cards</h2>
   <p>
     Entry points that surface content and invite action. Background, border, and border-radius
     are driven by <code>--card-*</code> Tier-3 tokens — retheme in one place without touching
@@ -185,12 +185,12 @@ a.card-interactive              &#123; color: inherit; text-decoration: none; &#
 
   <!-- ── Preview card pattern ─────────────────────────────────────────── -->
 
-  <h2 id="preview-card">Preview card pattern <span class="badge badge-published">stable</span></h2>
+  <h2 id="preview-card">Preview card pattern</h2>
   <p>
-    A card with a fixed-height live-demo strip at the top — used for overview grids where each
-    card links to a section and gives a visual taste of its content. Composes the existing card
-    anatomy: <code>.card-media.card-preview</code> for the strip, <code>.card-body</code> for
-    the label and description.
+    A card with a fixed-height live-demo strip at the top — useful whenever a card should preview
+    the content or context it links to, giving the viewer a visual taste before they navigate.
+    Composes the existing card anatomy: <code>.card-media.card-preview</code> for the strip,
+    <code>.card-body</code> for the label and description.
   </p>
 
   <div class="card-grid preview-card-demo">
@@ -271,7 +271,7 @@ a.card-interactive &#123;
 
   <!-- ── Section Transitions ───────────────────────────────────────────── -->
 
-  <h2 id="section-transitions">Section Transitions <span class="badge badge-beta">beta</span></h2>
+  <h2 id="section-transitions">Section Transitions</h2>
   <p>
     Intentional visual breaks between full-width page sections — signalling a shift in content,
     depth, or energy. All patterns consume the semantic token layer so transitions stay coherent
@@ -449,7 +449,7 @@ a.card-interactive &#123;
 
         <pre><code>&lt;section style="position: relative; padding-bottom: var(--wave-height);
              --color-section-next: var(--color-bg-panel);"&gt;
-  &lt;div class="section-wave" data-scroll-reveal aria-hidden="true"&gt;
+  &lt;div class="section-wave" aria-hidden="true"&gt;
     &lt;svg viewBox="0 0 1200 80" preserveAspectRatio="none"&gt;
       &lt;!-- depth layer first (SVG paints in document order) --&gt;
       &lt;path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z"
@@ -503,7 +503,7 @@ a.card-interactive &#123;
 
         <pre><code>&lt;section style="position: relative; padding-bottom: var(--blob-height);
              --color-section-next: var(--color-bg-panel);"&gt;
-  &lt;div class="section-blob" data-scroll-reveal aria-hidden="true"&gt;
+  &lt;div class="section-blob" aria-hidden="true"&gt;
     &lt;svg viewBox="0 0 1200 100" preserveAspectRatio="none"&gt;
       &lt;!-- depth layer first (SVG paints in document order) --&gt;
       &lt;path d="M0,60 C150,25 200,80 400,55 C600,28 700,75 900,50 C1050,28 1150,65 1200,45 L1200,100 L0,100 Z"
@@ -518,7 +518,6 @@ a.card-interactive &#123;
           <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
             <tr><td><code>--blob-height</code></td><td><code>100px</code></td><td>SVG rendered height and required parent <code>padding-bottom</code></td></tr>
-            <tr><td><code>--blob-duration</code></td><td><code>900ms</code></td><td>Fade-in duration — longer than other patterns to suit the organic character</td></tr>
             <tr><td><code>--color-section-next</code></td><td><code>var(--color-bg-panel)</code></td><td>Fill colour — set on the parent to match the destination background</td></tr>
           </tbody>
         </table>
@@ -575,7 +574,7 @@ a.card-interactive &#123;
 
   <!-- ── Separator ─────────────────────────────────────────────────────── -->
 
-  <h2 id="separator">Separator <span class="badge badge-published">stable</span></h2>
+  <h2 id="separator">Separator</h2>
   <p>
     Content-level horizontal rules — distinct from section-transition patterns. Three
     purpose-named variants cover the full range from tight list spacing to editorial
@@ -601,7 +600,7 @@ a.card-interactive &#123;
           <thead><tr><th>Class</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td><code>.hairline</code></td><td>1px subtle rule — tight spacing; between list items or dense content</td></tr>
-            <tr><td><code>.section-divider</code></td><td>1px standard rule — medium spacing; between content groups</td></tr>
+            <tr><td><code>.section-divider</code></td><td>2px standard rule — medium spacing; between content groups</td></tr>
             <tr><td><code>.decorative</code></td><td>2px accent-color rule, 32px wide — editorial scene break</td></tr>
           </tbody>
         </table>
@@ -624,11 +623,13 @@ a.card-interactive &#123;
         <table>
           <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
           <tbody>
+            <tr><td><code>--separator-section-weight</code></td><td><code>2px</code></td><td>Section divider border thickness</td></tr>
             <tr><td><code>--color-border-subtle</code></td><td><code>color-mix()</code> at 12% / 25%</td><td>Hairline color</td></tr>
             <tr><td><code>--color-border</code></td><td>Light: <code>--in3-ash</code> · Dark: <code>--in2-slate</code></td><td>Section divider color</td></tr>
             <tr><td><code>--color-accent</code></td><td>Light: <code>--fo1-fern</code> · Dark: <code>--fo0-glade</code></td><td>Decorative rule color</td></tr>
             <tr><td><code>--space-sm</code></td><td><code>0.75rem</code></td><td>Hairline vertical margin</td></tr>
-            <tr><td><code>--space-md</code></td><td><code>1.5rem</code></td><td>Section / decorative vertical margin</td></tr>
+            <tr><td><code>--space-lg</code></td><td><code>2rem</code></td><td>Section divider vertical margin</td></tr>
+            <tr><td><code>--space-md</code></td><td><code>1.5rem</code></td><td>Decorative rule vertical margin</td></tr>
           </tbody>
         </table>
 
@@ -637,7 +638,7 @@ a.card-interactive &#123;
         <pre><code>hr &#123; border: none; &#125;
 
 .hairline        &#123; border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; &#125;
-.section-divider &#123; border-top: 1px solid var(--color-border);        margin: var(--space-md) 0; &#125;
+.section-divider &#123; border-top: var(--separator-section-weight) solid var(--color-border); margin: var(--space-lg) 0; &#125;
 .decorative      &#123; border-top: 2px solid var(--color-accent);        width: 32px; margin: var(--space-md) 0; &#125;</code></pre>
 
       </div>
@@ -646,7 +647,7 @@ a.card-interactive &#123;
 
   <!-- ── Quotes ────────────────────────────────────────────────────────── -->
 
-  <h2 id="quotes">Quotes <span class="badge badge-published">stable</span></h2>
+  <h2 id="quotes">Quotes</h2>
   <p>
     Three patterns for surfacing cited text, featured statements, and testimonials.
     All variants consume <code>--quote-*</code> Tier-3 tokens — retheme in one place.
@@ -778,6 +779,122 @@ a.card-interactive &#123;
     </details>
   </div>
 
+  <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+
+  <h2 id="footer">Footer</h2>
+  <p>
+    A site-wide footer shell — logo, tagline, navigation slot, copyright bar, and secondary
+    links — styled by <code>--footer-*</code> Tier-3 tokens. Works on any background; pair
+    with <code>data-theme="dark"</code> for the standard inverted treatment.
+  </p>
+
+  <div class="callout">
+    <strong>Live demo:</strong> the <code>.footer</code> component is rendered at the bottom of
+    this page. Scroll down to see the logo, tagline, navigation links, and footer bar in action.
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Footer</summary>
+      <div class="accordion-panel">
+
+        <h3>Anatomy</h3>
+        <pre><code>&lt;footer class="footer" data-theme="dark"&gt;
+  &lt;div class="footer-inner"&gt;
+    &lt;div class="footer-top"&gt;
+      &lt;div class="footer-logo"&gt;
+        &lt;svg ...&gt;&lt;/svg&gt; &lt;!-- your logo icon --&gt;
+        Site Name&lt;span&gt;.&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;p class="footer-tagline"&gt;Short tagline.&lt;/p&gt;
+      &lt;nav class="footer-nav"&gt;
+        &lt;a href="/docs"&gt;Docs&lt;/a&gt;
+        &lt;a href="/components"&gt;Components&lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+    &lt;hr class="footer-hr"&gt;
+    &lt;div class="footer-bar"&gt;
+      &lt;p class="footer-copy"&gt;&amp;copy; 2026 Your Name&lt;/p&gt;
+      &lt;div class="footer-links"&gt;
+        &lt;a href="/about"&gt;About&lt;/a&gt;
+        &lt;a href="/contact"&gt;Contact&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</code></pre>
+
+        <table>
+          <thead><tr><th>Class</th><th>Element</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>.footer</code></td><td><code>&lt;footer&gt;</code></td><td>Outer shell — top/bottom padding via <code>--footer-padding-top/bottom</code></td></tr>
+            <tr><td><code>.footer-inner</code></td><td><code>&lt;div&gt;</code></td><td>Max-width container with horizontal padding</td></tr>
+            <tr><td><code>.footer-top</code></td><td><code>&lt;div&gt;</code></td><td>Logo + tagline + nav row</td></tr>
+            <tr><td><code>.footer-logo</code></td><td><code>&lt;div&gt;</code></td><td>Flex row for logo icon and wordmark</td></tr>
+            <tr><td><code>.footer-logo-icon</code></td><td><code>&lt;svg&gt;</code></td><td>56px tall logo icon — set on the <code>&lt;svg&gt;</code> or <code>&lt;img&gt;</code></td></tr>
+            <tr><td><code>.footer-tagline</code></td><td><code>&lt;p&gt;</code></td><td>Short one-liner below logo — <code>--color-text-secondary</code>, max-width 48ch</td></tr>
+            <tr><td><code>.footer-nav</code></td><td><code>&lt;nav&gt;</code> or <code>&lt;div&gt;</code></td><td>Horizontal link row — <code>--color-text-tertiary</code> with hover/focus states</td></tr>
+            <tr><td><code>.footer-hr</code></td><td><code>&lt;hr&gt;</code></td><td>Subtle horizontal rule — <code>--color-border-subtle</code></td></tr>
+            <tr><td><code>.footer-bar</code></td><td><code>&lt;div&gt;</code></td><td>Copyright + secondary links row — space-between layout</td></tr>
+            <tr><td><code>.footer-copy</code></td><td><code>&lt;p&gt;</code></td><td>12px copyright line — <code>--color-text-tertiary</code></td></tr>
+            <tr><td><code>.footer-links</code></td><td><code>&lt;div&gt;</code></td><td>Flex row for legal/secondary links — 12px, <code>--color-text-tertiary</code></td></tr>
+          </tbody>
+        </table>
+
+        <h3>Theme</h3>
+        <p>
+          Add <code>data-theme="dark"</code> to get the standard dark-footer treatment — all
+          semantic tokens flip automatically without any extra CSS.
+        </p>
+        <pre><code>&lt;footer class="footer" data-theme="dark"&gt; … &lt;/footer&gt;</code></pre>
+        <p>
+          The footer slot accepts any content via <code>&lt;slot /&gt;</code> (Astro) or direct
+          children — use <code>.footer-nav</code> with plain <code>&lt;a&gt;</code> elements for
+          navigation links.
+        </p>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>--footer-padding-top</code></td><td><code>var(--space-3xl)</code></td><td>Space above footer content</td></tr>
+            <tr><td><code>--footer-padding-bottom</code></td><td><code>var(--space-xl)</code></td><td>Space below footer content</td></tr>
+          </tbody>
+        </table>
+
+        <h3>CSS reference</h3>
+        <p>Shipped in <code>dist/farn-components.css</code>. Load alongside <code>farn.css</code> or <code>farn-tokens.css</code>.</p>
+        <pre><code>.footer &#123;
+  padding: var(--footer-padding-top) 0 var(--footer-padding-bottom);
+&#125;
+.footer-inner &#123;
+  max-width: var(--width-content); margin: 0 auto; padding: 0 var(--space-lg);
+&#125;
+.footer-top &#123; margin-bottom: var(--space-xl); &#125;
+.footer-logo &#123;
+  display: flex; align-items: center;
+  font-size: 1.75rem; font-weight: 700; text-decoration: none; color: var(--color-text);
+&#125;
+.footer-logo span &#123; color: var(--color-accent); &#125;
+.footer-logo-icon &#123; height: 56px; width: auto; margin-right: 0.45em; &#125;
+.footer-tagline &#123; font-size: 14px; color: var(--color-text-secondary); max-width: 48ch; &#125;
+.footer-nav &#123; display: flex; gap: var(--space-md); flex-wrap: wrap; &#125;
+.footer-nav a &#123; font-size: 14px; color: var(--color-text-tertiary); text-decoration: none; &#125;
+.footer-nav a:hover        &#123; color: var(--color-text-secondary); &#125;
+.footer-nav a:focus-visible &#123; outline: 2px solid var(--color-accent); outline-offset: 3px; &#125;
+.footer-hr &#123; border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-xl) 0; &#125;
+.footer-bar &#123;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-sm);
+&#125;
+.footer-copy &#123; font-size: 12px; color: var(--color-text-tertiary); &#125;
+.footer-links &#123; display: flex; gap: var(--space-md); flex-wrap: wrap; &#125;
+.footer-links a &#123; font-size: 12px; color: var(--color-text-tertiary); text-decoration: none; &#125;
+.footer-links a:hover        &#123; color: var(--color-text-secondary); &#125;
+.footer-links a:focus-visible &#123; outline: 2px solid var(--color-accent); outline-offset: 3px; &#125;</code></pre>
+
+      </div>
+    </details>
+  </div>
+
 </DocLayout>
 
 <style>
@@ -901,6 +1018,7 @@ a.card-interactive &#123;
 
   /* ── Diagonal cut demo ────────────────────────────────────────────────── */
   .demo-diagonal-top {
+    --color-section: var(--color-bg);
     padding: var(--space-xl) var(--space-md) calc(var(--space-xl) + 30px);
   }
 

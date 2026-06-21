@@ -9,8 +9,10 @@
   height: var(--badge-height);
   padding: var(--badge-padding);
   border-radius: var(--radius-sm);
+  font-family: var(--font-body);
   font-size: var(--badge-font-size);
   font-weight: 600;
+  font-variation-settings: normal;
   letter-spacing: var(--badge-letter-spacing);
 }
 .badge-general   { background: var(--badge-general-bg);   color: var(--badge-general-text); }
@@ -280,8 +282,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
 
 /* SVG wave sits absolutely at the bottom of its parent section.
    Parent must have position:relative and padding-bottom:var(--wave-height).
-   Add data-scroll-reveal to trigger the entry animation — a left-to-right
-   clip-path sweep, with the depth-layer path trailing the main path. */
+   Reveal is scroll-linked via animation-timeline:view(); static (fully visible) in fallback browsers. */
 .section-wave {
   position: absolute;
   bottom: 0;
@@ -297,33 +298,29 @@ a.card-interactive { color: inherit; text-decoration: none; }
   height: var(--wave-height);
 }
 
-.section-wave svg path {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path var(--duration-reveal) var(--ease-out);
-}
+@supports (animation-timeline: view()) {
+  @keyframes wave-reveal {
+    from { clip-path: inset(100% 0 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
 
-.section-wave svg path:last-child {
-  transition-delay: 80ms;
-}
-
-.section-wave.is-visible svg path {
-  clip-path: inset(0 0 0 0);
+  .section-wave {
+    clip-path: inset(100% 0 0 0);
+    animation: wave-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-wave svg path { clip-path: none; transition: none; }
-}
-
-@media (scripting: none) {
-  .section-wave svg path { clip-path: none; }
+  .section-wave { clip-path: none; animation: none; }
 }
 
 /* ── Convex arc ──────────────────────────────────────────────────────────── */
 
 /* Parent section: position:relative; padding-bottom:var(--arc-height)
-   No data-scroll-reveal needed — the reveal runs on animation-timeline: view()
-   (CSS-only scroll-linked animation), unlike .section-wave/.section-blob which
-   are JS-driven via the .is-visible class from initScrollReveal(). */
+   No data-scroll-reveal needed — reveal runs on animation-timeline: view() for all three
+   SVG dividers (wave, arc, blob); static fallback in non-supporting browsers. */
 .section-arc {
   position: absolute;
   bottom: 0;
@@ -368,9 +365,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
 /* SVG blob sits absolutely at the bottom of its parent section.
    Parent must have position:relative and padding-bottom:var(--blob-height).
    Blob paths must be drawn in Figma/Inkscape and exported — not hand-authored.
-   Add data-scroll-reveal to trigger the entry animation — the depth-layer path
-   (first child) cross-fades in to its 0.45 resting opacity, the main path
-   (last child) follows ~80ms later up to full opacity. */
+   Reveal is scroll-linked via animation-timeline:view(); static (fully visible) in fallback browsers. */
 .section-blob {
   position: absolute;
   bottom: 0;
@@ -386,32 +381,22 @@ a.card-interactive { color: inherit; text-decoration: none; }
   height: var(--blob-height);
 }
 
-.section-blob svg path {
-  opacity: 0;
-  transition: opacity var(--blob-duration) var(--ease-out);
-}
+@supports (animation-timeline: view()) {
+  @keyframes blob-reveal {
+    from { clip-path: inset(100% 0 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
 
-.section-blob svg path:last-child {
-  transition-delay: 80ms;
-}
-
-.section-blob.is-visible svg path:first-child {
-  opacity: 0.45;
-}
-
-.section-blob.is-visible svg path:last-child {
-  opacity: 1;
+  .section-blob {
+    clip-path: inset(100% 0 0 0);
+    animation: blob-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 50%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-blob svg path { transition: none; }
-  .section-blob svg path:first-child { opacity: 0.45; }
-  .section-blob svg path:last-child { opacity: 1; }
-}
-
-@media (scripting: none) {
-  .section-blob svg path:first-child { opacity: 0.45; }
-  .section-blob svg path:last-child { opacity: 1; }
+  .section-blob { clip-path: none; animation: none; }
 }
 
 /* ── Diagonal cut ────────────────────────────────────────────────────────── */
@@ -1147,3 +1132,428 @@ hr { border: none; }
   scrollbar-width: none;
 }
 .scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ── Nav ─────────────────────────────────────────────────────────────────── */
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height);
+  z-index: var(--z-nav);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--duration-slow) var(--ease-default),
+              border-color var(--duration-slow) var(--ease-default),
+              transform var(--duration-enter) var(--ease-default);
+}
+
+.nav.filled {
+  background: var(--color-bg);
+  border-bottom-color: var(--color-border-subtle);
+}
+
+.nav.hidden {
+  transform: translateY(-100%);
+  border-bottom-color: transparent;
+}
+
+/* When JS is disabled, data-nav-fill never fires — start filled so content is visible */
+@media (scripting: none) {
+  .nav[data-nav-fill] {
+    background: var(--color-bg);
+    border-bottom-color: var(--color-border-subtle);
+  }
+}
+
+.nav-inner {
+  max-width: var(--width-content);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  font-variation-settings: 'opsz' 28;
+  color: var(--color-text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color var(--duration-slow) var(--ease-default);
+}
+
+.nav-logo span { color: var(--color-accent); }
+
+.nav-logo-icon {
+  height: 40px;
+  width: auto;
+  flex-shrink: 0;
+  margin-right: 0.45em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0 0 0 auto;
+  padding: 0;
+}
+
+@media (max-width: 640px) /* --breakpoint-mobile */ {
+  .nav-links { display: none; }
+}
+
+.nav-links a {
+  font-size: var(--nav-link-font-size);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease-default);
+}
+
+.nav-links a:hover         { color: var(--color-text); font-weight: 600; }
+.nav-links a.active        { color: var(--color-accent); font-weight: 600; }
+.nav-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-left: var(--space-sm);
+}
+
+/* Generic icon button — GitHub, external links, etc. */
+.nav-icon-link {
+  width: 36px; height: 36px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-text-tertiary);
+  font-size: 20px;
+  text-decoration: none;
+  transition: background-color var(--duration-base) var(--ease-default),
+              color var(--duration-base) var(--ease-default);
+}
+
+.nav-icon-link:hover        { background: var(--color-bg-interactive-hover); color: var(--color-text); }
+.nav-icon-link:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+/* Theme toggle button */
+.nav-theme-toggle {
+  width: 36px; height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-text-tertiary);
+  font-size: 20px;
+  transition: background-color var(--duration-base) var(--ease-default),
+              color var(--duration-base) var(--ease-default);
+  appearance: none;
+  font-family: inherit;
+}
+
+.nav-theme-toggle:hover        { background: var(--color-bg-interactive-hover); color: var(--color-text); }
+.nav-theme-toggle:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+/* Primary CTA */
+.nav-cta {
+  height: var(--nav-cta-height);
+  padding: 0 16px;
+  margin-left: var(--space-xs);
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color var(--duration-base) var(--ease-default),
+              border-color var(--duration-base) var(--ease-default);
+}
+
+.nav-cta:hover        { background: var(--color-accent-hover); color: var(--color-accent-text); }
+.nav-cta:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.nav-cta-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+
+.nav-cta-ghost:hover { background: var(--color-bg-interactive-hover); color: var(--color-text); border-color: var(--color-border-strong); }
+
+/* Mobile toggle button — hidden above breakpoint */
+.nav-toggle {
+  display: none;
+  width: 36px; height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: 22px;
+  transition: background-color var(--duration-base) var(--ease-default),
+              color var(--duration-base) var(--ease-default);
+  appearance: none;
+  font-family: inherit;
+}
+
+.nav-toggle:hover        { background: var(--color-bg-interactive-hover); color: var(--color-text); }
+.nav-toggle:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+@media (max-width: 640px) /* --breakpoint-mobile */ {
+  .nav-toggle { display: flex; }
+  .nav-right  { margin-left: auto; }
+  .nav-cta    { display: none; }
+}
+
+/* ── Nav drawer ──────────────────────────────────────────────────────────── */
+
+.nav-drawer {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: var(--color-bg);
+  z-index: var(--z-overlay);
+  transform: translateY(calc(-100% - 2px)); /* extra 2px hides the border-bottom in the off-screen position */
+  transition: transform var(--duration-enter) var(--ease-default);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.nav-drawer.open { transform: translateY(var(--nav-height)); }
+
+.nav-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-md);
+  height: var(--nav-height);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.nav-drawer-logo {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  font-variation-settings: 'opsz' 22;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.nav-drawer-logo span { color: var(--color-accent); }
+
+.nav-drawer-close {
+  width: 36px; height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: 20px;
+  transition: background-color var(--duration-base) var(--ease-default),
+              color var(--duration-base) var(--ease-default);
+  appearance: none;
+  font-family: inherit;
+}
+
+.nav-drawer-close:hover        { background: var(--color-bg-interactive-hover); color: var(--color-text); }
+.nav-drawer-close:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.nav-drawer-nav a {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 var(--space-md);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: background var(--duration-base) var(--ease-default),
+              color var(--duration-base) var(--ease-default);
+}
+
+.nav-drawer-nav a:hover        { background: var(--color-bg-interactive-hover); color: var(--color-accent); }
+.nav-drawer-nav a.active       { color: var(--color-accent); }
+.nav-drawer-nav a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+
+.nav-drawer-group-label {
+  display: block;
+  padding: var(--space-md) var(--space-md) var(--space-xs);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-tertiary);
+}
+
+.nav-drawer-actions { display: flex; flex-direction: column; }
+
+.nav-drawer-cta {
+  margin: var(--space-md);
+  height: 48px;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color var(--duration-base) var(--ease-default);
+}
+
+.nav-drawer-cta:hover        { background: var(--color-accent-hover); }
+.nav-drawer-cta:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.nav-drawer-cta-ghost {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.nav-drawer-cta-ghost:hover { background: var(--color-bg-interactive-hover); color: var(--color-accent); }
+
+/* Overlay dims the page while the drawer is open */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: calc(var(--z-overlay) - 1);
+  pointer-events: none;
+  transition: background var(--duration-enter) var(--ease-default);
+}
+
+.nav-overlay.active {
+  background: var(--nav-overlay-bg);
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav,
+  .nav-drawer,
+  .nav-overlay { transition: none; }
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+
+.footer {
+  padding: var(--footer-padding-top) 0 var(--footer-padding-bottom);
+}
+
+.footer-inner {
+  max-width: var(--width-content);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.footer-top {
+  --logo-indent: 69px; /* 56px icon + ~13px margin-right (0.45em at 28px) */
+  margin-bottom: var(--space-xl);
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  font-variation-settings: 'opsz' 28;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.footer-logo span { color: var(--color-accent); }
+
+.footer-logo-icon {
+  height: 56px;
+  width: auto;
+  flex-shrink: 0;
+  margin-right: 0.45em;
+}
+
+.footer-tagline {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+  padding-left: var(--logo-indent);
+}
+
+.footer-nav {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  padding-left: var(--logo-indent);
+}
+
+.footer-nav a {
+  font-size: 14px;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease-default);
+  white-space: nowrap;
+}
+
+.footer-nav a:hover        { color: var(--color-text-secondary); }
+.footer-nav a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.footer-hr {
+  border: none;
+  border-top: 1px solid var(--color-border-subtle);
+  margin: 0 0 var(--space-lg);
+}
+
+.footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-links a {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease-default);
+  white-space: nowrap;
+}
+
+.footer-links a:hover        { color: var(--color-text-secondary); }
+.footer-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }

@@ -2,17 +2,162 @@
 import DocLayout from '../../layouts/DocLayout.astro';
 ---
 
-<DocLayout title="Navigation" description="Navigation components in the Farn design system — breadcrumbs, accordion, and wayfinding patterns">
+<DocLayout title="Navigation" description="Navigation components in the Farn design system — site nav, breadcrumbs, tabs, pagination, and wayfinding patterns">
   <h1>Navigation</h1>
   <p>
     Components that help users orient themselves and move through a site or application.
-    Most ship as pure CSS — Tabs adds a small progressive-enhancement script for keyboard
-    navigation and panel switching.
+    Nav and Tabs add a small progressive-enhancement script; all other components ship as
+    pure CSS.
   </p>
+
+  <!-- ── Nav ──────────────────────────────────────────────────────────── -->
+
+  <h2 id="nav">Nav</h2>
+  <p>
+    A fixed top navigation bar with a logo zone, primary links, an actions zone
+    (icon links, theme toggle, CTAs), and a mobile drawer. The mobile drawer and theme
+    toggle are wired by <code>dist/nav.js</code>. Scroll-fill and auto-hide behaviors are
+    opt-in via data attributes.
+  </p>
+
+  <div class="card card-outlined" style="padding: var(--space-md); margin-bottom: var(--space-md);">
+    <p style="margin: 0;">
+      <strong>↑ Live demo</strong> — The navigation bar fixed to the top of this page is
+      the shipped component. Resize below 640 px to see the mobile drawer open.
+    </p>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Full reference — Nav</summary>
+      <div class="accordion-panel">
+
+        <h3>Anatomy</h3>
+        <p>
+          The <code>.nav</code> wrapper is <code>position: fixed</code>. Add
+          <code>padding-top: var(--nav-height)</code> to <code>&lt;body&gt;</code> so
+          page content clears it. The drawer and overlay are siblings of
+          <code>.nav</code> — not nested inside it.
+        </p>
+        <pre><code>&lt;nav class="nav" aria-label="Main navigation"&gt;
+  &lt;div class="nav-inner"&gt;
+    &lt;a href="/" class="nav-logo"&gt;Brand&lt;/a&gt;
+    &lt;ul class="nav-links"&gt;
+      &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/work" class="active"&gt;Work&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div class="nav-right"&gt;
+      &lt;a href="https://github.com/…" class="nav-icon-link" aria-label="GitHub"&gt;
+        &lt;!-- icon --&gt;
+      &lt;/a&gt;
+      &lt;button class="nav-theme-toggle" aria-label="Switch to dark mode"&gt;
+        &lt;!-- icon --&gt;
+      &lt;/button&gt;
+      &lt;a href="/get-started" class="nav-cta"&gt;Get started&lt;/a&gt;
+      &lt;button class="nav-toggle" aria-expanded="false" aria-controls="nav-drawer"&gt;
+        &lt;!-- hamburger icon --&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu"&gt;
+  &lt;div class="nav-drawer-header"&gt;
+    &lt;span class="nav-drawer-logo"&gt;Brand&lt;/span&gt;
+    &lt;button class="nav-drawer-close" aria-label="Close menu"&gt;&lt;!-- icon --&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;nav class="nav-drawer-nav"&gt;
+    &lt;span class="nav-drawer-group-label"&gt;Docs&lt;/span&gt;
+    &lt;a href="/about" class="nav-drawer-link"&gt;About&lt;/a&gt;
+    &lt;a href="/work" class="nav-drawer-link active"&gt;Work&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;div class="nav-drawer-actions"&gt;
+    &lt;a href="/get-started" class="nav-drawer-cta"&gt;Get started&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="nav-overlay"&gt;&lt;/div&gt;</code></pre>
+
+        <h3>Scroll behaviors (opt-in)</h3>
+        <p>
+          Add data attributes to <code>.nav</code> to enable scroll-driven behaviors.
+          Both are handled by <code>nav.js</code> — no extra configuration needed.
+        </p>
+        <table>
+          <thead><tr><th>Attribute</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><code>data-nav-fill</code></td><td>Nav starts transparent; gains <code>.filled</code> (opaque background + border) once the page scrolls past 10 px. Use over hero sections.</td></tr>
+            <tr><td><code>data-nav-autohide</code></td><td>Nav slides up (<code>.hidden</code>) when scrolling down past 80 px; slides back on scroll-up. Recovers screen space on long pages.</td></tr>
+          </tbody>
+        </table>
+        <pre><code>&lt;!-- Always filled (doc pages, app shells) --&gt;
+&lt;nav class="nav filled" …&gt;…&lt;/nav&gt;
+
+&lt;!-- Transparent-to-filled + auto-hide (landing pages) --&gt;
+&lt;nav class="nav" data-nav-fill data-nav-autohide …&gt;…&lt;/nav&gt;</code></pre>
+
+        <h3>Script</h3>
+        <p>
+          <code>dist/nav.js</code> is a self-initializing script — include it once and it
+          finds <code>.nav</code> automatically. Ships as a named package export:
+        </p>
+        <pre><code>&lt;!-- Via CDN — defer is required so the script runs after the DOM is ready --&gt;
+&lt;script defer src="https://cdn.jsdelivr.net/npm/farn-theme@0.2.0/dist/nav.js"&gt;&lt;/script&gt;
+
+&lt;!-- Via npm (Astro, Vite, etc.) — deferred automatically --&gt;
+import 'farn-theme/scripts/nav';</code></pre>
+        <p>
+          The script handles: theme toggle (<code>.nav-theme-toggle</code>), mobile
+          drawer open/close (<code>.nav-toggle</code>, <code>.nav-drawer-close</code>,
+          <code>.nav-overlay</code>), Escape key close, and opt-in scroll behaviors.
+          Without the script, the nav renders as a static bar — no content is hidden.
+        </p>
+
+        <h3>Theme toggle</h3>
+        <p>
+          Add <code>.nav-theme-toggle</code> to any button inside <code>.nav-right</code>.
+          The script reads and writes <code>data-theme</code> on <code>&lt;html&gt;</code>
+          and persists the choice to <code>localStorage</code> under the key
+          <code>farn-theme</code>. Include the FOWT-prevention inline script in
+          <code>&lt;head&gt;</code> to avoid a flash on load:
+        </p>
+        <pre><code>&lt;script&gt;
+  (function () &#123;
+    const t = localStorage.getItem('farn-theme');
+    const s = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t ?? s);
+  &#125;)();
+&lt;/script&gt;</code></pre>
+
+        <h3>Accessibility</h3>
+        <table>
+          <thead><tr><th>Attribute</th><th>Where</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><code>aria-label="Main navigation"</code></td><td><code>.nav</code></td><td>Names the landmark for screen readers.</td></tr>
+            <tr><td><code>aria-expanded</code></td><td><code>.nav-toggle</code></td><td>Updated by the script to reflect open/closed state.</td></tr>
+            <tr><td><code>aria-controls="nav-drawer"</code></td><td><code>.nav-toggle</code></td><td>Associates the toggle with the drawer element.</td></tr>
+            <tr><td><code>role="dialog" aria-modal="true"</code></td><td><code>.nav-drawer</code></td><td>Identifies the drawer as a modal for assistive technology. The script traps focus inside the drawer while it is open and returns focus to <code>.nav-toggle</code> on close.</td></tr>
+            <tr><td><code>aria-label="Navigation menu"</code></td><td><code>.nav-drawer</code></td><td>Names the dialog.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Token reference</h3>
+        <table>
+          <thead><tr><th>Token</th><th>Default</th><th>Controls</th></tr></thead>
+          <tbody>
+            <tr><td><code>--nav-height</code></td><td><code>64px</code></td><td>Bar height — also set on <code>&lt;body&gt;</code> as <code>padding-top: var(--nav-height)</code> to clear the fixed bar</td></tr>
+            <tr><td><code>--nav-link-font-size</code></td><td><code>var(--text-sm)</code></td><td>Primary link text size</td></tr>
+            <tr><td><code>--nav-cta-height</code></td><td><code>36px</code></td><td>CTA button height</td></tr>
+            <tr><td><code>--nav-overlay-bg</code></td><td><code>color-mix(in srgb, black 50%, transparent)</code></td><td>Drawer backdrop color</td></tr>
+          </tbody>
+        </table>
+
+      </div>
+    </details>
+  </div>
 
   <!-- ── Breadcrumbs ──────────────────────────────────────────────────── -->
 
-  <h2 id="breadcrumbs">Breadcrumbs <span class="badge badge-published">stable</span></h2>
+  <h2 id="breadcrumbs">Breadcrumbs</h2>
   <p>
     Shows users where they are within a site hierarchy and lets them navigate back to parent
     sections. Colors adapt automatically to any surface or theme context.
@@ -114,7 +259,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <!-- ── Accordion ────────────────────────────────────────────────────── -->
 
-  <h2 id="accordion">Accordion <span class="badge badge-published">stable</span></h2>
+  <h2 id="accordion">Accordion</h2>
   <p>
     Expandable content panels built on native <code>&lt;details&gt;</code> /
     <code>&lt;summary&gt;</code> — no JavaScript required. Animated height in Chrome 131+
@@ -232,7 +377,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <!-- ── Tabs ──────────────────────────────────────────────────────────── -->
 
-  <h2 id="tabs">Tabs <span class="badge badge-published">stable</span></h2>
+  <h2 id="tabs">Tabs</h2>
   <p>
     Horizontal tabs for switching between related views on the same screen. CSS drives all
     visual states via <code>[aria-selected]</code>; a small script handles panel switching
@@ -436,7 +581,7 @@ document.addEventListener('DOMContentLoaded', initTabs);</code></pre>
 
   <!-- ── Pagination ────────────────────────────────────────────────────── -->
 
-  <h2 id="pagination">Pagination <span class="badge badge-published">stable</span></h2>
+  <h2 id="pagination">Pagination</h2>
   <p>
     Numbered and prev/next page controls for navigating multi-page content. CSS-only —
     no JavaScript required. Active state driven by <code>aria-current="page"</code>;

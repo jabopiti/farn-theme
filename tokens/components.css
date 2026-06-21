@@ -5,6 +5,16 @@
 /* that affect the rest of the system.                                       */
 
 :root {
+  /* ── Nav tokens ─────────────────────────────────────────────────────── */
+  --nav-height:         64px;
+  --nav-link-font-size: var(--text-sm);
+  --nav-cta-height:     36px;
+  --nav-overlay-bg:     color-mix(in srgb, black 50%, transparent);
+
+  /* ── Footer tokens ──────────────────────────────────────────────────── */
+  --footer-padding-top:    var(--space-3xl);
+  --footer-padding-bottom: var(--space-xl);
+
   /* ── Button tokens ──────────────────────────────────────────────────── */
   --btn-radius:           var(--radius-md);
   --btn-disabled-opacity: 0.5;
@@ -76,8 +86,7 @@
   --arc-height: 80px;
 
   /* ── Organic blob tokens ─────────────────────────────────────────────── */
-  --blob-height:   100px;
-  --blob-duration: 900ms; /* Intentionally longer than --duration-reveal; organic shapes reveal slowly */
+  --blob-height: 100px;
 
   /* ── Diagonal cut tokens ─────────────────────────────────────────────── */
   --diagonal-angle: -3deg; /* static display angle; keep between -2deg and -5deg */
@@ -133,14 +142,14 @@
   --badge-category-text:   var(--bm2-birch);  /* forest bg: birch 6.91:1 ✓; void 2.53:1 fail */
 
   /* ── Component typography tokens ────────────────────────────────────── */
-  --btn-font-size:        var(--text-sm);
-  --btn-sm-font-size:     var(--text-xs);
+  --btn-font-size:        var(--text-xs);
+  --btn-sm-font-size:     var(--text-2xs);
   --btn-lg-font-size:     var(--text-sm);
   --label-font-size:      var(--text-sm);
   --input-font-size:      var(--text-sm);
   --badge-font-size:      var(--text-2xs);
   --hint-font-size:       var(--text-sm);
-  --breadcrumb-font-size: var(--text-sm);
+  --breadcrumb-font-size: var(--text-xs);
 
   /* ── Quote tokens ──────────────────────────────────────────────────────── */
   --quote-border-width:   3px;
@@ -227,7 +236,7 @@
   --skeleton-duration: 1.6s;
 
   /* ── Separator tokens ──────────────────────────────────────────────────── */
-  --separator-section-weight:    3px;
+  --separator-section-weight:    2px;
   --separator-decorative-width:  32px;
   --separator-decorative-weight: 2px;
   --separator-decorative-color:  var(--color-accent);

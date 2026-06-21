@@ -1,0 +1,103 @@
+name: Task
+description: A gap, enhancement, or new feature for the Farn design system
+title: ""
+labels: []
+body:
+  - type: textarea
+    id: gap
+    attributes:
+      label: Gap / Problem
+      description: "What is missing, broken, or suboptimal? What is the impact on consumers or the docs site?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Complexity
+      description: "XS = 1 isolated file · S = 2–3 files in one area · M = cross-cutting across token layers or multiple components · L = structural (IA, navigation.ts, colors.css, dark-light.css surfaces)"
+      options:
+        - XS
+        - S
+        - M
+        - L
+    validations:
+      required: false
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk
+      description: "high = a complexity-gate trigger applies (breaking token/class rename affecting consumers, new data-surface, structural change to colors.css/dark-light.css/navigation.ts, Complexity M/L on a new feature) — requires user approval before coding. medium = has a Before-coding research step, or touches shared Tier-3 tokens consumed by multiple components. low = neither."
+      options:
+        - low
+        - medium
+        - high
+    validations:
+      required: false
+
+  - type: textarea
+    id: files
+    attributes:
+      label: Files likely touched
+      description: "List paths expected to change. Planning aid, not a contract — implementation can touch more or fewer. Overlaps with other open issues signal bundling into one PR."
+      placeholder: |
+        tokens/components.css
+        tokens/component-classes.css
+        site/src/pages/components/data.astro
+    validations:
+      required: false
+
+  - type: input
+    id: depends-on
+    attributes:
+      label: Depends on
+      description: "Issue numbers that must be closed before this can be picked up, e.g. #12, #15"
+      placeholder: "#"
+    validations:
+      required: false
+
+  - type: textarea
+    id: before-coding
+    attributes:
+      label: Before coding (research)
+      description: "Questions to answer before writing code. Complete research and post findings as an issue comment before implementation."
+    validations:
+      required: false
+
+  - type: textarea
+    id: open-questions
+    attributes:
+      label: Open Questions
+      description: "Things that must be resolved before this issue can move to Ready. Strike through each question when answered. When this list is empty, the issue may move to Ready."
+      placeholder: |
+        - [ ] Which approach should we take for X?
+        - [ ] Does Y need to change first?
+    validations:
+      required: false
+
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Decisions
+      description: "Resolved choices that shaped the approach. Updated as open questions are answered. Provides rationale for future reference."
+      placeholder: |
+        - Chose X over Y because Z
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: |
+        Use plain checklist bullets for structural items:
+          - [ ] Add `--quote-*` tokens to tokens/components.css
+          - [ ] Rebuild dist/, update CHANGELOG.md
+
+        Use Given/When/Then for behavioral or stateful criteria:
+          **Given** an input is focused
+          **When** the user tabs to it
+          **Then** a focus-visible ring using `--color-accent` is visible in both light and dark themes
+    validations:
+      required: true

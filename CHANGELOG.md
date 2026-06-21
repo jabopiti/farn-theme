@@ -8,6 +8,37 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `tokens/spacing.css`: Added `--z-nav: 50` — dedicated z-index token for the fixed nav bar, positioned between `--z-content` (10) and `--z-dropdown` (100). `.nav` now uses `--z-nav` instead of the semantically incorrect `--z-dropdown`.
+- `tokens/components.css`: Added `--nav-overlay-bg: color-mix(in srgb, black 50%, transparent)` — component token for the drawer backdrop. Replaces the raw palette token (`--in0-void`) that was previously inlined in component-classes.css.
+- `tokens/components.css`: Added `--nav-height` (64px), `--nav-link-font-size`, `--nav-cta-height` (36px) Tier-3 nav tokens. `--nav-height` was previously hardcoded in `site/src/styles/site.css`; moving it to the component token layer makes it available to all consumers.
+- `tokens/components.css`: Added `--footer-padding-top` (`var(--space-3xl)`) and `--footer-padding-bottom` (`var(--space-xl)`) Tier-3 footer tokens.
+- `tokens/component-classes.css`: Added full `.nav` component — fixed top bar with logo, link list, icon slot, theme toggle, CTA area, and mobile hamburger. Opt-in scroll behaviors via `data-nav-fill` (transparent → filled on scroll) and `data-nav-autohide` (slide-up on scroll-down). Includes mobile drawer sub-classes (`.nav-drawer`, `.nav-drawer-header`, `.nav-drawer-nav`, `.nav-drawer-actions`, `.nav-drawer-logo`, `.nav-drawer-group-label`, `.nav-drawer-link`, `.nav-drawer-close`, `.nav-drawer-cta`, `.nav-drawer-cta-ghost`) and backdrop overlay (`.nav-overlay`). `:focus-visible` on all interactive elements. `@media (scripting: none)` fallback ensures `data-nav-fill` nav renders filled when JS is disabled.
+- `tokens/component-classes.css`: Added full `.footer` component — logo, tagline, navigation slot (`.footer-nav`), horizontal rule (`.footer-hr`), footer bar with copyright and secondary links (`.footer-bar`, `.footer-copy`, `.footer-links`). `:focus-visible` on all link elements.
+- `site/src/scripts/nav.js`: New script for the nav component — theme toggle (reads/writes `localStorage` key `farn-theme`, syncs icon), mobile drawer (open/close, Escape-key dismiss, body scroll lock, focus trap cycling within `role="dialog"`, focus restored to trigger on close), and opt-in scroll behaviors (`data-nav-fill`, `data-nav-autohide`). Ships as self-initializing IIFE; exported as `farn-theme/scripts/nav`.
+- `package.json`: Added `"./scripts/nav"` export entry pointing to `dist/nav.js`; added `cp site/src/scripts/nav.js dist/nav.js` step to the build script.
+- `site/src/pages/components/navigation.astro`: Added Nav documentation section — callout demo, anatomy HTML, scroll behavior table, script usage, FOWT script, accessibility table, and token reference.
+- `site/src/pages/components/layout.astro`: Added Footer documentation section — callout demo, anatomy HTML, class reference table, theme usage note, token reference, and CSS reference.
+
+### Changed
+- `site/src/components/SiteNav.astro`: Rewritten to use shipped `.nav` component classes. Removed all `id=""` attributes — JS now uses class/data-attribute selectors for safe multi-instance use. Renamed: `.hamburger` → `.nav-toggle`, `.mobile-drawer` → `.nav-drawer`, `.github-link` → `.nav-icon-link`, `.theme-toggle` → `.nav-theme-toggle`, `.drawer-*` → `.nav-drawer-*`. Inline `<script is:inline>` block removed; replaced with `<script> import '../scripts/nav.js'; </script>`. Added `data-nav-fill` and `data-nav-autohide` attributes (conditional on `filled` prop — doc pages are always filled, landing page gets scroll behaviors).
+- `site/src/components/Footer.astro`: Changed `class="page-footer"` to `class="footer"` — dogfoods the newly shipped component class.
+- `site/src/styles/site.css`: Removed the nav CSS section (~211 lines) and footer CSS section (~80 lines) — both now live in `tokens/component-classes.css`. Removed `--nav-height: 64px` from `:root` (now a Tier-3 token in `tokens/components.css`); `--scroll-offset` still resolves correctly because `components.css` loads before `site.css`.
+
+### Fixed
+- `tokens/component-classes.css`: Added `font-family: var(--font-body)` and `font-variation-settings: normal` to `.badge` — badges placed inside heading elements (e.g. `<h2>`) were inheriting the Fraunces display font and its `opsz` axis, making them render incorrectly.
+- `tokens/components.css`: Reduced `--btn-font-size` from `--text-sm` (14px) to `--text-xs` (12px); `--btn-sm-font-size` from `--text-xs` to `--text-2xs` (11px). `--btn-lg-font-size` stays at `--text-sm` (14px) to preserve the small/default/large size hierarchy. Buttons and badges now read at the correct UI chrome scale.
+- `tokens/components.css`: Reduced `--breadcrumb-font-size` from `--text-sm` (14px) to `--text-xs` (12px) — aligns breadcrumbs with the sub-nav visual weight inside body content.
+- `tokens/components.css`: Changed `--separator-section-weight` from `3px` to `2px` for a more appropriate section divider weight.
+- `site/src/layouts/DocLayout.astro`: Fixed `hr` specificity bug — `.doc-container hr { border-top: 1px }` was outspecifying `.section-divider { border-top: var(--separator-section-weight) }`, making both separators appear as 1px. Added `:not(.hairline):not(.section-divider):not(.decorative)` guard to the prose `hr` rule so component separator classes win.
+- `site/src/scripts/code-copy.js` + `site/src/layouts/DocLayout.astro`: Fixed code copy button scrolling with content during horizontal scroll. Root cause: the button was `position: absolute` inside `<pre>` which is both the positioning context and the overflow scroll container; `right: X` resolved against the overflow content area rather than the visible edge. Fix: JS now wraps each `<pre>` in a `.code-copy-wrap` div (no overflow) and appends the button there; DocLayout adds `position: static; max-width: none; margin-bottom: 0` overrides for wrapped `<pre>` elements.
+- `site/src/pages/foundations/surfaces.astro`: Removed bare `.badge` (no variant class) elements from the surfaces live demo — they rendered as unstyled text in light mode because the base `.badge` class has no background or colour. Demo now shows only buttons.
+- `site/src/pages/components/layout.astro`: Updated separator docs — `.section-divider` description corrected from "1px" to "2px"; CSS reference and token table updated to reflect `var(--separator-section-weight)` and `--space-lg` margin.
+
+### Changed
+- `site/src/pages/components/index.astro`: Replaced blank navigation card preview (breadcrumb inside `.card-preview` was too small to render usefully) with a redesigned mini-demo showing a breadcrumb trail and a tab bar.
+- `site/src/pages/styles/index.astro`: Replaced the motion overview card's static bouncing-block animation with the hover colour shift demo from the Motion › Pairing Guide — animates between `--color-bg-panel` and `--color-accent` to show `--duration-base + --ease-out` in context.
+
+### Added
 - **T-74** `site/src/pages/index.astro`: Added three section transition dividers — Arc (Architecture → Palette+Typography), Sine wave (Palette+Typography → Tokens in action), Blob (Included → Closing CTA, hand-authored organic path). All use the `--color-section-next` token pattern instead of the old `data-surface` + hardcoded fill workaround.
 
 ### Changed

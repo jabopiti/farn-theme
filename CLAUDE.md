@@ -1,6 +1,6 @@
 # Farn — Agent Guide
 
-Token-first CSS design system: palette → semantic → component token layers, with opt-in shipped component classes. Source in `tokens/`, built to `dist/`, documented in `site/` (Astro). Pick up work from `TASKS.md`.
+Token-first CSS design system: palette → semantic → component token layers, with opt-in shipped component classes. Source in `tokens/`, built to `dist/`, documented in `site/` (Astro). Task backlog lives in GitHub Issues.
 
 ## Repo structure
 
@@ -30,6 +30,17 @@ site/
     scroll-reveal.js            Shared IntersectionObserver for .scroll-reveal elements
     code-copy.js                Copy-to-clipboard for .code-block elements
     tabs.js                     Tab component progressive enhancement (source; dist/tabs.js is the built copy)
+  src/pages/foundations/
+    surfaces.astro              Surfaces deep-dive (data-surface values, base/layer/overlay/featured)
+    layout.astro                Layout foundations
+    responsive.astro            Responsive system
+    accessibility.astro         Accessibility guidelines
+  src/pages/styles/
+    color.astro                 Color palette + semantic token reference (edit here when adding color tokens)
+    typography.astro            Typography scale reference
+    spacing.astro               Spacing scale reference
+    motion.astro                Motion tokens reference
+    icons.astro                 Icon reference
   src/pages/components/
     layout.astro                Group page — Cards, Section Transitions, Separators, Quotes
     navigation.astro            Group page — Breadcrumbs, Pagination, Tabs
@@ -39,7 +50,6 @@ site/
     status.astro                Group page — Spinner, Skeleton
 llms.txt                        Machine-readable guide for AI agents building *with* Farn (root is canonical; synced to site/public/)
 CHANGELOG.md                    Updated on every token or component change
-TASKS.md                        Task backlog — pick up work here
 ```
 
 ## Navigation structure
@@ -73,6 +83,16 @@ cp site/src/scripts/tabs.js dist/tabs.js
 `tokens/typography-classes.css` is **not** in `tokens/index.css` — DocLayout imports it directly from source. Do not add it to the index chain.
 
 Run all six steps after any change to a `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
+
+A PostToolUse hook auto-runs `npm run build` after every `tokens/` edit — no need to run it manually between individual changes. For `llms.txt` or `site/src/scripts/tabs.js` changes, run it explicitly.
+
+## Docs site dev server
+
+```bash
+cd site && npm run dev   # Astro dev server — http://localhost:4321
+```
+
+The docs site (`site/`) has its own `package.json` and dependencies. Run `npm install` inside `site/` once before first use.
 
 ## CSS naming conventions
 
@@ -111,7 +131,7 @@ h1 {
 
 **CHANGELOG:** Update `CHANGELOG.md` with every token or component change. Mark breaking changes with ⚠️ **Breaking**.
 
-**No tech debt:** Do not leave TODO or FIXME comments in committed code — create a TASKS.md entry instead. No half-implemented features — a component needs both Track A (tokens + CSS) and Track B (docs) for `stable` status. In-progress or planned work is marked `badge-beta` or `badge-coming-soon` in the docs.
+**No tech debt:** Do not leave TODO or FIXME comments in committed code — open a GitHub issue for deferred work instead. No half-implemented features — a component needs both Track A (tokens + CSS) and Track B (docs) for `stable` status. In-progress or planned work is marked `badge-beta` or `badge-coming-soon` in the docs.
 
 **Demo-first docs:** Every component section on a group page shows a live demo outside any accordion. Token tables and code examples go inside `<details>` accordions.
 
@@ -160,6 +180,8 @@ Two parallel tracks — both required for `stable` status.
 
 ## Release
 
+Use the `/release-farn` skill to be guided through these steps.
+
 Farn has three core deliverables that must be aligned on every release:
 1. **CSS artifacts** — `dist/farn.css`, `dist/farn-tokens.css`, `dist/farn-components.css`, `dist/farn-typography.css`, `dist/tabs.js`
 2. **`llms.txt`** — machine-readable spec for AI agents building with Farn; root file is canonical, synced to `site/public/llms.txt` via build
@@ -202,38 +224,31 @@ Before bumping the version, verify these are in sync:
 - A reference URL changes (page moves, IA restructures)
 - A core rule changes (token naming, opsz values, load order)
 
-## Task workflow
+## Task lifecycle
 
-Tasks live in `TASKS.md`. Pick a `status: backlog` task (respect `Depends on`). Update the task block: change `status: backlog` → `status: in-progress`, add `branch: <branch-name>`, then create and push the branch.
+When creating, picking up, or closing a GitHub issue, or when documenting discovered or deferred work: invoke the `tracker` skill.
 
-### Before planning
+### Complexity gate — get user approval (Risk: high) if any apply
 
-1. Read the full task spec and every source file it references before forming a plan.
-2. If the task includes a **"Before coding:"** research step — complete that research first and note findings before writing any code.
-3. Identify ambiguities. If the spec leaves a meaningful implementation or design choice unresolved, propose options via `AskUserQuestion` before writing code.
-4. Check complexity gate triggers below. If any apply, ask for approval before proceeding.
-
-### When to ask the user (AskUserQuestion)
-
-**Ask when:**
-- Any complexity gate condition applies (see below)
-- The task spec has an unresolved fork that meaningfully changes the output (e.g. new component vs. variant of an existing one)
-- A token name or class API will be public-facing and has more than one reasonable option
-- A "Before coding" research step surfaces a decision that changes the implementation direction
-
-**Do not ask about:**
-- Which files to edit — derive from the task and existing patterns
-- Whether to update CHANGELOG.md — always yes
-- Whether to run the build — always yes if any `tokens/` file changed
-- Implementation details resolvable by reading existing code patterns
-
-### Complexity gate — get user approval before proceeding if any apply
-
-- Effort `M` or `L` on a new feature (not a fix)
+- Complexity `M` or `L` on a new feature (not a fix)
 - Structural changes to `colors.css` or `dark-light.css` (adding/removing a surface or palette)
 - Adding a new `data-surface` value
 - Structural changes to `navigation.ts` or adding a new component group page
 - Breaking rename of a token or class affecting consumers (mark ⚠️ Breaking in CHANGELOG)
+
+### When to ask the user (AskUserQuestion)
+
+**Ask when:**
+- Risk is `high` — always ask before writing code
+- The issue spec has an unresolved fork that meaningfully changes the output (e.g. new component vs. variant of an existing one)
+- A token name or class API will be public-facing and has more than one reasonable option
+- A "Before coding" research step surfaces a decision that changes the implementation direction
+
+**Do not ask about:**
+- Which files to edit — derive from the issue and existing patterns
+- Whether to update CHANGELOG.md — always yes
+- Whether to run the build — always yes if any `tokens/` file changed
+- Implementation details resolvable by reading existing code patterns
 
 ### Self-critique before executing
 
@@ -247,12 +262,15 @@ Tasks live in `TASKS.md`. Pick a `status: backlog` task (respect `Depends on`). 
 - JS-disabled fallback for elements that start at `opacity: 0` (use `@media (scripting: none)`)?
 - Demo-first: live demo visible outside the accordion, reference content inside?
 
-### Close-out checklist — run in this order before pushing
+### Complete
 
-- [ ] `/simplify` skill — apply all suggested cleanups before review
-- [ ] `/review` skill at the correct level: `XS` low · `S` medium · `M`/`L` high; bump one level if touching `dark-light.css` or `colors.css`
-- [ ] No TODO/FIXME comments in committed code — create a TASKS.md entry for deferred work instead
-- [ ] `CHANGELOG.md` updated with task ID and a description of every token, class, or behaviour change (⚠️ Breaking where applicable)
-- [ ] Build command run (`npm run build`) if any `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` changed
-- [ ] Mark `status: done` in `TASKS.md` (update the task block; check off completed items)
-- [ ] Push branch and open a PR — PR description should reference the task ID and summarise the CHANGELOG entries
+- [ ] `/simplify` — apply all suggested cleanups before review
+- [ ] `/review` at the correct level: Complexity `XS` → low · `S` → medium · `M`/`L` → high; bump one level if touching `dark-light.css` or `colors.css`
+- [ ] No TODO/FIXME comments in committed code — open a GitHub issue for deferred work instead
+- [ ] `CHANGELOG.md` updated with `#N` issue reference and a description of every token, class, or behaviour change (⚠️ Breaking where applicable)
+- [ ] `npm run build` if `llms.txt` or `site/src/scripts/tabs.js` changed (tokens/ edits rebuild automatically via hook)
+- [ ] PR body includes `Closes #N` — the issue auto-closes when the PR merges
+
+### Superseded work
+
+Comment "Merged into #N" on the superseded issue, then close it.
