@@ -21,17 +21,17 @@
   }
 
   // ── Mobile drawer ────────────────────────────────────────────────────────
-  const navToggle = nav.querySelector('.nav-toggle');
-  const drawer    = document.querySelector('.nav-drawer');
-  const overlay   = document.querySelector('.nav-overlay');
-  const closeBtn  = drawer?.querySelector('.nav-drawer-close');
+  const navToggle     = nav.querySelector('.nav-toggle');
+  const navToggleIcon = navToggle?.querySelector('i');
+  const drawer        = document.querySelector('.nav-drawer');
+  const overlay       = document.querySelector('.nav-overlay');
+  const closeBtn      = drawer?.querySelector('.nav-drawer-close');
 
   function openDrawer() {
     drawer?.classList.add('open');
     overlay?.classList.add('active');
     navToggle?.setAttribute('aria-expanded', 'true');
-    const icon = navToggle?.querySelector('i');
-    if (icon) icon.className = 'ti ti-x';
+    if (navToggleIcon) navToggleIcon.className = 'ti ti-x';
     document.body.style.overflow = 'hidden';
   }
 
@@ -39,8 +39,7 @@
     drawer?.classList.remove('open');
     overlay?.classList.remove('active');
     navToggle?.setAttribute('aria-expanded', 'false');
-    const icon = navToggle?.querySelector('i');
-    if (icon) icon.className = 'ti ti-menu-2';
+    if (navToggleIcon) navToggleIcon.className = 'ti ti-menu-2';
     document.body.style.overflow = '';
   }
 

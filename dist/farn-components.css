@@ -1587,7 +1587,7 @@ hr { border: none; }
   top: 0; left: 0; right: 0;
   background: var(--color-bg);
   z-index: var(--z-overlay);
-  transform: translateY(calc(-100% - 2px));
+  transform: translateY(calc(-100% - 2px)); /* extra 2px hides the border-bottom in the off-screen position */
   transition: transform var(--duration-enter) var(--ease-default);
   border-bottom: 1px solid var(--color-border-subtle);
 }
