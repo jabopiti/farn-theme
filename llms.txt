@@ -1,6 +1,6 @@
 # Farn
 
-> Token-first CSS design system for the web. Palette tokens, semantic tokens, and opt-in component classes. Zero JavaScript, zero build step, zero framework assumptions.
+> Token-first CSS design system for the web. Palette tokens, semantic tokens, and opt-in component classes. Zero framework assumptions — opt-in JavaScript available for nav and tab components.
 
 ## Install
 
@@ -13,7 +13,7 @@ Then import in your bundler (Vite, webpack, Parcel, etc.):
 ```css
 @import "farn-theme";            /* full bundle: tokens + base reset */
 @import "farn-theme/tokens";     /* tokens only — no reset */
-@import "farn-theme/components"; /* opt-in: buttons, cards, forms, badges, accordion… */
+@import "farn-theme/components"; /* opt-in: nav, footer, buttons, cards, forms, badges, accordion… */
 @import "farn-theme/typography"; /* opt-in: .text-h1, .text-body, .text-mono… */
 ```
 
@@ -22,6 +22,19 @@ Or link from CDN (replace `@0.2.0` with the latest tag):
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.2.0/dist/farn.css">
 ```
+
+### Optional JavaScript
+
+Two opt-in scripts ship alongside the CSS:
+
+```js
+import 'farn-theme/scripts/nav';  /* nav: theme toggle, mobile drawer, scroll fill/autohide */
+import 'farn-theme/scripts/tabs'; /* tab component progressive enhancement */
+```
+
+`nav.js` is required for `.nav-theme-toggle`, mobile drawer open/close, and the
+`data-nav-fill` / `data-nav-autohide` scroll behaviors. The `.nav` CSS classes render
+correctly without it — the nav appears filled and the drawer is hidden.
 
 ## Core rules
 
@@ -39,7 +52,7 @@ Farn uses a three-tier token architecture:
 
 1. **Palette** — raw color values; never reference directly. Prefixed `--in*` (Iron Night dark), `--bm*` (Birch Mist light), `--fo*` (Forest accent), `--bl*` (Bloom palette).
 2. **Semantic** — purpose-mapped, theme-aware aliases. Use these in all component and page styles: `--color-bg`, `--color-text`, `--color-text-secondary`, `--color-accent`, `--color-accent-hover`, `--color-border`, `--color-error`, `--color-success`, `--color-warning`, and surface variants `--color-bg-panel`, `--color-bg-inset`.
-3. **Component** (Tier 3) — per-component override points: `--btn-*`, `--card-*`, `--input-*`, `--badge-*`, `--accordion-*`, `--table-*`, `--code-*`, `--link-*`, `--quote-*`, `--pagination-*`, `--tooltip-*`, `--overlap-*`, `--wave-height`, `--arc-height`, `--blob-*`, `--diagonal-angle`. Override on `:root` for global rebrand or scope to any selector.
+3. **Component** (Tier 3) — per-component override points: `--nav-*`, `--footer-*`, `--btn-*`, `--card-*`, `--input-*`, `--badge-*`, `--accordion-*`, `--table-*`, `--code-*`, `--link-*`, `--quote-*`, `--pagination-*`, `--tooltip-*`, `--overlap-*`, `--wave-height`, `--arc-height`, `--blob-*`, `--diagonal-angle`. Override on `:root` for global rebrand or scope to any selector.
 
 ## FOWT prevention snippet
 
@@ -73,8 +86,8 @@ Full reference: https://farn.jbpt.de/llms.txt
 - [Spacing](https://farn.jbpt.de/styles/spacing) — space scale, layout widths, border radius, z-index
 - [Motion](https://farn.jbpt.de/styles/motion) — duration + easing token reference
 - [Components › Actions](https://farn.jbpt.de/components/actions) — buttons (`.btn`, `.btn-p`, `.btn-s`, `.btn-g`, `.btn-d`) + links
-- [Components › Layout](https://farn.jbpt.de/components/layout) — cards, section transitions, quotes, separators
-- [Components › Navigation](https://farn.jbpt.de/components/navigation) — breadcrumbs, accordion, pagination, tabs
+- [Components › Layout](https://farn.jbpt.de/components/layout) — cards, section transitions, quotes, separators, footer
+- [Components › Navigation](https://farn.jbpt.de/components/navigation) — nav, breadcrumbs, accordion, pagination, tabs
 - [Components › Forms](https://farn.jbpt.de/components/forms) — inputs, textarea, select, labels, error states
 - [Components › Data](https://farn.jbpt.de/components/data) — badges (7 variants), tables, code blocks, tooltips
 - [Components › Status](https://farn.jbpt.de/components/status) — spinner, skeleton loader
