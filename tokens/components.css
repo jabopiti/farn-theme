@@ -5,6 +5,16 @@
 /* that affect the rest of the system.                                       */
 
 :root {
+  /* ── Nav tokens ─────────────────────────────────────────────────────── */
+  --nav-height:         64px;
+  --nav-link-font-size: var(--text-sm);
+  --nav-cta-height:     36px;
+  --nav-overlay-bg:     color-mix(in srgb, black 50%, transparent);
+
+  /* ── Footer tokens ──────────────────────────────────────────────────── */
+  --footer-padding-top:    var(--space-3xl);
+  --footer-padding-bottom: var(--space-xl);
+
   /* ── Button tokens ──────────────────────────────────────────────────── */
   --btn-radius:           var(--radius-md);
   --btn-disabled-opacity: 0.5;
