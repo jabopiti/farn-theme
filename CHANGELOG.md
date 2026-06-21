@@ -7,6 +7,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+---
+
+## [0.3.0] — 2026-06-21
+
 ### Added
 - `tokens/spacing.css`: Added `--z-nav: 50` — dedicated z-index token for the fixed nav bar, positioned between `--z-content` (10) and `--z-dropdown` (100). `.nav` now uses `--z-nav` instead of the semantically incorrect `--z-dropdown`.
 - `tokens/components.css`: Added `--nav-overlay-bg: color-mix(in srgb, black 50%, transparent)` — component token for the drawer backdrop. Replaces the raw palette token (`--in0-void`) that was previously inlined in component-classes.css.
