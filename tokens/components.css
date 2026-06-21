@@ -9,6 +9,7 @@
   --nav-height:         64px;
   --nav-link-font-size: var(--text-sm);
   --nav-cta-height:     36px;
+  --nav-overlay-bg:     color-mix(in srgb, black 50%, transparent);
 
   /* ── Footer tokens ──────────────────────────────────────────────────── */
   --footer-padding-top:    var(--space-3xl);

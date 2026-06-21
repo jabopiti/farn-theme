@@ -27,12 +27,31 @@
   const overlay       = document.querySelector('.nav-overlay');
   const closeBtn      = drawer?.querySelector('.nav-drawer-close');
 
+  let trapHandler = null;
+
   function openDrawer() {
     drawer?.classList.add('open');
     overlay?.classList.add('active');
     navToggle?.setAttribute('aria-expanded', 'true');
     if (navToggleIcon) navToggleIcon.className = 'ti ti-x';
     document.body.style.overflow = 'hidden';
+
+    if (drawer) {
+      const focusable = Array.from(drawer.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ));
+      if (focusable.length) focusable[0].focus();
+      trapHandler = (e) => {
+        if (e.key !== 'Tab' || !focusable.length) return;
+        const first = focusable[0];
+        const last  = focusable[focusable.length - 1];
+        if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+          e.preventDefault();
+          (e.shiftKey ? last : first).focus();
+        }
+      };
+      drawer.addEventListener('keydown', trapHandler);
+    }
   }
 
   function closeDrawer() {
@@ -41,6 +60,11 @@
     navToggle?.setAttribute('aria-expanded', 'false');
     if (navToggleIcon) navToggleIcon.className = 'ti ti-menu-2';
     document.body.style.overflow = '';
+    if (drawer && trapHandler) {
+      drawer.removeEventListener('keydown', trapHandler);
+      trapHandler = null;
+    }
+    navToggle?.focus();
   }
 
   navToggle?.addEventListener('click', () => {

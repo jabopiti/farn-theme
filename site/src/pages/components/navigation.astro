@@ -100,10 +100,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <code>dist/nav.js</code> is a self-initializing script — include it once and it
           finds <code>.nav</code> automatically. Ships as a named package export:
         </p>
-        <pre><code>&lt;!-- Via CDN --&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/farn-theme@0.2.0/dist/nav.js"&gt;&lt;/script&gt;
+        <pre><code>&lt;!-- Via CDN — defer is required so the script runs after the DOM is ready --&gt;
+&lt;script defer src="https://cdn.jsdelivr.net/npm/farn-theme@0.2.0/dist/nav.js"&gt;&lt;/script&gt;
 
-&lt;!-- Via npm --&gt;
+&lt;!-- Via npm (Astro, Vite, etc.) — deferred automatically --&gt;
 import 'farn-theme/scripts/nav';</code></pre>
         <p>
           The script handles: theme toggle (<code>.nav-theme-toggle</code>), mobile
@@ -135,7 +135,7 @@ import 'farn-theme/scripts/nav';</code></pre>
             <tr><td><code>aria-label="Main navigation"</code></td><td><code>.nav</code></td><td>Names the landmark for screen readers.</td></tr>
             <tr><td><code>aria-expanded</code></td><td><code>.nav-toggle</code></td><td>Updated by the script to reflect open/closed state.</td></tr>
             <tr><td><code>aria-controls="nav-drawer"</code></td><td><code>.nav-toggle</code></td><td>Associates the toggle with the drawer element.</td></tr>
-            <tr><td><code>role="dialog" aria-modal="true"</code></td><td><code>.nav-drawer</code></td><td>Identifies the drawer as a modal for assistive technology.</td></tr>
+            <tr><td><code>role="dialog" aria-modal="true"</code></td><td><code>.nav-drawer</code></td><td>Identifies the drawer as a modal for assistive technology. The script traps focus inside the drawer while it is open and returns focus to <code>.nav-toggle</code> on close.</td></tr>
             <tr><td><code>aria-label="Navigation menu"</code></td><td><code>.nav-drawer</code></td><td>Names the dialog.</td></tr>
           </tbody>
         </table>
@@ -147,6 +147,7 @@ import 'farn-theme/scripts/nav';</code></pre>
             <tr><td><code>--nav-height</code></td><td><code>64px</code></td><td>Bar height — also set on <code>&lt;body&gt;</code> as <code>padding-top: var(--nav-height)</code> to clear the fixed bar</td></tr>
             <tr><td><code>--nav-link-font-size</code></td><td><code>var(--text-sm)</code></td><td>Primary link text size</td></tr>
             <tr><td><code>--nav-cta-height</code></td><td><code>36px</code></td><td>CTA button height</td></tr>
+            <tr><td><code>--nav-overlay-bg</code></td><td><code>color-mix(in srgb, black 50%, transparent)</code></td><td>Drawer backdrop color</td></tr>
           </tbody>
         </table>
 

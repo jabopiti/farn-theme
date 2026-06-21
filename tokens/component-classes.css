@@ -1139,7 +1139,7 @@ hr { border: none; }
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--nav-height);
-  z-index: var(--z-dropdown);
+  z-index: var(--z-nav);
   background: transparent;
   border-bottom: 1px solid transparent;
   transition: background-color var(--duration-slow) var(--ease-default),
@@ -1449,7 +1449,7 @@ hr { border: none; }
 }
 
 .nav-overlay.active {
-  background: color-mix(in srgb, var(--in0-void) 50%, transparent);
+  background: var(--nav-overlay-bg);
   pointer-events: auto;
 }
 
