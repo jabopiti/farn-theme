@@ -7,6 +7,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Changed
+- `site/src/components/SiteNav.astro`, `site/src/scripts/nav.js`: Replaced Tabler icon-font classes (`<i class="ti ti-*">`) with inline Lucide SVGs for the theme toggle (moon/sun), mobile menu toggle (menu/×), and drawer close (×). The GitHub link retains a fill-based inline SVG (noted in a comment) since Lucide does not ship brand icons. Removes the Tabler webfont CDN dependency from `DocLayout.astro`.
+
 ---
 
 ## [0.4.0] — 2026-06-22
