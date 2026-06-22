@@ -7,6 +7,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+---
+
+## [0.4.0] — 2026-06-22
+
 ### Added
 - `tokens/spacing.css`: Added `--gap-xs` (6px), `--gap-sm` (12px), `--gap-md` (24px), `--gap-lg` (36px), `--gap-xl` (48px), `--gap-2xl` (60px), `--gap-3xl` (72px), `--gap-4xl` (96px) — semantic gap aliases mirroring the full `--space-*` scale. Intended for use in layout primitives; existing components continue using `--space-*` directly. (#134)
 - `tokens/layout.css`: New opt-in layout composition primitive layer, built to `dist/farn-layout.css`. Ships ten classes:

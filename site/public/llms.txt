@@ -18,10 +18,10 @@ Then import in your bundler (Vite, webpack, Parcel, etc.):
 @import "farn-theme/layout";     /* opt-in: .container, .stack, .cluster, .center, .auto-grid, .sidebar, .grid-2, .grid-3 */
 ```
 
-Or link from CDN (replace `@0.3.0` with the latest tag):
+Or link from CDN (replace `@0.4.0` with the latest tag):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.3.0/dist/farn.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.4.0/dist/farn.css">
 ```
 
 ### Optional JavaScript
@@ -79,7 +79,7 @@ Override gaps inline: `<div class="stack" style="--stack-gap: var(--gap-sm)">`.
 Farn uses a three-tier token architecture:
 
 1. **Palette** — raw color values; never reference directly. Prefixed `--in*` (Iron Night dark), `--bm*` (Birch Mist light), `--fo*` (Forest accent), `--bl*` (Bloom palette).
-2. **Semantic** — purpose-mapped, theme-aware aliases. Use these in all component and page styles: `--color-bg`, `--color-text`, `--color-text-secondary`, `--color-accent`, `--color-accent-hover`, `--color-border`, `--color-error`, `--color-success`, `--color-warning`, and surface variants `--color-bg-panel`, `--color-bg-inset`. Spacing: `--space-xs` through `--space-4xl`; gap aliases: `--gap-xs` through `--gap-xl` (point at `--space-*`).
+2. **Semantic** — purpose-mapped, theme-aware aliases. Use these in all component and page styles: `--color-bg`, `--color-text`, `--color-text-secondary`, `--color-accent`, `--color-accent-hover`, `--color-border`, `--color-error`, `--color-success`, `--color-warning`, and surface variants `--color-bg-panel`, `--color-bg-inset`. Spacing: `--space-xs` through `--space-4xl`; gap aliases: `--gap-xs` through `--gap-4xl` (point at `--space-*`).
 3. **Component** (Tier 3) — per-component override points: `--nav-*` (incl. `--nav-height`, `--nav-overlay-bg`), `--footer-*`, `--btn-*`, `--card-*`, `--input-*`, `--badge-*`, `--accordion-*`, `--table-*`, `--code-*`, `--link-*`, `--quote-*`, `--pagination-*`, `--tooltip-*`, `--overlap-*`, `--wave-height`, `--arc-height`, `--blob-*`, `--diagonal-angle`. Override on `:root` for global rebrand or scope to any selector.
 
 ## FOWT prevention snippet
