@@ -194,6 +194,312 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </details>
   </div>
 
+  <h2 id="layout-primitives">Layout composition primitives</h2>
+  <p>
+    <code>farn-layout.css</code> is an opt-in layer of ten composition classes built on top of
+    the Farn token set. Load it after <code>farn.css</code> or <code>farn-tokens.css</code>.
+    The classes use Every Layout naming — they describe intent, not CSS properties.
+  </p>
+  <pre><code>@import "farn-theme";        /* tokens + reset */
+@import "farn-theme/layout"; /* opt-in: container, stack, cluster… */</code></pre>
+
+  <h3 id="containers">Containers</h3>
+  <p>
+    Three width-constrained, centered wrappers. Each sets <code>container-type: inline-size</code>
+    so <code>@container</code> queries on children fire without an extra wrapper.
+    Padding reduces from <code>--space-lg</code> to <code>--space-md</code> at mobile widths.
+  </p>
+
+  <div class="primitive-demo">
+    <div class="prim-container-demo">
+      <div class="prim-bar prim-bar--content">
+        <code>.container</code>
+        <span>max-width: 1080px · outer sections</span>
+      </div>
+      <div class="prim-bar prim-bar--narrow">
+        <code>.container-narrow</code>
+        <span>max-width: 640px · forms, dialogs</span>
+      </div>
+      <div class="prim-bar prim-bar--prose">
+        <code>.container-prose</code>
+        <span>max-width: 70ch · running text</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Container reference</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead>
+            <tr><th>Class</th><th>Max-width token</th><th>Typical use</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.container</code></td>
+              <td><code>--width-content</code> (1080px)</td>
+              <td>Page sections, nav wrapper, hero, footer</td>
+            </tr>
+            <tr>
+              <td><code>.container-narrow</code></td>
+              <td><code>--width-narrow</code> (640px)</td>
+              <td>Forms, dialogs, focused card layouts</td>
+            </tr>
+            <tr>
+              <td><code>.container-prose</code></td>
+              <td><code>--width-prose</code> (70ch)</td>
+              <td>Articles, documentation, running prose</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>All three use <code>margin-inline: auto</code> and <code>padding-inline: var(--space-lg)</code> (reduced to <code>var(--space-md)</code> at <code>&lt;640px</code>).</p>
+        <pre><code>&lt;section&gt;
+  &lt;div class="container"&gt;
+    &lt;!-- content constrained to 1080px --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <h3 id="stack-cluster-center">Stack, Cluster, Center</h3>
+  <p>
+    The three fundamental composition primitives. <strong>Stack</strong> flows children
+    vertically. <strong>Cluster</strong> wraps them horizontally. <strong>Center</strong>
+    places a single item at the middle of both axes. All accept inline custom-property
+    overrides for gap.
+  </p>
+
+  <div class="primitive-demo">
+    <div class="prim-row">
+      <div class="prim-block">
+        <div class="prim-label"><code>.stack</code></div>
+        <div class="stack prim-box" style="--stack-gap: var(--gap-sm)">
+          <div class="prim-item" data-surface="layer">Item A</div>
+          <div class="prim-item" data-surface="layer">Item B</div>
+          <div class="prim-item" data-surface="layer">Item C</div>
+        </div>
+      </div>
+      <div class="prim-block">
+        <div class="prim-label"><code>.cluster</code></div>
+        <div class="cluster prim-box" style="--cluster-gap: var(--gap-sm)">
+          <span class="badge badge-general">Design</span>
+          <span class="badge badge-published">Released</span>
+          <span class="badge badge-beta">Beta</span>
+          <span class="badge badge-general">CSS</span>
+        </div>
+      </div>
+      <div class="prim-block">
+        <div class="prim-label"><code>.center</code></div>
+        <div class="center prim-box" style="min-height: 96px">
+          <span class="badge badge-general">Centered</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Stack / Cluster / Center reference</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead>
+            <tr><th>Class</th><th>CSS</th><th>Override</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.stack</code></td>
+              <td><code>flex-direction: column; gap: var(--gap-md)</code></td>
+              <td><code>--stack-gap</code></td>
+            </tr>
+            <tr>
+              <td><code>.cluster</code></td>
+              <td><code>flex-wrap: wrap; align-items: center; gap: var(--gap-md)</code></td>
+              <td><code>--cluster-gap</code></td>
+            </tr>
+            <tr>
+              <td><code>.center</code></td>
+              <td><code>display: flex; align-items: center; justify-content: center</code></td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+        <pre><code>&lt;!-- Tighter gap on this stack --&gt;
+&lt;div class="stack" style="--stack-gap: var(--gap-sm)"&gt;
+  &lt;div class="card"&gt;…&lt;/div&gt;
+  &lt;div class="card"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Badge row --&gt;
+&lt;div class="cluster"&gt;
+  &lt;span class="badge badge-general"&gt;Tag&lt;/span&gt;
+  &lt;span class="badge badge-published"&gt;Live&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <h3 id="auto-grid">Auto grid</h3>
+  <p>
+    Columns auto-fit to available space using <code>auto-fit minmax()</code> — no breakpoints
+    needed. Override the minimum column width with <code>--grid-min</code> (default: 280px).
+    This is the general-purpose version; <code>.card-grid</code> in <code>farn-components.css</code>
+    uses the same pattern with a fixed 280px minimum.
+  </p>
+
+  <div class="auto-grid" style="--grid-min: 160px; --grid-gap: var(--gap-sm); margin-bottom: var(--space-xl)">
+    {[1, 2, 3, 4, 5].map(n => (
+      <div class="prim-item prim-item--tall" data-surface="layer">
+        <code style="font-size: 11px">col {n}</code>
+      </div>
+    ))}
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Auto grid reference</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead>
+            <tr><th>Override</th><th>Default</th><th>Effect</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>--grid-min</code></td><td>280px</td><td>Minimum column width before wrapping</td></tr>
+            <tr><td><code>--grid-gap</code></td><td><code>var(--gap-md)</code></td><td>Gap between columns and rows</td></tr>
+          </tbody>
+        </table>
+        <pre><code>&lt;!-- Tighter columns, smaller gap --&gt;
+&lt;div class="auto-grid" style="--grid-min: 200px; --grid-gap: var(--gap-sm)"&gt;
+  &lt;div class="card"&gt;…&lt;/div&gt;
+  &lt;div class="card"&gt;…&lt;/div&gt;
+  &lt;div class="card"&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <p>
+          <strong>vs <code>.card-grid</code>:</strong> <code>.auto-grid</code> is in <code>farn-layout.css</code>
+          and accepts <code>--grid-min</code>. <code>.card-grid</code> is in <code>farn-components.css</code>
+          with a fixed 280px minimum — use it when you always want the card column width, <code>.auto-grid</code>
+          when you need a different minimum or want to override per-instance.
+        </p>
+      </div>
+    </details>
+  </div>
+
+  <h3 id="sidebar-grid">Sidebar, Grid-2, Grid-3</h3>
+  <p>
+    Explicit column grids. <strong>Sidebar</strong> pairs a fixed-width column with a
+    flexible main area. <strong>Grid-2</strong> and <strong>Grid-3</strong> create equal
+    columns. All three collapse responsively when inside a container context — wrap them in
+    <code>.container</code> (or any element with <code>container-type: inline-size</code>) to
+    activate <code>@container</code> collapsing.
+  </p>
+
+  <div class="prim-label" style="margin-bottom: var(--space-xs)"><code>.sidebar</code> — collapses to 1 col at &lt;600px container width</div>
+  <div class="container" style="padding-inline: 0; margin-bottom: var(--space-md)">
+    <div class="sidebar" style="--sidebar-w: 160px; --grid-gap: var(--gap-sm)">
+      <div class="prim-item prim-item--tall" data-surface="layer" style="font-size: 12px">sidebar<br/><code style="font-size: 10px">--sidebar-w: 160px</code></div>
+      <div class="prim-item prim-item--tall" data-surface="overlay" style="font-size: 12px">main content</div>
+    </div>
+  </div>
+
+  <div class="prim-label" style="margin-bottom: var(--space-xs)"><code>.grid-2</code> — collapses to 1 col at &lt;500px</div>
+  <div class="container" style="padding-inline: 0; margin-bottom: var(--space-md)">
+    <div class="grid-2" style="--grid-gap: var(--gap-sm)">
+      <div class="prim-item" data-surface="layer">Column 1</div>
+      <div class="prim-item" data-surface="layer">Column 2</div>
+    </div>
+  </div>
+
+  <div class="prim-label" style="margin-bottom: var(--space-xs)"><code>.grid-3</code> — 3→2 cols at &lt;900px, 1 col at &lt;500px</div>
+  <div class="container" style="padding-inline: 0; margin-bottom: var(--space-xl)">
+    <div class="grid-3" style="--grid-gap: var(--gap-sm)">
+      <div class="prim-item" data-surface="layer">Column 1</div>
+      <div class="prim-item" data-surface="layer">Column 2</div>
+      <div class="prim-item" data-surface="layer">Column 3</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Sidebar / Grid-2 / Grid-3 reference</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead>
+            <tr><th>Class</th><th>Columns</th><th>Collapses (in container context)</th><th>Overrides</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.sidebar</code></td>
+              <td><code>var(--sidebar-w, 300px) 1fr</code></td>
+              <td>1 col at &lt;600px</td>
+              <td><code>--sidebar-w</code>, <code>--grid-gap</code></td>
+            </tr>
+            <tr>
+              <td><code>.grid-2</code></td>
+              <td><code>repeat(2, 1fr)</code></td>
+              <td>1 col at &lt;500px</td>
+              <td><code>--grid-gap</code></td>
+            </tr>
+            <tr>
+              <td><code>.grid-3</code></td>
+              <td><code>repeat(3, 1fr)</code></td>
+              <td>2 cols at &lt;900px, 1 col at &lt;500px</td>
+              <td><code>--grid-gap</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <strong>Container context required for collapsing.</strong> Grids collapse via
+          <code>@container</code> queries, not <code>@media</code> queries. Wrap in
+          <code>.container</code> or set <code>container-type: inline-size</code> on a parent.
+        </p>
+        <pre><code>&lt;!-- Grids collapse when the .container is narrow --&gt;
+&lt;section&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="grid-3"&gt;
+      &lt;div class="card"&gt;…&lt;/div&gt;
+      &lt;div class="card"&gt;…&lt;/div&gt;
+      &lt;div class="card"&gt;…&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Sidebar with narrow sidebar column --&gt;
+&lt;div class="container"&gt;
+  &lt;div class="sidebar" style="--sidebar-w: 240px"&gt;
+    &lt;nav&gt;…&lt;/nav&gt;
+    &lt;main&gt;…&lt;/main&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <h3 id="gap-tokens">Gap tokens</h3>
+  <p>
+    Five <code>--gap-*</code> tokens alias the spacing scale for use in layout contexts.
+    They live in <code>farn-tokens.css</code> alongside <code>--space-*</code>.
+  </p>
+  <div class="accordion">
+    <details open>
+      <summary>Gap token reference</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead>
+            <tr><th>Token</th><th>Value</th><th>Alias</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>--gap-xs</code></td><td>6px</td><td><code>var(--space-xs)</code></td></tr>
+            <tr><td><code>--gap-sm</code></td><td>12px</td><td><code>var(--space-sm)</code></td></tr>
+            <tr><td><code>--gap-md</code></td><td>24px</td><td><code>var(--space-md)</code></td></tr>
+            <tr><td><code>--gap-lg</code></td><td>36px</td><td><code>var(--space-lg)</code></td></tr>
+            <tr><td><code>--gap-xl</code></td><td>48px</td><td><code>var(--space-xl)</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
   <h2 id="radius">Radius as hierarchy</h2>
   <p>
     Border radius is not purely decorative — it signals depth and interactivity. Use the scale
@@ -279,6 +585,102 @@ import DocLayout from '../../layouts/DocLayout.astro';
 </DocLayout>
 
 <style>
+  /* ── Layout primitive demos ─────────────────────────────────────────── */
+  .primitive-demo {
+    margin-bottom: var(--space-xl);
+  }
+
+  .prim-container-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .prim-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-panel);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .prim-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    opacity: 0.07;
+    border-radius: inherit;
+  }
+
+  .prim-bar code {
+    background: none;
+    padding: 0;
+    font-size: 13px;
+    color: var(--color-text);
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .prim-bar span {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    position: relative;
+  }
+
+  .prim-bar--content { width: 100%; }
+  .prim-bar--narrow  { width: min(100%, 640px); }
+  .prim-bar--prose   { width: min(100%, 70ch); }
+
+  .prim-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--space-sm);
+  }
+
+  .prim-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .prim-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .prim-box {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+    background: var(--color-bg-panel);
+    min-height: 80px;
+  }
+
+  .prim-item {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-align: center;
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .prim-item--tall {
+    padding: var(--space-md);
+    min-height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   /* ── Width demo ─────────────────────────────────────────────────────── */
   .width-demo {
     display: flex;

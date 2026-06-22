@@ -7,6 +7,27 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Added
+- `tokens/spacing.css`: Added `--gap-xs` (6px), `--gap-sm` (12px), `--gap-md` (24px), `--gap-lg` (36px), `--gap-xl` (48px) — semantic gap aliases pointing at the corresponding `--space-*` tokens. Intended for use in layout primitives; existing components continue using `--space-*` directly. (#134)
+- `tokens/layout.css`: New opt-in layout composition primitive layer, built to `dist/farn-layout.css`. Ships ten classes:
+  - `.container` — max-width wrapper (`--width-content`) with `container-type: inline-size`, enabling `@container` queries on children. Responsive padding: `var(--space-lg)` at wide, `var(--space-md)` at `<640px`.
+  - `.container-narrow` — same as `.container` with `--width-narrow` (640px) max-width.
+  - `.container-prose` — same as `.container` with `--width-prose` (70ch) max-width.
+  - `.stack` — vertical flex column; override gap with `--stack-gap` (default: `var(--gap-md)`).
+  - `.cluster` — horizontal flex wrap row; override gap with `--cluster-gap` (default: `var(--gap-md)`).
+  - `.center` — flex centering on both axes.
+  - `.auto-grid` — `auto-fit` grid with parameterizable minimum column width (`--grid-min`, default: 280px). Inherently responsive without breakpoints. See also: `.card-grid` in `farn-components.css` (fixed 280px minimum).
+  - `.sidebar` — two-column grid with fixed sidebar (`--sidebar-w`, default: 300px) + flexible main area. Collapses inside container context at `<600px`.
+  - `.grid-2` — two-column equal grid. Collapses inside container context at `<500px`.
+  - `.grid-3` — three-column equal grid. Collapses to 2 cols at `<900px`, 1 col at `<500px` inside container context.
+  - All grid/sidebar primitives share `--grid-gap` override (default: `var(--gap-md)`).
+  - `@container` collapsing fires when the primitive is inside `.container` or any element with `container-type: inline-size`.
+- `package.json`: Added `"./layout"` export entry pointing to `dist/farn-layout.css`; added `cat tokens/layout.css > dist/farn-layout.css` step to the build script. (#134)
+
+### Changed
+- `site/src/styles/site.css`: Removed `.container` block — now dogfoods `tokens/layout.css`. The Farn version adds `container-type: inline-size` and uses `margin-inline: auto` / `padding-inline` (logical properties). (#134)
+- `site/src/pages/index.astro`, `site/src/layouts/DocLayout.astro`: Added `@import '../../../tokens/layout.css'` to the token import chain. (#134)
+
 ---
 
 ## [0.3.0] — 2026-06-21

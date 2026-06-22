@@ -36,6 +36,10 @@
       "style": "./dist/farn-typography.css",
       "default": "./dist/farn-typography.css"
     },
+    "./layout": {
+      "style": "./dist/farn-layout.css",
+      "default": "./dist/farn-layout.css"
+    },
     "./scripts/tabs": {
       "default": "./dist/tabs.js"
     },
@@ -52,7 +56,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css && cat dist/farn-tokens.css tokens/base.css > dist/farn.css && cat tokens/components.css tokens/component-classes.css > dist/farn-components.css && cat tokens/typography-classes.css > dist/farn-typography.css && cp llms.txt site/public/llms.txt && cp site/src/scripts/tabs.js dist/tabs.js && cp site/src/scripts/nav.js dist/nav.js"
+    "build": "cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css && cat dist/farn-tokens.css tokens/base.css > dist/farn.css && cat tokens/components.css tokens/component-classes.css > dist/farn-components.css && cat tokens/typography-classes.css > dist/farn-typography.css && cat tokens/layout.css > dist/farn-layout.css && cp llms.txt site/public/llms.txt && cp site/src/scripts/tabs.js dist/tabs.js && cp site/src/scripts/nav.js dist/nav.js"
   },
   "sideEffects": true
 }

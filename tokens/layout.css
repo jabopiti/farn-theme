@@ -1,0 +1,122 @@
+/* ── Farn — Layout composition primitives ─────────────────────────────────── */
+/* Opt-in layer — load after farn.css or farn-tokens.css.                      */
+/* Source for dist/farn-layout.css.                                             */
+/* Not in tokens/index.css — import explicitly when needed.                     */
+
+/* ── Container ──────────────────────────────────────────────────────────────── */
+/* Width-constrained, centered wrapper. Sets a container context so             */
+/* @container queries on children fire without additional wrappers.             */
+
+.container {
+  max-width: var(--width-content);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+  container-type: inline-size;
+}
+
+.container-narrow {
+  max-width: var(--width-narrow);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+  container-type: inline-size;
+}
+
+.container-prose {
+  max-width: var(--width-prose);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+  container-type: inline-size;
+}
+
+@media (max-width: 640px) /* --breakpoint-mobile */ {
+  .container,
+  .container-narrow,
+  .container-prose {
+    padding-inline: var(--space-md);
+  }
+}
+
+/* ── Stack ───────────────────────────────────────────────────────────────────── */
+/* Vertical flex column. Override gap inline: style="--stack-gap: var(--gap-sm)" */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap, var(--gap-md));
+}
+
+/* ── Cluster ─────────────────────────────────────────────────────────────────── */
+/* Horizontal flex row with wrapping. Override gap with --cluster-gap.           */
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cluster-gap, var(--gap-md));
+  align-items: center;
+}
+
+/* ── Center ──────────────────────────────────────────────────────────────────── */
+/* Flex centering on both axes.                                                   */
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Auto grid ───────────────────────────────────────────────────────────────── */
+/* Responsive grid — columns auto-fit to available space.                        */
+/* Override minimum column width with --grid-min (default: 280px).               */
+/* Override gap with --grid-gap.                                                  */
+/* Related: .card-grid in farn-components.css uses the same pattern with a       */
+/* fixed 280px minimum. .auto-grid is the parameterizable general-purpose version. */
+
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 280px), 1fr));
+  gap: var(--grid-gap, var(--gap-md));
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────────── */
+/* Two-column grid: fixed sidebar + flexible main area.                           */
+/* Override sidebar width with --sidebar-w (default: 300px).                      */
+/* Override gap with --grid-gap.                                                   */
+
+.sidebar {
+  display: grid;
+  grid-template-columns: var(--sidebar-w, 300px) 1fr;
+  gap: var(--grid-gap, var(--gap-md));
+}
+
+/* ── Explicit column grids ───────────────────────────────────────────────────── */
+/* Fixed-column grids that collapse responsively inside a container context.      */
+/* Override gap with --grid-gap.                                                   */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--grid-gap, var(--gap-md));
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gap, var(--gap-md));
+}
+
+/* ── @container collapsing ───────────────────────────────────────────────────── */
+/* Fires when the primitive is inside a container context (.container or any      */
+/* element with container-type: inline-size).                                      */
+
+@container (max-width: 899px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@container (max-width: 499px) {
+  .grid-2,
+  .grid-3 { grid-template-columns: 1fr; }
+}
+
+@container (max-width: 599px) {
+  .sidebar { grid-template-columns: 1fr; }
+}

@@ -10,17 +10,6 @@
   --font-mono:    'JetBrains Mono', 'Courier New', monospace;
 }
 
-/* ── Layout ──────────────────────────────────────────────────────────────── */
-.container {
-  width: 100%;
-  max-width: var(--width-content);
-  margin: 0 auto;
-  padding: 0 var(--space-lg);
-}
-@media (max-width: 640px) /* --breakpoint-mobile */ {
-  .container { padding: 0 var(--space-md); }
-}
-
 /* ── Sub-nav ──────────────────────────────────────────────────────────────── */
 :root {
   --subnav-height: 44px;

@@ -15,6 +15,7 @@ Then import in your bundler (Vite, webpack, Parcel, etc.):
 @import "farn-theme/tokens";     /* tokens only — no reset */
 @import "farn-theme/components"; /* opt-in: nav, footer, buttons, cards, forms, badges, accordion… */
 @import "farn-theme/typography"; /* opt-in: .text-h1, .text-body, .text-mono… */
+@import "farn-theme/layout";     /* opt-in: .container, .stack, .cluster, .center, .auto-grid, .sidebar, .grid-2, .grid-3 */
 ```
 
 Or link from CDN (replace `@0.3.0` with the latest tag):
@@ -44,14 +45,37 @@ correctly without it — the nav appears filled and the drawer is hidden.
 - **Surface depth**: use `data-surface="base|layer|overlay|featured"` on any element to set depth context. All children inherit re-scoped tokens automatically — `base` is page-level, `layer` is cards/panels, `overlay` is modals/dropdowns, `featured` is always dark regardless of page theme (use for hero/brand sections).
 - **Combine theme + surface**: `<section data-theme="dark" data-surface="layer">` renders a dark panel regardless of the page theme. `featured` is self-contained — do not also set `data-theme="dark"` on the same element.
 - **FOWT prevention**: add an inline `<script>` in `<head>` before any CSS that reads `localStorage.getItem('farn-theme')` and sets `data-theme` on `<html>` before first paint.
-- **Load order**: `farn.css` (or `farn-tokens.css`) first, then `farn-components.css`, then `farn-typography.css`.
+- **Load order**: `farn.css` (or `farn-tokens.css`) first, then `farn-components.css`, then `farn-typography.css` and/or `farn-layout.css`. Both `farn-typography.css` and `farn-layout.css` depend on tokens from `farn.css` / `farn-tokens.css` and are not standalone.
+
+## Layout primitives (`farn-layout.css`)
+
+Opt-in composition layer. Load after `farn.css` or `farn-tokens.css`.
+
+| Class | Description | Override points |
+|---|---|---|
+| `.container` | Max-width (`--width-content`) centered wrapper. Sets `container-type: inline-size` so `@container` queries fire on children. Responsive padding (`--space-lg` → `--space-md` at `<640px`). | — |
+| `.container-narrow` | Same as `.container` with `--width-narrow` (640px). | — |
+| `.container-prose` | Same as `.container` with `--width-prose` (70ch). | — |
+| `.stack` | Vertical flex column. | `--stack-gap` (default `--gap-md`) |
+| `.cluster` | Horizontal flex wrap row. | `--cluster-gap` (default `--gap-md`) |
+| `.center` | Flex centering both axes. | — |
+| `.auto-grid` | `auto-fit` grid — columns fill available space. Inherently responsive. See also `.card-grid` in `farn-components.css` (fixed 280px min). | `--grid-min` (default 280px), `--grid-gap` |
+| `.sidebar` | Two-column grid: fixed sidebar + flexible main. Collapses to 1 col at `<600px` in container context. | `--sidebar-w` (default 300px), `--grid-gap` |
+| `.grid-2` | Two equal columns. Collapses at `<500px`. | `--grid-gap` |
+| `.grid-3` | Three equal columns. Collapses to 2 cols at `<900px`, 1 col at `<500px`. | `--grid-gap` |
+
+**Gap tokens** (in `farn-tokens.css`, aliases for `--space-*`): `--gap-xs` (6px), `--gap-sm` (12px), `--gap-md` (24px), `--gap-lg` (36px), `--gap-xl` (48px).
+
+**Responsive collapsing** requires a container context — place grids inside `.container` or any element with `container-type: inline-size`. `.auto-grid` is self-responsive via `auto-fit` and does not need a container context.
+
+Override gaps inline: `<div class="stack" style="--stack-gap: var(--gap-sm)">`.
 
 ## Token layers
 
 Farn uses a three-tier token architecture:
 
 1. **Palette** — raw color values; never reference directly. Prefixed `--in*` (Iron Night dark), `--bm*` (Birch Mist light), `--fo*` (Forest accent), `--bl*` (Bloom palette).
-2. **Semantic** — purpose-mapped, theme-aware aliases. Use these in all component and page styles: `--color-bg`, `--color-text`, `--color-text-secondary`, `--color-accent`, `--color-accent-hover`, `--color-border`, `--color-error`, `--color-success`, `--color-warning`, and surface variants `--color-bg-panel`, `--color-bg-inset`.
+2. **Semantic** — purpose-mapped, theme-aware aliases. Use these in all component and page styles: `--color-bg`, `--color-text`, `--color-text-secondary`, `--color-accent`, `--color-accent-hover`, `--color-border`, `--color-error`, `--color-success`, `--color-warning`, and surface variants `--color-bg-panel`, `--color-bg-inset`. Spacing: `--space-xs` through `--space-4xl`; gap aliases: `--gap-xs` through `--gap-xl` (point at `--space-*`).
 3. **Component** (Tier 3) — per-component override points: `--nav-*` (incl. `--nav-height`, `--nav-overlay-bg`), `--footer-*`, `--btn-*`, `--card-*`, `--input-*`, `--badge-*`, `--accordion-*`, `--table-*`, `--code-*`, `--link-*`, `--quote-*`, `--pagination-*`, `--tooltip-*`, `--overlap-*`, `--wave-height`, `--arc-height`, `--blob-*`, `--diagonal-angle`. Override on `:root` for global rebrand or scope to any selector.
 
 ## FOWT prevention snippet
