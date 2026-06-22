@@ -32,6 +32,7 @@
   --z-base:    0;
   --z-raised:  1;
   --z-content: 10;    /* sticky sub-nav — above page, below fixed nav */
+  --z-nav:     50;    /* fixed top nav bar — above sticky, below dropdowns */
   --z-dropdown: 100;
   --z-sticky:  200;
   --z-overlay: 300;

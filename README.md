@@ -39,10 +39,10 @@ npm install farn-theme
 
 ```html
 <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.2.0/dist/farn.css">
+  href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.3.0/dist/farn.css">
 ```
 
-> Replace `0.2.0` with the [latest release tag](https://github.com/jabopiti/farn-theme/releases), or pin it for stability.
+> Replace `0.3.0` with the [latest release tag](https://github.com/jabopiti/farn-theme/releases), or pin it for stability.
 
 Prevent a flash of the wrong theme by adding this before `<body>`:
 
@@ -74,7 +74,7 @@ Build bundles after any `tokens/` change with `npm run build`. Contributor conve
 
 ## For AI assistants
 
-The [`farn-painter`](https://github.com/jabopiti/claude-skills/tree/main/skills/farn-painter) Claude Code skill applies Farn colors and typography to any visual output. Use `/farn-painter` in a Claude Code session when working on UI artifacts.
+The [`farn-styling`](https://github.com/jabopiti/claude-skills/tree/main/skills/farn-styling) Claude Code skill applies Farn colors and typography to any visual output. Use `/farn-styling` in a Claude Code session when working on UI artifacts.
 
 A compact reference for AI-assisted coding is also available at [`llms.txt`](llms.txt).
 

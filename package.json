@@ -1,6 +1,6 @@
 {
   "name": "farn-theme",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A token-first CSS design system rooted in the forests of northern Germany — palette + semantic tokens, plus ready-to-use component classes",
   "license": "MIT",
   "author": "Jacob Lueg Tiedemann <bo@jbpt.de>",
@@ -38,6 +38,9 @@
     },
     "./scripts/tabs": {
       "default": "./dist/tabs.js"
+    },
+    "./scripts/nav": {
+      "default": "./dist/nav.js"
     }
   },
   "files": [
@@ -49,7 +52,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css && cat dist/farn-tokens.css tokens/base.css > dist/farn.css && cat tokens/components.css tokens/component-classes.css > dist/farn-components.css && cat tokens/typography-classes.css > dist/farn-typography.css && cp llms.txt site/public/llms.txt && cp site/src/scripts/tabs.js dist/tabs.js"
+    "build": "cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css && cat dist/farn-tokens.css tokens/base.css > dist/farn.css && cat tokens/components.css tokens/component-classes.css > dist/farn-components.css && cat tokens/typography-classes.css > dist/farn-typography.css && cp llms.txt site/public/llms.txt && cp site/src/scripts/tabs.js dist/tabs.js && cp site/src/scripts/nav.js dist/nav.js"
   },
   "sideEffects": true
 }
