@@ -8,9 +8,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
-- `tokens/spacing.css`: Added `--gap-xs` (6px), `--gap-sm` (12px), `--gap-md` (24px), `--gap-lg` (36px), `--gap-xl` (48px) — semantic gap aliases pointing at the corresponding `--space-*` tokens. Intended for use in layout primitives; existing components continue using `--space-*` directly. (#134)
+- `tokens/spacing.css`: Added `--gap-xs` (6px), `--gap-sm` (12px), `--gap-md` (24px), `--gap-lg` (36px), `--gap-xl` (48px), `--gap-2xl` (60px), `--gap-3xl` (72px), `--gap-4xl` (96px) — semantic gap aliases mirroring the full `--space-*` scale. Intended for use in layout primitives; existing components continue using `--space-*` directly. (#134)
 - `tokens/layout.css`: New opt-in layout composition primitive layer, built to `dist/farn-layout.css`. Ships ten classes:
-  - `.container` — max-width wrapper (`--width-content`) with `container-type: inline-size`, enabling `@container` queries on children. Responsive padding: `var(--space-lg)` at wide, `var(--space-md)` at `<640px`.
+  - `.container` — max-width wrapper (`--width-content`) with `container-type: inline-size`, enabling `@container` queries on children. Responsive padding: `var(--space-lg)` at wide, `var(--space-md)` at `<640px`. Sets `box-sizing: border-box` so padding is absorbed into the max-width regardless of reset.
   - `.container-narrow` — same as `.container` with `--width-narrow` (640px) max-width.
   - `.container-prose` — same as `.container` with `--width-prose` (70ch) max-width.
   - `.stack` — vertical flex column; override gap with `--stack-gap` (default: `var(--gap-md)`).

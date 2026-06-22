@@ -251,7 +251,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
             </tr>
           </tbody>
         </table>
-        <p>All three use <code>margin-inline: auto</code> and <code>padding-inline: var(--space-lg)</code> (reduced to <code>var(--space-md)</code> at <code>&lt;640px</code>).</p>
+        <p>All three set <code>box-sizing: border-box</code>, <code>margin-inline: auto</code>, and <code>padding-inline: var(--space-lg)</code> (reduced to <code>var(--space-md)</code> at <code>&lt;640px</code>). The <code>box-sizing</code> guard ensures padding is absorbed into the max-width even when loading <code>farn-tokens.css</code> without <code>farn.css</code>'s base reset.</p>
+        <p><strong>Name collision:</strong> <code>.container</code> is a common class name. If your existing CSS already defines <code>.container</code>, loading <code>farn-layout.css</code> may conflict — audit your styles or use <code>farn-tokens.css</code> to adopt only the tokens without the classes.</p>
         <pre><code>&lt;section&gt;
   &lt;div class="container"&gt;
     &lt;!-- content constrained to 1080px --&gt;
@@ -492,6 +493,9 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr><td><code>--gap-md</code></td><td>24px</td><td><code>var(--space-md)</code></td></tr>
             <tr><td><code>--gap-lg</code></td><td>36px</td><td><code>var(--space-lg)</code></td></tr>
             <tr><td><code>--gap-xl</code></td><td>48px</td><td><code>var(--space-xl)</code></td></tr>
+            <tr><td><code>--gap-2xl</code></td><td>60px</td><td><code>var(--space-2xl)</code></td></tr>
+            <tr><td><code>--gap-3xl</code></td><td>72px</td><td><code>var(--space-3xl)</code></td></tr>
+            <tr><td><code>--gap-4xl</code></td><td>96px</td><td><code>var(--space-4xl)</code></td></tr>
           </tbody>
         </table>
       </div>

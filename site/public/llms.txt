@@ -64,11 +64,15 @@ Opt-in composition layer. Load after `farn.css` or `farn-tokens.css`.
 | `.grid-2` | Two equal columns. Collapses at `<500px`. | `--grid-gap` |
 | `.grid-3` | Three equal columns. Collapses to 2 cols at `<900px`, 1 col at `<500px`. | `--grid-gap` |
 
-**Gap tokens** (in `farn-tokens.css`, aliases for `--space-*`): `--gap-xs` (6px), `--gap-sm` (12px), `--gap-md` (24px), `--gap-lg` (36px), `--gap-xl` (48px).
+**Gap tokens** (in `farn-tokens.css`, aliases for `--space-*`): `--gap-xs` (6px), `--gap-sm` (12px), `--gap-md` (24px), `--gap-lg` (36px), `--gap-xl` (48px), `--gap-2xl` (60px), `--gap-3xl` (72px), `--gap-4xl` (96px). The full gap scale mirrors `--space-*`.
 
 **Responsive collapsing** requires a container context — place grids inside `.container` or any element with `container-type: inline-size`. `.auto-grid` is self-responsive via `auto-fit` and does not need a container context.
 
 Override gaps inline: `<div class="stack" style="--stack-gap: var(--gap-sm)">`.
+
+**Known limitations:**
+- `.container` is a common class name. If your existing CSS already defines `.container`, loading `farn-layout.css` will conflict. Audit your styles or scope the import.
+- `farn-layout.css` requires `box-sizing: border-box` — provided by `farn.css` base reset. If you load `farn-tokens.css` (no reset), ensure your own reset sets `box-sizing: border-box` globally, or the container padding will add to the max-width rather than being absorbed.
 
 ## Token layers
 

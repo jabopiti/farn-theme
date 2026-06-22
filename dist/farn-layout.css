@@ -10,6 +10,7 @@
 .container,
 .container-narrow,
 .container-prose {
+  box-sizing: border-box;
   margin-inline: auto;
   padding-inline: var(--space-lg);
   container-type: inline-size;
