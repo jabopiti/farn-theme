@@ -210,20 +210,18 @@ import DocLayout from '../../layouts/DocLayout.astro';
     Padding reduces from <code>--space-lg</code> to <code>--space-md</code> at mobile widths.
   </p>
 
-  <div class="primitive-demo">
-    <div class="prim-container-demo">
-      <div class="prim-bar prim-bar--content">
-        <code>.container</code>
-        <span>max-width: 1080px · outer sections</span>
-      </div>
-      <div class="prim-bar prim-bar--narrow">
-        <code>.container-narrow</code>
-        <span>max-width: 640px · forms, dialogs</span>
-      </div>
-      <div class="prim-bar prim-bar--prose">
-        <code>.container-prose</code>
-        <span>max-width: 70ch · running text</span>
-      </div>
+  <div class="width-demo">
+    <div class="width-bar width-bar--content">
+      <span class="width-label"><code>.container</code></span>
+      <span class="width-value">max-width: 1080px · outer sections</span>
+    </div>
+    <div class="width-bar width-bar--narrow">
+      <span class="width-label"><code>.container-narrow</code></span>
+      <span class="width-value">max-width: 640px · forms, dialogs</span>
+    </div>
+    <div class="width-bar width-bar--prose">
+      <span class="width-label"><code>.container-prose</code></span>
+      <span class="width-value">max-width: 70ch · running text</span>
     </div>
   </div>
 
@@ -590,52 +588,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     margin-bottom: var(--space-xl);
   }
 
-  .prim-container-demo {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-
-  .prim-bar {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-bg-panel);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .prim-bar::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--color-accent);
-    opacity: 0.07;
-    border-radius: inherit;
-  }
-
-  .prim-bar code {
-    background: none;
-    padding: 0;
-    font-size: 13px;
-    color: var(--color-text);
-    position: relative;
-    white-space: nowrap;
-  }
-
-  .prim-bar span {
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    position: relative;
-  }
-
-  .prim-bar--content { width: 100%; }
-  .prim-bar--narrow  { width: min(100%, 640px); }
-  .prim-bar--prose   { width: min(100%, 70ch); }
-
   .prim-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -707,8 +659,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
     inset: 0;
     background: var(--color-accent);
     opacity: 0.08;
-    border-radius: var(--radius-md);
+    border-radius: inherit;
   }
+
+  .width-bar > * { position: relative; }
 
   .width-bar--content { width: 100%; }
   .width-bar--narrow  { width: min(100%, 640px); }
@@ -719,13 +673,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
     font-size: 13px;
     color: var(--color-text);
     white-space: nowrap;
-    position: relative;
   }
 
   .width-value {
     font-size: 12px;
     color: var(--color-text-secondary);
-    position: relative;
   }
 
   /* ── Wireframe ──────────────────────────────────────────────────────── */
