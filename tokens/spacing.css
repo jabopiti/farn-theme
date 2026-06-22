@@ -21,6 +21,16 @@
   --breakpoint-mobile:  640px;
   --breakpoint-tablet:  768px;
 
+  /* Gap aliases — semantic aliases for spacing tokens used in layout primitives */
+  --gap-xs:  var(--space-xs);   /*  6px */
+  --gap-sm:  var(--space-sm);   /* 12px */
+  --gap-md:  var(--space-md);   /* 24px */
+  --gap-lg:  var(--space-lg);   /* 36px */
+  --gap-xl:  var(--space-xl);   /* 48px */
+  --gap-2xl: var(--space-2xl);  /* 60px */
+  --gap-3xl: var(--space-3xl);  /* 72px */
+  --gap-4xl: var(--space-4xl);  /* 96px */
+
   /* Border radius */
   --radius-sm:  4px;
   --radius-md:  6px;

@@ -21,6 +21,7 @@ dist/
   farn-tokens.css               Tokens only — no base reset (for consumers with their own reset)
   farn-components.css           Component tokens + classes — opt-in, load alongside farn.css
   farn-typography.css           Typography utility classes — opt-in
+  farn-layout.css               Layout composition primitives — opt-in, requires farn.css or farn-tokens.css
   tabs.js                       Tab widget script — exported as farn-theme/scripts/tabs
 site/
   src/data/navigation.ts        Single source of truth for top nav, sub-nav, mobile drawer
@@ -73,6 +74,9 @@ cat tokens/components.css tokens/component-classes.css > dist/farn-components.cs
 # Typography utility classes (opt-in) — requires farn.css or farn-tokens.css for --font-* tokens
 cat tokens/typography-classes.css > dist/farn-typography.css
 
+# Layout composition primitives (opt-in) — requires farn.css or farn-tokens.css loaded first
+cat tokens/layout.css > dist/farn-layout.css
+
 # Sync llms.txt to site/public so farn.jbpt.de/llms.txt stays current (root file is canonical)
 cp llms.txt site/public/llms.txt
 
@@ -82,7 +86,7 @@ cp site/src/scripts/tabs.js dist/tabs.js
 
 `tokens/typography-classes.css` is **not** in `tokens/index.css` — DocLayout imports it directly from source. Do not add it to the index chain.
 
-Run all six steps after any change to a `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
+Run all steps after any change to a `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
 
 A PostToolUse hook auto-runs `npm run build` after every `tokens/` edit — no need to run it manually between individual changes. For `llms.txt` or `site/src/scripts/tabs.js` changes, run it explicitly.
 
