@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "farn-site",
-      "runtimeExecutable": "/Users/jabopiti/Projects/farn-theme/site/node_modules/.bin/astro",
-      "runtimeArgs": ["dev", "--port", "4321"],
-      "cwd": "/Users/jabopiti/Projects/farn-theme/site",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "site",
       "port": 4321
     }
   ]

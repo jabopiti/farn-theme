@@ -81,7 +81,6 @@ import { groups, links, ctas } from '../data/navigation';
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--fo1-fern);
-    text-shadow: 0 1px 5px var(--color-bg);
     margin-bottom: var(--space-md);
     opacity: 0;
     animation: fadeUp 600ms ease-out 100ms forwards;
@@ -102,8 +101,10 @@ import { groups, links, ctas } from '../data/navigation';
   .hero-desc {
     font-size: clamp(16px, 2vw, 20px);
     line-height: 1.65;
-    color: var(--color-text-secondary);
-    text-shadow: 0 1px 5px var(--color-bg);
+    /* Exception: --color-text instead of --color-text-secondary. The hero gradient
+       background reduces perceived contrast of the secondary tone in light mode.
+       Size hierarchy (56–112px title vs 16–20px body) carries the visual distinction. */
+    color: var(--color-text);
     max-width: 52ch;
     margin-bottom: var(--space-xl);
     opacity: 0;
