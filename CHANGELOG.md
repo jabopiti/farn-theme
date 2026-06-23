@@ -7,6 +7,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Changed
+- `tokens/colors.css`, `tokens/dark-light.css`, `tokens/components.css`: Swapped the semantic roles of `--bl1-ochre` and `--bl2-grain`. Ochre (`#AB5A2B`) is now the warning / draft / regex-escape color — maps to `--color-warning` and `--badge-draft-bg`. Grain (`#8D6B20`) is now the annotation / decorator color — maps to `--badge-research-bg`. Hex values and token names are unchanged; only semantic intent and token wiring changed. Docs updated across `color.astro`, `surfaces.astro`, `accessibility.astro`, and `data.astro`.
+
 ### Fixed
 - `tokens/component-classes.css`: Replaced hardcoded `px` font sizes in shipped nav/footer classes with `--text-*` tokens — `.footer-tagline`, `.footer-nav a` → `var(--text-sm)`; `.footer-copy`, `.footer-links a` → `var(--text-xs)`; `.nav-drawer-nav a` → `var(--text-base)`; `.nav-cta` → `var(--text-xs)`; `.nav-drawer-group-label` → `var(--text-2xs)`; `.nav-drawer-cta` → `var(--text-sm)`.
 - `tokens/typography-classes.css`: `.text-mono` font-size replaced with `var(--text-xs)`.
