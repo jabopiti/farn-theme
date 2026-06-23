@@ -10,6 +10,29 @@
   --font-mono:    'JetBrains Mono', 'Courier New', monospace;
 }
 
+/* ── Skip link ───────────────────────────────────────────────────────────── */
+.skip-link {
+  position: fixed;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  transform: translateY(calc(-100% - var(--space-sm)));
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-accent);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  z-index: var(--z-toast);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline-offset: 2px;
+}
+
 /* ── Sub-nav ──────────────────────────────────────────────────────────────── */
 :root {
   --subnav-height: 44px;
@@ -51,56 +74,24 @@
 .sub-nav.filled .sub-nav-link:hover,
 .sub-nav.filled .sub-nav-link.active { color: var(--color-text); font-weight: 600; }
 
-/* ── Section labels ───────────────────────────────────────────────────────── */
+/* ── Section labels ─────────────────────────────────────────────────────────
+   Site modifiers that extend farn-typography.css utility classes.
+   Pair with the base farn class in HTML:
+     .text-label.section-eyebrow  /  .text-h2.section-title  /  .text-body-lg.section-desc
+   ─────────────────────────────────────────────────────────────────────────── */
 .section-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: var(--color-accent);
   margin-bottom: var(--space-sm);
 }
 .section-title {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 700;
-  font-variation-settings: 'opsz' 36;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  color: var(--color-text);
   margin-bottom: var(--space-md);
 }
 .section-desc {
-  font-size: 17px;
-  line-height: 1.7;
   color: var(--color-text-secondary);
   max-width: 60ch;
   margin-bottom: var(--space-xl);
-}
-
-/* ── Page header ──────────────────────────────────────────────────────────── */
-.page-header {
-  padding: var(--space-4xl) 0 var(--space-3xl);
-  border-bottom: 1px solid var(--color-border-subtle);
-  margin-bottom: var(--space-3xl);
-}
-.page-eyebrow {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--color-accent); margin-bottom: var(--space-sm);
-}
-.page-title {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 6vw, 64px);
-  font-weight: 800;
-  font-variation-settings: 'opsz' 72;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  color: var(--color-text);
-  margin-bottom: var(--space-md);
-}
-.page-title em { font-style: italic; color: var(--color-accent); }
-.page-desc {
-  font-size: 17px; line-height: 1.7; color: var(--color-text-secondary); max-width: 65ch;
 }
 
 /* ── Reveal animations ────────────────────────────────────────────────────── */

@@ -15,6 +15,7 @@ interface Props {
 const { groups, links = [], ctas, activeGroupId = null, activePath = '', filled = false } = Astro.props;
 ---
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <nav
   class={`nav${filled ? ' filled' : ''}`}
   aria-label="Main navigation"

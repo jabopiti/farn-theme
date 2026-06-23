@@ -7,6 +7,33 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Added
+- `site/src/components/SiteNav.astro`: Skip link ("Skip to main content") added as the first element before `<nav>`, satisfying WCAG 2.4.1 Bypass Blocks.
+- `site/src/styles/site.css`: `.skip-link` and `.skip-link:focus-visible` styles — fixed-position, revealed on keyboard focus via transform, z-index `var(--z-toast)` to clear all overlaid layers.
+- `site/src/pages/index.astro`: `<main id="main-content">` wraps all landing page sections — provides the skip link target and a correct landmark.
+- `site/src/pages/index.astro`: `html { scroll-padding-top: var(--nav-height) }` in the global style block — prevents the fixed nav from obscuring anchor jump targets.
+
+### Changed
+- `tokens/component-classes.css`: `.quote-pull p` now sets `font-style: italic` — consistent with `.quote` italic treatment; restores the italic that the old `.about-etymology` provided before migration to `.quote-pull`.
+- `tokens/component-classes.css`: `.badge-category` now adds `text-transform: uppercase; letter-spacing: 0.06em;` — category labels render as uppercase label stamps, consistent with the rest of the badge family's compact typographic treatment.
+- `site/src/pages/index.astro`: `data-surface="base"` added to §3 (Architecture), §5 (Tokens demo), and §6 (What you get) sections — landing page now correctly uses the `data-surface` system it documents.
+- `site/src/pages/index.astro`: Tier label `<span>` elements migrated from `.system-tier span` to `.badge.badge-category` — uses the shipped badge component instead of a bespoke one-off style.
+- `site/src/pages/index.astro`: `<span class="badge badge-general">base|layer|overlay</span>` added inside each Tokens-in-action demo card — live badge demo inside the very section that explains the token system.
+- `site/src/pages/index.astro`: About-section etymology paragraph migrated from bespoke `.about-etymology` to `.quote-pull` — uses the shipped pullquote component.
+- `site/src/pages/index.astro`, `site/src/pages/foundations/surfaces.astro`: All `.section-eyebrow`, `.section-title`, `.section-desc` elements now also carry `.text-label`, `.text-h2`, `.text-body-lg` respectively — section header elements dogfood the shipped typography utility classes.
+- `site/src/pages/index.astro`: `.system-tier` `color: var(--color-accent)` moved from the container to `.system-tier i` — icon color is explicit; badge inside the tier inherits its own token-defined color instead of the container's.
+- `site/src/styles/site.css`: `.section-eyebrow`, `.section-title`, `.section-desc` reduced to thin modifiers (spacing/color/transform only) — font, size, and weight properties removed as they are now provided by the paired `farn-typography.css` utility class.
+
+### Removed
+- `site/src/pages/index.astro`: Duplicate `@keyframes fadeUp` (also defined in `site.css`).
+- `site/src/pages/index.astro`: Dead `.system-tier span` CSS rule (replaced by `.badge-category`).
+- `site/src/pages/index.astro`: Dead `.get-card .badge` CSS rule.
+- `site/src/pages/index.astro`: Bespoke `.about-etymology` CSS block (replaced by `.quote-pull`).
+- `site/src/styles/site.css`: Dead `.page-header`, `.page-eyebrow`, `.page-title`, `.page-desc` CSS block — no template referenced these classes.
+- `site/src/styles/site.css`: Redundant `outline` declaration from `.skip-link:focus-visible` — covered by `base.css` global focus rule.
+- `site/src/styles/site.css`: Redundant `@media (prefers-reduced-motion)` guard for `.skip-link` — `base.css` handles the global motion guard.
+- `site/src/styles/site.css`: Redundant `color: var(--color-text)` from `.section-title` — provided by the paired `.text-h2` utility class.
+
 ---
 
 ## [0.6.0] — 2026-06-23
