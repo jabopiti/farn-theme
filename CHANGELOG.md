@@ -9,6 +9,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ### Fixed
 - `tokens/component-classes.css`: Section dividers (`.section-wave`, `.section-arc`, `.section-blob`) now set `background: var(--color-bg)` on their containers. This prevents a 1px white line at the top of the divider caused by GPU compositing layers rendering transparent SVG areas against the page root background instead of the parent section's background. Also adds the missing `overflow: hidden` to `.section-arc`, bringing it in line with `.section-wave` and `.section-blob`.
+- `site/src/components/SiteNav.astro`: Mobile drawer now shows only top-level section links (Foundations / Styles / Components) instead of all sub-pages. Removes the overflow issue where the full sub-page list exceeded the viewport height on small screens.
 
 ---
 
