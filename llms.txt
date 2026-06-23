@@ -21,7 +21,7 @@ Then import in your bundler (Vite, webpack, Parcel, etc.):
 Or link from CDN (replace `@0.4.0` with the latest tag):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.4.0/dist/farn.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.5.0/dist/farn.css">
 ```
 
 ### Optional JavaScript
