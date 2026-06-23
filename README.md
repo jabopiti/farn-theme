@@ -39,7 +39,7 @@ npm install farn-theme
 
 ```html
 <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.5.0/dist/farn.css">
+  href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.6.0/dist/farn.css">
 ```
 
 > Replace `0.5.0` with the [latest release tag](https://github.com/jabopiti/farn-theme/releases), or pin it for stability.
