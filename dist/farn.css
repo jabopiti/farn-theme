@@ -182,6 +182,16 @@
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
   --skeleton-shine:              var(--bm2-birch); /* birch (page bg) — lighter than panel (mist) */
+  --btn-p-bg:        var(--color-accent);
+  --btn-p-text:      var(--color-accent-text);
+  --btn-p-hover-bg:  var(--color-accent-hover);
+  --btn-p-active-bg: var(--color-accent-active);
+  --btn-s-bg:        var(--color-bg-inset);
+  --btn-s-hover-bg:  var(--color-bg-interactive-hover);
+  --btn-s-active-bg: var(--color-bg-inset);
+  --btn-g-hover-bg:  var(--color-bg-interactive-hover);
+  --btn-g-active-bg: var(--bm0-sand);
+  --btn-g-border:    var(--color-border);
   --btn-g-text:                  var(--in0-void);
   --btn-s-text:                  var(--in0-void);
 
@@ -213,7 +223,6 @@
   --color-accent-hover:     var(--fo1-fern);   /* hover; --btn-p-active-bg also collapses to fern — forest + void text = 2.53:1 fail */
   --color-accent-active:    var(--fo2-forest);
   --color-accent-text:      var(--in0-void);   /* glade bg is light (L=0.49) — dark text required; badge/success/warning text overrides below use --bm2-birch directly */
-  --btn-p-active-bg:        var(--fo1-fern);   /* collapses active = hover; forest + void text fails at 2.53:1 */
   --color-error:            var(--bl0-ember);
   --color-warning:          var(--bl2-grain);
   --color-success:          var(--bl3-moss);
@@ -225,7 +234,16 @@
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
-  --btn-g-active-bg:            var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
+  --btn-p-bg:        var(--color-accent);
+  --btn-p-text:      var(--color-accent-text);
+  --btn-p-hover-bg:  var(--color-accent-hover);
+  --btn-p-active-bg: var(--fo1-fern);   /* collapses active = hover; forest + void text fails at 2.53:1 */
+  --btn-s-bg:        var(--color-bg-inset);
+  --btn-s-hover-bg:  var(--color-bg-interactive-hover);
+  --btn-s-active-bg: var(--color-bg-inset);
+  --btn-g-hover-bg:  var(--color-bg-interactive-hover);
+  --btn-g-active-bg: var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
+  --btn-g-border:    var(--color-border);
   --btn-g-text:                 var(--bm2-birch);
   --btn-s-text:                 var(--bm2-birch);
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
