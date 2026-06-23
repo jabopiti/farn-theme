@@ -7,6 +7,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/component-classes.css`: Replaced hardcoded `px` font sizes in shipped nav/footer classes with `--text-*` tokens — `.footer-tagline`, `.footer-nav a` → `var(--text-sm)`; `.footer-copy`, `.footer-links a` → `var(--text-xs)`; `.nav-drawer-nav a` → `var(--text-base)`; `.nav-cta` → `var(--text-xs)`; `.nav-drawer-group-label` → `var(--text-2xs)`; `.nav-drawer-cta` → `var(--text-sm)`.
+- `tokens/typography-classes.css`: `.text-mono` font-size replaced with `var(--text-xs)`.
+- `site/src/components/FernMultiplaneHero.astro`: `.eyebrow` and `.state-chip` font sizes replaced with `var(--text-xs)`.
+- `site/src/pages/index.astro`: Replaced all hardcoded font sizes with `--text-*` tokens where applicable (`.hero-eyebrow`, `.about-text p`, `.palette-label`, `.surface-label`, `.specimen-name`, `.system-tier span`, `.system-card p`, `.demo-card h4`, `.demo-card p`, `.get-card p`, `.specimen-sample-mono`). Fixed opsz mismatch on `.about-etymology` (`17px → 18px` to match `opsz: 18`). `.swatch-name` 9px retained as intentionally sub-scale with comment.
+
 ---
 
 ## [0.5.0] — 2026-06-23
