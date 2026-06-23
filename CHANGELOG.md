@@ -7,6 +7,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/component-classes.css`: Section dividers (`.section-wave`, `.section-arc`, `.section-blob`) now set `background: var(--color-bg)` on their containers. This prevents a 1px white line at the top of the divider caused by GPU compositing layers rendering transparent SVG areas against the page root background instead of the parent section's background. Also adds the missing `overflow: hidden` to `.section-arc`, bringing it in line with `.section-wave` and `.section-blob`.
+
 ---
 
 ## [0.4.0] — 2026-06-22
