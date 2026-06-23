@@ -40,6 +40,8 @@ import { groups, links, ctas } from '../data/navigation';
   @import '../../../tokens/base.css';
   @import '../styles/site.css';
 
+  html { scroll-padding-top: var(--nav-height); }
+
   /* ── Section spacing ──────────────────────────────── */
   .landing-section { padding: var(--space-3xl) 0; }
 
@@ -48,11 +50,6 @@ import { groups, links, ctas } from '../data/navigation';
   .landing-section--divider-wave { position: relative; padding-bottom: calc(var(--space-3xl) + var(--wave-height)); }
   .landing-section--divider-blob { position: relative; padding-bottom: calc(var(--space-3xl) + var(--blob-height)); }
 
-  /* ── Keyframes ────────────────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
   /* ── Hero ─────────────────────────────────────────── */
   .hero {
     min-height: 100vh;
@@ -216,16 +213,9 @@ import { groups, links, ctas } from '../data/navigation';
     display: flex;
     flex-direction: column;
     gap: 4px;
-    color: var(--color-accent);
     margin-bottom: var(--space-sm);
   }
-  .system-tier i { font-size: 22px; }
-  .system-tier span {
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
+  .system-tier i { font-size: 22px; color: var(--color-accent); }
   .system-card h3, .get-card h3 {
     font-family: var(--font-display);
     font-size: 18px;

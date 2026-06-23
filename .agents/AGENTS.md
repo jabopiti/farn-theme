@@ -139,6 +139,8 @@ h1 {
 
 **No tech debt:** Do not leave TODO or FIXME comments in committed code — open a GitHub issue for deferred work instead. No half-implemented features — a component needs both Track A (tokens + CSS) and Track B (docs) for `stable` status. In-progress or planned work is marked `badge-beta` or `badge-coming-soon` in the docs.
 
+**Scout rule:** After running `/simplify` or `/code-review`, scan the touched code for adjacent waste or debt. Fix trivial issues in the same pass; open a GitHub issue for anything larger. Always leave the code cleaner than you found it.
+
 **Demo-first docs:** Every component section on a group page shows a live demo outside any accordion. Token tables and code examples go inside `<details>` accordions.
 
 ## Dark/light mode

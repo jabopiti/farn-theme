@@ -24,18 +24,13 @@
   font-size: var(--text-sm);
   font-weight: 600;
   text-decoration: none;
-  z-index: calc(var(--z-nav) + 1);
+  z-index: var(--z-toast);
   transition: transform var(--duration-fast) var(--ease-out);
 }
 
 .skip-link:focus-visible {
   transform: translateY(0);
-  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .skip-link { transition: none; }
 }
 
 /* ── Sub-nav ──────────────────────────────────────────────────────────────── */
@@ -91,38 +86,12 @@
   margin-bottom: var(--space-sm);
 }
 .section-title {
-  color: var(--color-text);
   margin-bottom: var(--space-md);
 }
 .section-desc {
   color: var(--color-text-secondary);
   max-width: 60ch;
   margin-bottom: var(--space-xl);
-}
-
-/* ── Page header ──────────────────────────────────────────────────────────── */
-.page-header {
-  padding: var(--space-4xl) 0 var(--space-3xl);
-  border-bottom: 1px solid var(--color-border-subtle);
-  margin-bottom: var(--space-3xl);
-}
-.page-eyebrow {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--color-accent); margin-bottom: var(--space-sm);
-}
-.page-title {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 6vw, 64px);
-  font-weight: 800;
-  font-variation-settings: 'opsz' 72;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  color: var(--color-text);
-  margin-bottom: var(--space-md);
-}
-.page-title em { font-style: italic; color: var(--color-accent); }
-.page-desc {
-  font-size: 17px; line-height: 1.7; color: var(--color-text-secondary); max-width: 65ch;
 }
 
 /* ── Reveal animations ────────────────────────────────────────────────────── */
