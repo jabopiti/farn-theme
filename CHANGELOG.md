@@ -7,6 +7,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Changed
+- ⚠️ **Breaking** `tokens/dark-light.css`: `featured` surface in dark mode now uses `--bm1-mist` (`#E9E6DC`) instead of `--fo3-deepwater` (`#254D5A`). The surface is no longer "always dark" — it now provides maximum contrast against the page in both themes (void in light, mist in dark). The dark-mode override block is expanded with a full light-palette token set: text tokens flip to void/slate/ash, border tokens to iron/ash, accent to fern, and button text to void. Consumers with custom styles targeting the deepwater background of `[data-surface="featured"]` in dark mode will need to update.
+
 ### Fixed
 - `tokens/dark-light.css`: Button background, text, hover, active, and border tokens (`--btn-p-bg`, `--btn-p-text`, `--btn-p-hover-bg`, `--btn-p-active-bg`, `--btn-s-bg`, `--btn-s-hover-bg`, `--btn-s-active-bg`, `--btn-g-hover-bg`, `--btn-g-active-bg`, `--btn-g-border`) are now redeclared in both `[data-theme="light"]` and `[data-theme="dark"]` blocks. Previously, browsers eagerly resolved the `var()` references in these tokens at `:root` scope, so any element with `data-theme="dark"` (or `data-theme="light"`) would still inherit the `:root`-resolved (light-page) colors rather than the theme-appropriate values. This caused buttons inside theme-pinned elements — including the Surfaces demo columns — to show the wrong background color when the page theme changed.
 - `tokens/component-classes.css`: Section dividers (`.section-wave`, `.section-arc`, `.section-blob`) now set `background: var(--color-bg)` on their containers. This prevents a 1px white line at the top of the divider caused by GPU compositing layers rendering transparent SVG areas against the page root background instead of the parent section's background. Also adds the missing `overflow: hidden` to `.section-arc`, bringing it in line with `.section-wave` and `.section-blob`.

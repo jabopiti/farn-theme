@@ -247,7 +247,7 @@
   --btn-g-text:                 var(--bm2-birch);
   --btn-s-text:                 var(--bm2-birch);
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
-  --color-section-featured: var(--fo3-deepwater);
+  --color-section-featured: var(--bm1-mist);
 }
 
 /* ── Surface patterns ─────────────────────────────────────────────────── */
@@ -315,12 +315,14 @@
   --input-border:               var(--in3-ash); /* ash visible on slate bg */
 }
 
-/* featured — always-dark section; void in light mode, deepwater in dark mode.
-   Explicitly overrides text/border tokens to dark-palette values so
-   descendants get correct contrast without needing data-theme on the element.
+/* featured — maximum-contrast section; void in light mode, mist in dark mode.
+   In light mode, text/border tokens are set to dark-palette values.
+   In dark mode, the full token set flips to light-palette values (text → void,
+   bg → mist) so descendants inherit correct contrast in both themes without
+   needing data-theme on the element.
    Only the ancestor selector is used for the dark override — the same-element
    form would fire on data-theme="dark" data-surface="featured" even in light
-   mode, incorrectly setting deepwater when void is expected. */
+   mode, incorrectly setting mist when void is expected. */
 [data-surface="featured"] {
   background:                   var(--in0-void);
   --color-bg:                   var(--in0-void);
@@ -342,8 +344,26 @@
 }
 
 [data-theme="dark"] [data-surface="featured"] {
-  background:  var(--fo3-deepwater);
-  --color-bg:  var(--fo3-deepwater);
+  background:                   var(--bm1-mist);
+  --color-bg:                   var(--bm1-mist);
+  --color-bg-panel:             var(--bm2-birch);
+  --color-bg-inset:             var(--bm0-sand);
+  --color-bg-code:              var(--fo3-deepwater);
+  --color-text:                 var(--in0-void);
+  --color-text-secondary:       var(--in2-slate);
+  --color-text-tertiary:        var(--in3-ash);
+  --color-border:               var(--in3-ash);
+  --color-border-strong:        var(--in1-iron);
+  --color-border-subtle:        color-mix(in srgb, var(--in1-iron) 12%, transparent);
+  --color-ghost-border:         color-mix(in srgb, var(--in1-iron) 25%, transparent);
+  --color-bg-interactive-hover: var(--bm0-sand);
+  --color-accent:               var(--fo1-fern);
+  --color-accent-hover:         var(--fo2-forest);
+  --color-accent-text:          var(--bm2-birch);
+  --skeleton-base:              var(--bm0-sand);
+  --skeleton-shine:             var(--bm2-birch);
+  --btn-g-text:                 var(--in0-void);
+  --btn-s-text:                 var(--in0-void);
 }
 
 /* ── Light-theme surface overrides ─────────────────────────────────────── */

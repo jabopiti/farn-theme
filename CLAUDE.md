@@ -147,7 +147,7 @@ h1 {
   - `base` — page-level bg (birch in light, void in dark); resets context inside a deeper surface
   - `layer` — card/panel level (mist in light, iron in dark)
   - `overlay` — modal/dropdown level (sand in light, slate in dark)
-  - `featured` — always dark regardless of page theme: void (`#0D1117`) in light, deepwater (`#254D5A`) in dark. Used for hero/brand sections. `featured` is self-contained — do not also set `data-theme="dark"` on the same element.
+  - `featured` — maximum contrast against the page: void (`#0D1117`) in light mode, mist (`#E9E6DC`) in dark mode. Used for hero/brand sections. `featured` is self-contained — do not also set `data-theme="dark"` on the same element.
 - Compose: `<section data-theme="dark" data-surface="layer">` = dark panel regardless of page theme
 - FOWT prevention: `DocLayout.astro` has an inline `<script>` that reads `localStorage.getItem('farn-theme')` (falling back to `prefers-color-scheme`) and sets `data-theme` on `<html>` before first paint
 

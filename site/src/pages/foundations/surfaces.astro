@@ -162,34 +162,35 @@ import DocLayout from '../../layouts/DocLayout.astro';
     expression of the palette story, not a separate mechanism bolted on.
   </p>
   <p>
-    The <code>featured</code> surface opts out of theme-relativity by design. It is always dark
-    — void in light mode, deepwater in dark mode — and forces its own text and border tokens so
-    descendants inherit correct contrast without a <code>data-theme</code> attribute.
+    The <code>featured</code> surface opts out of theme-relativity by design. It always provides
+    maximum contrast against the page — void in light mode, mist in dark mode — and forces its own
+    text and border tokens so descendants inherit correct contrast without a <code>data-theme</code> attribute.
   </p>
 
   <h2 id="featured-surface">Featured Surface</h2>
   <p>
-    The <code>featured</code> surface is intentionally theme-breaking. It always renders dark —
-    void (<code>#0D1117</code>) in light mode and deepwater (<code>#254D5A</code>) in dark mode —
-    giving hero sections and feature callouts visual weight that adapts without losing contrast.
+    The <code>featured</code> surface is intentionally theme-breaking. It always provides maximum
+    contrast against the page — void (<code>#0D1117</code>) in light mode, mist (<code>#E9E6DC</code>)
+    in dark mode — giving hero sections and feature callouts visual weight that adapts without losing
+    contrast.
   </p>
   <p>
     Unlike the three relative surfaces, it overrides text and border tokens directly so descendants
-    automatically inherit the right dark-palette values. Just add <code>data-surface="featured"</code>
+    automatically inherit the correct palette values. Just add <code>data-surface="featured"</code>
     — no <code>data-theme</code> composition required.
   </p>
   <pre><code>&lt;section data-surface="featured"&gt;
-  &lt;!-- text tokens are dark-palette: birch, mist, sand --&gt;
-  &lt;!-- bg: void in light mode, deepwater in dark mode   --&gt;
+  &lt;!-- light mode: void bg, dark-palette text (birch/mist/sand) --&gt;
+  &lt;!-- dark mode:  mist bg, light-palette text (void/slate/ash)  --&gt;
 &lt;/section&gt;</code></pre>
   <p>
-    Toggle the page theme — the block below stays dark in both modes but shifts hue:
+    Toggle the page theme — the block below inverts to maximum contrast in both modes:
   </p>
   <div class="surface-demo featured-surface-demo" data-surface="featured">
     <code class="surface-tag">data-surface="featured"</code>
-    <p class="surface-desc">Light mode: void &nbsp;·&nbsp; Dark mode: deepwater</p>
+    <p class="surface-desc">Light mode: void &nbsp;·&nbsp; Dark mode: mist</p>
     <p class="surface-contrast-note">
-      Primary text 8.5:1 (AAA) &nbsp;·&nbsp; Secondary 7.4:1 (AAA) &nbsp;·&nbsp; Tertiary 6.1:1 (AA)
+      Light — Primary text 19:1 (AAA) &nbsp;·&nbsp; Secondary 9:1 (AAA) &nbsp;·&nbsp; Tertiary 5.9:1 (AA)
     </p>
   </div>
 
@@ -270,10 +271,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
             <tr>
               <td><code>featured</code></td>
               <td><code>--in0-void</code> <span class="swatch" style="background:#0D1117"></span></td>
-              <td><code>--fo3-deepwater</code> <span class="swatch" style="background:#254D5A"></span></td>
+              <td><code>--bm1-mist</code> <span class="swatch" style="background:#E9E6DC"></span></td>
               <td><code>--in1-iron</code></td>
-              <td><code>--in1-iron</code></td>
-              <td>Hero sections, feature callouts — always dark</td>
+              <td><code>--bm2-birch</code></td>
+              <td>Hero sections, feature callouts — maximum contrast</td>
             </tr>
           </tbody>
         </table>
