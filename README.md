@@ -68,13 +68,13 @@ For anyone forking or contributing:
 - **`dist/`** — built bundles (`farn.css`, `farn-tokens.css`, `farn-components.css`, `farn-typography.css`).
 - **`site/`** — the Astro documentation site, itself built with Farn.
 
-Build bundles after any `tokens/` change with `npm run build`. Contributor conventions live in [CLAUDE.md](CLAUDE.md); release history in [CHANGELOG.md](CHANGELOG.md).
+Build bundles after any `tokens/` change with `npm run build`. Contributor conventions live in [.agents/AGENTS.md](.agents/AGENTS.md); release history in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
 ## For AI assistants
 
-The [`farn-styling`](https://github.com/jabopiti/claude-skills/tree/main/skills/farn-styling) Claude Code skill applies Farn colors and typography to any visual output. Use `/farn-styling` in a Claude Code session when working on UI artifacts.
+The [`farn-styling`](https://github.com/jabopiti/bo-skills/tree/main/skills/farn-styling) skill applies Farn colors and typography to any visual output. If your AI assistant supports skills, you can use this to ensure visual consistency when generating UI artifacts.
 
 A compact reference for AI-assisted coding is also available at [`llms.txt`](llms.txt).
 
