@@ -21,8 +21,8 @@
 
   /* Bloom — semantic */
   --bl0-ember:     #C5414C;   /* Errors, deletions                         */
-  --bl1-ochre:     #AB5A2B;   /* Annotations, decorators                   */
-  --bl2-grain:     #8D6B20;   /* Warnings, regex, escapes                  */
+  --bl1-ochre:     #AB5A2B;   /* Warnings, regex, escapes                  */
+  --bl2-grain:     #8D6B20;   /* Annotations, decorators                   */
   --bl3-moss:      #567A37;   /* Success, additions, strings               */
   --bl4-heather:   #885DB4;   /* Numbers, uncommon functionality           */
 }

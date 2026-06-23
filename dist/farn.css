@@ -21,8 +21,8 @@
 
   /* Bloom — semantic */
   --bl0-ember:     #C5414C;   /* Errors, deletions                         */
-  --bl1-ochre:     #AB5A2B;   /* Annotations, decorators                   */
-  --bl2-grain:     #8D6B20;   /* Warnings, regex, escapes                  */
+  --bl1-ochre:     #AB5A2B;   /* Warnings, regex, escapes                  */
+  --bl2-grain:     #8D6B20;   /* Annotations, decorators                   */
   --bl3-moss:      #567A37;   /* Success, additions, strings               */
   --bl4-heather:   #885DB4;   /* Numbers, uncommon functionality           */
 }
@@ -168,7 +168,7 @@
   --color-accent-active:    var(--fo3-deepwater);
   --color-accent-text:      var(--bm2-birch);
   --color-error:            var(--bl0-ember);
-  --color-warning:          var(--bl2-grain);
+  --color-warning:          var(--bl1-ochre);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
@@ -224,11 +224,11 @@
   --color-accent-active:    var(--fo2-forest);
   --color-accent-text:      var(--in0-void);   /* glade bg is light (L=0.49) — dark text required; badge/success/warning text overrides below use --bm2-birch directly */
   --color-error:            var(--bl0-ember);
-  --color-warning:          var(--bl2-grain);
+  --color-warning:          var(--bl1-ochre);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--bm2-birch);  /* bloom-palette bg (moss) needs light text; void = 3.81:1 fail */
-  --color-on-warning:       var(--bm2-birch);  /* bloom-palette bg (grain) needs light text; void = 3.84:1 fail */
+  --color-on-warning:       var(--bm2-birch);  /* bloom-palette bg (ochre) needs light text; void = 3.80:1 fail */
   --color-bg-interactive-hover:          var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
   --color-card-highlight-bg:             var(--fo2-forest);
   --tooltip-bg:                  var(--bm1-mist);
@@ -537,14 +537,14 @@
   --badge-general-text:    var(--in0-void);
   --badge-published-bg:    var(--bl3-moss);
   --badge-published-text:  var(--bm2-birch);  /* bloom bg: birch 4.59:1 ✓; void 3.81:1 fail */
-  --badge-draft-bg:        var(--bl2-grain);
-  --badge-draft-text:      var(--bm2-birch);  /* bloom bg: birch 4.56:1 ✓; void 3.84:1 fail */
+  --badge-draft-bg:        var(--bl1-ochre);
+  --badge-draft-text:      var(--bm2-birch);  /* bloom bg: birch 4.59:1 ✓; void 3.81:1 fail */
   --badge-archived-bg:     var(--bl0-ember);
   --badge-archived-text:   var(--bm2-birch);  /* bloom bg: birch 4.59:1 ✓; void 3.82:1 fail */
   --badge-beta-bg:         var(--bl4-heather);
   --badge-beta-text:       var(--bm2-birch);  /* bloom bg: birch 4.55:1 ✓; void 3.84:1 fail */
-  --badge-research-bg:     var(--bl1-ochre);
-  --badge-research-text:   var(--bm2-birch);  /* bloom bg: birch 4.60:1 ✓; void 3.80:1 fail */
+  --badge-research-bg:     var(--bl2-grain);
+  --badge-research-text:   var(--bm2-birch);  /* bloom bg: birch 4.57:1 ✓; void 3.84:1 fail */
   --badge-category-bg:     var(--fo2-forest);
   --badge-category-text:   var(--bm2-birch);  /* forest bg: birch 6.91:1 ✓; void 2.53:1 fail */
 

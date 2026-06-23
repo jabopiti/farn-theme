@@ -35,7 +35,7 @@
   --color-accent-active:    var(--fo3-deepwater);
   --color-accent-text:      var(--bm2-birch);
   --color-error:            var(--bl0-ember);
-  --color-warning:          var(--bl2-grain);
+  --color-warning:          var(--bl1-ochre);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--color-accent-text);
@@ -91,11 +91,11 @@
   --color-accent-active:    var(--fo2-forest);
   --color-accent-text:      var(--in0-void);   /* glade bg is light (L=0.49) — dark text required; badge/success/warning text overrides below use --bm2-birch directly */
   --color-error:            var(--bl0-ember);
-  --color-warning:          var(--bl2-grain);
+  --color-warning:          var(--bl1-ochre);
   --color-success:          var(--bl3-moss);
   --color-on-error:         var(--bm2-birch);
   --color-on-success:       var(--bm2-birch);  /* bloom-palette bg (moss) needs light text; void = 3.81:1 fail */
-  --color-on-warning:       var(--bm2-birch);  /* bloom-palette bg (grain) needs light text; void = 3.84:1 fail */
+  --color-on-warning:       var(--bm2-birch);  /* bloom-palette bg (ochre) needs light text; void = 3.80:1 fail */
   --color-bg-interactive-hover:          var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
   --color-card-highlight-bg:             var(--fo2-forest);
   --tooltip-bg:                  var(--bm1-mist);
