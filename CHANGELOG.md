@@ -7,6 +7,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/component-classes.css`: Section dividers (`.section-wave`, `.section-arc`, `.section-blob`) now set `background: var(--color-bg)` on their containers. This prevents a 1px white line at the top of the divider caused by GPU compositing layers rendering transparent SVG areas against the page root background instead of the parent section's background. Also adds the missing `overflow: hidden` to `.section-arc`, bringing it in line with `.section-wave` and `.section-blob`.
+- `site/src/components/SiteNav.astro`: Mobile drawer now shows only top-level section links (Foundations / Styles / Components) instead of all sub-pages. Removes the overflow issue where the full sub-page list exceeded the viewport height on small screens.
+
 ### Changed
 - `site/src/components/SiteNav.astro`, `site/src/scripts/nav.js`: Replaced Tabler icon-font classes (`<i class="ti ti-*">`) with inline Lucide SVGs for the theme toggle (moon/sun), mobile menu toggle (menu/×), and drawer close (×). The GitHub link retains a fill-based inline SVG (noted in a comment) since Lucide does not ship brand icons. Removes the Tabler webfont CDN dependency from `DocLayout.astro`.
 - `site/src/pages/styles/icons.astro`: Added note to the "Need more?" callout recommending Tabler for brand icons (`ti-brand-*`) — Lucide intentionally excludes third-party brand marks.
@@ -14,7 +18,6 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ---
 
 ## [0.4.0] — 2026-06-22
-
 ### Added
 - `tokens/spacing.css`: Added `--gap-xs` (6px), `--gap-sm` (12px), `--gap-md` (24px), `--gap-lg` (36px), `--gap-xl` (48px), `--gap-2xl` (60px), `--gap-3xl` (72px), `--gap-4xl` (96px) — semantic gap aliases mirroring the full `--space-*` scale. Intended for use in layout primitives; existing components continue using `--space-*` directly. (#134)
 - `tokens/layout.css`: New opt-in layout composition primitive layer, built to `dist/farn-layout.css`. Ships ten classes:

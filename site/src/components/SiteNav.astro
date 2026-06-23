@@ -60,12 +60,7 @@ const { groups, links = [], ctas, activeGroupId = null, activePath = '', filled 
   </div>
   <nav class="nav-drawer-nav">
     {groups.map((g) => (
-      <>
-        <span class="nav-drawer-group-label">{g.label}</span>
-        {g.pages.map((pg) => (
-          <a href={pg.href} class={`nav-drawer-link${activePath === pg.href ? ' active' : ''}`}>{pg.label}</a>
-        ))}
-      </>
+      <a href={g.href} class={`nav-drawer-link${activeGroupId === g.id ? ' active' : ''}`}>{g.label}</a>
     ))}
     {links.map((l) => (
       <a href={l.href} class={`nav-drawer-link${activePath === l.href ? ' active' : ''}`}>{l.label}</a>
