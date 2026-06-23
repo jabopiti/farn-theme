@@ -10,6 +10,34 @@
   --font-mono:    'JetBrains Mono', 'Courier New', monospace;
 }
 
+/* ── Skip link ───────────────────────────────────────────────────────────── */
+.skip-link {
+  position: fixed;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  transform: translateY(calc(-100% - var(--space-sm)));
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-accent);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  z-index: calc(var(--z-nav) + 1);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+}
+
 /* ── Sub-nav ──────────────────────────────────────────────────────────────── */
 :root {
   --subnav-height: 44px;
@@ -51,28 +79,22 @@
 .sub-nav.filled .sub-nav-link:hover,
 .sub-nav.filled .sub-nav-link.active { color: var(--color-text); font-weight: 600; }
 
-/* ── Section labels ───────────────────────────────────────────────────────── */
+/* ── Section labels ─────────────────────────────────────────────────────────
+   Site modifiers that extend farn-typography.css utility classes.
+   Pair with the base farn class in HTML:
+     .text-label.section-eyebrow  /  .text-h2.section-title  /  .text-body-lg.section-desc
+   ─────────────────────────────────────────────────────────────────────────── */
 .section-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: var(--color-accent);
   margin-bottom: var(--space-sm);
 }
 .section-title {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 700;
-  font-variation-settings: 'opsz' 36;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
   color: var(--color-text);
   margin-bottom: var(--space-md);
 }
 .section-desc {
-  font-size: 17px;
-  line-height: 1.7;
   color: var(--color-text-secondary);
   max-width: 60ch;
   margin-bottom: var(--space-xl);
