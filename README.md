@@ -12,7 +12,7 @@ Farn is a zero-dependency, token-first CSS design system for projects that want 
 
 ### 📖 Full documentation at **[farn.jbpt.de](https://farn.jbpt.de)**
 
-Tokens, components, theming, and live examples live on the docs site. This README is just enough to install and orient.
+Tokens, components, theming, live examples, and copy-paste [Templates](https://farn.jbpt.de/templates) live on the docs site. This README is just enough to install and orient.
 
 ---
 

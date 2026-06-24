@@ -186,6 +186,36 @@ Two parallel tracks — both required for `stable` status.
 
 `site/` pages are the canonical specification for each component.
 
+## Adding a block
+
+A **Block** is a named, reusable page section documented on a template page. Blocks use only Farn semantic tokens — no hardcoded color, spacing, or size values. Block CSS classes (`.hero`, `.features`, etc.) are copy-paste starters for builders, not stable Farn API. They are **not** shipped in `dist/`.
+
+**Rule:** every block must use only semantic tokens (`--color-*`, `--space-*`, `--text-*`, `--font-*`, `--radius-*`). No palette tokens, no hardcoded values.
+
+To add a block to an existing template page:
+1. Find the relevant template page: `site/src/pages/templates/<template-name>.astro`
+2. Add an `<h2 id="block-name">` section with:
+   - A brief description paragraph (when to use this block)
+   - A live demo inside `<div class="block-preview">` — use `b-` prefixed class names in the demo to avoid collision with the copy-paste class names shown in the code
+   - Copy-paste HTML in a `<details class="accordion">` accordion
+   - Copy-paste CSS in a second `<details class="accordion">` accordion
+3. Add `b-*` prefixed CSS to the page `<style>` block for the live demo rendering
+4. The copy-paste CSS (shown in the accordion) uses unprefixed semantic names (`.hero`, `.features`, etc.) — these are what builders will use
+
+The `b-` prefix is docs-only — it scopes demo styles to avoid collision with the copy-paste examples rendered on the same page.
+
+## Adding a template
+
+A **Template** is a complete page layout assembled from blocks, documented as a single page.
+
+1. Create `site/src/pages/templates/<template-name>.astro` using `landing-page.astro` as a reference
+2. Add the template to the Templates group in `site/src/data/navigation.ts`
+3. Add a card for the template to `site/src/pages/templates/index.astro`
+4. Update `llms.txt` — add the template's blocks to the Templates section
+5. Update `CHANGELOG.md`
+
+Template pages use `DocLayout`. Each block gets its own `<h2>` section following the live demo + accordion pattern above.
+
 ## Release
 
 Use the `/release-farn` skill to be guided through these steps.

@@ -12,6 +12,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: `.skip-link` and `.skip-link:focus-visible` styles — fixed-position, revealed on keyboard focus via transform, z-index `var(--z-toast)` to clear all overlaid layers.
 - `site/src/pages/index.astro`: `<main id="main-content">` wraps all landing page sections — provides the skip link target and a correct landmark.
 - `site/src/pages/index.astro`: `html { scroll-padding-top: var(--nav-height) }` in the global style block — prevents the fixed nav from obscuring anchor jump targets.
+- **Templates section** (`site/src/pages/templates/`) — new top-level docs section introducing the Templates/Blocks model. Closes #147.
+  - `templates/index.astro` — overview page explaining the Template → Block → Component hierarchy, with a card grid linking to available templates.
+  - `templates/landing-page.astro` — Landing Page template documenting four copy-paste blocks: Hero, Intro, Features, CTA. Each block has a live demo (contained preview) + copy-paste HTML + copy-paste CSS in accordions. All block CSS uses only Farn semantic tokens.
+- `site/src/data/navigation.ts`: added Templates nav group with Overview and Landing Page pages.
+- `llms.txt`: added Templates section covering the block model, hierarchy, and Landing Page block reference table.
+- `.agents/AGENTS.md`: added "Adding a block" and "Adding a template" workflow sections.
 
 ### Changed
 - `tokens/component-classes.css`: `.quote-pull p` now sets `font-style: italic` — consistent with `.quote` italic treatment; restores the italic that the old `.about-etymology` provided before migration to `.quote-pull`.

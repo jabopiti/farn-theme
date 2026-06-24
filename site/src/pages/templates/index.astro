@@ -1,0 +1,79 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Templates" description="Copy-paste page section templates built with Farn tokens and components">
+  <h1>Templates</h1>
+  <p>
+    Templates are complete page layouts assembled from <strong>Blocks</strong>. A Block is a named,
+    reusable page section — styled exclusively with Farn semantic tokens and built from Farn components.
+    Copy a block's HTML and CSS into your project, swap the content, and rename the classes to fit
+    your codebase.
+  </p>
+
+  <h2>How it works</h2>
+  <p>Three levels, each building on the last:</p>
+  <ul>
+    <li><strong>Template</strong> — a named, complete page layout assembled from blocks (e.g. Landing Page).</li>
+    <li><strong>Block</strong> — a named page section combining layout HTML with Farn tokens and components. Styled only with semantic tokens — no hardcoded values.</li>
+    <li><strong>Component</strong> — Farn's shipped atoms: <code>.btn</code>, <code>.card</code>, <code>.badge</code>, and the rest. Used inside blocks.</li>
+  </ul>
+  <p>
+    Block CSS classes (<code>.hero</code>, <code>.features</code>, etc.) are copy-paste starters —
+    rename them to fit your project. They are not part of Farn's stable component API.
+  </p>
+
+  <h2>Available templates</h2>
+
+  <div class="card-grid" style="margin-top: var(--space-lg)">
+    <a class="card card-interactive card-outlined" href="/templates/landing-page">
+      <div class="card-media card-preview tp-preview-landing" aria-hidden="true">
+        <div class="tp-preview-bar tp-bar-hero"></div>
+        <div class="tp-preview-bar tp-bar-intro"></div>
+        <div class="tp-preview-row">
+          <div class="tp-preview-card"></div>
+          <div class="tp-preview-card"></div>
+          <div class="tp-preview-card"></div>
+        </div>
+        <div class="tp-preview-bar tp-bar-cta"></div>
+      </div>
+      <div class="card-body">
+        <p class="overview-card-title">Landing Page</p>
+        <p class="overview-card-desc">Hero · Intro · Features · CTA — four blocks assembled into a complete marketing landing page.</p>
+      </div>
+    </a>
+  </div>
+</DocLayout>
+
+<style>
+  /* ── Template card preview illustrations ─────────────────────────── */
+  .tp-preview-landing {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: var(--space-md);
+    background: var(--color-bg);
+  }
+
+  .tp-preview-bar {
+    border-radius: var(--radius-sm);
+    background: var(--color-border);
+  }
+
+  .tp-bar-hero  { height: 40px; background: var(--color-bg-panel); }
+  .tp-bar-intro { height: 28px; }
+  .tp-bar-cta   { height: 24px; background: var(--color-accent); opacity: 0.25; }
+
+  .tp-preview-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+  }
+
+  .tp-preview-card {
+    height: 28px;
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+  }
+</style>

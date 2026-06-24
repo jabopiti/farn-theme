@@ -1,0 +1,587 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+---
+
+<DocLayout title="Landing Page" description="A complete landing page template built from four Farn blocks: Hero, Intro, Features, and CTA">
+  <h1>Landing Page</h1>
+  <p>
+    Four blocks assembled into a complete marketing landing page. Copy each block independently
+    or use all four together. The assembly order is Hero → Intro → Features → CTA.
+  </p>
+  <p>
+    Each block's CSS uses only Farn semantic tokens. Block class names (<code>.hero</code>,
+    <code>.intro</code>, etc.) are starters — rename them to avoid conflicts with your own styles.
+  </p>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+
+  <h2 id="hero">Hero</h2>
+  <p>
+    Full-page intro section with eyebrow text, a large display headline, body copy, and primary
+    and secondary CTAs. Use as the first section of any marketing or product page.
+  </p>
+
+  <div class="block-preview" aria-label="Hero block preview">
+    <section class="b-hero">
+      <div class="container">
+        <div class="b-hero-inner">
+          <p class="section-eyebrow">Your tagline here</p>
+          <h1 class="b-hero-title">A headline that <em>captures attention.</em></h1>
+          <p class="b-hero-desc">One or two sentences describing your product or service. Keep it focused and honest about the value you deliver.</p>
+          <div class="b-hero-actions">
+            <a href="#" class="btn btn-p btn-lg">Primary action</a>
+            <a href="#" class="btn btn-g btn-lg">Secondary action</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>HTML</summary>
+      <div class="accordion-panel">
+        <pre is:raw><code>&lt;section class="hero"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="hero-inner"&gt;
+      &lt;p class="section-eyebrow"&gt;Your tagline here&lt;/p&gt;
+      &lt;h1 class="hero-title"&gt;A headline that &lt;em&gt;captures attention.&lt;/em&gt;&lt;/h1&gt;
+      &lt;p class="hero-desc"&gt;One or two sentences describing your product or service.
+Keep it focused and honest about the value you deliver.&lt;/p&gt;
+      &lt;div class="hero-actions"&gt;
+        &lt;a href="#" class="btn btn-p btn-lg"&gt;Primary action&lt;/a&gt;
+        &lt;a href="#" class="btn btn-g btn-lg"&gt;Secondary action&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      </div>
+    </details>
+    <details>
+      <summary>CSS</summary>
+      <div class="accordion-panel">
+        <pre is:raw><code>.hero {
+  padding: var(--space-4xl) 0;
+  background: var(--color-bg);
+}
+
+.hero-inner {
+  max-width: 640px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 7vw, 96px);
+  font-weight: 800;
+  font-variation-settings: 'opsz' 72;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.hero-desc {
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  max-width: 52ch;
+  margin-bottom: var(--space-xl);
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* Add min-height: 100vh to .hero for a full-viewport hero */</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Intro ─────────────────────────────────────────────────────────── -->
+
+  <h2 id="intro">Intro</h2>
+  <p>
+    Two-column section with text on the left and a visual on the right. Use it to introduce
+    your product, explain what you do, or build trust. Collapses to a single column on mobile.
+  </p>
+
+  <div class="block-preview" aria-label="Intro block preview">
+    <section class="b-intro" data-surface="featured">
+      <div class="container">
+        <div class="b-intro-grid">
+          <div class="b-intro-text">
+            <p class="section-eyebrow">About</p>
+            <h2 class="section-title">A brief, compelling description of your product.</h2>
+            <p>Expand on your value proposition. What problem do you solve? Who is it for? Keep it direct and honest.</p>
+            <p>A second paragraph if you need more context. This is where you earn trust.</p>
+            <div style="margin-top: var(--space-lg)">
+              <a href="#" class="btn btn-g">Learn more</a>
+            </div>
+          </div>
+          <div class="b-intro-visual">
+            <div class="b-intro-placeholder" aria-hidden="true">
+              <i class="ti ti-photo"></i>
+              <span>Your image or illustration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>HTML</summary>
+      <div class="accordion-panel">
+        <pre is:raw><code>&lt;section class="intro" data-surface="featured"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="intro-grid"&gt;
+      &lt;div class="intro-text"&gt;
+        &lt;p class="section-eyebrow"&gt;About&lt;/p&gt;
+        &lt;h2 class="section-title"&gt;A brief, compelling description of your product.&lt;/h2&gt;
+        &lt;p&gt;Expand on your value proposition. What problem do you solve? Who is it for?&lt;/p&gt;
+        &lt;p&gt;A second paragraph if you need more context. This is where you earn trust.&lt;/p&gt;
+        &lt;div class="intro-actions"&gt;
+          &lt;a href="#" class="btn btn-g"&gt;Learn more&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="intro-visual"&gt;
+        &lt;!-- Place your image, illustration, or other visual here --&gt;
+        &lt;img src="your-image.png" alt="Description of your visual" /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      </div>
+    </details>
+    <details>
+      <summary>CSS</summary>
+      <div class="accordion-panel">
+        <pre is:raw><code>.intro {
+  padding: var(--space-3xl) 0;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+}
+
+.intro-text p {
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.intro-text p:last-of-type {
+  margin-bottom: 0;
+}
+
+.intro-actions {
+  margin-top: var(--space-lg);
+}
+
+.intro-visual img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+}</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Features ──────────────────────────────────────────────────────── -->
+
+  <h2 id="features">Features</h2>
+  <p>
+    A responsive card grid for showcasing product features, benefits, or capabilities. Each card
+    holds an icon, a heading, and a short description. Add or remove cards as needed — the grid
+    reflows automatically.
+  </p>
+
+  <div class="block-preview" aria-label="Features block preview">
+    <section class="b-features">
+      <div class="container">
+        <p class="section-eyebrow">Features</p>
+        <h2 class="section-title">What you get.</h2>
+        <div class="b-features-grid">
+          <div class="card">
+            <div class="card-body">
+              <i class="ti ti-bolt b-features-icon"></i>
+              <h3>Feature one</h3>
+              <p>A short description of this feature. What does it do and why does it matter?</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <i class="ti ti-lock b-features-icon"></i>
+              <h3>Feature two</h3>
+              <p>Keep each description to two or three sentences. Focus on the benefit, not the mechanism.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <i class="ti ti-puzzle b-features-icon"></i>
+              <h3>Feature three</h3>
+              <p>A third feature. Three cards is a natural minimum — add more as needed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>HTML</summary>
+      <div class="accordion-panel">
+        <pre is:raw><code>&lt;section class="features"&gt;
+  &lt;div class="container"&gt;
+    &lt;p class="section-eyebrow"&gt;Features&lt;/p&gt;
+    &lt;h2 class="section-title"&gt;What you get.&lt;/h2&gt;
+    &lt;div class="features-grid"&gt;
+      &lt;div class="card"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;i class="ti ti-bolt features-icon"&gt;&lt;/i&gt;
+          &lt;h3&gt;Feature one&lt;/h3&gt;
+          &lt;p&gt;A short description of this feature. What does it do and why does it matter?&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="card"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;i class="ti ti-lock features-icon"&gt;&lt;/i&gt;
+          &lt;h3&gt;Feature two&lt;/h3&gt;
+          &lt;p&gt;Keep each description concise. Focus on the benefit, not the mechanism.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="card"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;i class="ti ti-puzzle features-icon"&gt;&lt;/i&gt;
+          &lt;h3&gt;Feature three&lt;/h3&gt;
+          &lt;p&gt;Three cards is a natural minimum — add more as needed.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      </div>
+    </details>
+    <details>
+      <summary>CSS</summary>
+      <div class="accordion-panel">
+        <pre is:raw><code>.features {
+  padding: var(--space-3xl) 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-2xl);
+}
+
+.features-icon {
+  font-size: 24px;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+  display: block;
+}
+
+.features .card h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  font-variation-settings: 'opsz' 16;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.features .card p {
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── CTA ───────────────────────────────────────────────────────────── -->
+
+  <h2 id="cta">CTA</h2>
+  <p>
+    Closing call-to-action section using the <code>featured</code> surface for maximum contrast.
+    Use it as the last section before the footer to give readers a clear next step.
+  </p>
+
+  <div class="block-preview" aria-label="CTA block preview">
+    <section class="b-cta" data-surface="featured">
+      <div class="container">
+        <div class="b-cta-inner">
+          <p class="section-eyebrow">Ready to start</p>
+          <h2 class="b-cta-title">Start building with <em>your product.</em></h2>
+          <p class="b-cta-desc">One clear sentence. What do you want the reader to do next?</p>
+          <div class="b-cta-actions">
+            <a href="#" class="btn btn-p btn-lg">Get started</a>
+            <a href="#" class="btn btn-g btn-lg">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>HTML</summary>
+      <div class="accordion-panel">
+        <pre is:raw><code>&lt;section class="cta" data-surface="featured"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="cta-inner"&gt;
+      &lt;p class="section-eyebrow"&gt;Ready to start&lt;/p&gt;
+      &lt;h2 class="cta-title"&gt;Start building with &lt;em&gt;your product.&lt;/em&gt;&lt;/h2&gt;
+      &lt;p class="cta-desc"&gt;One clear sentence. What do you want the reader to do next?&lt;/p&gt;
+      &lt;div class="cta-actions"&gt;
+        &lt;a href="#" class="btn btn-p btn-lg"&gt;Get started&lt;/a&gt;
+        &lt;a href="#" class="btn btn-g btn-lg"&gt;Learn more&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      </div>
+    </details>
+    <details>
+      <summary>CSS</summary>
+      <div class="accordion-panel">
+        <pre is:raw><code>.cta {
+  padding: var(--space-3xl) 0;
+}
+
+.cta-inner {
+  max-width: var(--width-prose);
+}
+
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 800;
+  font-variation-settings: 'opsz' 48;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+.cta-title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.cta-desc {
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  max-width: 48ch;
+  margin-bottom: var(--space-xl);
+}
+
+.cta-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}</code></pre>
+      </div>
+    </details>
+  </div>
+</DocLayout>
+
+<style>
+  /* ── Block preview container ─────────────────────────────────────────── */
+  /* Docs-only wrapper — this CSS is NOT part of the copy-paste block code. */
+  .block-preview {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin: var(--space-lg) 0;
+  }
+
+  /* ── Hero block (prefixed b- to avoid collision with landing page classes) */
+  .b-hero {
+    padding: var(--space-4xl) 0;
+    background: var(--color-bg);
+  }
+
+  .b-hero-inner {
+    max-width: 640px;
+  }
+
+  .b-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 800;
+    font-variation-settings: 'opsz' 72;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin-bottom: var(--space-lg);
+  }
+
+  .b-hero-title em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+
+  .b-hero-desc {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    max-width: 52ch;
+    margin-bottom: var(--space-xl);
+  }
+
+  .b-hero-actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  /* ── Intro block ─────────────────────────────────────────────────────── */
+  .b-intro {
+    padding: var(--space-3xl) 0;
+  }
+
+  .b-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  @media (max-width: 640px) {
+    .b-intro-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+
+  .b-intro-text p {
+    font-size: var(--text-base);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+  }
+
+  .b-intro-text p:last-of-type { margin-bottom: 0; }
+
+  .b-intro-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .b-intro-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    height: 200px;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    border: 2px dashed var(--color-border);
+    color: var(--color-text-tertiary);
+    font-size: var(--text-sm);
+  }
+
+  .b-intro-placeholder i { font-size: 32px; }
+
+  /* ── Features block ──────────────────────────────────────────────────── */
+  .b-features {
+    padding: var(--space-3xl) 0;
+  }
+
+  .b-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-2xl);
+  }
+
+  .b-features-icon {
+    font-size: 24px;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+    display: block;
+  }
+
+  .b-features .card h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: 700;
+    font-variation-settings: 'opsz' 16;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .b-features .card p {
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin-bottom: 0;
+  }
+
+  /* ── CTA block ───────────────────────────────────────────────────────── */
+  .b-cta {
+    padding: var(--space-3xl) 0;
+  }
+
+  .b-cta-inner {
+    max-width: var(--width-prose);
+  }
+
+  .b-cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    font-variation-settings: 'opsz' 48;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+
+  .b-cta-title em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+
+  .b-cta-desc {
+    font-size: var(--text-base);
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    max-width: 48ch;
+    margin-bottom: var(--space-xl);
+  }
+
+  .b-cta-actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+</style>

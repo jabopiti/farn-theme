@@ -47,6 +47,15 @@ export const groups: NavGroup[] = [
       { label: 'Status',      href: '/components/status' },
     ],
   },
+  {
+    id: 'templates',
+    label: 'Templates',
+    href: '/templates',
+    pages: [
+      { label: 'Overview',      href: '/templates' },
+      { label: 'Landing Page',  href: '/templates/landing-page' },
+    ],
+  },
 ];
 
 export const links: NavLink[] = [];
