@@ -104,6 +104,31 @@ This project uses the Farn design system.
 Full reference: https://farn.jbpt.de/llms.txt
 ```
 
+## Templates
+
+Copy-paste page sections assembled into complete layouts. All blocks use only Farn semantic tokens — no hardcoded values.
+
+### Concept
+
+Three levels: **Template** (complete page layout) → **Block** (named page section) → **Component** (Farn atoms like `.btn`, `.card`).
+
+A template is a sequence of named blocks. A block combines layout HTML with Farn tokens and components. Block CSS class names (`.hero`, `.features`, etc.) are copy-paste starters — rename them to fit your project; they are not part of Farn's stable API.
+
+**Strict rule:** every block uses only Farn semantic tokens (`--color-*`, `--space-*`, `--text-*`, `--font-*`, `--radius-*`). No hardcoded values.
+
+### Landing Page template
+
+Four blocks in assembly order:
+
+| Block | Surface | Description |
+|---|---|---|
+| Hero | base | Full-page intro: eyebrow, display headline, body copy, primary + secondary CTA buttons |
+| Intro | featured | Two-column text + visual. Left: eyebrow, heading, body, CTA. Right: open slot for image or illustration. Collapses to 1 col on mobile. |
+| Features | base | Auto-fit card grid: icon, heading, short description per card. Uses `.card` component. |
+| CTA | featured | Closing section: eyebrow, display headline with italic accent, body, action buttons. Constrained to prose width. |
+
+Reference: [Templates](https://farn.jbpt.de/templates) — [Landing Page](https://farn.jbpt.de/templates/landing-page)
+
 ## Reference
 
 - [Getting Started](https://farn.jbpt.de/getting-started) — install, load order, FOWT, theming, minimal example
