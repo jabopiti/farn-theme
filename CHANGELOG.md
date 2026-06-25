@@ -7,6 +7,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Fixed
+- `tokens/component-classes.css`: Section dividers (`.section-wave`, `.section-arc`, `.section-blob`) changed container `background` from `var(--color-bg)` to `var(--color-section-next)`. The previous fix worked for dark→light transitions but failed for light→dark — the light page background bled through subpixel gaps at the seam as a thin white line. Using `var(--color-section-next)` (which matches the SVG fill) is direction-agnostic and eliminates the artifact in both cases.
+
 ---
 
 ## [0.6.0] — 2026-06-25
