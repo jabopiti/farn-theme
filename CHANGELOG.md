@@ -8,7 +8,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Fixed
-- `tokens/component-classes.css`: Section dividers (`.section-wave`, `.section-arc`, `.section-blob`) changed container `background` from `var(--color-bg)` to `var(--color-section-next)`. The previous fix worked for dark→light transitions but failed for light→dark — the light page background bled through subpixel gaps at the seam as a thin white line. Using `var(--color-section-next)` (which matches the SVG fill) is direction-agnostic and eliminates the artifact in both cases.
+- `tokens/component-classes.css`: Section dividers (`.section-wave`, `.section-arc`, `.section-blob`) — SVG height set to `calc(var(--height-token) + 2px)` with explicit container `height`, so the SVG fill overbleeds 2px past the container bottom; `overflow: hidden` clips the bleed invisibly. Eliminates the 1px white-line seam artifact caused by GPU compositing not covering the final subpixel of the container. Container `background` reverted to `var(--color-bg)` (correct for the transparent area above the wave curve). Supersedes the incorrect fix shipped in v0.6.0.
 
 ---
 
