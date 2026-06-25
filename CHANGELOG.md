@@ -10,6 +10,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ### Fixed
 - `tokens/component-classes.css`: Section dividers (`.section-wave`, `.section-arc`, `.section-blob`) changed container `background` from `var(--color-bg)` to `var(--color-section-next)`. The previous fix worked for dark→light transitions but failed for light→dark — the light page background bled through subpixel gaps at the seam as a thin white line. Using `var(--color-section-next)` (which matches the SVG fill) is direction-agnostic and eliminates the artifact in both cases.
 
+---
+
+## [0.6.0] — 2026-06-25
+
 ### Added
 - `site/src/components/SiteNav.astro`: Skip link ("Skip to main content") added as the first element before `<nav>`, satisfying WCAG 2.4.1 Bypass Blocks.
 - `site/src/styles/site.css`: `.skip-link` and `.skip-link:focus-visible` styles — fixed-position, revealed on keyboard focus via transform, z-index `var(--z-toast)` to clear all overlaid layers.
@@ -23,6 +27,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `.agents/AGENTS.md`: added "Adding a block" and "Adding a template" workflow sections.
 
 ### Changed
+- `tokens/colors.css`, `tokens/dark-light.css`, `tokens/components.css`: Swapped the semantic roles of `--bl1-ochre` and `--bl2-grain`. Ochre (`#AB5A2B`) is now the warning / draft / regex-escape color — maps to `--color-warning` and `--badge-draft-bg`. Grain (`#8D6B20`) is now the annotation / decorator color — maps to `--badge-research-bg`. Hex values and token names are unchanged; only semantic intent and token wiring changed. Docs updated across `color.astro`, `surfaces.astro`, `accessibility.astro`, and `data.astro`.
 - `tokens/component-classes.css`: `.quote-pull p` now sets `font-style: italic` — consistent with `.quote` italic treatment; restores the italic that the old `.about-etymology` provided before migration to `.quote-pull`.
 - `tokens/component-classes.css`: `.badge-category` now adds `text-transform: uppercase; letter-spacing: 0.06em;` — category labels render as uppercase label stamps, consistent with the rest of the badge family's compact typographic treatment.
 - `site/src/pages/index.astro`: `data-surface="base"` added to §3 (Architecture), §5 (Tokens demo), and §6 (What you get) sections — landing page now correctly uses the `data-surface` system it documents.
@@ -33,6 +38,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/pages/index.astro`: `.system-tier` `color: var(--color-accent)` moved from the container to `.system-tier i` — icon color is explicit; badge inside the tier inherits its own token-defined color instead of the container's.
 - `site/src/styles/site.css`: `.section-eyebrow`, `.section-title`, `.section-desc` reduced to thin modifiers (spacing/color/transform only) — font, size, and weight properties removed as they are now provided by the paired `farn-typography.css` utility class.
 
+### Fixed
+- `tokens/component-classes.css`: Replaced hardcoded `px` font sizes in shipped nav/footer classes with `--text-*` tokens — `.footer-tagline`, `.footer-nav a` → `var(--text-sm)`; `.footer-copy`, `.footer-links a` → `var(--text-xs)`; `.nav-drawer-nav a` → `var(--text-base)`; `.nav-cta` → `var(--text-xs)`; `.nav-drawer-group-label` → `var(--text-2xs)`; `.nav-drawer-cta` → `var(--text-sm)`.
+- `tokens/typography-classes.css`: `.text-mono` font-size replaced with `var(--text-xs)`.
+- `site/src/components/FernMultiplaneHero.astro`: `.eyebrow` and `.state-chip` font sizes replaced with `var(--text-xs)`.
+- `site/src/pages/index.astro`: Replaced all hardcoded font sizes with `--text-*` tokens where applicable (`.hero-eyebrow`, `.about-text p`, `.palette-label`, `.surface-label`, `.specimen-name`, `.system-tier span`, `.system-card p`, `.demo-card h4`, `.demo-card p`, `.get-card p`, `.specimen-sample-mono`). Fixed opsz mismatch on `.about-etymology` (`17px → 18px` to match `opsz: 18`). `.swatch-name` 9px retained as intentionally sub-scale with comment.
+
 ### Removed
 - `site/src/pages/index.astro`: Duplicate `@keyframes fadeUp` (also defined in `site.css`).
 - `site/src/pages/index.astro`: Dead `.system-tier span` CSS rule (replaced by `.badge-category`).
@@ -42,19 +53,6 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Redundant `outline` declaration from `.skip-link:focus-visible` — covered by `base.css` global focus rule.
 - `site/src/styles/site.css`: Redundant `@media (prefers-reduced-motion)` guard for `.skip-link` — `base.css` handles the global motion guard.
 - `site/src/styles/site.css`: Redundant `color: var(--color-text)` from `.section-title` — provided by the paired `.text-h2` utility class.
-
----
-
-## [0.6.0] — 2026-06-23
-
-### Changed
-- `tokens/colors.css`, `tokens/dark-light.css`, `tokens/components.css`: Swapped the semantic roles of `--bl1-ochre` and `--bl2-grain`. Ochre (`#AB5A2B`) is now the warning / draft / regex-escape color — maps to `--color-warning` and `--badge-draft-bg`. Grain (`#8D6B20`) is now the annotation / decorator color — maps to `--badge-research-bg`. Hex values and token names are unchanged; only semantic intent and token wiring changed. Docs updated across `color.astro`, `surfaces.astro`, `accessibility.astro`, and `data.astro`.
-
-### Fixed
-- `tokens/component-classes.css`: Replaced hardcoded `px` font sizes in shipped nav/footer classes with `--text-*` tokens — `.footer-tagline`, `.footer-nav a` → `var(--text-sm)`; `.footer-copy`, `.footer-links a` → `var(--text-xs)`; `.nav-drawer-nav a` → `var(--text-base)`; `.nav-cta` → `var(--text-xs)`; `.nav-drawer-group-label` → `var(--text-2xs)`; `.nav-drawer-cta` → `var(--text-sm)`.
-- `tokens/typography-classes.css`: `.text-mono` font-size replaced with `var(--text-xs)`.
-- `site/src/components/FernMultiplaneHero.astro`: `.eyebrow` and `.state-chip` font sizes replaced with `var(--text-xs)`.
-- `site/src/pages/index.astro`: Replaced all hardcoded font sizes with `--text-*` tokens where applicable (`.hero-eyebrow`, `.about-text p`, `.palette-label`, `.surface-label`, `.specimen-name`, `.system-tier span`, `.system-card p`, `.demo-card h4`, `.demo-card p`, `.get-card p`, `.specimen-sample-mono`). Fixed opsz mismatch on `.about-etymology` (`17px → 18px` to match `opsz: 18`). `.swatch-name` 9px retained as intentionally sub-scale with comment.
 
 ---
 
