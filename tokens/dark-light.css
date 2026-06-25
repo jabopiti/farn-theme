@@ -19,6 +19,7 @@
 :root,
 [data-theme="light"] {
   background:               var(--color-bg);
+  color:                    var(--color-text);
   --color-bg:               var(--bm2-birch);
   --color-bg-panel:         var(--bm1-mist);
   --color-bg-inset:         var(--bm0-sand);
@@ -75,6 +76,7 @@
 /* ── Semantic tokens — dark ─────────────────────────────────────────── */
 [data-theme="dark"] {
   background:               var(--color-bg);
+  color:                    var(--color-text);
   --color-bg:               var(--in0-void);
   --color-bg-panel:         var(--in1-iron);
   --color-bg-inset:         var(--in2-slate);
@@ -192,6 +194,7 @@
    mode, incorrectly setting mist when void is expected. */
 [data-surface="featured"] {
   background:                   var(--in0-void);
+  color:                        var(--color-text);
   --color-bg:                   var(--in0-void);
   --color-bg-panel:             var(--in1-iron);
   --color-bg-inset:             var(--in2-slate);
@@ -212,6 +215,7 @@
 
 [data-theme="dark"] [data-surface="featured"] {
   background:                   var(--bm1-mist);
+  color:                        var(--color-text);
   --color-bg:                   var(--bm1-mist);
   --color-bg-panel:             var(--bm2-birch);
   --color-bg-inset:             var(--bm0-sand);
