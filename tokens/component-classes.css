@@ -290,7 +290,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
   width: 100%;
   overflow: hidden;
   line-height: 0;
-  background: var(--color-bg);
+  background: var(--color-section-next);
 }
 
 .section-wave svg {
@@ -329,7 +329,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
   width: 100%;
   overflow: hidden;
   line-height: 0;
-  background: var(--color-bg);
+  background: var(--color-section-next);
 }
 
 .section-arc svg {
@@ -376,7 +376,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
   width: 100%;
   overflow: hidden;
   line-height: 0;
-  background: var(--color-bg);
+  background: var(--color-section-next);
 }
 
 .section-blob svg {
