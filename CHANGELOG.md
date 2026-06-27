@@ -7,6 +7,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+---
+
+## [0.6.1] — 2026-06-27
+
 ### Fixed
 - `tokens/dark-light.css`: `[data-surface="featured"]` and its dark-mode override now declare `color: var(--color-text)` on the element itself. Previously, `body { color: var(--color-text) }` resolved the text color at body scope (against the page-level palette), producing a concrete inherited value that never updated inside featured sections — making headings invisible (void text on void background in light mode; birch text on mist background in dark mode). Adding `color: var(--color-text)` directly on the featured element re-evaluates the custom property at the correct scope so all descendants inherit the right contrast color. The same property is added to `[data-theme="dark"]` and `[data-theme="light"]` so nested theme islands (elements with `data-theme` that are not `<html>`) are fully self-contained — background and text both flip together as documented.
 - `tokens/component-classes.css`: Section dividers (`.section-wave`, `.section-arc`, `.section-blob`) — SVG height set to `calc(var(--height-token) + 2px)` with explicit container `height`, so the SVG fill overbleeds 2px past the container bottom; `overflow: hidden` clips the bleed invisibly. Eliminates the 1px white-line seam artifact caused by GPU compositing not covering the final subpixel of the container. Container `background` reverted to `var(--color-bg)` (correct for the transparent area above the wave curve). Supersedes the incorrect fix shipped in v0.6.0.
