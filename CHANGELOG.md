@@ -8,7 +8,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
-- `tokens/dark-light.css`: `@media (prefers-color-scheme: dark) { :root:not([data-theme]) { … } }` — no-JS dark mode fallback. Fires before the FOWT inline script sets `data-theme`; once set, the `[data-theme="dark"]` rules take over at higher specificity. Consumers with JavaScript disabled now correctly respect the OS dark-mode preference.
+- `tokens/dark-light.css`: `@media (prefers-color-scheme: dark) { :root:not([data-theme]) { … } }` — no-JS dark mode fallback.
+
+### Removed
+- ⚠️ **Breaking** `tokens/spacing.css`: Removed `--gap-xs` through `--gap-4xl` — these were 1:1 aliases of `--space-xs` through `--space-4xl` with no semantic distinction, creating unnecessary surface area. **Migrate:** replace every `var(--gap-*)` with the equivalent `var(--space-*)` (e.g. `--gap-md` → `--space-md`). The layout primitives in `farn-layout.css` have been updated accordingly. Fires before the FOWT inline script sets `data-theme`; once set, the `[data-theme="dark"]` rules take over at higher specificity. Consumers with JavaScript disabled now correctly respect the OS dark-mode preference.
 - `.github/workflows/ci.yml`: Added drift-detection steps for `dist/farn-layout.css` (from `tokens/layout.css`) and `dist/nav.js` (from `site/src/scripts/nav.js`) — both were unguarded despite being exported in `package.json`.
 - `.github/workflows/release.yml`: Added `dist/farn-layout.css` and `dist/nav.js` to GitHub Release artifacts — both are exported in `package.json` and consumed via jsDelivr CDN but were missing from release uploads.
 - `.github/workflows/release.yml`: Added pre-publish dist presence check — verifies all 7 artifacts exist before `npm publish` to guard against tagging without a build.

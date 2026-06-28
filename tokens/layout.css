@@ -29,12 +29,12 @@
 }
 
 /* ── Stack ───────────────────────────────────────────────────────────────────── */
-/* Vertical flex column. Override gap inline: style="--stack-gap: var(--gap-sm)" */
+/* Vertical flex column. Override gap inline: style="--stack-gap: var(--space-sm)" */
 
 .stack {
   display: flex;
   flex-direction: column;
-  gap: var(--stack-gap, var(--gap-md));
+  gap: var(--stack-gap, var(--space-md));
 }
 
 /* ── Cluster ─────────────────────────────────────────────────────────────────── */
@@ -43,7 +43,7 @@
 .cluster {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--cluster-gap, var(--gap-md));
+  gap: var(--cluster-gap, var(--space-md));
   align-items: center;
 }
 
@@ -66,7 +66,7 @@
 .auto-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 280px), 1fr));
-  gap: var(--grid-gap, var(--gap-md));
+  gap: var(--grid-gap, var(--space-md));
 }
 
 /* ── Sidebar ─────────────────────────────────────────────────────────────────── */
@@ -77,7 +77,7 @@
 .sidebar {
   display: grid;
   grid-template-columns: var(--sidebar-w, 300px) 1fr;
-  gap: var(--grid-gap, var(--gap-md));
+  gap: var(--grid-gap, var(--space-md));
 }
 
 /* ── Explicit column grids ───────────────────────────────────────────────────── */
@@ -87,7 +87,7 @@
 .grid-2,
 .grid-3 {
   display: grid;
-  gap: var(--grid-gap, var(--gap-md));
+  gap: var(--grid-gap, var(--space-md));
 }
 
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
