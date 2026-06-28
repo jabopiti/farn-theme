@@ -133,6 +133,10 @@ h1 {
 
 **Tokens only:** Edit `tokens/` files, never `dist/` files directly.
 
+**Semantic only in site/ and templates:** `site/src/pages/index.astro` is the canonical reference consumer of the design system. It, `DocLayout.astro`, all template pages, and all block CSS must use only semantic tokens (`--color-*`, `--space-*`, `--text-*`, `--font-*`, `--radius-*`, `--duration-*`, `--ease-*`). Palette tokens (`--in*`, `--bm*`, `--fo*`, `--bl*`) and hardcoded values are not allowed in `site/` CSS or inline styles — the only exceptions are intentionally sub-scale values (e.g. `font-size: 9px` with a comment explaining why) and typographic em-relative spacing tied to a specific font size. Component classes in `tokens/` may not reference palette tokens either — use semantic tokens so consumers get correct dark-mode behavior automatically.
+
+**Import chain:** Every page that loads Farn tokens must import them in this order: `colors.css` → `typography.css` → `spacing.css` → `motion.css` → `dark-light.css` → `components.css`. Skipping `typography.css` leaves `--text-*` undefined and causes all component font sizes to fall back to the browser default (16px).
+
 **Dogfood:** The docs site loads `tokens/component-classes.css` directly — every shipped component class must render correctly there before being considered done. If it breaks the docs site, it breaks consumers.
 
 **CHANGELOG:** Update `CHANGELOG.md` with every token or component change. Mark breaking changes with ⚠️ **Breaking**.
@@ -299,6 +303,8 @@ When creating, picking up, or closing a GitHub issue, or when documenting discov
 - `prefers-reduced-motion` guard on every animation or transition?
 - JS-disabled fallback for elements that start at `opacity: 0` (use `@media (scripting: none)`)?
 - Demo-first: live demo visible outside the accordion, reference content inside?
+- Any new CSS in `site/` or templates using only semantic tokens (no palette tokens, no hardcoded px/rem/color values)?
+- Import chain in any new or edited page includes `typography.css` between `colors.css` and `spacing.css`?
 
 ### Complete
 
