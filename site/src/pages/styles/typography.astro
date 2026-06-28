@@ -385,12 +385,28 @@ import 'farn-theme/typography';
     <details>
       <summary>Loading fonts</summary>
       <div class="accordion-panel">
-        <p>Load via <code>&lt;link&gt;</code> in <code>&lt;head&gt;</code> — not via <code>@import url()</code> inside CSS, which delays rendering.</p>
-        <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
-&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
-&lt;link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-/&gt;</code></pre>
+        <p>Self-host the WOFF2 files from the <a href="https://github.com/jabopiti/farn-theme/tree/main/site/public/fonts" target="_blank" rel="noopener noreferrer">Farn repo</a> and declare them with <code>@font-face</code> — no requests to third-party servers. See <a href="/getting-started#load-fonts">Getting Started › Load Fonts</a> for the full declarations.</p>
+        <pre><code>@font-face &#123;
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-normal.woff2') format('woff2');
+&#125;
+@font-face &#123;
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-latin.woff2') format('woff2');
+&#125;
+@font-face &#123;
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+&#125;</code></pre>
       </div>
     </details>
   </div>
