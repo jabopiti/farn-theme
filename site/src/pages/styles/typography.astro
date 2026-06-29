@@ -258,6 +258,29 @@ import 'farn-theme/typography';
     <li>Fraunces minimum size: 16px — never smaller.</li>
   </ul>
 
+  <h2 id="accent-emphasis">Accent Emphasis</h2>
+  <p>
+    Use <code>&lt;em&gt;</code> inside any heading to highlight a word or phrase in the accent
+    color. Works across all themes and surfaces — the accent token adapts automatically.
+  </p>
+
+  <div class="b-ae-demo">
+    <h2 class="text-h2">Build faster with <em>Farn.</em></h2>
+    <p class="text-body-sm" style="color: var(--color-text-secondary); margin-top: var(--space-sm)">Compatible with any heading class — <code>.text-display</code>, <code>.text-h1</code>, <code>.text-h2</code>, etc.</p>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>CSS</summary>
+      <div class="accordion-panel">
+        <pre><code>em &#123;
+  font-style: normal;
+  color: var(--color-accent);
+&#125;</code></pre>
+      </div>
+    </details>
+  </div>
+
   <h2 id="reference">Reference</h2>
 
   <div class="accordion">
@@ -413,6 +436,19 @@ import 'farn-theme/typography';
 </DocLayout>
 
 <style>
+  /* ── Accent emphasis demo ────────────────────────────────────────────── */
+  .b-ae-demo {
+    padding: var(--space-xl) var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    margin: var(--space-lg) 0;
+  }
+
+  .b-ae-demo em {
+    font-style: normal;
+    color: var(--color-accent);
+  }
+
   /* ── Font specimens ─────────────────────────────────────────────────── */
   .font-specimens {
     display: grid;

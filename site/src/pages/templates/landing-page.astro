@@ -11,6 +11,10 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <p>
     Each block's CSS uses only Farn semantic tokens. Block class names (<code>.hero</code>,
     <code>.intro</code>, etc.) are starters — rename them to avoid conflicts with your own styles.
+    Layout utility classes (<code>.stack</code>, <code>.cluster</code>, <code>.grid-2</code>,
+    <code>.auto-grid</code>, <code>.container-prose</code>) require <code>farn-layout.css</code>.
+    Typography utility classes (<code>.text-label</code>, <code>.text-h2</code>) require
+    <code>farn-typography.css</code>.
   </p>
 
   <!-- ── Hero ──────────────────────────────────────────────────────────── -->
@@ -22,13 +26,15 @@ import DocLayout from '../../layouts/DocLayout.astro';
   </p>
 
   <div class="block-preview" aria-label="Hero block preview">
-    <section class="b-hero">
+    <section class="b-hero" aria-labelledby="b-hero-heading">
       <div class="container">
-        <div class="b-hero-inner">
-          <p class="section-eyebrow">Your tagline here</p>
-          <h1 class="b-hero-title">A headline that <em>captures attention.</em></h1>
+        <div class="b-hero-inner stack" style="--stack-gap: var(--space-xl)">
+          <header>
+            <p class="text-label section-eyebrow">Your tagline here</p>
+            <h1 id="b-hero-heading" class="b-hero-title">A headline that <em>captures attention.</em></h1>
+          </header>
           <p class="b-hero-desc">One or two sentences describing your product or service. Keep it focused and honest about the value you deliver.</p>
-          <div class="b-hero-actions">
+          <div class="cluster">
             <a href="#" class="btn btn-p btn-lg">Primary action</a>
             <a href="#" class="btn btn-g btn-lg">Secondary action</a>
           </div>
@@ -41,14 +47,16 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <details>
       <summary>HTML</summary>
       <div class="accordion-panel">
-        <pre is:raw><code>&lt;section class="hero"&gt;
+        <pre is:raw><code>&lt;section class="hero" aria-labelledby="hero-heading"&gt;
   &lt;div class="container"&gt;
-    &lt;div class="hero-inner"&gt;
-      &lt;p class="section-eyebrow"&gt;Your tagline here&lt;/p&gt;
-      &lt;h1 class="hero-title"&gt;A headline that &lt;em&gt;captures attention.&lt;/em&gt;&lt;/h1&gt;
+    &lt;div class="hero-inner stack" style="--stack-gap: var(--space-xl)"&gt;
+      &lt;header&gt;
+        &lt;p class="text-label section-eyebrow"&gt;Your tagline here&lt;/p&gt;
+        &lt;h1 id="hero-heading" class="hero-title"&gt;A headline that &lt;em&gt;captures attention.&lt;/em&gt;&lt;/h1&gt;
+      &lt;/header&gt;
       &lt;p class="hero-desc"&gt;One or two sentences describing your product or service.
 Keep it focused and honest about the value you deliver.&lt;/p&gt;
-      &lt;div class="hero-actions"&gt;
+      &lt;div class="cluster"&gt;
         &lt;a href="#" class="btn btn-p btn-lg"&gt;Primary action&lt;/a&gt;
         &lt;a href="#" class="btn btn-g btn-lg"&gt;Secondary action&lt;/a&gt;
       &lt;/div&gt;
@@ -77,11 +85,10 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   line-height: 1.05;
   letter-spacing: -0.03em;
   color: var(--color-text);
-  margin-bottom: var(--space-lg);
 }
 
 .hero-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--color-accent);
 }
 
@@ -90,13 +97,6 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   line-height: 1.65;
   color: var(--color-text-secondary);
   max-width: 52ch;
-  margin-bottom: var(--space-xl);
-}
-
-.hero-actions {
-  display: flex;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
 }
 
 /* Add min-height: 100vh to .hero for a full-viewport hero */</code></pre>
@@ -109,23 +109,26 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   <h2 id="intro">Intro</h2>
   <p>
     Two-column section with text on the left and a visual on the right. Use it to introduce
-    your product, explain what you do, or build trust. Collapses to a single column on mobile.
+    your product, explain what you do, or build trust. Collapses to a single column on mobile
+    via <code>.grid-2</code>'s built-in container query.
   </p>
 
   <div class="block-preview" aria-label="Intro block preview">
-    <section class="b-intro" data-surface="featured">
+    <section class="b-intro" data-surface="featured" aria-labelledby="b-intro-heading">
       <div class="container">
-        <div class="b-intro-grid">
-          <div class="b-intro-text">
-            <p class="section-eyebrow">About</p>
-            <h2 class="section-title">A brief, compelling description of your product.</h2>
+        <div class="grid-2" style="--grid-gap: var(--space-4xl); align-items: center">
+          <div class="b-intro-text stack">
+            <header>
+              <p class="text-label section-eyebrow">About</p>
+              <h2 id="b-intro-heading" class="text-h2 section-title">A brief, compelling description of your product.</h2>
+            </header>
             <p>Expand on your value proposition. What problem do you solve? Who is it for? Keep it direct and honest.</p>
             <p>A second paragraph if you need more context. This is where you earn trust.</p>
-            <div style="margin-top: var(--space-lg)">
+            <div class="cluster">
               <a href="#" class="btn btn-g">Learn more</a>
             </div>
           </div>
-          <div class="b-intro-visual">
+          <div class="b-intro-visual center">
             <div class="b-intro-placeholder" aria-hidden="true">
               <i class="ti ti-photo"></i>
               <span>Your image or illustration</span>
@@ -140,15 +143,17 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     <details>
       <summary>HTML</summary>
       <div class="accordion-panel">
-        <pre is:raw><code>&lt;section class="intro" data-surface="featured"&gt;
+        <pre is:raw><code>&lt;section class="intro" data-surface="featured" aria-labelledby="intro-heading"&gt;
   &lt;div class="container"&gt;
-    &lt;div class="intro-grid"&gt;
-      &lt;div class="intro-text"&gt;
-        &lt;p class="section-eyebrow"&gt;About&lt;/p&gt;
-        &lt;h2 class="section-title"&gt;A brief, compelling description of your product.&lt;/h2&gt;
+    &lt;div class="grid-2" style="--grid-gap: var(--space-4xl); align-items: center"&gt;
+      &lt;div class="intro-text stack"&gt;
+        &lt;header&gt;
+          &lt;p class="text-label section-eyebrow"&gt;About&lt;/p&gt;
+          &lt;h2 id="intro-heading" class="text-h2 section-title"&gt;A brief, compelling description of your product.&lt;/h2&gt;
+        &lt;/header&gt;
         &lt;p&gt;Expand on your value proposition. What problem do you solve? Who is it for?&lt;/p&gt;
         &lt;p&gt;A second paragraph if you need more context. This is where you earn trust.&lt;/p&gt;
-        &lt;div class="intro-actions"&gt;
+        &lt;div class="cluster"&gt;
           &lt;a href="#" class="btn btn-g"&gt;Learn more&lt;/a&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -168,33 +173,10 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   padding: var(--space-3xl) 0;
 }
 
-.intro-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4xl);
-  align-items: center;
-}
-
-@media (max-width: 768px) {
-  .intro-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-2xl);
-  }
-}
-
 .intro-text p {
   font-size: var(--text-base);
   line-height: 1.75;
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-md);
-}
-
-.intro-text p:last-of-type {
-  margin-bottom: 0;
-}
-
-.intro-actions {
-  margin-top: var(--space-lg);
 }
 
 .intro-visual img {
@@ -211,31 +193,33 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   <p>
     A responsive card grid for showcasing product features, benefits, or capabilities. Each card
     holds an icon, a heading, and a short description. Add or remove cards as needed — the grid
-    reflows automatically.
+    reflows automatically via <code>.auto-grid</code>.
   </p>
 
   <div class="block-preview" aria-label="Features block preview">
-    <section class="b-features">
-      <div class="container">
-        <p class="section-eyebrow">Features</p>
-        <h2 class="section-title">What you get.</h2>
-        <div class="b-features-grid">
+    <section class="b-features" aria-labelledby="b-features-heading">
+      <div class="container stack" style="--stack-gap: var(--space-2xl)">
+        <header>
+          <p class="text-label section-eyebrow">Features</p>
+          <h2 id="b-features-heading" class="text-h2 section-title">What you get.</h2>
+        </header>
+        <div class="auto-grid" style="--grid-min: 200px">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body stack">
               <i class="ti ti-bolt b-features-icon"></i>
               <h3>Feature one</h3>
               <p>A short description of this feature. What does it do and why does it matter?</p>
             </div>
           </div>
           <div class="card">
-            <div class="card-body">
+            <div class="card-body stack">
               <i class="ti ti-lock b-features-icon"></i>
               <h3>Feature two</h3>
               <p>Keep each description to two or three sentences. Focus on the benefit, not the mechanism.</p>
             </div>
           </div>
           <div class="card">
-            <div class="card-body">
+            <div class="card-body stack">
               <i class="ti ti-puzzle b-features-icon"></i>
               <h3>Feature three</h3>
               <p>A third feature. Three cards is a natural minimum — add more as needed.</p>
@@ -250,28 +234,30 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     <details>
       <summary>HTML</summary>
       <div class="accordion-panel">
-        <pre is:raw><code>&lt;section class="features"&gt;
-  &lt;div class="container"&gt;
-    &lt;p class="section-eyebrow"&gt;Features&lt;/p&gt;
-    &lt;h2 class="section-title"&gt;What you get.&lt;/h2&gt;
-    &lt;div class="features-grid"&gt;
+        <pre is:raw><code>&lt;section class="features" aria-labelledby="features-heading"&gt;
+  &lt;div class="container stack" style="--stack-gap: var(--space-2xl)"&gt;
+    &lt;header&gt;
+      &lt;p class="text-label section-eyebrow"&gt;Features&lt;/p&gt;
+      &lt;h2 id="features-heading" class="text-h2 section-title"&gt;What you get.&lt;/h2&gt;
+    &lt;/header&gt;
+    &lt;div class="auto-grid" style="--grid-min: 240px"&gt;
       &lt;div class="card"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;i class="ti ti-bolt features-icon"&gt;&lt;/i&gt;
+        &lt;div class="card-body stack"&gt;
+          &lt;!-- Replace with your icon --&gt;
           &lt;h3&gt;Feature one&lt;/h3&gt;
           &lt;p&gt;A short description of this feature. What does it do and why does it matter?&lt;/p&gt;
         &lt;/div&gt;
       &lt;/div&gt;
       &lt;div class="card"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;i class="ti ti-lock features-icon"&gt;&lt;/i&gt;
+        &lt;div class="card-body stack"&gt;
+          &lt;!-- Replace with your icon --&gt;
           &lt;h3&gt;Feature two&lt;/h3&gt;
           &lt;p&gt;Keep each description concise. Focus on the benefit, not the mechanism.&lt;/p&gt;
         &lt;/div&gt;
       &lt;/div&gt;
       &lt;div class="card"&gt;
-        &lt;div class="card-body"&gt;
-          &lt;i class="ti ti-puzzle features-icon"&gt;&lt;/i&gt;
+        &lt;div class="card-body stack"&gt;
+          &lt;!-- Replace with your icon --&gt;
           &lt;h3&gt;Feature three&lt;/h3&gt;
           &lt;p&gt;Three cards is a natural minimum — add more as needed.&lt;/p&gt;
         &lt;/div&gt;
@@ -288,20 +274,6 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   padding: var(--space-3xl) 0;
 }
 
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: var(--space-md);
-  margin-top: var(--space-2xl);
-}
-
-.features-icon {
-  font-size: 24px;
-  color: var(--color-accent);
-  margin-bottom: var(--space-sm);
-  display: block;
-}
-
 .features .card h3 {
   font-family: var(--font-display);
   font-size: var(--text-base);
@@ -309,14 +281,12 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   font-variation-settings: 'opsz' 16;
   letter-spacing: -0.01em;
   color: var(--color-text);
-  margin-bottom: var(--space-xs);
 }
 
 .features .card p {
   font-size: var(--text-sm);
   line-height: 1.65;
   color: var(--color-text-secondary);
-  margin-bottom: 0;
 }</code></pre>
       </div>
     </details>
@@ -331,16 +301,16 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   </p>
 
   <div class="block-preview" aria-label="CTA block preview">
-    <section class="b-cta" data-surface="featured">
-      <div class="container">
-        <div class="b-cta-inner">
-          <p class="section-eyebrow">Ready to start</p>
-          <h2 class="b-cta-title">Start building with <em>your product.</em></h2>
-          <p class="b-cta-desc">One clear sentence. What do you want the reader to do next?</p>
-          <div class="b-cta-actions">
-            <a href="#" class="btn btn-p btn-lg">Get started</a>
-            <a href="#" class="btn btn-g btn-lg">Learn more</a>
-          </div>
+    <section class="b-cta" data-surface="featured" aria-labelledby="b-cta-heading">
+      <div class="container-prose stack" style="--stack-gap: var(--space-xl); padding-block: var(--space-sm)">
+        <header>
+          <p class="text-label section-eyebrow">Ready to start</p>
+          <h2 id="b-cta-heading" class="b-cta-title">Start building with <em>your product.</em></h2>
+        </header>
+        <p class="b-cta-desc">One clear sentence. What do you want the reader to do next?</p>
+        <div class="cluster">
+          <a href="#" class="btn btn-p btn-lg">Get started</a>
+          <a href="#" class="btn btn-g btn-lg">Learn more</a>
         </div>
       </div>
     </section>
@@ -350,16 +320,16 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     <details>
       <summary>HTML</summary>
       <div class="accordion-panel">
-        <pre is:raw><code>&lt;section class="cta" data-surface="featured"&gt;
-  &lt;div class="container"&gt;
-    &lt;div class="cta-inner"&gt;
-      &lt;p class="section-eyebrow"&gt;Ready to start&lt;/p&gt;
-      &lt;h2 class="cta-title"&gt;Start building with &lt;em&gt;your product.&lt;/em&gt;&lt;/h2&gt;
-      &lt;p class="cta-desc"&gt;One clear sentence. What do you want the reader to do next?&lt;/p&gt;
-      &lt;div class="cta-actions"&gt;
-        &lt;a href="#" class="btn btn-p btn-lg"&gt;Get started&lt;/a&gt;
-        &lt;a href="#" class="btn btn-g btn-lg"&gt;Learn more&lt;/a&gt;
-      &lt;/div&gt;
+        <pre is:raw><code>&lt;section class="cta" data-surface="featured" aria-labelledby="cta-heading"&gt;
+  &lt;div class="container-prose stack" style="--stack-gap: var(--space-xl)"&gt;
+    &lt;header&gt;
+      &lt;p class="text-label section-eyebrow"&gt;Ready to start&lt;/p&gt;
+      &lt;h2 id="cta-heading" class="cta-title"&gt;Start building with &lt;em&gt;your product.&lt;/em&gt;&lt;/h2&gt;
+    &lt;/header&gt;
+    &lt;p class="cta-desc"&gt;One clear sentence. What do you want the reader to do next?&lt;/p&gt;
+    &lt;div class="cluster"&gt;
+      &lt;a href="#" class="btn btn-p btn-lg"&gt;Get started&lt;/a&gt;
+      &lt;a href="#" class="btn btn-g btn-lg"&gt;Learn more&lt;/a&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
@@ -372,10 +342,6 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   padding: var(--space-3xl) 0;
 }
 
-.cta-inner {
-  max-width: var(--width-prose);
-}
-
 .cta-title {
   font-family: var(--font-display);
   font-size: clamp(32px, 5vw, 64px);
@@ -384,11 +350,10 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--color-text);
-  margin-bottom: var(--space-md);
 }
 
 .cta-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--color-accent);
 }
 
@@ -397,13 +362,6 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
   line-height: 1.65;
   color: var(--color-text-secondary);
   max-width: 48ch;
-  margin-bottom: var(--space-xl);
-}
-
-.cta-actions {
-  display: flex;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
 }</code></pre>
       </div>
     </details>
@@ -438,11 +396,10 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     line-height: 1.05;
     letter-spacing: -0.03em;
     color: var(--color-text);
-    margin-bottom: var(--space-lg);
   }
 
   .b-hero-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--color-accent);
   }
 
@@ -451,13 +408,6 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     line-height: 1.65;
     color: var(--color-text-secondary);
     max-width: 52ch;
-    margin-bottom: var(--space-xl);
-  }
-
-  .b-hero-actions {
-    display: flex;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
   }
 
   /* ── Intro block ─────────────────────────────────────────────────────── */
@@ -465,33 +415,10 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     padding: var(--space-3xl) 0;
   }
 
-  .b-intro-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-3xl);
-    align-items: center;
-  }
-
-  @media (max-width: 640px) {
-    .b-intro-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-2xl);
-    }
-  }
-
   .b-intro-text p {
     font-size: var(--text-base);
     line-height: 1.75;
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-md);
-  }
-
-  .b-intro-text p:last-of-type { margin-bottom: 0; }
-
-  .b-intro-visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .b-intro-placeholder {
@@ -515,18 +442,9 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     padding: var(--space-3xl) 0;
   }
 
-  .b-features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-md);
-    margin-top: var(--space-2xl);
-  }
-
   .b-features-icon {
     font-size: 24px;
     color: var(--color-accent);
-    margin-bottom: var(--space-sm);
-    display: block;
   }
 
   .b-features .card h3 {
@@ -536,23 +454,17 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     font-variation-settings: 'opsz' 16;
     letter-spacing: -0.01em;
     color: var(--color-text);
-    margin-bottom: var(--space-xs);
   }
 
   .b-features .card p {
     font-size: var(--text-sm);
     line-height: 1.65;
     color: var(--color-text-secondary);
-    margin-bottom: 0;
   }
 
   /* ── CTA block ───────────────────────────────────────────────────────── */
   .b-cta {
     padding: var(--space-3xl) 0;
-  }
-
-  .b-cta-inner {
-    max-width: var(--width-prose);
   }
 
   .b-cta-title {
@@ -563,11 +475,10 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--color-text);
-    margin-bottom: var(--space-md);
   }
 
   .b-cta-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--color-accent);
   }
 
@@ -576,12 +487,5 @@ Keep it focused and honest about the value you deliver.&lt;/p&gt;
     line-height: 1.65;
     color: var(--color-text-secondary);
     max-width: 48ch;
-    margin-bottom: var(--space-xl);
-  }
-
-  .b-cta-actions {
-    display: flex;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
   }
 </style>
