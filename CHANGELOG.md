@@ -7,6 +7,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Added
+- `tokens/dark-light.css`: `@media (prefers-color-scheme: dark) { :root:not([data-theme]) { … } }` — no-JS dark mode fallback.
+
+### Removed
+- ⚠️ **Breaking** `tokens/spacing.css`: Removed `--gap-xs` through `--gap-4xl` — these were 1:1 aliases of `--space-xs` through `--space-4xl` with no semantic distinction, creating unnecessary surface area. **Migrate:** replace every `var(--gap-*)` with the equivalent `var(--space-*)` (e.g. `--gap-md` → `--space-md`). The layout primitives in `farn-layout.css` have been updated accordingly. Fires before the FOWT inline script sets `data-theme`; once set, the `[data-theme="dark"]` rules take over at higher specificity. Consumers with JavaScript disabled now correctly respect the OS dark-mode preference.
+- `.github/workflows/ci.yml`: Added drift-detection steps for `dist/farn-layout.css` (from `tokens/layout.css`) and `dist/nav.js` (from `site/src/scripts/nav.js`) — both were unguarded despite being exported in `package.json`.
+- `.github/workflows/release.yml`: Added `dist/farn-layout.css` and `dist/nav.js` to GitHub Release artifacts — both are exported in `package.json` and consumed via jsDelivr CDN but were missing from release uploads.
+- `.github/workflows/release.yml`: Added pre-publish dist presence check — verifies all 7 artifacts exist before `npm publish` to guard against tagging without a build.
+- `.github/workflows/release.yml`: `npm publish --provenance` — enables npm provenance attestations using the already-present `id-token: write` permission.
+
+### Changed
+- `tokens/base.css`: Removed `html { scroll-behavior: smooth }` — opinionated default for a library; consumers control their own scroll behaviour. Smooth scrolling is preserved on the docs site via `site/src/styles/site.css`.
+- `site/src/styles/site.css`: Added `html { scroll-behavior: smooth }` — restores smooth anchor scrolling on the docs site after removal from `base.css`.
+- `site/src/styles/site.css`: Unfilled sub-nav link idle colour changed from hardcoded `rgba(247,246,243,0.6)` to `color-mix(in srgb, var(--bm2-birch) 60%, transparent)` — uses the palette token so the colour updates if `--bm2-birch` ever changes.
+- `site/src/styles/site.css`: Unfilled sub-nav link font size changed from hardcoded `14px` to `var(--text-sm)`; padding changed from hardcoded `16px` to `var(--space-md)`.
+
 ---
 
 ## [0.6.1] — 2026-06-27

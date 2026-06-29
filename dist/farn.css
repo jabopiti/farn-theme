@@ -86,16 +86,6 @@
   --breakpoint-mobile:  640px;
   --breakpoint-tablet:  768px;
 
-  /* Gap aliases — semantic aliases for spacing tokens used in layout primitives */
-  --gap-xs:  var(--space-xs);   /*  6px */
-  --gap-sm:  var(--space-sm);   /* 12px */
-  --gap-md:  var(--space-md);   /* 24px */
-  --gap-lg:  var(--space-lg);   /* 36px */
-  --gap-xl:  var(--space-xl);   /* 48px */
-  --gap-2xl: var(--space-2xl);  /* 60px */
-  --gap-3xl: var(--space-3xl);  /* 72px */
-  --gap-4xl: var(--space-4xl);  /* 96px */
-
   /* Border radius */
   --radius-sm:  4px;
   --radius-md:  6px;
@@ -147,6 +137,57 @@
 /*   const s = window.matchMedia('(prefers-color-scheme: dark)').matches     */
 /*     ? 'dark' : 'light';                                                   */
 /*   document.documentElement.setAttribute('data-theme', t ?? s);            */
+
+/* ── No-JS dark mode fallback ───────────────────────────────────────── */
+/* Fires only when data-theme has not yet been set (before JS runs or when  */
+/* JS is disabled). Once the FOWT inline script sets data-theme on <html>, */
+/* the [data-theme="dark"] block below takes over at higher specificity.    */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    background:               var(--color-bg);
+    color:                    var(--color-text);
+    --color-bg:               var(--in0-void);
+    --color-bg-panel:         var(--in1-iron);
+    --color-bg-inset:         var(--in2-slate);
+    --color-text:             var(--bm2-birch);
+    --color-text-secondary:   var(--bm1-mist);
+    --color-text-tertiary:    var(--bm0-sand);
+    --color-border:           var(--in2-slate);
+    --color-border-strong:    var(--bm0-sand);
+    --color-border-subtle:    color-mix(in srgb, var(--in2-slate) 25%, transparent);
+    --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
+    --color-bg-code:          var(--in1-iron);
+    --color-accent:           var(--fo0-glade);
+    --color-accent-hover:     var(--fo1-fern);
+    --color-accent-active:    var(--fo2-forest);
+    --color-accent-text:      var(--in0-void);
+    --color-error:            var(--bl0-ember);
+    --color-warning:          var(--bl1-ochre);
+    --color-success:          var(--bl3-moss);
+    --color-on-error:         var(--bm2-birch);
+    --color-on-success:       var(--bm2-birch);
+    --color-on-warning:       var(--bm2-birch);
+    --color-bg-interactive-hover:          var(--in3-ash);
+    --color-card-highlight-bg:             var(--fo2-forest);
+    --tooltip-bg:                  var(--bm1-mist);
+    --tooltip-text:                var(--in0-void);
+    --skeleton-shine:              var(--in2-slate);
+    --btn-p-bg:        var(--color-accent);
+    --btn-p-text:      var(--color-accent-text);
+    --btn-p-hover-bg:  var(--color-accent-hover);
+    --btn-p-active-bg: var(--fo1-fern);
+    --btn-s-bg:        var(--color-bg-inset);
+    --btn-s-hover-bg:  var(--color-bg-interactive-hover);
+    --btn-s-active-bg: var(--color-bg-inset);
+    --btn-g-hover-bg:  var(--color-bg-interactive-hover);
+    --btn-g-active-bg: var(--in0-void);
+    --btn-g-border:    var(--color-border);
+    --btn-g-text:      var(--bm2-birch);
+    --btn-s-text:      var(--bm2-birch);
+    --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
+    --color-section-featured: var(--bm1-mist);
+  }
+}
 
 /* ── Semantic tokens — light (default) ───────────────────────────────── */
 :root,
@@ -673,10 +714,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {

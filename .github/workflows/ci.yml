@@ -70,6 +70,23 @@ jobs:
             exit 1
           fi
 
+      - name: Verify dist/nav.js is up-to-date
+        run: |
+          if ! diff -q dist/nav.js site/src/scripts/nav.js > /dev/null; then
+            echo "dist/nav.js is out of sync with site/src/scripts/nav.js. Rebuild:"
+            echo "  cp site/src/scripts/nav.js dist/nav.js"
+            exit 1
+          fi
+
+      - name: Verify dist/farn-layout.css is up-to-date
+        run: |
+          if ! diff -q dist/farn-layout.css tokens/layout.css > /dev/null; then
+            echo "dist/farn-layout.css is out of sync with tokens/layout.css. Rebuild:"
+            echo "  cat tokens/layout.css > dist/farn-layout.css"
+            diff dist/farn-layout.css tokens/layout.css
+            exit 1
+          fi
+
       - name: Verify site/public/llms.txt matches root llms.txt
         run: |
           if ! diff -q llms.txt site/public/llms.txt > /dev/null; then

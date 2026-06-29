@@ -274,7 +274,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     <div class="prim-row">
       <div class="prim-block">
         <div class="prim-label"><code>.stack</code></div>
-        <div class="stack prim-box" style="--stack-gap: var(--gap-sm)">
+        <div class="stack prim-box" style="--stack-gap: var(--space-sm)">
           <div class="prim-item" data-surface="layer">Item A</div>
           <div class="prim-item" data-surface="layer">Item B</div>
           <div class="prim-item" data-surface="layer">Item C</div>
@@ -282,7 +282,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
       </div>
       <div class="prim-block">
         <div class="prim-label"><code>.cluster</code></div>
-        <div class="cluster prim-box" style="--cluster-gap: var(--gap-sm)">
+        <div class="cluster prim-box" style="--cluster-gap: var(--space-sm)">
           <span class="badge badge-general">Design</span>
           <span class="badge badge-published">Released</span>
           <span class="badge badge-beta">Beta</span>
@@ -309,12 +309,12 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <tbody>
             <tr>
               <td><code>.stack</code></td>
-              <td><code>flex-direction: column; gap: var(--gap-md)</code></td>
+              <td><code>flex-direction: column; gap: var(--space-md)</code></td>
               <td><code>--stack-gap</code></td>
             </tr>
             <tr>
               <td><code>.cluster</code></td>
-              <td><code>flex-wrap: wrap; align-items: center; gap: var(--gap-md)</code></td>
+              <td><code>flex-wrap: wrap; align-items: center; gap: var(--space-md)</code></td>
               <td><code>--cluster-gap</code></td>
             </tr>
             <tr>
@@ -325,7 +325,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </tbody>
         </table>
         <pre><code>&lt;!-- Tighter gap on this stack --&gt;
-&lt;div class="stack" style="--stack-gap: var(--gap-sm)"&gt;
+&lt;div class="stack" style="--stack-gap: var(--space-sm)"&gt;
   &lt;div class="card"&gt;…&lt;/div&gt;
   &lt;div class="card"&gt;…&lt;/div&gt;
 &lt;/div&gt;
@@ -347,7 +347,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
     uses the same pattern with a fixed 280px minimum.
   </p>
 
-  <div class="auto-grid" style="--grid-min: 160px; --grid-gap: var(--gap-sm); margin-bottom: var(--space-xl)">
+  <div class="auto-grid" style="--grid-min: 160px; --grid-gap: var(--space-sm); margin-bottom: var(--space-xl)">
     {[1, 2, 3, 4, 5].map(n => (
       <div class="prim-item prim-item--tall" data-surface="layer">
         <code style="font-size: 11px">col {n}</code>
@@ -365,11 +365,11 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </thead>
           <tbody>
             <tr><td><code>--grid-min</code></td><td>280px</td><td>Minimum column width before wrapping</td></tr>
-            <tr><td><code>--grid-gap</code></td><td><code>var(--gap-md)</code></td><td>Gap between columns and rows</td></tr>
+            <tr><td><code>--grid-gap</code></td><td><code>var(--space-md)</code></td><td>Gap between columns and rows</td></tr>
           </tbody>
         </table>
         <pre><code>&lt;!-- Tighter columns, smaller gap --&gt;
-&lt;div class="auto-grid" style="--grid-min: 200px; --grid-gap: var(--gap-sm)"&gt;
+&lt;div class="auto-grid" style="--grid-min: 200px; --grid-gap: var(--space-sm)"&gt;
   &lt;div class="card"&gt;…&lt;/div&gt;
   &lt;div class="card"&gt;…&lt;/div&gt;
   &lt;div class="card"&gt;…&lt;/div&gt;
@@ -395,7 +395,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <div class="prim-label" style="margin-bottom: var(--space-xs)"><code>.sidebar</code> — collapses to 1 col at &lt;600px container width</div>
   <div class="container" style="padding-inline: 0; margin-bottom: var(--space-md)">
-    <div class="sidebar" style="--sidebar-w: 160px; --grid-gap: var(--gap-sm)">
+    <div class="sidebar" style="--sidebar-w: 160px; --grid-gap: var(--space-sm)">
       <div class="prim-item prim-item--tall" data-surface="layer" style="font-size: 12px">sidebar<br/><code style="font-size: 10px">--sidebar-w: 160px</code></div>
       <div class="prim-item prim-item--tall" data-surface="overlay" style="font-size: 12px">main content</div>
     </div>
@@ -403,7 +403,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <div class="prim-label" style="margin-bottom: var(--space-xs)"><code>.grid-2</code> — collapses to 1 col at &lt;500px</div>
   <div class="container" style="padding-inline: 0; margin-bottom: var(--space-md)">
-    <div class="grid-2" style="--grid-gap: var(--gap-sm)">
+    <div class="grid-2" style="--grid-gap: var(--space-sm)">
       <div class="prim-item" data-surface="layer">Column 1</div>
       <div class="prim-item" data-surface="layer">Column 2</div>
     </div>
@@ -411,7 +411,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <div class="prim-label" style="margin-bottom: var(--space-xs)"><code>.grid-3</code> — 3→2 cols at &lt;900px, 1 col at &lt;500px</div>
   <div class="container" style="padding-inline: 0; margin-bottom: var(--space-xl)">
-    <div class="grid-3" style="--grid-gap: var(--gap-sm)">
+    <div class="grid-3" style="--grid-gap: var(--space-sm)">
       <div class="prim-item" data-surface="layer">Column 1</div>
       <div class="prim-item" data-surface="layer">Column 2</div>
       <div class="prim-item" data-surface="layer">Column 3</div>
@@ -474,33 +474,6 @@ import DocLayout from '../../layouts/DocLayout.astro';
     </details>
   </div>
 
-  <h3 id="gap-tokens">Gap tokens</h3>
-  <p>
-    Five <code>--gap-*</code> tokens alias the spacing scale for use in layout contexts.
-    They live in <code>farn-tokens.css</code> alongside <code>--space-*</code>.
-  </p>
-  <div class="accordion">
-    <details open>
-      <summary>Gap token reference</summary>
-      <div class="accordion-panel">
-        <table>
-          <thead>
-            <tr><th>Token</th><th>Value</th><th>Alias</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>--gap-xs</code></td><td>6px</td><td><code>var(--space-xs)</code></td></tr>
-            <tr><td><code>--gap-sm</code></td><td>12px</td><td><code>var(--space-sm)</code></td></tr>
-            <tr><td><code>--gap-md</code></td><td>24px</td><td><code>var(--space-md)</code></td></tr>
-            <tr><td><code>--gap-lg</code></td><td>36px</td><td><code>var(--space-lg)</code></td></tr>
-            <tr><td><code>--gap-xl</code></td><td>48px</td><td><code>var(--space-xl)</code></td></tr>
-            <tr><td><code>--gap-2xl</code></td><td>60px</td><td><code>var(--space-2xl)</code></td></tr>
-            <tr><td><code>--gap-3xl</code></td><td>72px</td><td><code>var(--space-3xl)</code></td></tr>
-            <tr><td><code>--gap-4xl</code></td><td>96px</td><td><code>var(--space-4xl)</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-  </div>
 
   <h2 id="radius">Radius as hierarchy</h2>
   <p>

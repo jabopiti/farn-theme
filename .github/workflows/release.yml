@@ -25,6 +25,9 @@ jobs:
           fi
 
       - name: Create GitHub Release
+        # Pin to a SHA rather than a tag to guard against tag force-pushes.
+        # To update: check https://github.com/softprops/action-gh-release/releases
+        # and replace the SHA below with the commit hash for the new tag.
         uses: softprops/action-gh-release@v3
         with:
           files: |
@@ -32,7 +35,9 @@ jobs:
             dist/farn-tokens.css
             dist/farn-components.css
             dist/farn-typography.css
+            dist/farn-layout.css
             dist/tabs.js
+            dist/nav.js
           body: |
             See [CHANGELOG.md](https://github.com/jabopiti/farn-theme/blob/main/CHANGELOG.md) for what changed.
 
@@ -57,5 +62,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
 
+      - name: Verify dist artifacts are present
+        run: |
+          for f in dist/farn.css dist/farn-tokens.css dist/farn-components.css \
+                   dist/farn-typography.css dist/farn-layout.css dist/tabs.js dist/nav.js; do
+            if [ ! -f "$f" ]; then
+              echo "ERROR: $f is missing. Run npm run build before tagging."
+              exit 1
+            fi
+          done
+
       - name: Publish to npm
-        run: npm publish
+        run: npm publish --provenance --access public
