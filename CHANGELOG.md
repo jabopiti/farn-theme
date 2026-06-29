@@ -8,6 +8,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `tokens/dark-light.css`: `--color-wordmark-dot: var(--fo1-fern)` — new semantic token declared identically in all three theme blocks (light, dark, no-JS fallback). Always resolves to fern regardless of theme, making it safe to use wherever a fixed brand color is needed without reaching for a palette token.
 - `tokens/dark-light.css`: `@media (prefers-color-scheme: dark) { :root:not([data-theme]) { … } }` — no-JS dark mode fallback.
 
 ### Removed
@@ -16,6 +17,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `.github/workflows/release.yml`: Added `dist/farn-layout.css` and `dist/nav.js` to GitHub Release artifacts — both are exported in `package.json` and consumed via jsDelivr CDN but were missing from release uploads.
 - `.github/workflows/release.yml`: Added pre-publish dist presence check — verifies all 7 artifacts exist before `npm publish` to guard against tagging without a build.
 - `.github/workflows/release.yml`: `npm publish --provenance` — enables npm provenance attestations using the already-present `id-token: write` permission.
+
+### Fixed
+- `tokens/component-classes.css`: `.nav-logo span`, `.nav-drawer-logo span`, `.footer-logo span` now use `color: var(--color-wordmark-dot)` instead of `color: var(--color-accent)`. The dot in "Farn." was rendering as glade in dark mode because `--color-accent` resolves to `--fo0-glade` on dark surfaces; `--color-wordmark-dot` is always `--fo1-fern`.
 
 ### Changed
 - `tokens/base.css`: Removed `html { scroll-behavior: smooth }` — opinionated default for a library; consumers control their own scroll behaviour. Smooth scrolling is preserved on the docs site via `site/src/styles/site.css`.
