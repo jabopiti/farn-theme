@@ -1,6 +1,5 @@
 /* ── Farn — Self-hosted fonts (Latin subset) ─────────────────────────── */
 /* Replaces the Google Fonts CDN dependency — no third-party requests.    */
-/* WOFF2 files are in site/public/fonts/, served at /fonts/.              */
 
 /* Fraunces — variable (opsz 9–144, wt 300–900), upright */
 @font-face {

@@ -2,9 +2,7 @@
 /* Fraunces (display) · Instrument Sans (body) · JetBrains Mono (code)      */
 /* IMPORTANT: Fraunces requires font-variation-settings: 'opsz' <size>       */
 
-/* Font loading is intentionally excluded from the dist bundle — no Google Fonts
-   dependency ships with Farn. Load fonts separately: self-host the WOFF2 files
-   from the Farn repo (site/public/fonts/) or use Google Fonts with consent. */
+/* Font loading excluded from dist — self-host WOFF2s (site/public/fonts/) or use Google Fonts with consent. */
 
 :root {
   --font-display: 'Fraunces', Georgia, serif;
