@@ -27,15 +27,61 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
   <div class="card-grid" style="margin-top: var(--space-lg)">
     <a class="card card-interactive card-outlined" href="/templates/landing-page">
-      <div class="card-media card-preview tp-preview-landing" aria-hidden="true">
-        <div class="tp-preview-bar tp-bar-hero"></div>
-        <div class="tp-preview-bar tp-bar-intro"></div>
-        <div class="tp-preview-row">
-          <div class="tp-preview-card"></div>
-          <div class="tp-preview-card"></div>
-          <div class="tp-preview-card"></div>
+      <div class="card-media card-preview tp-landing" aria-hidden="true">
+
+        <!-- Hero -->
+        <div class="tp-hero">
+          <div class="tp-eyebrow"></div>
+          <div class="tp-bar tp-bar-h1"></div>
+          <div class="tp-bar tp-bar-h2"></div>
+          <div class="tp-text">
+            <div class="tp-line"></div>
+            <div class="tp-line tp-line-sm"></div>
+          </div>
+          <div class="tp-btns">
+            <div class="tp-btn tp-btn-p"></div>
+            <div class="tp-btn tp-btn-g"></div>
+          </div>
         </div>
-        <div class="tp-preview-bar tp-bar-cta"></div>
+
+        <!-- Intro -->
+        <div class="tp-intro">
+          <div class="tp-intro-text">
+            <div class="tp-eyebrow"></div>
+            <div class="tp-bar tp-bar-h3"></div>
+            <div class="tp-text">
+              <div class="tp-line"></div>
+              <div class="tp-line tp-line-sm"></div>
+            </div>
+          </div>
+          <div class="tp-intro-img"></div>
+        </div>
+
+        <!-- Features -->
+        <div class="tp-features">
+          <div class="tp-fcard">
+            <div class="tp-dot"></div>
+            <div class="tp-bar tp-bar-label"></div>
+            <div class="tp-line"></div>
+          </div>
+          <div class="tp-fcard">
+            <div class="tp-dot"></div>
+            <div class="tp-bar tp-bar-label"></div>
+            <div class="tp-line"></div>
+          </div>
+          <div class="tp-fcard">
+            <div class="tp-dot"></div>
+            <div class="tp-bar tp-bar-label"></div>
+            <div class="tp-line"></div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="tp-cta">
+          <div class="tp-bar tp-bar-h2 tp-inv"></div>
+          <div class="tp-btn tp-btn-inv"></div>
+        </div>
+
       </div>
       <div class="card-body">
         <p class="overview-card-title">Landing Page</p>
@@ -46,34 +92,140 @@ import DocLayout from '../../layouts/DocLayout.astro';
 </DocLayout>
 
 <style>
-  /* ── Template card preview illustrations ─────────────────────────── */
-  .tp-preview-landing {
+  /* ── Skeleton preview — Landing Page card ───────────────────────────── */
+  .tp-landing {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding: var(--space-md);
+    gap: 0;
+    padding: 0;
+    background: var(--color-bg);
+    overflow: hidden;
+  }
+
+  /* ── Shared skeleton atoms ──────────────────────────────────────────── */
+  .tp-eyebrow {
+    height: 3px;
+    width: 28px;
+    background: var(--color-accent);
+    border-radius: 2px;
+    opacity: 0.8;
+  }
+
+  .tp-bar {
+    background: var(--color-border);
+    border-radius: 2px;
+  }
+  .tp-bar-h1    { height: 9px; width: 75%; }
+  .tp-bar-h2    { height: 7px; width: 55%; }
+  .tp-bar-h3    { height: 7px; width: 80%; }
+  .tp-bar-label { height: 5px; width: 60%; }
+
+  .tp-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .tp-line {
+    height: 3px;
+    background: var(--color-border);
+    border-radius: 2px;
+    opacity: 0.55;
+  }
+  .tp-line-sm { width: 70%; }
+
+  .tp-btns {
+    display: flex;
+    gap: 5px;
+  }
+  .tp-btn {
+    height: 9px;
+    width: 36px;
+    border-radius: 99px;
+  }
+  .tp-btn-p { background: var(--color-accent); }
+  .tp-btn-g {
+    background: transparent;
+    border: 1px solid var(--color-border);
+  }
+
+  .tp-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0.65;
+  }
+
+  /* ── Hero section ───────────────────────────────────────────────────── */
+  .tp-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 14px 14px 10px;
     background: var(--color-bg);
   }
 
-  .tp-preview-bar {
+  /* ── Intro section ──────────────────────────────────────────────────── */
+  .tp-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--color-bg-panel);
+  }
+
+  .tp-intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .tp-intro-img {
+    height: 36px;
     border-radius: var(--radius-sm);
     background: var(--color-border);
+    opacity: 0.35;
   }
 
-  .tp-bar-hero  { height: 40px; background: var(--color-bg-panel); }
-  .tp-bar-intro { height: 28px; }
-  .tp-bar-cta   { height: 24px; background: var(--color-accent); opacity: 0.25; }
-
-  .tp-preview-row {
+  /* ── Features section ───────────────────────────────────────────────── */
+  .tp-features {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 6px;
+    gap: 5px;
+    padding: 10px 14px;
+    background: var(--color-bg);
   }
 
-  .tp-preview-card {
-    height: 28px;
-    border-radius: var(--radius-sm);
+  .tp-fcard {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 7px 6px;
     background: var(--color-bg-panel);
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  /* ── CTA section ────────────────────────────────────────────────────── */
+  .tp-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 14px;
+    background: var(--color-accent);
+    flex: 1;
+    justify-content: center;
+  }
+
+  .tp-inv {
+    background: rgba(255, 255, 255, 0.4);
+    width: 45%;
+  }
+
+  .tp-btn-inv {
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
   }
 </style>

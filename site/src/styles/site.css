@@ -84,6 +84,9 @@ html { scroll-behavior: smooth; }
 .section-title {
   margin-bottom: var(--space-md);
 }
+.stack .section-title {
+  margin-bottom: 0;
+}
 .section-desc {
   color: var(--color-text-secondary);
   max-width: 60ch;
