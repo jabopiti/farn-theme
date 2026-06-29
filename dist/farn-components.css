@@ -1454,7 +1454,7 @@ hr { border: none; }
   transition: color var(--duration-slow) var(--ease-default);
 }
 
-.nav-logo span { color: var(--color-accent); }
+.nav-logo span { color: var(--color-wordmark-dot); }
 
 .nav-logo-icon {
   height: 40px;
@@ -1625,7 +1625,7 @@ hr { border: none; }
   letter-spacing: -0.02em;
 }
 
-.nav-drawer-logo span { color: var(--color-accent); }
+.nav-drawer-logo span { color: var(--color-wordmark-dot); }
 
 .nav-drawer-close {
   width: 36px; height: 36px;
@@ -1753,7 +1753,7 @@ hr { border: none; }
   margin-bottom: var(--space-xs);
 }
 
-.footer-logo span { color: var(--color-accent); }
+.footer-logo span { color: var(--color-wordmark-dot); }
 
 .footer-logo-icon {
   height: 56px;
