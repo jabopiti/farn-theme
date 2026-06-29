@@ -22,7 +22,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/site.css`: Added `html { scroll-behavior: smooth }` — restores smooth anchor scrolling on the docs site after removal from `base.css`.
 - `site/src/styles/site.css`: Unfilled sub-nav link idle colour changed from hardcoded `rgba(247,246,243,0.6)` to `color-mix(in srgb, var(--bm2-birch) 60%, transparent)` — uses the palette token so the colour updates if `--bm2-birch` ever changes.
 - `site/src/styles/site.css`: Unfilled sub-nav link font size changed from hardcoded `14px` to `var(--text-sm)`; padding changed from hardcoded `16px` to `var(--space-md)`.
-
+- `tokens/typography.css`: Removed the `@import url('https://fonts.googleapis.com/...')` from the dist bundle. Font loading is now the consumer's responsibility — self-host WOFF2 files or use Google Fonts CDN with consent management. The `--font-*` custom properties are unchanged.
+- `site/src/styles/fonts.css` (new): `@font-face` declarations for the docs site, loading Fraunces, Instrument Sans, and JetBrains Mono from self-hosted WOFF2 files in `site/public/fonts/` (Latin subset). No third-party font requests from `farn.jbpt.de`.
+- `site/public/fonts/`: Added four WOFF2 files sourced from fonts.gstatic.com — `fraunces-latin-normal.woff2`, `fraunces-latin-italic.woff2`, `instrument-sans-latin.woff2`, `jetbrains-mono-latin.woff2`.
+- Getting Started and Typography docs updated to show self-hosted `@font-face` pattern instead of Google Fonts CDN links.
 ---
 
 ## [0.6.1] — 2026-06-27

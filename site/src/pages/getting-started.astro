@@ -80,15 +80,48 @@ Full reference: https://farn.jbpt.de/llms.txt</code></pre>
     <li><code>base.css</code> — box-sizing reset, smooth scroll, focus ring, reduced-motion</li>
   </ol>
   <p><code>farn-tokens.css</code> is the same bundle without <code>base.css</code> (layers 1–6 only).</p>
-  <p>Fonts are not bundled. Load them separately via Google Fonts.</p>
+  <p>Fonts are not bundled — load them separately. Self-hosting the WOFF2 files is recommended; see <a href="#load-fonts">Load Fonts</a> below.</p>
 
   <h2 id="load-fonts">Load Fonts</h2>
-  <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
-&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;
-&lt;link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-/&gt;</code></pre>
-  <p>Load fonts via a <code>&lt;link&gt;</code> tag in <code>&lt;head&gt;</code>, not via <code>@import url()</code> inside CSS — the <code>@import</code> approach delays rendering.</p>
+  <p>Farn uses <strong>Fraunces</strong> (display/headings), <strong>Instrument Sans</strong> (body/UI), and <strong>JetBrains Mono</strong> (code). Download the four WOFF2 files from the <a href="https://github.com/jabopiti/farn-theme/tree/main/site/public/fonts" target="_blank" rel="noopener noreferrer">Farn repo</a>, place them at <code>/fonts/</code> in your public root, and declare them with <code>@font-face</code>:</p>
+  <pre><code>/* Fraunces — variable (wt 300–900), upright */
+@font-face &#123;
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+&#125;
+@font-face &#123;
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+&#125;
+
+/* Instrument Sans — variable (wt 400–600), upright */
+@font-face &#123;
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+&#125;
+
+/* JetBrains Mono — variable (wt 400–500), upright */
+@font-face &#123;
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+&#125;</code></pre>
+  <p>Self-hosting serves fonts from your own domain — no IP addresses are sent to third-party servers, which satisfies GDPR obligations without a consent banner. If you prefer the Google Fonts CDN, add a consent management platform before enabling it.</p>
 
   <h2 id="fowt">Prevent Flash of Wrong Theme (FOWT)</h2>
   <p>Add this inline script in <code>&lt;head&gt;</code> before any CSS loads. It reads the stored preference and sets <code>data-theme</code> on <code>&lt;html&gt;</code> before the browser paints.</p>
@@ -172,10 +205,7 @@ h3 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; 
   &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
   &lt;link rel="stylesheet"
     href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.6.1/dist/farn.css"&gt;
-  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
-  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
-  &lt;link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap"&gt;
+  &lt;link rel="stylesheet" href="/styles/fonts.css"&gt;&lt;!-- self-hosted @font-face, see Load Fonts --&gt;
   &lt;script&gt;
     (function()&#123;
       const s = localStorage.getItem('farn-theme');

@@ -17,9 +17,10 @@ import { groups, links, ctas } from '../data/navigation';
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" href="/fern_icon.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/fraunces-latin-normal.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/fraunces-latin-italic.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/instrument-sans-latin.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/jetbrains-mono-latin.woff2" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 <script is:inline>
   (function() {
@@ -29,6 +30,7 @@ import { groups, links, ctas } from '../data/navigation';
   })();
 </script>
 <style is:global>
+  @import '../styles/fonts.css';
   @import '../../../tokens/colors.css';
   @import '../../../tokens/typography.css';
   @import '../../../tokens/spacing.css';

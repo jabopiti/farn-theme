@@ -2,7 +2,7 @@
 /* Fraunces (display) · Instrument Sans (body) · JetBrains Mono (code)      */
 /* IMPORTANT: Fraunces requires font-variation-settings: 'opsz' <size>       */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Font loading excluded from dist — self-host WOFF2s (site/public/fonts/) or use Google Fonts with consent. */
 
 :root {
   --font-display: 'Fraunces', Georgia, serif;
