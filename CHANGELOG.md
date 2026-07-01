@@ -35,6 +35,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/fonts.css` (new): `@font-face` declarations for the docs site, loading Fraunces, Instrument Sans, and JetBrains Mono from self-hosted WOFF2 files in `site/public/fonts/` (Latin subset). No third-party font requests from `farn.jbpt.de`.
 - `site/public/fonts/`: Added four WOFF2 files sourced from fonts.gstatic.com — `fraunces-latin-normal.woff2`, `fraunces-latin-italic.woff2`, `instrument-sans-latin.woff2`, `jetbrains-mono-latin.woff2`.
 - Getting Started and Typography docs updated to show self-hosted `@font-face` pattern instead of Google Fonts CDN links.
+- `site/src/pages/styles/color.astro`, `site/src/pages/index.astro`: Palette swatch fills now reference `var(--token-name)` instead of hardcoded hex literals — editing a palette token in `tokens/colors.css` now updates every swatch rendering with no other edit. Hex labels and copy-to-clipboard values are unchanged. Closes #165.
 ---
 
 ## [0.6.1] — 2026-06-27
