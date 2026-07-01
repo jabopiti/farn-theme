@@ -10,6 +10,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ### Added
 - `tokens/dark-light.css`: `--color-wordmark-dot: var(--fo1-fern)` — new semantic token declared identically in all three theme blocks (light, dark, no-JS fallback). Always resolves to fern regardless of theme, making it safe to use wherever a fixed brand color is needed without reaching for a palette token.
 - `tokens/dark-light.css`: `@media (prefers-color-scheme: dark) { :root:not([data-theme]) { … } }` — no-JS dark mode fallback. Fires before the FOWT inline script sets `data-theme`; once set, the `[data-theme="dark"]` rules take over at higher specificity. Consumers with JavaScript disabled now correctly respect the OS dark-mode preference.
+- `tokens/dark-light.css`: `--color-bg-interactive-active` — new semantic token for ghost-button pressed background (light: `--bm0-sand`, dark/no-JS-dark: `--in0-void`). Backs `components.css`'s `--btn-g-active-bg`, closing the one genuine per-theme gap identified in #164.
+- `tokens/dark-light.css`: `[data-theme="dark"]` and the no-JS dark block now declare `--color-card-highlight-text`, `-text-secondary`, `-text-tertiary`, and `-border` (previously only defined in the light block). `.card-highlight` in dark mode no longer falls back to `currentColor` for text and border. Closes #164.
 
 **Tooling**
 - `.github/workflows/ci.yml`: Added drift-detection steps for `dist/farn-layout.css` (from `tokens/layout.css`) and `dist/nav.js` (from `site/src/scripts/nav.js`) — both were unguarded despite being exported in `package.json`.
@@ -22,6 +24,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ### Fixed
 - `tokens/component-classes.css`: `.nav-logo span`, `.nav-drawer-logo span`, `.footer-logo span` now use `color: var(--color-wordmark-dot)` instead of `color: var(--color-accent)`. The dot in "Farn." was rendering as glade in dark mode because `--color-accent` resolves to `--fo0-glade` on dark surfaces; `--color-wordmark-dot` is always `--fo1-fern`.
+- `tokens/dark-light.css`, `tokens/components.css`: Removed `--btn-*` redeclarations in `dark-light.css` (no-JS dark, light, dark theme blocks, and the `[data-surface="featured"]` overrides) that were byte-identical to their `components.css` Tier-3 default or to what an existing semantic token (`--color-text`, `--color-bg-inset`, `--color-border`, etc.) already resolved to. This restores the intended Tier-2 → Tier-3 consumption direction — a button default now needs changing in exactly one place.
 - `tokens/dark-light.css`: Primary button label failed AA contrast on hover/active in dark mode — void text on the fern hover/active background measured 3.66:1. New `--btn-p-hover-text` / `--btn-p-active-text` tokens (wired through `.btn:hover` / `.btn:active` in `tokens/component-classes.css`) flip the label to birch in dark mode, giving 4.78:1 on hover and 6.91:1 on active. Idle state and light mode are unchanged. Closes #167.
 - `site/src/pages/components/actions.astro`: Button "Size tokens" table listed Small/Default font sizes one step too large (12px/13px) — corrected to the actual resolved sizes (11px/12px) and each row now names its `--btn-*-font-size` token. Closes #166.
 
@@ -34,6 +37,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/styles/fonts.css` (new): `@font-face` declarations for the docs site, loading Fraunces, Instrument Sans, and JetBrains Mono from self-hosted WOFF2 files in `site/public/fonts/` (Latin subset). No third-party font requests from `farn.jbpt.de`.
 - `site/public/fonts/`: Added four WOFF2 files sourced from fonts.gstatic.com — `fraunces-latin-normal.woff2`, `fraunces-latin-italic.woff2`, `instrument-sans-latin.woff2`, `jetbrains-mono-latin.woff2`.
 - Getting Started and Typography docs updated to show self-hosted `@font-face` pattern instead of Google Fonts CDN links.
+- `site/src/pages/styles/color.astro`, `site/src/pages/index.astro`: Palette swatch fills now reference `var(--token-name)` instead of hardcoded hex literals — editing a palette token in `tokens/colors.css` now updates every swatch rendering with no other edit. Hex labels and copy-to-clipboard values are unchanged. Closes #165.
 ---
 
 ## [0.6.1] — 2026-06-27

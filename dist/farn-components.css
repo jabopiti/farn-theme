@@ -47,11 +47,11 @@
   --btn-d-border:   transparent;
   --btn-d-hover-bg: var(--in0-void);
 
-  /* Active / pressed — ghost has dark override in dark-light.css */
-  --btn-p-active-bg: var(--color-accent-active); /* semantic; light: --fo3-deepwater · dark: --fo2-forest */
-  --btn-s-active-bg: var(--color-bg-inset);      /* light: hover-sandwich (idle=active); dark: --in2-slate via semantic layer */
-  --btn-g-active-bg: var(--bm0-sand);            /* light: darker than hover --bm1-mist; dark: --in0-void override */
-  --btn-d-active-bg: var(--in0-void);            /* same as hover — no darker palette token exists */
+  /* Active / pressed */
+  --btn-p-active-bg: var(--color-accent-active);         /* semantic; light: --fo3-deepwater · dark: --fo2-forest (dark override in dark-light.css, which also sets --btn-p-hover-text/--btn-p-active-text to birch there) */
+  --btn-s-active-bg: var(--color-bg-inset);              /* light: hover-sandwich (idle=active); dark: --in2-slate via semantic layer */
+  --btn-g-active-bg: var(--color-bg-interactive-active); /* semantic; light: --bm0-sand · dark: --in0-void */
+  --btn-d-active-bg: var(--in0-void);                    /* same as hover — no darker palette token exists */
 
   /* ── Link tokens ────────────────────────────────────────────────────── */
   --link-color:         var(--color-accent);
@@ -1479,7 +1479,7 @@ hr { border: none; }
 .nav-links a {
   font-size: var(--nav-link-font-size);
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   text-decoration: none;
   transition: color var(--duration-base) var(--ease-default);
 }
@@ -1504,7 +1504,7 @@ hr { border: none; }
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  color: var(--color-text-tertiary);
+  color: var(--color-text);
   font-size: 20px;
   text-decoration: none;
   transition: background-color var(--duration-base) var(--ease-default),
@@ -1524,7 +1524,7 @@ hr { border: none; }
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  color: var(--color-text-tertiary);
+  color: var(--color-text);
   font-size: 20px;
   transition: background-color var(--duration-base) var(--ease-default),
               color var(--duration-base) var(--ease-default);
