@@ -50,14 +50,14 @@
   pointer-events: none;
 }
 
-/* Variants — each sets its own scoped hover/active bg for the shared interaction rules below */
-.btn-p { background: var(--btn-p-bg); color: var(--btn-p-text); border-color: var(--btn-p-border); --btn-hover-bg: var(--btn-p-hover-bg); --btn-active-bg: var(--btn-p-active-bg); }
-.btn-s { background: var(--btn-s-bg); color: var(--btn-s-text); border-color: var(--btn-s-border); --btn-hover-bg: var(--btn-s-hover-bg); --btn-active-bg: var(--btn-s-active-bg); }
-.btn-g { background: var(--btn-g-bg); color: var(--btn-g-text); border-color: var(--btn-g-border); --btn-hover-bg: var(--btn-g-hover-bg); --btn-active-bg: var(--btn-g-active-bg); }
-.btn-d { background: var(--btn-d-bg); color: var(--btn-d-text); border-color: var(--btn-d-border); --btn-hover-bg: var(--btn-d-hover-bg); --btn-active-bg: var(--btn-d-active-bg); }
+/* Variants — each sets its own scoped hover/active bg (and, where the theme needs a text swap for contrast, text) for the shared interaction rules below */
+.btn-p { background: var(--btn-p-bg); color: var(--btn-p-text); border-color: var(--btn-p-border); --btn-hover-bg: var(--btn-p-hover-bg); --btn-active-bg: var(--btn-p-active-bg); --btn-hover-text: var(--btn-p-hover-text, var(--btn-p-text)); --btn-active-text: var(--btn-p-active-text, var(--btn-p-text)); }
+.btn-s { background: var(--btn-s-bg); color: var(--btn-s-text); border-color: var(--btn-s-border); --btn-hover-bg: var(--btn-s-hover-bg); --btn-active-bg: var(--btn-s-active-bg); --btn-hover-text: var(--btn-s-text); --btn-active-text: var(--btn-s-text); }
+.btn-g { background: var(--btn-g-bg); color: var(--btn-g-text); border-color: var(--btn-g-border); --btn-hover-bg: var(--btn-g-hover-bg); --btn-active-bg: var(--btn-g-active-bg); --btn-hover-text: var(--btn-g-text); --btn-active-text: var(--btn-g-text); }
+.btn-d { background: var(--btn-d-bg); color: var(--btn-d-text); border-color: var(--btn-d-border); --btn-hover-bg: var(--btn-d-hover-bg); --btn-active-bg: var(--btn-d-active-bg); --btn-hover-text: var(--btn-d-text); --btn-active-text: var(--btn-d-text); }
 
-.btn:hover       { background: var(--btn-hover-bg); }
-.btn:active      { background: var(--btn-active-bg); }
+.btn:hover       { background: var(--btn-hover-bg); color: var(--btn-hover-text); }
+.btn:active      { background: var(--btn-active-bg); color: var(--btn-active-text); }
 .btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 
 /* Sizes */
@@ -1223,7 +1223,7 @@ hr { border: none; }
 .nav-links a {
   font-size: var(--nav-link-font-size);
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   text-decoration: none;
   transition: color var(--duration-base) var(--ease-default);
 }
@@ -1248,7 +1248,7 @@ hr { border: none; }
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  color: var(--color-text-tertiary);
+  color: var(--color-text);
   font-size: 20px;
   text-decoration: none;
   transition: background-color var(--duration-base) var(--ease-default),
@@ -1268,7 +1268,7 @@ hr { border: none; }
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  color: var(--color-text-tertiary);
+  color: var(--color-text);
   font-size: 20px;
   transition: background-color var(--duration-base) var(--ease-default),
               color var(--duration-base) var(--ease-default);

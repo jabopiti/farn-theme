@@ -169,22 +169,18 @@
     --color-on-success:       var(--bm2-birch);
     --color-on-warning:       var(--bm2-birch);
     --color-bg-interactive-hover:          var(--in3-ash);
+    --color-bg-interactive-active:         var(--in0-void);
     --color-card-highlight-bg:             var(--fo2-forest);
+    --color-card-highlight-border:         transparent;
+    --color-card-highlight-text:           var(--bm2-birch);
+    --color-card-highlight-text-secondary: var(--bm1-mist);
+    --color-card-highlight-text-tertiary:  var(--bm0-sand);
     --tooltip-bg:                  var(--bm1-mist);
     --tooltip-text:                var(--in0-void);
     --skeleton-shine:              var(--in2-slate);
-    --btn-p-bg:        var(--color-accent);
-    --btn-p-text:      var(--color-accent-text);
-    --btn-p-hover-bg:  var(--color-accent-hover);
-    --btn-p-active-bg: var(--fo1-fern);
-    --btn-s-bg:        var(--color-bg-inset);
-    --btn-s-hover-bg:  var(--color-bg-interactive-hover);
-    --btn-s-active-bg: var(--color-bg-inset);
-    --btn-g-hover-bg:  var(--color-bg-interactive-hover);
-    --btn-g-active-bg: var(--in0-void);
-    --btn-g-border:    var(--color-border);
-    --btn-g-text:      var(--bm2-birch);
-    --btn-s-text:      var(--bm2-birch);
+    --btn-p-active-bg: var(--fo1-fern); /* collapses active = hover */
+    --btn-p-hover-text:  var(--bm2-birch);  /* fern bg + void text = 3.66:1 fail; birch text passes at 4.78:1 */
+    --btn-p-active-text: var(--bm2-birch);  /* active collapses to fern bg too; same swap keeps it ≥4.78:1 */
     --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
     --color-section-featured: var(--bm1-mist);
   }
@@ -218,6 +214,7 @@
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
   --color-bg-interactive-hover:          var(--bm1-mist);  /* one step deeper than base bg (birch) */
+  --color-bg-interactive-active:         var(--bm0-sand);  /* one step deeper than hover */
   --color-card-highlight-bg:             var(--fo3-deepwater);
   --color-card-highlight-border:         transparent;
   --color-card-highlight-text:           var(--bm2-birch);
@@ -226,18 +223,6 @@
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
   --skeleton-shine:              var(--bm2-birch); /* birch (page bg) — lighter than panel (mist) */
-  --btn-p-bg:        var(--color-accent);
-  --btn-p-text:      var(--color-accent-text);
-  --btn-p-hover-bg:  var(--color-accent-hover);
-  --btn-p-active-bg: var(--color-accent-active);
-  --btn-s-bg:        var(--color-bg-inset);
-  --btn-s-hover-bg:  var(--color-bg-interactive-hover);
-  --btn-s-active-bg: var(--color-bg-inset);
-  --btn-g-hover-bg:  var(--color-bg-interactive-hover);
-  --btn-g-active-bg: var(--bm0-sand);
-  --btn-g-border:    var(--color-border);
-  --btn-g-text:                  var(--in0-void);
-  --btn-s-text:                  var(--in0-void);
 
   /* Section transition aliases — consumed by divider patterns (T-23–T-28) */
   --color-section:          var(--color-bg);
@@ -265,7 +250,7 @@
   --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
   --color-bg-code:          var(--in1-iron);
   --color-accent:           var(--fo0-glade);  /* glade: 9.79:1 on void, 5.33:1 on iron — passes AA on all dark surfaces */
-  --color-accent-hover:     var(--fo1-fern);   /* hover; --btn-p-active-bg also collapses to fern — forest + void text = 2.53:1 fail */
+  --color-accent-hover:     var(--fo1-fern);   /* hover; --btn-p-active-bg also collapses to fern — void text would be 3.66:1 fail, so the button text swaps to birch below */
   --color-accent-active:    var(--fo2-forest);
   --color-accent-text:      var(--in0-void);   /* glade bg is light (L=0.49) — dark text required; badge/success/warning text overrides below use --bm2-birch directly */
   --color-wordmark-dot:     var(--fo1-fern); /* fixed brand color — always fern, never follows theme */
@@ -276,22 +261,18 @@
   --color-on-success:       var(--bm2-birch);  /* bloom-palette bg (moss) needs light text; void = 3.81:1 fail */
   --color-on-warning:       var(--bm2-birch);  /* bloom-palette bg (ochre) needs light text; void = 3.80:1 fail */
   --color-bg-interactive-hover:          var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
+  --color-bg-interactive-active:         var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
   --color-card-highlight-bg:             var(--fo2-forest);
+  --color-card-highlight-border:         transparent;
+  --color-card-highlight-text:           var(--bm2-birch);
+  --color-card-highlight-text-secondary: var(--bm1-mist);
+  --color-card-highlight-text-tertiary:  var(--bm0-sand);
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
-  --btn-p-bg:        var(--color-accent);
-  --btn-p-text:      var(--color-accent-text);
-  --btn-p-hover-bg:  var(--color-accent-hover);
-  --btn-p-active-bg: var(--fo1-fern);   /* collapses active = hover; forest + void text fails at 2.53:1 */
-  --btn-s-bg:        var(--color-bg-inset);
-  --btn-s-hover-bg:  var(--color-bg-interactive-hover);
-  --btn-s-active-bg: var(--color-bg-inset);
-  --btn-g-hover-bg:  var(--color-bg-interactive-hover);
-  --btn-g-active-bg: var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
-  --btn-g-border:    var(--color-border);
-  --btn-g-text:                 var(--bm2-birch);
-  --btn-s-text:                 var(--bm2-birch);
+  --btn-p-active-bg: var(--fo1-fern);   /* collapses active = hover */
+  --btn-p-hover-text:  var(--bm2-birch);  /* fern bg + void text = 3.66:1 fail; birch text passes at 4.78:1 */
+  --btn-p-active-text: var(--bm2-birch);  /* active collapses to fern bg too; same swap keeps it ≥4.78:1 */
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
   --color-section-featured: var(--bm1-mist);
 }
@@ -386,8 +367,6 @@
   --color-bg-interactive-hover: var(--in3-ash);
   --skeleton-base:              var(--in1-iron);
   --skeleton-shine:             var(--in2-slate);
-  --btn-g-text:                 var(--bm2-birch);
-  --btn-s-text:                 var(--bm2-birch);
 }
 
 [data-theme="dark"] [data-surface="featured"] {
@@ -410,8 +389,6 @@
   --color-accent-text:          var(--bm2-birch);
   --skeleton-base:              var(--bm0-sand);
   --skeleton-shine:             var(--bm2-birch);
-  --btn-g-text:                 var(--in0-void);
-  --btn-s-text:                 var(--in0-void);
 }
 
 /* ── Light-theme surface overrides ─────────────────────────────────────── */
@@ -502,11 +479,11 @@
   --btn-d-border:   transparent;
   --btn-d-hover-bg: var(--in0-void);
 
-  /* Active / pressed — ghost has dark override in dark-light.css */
-  --btn-p-active-bg: var(--color-accent-active); /* semantic; light: --fo3-deepwater · dark: --fo2-forest */
-  --btn-s-active-bg: var(--color-bg-inset);      /* light: hover-sandwich (idle=active); dark: --in2-slate via semantic layer */
-  --btn-g-active-bg: var(--bm0-sand);            /* light: darker than hover --bm1-mist; dark: --in0-void override */
-  --btn-d-active-bg: var(--in0-void);            /* same as hover — no darker palette token exists */
+  /* Active / pressed */
+  --btn-p-active-bg: var(--color-accent-active);         /* semantic; light: --fo3-deepwater · dark: --fo2-forest (dark override in dark-light.css, which also sets --btn-p-hover-text/--btn-p-active-text to birch there) */
+  --btn-s-active-bg: var(--color-bg-inset);              /* light: hover-sandwich (idle=active); dark: --in2-slate via semantic layer */
+  --btn-g-active-bg: var(--color-bg-interactive-active); /* semantic; light: --bm0-sand · dark: --in0-void */
+  --btn-d-active-bg: var(--in0-void);                    /* same as hover — no darker palette token exists */
 
   /* ── Link tokens ────────────────────────────────────────────────────── */
   --link-color:         var(--color-accent);
