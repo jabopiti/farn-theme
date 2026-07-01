@@ -45,7 +45,7 @@ import { groups, links, ctas } from '../../data/navigation';
     position: relative;
     overflow: clip;
     padding-top: var(--space-4xl);
-    padding-bottom: var(--space-4xl);
+    padding-bottom: calc(var(--space-4xl) + var(--wave-height));
     touch-action: pan-y;
     background: var(--color-bg);
   }
@@ -63,7 +63,7 @@ import { groups, links, ctas } from '../../data/navigation';
   .proto-frost-panel {
     max-width: 640px;
     border-radius: var(--radius-lg);
-    padding: var(--space-xl);
+    padding: var(--space-sm) var(--space-xl);
     border: 1px solid transparent;
     transition:
       background     400ms var(--ease-out),
