@@ -703,52 +703,28 @@ import { groups, links, ctas } from '../data/navigation';
   <a href="https://github.com/jabopiti/farn-theme" target="_blank" rel="noopener noreferrer">GitHub</a>
 </Footer>
 
-<!-- Smart nav: transparent overlay over hero, fills + hides on scroll -->
-<script is:inline>
-(function () {
-  const nav = document.getElementById('nav');
-  const NAV_H = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));
-  let lastY = 0;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    nav.classList.toggle('filled', y > 20);
-    if (y < NAV_H) {
-      nav.classList.remove('hidden');
-    } else if (y > lastY + 8) {
-      nav.classList.add('hidden');
-    } else if (y < lastY) {
-      nav.classList.remove('hidden');
-    }
-    lastY = y;
-  }, { passive: true });
-})();
-</script>
+<!-- Demo theme toggle (§5 — toggles global page theme; nav fill/autohide/theme-icon sync is handled by nav.js) -->
+<script>
+  import { syncNavThemeIcon } from '../scripts/nav.js';
 
-<!-- Demo theme toggle (§5 — toggles global page theme) -->
-<script is:inline>
-(function () {
   const btn = document.getElementById('demo-theme-toggle');
-  if (!btn) return;
-  function syncBtn() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    btn.innerHTML = isDark
-      ? '<i class="ti ti-sun"></i> Switch to Light'
-      : '<i class="ti ti-moon"></i> Switch to Dark';
-  }
-  syncBtn();
-  btn.addEventListener('click', () => {
-    const html = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('farn-theme', next);
+  if (btn) {
+    const syncBtn = () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      btn.innerHTML = isDark
+        ? '<i class="ti ti-sun"></i> Switch to Light'
+        : '<i class="ti ti-moon"></i> Switch to Dark';
+    };
     syncBtn();
-    const themeIcon   = document.getElementById('themeIcon');
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeIcon) themeIcon.className = next === 'dark' ? 'ti ti-sun' : 'ti ti-moon';
-    if (themeToggle) themeToggle.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-  });
-})();
+    btn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('farn-theme', next);
+      syncBtn();
+      syncNavThemeIcon();
+    });
+  }
 </script>
 
 <script>
