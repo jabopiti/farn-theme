@@ -1,0 +1,437 @@
+---
+interface Props {
+  /** Show A/B direction switcher and effect label — prototype use only */
+  protoMode?: boolean;
+}
+const { protoMode = false } = Astro.props;
+---
+
+<!--
+  FernParallaxBackground — three-layer depth parallax for the landing hero.
+
+  Layer stack (bottom → top):
+    1  bg-farn-forest-layer1 — painted forest path, full bleed (AVIF/PNG)
+    2  bg-farn-forest-layer2 — fern mandala, alpha PNG
+    3  bg-farn-forest-layer3 — fern border frame, alpha PNG
+    4  .px-grain              — film grain texture (toggled via data-grain="on" on <html>)
+    5  .px-overlay            — contrast gradient (colour adapts via data-vignette="on")
+
+  Runtime effects (all toggled via data-* attributes on <html>):
+    data-spring="on"    Spring physics motion (vs. lerp)
+    data-grain="on"     Film grain + atmospheric depth grading per layer
+    data-vignette="on"  Forest-green tinted vignette (vs. bg-colour fade)
+    data-frost="on"     Handled in the consuming page (backdrop-filter on text)
+
+  Motion triggers: load entry choreography · mouse parallax · scroll · gyroscope
+  Accessibility: aria-hidden, prefers-reduced-motion guard
+-->
+
+<div class="px-bg" aria-hidden="true" data-px-bg>
+  <div class="px-scene" data-dir="a" data-px-scene>
+
+    <div class="px-layer" data-layer="1">
+      <div class="px-inner" data-px-inner>
+        <picture>
+          <source srcset="/bg-farn-forest-parallax/bg-farn-forest-layer1.avif" type="image/avif">
+          <img src="/bg-farn-forest-parallax/bg-farn-forest-layer1.png"
+               alt="" draggable="false" loading="eager" decoding="async">
+        </picture>
+      </div>
+    </div>
+
+    <div class="px-layer" data-layer="2">
+      <div class="px-inner" data-px-inner>
+        <picture>
+          <img src="/bg-farn-forest-parallax/bg-farn-forest-layer2.png"
+               alt="" draggable="false" loading="eager" decoding="async">
+        </picture>
+      </div>
+    </div>
+
+    <div class="px-layer" data-layer="3">
+      <div class="px-inner" data-px-inner>
+        <picture>
+          <img src="/bg-farn-forest-parallax/bg-farn-forest-layer3.png"
+               alt="" draggable="false" loading="eager" decoding="async">
+        </picture>
+      </div>
+    </div>
+
+    <!-- Film grain overlay (effect 2) -->
+    <div class="px-grain" aria-hidden="true"></div>
+
+    <!-- Contrast / vignette overlay (effect 3) -->
+    <div class="px-overlay" aria-hidden="true"></div>
+  </div>
+
+  {protoMode && (
+    <div class="px-proto-switch" data-px-switch>
+      <span class="px-proto-label">Direction</span>
+      <button class="active" data-dir-btn="a">A — Forest Path</button>
+      <button data-dir-btn="b">B — Garden Window</button>
+    </div>
+  )}
+</div>
+
+<style>
+  /* ── Container ────────────────────────────────────────────────────────── */
+  .px-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .px-scene {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ── Layers ───────────────────────────────────────────────────────────── */
+  /* Oversize by 20%: parallax travel (scroll ≈14vh, mouse ≈3vw) stays well inside. */
+  .px-layer {
+    position: absolute;
+    inset: -20%;
+    z-index: 1;
+  }
+
+  .px-layer[data-layer="2"] { z-index: 2; }
+  .px-layer[data-layer="3"] { z-index: 3; }
+
+  /* Direction B: layer 2 as bottom-edge ground foliage */
+  .px-scene[data-dir="b"] .px-layer[data-layer="2"] {
+    inset: auto -8% -8% -8%;
+    height: 68%;
+  }
+
+  /* ── Parallax inner (JS writes transform here) ────────────────────────── */
+  .px-inner {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+    opacity: 0;
+    animation: px-fade-in var(--duration-reveal, 400ms) var(--ease-out, ease-out) forwards;
+  }
+
+  .px-layer[data-layer="1"] .px-inner { animation-delay: 0ms; }
+  .px-layer[data-layer="2"] .px-inner { animation-delay: 200ms; }
+  .px-layer[data-layer="3"] .px-inner { animation-delay: 400ms; }
+
+  @keyframes px-fade-in { to { opacity: 1; } }
+
+  /* ── Images ───────────────────────────────────────────────────────────── */
+  .px-layer img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .px-scene[data-dir="b"] .px-layer[data-layer="2"] img {
+    object-position: center bottom;
+  }
+
+  /* ── Effect 2: film grain ─────────────────────────────────────────────── */
+  .px-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 8;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 700ms var(--ease-out, ease-out);
+    /*
+      SVG fractalNoise grain via data URI.
+      %3C = <  %3E = >  %23 = #  %25 = %  %2F = /  %27 = '
+    */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65 0.60' numOctaves='3' stitchTiles='stitch'%2F%3E%3CfeColorMatrix type='saturate' values='0'%2F%3E%3C%2Ffilter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'%2F%3E%3C%2Fsvg%3E");
+    background-repeat: repeat;
+    background-size: 220px 220px;
+  }
+
+  :global([data-grain="on"]) .px-grain { opacity: 0.055; }
+
+  /* ── Effect 2: atmospheric depth grading per layer ────────────────────── */
+  /* Far layer (1): push back — slightly warmer, lower contrast, softer */
+  :global([data-grain="on"]) .px-layer[data-layer="1"] .px-inner {
+    filter: brightness(1.07) sepia(0.10) saturate(0.90);
+  }
+  /* Near layer (3): pull forward — higher contrast, more saturated, cooler */
+  :global([data-grain="on"]) .px-layer[data-layer="3"] .px-inner {
+    filter: brightness(0.94) contrast(1.09) saturate(1.14);
+  }
+
+  /* ── Dark mode base ───────────────────────────────────────────────────── */
+  /* :global() needed — data-theme is on <html>, outside this component's scope */
+  :global([data-theme="dark"]) .px-inner {
+    filter: brightness(0.50) saturate(0.80);
+  }
+
+  /* Dark mode + grain: graded darkening per layer */
+  :global([data-theme="dark"][data-grain="on"]) .px-layer[data-layer="1"] .px-inner {
+    filter: brightness(0.44) saturate(0.72) sepia(0.08);
+  }
+  :global([data-theme="dark"][data-grain="on"]) .px-layer[data-layer="3"] .px-inner {
+    filter: brightness(0.47) contrast(1.05) saturate(0.86);
+  }
+
+  /* ── Effect 3 OFF: default semantic contrast overlay ─────────────────── */
+  .px-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+    pointer-events: none;
+    transition: background 600ms var(--ease-out, ease-out);
+    background:
+      linear-gradient(
+        100deg,
+        color-mix(in srgb, var(--color-bg) 55%, transparent) 0%,
+        color-mix(in srgb, var(--color-bg) 22%, transparent) 42%,
+        transparent 68%
+      ),
+      radial-gradient(
+        ellipse 75% 85% at 50% 50%,
+        transparent 28%,
+        color-mix(in srgb, var(--color-bg) 8%, transparent) 58%,
+        color-mix(in srgb, var(--color-bg) 28%, transparent) 100%
+      );
+  }
+
+  /* ── Effect 3 ON: tinted forest vignette ─────────────────────────────── */
+  /*
+    Draws from the actual image palette rather than the semantic bg token.
+    Local properties scope hardcoded palette references to this component only.
+    Production exception: vignette tinting is inherently image-specific.
+  */
+  :global([data-vignette="on"]) .px-overlay {
+    background:
+      /* Warm amber glow at scene centre — the light source */
+      radial-gradient(
+        ellipse 50% 60% at 50% 50%,
+        rgba(210,165,70,0.09) 0%,
+        transparent 58%
+      ),
+      /* Deep forest left edge — behind the text */
+      linear-gradient(
+        100deg,
+        rgba(8,35,18,0.80) 0%,
+        rgba(10,42,22,0.45) 27%,
+        transparent 54%
+      ),
+      /* Vignette on all edges — draws the eye inward */
+      radial-gradient(
+        ellipse 100% 100% at 50% 50%,
+        transparent 36%,
+        rgba(5,25,12,0.26) 66%,
+        rgba(5,20,10,0.52) 100%
+      );
+  }
+
+  /* ── Layer 2 direction-switch transition ──────────────────────────────── */
+  .px-layer[data-layer="2"] {
+    transition:
+      inset  500ms var(--ease-spring, cubic-bezier(0.16,1,0.3,1)),
+      height 500ms var(--ease-spring, cubic-bezier(0.16,1,0.3,1));
+  }
+
+  /* ── Prototype: direction switcher ───────────────────────────────────── */
+  .px-proto-switch {
+    position: absolute;
+    top: calc(var(--nav-height, 64px) + 12px);
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 50;
+    pointer-events: all;
+  }
+
+  .px-proto-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-right: 2px;
+  }
+
+  .px-proto-switch button {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    padding: 5px 11px;
+    background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition:
+      background var(--duration-slow, 200ms),
+      color     var(--duration-slow, 200ms),
+      border-color var(--duration-slow, 200ms);
+  }
+
+  .px-proto-switch button.active {
+    background: var(--color-bg);
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .px-proto-switch button:not(.active):hover {
+    background: color-mix(in srgb, var(--color-bg) 90%, transparent);
+    color: var(--color-text);
+  }
+
+  /* ── Reduced motion: skip all animation, appear instantly ────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .px-inner {
+      animation: none;
+      opacity: 1;
+    }
+    .px-layer[data-layer="2"] {
+      transition: none;
+    }
+    .px-grain,
+    .px-overlay {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  const bg = document.querySelector<HTMLElement>('[data-px-bg]');
+  if (!bg) return;
+  const scene = bg.querySelector<HTMLElement>('[data-px-scene]');
+  if (!scene) return;
+  const inners = [...bg.querySelectorAll<HTMLElement>('[data-px-inner]')];
+  if (!inners.length) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ROOT = document.documentElement;
+
+  // ── Parallax depth multipliers per layer [far, mid, near] ─────────────
+  const MOUSE_X  = [0.006, 0.018, 0.030]; // × half-viewport-width
+  const MOUSE_Y  = [0.004, 0.012, 0.020]; // × half-viewport-height
+  const SCROLL_Y = [0.040, 0.085, 0.145]; // × scrollY (px)
+
+  // ── Motion model A: lerp ───────────────────────────────────────────────
+  const LERP = 0.065;
+  const curr = inners.map(() => ({ x: 0, y: 0 }));
+
+  // ── Motion model B: spring (effect 1) ─────────────────────────────────
+  // Discrete spring: vel = (vel + (target - pos) * stiffness) * damping
+  // Layer 1 — heavy/slow settle; Layer 3 — light, slight overshoot on fast moves
+  const SPRING = [
+    { k: 0.022, d: 0.84 },
+    { k: 0.038, d: 0.78 },
+    { k: 0.060, d: 0.73 },
+  ] as const;
+  const spr = inners.map(() => ({ x: 0, y: 0, vx: 0, vy: 0 }));
+
+  // ── Entry choreography (always active, not a toggle) ──────────────────
+  // Each layer starts from a displaced position and converges to 0.
+  // Purely additive — works with both lerp and spring modes.
+  const ENTRY_FROM = [
+    { x: 0, y: -22 }, // far bg: drifts down into frame
+    { x: 0, y:  20 }, // mid cluster: rises up into frame
+    { x: 0, y:   0 }, // frame ferns: already in place, just fade
+  ];
+  const ENTRY_MS = 1300;
+  const entryStart = performance.now();
+  function easeOutCubic(t: number) { return 1 - (1 - t) ** 3; }
+
+  // ── Input state ───────────────────────────────────────────────────────
+  let inputX = 0, inputY = 0, scrollPx = 0, usingGyro = false;
+
+  // ── Mouse ─────────────────────────────────────────────────────────────
+  window.addEventListener('mousemove', (e) => {
+    if (usingGyro) return;
+    inputX = (e.clientX / window.innerWidth  - 0.5) * 2; // –1…+1
+    inputY = (e.clientY / window.innerHeight - 0.5) * 2;
+  }, { passive: true });
+
+  // ── Scroll ────────────────────────────────────────────────────────────
+  window.addEventListener('scroll', () => { scrollPx = window.scrollY; }, { passive: true });
+
+  // ── Gyroscope ─────────────────────────────────────────────────────────
+  function startGyro() {
+    usingGyro = true;
+    window.addEventListener('deviceorientation', (e: DeviceOrientationEvent) => {
+      inputX = Math.max(-1, Math.min(1, (e.gamma ?? 0) / 28));
+      inputY = Math.max(-1, Math.min(1, ((e.beta  ?? 0) - 35) / 22));
+    }, { passive: true });
+  }
+
+  if (typeof DeviceOrientationEvent !== 'undefined') {
+    if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+      document.addEventListener('touchstart', async function once() {
+        document.removeEventListener('touchstart', once);
+        try {
+          if (await (DeviceOrientationEvent as any).requestPermission() === 'granted') startGyro();
+        } catch { /* denied or unsupported */ }
+      }, { once: true });
+    } else {
+      startGyro();
+    }
+  }
+
+  // ── Direction switcher ────────────────────────────────────────────────
+  bg.querySelectorAll<HTMLButtonElement>('[data-dir-btn]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      scene.dataset.dir = btn.dataset.dirBtn ?? 'a';
+      bg.querySelectorAll<HTMLButtonElement>('[data-dir-btn]')
+        .forEach(b => b.classList.toggle('active', b === btn));
+    });
+  });
+
+  // ── rAF loop ──────────────────────────────────────────────────────────
+  function tick() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const useSpring = ROOT.dataset.spring === 'on';
+
+    // Entry offset: decays from 1 → 0 over ENTRY_MS with cubic ease
+    const elapsed = performance.now() - entryStart;
+    const entryFactor = elapsed < ENTRY_MS
+      ? 1 - easeOutCubic(Math.min(1, elapsed / ENTRY_MS))
+      : 0;
+
+    inners.forEach((el, i) => {
+      const tx = inputX * MOUSE_X[i] * vw;
+      const ty = inputY * MOUSE_Y[i] * vh - scrollPx * SCROLL_Y[i];
+
+      let px: number, py: number;
+
+      if (useSpring) {
+        const s = SPRING[i];
+        spr[i].vx = (spr[i].vx + (tx - spr[i].x) * s.k) * s.d;
+        spr[i].vy = (spr[i].vy + (ty - spr[i].y) * s.k) * s.d;
+        spr[i].x += spr[i].vx;
+        spr[i].y += spr[i].vy;
+        px = spr[i].x;
+        py = spr[i].y;
+      } else {
+        curr[i].x += (tx - curr[i].x) * LERP;
+        curr[i].y += (ty - curr[i].y) * LERP;
+        px = curr[i].x;
+        py = curr[i].y;
+      }
+
+      // Add entry choreography offset (additive, decays to 0)
+      const ex = ENTRY_FROM[i].x * entryFactor;
+      const ey = ENTRY_FROM[i].y * entryFactor;
+
+      el.style.transform =
+        `translate3d(${(px + ex).toFixed(1)}px,${(py + ey).toFixed(1)}px,0)`;
+    });
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+})();
+</script>
