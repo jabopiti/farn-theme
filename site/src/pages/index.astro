@@ -4,7 +4,7 @@
 // body layout and scroll behaviour handled below.
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
-import FernBackground from '../components/FernBackground.astro';
+import FernParallaxBackground from '../components/FernParallaxBackground.astro';
 import { groups, links, ctas } from '../data/navigation';
 ---
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ import { groups, links, ctas } from '../data/navigation';
     overflow: clip;
     padding-top: var(--space-4xl);
     padding-bottom: calc(var(--space-4xl) + var(--wave-height));
-    background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-panel) 55%, var(--color-bg-inset) 100%);
+    background: var(--color-bg);
     touch-action: pan-y;
   }
   /* Semantic tokens above resolve to the correct palette per theme automatically */
@@ -393,7 +393,7 @@ import { groups, links, ctas } from '../data/navigation';
 
 <!-- ── § 1 Hero ──────────────────────────────────────────────────── -->
 <section class="hero" data-fern data-intro="3000" aria-label="Hero">
-  <FernBackground />
+  <FernParallaxBackground />
   <div class="hero-inner">
     <p class="hero-eyebrow">Sharp · Warm · Intellectual</p>
     <h1 class="hero-title">A design system<br>rooted in northern forests.</h1>
