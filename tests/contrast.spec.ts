@@ -14,8 +14,8 @@ const FIXTURE_URL = pathToFileURL(
 // the surface's own (often inverted) colors — producing near-invisible text
 // and borders. This suite renders every button variant inside every surface,
 // in both page themes, including the surface pinned to the opposite theme on
-// the same element, and checks that text/border stay legible at rest and on
-// hover.
+// the same element, and checks that text/border stay legible at rest, on
+// hover, and on press.
 
 const THEMES = ['light', 'dark'] as const;
 const SURFACES = [
@@ -113,7 +113,7 @@ test.describe('button contrast across surfaces and themes', () => {
   for (const theme of THEMES) {
     for (const surface of SURFACES) {
       for (const variant of VARIANTS) {
-        test(`${theme} page / ${surface} surface / ${variant} stays legible at rest and on hover`, async ({
+        test(`${theme} page / ${surface} surface / ${variant} stays legible at rest, on hover, and on press`, async ({
           page,
         }) => {
           await page.goto(FIXTURE_URL);
@@ -145,6 +145,7 @@ test.describe('button contrast across surfaces and themes', () => {
           // At rest
           const restColor = await btn.evaluate((el) => getComputedStyle(el).color);
           const restBorder = await btn.evaluate((el) => getComputedStyle(el).borderColor);
+          const restRawBg = await btn.evaluate((el) => getComputedStyle(el).backgroundColor);
           const restBg = await effectiveBackground(btn);
 
           const restTextContrast = contrastRatio(restColor, restBg);
@@ -175,6 +176,42 @@ test.describe('button contrast across surfaces and themes', () => {
             hoverTextContrast,
             `${variant} text vs background contrast too low on hover (${hoverColor} on ${effectiveHoverBg})`,
           ).toBeGreaterThanOrEqual(MIN_TEXT_CONTRAST);
+
+          // On press (:active) — a real mousedown, not just a CSS class toggle,
+          // since :active only applies to the element actually under the
+          // pointer at mousedown time. Exercises --btn-*-active-bg/-active-text,
+          // which (unlike hover) aren't covered anywhere else in this suite.
+          const box = await btn.boundingBox();
+          if (!box) throw new Error(`${variant} in ${surface} has no bounding box to click`);
+          await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+          await page.mouse.down();
+          const activeColor = await btn.evaluate((el) => getComputedStyle(el).color);
+          const activeBg = await btn.evaluate((el) => getComputedStyle(el).backgroundColor);
+          await page.mouse.up();
+          const effectiveActiveBg = activeBg.startsWith('rgba') && parseRgb(activeBg)[3] === 0
+            ? await effectiveBackground(btn)
+            : activeBg;
+
+          const activeTextContrast = contrastRatio(activeColor, effectiveActiveBg);
+          expect(
+            activeTextContrast,
+            `${variant} text vs background contrast too low on press (${activeColor} on ${effectiveActiveBg})`,
+          ).toBeGreaterThanOrEqual(MIN_TEXT_CONTRAST);
+
+          // A press that resolves to the SAME fill as rest gives no feedback
+          // at all — contrast math alone can't catch this (an --active-bg
+          // token can leak the wrong ambient value and still pass contrast
+          // if it happens to equal a still-legible resting color). btn-s is
+          // exempt: --btn-s-active-bg is deliberately aliased to the same
+          // --color-bg-inset as --btn-s-bg (the "hover-sandwich" convention —
+          // idle and pressed share a fill, only hover lifts it), so equality
+          // there is the intended design, not a leak.
+          if (variant !== 'btn-s') {
+            expect(
+              activeBg,
+              `${variant} press background is identical to its resting background (${activeBg}) — pressing gives no visual feedback, likely a leaked/frozen --btn-*-active-bg token`,
+            ).not.toBe(restRawBg);
+          }
         });
       }
     }
