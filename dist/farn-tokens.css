@@ -121,338 +121,6 @@
   --ease-in-out:  ease-in-out;
   --ease-spring:  cubic-bezier(0.16, 1, 0.3, 1); /* overshoot / spring out */
 }
-/* ── Farn — Semantic tokens and surface patterns ──────────────────────── */
-/*                                                                           */
-/* Two-layer architecture:                                                   */
-/*   Layer 1 — palette (colors.css): raw color values, never used directly  */
-/*   Layer 2 — semantic (this file): purpose-mapped aliases                  */
-/*                                                                           */
-/* Theme control:                                                             */
-/*   Page-level : data-theme="dark" or data-theme="light" on <html>         */
-/*   Any element: data-theme="dark|light" — sets background + all tokens    */
-/*   Depth      : data-surface="base|layer|overlay|featured" — relative to theme */
-/*                                                                           */
-/* FOWT prevention: add this inline script before <body>:                    */
-/*   const t = localStorage.getItem('farn-theme');                           */
-/*   const s = window.matchMedia('(prefers-color-scheme: dark)').matches     */
-/*     ? 'dark' : 'light';                                                   */
-/*   document.documentElement.setAttribute('data-theme', t ?? s);            */
-
-/* ── No-JS dark mode fallback ───────────────────────────────────────── */
-/* Fires only when data-theme has not yet been set (before JS runs or when  */
-/* JS is disabled). Once the FOWT inline script sets data-theme on <html>, */
-/* the [data-theme="dark"] block below takes over at higher specificity.    */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    background:               var(--color-bg);
-    color:                    var(--color-text);
-    --color-bg:               var(--in0-void);
-    --color-bg-panel:         var(--in1-iron);
-    --color-bg-inset:         var(--in2-slate);
-    --color-text:             var(--bm2-birch);
-    --color-text-secondary:   var(--bm1-mist);
-    --color-text-tertiary:    var(--bm0-sand);
-    --color-border:           var(--in2-slate);
-    --color-border-strong:    var(--bm0-sand);
-    --color-border-subtle:    color-mix(in srgb, var(--in2-slate) 25%, transparent);
-    --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
-    --color-bg-code:          var(--in1-iron);
-    --color-accent:           var(--fo0-glade);
-    --color-accent-hover:     var(--fo1-fern);
-    --color-accent-active:    var(--fo2-forest);
-    --color-accent-text:      var(--in0-void);
-    --color-wordmark-dot:     var(--fo1-fern); /* fixed brand color — always fern, never follows theme */
-    --color-error:            var(--bl0-ember);
-    --color-warning:          var(--bl1-ochre);
-    --color-success:          var(--bl3-moss);
-    --color-on-error:         var(--bm2-birch);
-    --color-on-success:       var(--bm2-birch);
-    --color-on-warning:       var(--bm2-birch);
-    --color-bg-interactive-hover:          var(--in3-ash);
-    --color-card-highlight-bg:             var(--fo2-forest);
-    --tooltip-bg:                  var(--bm1-mist);
-    --tooltip-text:                var(--in0-void);
-    --skeleton-shine:              var(--in2-slate);
-    --btn-p-bg:        var(--color-accent);
-    --btn-p-text:      var(--color-accent-text);
-    --btn-p-hover-bg:  var(--color-accent-hover);
-    --btn-p-active-bg: var(--fo1-fern);
-    --btn-s-bg:        var(--color-bg-inset);
-    --btn-s-hover-bg:  var(--color-bg-interactive-hover);
-    --btn-s-active-bg: var(--color-bg-inset);
-    --btn-g-hover-bg:  var(--color-bg-interactive-hover);
-    --btn-g-active-bg: var(--in0-void);
-    --btn-g-border:    var(--color-border);
-    --btn-g-text:      var(--bm2-birch);
-    --btn-s-text:      var(--bm2-birch);
-    --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
-    --color-section-featured: var(--bm1-mist);
-  }
-}
-
-/* ── Semantic tokens — light (default) ───────────────────────────────── */
-:root,
-[data-theme="light"] {
-  background:               var(--color-bg);
-  color:                    var(--color-text);
-  --color-bg:               var(--bm2-birch);
-  --color-bg-panel:         var(--bm1-mist);
-  --color-bg-inset:         var(--bm0-sand);
-  --color-text:             var(--in0-void);
-  --color-text-secondary:   var(--in2-slate);
-  --color-text-tertiary:    var(--in3-ash);
-  --color-border:           var(--in3-ash);
-  --color-border-strong:    var(--in1-iron);
-  --color-border-subtle:    color-mix(in srgb, var(--in1-iron) 12%, transparent);
-  --color-ghost-border:     color-mix(in srgb, var(--in1-iron) 25%, transparent);
-  --color-bg-code:          var(--fo3-deepwater);
-  --color-accent:           var(--fo1-fern);
-  --color-accent-hover:     var(--fo2-forest);
-  --color-accent-active:    var(--fo3-deepwater);
-  --color-accent-text:      var(--bm2-birch);
-  --color-wordmark-dot:     var(--fo1-fern); /* fixed brand color — always fern, never follows theme */
-  --color-error:            var(--bl0-ember);
-  --color-warning:          var(--bl1-ochre);
-  --color-success:          var(--bl3-moss);
-  --color-on-error:         var(--bm2-birch);
-  --color-on-success:       var(--color-accent-text);
-  --color-on-warning:       var(--color-accent-text);
-  --color-bg-interactive-hover:          var(--bm1-mist);  /* one step deeper than base bg (birch) */
-  --color-card-highlight-bg:             var(--fo3-deepwater);
-  --color-card-highlight-border:         transparent;
-  --color-card-highlight-text:           var(--bm2-birch);
-  --color-card-highlight-text-secondary: var(--bm1-mist);
-  --color-card-highlight-text-tertiary:  var(--bm0-sand);
-  --tooltip-bg:                  var(--in0-void);
-  --tooltip-text:                var(--bm2-birch);
-  --skeleton-shine:              var(--bm2-birch); /* birch (page bg) — lighter than panel (mist) */
-  --btn-p-bg:        var(--color-accent);
-  --btn-p-text:      var(--color-accent-text);
-  --btn-p-hover-bg:  var(--color-accent-hover);
-  --btn-p-active-bg: var(--color-accent-active);
-  --btn-s-bg:        var(--color-bg-inset);
-  --btn-s-hover-bg:  var(--color-bg-interactive-hover);
-  --btn-s-active-bg: var(--color-bg-inset);
-  --btn-g-hover-bg:  var(--color-bg-interactive-hover);
-  --btn-g-active-bg: var(--bm0-sand);
-  --btn-g-border:    var(--color-border);
-  --btn-g-text:                  var(--in0-void);
-  --btn-s-text:                  var(--in0-void);
-
-  /* Section transition aliases — consumed by divider patterns (T-23–T-28) */
-  --color-section:          var(--color-bg);
-  /* override --color-section-next on the divider element to match the actual destination section */
-  --color-section-next:     var(--color-bg-panel);
-  --color-section-base:     var(--color-bg);
-  --color-section-layer:    var(--color-bg-panel);
-  --color-section-overlay:  var(--color-bg-inset);
-  --color-section-featured: var(--in0-void);
-}
-
-/* ── Semantic tokens — dark ─────────────────────────────────────────── */
-[data-theme="dark"] {
-  background:               var(--color-bg);
-  color:                    var(--color-text);
-  --color-bg:               var(--in0-void);
-  --color-bg-panel:         var(--in1-iron);
-  --color-bg-inset:         var(--in2-slate);
-  --color-text:             var(--bm2-birch);
-  --color-text-secondary:   var(--bm1-mist);
-  --color-text-tertiary:    var(--bm0-sand);
-  --color-border:           var(--in2-slate);
-  --color-border-strong:    var(--bm0-sand);
-  --color-border-subtle:    color-mix(in srgb, var(--in2-slate) 25%, transparent);
-  --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
-  --color-bg-code:          var(--in1-iron);
-  --color-accent:           var(--fo0-glade);  /* glade: 9.79:1 on void, 5.33:1 on iron — passes AA on all dark surfaces */
-  --color-accent-hover:     var(--fo1-fern);   /* hover; --btn-p-active-bg also collapses to fern — forest + void text = 2.53:1 fail */
-  --color-accent-active:    var(--fo2-forest);
-  --color-accent-text:      var(--in0-void);   /* glade bg is light (L=0.49) — dark text required; badge/success/warning text overrides below use --bm2-birch directly */
-  --color-wordmark-dot:     var(--fo1-fern); /* fixed brand color — always fern, never follows theme */
-  --color-error:            var(--bl0-ember);
-  --color-warning:          var(--bl1-ochre);
-  --color-success:          var(--bl3-moss);
-  --color-on-error:         var(--bm2-birch);
-  --color-on-success:       var(--bm2-birch);  /* bloom-palette bg (moss) needs light text; void = 3.81:1 fail */
-  --color-on-warning:       var(--bm2-birch);  /* bloom-palette bg (ochre) needs light text; void = 3.80:1 fail */
-  --color-bg-interactive-hover:          var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
-  --color-card-highlight-bg:             var(--fo2-forest);
-  --tooltip-bg:                  var(--bm1-mist);
-  --tooltip-text:                var(--in0-void);
-  --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
-  --btn-p-bg:        var(--color-accent);
-  --btn-p-text:      var(--color-accent-text);
-  --btn-p-hover-bg:  var(--color-accent-hover);
-  --btn-p-active-bg: var(--fo1-fern);   /* collapses active = hover; forest + void text fails at 2.53:1 */
-  --btn-s-bg:        var(--color-bg-inset);
-  --btn-s-hover-bg:  var(--color-bg-interactive-hover);
-  --btn-s-active-bg: var(--color-bg-inset);
-  --btn-g-hover-bg:  var(--color-bg-interactive-hover);
-  --btn-g-active-bg: var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
-  --btn-g-border:    var(--color-border);
-  --btn-g-text:                 var(--bm2-birch);
-  --btn-s-text:                 var(--bm2-birch);
-  --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
-  --color-section-featured: var(--bm1-mist);
-}
-
-/* ── Surface patterns ─────────────────────────────────────────────────── */
-/* base/layer/overlay are relative — they adapt to the current data-theme.   */
-/* featured is the exception: always dark regardless of page theme.          */
-/* Only tokens that differ from the inherited theme values are declared.     */
-/* Each relative surface that changes in dark mode has two override selectors:*/
-/*   [data-theme="dark"] [data-surface]  — theme on ancestor element         */
-/*   [data-surface][data-theme="dark"]   — theme on same element             */
-/* featured uses only the ancestor selector — see block comment below.       */
-
-/* base — resets to page-level bg (useful inside deeper surface contexts) */
-[data-surface="base"] {
-  background: var(--bm2-birch);
-  --color-bg: var(--bm2-birch);
-}
-
-[data-theme="dark"] [data-surface="base"],
-[data-surface="base"][data-theme="dark"] {
-  background: var(--in0-void);
-  --color-bg: var(--in0-void);
-}
-
-/* layer — cards, sidebars, panels */
-[data-surface="layer"] {
-  background:                   var(--bm1-mist);
-  --color-bg:                   var(--bm1-mist);
-  --color-bg-panel:             var(--bm2-birch);
-  --color-bg-interactive-hover: var(--bm0-sand);  /* go deeper from mist */
-  --skeleton-base:              var(--bm0-sand);
-  --skeleton-shine:             var(--bm2-birch);
-}
-
-[data-theme="dark"] [data-surface="layer"],
-[data-surface="layer"][data-theme="dark"] {
-  background:                   var(--in1-iron);
-  --color-bg:                   var(--in1-iron);
-  --color-bg-panel:             var(--in2-slate);
-  --color-bg-code:              var(--in2-slate);
-  --color-bg-interactive-hover: var(--in3-ash);
-  --skeleton-base:              var(--in2-slate);
-  --skeleton-shine:             var(--in3-ash);
-  --input-border:               var(--in3-ash); /* ash visible on slate panel bg */
-}
-
-/* overlay — modals, dropdowns, floating elements */
-[data-surface="overlay"] {
-  background:                   var(--bm0-sand);
-  --color-bg:                   var(--bm0-sand);
-  --color-bg-inset:             var(--bm1-mist);   /* sand is the darkest light step — inset goes lighter for contrast */
-  --color-bg-interactive-hover: var(--bm2-birch);  /* go lighter — sand is the darkest light step */
-  --skeleton-base:              var(--bm1-mist);
-  --skeleton-shine:             var(--bm2-birch);
-}
-
-[data-theme="dark"] [data-surface="overlay"],
-[data-surface="overlay"][data-theme="dark"] {
-  background:                   var(--in2-slate);
-  --color-bg:                   var(--in2-slate);
-  --color-bg-panel:             var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
-  --color-bg-inset:             var(--in1-iron);
-  --color-bg-interactive-hover: var(--in3-ash);
-  --skeleton-base:              var(--in1-iron);
-  --skeleton-shine:             var(--in3-ash);
-  --input-border:               var(--in3-ash); /* ash visible on slate bg */
-}
-
-/* featured — maximum-contrast section; void in light mode, mist in dark mode.
-   In light mode, text/border tokens are set to dark-palette values.
-   In dark mode, the full token set flips to light-palette values (text → void,
-   bg → mist) so descendants inherit correct contrast in both themes without
-   needing data-theme on the element.
-   Only the ancestor selector is used for the dark override — the same-element
-   form would fire on data-theme="dark" data-surface="featured" even in light
-   mode, incorrectly setting mist when void is expected. */
-[data-surface="featured"] {
-  background:                   var(--in0-void);
-  color:                        var(--color-text);
-  --color-bg:                   var(--in0-void);
-  --color-bg-panel:             var(--in1-iron);
-  --color-bg-inset:             var(--in2-slate);
-  --color-bg-code:              var(--in1-iron);
-  --color-text:                 var(--bm2-birch);
-  --color-text-secondary:       var(--bm1-mist);
-  --color-text-tertiary:        var(--bm0-sand);
-  --color-border:               var(--in2-slate);
-  --color-border-strong:        var(--bm0-sand);
-  --color-border-subtle:        color-mix(in srgb, var(--in2-slate) 25%, transparent);
-  --color-ghost-border:         color-mix(in srgb, var(--bm2-birch) 25%, transparent);
-  --color-bg-interactive-hover: var(--in3-ash);
-  --skeleton-base:              var(--in1-iron);
-  --skeleton-shine:             var(--in2-slate);
-  --btn-g-text:                 var(--bm2-birch);
-  --btn-s-text:                 var(--bm2-birch);
-}
-
-[data-theme="dark"] [data-surface="featured"] {
-  background:                   var(--bm1-mist);
-  color:                        var(--color-text);
-  --color-bg:                   var(--bm1-mist);
-  --color-bg-panel:             var(--bm2-birch);
-  --color-bg-inset:             var(--bm0-sand);
-  --color-bg-code:              var(--fo3-deepwater);
-  --color-text:                 var(--in0-void);
-  --color-text-secondary:       var(--in2-slate);
-  --color-text-tertiary:        var(--in3-ash);
-  --color-border:               var(--in3-ash);
-  --color-border-strong:        var(--in1-iron);
-  --color-border-subtle:        color-mix(in srgb, var(--in1-iron) 12%, transparent);
-  --color-ghost-border:         color-mix(in srgb, var(--in1-iron) 25%, transparent);
-  --color-bg-interactive-hover: var(--bm0-sand);
-  --color-accent:               var(--fo1-fern);
-  --color-accent-hover:         var(--fo2-forest);
-  --color-accent-text:          var(--bm2-birch);
-  --skeleton-base:              var(--bm0-sand);
-  --skeleton-shine:             var(--bm2-birch);
-  --btn-g-text:                 var(--in0-void);
-  --btn-s-text:                 var(--in0-void);
-}
-
-/* ── Light-theme surface overrides ─────────────────────────────────────── */
-/* Without these, data-theme="light" data-surface="x" on an element inside  */
-/* a dark page resolves to dark palette values — the ancestor dark selector  */
-/* ([data-theme="dark"] [data-surface]) at specificity 0-2-0 beats the      */
-/* default light surface rule at 0-1-0. Same-element form (0-2-0) ties on   */
-/* specificity; source order here ensures light wins when declared last.     */
-/* The descendant form uses :not() (specificity 0-3-0) to beat the dark     */
-/* ancestor while excluding elements that are explicitly dark themselves.    */
-
-[data-surface="base"][data-theme="light"],
-[data-theme="light"] [data-surface="base"]:not([data-theme="dark"]) {
-  background:        var(--bm2-birch);
-  --color-bg:        var(--bm2-birch);
-  --input-border:    var(--color-border);
-}
-
-[data-surface="layer"][data-theme="light"],
-[data-theme="light"] [data-surface="layer"]:not([data-theme="dark"]) {
-  background:                   var(--bm1-mist);
-  --color-bg:                   var(--bm1-mist);
-  --color-bg-panel:             var(--bm2-birch);
-  --color-bg-code:              var(--fo3-deepwater);
-  --color-bg-interactive-hover: var(--bm0-sand);
-  --skeleton-base:              var(--bm0-sand);
-  --skeleton-shine:             var(--bm2-birch);
-  --input-border:               var(--color-border);
-}
-
-[data-surface="overlay"][data-theme="light"],
-[data-theme="light"] [data-surface="overlay"]:not([data-theme="dark"]) {
-  background:                   var(--bm0-sand);
-  --color-bg:                   var(--bm0-sand);
-  --color-bg-inset:             var(--bm1-mist);
-  --color-bg-code:              var(--fo3-deepwater);
-  --color-bg-interactive-hover: var(--bm2-birch);
-  --skeleton-base:              var(--bm1-mist);
-  --skeleton-shine:             var(--bm2-birch);
-  --input-border:               var(--color-border);
-}
 /* ── Farn — Component tokens (Tier 3) ─────────────────────────────────── */
 /*                                                                           */
 /* Tier-3 tokens sit above the semantic layer and below implementation.      */
@@ -493,7 +161,7 @@
   /* Ghost */
   --btn-g-bg:       transparent;
   --btn-g-text:     var(--color-text);
-  --btn-g-border:   var(--color-border);
+  --btn-g-border:   var(--color-border-strong); /* not --color-border: a ghost button's border is its only affordance, needs emphasis contrast, not the subtle default */
   --btn-g-hover-bg: var(--color-bg-interactive-hover);
 
   /* Destructive — hover is theme-invariant (always near-black for emphasis) */
@@ -507,6 +175,14 @@
   --btn-s-active-bg: var(--color-bg-inset);      /* light: hover-sandwich (idle=active); dark: --in2-slate via semantic layer */
   --btn-g-active-bg: var(--bm0-sand);            /* light: darker than hover --bm1-mist; dark: --in0-void override */
   --btn-d-active-bg: var(--in0-void);            /* same as hover — no darker palette token exists */
+
+  /* Hover/active text — --btn-*-hover-text/--btn-*-active-text are intentionally
+     NOT declared here. component-classes.css falls back to the resting
+     --btn-*-text when they're unset, which resolves correctly in every surface
+     without needing a redeclaration in each one (unlike --btn-*-bg/border,
+     these aren't derived from a context-sensitive semantic token — see the
+     dark-mode --btn-p-hover-text override in dark-light.css for the one place
+     a hover/active fill needs different text than its resting state). */
 
   /* ── Link tokens ────────────────────────────────────────────────────── */
   --link-color:         var(--color-accent);
@@ -708,4 +384,406 @@
   --table-cell-padding-sm:    4px var(--space-xs);              /* 4px 6px — compact */
   --table-cell-padding-lg:    var(--space-md) var(--space-md);  /* 24px 24px — comfortable */
   --table-radius:             var(--radius-md);        /* apply to a wrapper, not the table */
+}
+/* ── Farn — Semantic tokens and surface patterns ──────────────────────── */
+/*                                                                           */
+/* Two-layer architecture:                                                   */
+/*   Layer 1 — palette (colors.css): raw color values, never used directly  */
+/*   Layer 2 — semantic (this file): purpose-mapped aliases                  */
+/*                                                                           */
+/* Theme control:                                                             */
+/*   Page-level : data-theme="dark" or data-theme="light" on <html>         */
+/*   Any element: data-theme="dark|light" — sets background + all tokens    */
+/*   Depth      : data-surface="base|layer|overlay|featured" — relative to theme */
+/*                                                                           */
+/* FOWT prevention: add this inline script before <body>:                    */
+/*   const t = localStorage.getItem('farn-theme');                           */
+/*   const s = window.matchMedia('(prefers-color-scheme: dark)').matches     */
+/*     ? 'dark' : 'light';                                                   */
+/*   document.documentElement.setAttribute('data-theme', t ?? s);            */
+
+/* ── No-JS dark mode fallback ───────────────────────────────────────── */
+/* Fires only when data-theme has not yet been set (before JS runs or when  */
+/* JS is disabled). Once the FOWT inline script sets data-theme on <html>, */
+/* the [data-theme="dark"] block below takes over at higher specificity.    */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    background:               var(--color-bg);
+    color:                    var(--color-text);
+    --color-bg:               var(--in0-void);
+    --color-bg-panel:         var(--in1-iron);
+    --color-bg-inset:         var(--in2-slate);
+    --color-text:             var(--bm2-birch);
+    --color-text-secondary:   var(--bm1-mist);
+    --color-text-tertiary:    var(--bm0-sand);
+    --color-border:           var(--in2-slate);
+    --color-border-strong:    var(--bm0-sand);
+    --color-border-subtle:    color-mix(in srgb, var(--in2-slate) 25%, transparent);
+    --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
+    --color-bg-code:          var(--in1-iron);
+    --color-accent:           var(--fo0-glade);
+    --color-accent-hover:     var(--fo1-fern);
+    --color-accent-active:    var(--fo2-forest);
+    --color-accent-text:      var(--in0-void);
+    --color-wordmark-dot:     var(--fo1-fern); /* fixed brand color — always fern, never follows theme */
+    --color-error:            var(--bl0-ember);
+    --color-warning:          var(--bl1-ochre);
+    --color-success:          var(--bl3-moss);
+    --color-on-error:         var(--bm2-birch);
+    --color-on-success:       var(--bm2-birch);
+    --color-on-warning:       var(--bm2-birch);
+    --color-bg-interactive-hover:          var(--in3-ash);
+    --color-card-highlight-bg:             var(--fo2-forest);
+    --tooltip-bg:                  var(--bm1-mist);
+    --tooltip-text:                var(--in0-void);
+    --skeleton-shine:              var(--in2-slate);
+    --btn-p-bg:        var(--color-accent);
+    --btn-p-text:      var(--color-accent-text);
+    --btn-p-hover-bg:  var(--color-accent-hover);
+    --btn-p-active-bg: var(--fo1-fern);
+    --btn-s-bg:        var(--color-bg-inset);
+    --btn-s-hover-bg:  var(--color-bg-interactive-hover);
+    --btn-s-active-bg: var(--color-bg-inset);
+    --btn-g-hover-bg:  var(--color-bg-interactive-hover);
+    --btn-g-active-bg: var(--in0-void);
+    --btn-g-text:      var(--bm2-birch);
+    --btn-s-text:      var(--bm2-birch);
+    --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
+    --color-section-featured: var(--bm1-mist);
+  }
+}
+
+/* ── Semantic tokens — light (default) ───────────────────────────────── */
+:root,
+[data-theme="light"] {
+  background:               var(--color-bg);
+  color:                    var(--color-text);
+  --color-bg:               var(--bm2-birch);
+  --color-bg-panel:         var(--bm1-mist);
+  --color-bg-inset:         var(--bm0-sand);
+  --color-text:             var(--in0-void);
+  --color-text-secondary:   var(--in2-slate);
+  --color-text-tertiary:    var(--in3-ash);
+  --color-border:           var(--in3-ash);
+  --color-border-strong:    var(--in1-iron);
+  --color-border-subtle:    color-mix(in srgb, var(--in1-iron) 12%, transparent);
+  --color-ghost-border:     color-mix(in srgb, var(--in1-iron) 25%, transparent);
+  --color-bg-code:          var(--fo3-deepwater);
+  --color-accent:           var(--fo1-fern);
+  --color-accent-hover:     var(--fo2-forest);
+  --color-accent-active:    var(--fo3-deepwater);
+  --color-accent-text:      var(--bm2-birch);
+  --color-wordmark-dot:     var(--fo1-fern); /* fixed brand color — always fern, never follows theme */
+  --color-error:            var(--bl0-ember);
+  --color-warning:          var(--bl1-ochre);
+  --color-success:          var(--bl3-moss);
+  --color-on-error:         var(--bm2-birch);
+  --color-on-success:       var(--color-accent-text);
+  --color-on-warning:       var(--color-accent-text);
+  --color-bg-interactive-hover:          var(--bm1-mist);  /* one step deeper than base bg (birch) */
+  --color-card-highlight-bg:             var(--fo3-deepwater);
+  --color-card-highlight-border:         transparent;
+  --color-card-highlight-text:           var(--bm2-birch);
+  --color-card-highlight-text-secondary: var(--bm1-mist);
+  --color-card-highlight-text-tertiary:  var(--bm0-sand);
+  --tooltip-bg:                  var(--in0-void);
+  --tooltip-text:                var(--bm2-birch);
+  --skeleton-shine:              var(--bm2-birch); /* birch (page bg) — lighter than panel (mist) */
+  --btn-p-bg:        var(--color-accent);
+  --btn-p-text:      var(--color-accent-text);
+  --btn-p-hover-bg:  var(--color-accent-hover);
+  --btn-p-active-bg: var(--color-accent-active);
+  --btn-s-bg:        var(--color-bg-inset);
+  --btn-s-hover-bg:  var(--color-bg-interactive-hover);
+  --btn-s-active-bg: var(--color-bg-inset);
+  --btn-g-hover-bg:  var(--color-bg-interactive-hover);
+  --btn-g-active-bg: var(--bm0-sand);
+  --btn-g-text:                  var(--in0-void);
+  --btn-s-text:                  var(--in0-void);
+
+  /* Section transition aliases — consumed by divider patterns (T-23–T-28) */
+  --color-section:          var(--color-bg);
+  /* override --color-section-next on the divider element to match the actual destination section */
+  --color-section-next:     var(--color-bg-panel);
+  --color-section-base:     var(--color-bg);
+  --color-section-layer:    var(--color-bg-panel);
+  --color-section-overlay:  var(--color-bg-inset);
+  --color-section-featured: var(--in0-void);
+}
+
+/* ── Semantic tokens — dark ─────────────────────────────────────────── */
+[data-theme="dark"] {
+  background:               var(--color-bg);
+  color:                    var(--color-text);
+  --color-bg:               var(--in0-void);
+  --color-bg-panel:         var(--in1-iron);
+  --color-bg-inset:         var(--in2-slate);
+  --color-text:             var(--bm2-birch);
+  --color-text-secondary:   var(--bm1-mist);
+  --color-text-tertiary:    var(--bm0-sand);
+  --color-border:           var(--in2-slate);
+  --color-border-strong:    var(--bm0-sand);
+  --color-border-subtle:    color-mix(in srgb, var(--in2-slate) 25%, transparent);
+  --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
+  --color-bg-code:          var(--in1-iron);
+  --color-accent:           var(--fo0-glade);  /* glade: 9.79:1 on void, 5.33:1 on iron — passes AA on all dark surfaces */
+  --color-accent-hover:     var(--fo1-fern);   /* hover; --btn-p-active-bg also collapses to fern — void text only reaches 3.66:1 on fern, so hover/active text flips to birch below */
+  --color-accent-active:    var(--fo2-forest);
+  --color-accent-text:      var(--in0-void);   /* glade bg is light (L=0.49) — dark text required; badge/success/warning text overrides below use --bm2-birch directly */
+  --color-wordmark-dot:     var(--fo1-fern); /* fixed brand color — always fern, never follows theme */
+  --color-error:            var(--bl0-ember);
+  --color-warning:          var(--bl1-ochre);
+  --color-success:          var(--bl3-moss);
+  --color-on-error:         var(--bm2-birch);
+  --color-on-success:       var(--bm2-birch);  /* bloom-palette bg (moss) needs light text; void = 3.81:1 fail */
+  --color-on-warning:       var(--bm2-birch);  /* bloom-palette bg (ochre) needs light text; void = 3.80:1 fail */
+  --color-bg-interactive-hover:          var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
+  --color-card-highlight-bg:             var(--fo2-forest);
+  --tooltip-bg:                  var(--bm1-mist);
+  --tooltip-text:                var(--in0-void);
+  --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
+  --btn-p-bg:          var(--color-accent);
+  --btn-p-text:        var(--color-accent-text);
+  --btn-p-hover-bg:    var(--color-accent-hover);
+  --btn-p-active-bg:   var(--fo1-fern);   /* collapses active = hover */
+  --btn-p-hover-text:  var(--bm2-birch);  /* void (resting text) only reaches 3.66:1 on fern — birch clears 4.78:1 */
+  --btn-p-active-text: var(--bm2-birch);
+  --btn-s-bg:        var(--color-bg-inset);
+  --btn-s-hover-bg:  var(--in1-iron);   /* not --color-bg-interactive-hover (ash): birch text only reaches 4.47:1 on ash; slate would match --btn-s-bg (no visible hover), so darken to iron instead (9.54:1) */
+  --btn-s-active-bg: var(--color-bg-inset);
+  --btn-g-hover-bg:  var(--in2-slate);  /* ghost rests at transparent, so lightening to slate is safe and clears 6.99:1 (ash only reached 4.47:1) */
+  --btn-g-active-bg: var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
+  --btn-g-text:                 var(--bm2-birch);
+  --btn-s-text:                 var(--bm2-birch);
+  --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
+  --color-section-featured: var(--bm1-mist);
+}
+
+/* ── Surface patterns ─────────────────────────────────────────────────── */
+/* base/layer/overlay are relative — they adapt to the current data-theme.   */
+/* featured is the exception: always dark regardless of page theme.          */
+/* Only tokens that differ from the inherited theme values are declared.     */
+/* Each relative surface that changes in dark mode has two override selectors:*/
+/*   [data-theme="dark"] [data-surface]  — theme on ancestor element         */
+/*   [data-surface][data-theme="dark"]   — theme on same element             */
+/* featured uses both forms too — see block comment below.                   */
+
+/* base — resets to page-level bg (useful inside deeper surface contexts) */
+[data-surface="base"] {
+  background: var(--bm2-birch);
+  --color-bg: var(--bm2-birch);
+}
+
+[data-theme="dark"] [data-surface="base"],
+[data-surface="base"][data-theme="dark"] {
+  background: var(--in0-void);
+  --color-bg: var(--in0-void);
+}
+
+/* layer — cards, sidebars, panels */
+[data-surface="layer"] {
+  background:                   var(--bm1-mist);
+  --color-bg:                   var(--bm1-mist);
+  --color-bg-panel:             var(--bm2-birch);
+  --color-bg-interactive-hover: var(--bm0-sand);  /* go deeper from mist */
+  --skeleton-base:              var(--bm0-sand);
+  --skeleton-shine:             var(--bm2-birch);
+}
+
+[data-theme="dark"] [data-surface="layer"],
+[data-surface="layer"][data-theme="dark"] {
+  background:                   var(--in1-iron);
+  --color-bg:                   var(--in1-iron);
+  --color-bg-panel:             var(--in2-slate);
+  --color-bg-code:              var(--in2-slate);
+  --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in2-slate);
+  --skeleton-shine:             var(--in3-ash);
+  --input-border:               var(--in3-ash); /* ash visible on slate panel bg */
+}
+
+/* overlay — modals, dropdowns, floating elements */
+[data-surface="overlay"] {
+  background:                   var(--bm0-sand);
+  --color-bg:                   var(--bm0-sand);
+  --color-bg-inset:             var(--bm1-mist);   /* sand is the darkest light step — inset goes lighter for contrast */
+  --color-bg-interactive-hover: var(--bm2-birch);  /* go lighter — sand is the darkest light step */
+  --skeleton-base:              var(--bm1-mist);
+  --skeleton-shine:             var(--bm2-birch);
+}
+
+[data-theme="dark"] [data-surface="overlay"],
+[data-surface="overlay"][data-theme="dark"] {
+  background:                   var(--in2-slate);
+  --color-bg:                   var(--in2-slate);
+  --color-bg-panel:             var(--in2-slate); /* slate ceiling — overlay bg is already slate, cap panels here */
+  --color-bg-inset:             var(--in1-iron);
+  --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in1-iron);
+  --skeleton-shine:             var(--in3-ash);
+  --input-border:               var(--in3-ash); /* ash visible on slate bg */
+}
+
+/* featured — maximum-contrast section; void in light mode, mist in dark mode.
+   In light mode, text/border tokens are set to dark-palette values.
+   In dark mode, the full token set flips to light-palette values (text → void,
+   bg → mist) so descendants inherit correct contrast in both themes without
+   needing data-theme on the element.
+   This bare selector covers only the default (unpinned) light-page case. An
+   explicit data-theme="light" pin needs its OWN, later rule (in the
+   "Light-theme surface overrides" section below, after the dark-flip block)
+   even though the declarations are identical — both this rule and the dark-
+   flip block below sit at specificity 0-2-0 for the same-element pin form, so
+   whichever comes LAST in the file wins the tie. Folding the light-pin
+   selectors into this early rule (as a prior version of this file did) is a
+   real bug, not just duplication: it would make the light-pin rule lose that
+   tie to the dark-flip block. See the light-pin block's own comment for the
+   base/layer/overlay pattern this mirrors.
+   The dark-flip block right below handles both the ancestor form
+   ([data-theme="dark"] [data-surface="featured"]) and the same-element pin
+   form ([data-surface="featured"][data-theme="dark"]).
+   The button tokens (--btn-p-bg, --btn-s-*, --btn-g-*) are redeclared in full
+   here — not just --btn-g-text/--btn-s-text — because browsers resolve their
+   var(--color-*) references at the element where they're last declared and
+   inherit the resolved color, not the reference; omitting any of them here
+   leaks the ambient page theme's color into buttons on this surface (see
+   c055620 for the same fix applied to the page-level theme blocks). This
+   duplication class is a known architectural stopgap — see the tracked
+   follow-up to make these tokens fall back to their semantic source instead
+   of needing per-surface redeclaration at all. */
+[data-surface="featured"] {
+  background:                   var(--in0-void);
+  color:                        var(--color-text);
+  --color-bg:                   var(--in0-void);
+  --color-bg-panel:             var(--in1-iron);
+  --color-bg-inset:             var(--in2-slate);
+  --color-bg-code:              var(--in1-iron);
+  --color-text:                 var(--bm2-birch);
+  --color-text-secondary:       var(--bm1-mist);
+  --color-text-tertiary:        var(--bm0-sand);
+  --color-border:               var(--in2-slate);
+  --color-border-strong:        var(--bm0-sand);
+  --color-border-subtle:        color-mix(in srgb, var(--in2-slate) 25%, transparent);
+  --color-ghost-border:         color-mix(in srgb, var(--bm2-birch) 25%, transparent);
+  --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in1-iron);
+  --skeleton-shine:             var(--in2-slate);
+  --btn-p-bg:                   var(--color-accent);
+  --btn-s-bg:                   var(--color-bg-inset);
+  --btn-s-hover-bg:             var(--in1-iron);  /* not --color-bg-interactive-hover (ash): birch reaches only 4.47:1 on ash, and slate would match --btn-s-bg (no visible hover) */
+  --btn-s-active-bg:            var(--color-bg-inset);
+  --btn-g-hover-bg:             var(--in2-slate); /* ghost rests at transparent, so lightening to slate is safe (6.99:1 vs ash's 4.47:1) */
+  --btn-g-active-bg:            var(--in2-slate);
+  --btn-g-border:               var(--color-border-strong); /* not --color-border (in2-slate): only 2.5:1 on void, sand reaches 12.5:1 */
+  --btn-g-text:                 var(--bm2-birch);
+  --btn-s-text:                 var(--bm2-birch);
+}
+
+[data-theme="dark"] [data-surface="featured"],
+[data-surface="featured"][data-theme="dark"] {
+  background:                   var(--bm1-mist);
+  color:                        var(--color-text);
+  --color-bg:                   var(--bm1-mist);
+  --color-bg-panel:             var(--bm2-birch);
+  --color-bg-inset:             var(--bm0-sand);
+  --color-bg-code:              var(--fo3-deepwater);
+  --color-text:                 var(--in0-void);
+  --color-text-secondary:       var(--in2-slate);
+  --color-text-tertiary:        var(--in3-ash);
+  --color-border:               var(--in3-ash);
+  --color-border-strong:        var(--in1-iron);
+  --color-border-subtle:        color-mix(in srgb, var(--in1-iron) 12%, transparent);
+  --color-ghost-border:         color-mix(in srgb, var(--in1-iron) 25%, transparent);
+  --color-bg-interactive-hover: var(--bm0-sand);
+  --color-accent:               var(--fo1-fern);
+  --color-accent-hover:         var(--fo2-forest);
+  --color-accent-text:          var(--bm2-birch);
+  --skeleton-base:              var(--bm0-sand);
+  --skeleton-shine:             var(--bm2-birch);
+  --btn-p-bg:                   var(--color-accent);
+  --btn-p-text:                 var(--color-accent-text);
+  --btn-s-bg:                   var(--color-bg-inset);
+  --btn-s-hover-bg:             var(--color-bg-interactive-hover);
+  --btn-s-active-bg:            var(--color-bg-inset);
+  --btn-g-hover-bg:             var(--color-bg-interactive-hover);
+  --btn-g-active-bg:            var(--bm0-sand);
+  --btn-g-border:               var(--color-border-strong);
+  --btn-g-text:                 var(--in0-void);
+  --btn-s-text:                 var(--in0-void);
+}
+
+/* ── Light-theme surface overrides ─────────────────────────────────────── */
+/* Without these, data-theme="light" data-surface="x" on an element inside  */
+/* a dark page resolves to dark palette values — the ancestor dark selector  */
+/* ([data-theme="dark"] [data-surface]) at specificity 0-2-0 beats the      */
+/* default light surface rule at 0-1-0. Same-element form (0-2-0) ties on   */
+/* specificity; source order here ensures light wins when declared last.     */
+/* The descendant form uses :not() (specificity 0-3-0) to beat the dark     */
+/* ancestor while excluding elements that are explicitly dark themselves.    */
+
+[data-surface="base"][data-theme="light"],
+[data-theme="light"] [data-surface="base"]:not([data-theme="dark"]) {
+  background:        var(--bm2-birch);
+  --color-bg:        var(--bm2-birch);
+  --input-border:    var(--color-border);
+}
+
+[data-surface="layer"][data-theme="light"],
+[data-theme="light"] [data-surface="layer"]:not([data-theme="dark"]) {
+  background:                   var(--bm1-mist);
+  --color-bg:                   var(--bm1-mist);
+  --color-bg-panel:             var(--bm2-birch);
+  --color-bg-code:              var(--fo3-deepwater);
+  --color-bg-interactive-hover: var(--bm0-sand);
+  --skeleton-base:              var(--bm0-sand);
+  --skeleton-shine:             var(--bm2-birch);
+  --input-border:               var(--color-border);
+}
+
+[data-surface="overlay"][data-theme="light"],
+[data-theme="light"] [data-surface="overlay"]:not([data-theme="dark"]) {
+  background:                   var(--bm0-sand);
+  --color-bg:                   var(--bm0-sand);
+  --color-bg-inset:             var(--bm1-mist);
+  --color-bg-code:              var(--fo3-deepwater);
+  --color-bg-interactive-hover: var(--bm2-birch);
+  --skeleton-base:              var(--bm1-mist);
+  --skeleton-shine:             var(--bm2-birch);
+  --input-border:               var(--color-border);
+}
+
+/* featured is the exception elsewhere in this file (always dark, pinned to  */
+/* page theme rather than adapting), but a local data-theme="light" pin must */
+/* still be able to force the void variant back on inside a dark page — same */
+/* specificity problem as base/layer/overlay above, same fix. This repeats   */
+/* the bare [data-surface="featured"] block's declarations verbatim; that is */
+/* required, not incidental — this rule must win the specificity tie against */
+/* the dark-flip block above by coming later in the file, so it can't be     */
+/* merged into that earlier rule's selector list (see that block's comment). */
+[data-surface="featured"][data-theme="light"],
+[data-theme="light"] [data-surface="featured"]:not([data-theme="dark"]) {
+  background:                   var(--in0-void);
+  --color-bg:                   var(--in0-void);
+  --color-bg-panel:             var(--in1-iron);
+  --color-bg-inset:             var(--in2-slate);
+  --color-bg-code:              var(--in1-iron);
+  --color-text:                 var(--bm2-birch);
+  --color-text-secondary:       var(--bm1-mist);
+  --color-text-tertiary:        var(--bm0-sand);
+  --color-border:               var(--in2-slate);
+  --color-border-strong:        var(--bm0-sand);
+  --color-border-subtle:        color-mix(in srgb, var(--in2-slate) 25%, transparent);
+  --color-ghost-border:         color-mix(in srgb, var(--bm2-birch) 25%, transparent);
+  --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in1-iron);
+  --skeleton-shine:             var(--in2-slate);
+  --btn-p-bg:                   var(--color-accent);
+  --btn-s-bg:                   var(--color-bg-inset);
+  --btn-s-hover-bg:             var(--in1-iron);  /* not --color-bg-interactive-hover (ash): birch reaches only 4.47:1 on ash, and slate would match --btn-s-bg (no visible hover) */
+  --btn-s-active-bg:            var(--color-bg-inset);
+  --btn-g-hover-bg:             var(--in2-slate); /* ghost rests at transparent, so lightening to slate is safe (6.99:1 vs ash's 4.47:1) */
+  --btn-g-active-bg:            var(--in2-slate);
+  --btn-g-border:               var(--color-border-strong); /* not --color-border (in2-slate): only 2.5:1 on void, sand reaches 12.5:1 */
+  --btn-g-text:                 var(--bm2-birch);
+  --btn-s-text:                 var(--bm2-birch);
 }
