@@ -1227,7 +1227,7 @@ hr { border: none; }
 .nav-links a {
   font-size: var(--nav-link-font-size);
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   text-decoration: none;
   transition: color var(--duration-base) var(--ease-default);
 }
@@ -1252,7 +1252,7 @@ hr { border: none; }
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  color: var(--color-text-tertiary);
+  color: var(--color-text);
   font-size: 20px;
   text-decoration: none;
   transition: background-color var(--duration-base) var(--ease-default),
@@ -1272,7 +1272,7 @@ hr { border: none; }
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  color: var(--color-text-tertiary);
+  color: var(--color-text);
   font-size: 20px;
   transition: background-color var(--duration-base) var(--ease-default),
               color var(--duration-base) var(--ease-default);

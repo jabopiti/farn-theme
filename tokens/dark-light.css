@@ -46,14 +46,21 @@
     --color-on-success:       var(--bm2-birch);
     --color-on-warning:       var(--bm2-birch);
     --color-bg-interactive-hover:          var(--in3-ash);
+    --color-bg-interactive-active:         var(--in0-void);
     --color-card-highlight-bg:             var(--fo2-forest);
+    --color-card-highlight-border:         transparent;
+    --color-card-highlight-text:           var(--bm2-birch);
+    --color-card-highlight-text-secondary: var(--bm1-mist);
+    --color-card-highlight-text-tertiary:  var(--bm0-sand);
     --tooltip-bg:                  var(--bm1-mist);
     --tooltip-text:                var(--in0-void);
     --skeleton-shine:              var(--in2-slate);
     --btn-p-bg:        var(--color-accent);
     --btn-p-text:      var(--color-accent-text);
     --btn-p-hover-bg:  var(--color-accent-hover);
-    --btn-p-active-bg: var(--fo1-fern);
+    --btn-p-active-bg: var(--fo1-fern); /* collapses active = hover */
+    --btn-p-hover-text:  var(--bm2-birch);  /* void (resting text) only reaches 3.66:1 on fern — birch clears 4.78:1 */
+    --btn-p-active-text: var(--bm2-birch);
     --btn-s-bg:        var(--color-bg-inset);
     --btn-s-hover-bg:  var(--color-bg-interactive-hover);
     --btn-s-active-bg: var(--color-bg-inset);
@@ -94,6 +101,7 @@
   --color-on-success:       var(--color-accent-text);
   --color-on-warning:       var(--color-accent-text);
   --color-bg-interactive-hover:          var(--bm1-mist);  /* one step deeper than base bg (birch) */
+  --color-bg-interactive-active:         var(--bm0-sand);  /* one step deeper than hover */
   --color-card-highlight-bg:             var(--fo3-deepwater);
   --color-card-highlight-border:         transparent;
   --color-card-highlight-text:           var(--bm2-birch);
@@ -151,7 +159,12 @@
   --color-on-success:       var(--bm2-birch);  /* bloom-palette bg (moss) needs light text; void = 3.81:1 fail */
   --color-on-warning:       var(--bm2-birch);  /* bloom-palette bg (ochre) needs light text; void = 3.80:1 fail */
   --color-bg-interactive-hover:          var(--in3-ash);   /* ash — lightest dark step, contrasts all dark surfaces */
+  --color-bg-interactive-active:         var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
   --color-card-highlight-bg:             var(--fo2-forest);
+  --color-card-highlight-border:         transparent;
+  --color-card-highlight-text:           var(--bm2-birch);
+  --color-card-highlight-text-secondary: var(--bm1-mist);
+  --color-card-highlight-text-tertiary:  var(--bm0-sand);
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
