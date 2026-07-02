@@ -534,6 +534,14 @@ a.card-interactive { color: inherit; text-decoration: none; }
   .overlap-card { opacity: 1; transform: none; box-shadow: var(--overlap-card-shadow-raised); }
 }
 
+/* ── Section transition dividers — INVARIANT ─────────────────────────────
+   Container background: var(--color-bg) — matches the CURRENT section.
+   SVG fill: var(--color-section-next) — must match the NEXT section.
+   Animation: transform: scaleY(0→1) on the SVG child element.
+   Never use clip-path on the wrapper — it hides the entire element.
+   Never use data-scroll-reveal on these — they use animation-timeline only.
+   ──────────────────────────────────────────────────────────────────────── */
+
 /* ── Sine wave ───────────────────────────────────────────────────────────── */
 
 /* SVG wave sits absolutely at the bottom of its parent section.
@@ -560,20 +568,25 @@ a.card-interactive { color: inherit; text-decoration: none; }
 
 @supports (animation-timeline: view()) {
   @keyframes wave-reveal {
-    from { clip-path: inset(100% 0 0 0); }
-    to   { clip-path: inset(0 0 0 0); }
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
   }
 
-  .section-wave {
-    clip-path: inset(100% 0 0 0);
-    animation: wave-reveal linear both;
+  .section-wave svg {
+    transform-origin: bottom;
+    transform: scaleY(0);
+    animation: wave-reveal var(--ease-out) both;
     animation-timeline: view();
-    animation-range: entry 0% cover 40%;
+    animation-range: entry 20% cover 60%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-wave { clip-path: none; animation: none; }
+  .section-wave svg { transform: none; animation: none; }
+}
+
+@media (scripting: none) {
+  .section-wave svg { transform: none; }
 }
 
 /* ── Convex arc ──────────────────────────────────────────────────────────── */
@@ -648,20 +661,25 @@ a.card-interactive { color: inherit; text-decoration: none; }
 
 @supports (animation-timeline: view()) {
   @keyframes blob-reveal {
-    from { clip-path: inset(100% 0 0 0); }
-    to   { clip-path: inset(0 0 0 0); }
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
   }
 
-  .section-blob {
-    clip-path: inset(100% 0 0 0);
-    animation: blob-reveal linear both;
+  .section-blob svg {
+    transform-origin: bottom;
+    transform: scaleY(0);
+    animation: blob-reveal var(--ease-out) both;
     animation-timeline: view();
-    animation-range: entry 0% cover 50%;
+    animation-range: entry 20% cover 60%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-blob { clip-path: none; animation: none; }
+  .section-blob svg { transform: none; animation: none; }
+}
+
+@media (scripting: none) {
+  .section-blob svg { transform: none; }
 }
 
 /* ── Diagonal cut ────────────────────────────────────────────────────────── */
