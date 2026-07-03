@@ -64,7 +64,9 @@
     --btn-s-hover-bg:  var(--in1-iron);   /* not --color-bg-interactive-hover (ash): birch text only reaches 4.47:1 on ash; slate would match --btn-s-bg (no visible hover), so darken to iron instead (9.54:1) */
     --btn-g-hover-bg:  var(--in2-slate);  /* ghost rests at transparent, so lightening to slate is safe and clears 6.99:1 (ash only reached 4.47:1) */
     --btn-g-active-bg: var(--in0-void);
-    --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
+    --shadow-opacity-sm: 0.18;
+    --shadow-opacity-md: 0.28;
+    --shadow-opacity-lg: 0.40;
     --color-section-featured: var(--bm1-mist);
   }
 }
@@ -165,7 +167,9 @@
   --btn-s-hover-bg:  var(--in1-iron);   /* not --color-bg-interactive-hover (ash): birch text only reaches 4.47:1 on ash; slate would match --btn-s-bg (no visible hover), so darken to iron instead (9.54:1) */
   --btn-g-hover-bg:  var(--in2-slate);  /* ghost rests at transparent, so lightening to slate is safe and clears 6.99:1 (ash only reached 4.47:1) */
   --btn-g-active-bg: var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
-  --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
+  --shadow-opacity-sm: 0.18;
+  --shadow-opacity-md: 0.28;
+  --shadow-opacity-lg: 0.40;
   --color-section-featured: var(--bm1-mist);
 }
 

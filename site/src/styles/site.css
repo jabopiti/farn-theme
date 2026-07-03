@@ -144,6 +144,15 @@ html { scroll-behavior: smooth; }
 
 .demo-surface p { margin: 0; }
 
+/* Card that gets its background from data-surface alone — no component-
+   specific CSS needed. See /foundations/surfaces#card-pattern. Shared here
+   (not page-scoped) so index.astro's token-story cards and the Surfaces doc
+   page render from the same rule instead of two copies that can drift. */
+.surface-card {
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+
 /* Uppercase eyebrow label for demo sections */
 .demo-label {
   font-size: var(--text-xs);

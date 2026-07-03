@@ -5,6 +5,7 @@
   /* Spacing scale */
   --space-xs:  0.375rem;   /*  6px */
   --space-sm:  0.75rem;    /* 12px */
+  --space-sm-plus: 1rem;   /* 16px — off-scale optical step; compact component padding (buttons, nav CTA) */
   --space-md:  1.5rem;     /* 24px */
   --space-lg:  2.25rem;    /* 36px */
   --space-xl:  3rem;       /* 48px */
@@ -38,4 +39,17 @@
   --z-overlay: 300;
   --z-modal:   400;
   --z-toast:   500;
+
+  /* Shadow / elevation scale — opacity-only per tier so directional shadows
+     (e.g. --overlap-card-shadow-raised in components.css) can share the same
+     darkness without duplicating a full box-shadow value. Dark-mode opacity
+     overrides live in dark-light.css — raw black needs more alpha to read
+     against dark surfaces. */
+  --shadow-opacity-sm: 0.06;
+  --shadow-opacity-md: 0.10;
+  --shadow-opacity-lg: 0.14;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, var(--shadow-opacity-sm));
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, var(--shadow-opacity-md));
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, var(--shadow-opacity-lg));
 }

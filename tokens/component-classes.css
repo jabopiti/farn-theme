@@ -1338,7 +1338,7 @@ hr { border: none; }
 /* Primary CTA */
 .nav-cta {
   height: var(--nav-cta-height);
-  padding: 0 16px;
+  padding: 0 var(--space-sm-plus);
   margin-left: var(--space-xs);
   background: var(--color-accent);
   color: var(--color-accent-text);

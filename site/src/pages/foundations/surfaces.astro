@@ -143,6 +143,44 @@ import DocLayout from '../../layouts/DocLayout.astro';
   Dark panel regardless of page theme
 &lt;/section&gt;</code></pre>
 
+  <h2 id="card-pattern">Surface Card Pattern</h2>
+  <p>
+    A card that adapts to its surface with no component-specific CSS: background resolves from
+    <code>data-surface</code> alone, and only <code>--space-*</code> / <code>--radius-*</code>
+    semantic tokens shape it. Reuse this pattern instead of hand-rolling background/border rules
+    per page — it's what the landing page's <a href="/#tokens-demo">token story section</a> is
+    built from. Unlike the shipped <code>.card</code> component class, it has no fixed
+    <code>background</code> — that's the point: it lets <code>data-surface</code> decide.
+  </p>
+
+  <div class="pattern-demo-row" aria-hidden="true">
+    <div class="surface-card" data-surface="base"><p class="surface-card-tag">base</p></div>
+    <div class="surface-card" data-surface="layer"><p class="surface-card-tag">layer</p></div>
+    <div class="surface-card" data-surface="overlay"><p class="surface-card-tag">overlay</p></div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Copy-paste — Surface Card</summary>
+      <div class="accordion-panel">
+        <pre><code>&lt;div class="surface-card" data-surface="layer"&gt;
+  &lt;h4&gt;Card title&lt;/h4&gt;
+  &lt;p&gt;Card copy.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <pre><code>.surface-card &#123;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+&#125;</code></pre>
+        <p>
+          No <code>background</code> declaration needed — <code>data-surface</code> sets it
+          directly on the element. Add <code>border: 1px solid var(--color-border)</code> if
+          adjacent surfaces need a visible edge (e.g. nested one level deep with little contrast
+          between steps).
+        </p>
+      </div>
+    </details>
+  </div>
+
   <h2 id="surface-system">The Two-Axis Model</h2>
   <p>
     Most theming systems give you a single switch — light or dark. Farn gives you two independent
@@ -476,5 +514,27 @@ import DocLayout from '../../layouts/DocLayout.astro';
     font-size: 12px;
     color: var(--color-text-tertiary);
     margin-top: var(--space-xs);
+  }
+
+  .pattern-demo-row {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xl);
+  }
+
+  /* .surface-card itself (padding/radius) is shared, global CSS — see site.css.
+     Layout-only additions for this page's row live here. */
+  .pattern-demo-row .surface-card {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .surface-card-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    margin: 0;
   }
 </style>

@@ -70,6 +70,7 @@
   /* Spacing scale */
   --space-xs:  0.375rem;   /*  6px */
   --space-sm:  0.75rem;    /* 12px */
+  --space-sm-plus: 1rem;   /* 16px — off-scale optical step; compact component padding (buttons, nav CTA) */
   --space-md:  1.5rem;     /* 24px */
   --space-lg:  2.25rem;    /* 36px */
   --space-xl:  3rem;       /* 48px */
@@ -103,6 +104,19 @@
   --z-overlay: 300;
   --z-modal:   400;
   --z-toast:   500;
+
+  /* Shadow / elevation scale — opacity-only per tier so directional shadows
+     (e.g. --overlap-card-shadow-raised in components.css) can share the same
+     darkness without duplicating a full box-shadow value. Dark-mode opacity
+     overrides live in dark-light.css — raw black needs more alpha to read
+     against dark surfaces. */
+  --shadow-opacity-sm: 0.06;
+  --shadow-opacity-md: 0.10;
+  --shadow-opacity-lg: 0.14;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, var(--shadow-opacity-sm));
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, var(--shadow-opacity-md));
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, var(--shadow-opacity-lg));
 }
 /* ── Farn — Motion tokens ─────────────────────────────────────────────── */
 
@@ -142,7 +156,7 @@
   --btn-radius:           var(--radius-md);
   --btn-disabled-opacity: 0.5;
   --btn-gap:              6px;
-  --btn-padding-x:        16px;
+  --btn-padding-x:        var(--space-sm-plus);
   --btn-sm-padding-x:     12px;
   --btn-lg-padding-x:     20px;
 
@@ -214,7 +228,7 @@
   --overlap-card-radius:        var(--card-radius);
   --overlap-card-offset:        80px;
   --overlap-card-duration:      0.7s;
-  --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.14);
+  --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, var(--shadow-opacity-lg));
 
   /* ── Sine wave tokens ───────────────────────────────────────────────── */
   --wave-height: 80px;
@@ -457,7 +471,9 @@
     --btn-s-hover-bg:  var(--in1-iron);   /* not --color-bg-interactive-hover (ash): birch text only reaches 4.47:1 on ash; slate would match --btn-s-bg (no visible hover), so darken to iron instead (9.54:1) */
     --btn-g-hover-bg:  var(--in2-slate);  /* ghost rests at transparent, so lightening to slate is safe and clears 6.99:1 (ash only reached 4.47:1) */
     --btn-g-active-bg: var(--in0-void);
-    --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
+    --shadow-opacity-sm: 0.18;
+    --shadow-opacity-md: 0.28;
+    --shadow-opacity-lg: 0.40;
     --color-section-featured: var(--bm1-mist);
   }
 }
@@ -558,7 +574,9 @@
   --btn-s-hover-bg:  var(--in1-iron);   /* not --color-bg-interactive-hover (ash): birch text only reaches 4.47:1 on ash; slate would match --btn-s-bg (no visible hover), so darken to iron instead (9.54:1) */
   --btn-g-hover-bg:  var(--in2-slate);  /* ghost rests at transparent, so lightening to slate is safe and clears 6.99:1 (ash only reached 4.47:1) */
   --btn-g-active-bg: var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
-  --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
+  --shadow-opacity-sm: 0.18;
+  --shadow-opacity-md: 0.28;
+  --shadow-opacity-lg: 0.40;
   --color-section-featured: var(--bm1-mist);
 }
 

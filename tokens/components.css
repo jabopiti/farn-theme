@@ -19,7 +19,7 @@
   --btn-radius:           var(--radius-md);
   --btn-disabled-opacity: 0.5;
   --btn-gap:              6px;
-  --btn-padding-x:        16px;
+  --btn-padding-x:        var(--space-sm-plus);
   --btn-sm-padding-x:     12px;
   --btn-lg-padding-x:     20px;
 
@@ -91,7 +91,7 @@
   --overlap-card-radius:        var(--card-radius);
   --overlap-card-offset:        80px;
   --overlap-card-duration:      0.7s;
-  --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.14);
+  --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, var(--shadow-opacity-lg));
 
   /* ── Sine wave tokens ───────────────────────────────────────────────── */
   --wave-height: 80px;
