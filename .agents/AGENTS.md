@@ -63,7 +63,7 @@ Component group pages live at `site/src/pages/components/{layout,navigation,acti
 
 ```bash
 # Tokens only (no reset) — build this first
-cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css
+cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/components.css tokens/dark-light.css > dist/farn-tokens.css
 
 # Full bundle (tokens + reset) — appends base.css to the tokens-only output
 cat dist/farn-tokens.css tokens/base.css > dist/farn.css
@@ -135,7 +135,7 @@ h1 {
 
 **Semantic only in site/ and templates:** `site/src/pages/index.astro` is the canonical reference consumer of the design system. It, `DocLayout.astro`, all template pages, and all block CSS must use only semantic tokens (`--color-*`, `--space-*`, `--text-*`, `--font-*`, `--radius-*`, `--duration-*`, `--ease-*`). Palette tokens (`--in*`, `--bm*`, `--fo*`, `--bl*`) and hardcoded values are not allowed in `site/` CSS or inline styles — the only exceptions are intentionally sub-scale values (e.g. `font-size: 9px` with a comment explaining why) and typographic em-relative spacing tied to a specific font size. Component classes in `tokens/` may not reference palette tokens either — use semantic tokens so consumers get correct dark-mode behavior automatically.
 
-**Import chain:** Every page that loads Farn tokens must import them in this order: `colors.css` → `typography.css` → `spacing.css` → `motion.css` → `dark-light.css` → `components.css`. Skipping `typography.css` leaves `--text-*` undefined and causes all component font sizes to fall back to the browser default (16px).
+**Import chain:** Every page that loads Farn tokens must import them in this order: `colors.css` → `typography.css` → `spacing.css` → `motion.css` → `components.css` → `dark-light.css`. `dark-light.css` must load last so its theme-specific overrides win cascade ties against `components.css`'s Tier-3 defaults. Skipping `typography.css` leaves `--text-*` undefined and causes all component font sizes to fall back to the browser default (16px).
 
 **Dogfood:** The docs site loads `tokens/component-classes.css` directly — every shipped component class must render correctly there before being considered done. If it breaks the docs site, it breaks consumers.
 

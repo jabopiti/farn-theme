@@ -330,9 +330,9 @@ import { groups, links, ctas } from '../data/navigation';
     color: var(--color-text-tertiary);
     margin-bottom: var(--space-xs);
   }
+  /* Padding/radius come from the shared .surface-card class (site.css) —
+     see /foundations/surfaces#card-pattern. Layout-only additions here. */
   .demo-card {
-    padding: var(--space-lg);
-    border-radius: var(--card-radius);
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
@@ -610,7 +610,7 @@ import { groups, links, ctas } from '../data/navigation';
 
     <div class="tokens-demo-cols">
       <div class="tokens-demo-col">
-        <div class="demo-card" data-surface="base">
+        <div class="demo-card surface-card" data-surface="base">
           <h4>Base</h4>
           <span class="badge badge-general">base</span>
           <p>The page-level background. Every theming context starts here.</p>
@@ -618,7 +618,7 @@ import { groups, links, ctas } from '../data/navigation';
         </div>
       </div>
       <div class="tokens-demo-col">
-        <div class="demo-card" data-surface="layer">
+        <div class="demo-card surface-card" data-surface="layer">
           <h4>Layer</h4>
           <span class="badge badge-general">layer</span>
           <p>Cards, panels, sidebars. One step above the base — naturally elevated.</p>
@@ -626,7 +626,7 @@ import { groups, links, ctas } from '../data/navigation';
         </div>
       </div>
       <div class="tokens-demo-col">
-        <div class="demo-card" data-surface="overlay">
+        <div class="demo-card surface-card" data-surface="overlay">
           <h4>Overlay</h4>
           <span class="badge badge-general">overlay</span>
           <p>Modals, dropdowns, tooltips. The topmost surface, floating above.</p>

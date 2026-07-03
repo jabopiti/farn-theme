@@ -7,6 +7,11 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+### Added
+- `tokens/spacing.css`: `--space-sm-plus` (16px) — off-scale step between `--space-sm` and `--space-md`. Replaces the raw `16px` literals in `--btn-padding-x` and `.nav-cta` padding. Documented on `site/src/pages/styles/spacing.astro`.
+- `tokens/spacing.css`: `--shadow-sm/-md/-lg` elevation scale, backed by per-tier `--shadow-opacity-*` tokens so dark mode can override just the opacity. `--overlap-card-shadow-raised` now reuses `--shadow-opacity-lg` instead of a hardcoded rgba literal (rendered output unchanged). Documented on `site/src/pages/styles/spacing.astro#elevation`.
+- `site/src/styles/site.css`: `.surface-card` — a shared card class with no fixed `background` (resolves from `data-surface`). Used by both `index.astro`'s token-story cards and the new Surfaces "Surface Card Pattern" doc section, replacing an undocumented, independently-invented `.demo-card` treatment.
+
 ## [0.7.0] — 2026-07-03
 
 ### Added

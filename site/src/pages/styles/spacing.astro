@@ -14,6 +14,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <div class="space-scale demo-surface" aria-hidden="true">
     <div class="space-bar"><div class="bar-fill" style="height: var(--space-xs)"></div><div class="bar-label">xs<br>6px</div></div>
     <div class="space-bar"><div class="bar-fill" style="height: var(--space-sm)"></div><div class="bar-label">sm<br>12px</div></div>
+    <div class="space-bar"><div class="bar-fill" style="height: var(--space-sm-plus)"></div><div class="bar-label">sm-plus<br>16px</div></div>
     <div class="space-bar"><div class="bar-fill" style="height: var(--space-md)"></div><div class="bar-label">md<br>24px</div></div>
     <div class="space-bar"><div class="bar-fill" style="height: var(--space-lg)"></div><div class="bar-label">lg<br>36px</div></div>
     <div class="space-bar"><div class="bar-fill" style="height: var(--space-xl)"></div><div class="bar-label">xl<br>48px</div></div>
@@ -28,6 +29,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <div class="padding-context demo-surface" aria-hidden="true">
     <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-xs)"><div class="pad-inner"></div></div><span class="pad-label">xs · 6px</span></div>
     <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-sm)"><div class="pad-inner"></div></div><span class="pad-label">sm · 12px</span></div>
+    <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-sm-plus)"><div class="pad-inner"></div></div><span class="pad-label">sm-plus · 16px</span></div>
     <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-md)"><div class="pad-inner"></div></div><span class="pad-label">md · 24px</span></div>
     <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-lg)"><div class="pad-inner"></div></div><span class="pad-label">lg · 36px</span></div>
     <div class="pad-example"><div class="pad-outer" style="padding-block: var(--space-xl)"><div class="pad-inner"></div></div><span class="pad-label">xl · 48px</span></div>
@@ -45,6 +47,7 @@ import DocLayout from '../../layouts/DocLayout.astro';
           <tbody>
             <tr><td><code>--space-xs</code></td><td>0.375rem</td><td>6px</td><td>Icon-to-label gap, tag padding</td></tr>
             <tr><td><code>--space-sm</code></td><td>0.75rem</td><td>12px</td><td>Tight grouping within a component</td></tr>
+            <tr><td><code>--space-sm-plus</code></td><td>1rem</td><td>16px</td><td>Off-scale optical step — compact component padding (button/nav-CTA horizontal padding)</td></tr>
             <tr><td><code>--space-md</code></td><td>1.5rem</td><td>24px</td><td>Standard gap — when in doubt, start here</td></tr>
             <tr><td><code>--space-lg</code></td><td>2.25rem</td><td>36px</td><td>Between distinct content blocks</td></tr>
             <tr><td><code>--space-xl</code></td><td>3rem</td><td>48px</td><td>Section breathing room, major transitions</td></tr>
@@ -164,24 +167,24 @@ import DocLayout from '../../layouts/DocLayout.astro';
   <h2 id="radius">Border Radius</h2>
   <p>Each radius maps to a specific element type. The progression creates implicit hierarchy — larger surfaces have larger radii, signalling containment without needing a border.</p>
 
-  <div class="radius-preview demo-surface" aria-hidden="true">
-    <div class="radius-item">
+  <div class="scale-preview demo-surface" aria-hidden="true">
+    <div class="scale-item">
       <div class="radius-chip" style="border-radius: var(--radius-sm)"></div>
       <div class="radius-label"><code>--radius-sm</code><br>4px · badges, tags</div>
     </div>
-    <div class="radius-item">
+    <div class="scale-item">
       <div class="radius-chip" style="border-radius: var(--radius-md)"></div>
       <div class="radius-label"><code>--radius-md</code><br>6px · buttons, inputs</div>
     </div>
-    <div class="radius-item">
+    <div class="scale-item">
       <div class="radius-chip" style="border-radius: var(--radius-lg)"></div>
       <div class="radius-label"><code>--radius-lg</code><br>8px · cards, drawers</div>
     </div>
-    <div class="radius-item">
+    <div class="scale-item">
       <div class="radius-chip" style="border-radius: var(--radius-xl)"></div>
       <div class="radius-label"><code>--radius-xl</code><br>12px · large panels</div>
     </div>
-    <div class="radius-item">
+    <div class="scale-item">
       <div class="radius-chip" style="border-radius: var(--radius-full)"></div>
       <div class="radius-label"><code>--radius-full</code><br>9999px · avatars</div>
     </div>
@@ -240,6 +243,43 @@ import DocLayout from '../../layouts/DocLayout.astro';
           </tbody>
         </table>
         <p>The nav (<code>--z-sticky: 200</code>) sits below overlays (<code>--z-overlay: 300</code>) — dropdowns triggered inside the nav render correctly above it without adjustment.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ── Elevation ─────────────────────────────────────────────────────── -->
+
+  <h2 id="elevation">Elevation</h2>
+  <p>Three shadow tiers for raised surfaces — dropdowns, popovers, raised cards. Each tier is an opacity token layered under a fixed offset/blur, so dark mode can boost the alpha without redeclaring the whole shadow.</p>
+
+  <div class="scale-preview demo-surface" aria-hidden="true">
+    <div class="scale-item">
+      <div class="elevation-chip" style="box-shadow: var(--shadow-sm)"></div>
+      <div class="radius-label"><code>--shadow-sm</code><br>Hover rows, inline chips</div>
+    </div>
+    <div class="scale-item">
+      <div class="elevation-chip" style="box-shadow: var(--shadow-md)"></div>
+      <div class="radius-label"><code>--shadow-md</code><br>Dropdowns, popovers, tooltips</div>
+    </div>
+    <div class="scale-item">
+      <div class="elevation-chip" style="box-shadow: var(--shadow-lg)"></div>
+      <div class="radius-label"><code>--shadow-lg</code><br>Modals, raised cards</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>Reference — Elevation</summary>
+      <div class="accordion-panel">
+        <table>
+          <thead><tr><th>Token</th><th>Light opacity</th><th>Dark opacity</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><code>--shadow-sm</code></td><td>0.06</td><td>0.18</td><td>Hover rows, inline chips</td></tr>
+            <tr><td><code>--shadow-md</code></td><td>0.10</td><td>0.28</td><td>Dropdowns, popovers, tooltips</td></tr>
+            <tr><td><code>--shadow-lg</code></td><td>0.14</td><td>0.40</td><td>Modals, raised cards</td></tr>
+          </tbody>
+        </table>
+        <p>Dark mode needs a higher opacity for the same shadow to read against an already-dark background — override only the <code>--shadow-opacity-*</code> token, not the full <code>--shadow-*</code> value, if you need a fourth tier. <code>--overlap-card-shadow-raised</code> (used by <code>.overlap-card</code>) reuses <code>--shadow-opacity-lg</code> for its own upward-facing shadow.</p>
       </div>
     </details>
   </div>
@@ -441,13 +481,15 @@ import DocLayout from '../../layouts/DocLayout.astro';
   }
 
   /* ── Border Radius ───────────────────────────────────────────────────── */
-  .radius-preview {
+  /* .scale-preview/.scale-item are shared with the Elevation section below —
+     both are a row of labeled swatch chips, just with a different chip. */
+  .scale-preview {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-lg);
   }
 
-  .radius-item {
+  .scale-item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -465,6 +507,14 @@ import DocLayout from '../../layouts/DocLayout.astro';
   .radius-label {
     font-size: 0.7rem;
     line-height: 1.5;
+  }
+
+  /* ── Elevation ────────────────────────────────────────────────────────── */
+  .elevation-chip {
+    width: 72px;
+    height: 48px;
+    background: var(--color-bg-panel);
+    border-radius: var(--radius-md);
   }
 
   /* ── Z-index Scale ───────────────────────────────────────────────────── */
