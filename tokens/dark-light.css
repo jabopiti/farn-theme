@@ -55,9 +55,15 @@
     --tooltip-bg:                  var(--bm1-mist);
     --tooltip-text:                var(--in0-void);
     --skeleton-shine:              var(--in2-slate);
-    --btn-p-active-bg: var(--fo1-fern); /* collapses active = hover */
-    --btn-p-hover-text:  var(--bm2-birch);  /* fern bg + void text = 3.66:1 fail; birch text passes at 4.78:1 */
-    --btn-p-active-text: var(--bm2-birch);  /* active collapses to fern bg too; same swap keeps it ≥4.78:1 */
+    /* Mirrors the [data-theme="dark"] block below: only genuine divergences
+       from the --btn-* semantic fallbacks need a value here (see the
+       components.css comment above --btn-p-border for why). */
+    --btn-p-active-bg:  var(--fo1-fern);   /* collapses active = hover */
+    --btn-p-hover-text:  var(--bm2-birch); /* void (resting text) only reaches 3.66:1 on fern — birch clears 4.78:1 */
+    --btn-p-active-text: var(--bm2-birch);
+    --btn-s-hover-bg:  var(--in1-iron);   /* not --color-bg-interactive-hover (ash): birch text only reaches 4.47:1 on ash; slate would match --btn-s-bg (no visible hover), so darken to iron instead (9.54:1) */
+    --btn-g-hover-bg:  var(--in2-slate);  /* ghost rests at transparent, so lightening to slate is safe and clears 6.99:1 (ash only reached 4.47:1) */
+    --btn-g-active-bg: var(--in0-void);
     --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
     --color-section-featured: var(--bm1-mist);
   }
@@ -100,6 +106,10 @@
   --tooltip-bg:                  var(--in0-void);
   --tooltip-text:                var(--bm2-birch);
   --skeleton-shine:              var(--bm2-birch); /* birch (page bg) — lighter than panel (mist) */
+  /* No --btn-* overrides needed here: every one of them already matches its
+     semantic fallback in light theme (see the components.css comment above
+     --btn-p-border) — --btn-g-active-bg is the sole exception, and its light
+     value is already the Tier-3 default in components.css. */
 
   /* Section transition aliases — consumed by divider patterns (T-23–T-28) */
   --color-section:          var(--color-bg);
@@ -127,7 +137,7 @@
   --color-ghost-border:     color-mix(in srgb, var(--bm2-birch) 25%, transparent);
   --color-bg-code:          var(--in1-iron);
   --color-accent:           var(--fo0-glade);  /* glade: 9.79:1 on void, 5.33:1 on iron — passes AA on all dark surfaces */
-  --color-accent-hover:     var(--fo1-fern);   /* hover; --btn-p-active-bg also collapses to fern — void text would be 3.66:1 fail, so the button text swaps to birch below */
+  --color-accent-hover:     var(--fo1-fern);   /* hover; --btn-p-active-bg also collapses to fern — void text only reaches 3.66:1 on fern, so hover/active text flips to birch below */
   --color-accent-active:    var(--fo2-forest);
   --color-accent-text:      var(--in0-void);   /* glade bg is light (L=0.49) — dark text required; badge/success/warning text overrides below use --bm2-birch directly */
   --color-wordmark-dot:     var(--fo1-fern); /* fixed brand color — always fern, never follows theme */
@@ -147,9 +157,14 @@
   --tooltip-bg:                  var(--bm1-mist);
   --tooltip-text:                var(--in0-void);
   --skeleton-shine:              var(--in2-slate); /* slate — lighter than panel (iron) */
-  --btn-p-active-bg: var(--fo1-fern);   /* collapses active = hover */
-  --btn-p-hover-text:  var(--bm2-birch);  /* fern bg + void text = 3.66:1 fail; birch text passes at 4.78:1 */
-  --btn-p-active-text: var(--bm2-birch);  /* active collapses to fern bg too; same swap keeps it ≥4.78:1 */
+  /* Only genuine divergences from the --btn-* semantic fallbacks are declared
+     here (see the components.css comment above --btn-p-border for why). */
+  --btn-p-active-bg:   var(--fo1-fern);   /* collapses active = hover */
+  --btn-p-hover-text:  var(--bm2-birch);  /* void (resting text) only reaches 3.66:1 on fern — birch clears 4.78:1 */
+  --btn-p-active-text: var(--bm2-birch);
+  --btn-s-hover-bg:  var(--in1-iron);   /* not --color-bg-interactive-hover (ash): birch text only reaches 4.47:1 on ash; slate would match --btn-s-bg (no visible hover), so darken to iron instead (9.54:1) */
+  --btn-g-hover-bg:  var(--in2-slate);  /* ghost rests at transparent, so lightening to slate is safe and clears 6.99:1 (ash only reached 4.47:1) */
+  --btn-g-active-bg: var(--in0-void);  /* darker than ghost hover ash (#6B7280) */
   --overlap-card-shadow-raised: 0 -4px 32px rgba(0, 0, 0, 0.40);
   --color-section-featured: var(--bm1-mist);
 }
@@ -161,7 +176,7 @@
 /* Each relative surface that changes in dark mode has two override selectors:*/
 /*   [data-theme="dark"] [data-surface]  — theme on ancestor element         */
 /*   [data-surface][data-theme="dark"]   — theme on same element             */
-/* featured uses only the ancestor selector — see block comment below.       */
+/* featured uses both forms too — see block comment below.                   */
 
 /* base — resets to page-level bg (useful inside deeper surface contexts) */
 [data-surface="base"] {
@@ -224,10 +239,40 @@
    In dark mode, the full token set flips to light-palette values (text → void,
    bg → mist) so descendants inherit correct contrast in both themes without
    needing data-theme on the element.
-   Only the ancestor selector is used for the dark override — the same-element
-   form would fire on data-theme="dark" data-surface="featured" even in light
-   mode, incorrectly setting mist when void is expected. */
-[data-surface="featured"] {
+   This selector covers only the default (unpinned) light-page case. An
+   explicit data-theme="light" pin needs its OWN, later rule (in the
+   "Light-theme surface overrides" section below, after the dark-flip block)
+   even though the declarations are identical — both that rule and the dark-
+   flip block below sit at specificity 0-2-0 for the same-element pin form, so
+   whichever comes LAST in the file wins the tie. Folding the light-pin
+   selectors into this early rule (as a prior version of this file did) is a
+   real bug, not just duplication: it would make the light-pin rule lose that
+   tie to the dark-flip block. See the light-pin block's own comment for the
+   base/layer/overlay pattern this mirrors.
+   The :not([data-theme="dark"]) guard (matching the same guard used on the
+   light-pin form of base/layer/overlay/featured below) makes this selector
+   mutually exclusive with the same-element dark pin, instead of merely
+   losing a specificity tie to it. That's not just cleanliness: without it,
+   any --btn-* override this block declares that the dark-flip block DOESN'T
+   also declare would leak straight through onto a dark-pinned element, since
+   custom properties cascade per-property, not per-rule — a value from a
+   "losing" rule still wins for a property the "winning" rule never touches.
+   This guard only closes that leak for the same-element pin case, though —
+   it does nothing for an unpinned featured surface sitting inside a dark
+   *ancestor* (data-theme="dark" on <html>, not on this element), since
+   :not() only inspects the element's own attributes. That's why the two
+   explicit resets in the dark-flip block below (--btn-s-hover-bg,
+   --btn-g-hover-bg) are still required — they close the ancestor-inheritance
+   leak, which this guard cannot.
+   The dark-flip block right below handles both the ancestor form
+   ([data-theme="dark"] [data-surface="featured"]) and the same-element pin
+   form ([data-surface="featured"][data-theme="dark"]).
+   Button tokens only need a value here where the surface's colors genuinely
+   diverge from their semantic fallback (see the components.css comment above
+   --btn-p-border) — --color-bg-inset/--color-border-strong/etc. are already
+   correctly scoped to this surface, so --btn-s-bg/--btn-g-border/etc. resolve
+   correctly here for free via their fallback, without redeclaration. */
+[data-surface="featured"]:not([data-theme="dark"]) {
   background:                   var(--in0-void);
   color:                        var(--color-text);
   --color-bg:                   var(--in0-void);
@@ -244,9 +289,13 @@
   --color-bg-interactive-hover: var(--in3-ash);
   --skeleton-base:              var(--in1-iron);
   --skeleton-shine:             var(--in2-slate);
+  --btn-s-hover-bg:             var(--in1-iron);  /* not --color-bg-interactive-hover (ash): birch reaches only 4.47:1 on ash, and slate would match --btn-s-bg (no visible hover) */
+  --btn-g-hover-bg:             var(--in2-slate); /* ghost rests at transparent, so lightening to slate is safe (6.99:1 vs ash's 4.47:1) */
+  --btn-g-active-bg:            var(--in2-slate);
 }
 
-[data-theme="dark"] [data-surface="featured"] {
+[data-theme="dark"] [data-surface="featured"],
+[data-surface="featured"][data-theme="dark"] {
   background:                   var(--bm1-mist);
   color:                        var(--color-text);
   --color-bg:                   var(--bm1-mist);
@@ -266,6 +315,28 @@
   --color-accent-text:          var(--bm2-birch);
   --skeleton-base:              var(--bm0-sand);
   --skeleton-shine:             var(--bm2-birch);
+  /* --btn-p-active-bg needs a reset too, for a THIRD reason beyond the two
+     below: this surface's own rest accent (fern) happens to equal the
+     ambient dark theme's --btn-p-active-bg override (also fern, "collapse
+     active = hover" there). Left unset here, that ambient value still wins
+     (it's genuinely declared, not merely a fallback default, so it beats
+     --color-accent-active regardless of what that resolves to) — making a
+     press revert to the resting color instead of darkening past hover.
+     Collapsing active = hover here too, but to THIS surface's own hover
+     (forest, not the ambient's fern) fixes it. */
+  --btn-p-active-bg:            var(--fo2-forest);
+  /* These two don't diverge from their semantic fallback here — but they DO
+     diverge in the light-default featured block below (and in the ambient
+     dark theme) and must be reset back to the fallback explicitly: the bare
+     [data-surface="featured"] selector still matches a same-element dark pin
+     (attribute selectors aren't mutually exclusive), and the ambient dark
+     theme's own override inherits down into an unpinned featured surface —
+     both would otherwise leak the wrong (birch-targeted, iron/slate) value
+     in here even though this surface's void text is fine with the sand
+     fallback. */
+  --btn-s-hover-bg:             var(--color-bg-interactive-hover);
+  --btn-g-hover-bg:             var(--color-bg-interactive-hover);
+  --btn-g-active-bg:            var(--bm0-sand);
 }
 
 /* ── Light-theme surface overrides ─────────────────────────────────────── */
@@ -306,4 +377,34 @@
   --skeleton-base:              var(--bm1-mist);
   --skeleton-shine:             var(--bm2-birch);
   --input-border:               var(--color-border);
+}
+
+/* featured is the exception elsewhere in this file (always dark, pinned to  */
+/* page theme rather than adapting), but a local data-theme="light" pin must */
+/* still be able to force the void variant back on inside a dark page — same */
+/* specificity problem as base/layer/overlay above, same fix. This repeats   */
+/* the bare [data-surface="featured"] block's declarations verbatim; that is */
+/* required, not incidental — this rule must win the specificity tie against */
+/* the dark-flip block above by coming later in the file, so it can't be     */
+/* merged into that earlier rule's selector list (see that block's comment). */
+[data-surface="featured"][data-theme="light"],
+[data-theme="light"] [data-surface="featured"]:not([data-theme="dark"]) {
+  background:                   var(--in0-void);
+  --color-bg:                   var(--in0-void);
+  --color-bg-panel:             var(--in1-iron);
+  --color-bg-inset:             var(--in2-slate);
+  --color-bg-code:              var(--in1-iron);
+  --color-text:                 var(--bm2-birch);
+  --color-text-secondary:       var(--bm1-mist);
+  --color-text-tertiary:        var(--bm0-sand);
+  --color-border:               var(--in2-slate);
+  --color-border-strong:        var(--bm0-sand);
+  --color-border-subtle:        color-mix(in srgb, var(--in2-slate) 25%, transparent);
+  --color-ghost-border:         color-mix(in srgb, var(--bm2-birch) 25%, transparent);
+  --color-bg-interactive-hover: var(--in3-ash);
+  --skeleton-base:              var(--in1-iron);
+  --skeleton-shine:             var(--in2-slate);
+  --btn-s-hover-bg:             var(--in1-iron);  /* not --color-bg-interactive-hover (ash): birch reaches only 4.47:1 on ash, and slate would match --btn-s-bg (no visible hover) */
+  --btn-g-hover-bg:             var(--in2-slate); /* ghost rests at transparent, so lightening to slate is safe (6.99:1 vs ash's 4.47:1) */
+  --btn-g-active-bg:            var(--in2-slate);
 }

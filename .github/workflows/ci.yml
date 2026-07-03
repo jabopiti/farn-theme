@@ -7,6 +7,10 @@ on:
       - 'site/**'
       - 'tokens/**'
       - 'dist/**'
+      - 'tests/**'
+      - 'playwright.config.ts'
+      - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/ci.yml'
   pull_request:
     branches: [main]
@@ -24,10 +28,10 @@ jobs:
       - name: Verify dist/farn-tokens.css is up-to-date
         run: |
           cat tokens/colors.css tokens/typography.css tokens/spacing.css \
-              tokens/motion.css tokens/dark-light.css tokens/components.css > /tmp/farn-tokens-rebuilt.css
+              tokens/motion.css tokens/components.css tokens/dark-light.css > /tmp/farn-tokens-rebuilt.css
           if ! diff -q dist/farn-tokens.css /tmp/farn-tokens-rebuilt.css > /dev/null; then
             echo "dist/farn-tokens.css is out of sync with tokens/. Rebuild:"
-            echo "  cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/dark-light.css tokens/components.css > dist/farn-tokens.css"
+            echo "  cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/components.css tokens/dark-light.css > dist/farn-tokens.css"
             diff dist/farn-tokens.css /tmp/farn-tokens-rebuilt.css
             exit 1
           fi
@@ -114,3 +118,23 @@ jobs:
       - name: Build
         working-directory: site
         run: pnpm build
+
+  contrast-test:
+    name: Button contrast regression suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run contrast tests
+        run: npm run test:contrast

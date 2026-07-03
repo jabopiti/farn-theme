@@ -23,35 +23,49 @@
   --btn-sm-padding-x:     12px;
   --btn-lg-padding-x:     20px;
 
-  /* Primary */
-  --btn-p-bg:       var(--color-accent);
-  --btn-p-text:     var(--color-accent-text);
+  /* Primary/Secondary/Ghost — --btn-p-bg, --btn-p-text, --btn-p-hover-bg,
+     --btn-s-bg, --btn-s-text, --btn-s-hover-bg, --btn-s-active-bg,
+     --btn-g-text, --btn-g-border, --btn-g-hover-bg are intentionally NOT
+     declared here. component-classes.css falls back to their semantic source
+     (--color-accent, --color-bg-inset, --color-text, --color-border-strong,
+     --color-bg-interactive-hover, etc.) when they're unset, which resolves
+     correctly in every theme/surface without needing a redeclaration in each
+     one. Declaring a Tier-3 default here would defeat that: browsers resolve
+     var() references at the element where the *custom property itself* is
+     last declared, not at the element that consumes it — so a default
+     declared once here would freeze to whichever context's semantic value
+     was in scope there, and leak that into every other context that doesn't
+     override it (this exact bug shipped for the featured surface; see
+     tokens/dark-light.css's [data-surface="featured"] block history). The
+     fallback pattern sidesteps that entirely: a context only needs to
+     declare one of these tokens when its correct value genuinely differs
+     from the semantic default (e.g. --btn-s-hover-bg needing --in1-iron
+     instead of --color-bg-interactive-hover where birch text would fail
+     contrast on ash — see the dark-theme block in dark-light.css). You can
+     still override any of these on any scope, same as before — set
+     e.g. --btn-p-bg directly and it takes precedence over the fallback.
+     --btn-g-active-bg is the one exception below: every context needs a
+     genuinely different value for it (not a shared default with occasional
+     overrides), so it keeps a real Tier-3 default plus per-context overrides. */
   --btn-p-border:   transparent;
-  --btn-p-hover-bg: var(--color-accent-hover);
 
   /* Secondary */
-  --btn-s-bg:       var(--color-bg-inset);
-  --btn-s-text:     var(--color-text);
   --btn-s-border:   transparent;
-  --btn-s-hover-bg: var(--color-bg-interactive-hover);
 
   /* Ghost */
   --btn-g-bg:       transparent;
-  --btn-g-text:     var(--color-text);
-  --btn-g-border:   var(--color-border);
-  --btn-g-hover-bg: var(--color-bg-interactive-hover);
 
-  /* Destructive — hover is theme-invariant (always near-black for emphasis) */
+  /* Destructive — theme-invariant everywhere (always near-black hover, for
+     emphasis), so it keeps plain Tier-3 aliases like the rest of this file;
+     nothing here is ever redeclared per theme/surface, so the fallback
+     pattern above wouldn't simplify anything. */
   --btn-d-bg:       var(--color-error);
   --btn-d-text:     var(--color-on-error);
   --btn-d-border:   transparent;
   --btn-d-hover-bg: var(--in0-void);
+  --btn-d-active-bg: var(--in0-void); /* same as hover — no darker palette token exists */
 
-  /* Active / pressed */
-  --btn-p-active-bg: var(--color-accent-active);         /* semantic; light: --fo3-deepwater · dark: --fo2-forest (dark override in dark-light.css, which also sets --btn-p-hover-text/--btn-p-active-text to birch there) */
-  --btn-s-active-bg: var(--color-bg-inset);              /* light: hover-sandwich (idle=active); dark: --in2-slate via semantic layer */
-  --btn-g-active-bg: var(--color-bg-interactive-active); /* semantic; light: --bm0-sand · dark: --in0-void */
-  --btn-d-active-bg: var(--in0-void);                    /* same as hover — no darker palette token exists */
+  --btn-g-active-bg: var(--color-bg-interactive-active); /* ambient default (light: --bm0-sand); dark ambient and both featured variants override this directly in dark-light.css, since each needs its own distinct value rather than a shared fallback */
 
   /* ── Link tokens ────────────────────────────────────────────────────── */
   --link-color:         var(--color-accent);
@@ -306,11 +320,49 @@
   pointer-events: none;
 }
 
-/* Variants — each sets its own scoped hover/active bg (and, where the theme needs a text swap for contrast, text) for the shared interaction rules below */
-.btn-p { background: var(--btn-p-bg); color: var(--btn-p-text); border-color: var(--btn-p-border); --btn-hover-bg: var(--btn-p-hover-bg); --btn-active-bg: var(--btn-p-active-bg); --btn-hover-text: var(--btn-p-hover-text, var(--btn-p-text)); --btn-active-text: var(--btn-p-active-text, var(--btn-p-text)); }
-.btn-s { background: var(--btn-s-bg); color: var(--btn-s-text); border-color: var(--btn-s-border); --btn-hover-bg: var(--btn-s-hover-bg); --btn-active-bg: var(--btn-s-active-bg); --btn-hover-text: var(--btn-s-text); --btn-active-text: var(--btn-s-text); }
-.btn-g { background: var(--btn-g-bg); color: var(--btn-g-text); border-color: var(--btn-g-border); --btn-hover-bg: var(--btn-g-hover-bg); --btn-active-bg: var(--btn-g-active-bg); --btn-hover-text: var(--btn-g-text); --btn-active-text: var(--btn-g-text); }
-.btn-d { background: var(--btn-d-bg); color: var(--btn-d-text); border-color: var(--btn-d-border); --btn-hover-bg: var(--btn-d-hover-bg); --btn-active-bg: var(--btn-d-active-bg); --btn-hover-text: var(--btn-d-text); --btn-active-text: var(--btn-d-text); }
+/* Variants — each sets its own scoped bg/text/hover/active for the shared
+   interaction rules below. Most properties use var(--btn-X, semantic-fallback)
+   rather than aliasing the semantic token directly in components.css — see
+   the comment there for why. --btn-*-hover-text/--btn-*-active-text chain two
+   levels deep (hover override → resting-text override → semantic default) so
+   a consumer can override just the resting text and have hover/active follow
+   it, without needing to also set the hover/active variant explicitly. */
+.btn-p {
+  background: var(--btn-p-bg, var(--color-accent));
+  color: var(--btn-p-text, var(--color-accent-text));
+  border-color: var(--btn-p-border);
+  --btn-hover-bg: var(--btn-p-hover-bg, var(--color-accent-hover));
+  --btn-active-bg: var(--btn-p-active-bg, var(--color-accent-active));
+  --btn-hover-text: var(--btn-p-hover-text, var(--btn-p-text, var(--color-accent-text)));
+  --btn-active-text: var(--btn-p-active-text, var(--btn-p-text, var(--color-accent-text)));
+}
+.btn-s {
+  background: var(--btn-s-bg, var(--color-bg-inset));
+  color: var(--btn-s-text, var(--color-text));
+  border-color: var(--btn-s-border);
+  --btn-hover-bg: var(--btn-s-hover-bg, var(--color-bg-interactive-hover));
+  --btn-active-bg: var(--btn-s-active-bg, var(--color-bg-inset));
+  --btn-hover-text: var(--btn-s-hover-text, var(--btn-s-text, var(--color-text)));
+  --btn-active-text: var(--btn-s-active-text, var(--btn-s-text, var(--color-text)));
+}
+.btn-g {
+  background: var(--btn-g-bg);
+  color: var(--btn-g-text, var(--color-text));
+  border-color: var(--btn-g-border, var(--color-border-strong));
+  --btn-hover-bg: var(--btn-g-hover-bg, var(--color-bg-interactive-hover));
+  --btn-active-bg: var(--btn-g-active-bg);
+  --btn-hover-text: var(--btn-g-hover-text, var(--btn-g-text, var(--color-text)));
+  --btn-active-text: var(--btn-g-active-text, var(--btn-g-text, var(--color-text)));
+}
+.btn-d {
+  background: var(--btn-d-bg);
+  color: var(--btn-d-text);
+  border-color: var(--btn-d-border);
+  --btn-hover-bg: var(--btn-d-hover-bg);
+  --btn-active-bg: var(--btn-d-active-bg);
+  --btn-hover-text: var(--btn-d-hover-text, var(--btn-d-text));
+  --btn-active-text: var(--btn-d-active-text, var(--btn-d-text));
+}
 
 .btn:hover       { background: var(--btn-hover-bg); color: var(--btn-hover-text); }
 .btn:active      { background: var(--btn-active-bg); color: var(--btn-active-text); }

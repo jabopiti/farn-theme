@@ -50,11 +50,49 @@
   pointer-events: none;
 }
 
-/* Variants — each sets its own scoped hover/active bg (and, where the theme needs a text swap for contrast, text) for the shared interaction rules below */
-.btn-p { background: var(--btn-p-bg); color: var(--btn-p-text); border-color: var(--btn-p-border); --btn-hover-bg: var(--btn-p-hover-bg); --btn-active-bg: var(--btn-p-active-bg); --btn-hover-text: var(--btn-p-hover-text, var(--btn-p-text)); --btn-active-text: var(--btn-p-active-text, var(--btn-p-text)); }
-.btn-s { background: var(--btn-s-bg); color: var(--btn-s-text); border-color: var(--btn-s-border); --btn-hover-bg: var(--btn-s-hover-bg); --btn-active-bg: var(--btn-s-active-bg); --btn-hover-text: var(--btn-s-text); --btn-active-text: var(--btn-s-text); }
-.btn-g { background: var(--btn-g-bg); color: var(--btn-g-text); border-color: var(--btn-g-border); --btn-hover-bg: var(--btn-g-hover-bg); --btn-active-bg: var(--btn-g-active-bg); --btn-hover-text: var(--btn-g-text); --btn-active-text: var(--btn-g-text); }
-.btn-d { background: var(--btn-d-bg); color: var(--btn-d-text); border-color: var(--btn-d-border); --btn-hover-bg: var(--btn-d-hover-bg); --btn-active-bg: var(--btn-d-active-bg); --btn-hover-text: var(--btn-d-text); --btn-active-text: var(--btn-d-text); }
+/* Variants — each sets its own scoped bg/text/hover/active for the shared
+   interaction rules below. Most properties use var(--btn-X, semantic-fallback)
+   rather than aliasing the semantic token directly in components.css — see
+   the comment there for why. --btn-*-hover-text/--btn-*-active-text chain two
+   levels deep (hover override → resting-text override → semantic default) so
+   a consumer can override just the resting text and have hover/active follow
+   it, without needing to also set the hover/active variant explicitly. */
+.btn-p {
+  background: var(--btn-p-bg, var(--color-accent));
+  color: var(--btn-p-text, var(--color-accent-text));
+  border-color: var(--btn-p-border);
+  --btn-hover-bg: var(--btn-p-hover-bg, var(--color-accent-hover));
+  --btn-active-bg: var(--btn-p-active-bg, var(--color-accent-active));
+  --btn-hover-text: var(--btn-p-hover-text, var(--btn-p-text, var(--color-accent-text)));
+  --btn-active-text: var(--btn-p-active-text, var(--btn-p-text, var(--color-accent-text)));
+}
+.btn-s {
+  background: var(--btn-s-bg, var(--color-bg-inset));
+  color: var(--btn-s-text, var(--color-text));
+  border-color: var(--btn-s-border);
+  --btn-hover-bg: var(--btn-s-hover-bg, var(--color-bg-interactive-hover));
+  --btn-active-bg: var(--btn-s-active-bg, var(--color-bg-inset));
+  --btn-hover-text: var(--btn-s-hover-text, var(--btn-s-text, var(--color-text)));
+  --btn-active-text: var(--btn-s-active-text, var(--btn-s-text, var(--color-text)));
+}
+.btn-g {
+  background: var(--btn-g-bg);
+  color: var(--btn-g-text, var(--color-text));
+  border-color: var(--btn-g-border, var(--color-border-strong));
+  --btn-hover-bg: var(--btn-g-hover-bg, var(--color-bg-interactive-hover));
+  --btn-active-bg: var(--btn-g-active-bg);
+  --btn-hover-text: var(--btn-g-hover-text, var(--btn-g-text, var(--color-text)));
+  --btn-active-text: var(--btn-g-active-text, var(--btn-g-text, var(--color-text)));
+}
+.btn-d {
+  background: var(--btn-d-bg);
+  color: var(--btn-d-text);
+  border-color: var(--btn-d-border);
+  --btn-hover-bg: var(--btn-d-hover-bg);
+  --btn-active-bg: var(--btn-d-active-bg);
+  --btn-hover-text: var(--btn-d-hover-text, var(--btn-d-text));
+  --btn-active-text: var(--btn-d-active-text, var(--btn-d-text));
+}
 
 .btn:hover       { background: var(--btn-hover-bg); color: var(--btn-hover-text); }
 .btn:active      { background: var(--btn-active-bg); color: var(--btn-active-text); }
