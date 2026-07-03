@@ -1,6 +1,6 @@
 {
   "name": "farn-theme",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "A token-first CSS design system rooted in the forests of northern Germany — palette + semantic tokens, plus ready-to-use component classes",
   "license": "MIT",
   "author": "Jacob Lueg Tiedemann <bo@jbpt.de>",
