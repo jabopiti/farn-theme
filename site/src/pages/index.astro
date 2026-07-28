@@ -6,10 +6,41 @@ import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
 import FernParallaxBackground from '../components/FernParallaxBackground.astro';
 import { groups, links, ctas } from '../data/navigation';
+import pkg from '../../../package.json';
 
 const title = 'Farn — Design System';
 const description = 'A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes for any stack.';
 const ogImage = new URL('/og-image.png', Astro.site);
+const authorName = pkg.author.replace(/\s*<.*>\s*/, '');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${Astro.site}#website`,
+      name: 'Farn',
+      url: Astro.site,
+      description,
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      '@id': `${Astro.site}#software`,
+      name: 'Farn',
+      description,
+      codeRepository: pkg.repository.url.replace(/^git\+/, '').replace(/\.git$/, ''),
+      programmingLanguage: 'CSS',
+      license: 'https://opensource.org/licenses/MIT',
+      softwareVersion: pkg.version,
+      author: {
+        '@type': 'Person',
+        name: authorName,
+        url: 'https://jbpt.de',
+      },
+    },
+  ],
+};
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +51,7 @@ const ogImage = new URL('/og-image.png', Astro.site);
 <meta name="description" content={description} />
 <link rel="canonical" href={Astro.site} />
 <meta property="og:type" content="website" />
+<meta property="og:site_name" content="Farn" />
 <meta property="og:url" content={Astro.site} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -30,6 +62,7 @@ const ogImage = new URL('/og-image.png', Astro.site);
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" href="/fern_icon.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

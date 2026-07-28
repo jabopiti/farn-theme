@@ -2,6 +2,8 @@
 
 > Token-first CSS design system for the web. Palette tokens, semantic tokens, and opt-in component classes. Zero framework assumptions — opt-in JavaScript available for nav and tab components.
 
+This is a curated reference. For the full text of every page on the docs site in one fetch, see [llms-full.txt](https://farn.jbpt.de/llms-full.txt).
+
 ## Install
 
 ```
