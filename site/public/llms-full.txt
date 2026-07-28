@@ -4230,14 +4230,6 @@ Flex for one-dimensional alignment, grid for two-dimensional layout. The demo be
 repeat(auto-fill, minmax(180px, 1fr)) — columns appear as space allows,
 collapsing to a single column on narrow viewports without a media query.
 
-{[1, 2, 3, 4].map(n => (
-
-Card {n}
-
-Grid auto-fill
-
-))}
-
 Grid vs flex pattern reference
 
 Pattern
@@ -4403,12 +4395,6 @@ Columns auto-fit to available space using auto-fit minmax() — no breakpoints
 needed. Override the minimum column width with --grid-min (default: 280px).
 This is the general-purpose version; .card-grid in farn-components.css
 uses the same pattern with a fixed 280px minimum.
-
-{[1, 2, 3, 4, 5].map(n => (
-
-col {n}
-
-))}
 
 Auto grid reference
 

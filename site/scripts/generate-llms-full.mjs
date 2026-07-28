@@ -68,14 +68,51 @@ function stripElement(str, tagName) {
   return replaceUntilStable(str, new RegExp(`<${tagName}\\b[\\s\\S]*?<\\/${tagName}\\s*>`, 'gi'), '');
 }
 
+// Drop every top-level (and nested) {...} JS expression — dynamic demo blocks
+// like `{[1, 2, 3].map(n => (<div>...</div>))}` aren't prose. Outside an `is:raw`
+// block, a literal brace is never valid here: this codebase HTML-entity-escapes
+// braces in code samples (`&#123;`/`&#125;`, see getting-started.astro)
+// specifically so they don't get parsed as Astro expressions — so any raw `{`
+// is guaranteed to open one, UNLESS it's inside `is:raw` (see extractText),
+// Astro's other escape hatch, which turns off expression parsing entirely
+// (used for unescaped code samples, e.g. templates/landing-page.astro).
+function stripExpressions(str) {
+  let out = '';
+  let depth = 0;
+  for (const ch of str) {
+    if (ch === '{') depth++;
+    else if (ch === '}') depth = Math.max(0, depth - 1);
+    else if (depth === 0) out += ch;
+  }
+  return out;
+}
+
+// `<tag is:raw>...</tag>` content is opaque to Astro's compiler — braces inside
+// are literal text, not expressions — so it must bypass stripExpressions entirely.
+// Pull these blocks out before expression-stripping using a placeholder token
+// that can't collide with real prose, then splice the extracted plain text back
+// in once every other stripping pass (which would otherwise treat literal `<`/`>`
+// inside the raw content as HTML tags) has finished running.
+const RAW_BLOCK_RE = /<(\w+)(?:\s[^>]*)?\bis:raw\b[^>]*>[\s\S]*?<\/\1\s*>/gi;
+const RAW_PLACEHOLDER_RE = /\[\[FARN_RAW_BLOCK_(\d+)\]\]/g;
+
 function extractText(source) {
   let body = source.replace(/^---[\s\S]*?---/, ''); // frontmatter
   body = stripElement(body, 'script');
   body = stripElement(body, 'style');
   body = stripElement(body, 'svg');
+
+  const rawBlocks = [];
+  body = body.replace(RAW_BLOCK_RE, (match) => {
+    rawBlocks.push(match.replace(/<[^>]+>/g, '\n'));
+    return `[[FARN_RAW_BLOCK_${rawBlocks.length - 1}]]`;
+  });
+
+  body = stripExpressions(body);
   body = body.replace(LAYOUT_WRAPPER_RE, '\n');
   body = body.replace(BLOCK_TAG_RE, '\n');
   body = replaceUntilStable(body, /<[^>]*>/g, ''); // strip remaining inline tags, keep their text content
+  body = body.replace(RAW_PLACEHOLDER_RE, (_, i) => rawBlocks[Number(i)]);
   body = body.replace(/&[a-z#0-9]+;/gi, (m) => ENTITIES[m] ?? m);
   return body
     .replace(/[ \t]+/g, ' ')
