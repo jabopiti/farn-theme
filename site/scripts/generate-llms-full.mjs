@@ -48,14 +48,29 @@ const BLOCK_TAGS = 'p|div|section|article|h[1-6]|li|ul|ol|tr|td|th|table|pre|br|
   '|blockquote|header|footer|nav|main|figure|figcaption|dl|dt|dd|DocLayout';
 const BLOCK_TAG_RE = new RegExp(`</?(?:${BLOCK_TAGS})(?:\\s[^>]*)?>`, 'gi');
 
+// Apply a replacement repeatedly until it stops changing the string, so a single
+// pass can't leave behind a fragment (e.g. from malformed/nested tags) that only
+// forms a match once an earlier removal has run.
+function replaceUntilStable(str, regex, replacement) {
+  let prev;
+  do {
+    prev = str;
+    str = str.replace(regex, replacement);
+  } while (str !== prev);
+  return str;
+}
+
+function stripElement(str, tagName) {
+  return replaceUntilStable(str, new RegExp(`<${tagName}\\b[\\s\\S]*?<\\/${tagName}\\s*>`, 'gi'), '');
+}
+
 function extractText(source) {
-  let body = source
-    .replace(/^---[\s\S]*?---/, '') // frontmatter
-    .replace(/<script[\s\S]*?<\/script>/gi, '')
-    .replace(/<style[\s\S]*?<\/style>/gi, '')
-    .replace(/<svg[\s\S]*?<\/svg>/gi, '')
-    .replace(BLOCK_TAG_RE, '\n')
-    .replace(/<[^>]+>/g, ''); // strip remaining inline tags, keep their text content
+  let body = source.replace(/^---[\s\S]*?---/, ''); // frontmatter
+  body = stripElement(body, 'script');
+  body = stripElement(body, 'style');
+  body = stripElement(body, 'svg');
+  body = body.replace(BLOCK_TAG_RE, '\n');
+  body = replaceUntilStable(body, /<[^>]*>/g, ''); // strip remaining inline tags, keep their text content
   body = body.replace(/&[a-z#0-9]+;/gi, (m) => ENTITIES[m] ?? m);
   return body
     .replace(/[ \t]+/g, ' ')
