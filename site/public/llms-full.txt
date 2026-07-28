@@ -4230,6 +4230,8 @@ Flex for one-dimensional alignment, grid for two-dimensional layout. The demo be
 repeat(auto-fill, minmax(180px, 1fr)) — columns appear as space allows,
 collapsing to a single column on narrow viewports without a media query.
 
+grid-demo-card layer grid-card-label grid-card-meta
+
 Grid vs flex pattern reference
 
 Pattern
@@ -4395,6 +4397,8 @@ Columns auto-fit to available space using auto-fit minmax() — no breakpoints
 needed. Override the minimum column width with --grid-min (default: 280px).
 This is the general-purpose version; .card-grid in farn-components.css
 uses the same pattern with a fixed 280px minimum.
+
+prim-item prim-item--tall layer font-size: 11px
 
 Auto grid reference
 
@@ -5232,6 +5236,7 @@ Surfaces
 Tokens
 Fraunces
 Example
+FAQ
 
 Getting Started
 
@@ -5491,7 +5496,13 @@ font-weight: 800;
 </body>
 </html>
 
+FAQ
+
+accordion-panel
+
 Need a starting point? Browse Templates — copy-paste page sections assembled into complete layouts, all built with Farn tokens.
+
+What is Farn?  Farn is a zero-dependency, token-first CSS design system. A single stylesheet gives you palette and semantic design tokens plus opt-in component classes for buttons, cards, forms, badges, and more — no JavaScript framework required.  Do I need a build step or JavaScript framework to use Farn?  No. Farn ships as plain CSS you link with one <link> tag or install from npm. Two small opt-in scripts (nav.js, tabs.js) add progressive enhancement for the theme toggle and tabs, but the CSS works without them.  How does dark/light mode work?  Set data-theme="dark" or data-theme="light" on <html> (or any element). Farn’s semantic tokens resolve to the correct palette values for that mode automatically — no separate dark-mode stylesheet needed.  Can I use Farn with React, Vue, Svelte, or another framework?  Yes. Farn is framework-agnostic CSS with no JavaScript dependencies, so it works identically in any stack.  Is Farn free to use?  Yes, MIT licensed, free for personal and commercial projects.  How do I customize Farn's colors for my brand?  Override Tier-3 component tokens (e.g. --btn-p-bg, --card-bg) on :root for a global change, or scope them to a selector for a local override — no need to touch Farn’s source.  Does Farn meet accessibility standards?  Farn targets WCAG AA contrast across all four surfaces in both dark and light mode, with visible :focus-visible states and prefers-reduced-motion support built in.
 
 ---
 

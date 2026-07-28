@@ -13,6 +13,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/astro.config.mjs`, `site/public/robots.txt`: `@astrojs/sitemap` integration and a `robots.txt` pointing at the generated sitemap.
 - `site/src/components/SeoMeta.astro` (new): shared canonical/OG/Twitter meta partial used by both `DocLayout.astro` and `index.astro`, replacing two copies of the same block.
 - `site/scripts/generate-llms-full.mjs` (new): generates `site/public/llms-full.txt` — full text of every docs page in one file — on every `build`, so it can't drift from the actual content. `llms.txt` now links to it.
+- `site/src/pages/getting-started.astro`: FAQ section (7 questions, `.accordion` component) backed by matching `FAQPage` JSON-LD, both generated from a single `faqs` array so they can't drift apart. `site/src/layouts/DocLayout.astro` gains a `slot="head"` extension point so pages can add their own JSON-LD.
 
 - `tokens/spacing.css`: `--space-sm-plus` (16px) — off-scale step between `--space-sm` and `--space-md`. Replaces the raw `16px` literals in `--btn-padding-x` and `.nav-cta` padding. Documented on `site/src/pages/styles/spacing.astro`.
 - `tokens/spacing.css`: `--shadow-sm/-md/-lg` elevation scale, backed by per-tier `--shadow-opacity-*` tokens so dark mode can override just the opacity. `--overlap-card-shadow-raised` now reuses `--shadow-opacity-lg` instead of a hardcoded rgba literal (rendered output unchanged). Documented on `site/src/pages/styles/spacing.astro#elevation`.
