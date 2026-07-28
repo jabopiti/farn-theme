@@ -10,7 +10,7 @@
     "generate-llms-full": "node scripts/generate-llms-full.mjs"
   },
   "dependencies": {
-    "astro": "^7.0.9"
+    "astro": "^7.1.1"
   },
   "engines": {
     "node": ">=18.17.0"
