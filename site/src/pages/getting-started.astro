@@ -1,8 +1,50 @@
 ---
 import DocLayout from '../layouts/DocLayout.astro';
+
+const faqs = [
+  {
+    q: 'What is Farn?',
+    a: 'Farn is a zero-dependency, token-first CSS design system. A single stylesheet gives you palette and semantic design tokens plus opt-in component classes for buttons, cards, forms, badges, and more — no JavaScript framework required.',
+  },
+  {
+    q: 'Do I need a build step or JavaScript framework to use Farn?',
+    a: 'No. Farn ships as plain CSS you link with one <link> tag or install from npm. Two small opt-in scripts (nav.js, tabs.js) add progressive enhancement for the theme toggle and tabs, but the CSS works without them.',
+  },
+  {
+    q: 'How does dark/light mode work?',
+    a: 'Set data-theme="dark" or data-theme="light" on <html> (or any element). Farn’s semantic tokens resolve to the correct palette values for that mode automatically — no separate dark-mode stylesheet needed.',
+  },
+  {
+    q: 'Can I use Farn with React, Vue, Svelte, or another framework?',
+    a: 'Yes. Farn is framework-agnostic CSS with no JavaScript dependencies, so it works identically in any stack.',
+  },
+  {
+    q: 'Is Farn free to use?',
+    a: 'Yes, MIT licensed, free for personal and commercial projects.',
+  },
+  {
+    q: "How do I customize Farn's colors for my brand?",
+    a: 'Override Tier-3 component tokens (e.g. --btn-p-bg, --card-bg) on :root for a global change, or scope them to a selector for a local override — no need to touch Farn’s source.',
+  },
+  {
+    q: 'Does Farn meet accessibility standards?',
+    a: 'Farn targets WCAG AA contrast across all four surfaces in both dark and light mode, with visible :focus-visible states and prefers-reduced-motion support built in.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
 ---
 
 <DocLayout title="Getting Started" description="Install Farn and set up dark/light mode in your project">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
   <nav slot="subnav" class="sub-nav filled" id="sub-nav-gs" aria-label="Section navigation">
     <div class="sub-nav-inner">
       <a href="#for-ai" class="sub-nav-link">For AI</a>
@@ -16,6 +58,7 @@ import DocLayout from '../layouts/DocLayout.astro';
       <a href="#using-tokens" class="sub-nav-link">Tokens</a>
       <a href="#fraunces-headings" class="sub-nav-link">Fraunces</a>
       <a href="#minimal-example" class="sub-nav-link">Example</a>
+      <a href="#faq" class="sub-nav-link">FAQ</a>
       <span class="sub-nav-indicator"></span>
     </div>
   </nav>
@@ -232,6 +275,18 @@ h3 &#123; font-family: var(--font-display); font-variation-settings: 'opsz' 20; 
   &lt;p&gt;Token-first design system.&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="accordion">
+    {faqs.map((faq) => (
+      <details>
+        <summary>{faq.q}</summary>
+        <div class="accordion-panel">
+          <p>{faq.a}</p>
+        </div>
+      </details>
+    ))}
+  </div>
 
   <hr />
   <p>Need a starting point? <a href="/templates">Browse Templates</a> — copy-paste page sections assembled into complete layouts, all built with Farn tokens.</p>

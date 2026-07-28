@@ -1,0 +1,7777 @@
+# Farn — Full documentation text
+
+> Concatenated full text of every page on https://farn.jbpt.de, regenerated on every site
+> build from the same source as the live site. For a shorter, curated reference
+> optimised for coding agents, see /llms.txt.
+
+## Actions — https://farn.jbpt.de/components/actions
+Action components in the Farn design system — buttons, links, and interactive triggers
+
+Actions
+
+Components that trigger operations or navigate the user. Buttons are for in-page actions;
+links are for navigation. Both consume Tier-3 tokens so the full action palette can be
+rethemed in one place.
+
+Buttons
+
+Four variants cover the full intent spectrum from primary confirmation to destructive operations.
+All variants share .btn as a base class and consume --btn-* Tier-3 tokens.
+
+Primary
+Secondary
+Ghost
+Destructive
+
+Sizes
+
+Size modifiers adjust height and padding only. Font weight and variant colours are unaffected. Default fits most layouts; use .btn-sm for dense UIs and .btn-lg for hero CTAs.
+
+Small
+Default
+Large
+
+States
+
+Enabled
+Disabled
+Enabled
+Disabled
+Enabled
+Disabled
+Enabled
+Disabled
+
+Loading
+
+Add .btn-loading to suppress pointer events and signal a busy cursor while an async operation runs. Place a .spinner .spinner-sm element inside the button; update aria-label on the button to describe what is happening.
+
+Saving…
+
+Loading
+
+Processing
+
+Full reference — Buttons
+
+Variants
+
+Apply .btn first, then exactly one variant modifier. Use the variant that matches the intent of the action — not its visual weight preference.
+
+Variant
+
+Class
+
+Use
+
+Primary
+
+.btn-p
+
+The single most important action on a page or in a dialog. Use once per view.
+
+Secondary
+
+.btn-s
+
+Supporting actions alongside a primary button — cancel, back, view details.
+
+Ghost
+
+.btn-g
+
+Low-emphasis actions in toolbars, cards, or dense layouts where ink weight matters.
+
+Destructive
+
+.btn-d
+
+Irreversible operations: delete, remove, revoke. Pair with a confirmation dialog.
+
+Size tokens
+
+Size
+
+Class
+
+Height
+
+Padding
+
+Font size
+
+Font token
+
+Small
+
+.btn-sm
+
+32px
+
+0 12px
+
+11px
+
+--btn-sm-font-size
+
+Default
+
+—
+
+40px
+
+0 16px
+
+12px
+
+--btn-font-size
+
+Large
+
+.btn-lg
+
+48px
+
+0 20px
+
+14px
+
+--btn-lg-font-size
+
+Disabled state
+
+Hover, active, and focus states are driven by --btn-* token values. Focus uses the global :focus-visible outline from base.css. Disabled buttons reduce opacity via --btn-disabled-opacity and suppress pointer events.
+
+For <a> elements acting as disabled buttons, use aria-disabled="true" and tabindex="-1" with inline opacity and pointer-events: none — the disabled attribute has no effect on anchors.
+
+<button class="btn btn-p" disabled>Can't proceed</button>
+
+<!-- anchor disabled state -->
+<a class="btn btn-p" aria-disabled="true" tabindex="-1"
+style="opacity: var(--btn-disabled-opacity); pointer-events: none;">
+Can't proceed
+</a>
+
+Loading state
+
+<button class="btn btn-p btn-loading" aria-label="Saving">
+<span class="spinner spinner-sm" aria-hidden="true"></span>
+Saving…
+</button>
+
+The spinner is aria-hidden because the button's own label already describes the state. Toggle .btn-loading via JavaScript when the async operation starts and ends. Do not use the HTML disabled attribute for loading — it removes the button from the tab order and prevents focus restoration after the operation completes.
+
+Anatomy
+
+<!-- base class + variant modifier -->
+<button class="btn btn-p">Label</button>
+
+<!-- with size modifier -->
+<button class="btn btn-s btn-sm">Label</button>
+
+<!-- with icon (flexbox gap: 6px) -->
+<button class="btn btn-g">
+<i class="ti ti-download"></i>
+Download
+</button>
+
+<!-- link element acting as a button -->
+<a href="/docs" class="btn btn-p">Read the docs</a>
+
+Token reference
+
+Token
+
+Default
+
+Purpose
+
+--btn-radius
+
+var(--radius-md)
+
+Border radius for all button variants
+
+--btn-disabled-opacity
+
+0.5
+
+Opacity applied to disabled buttons
+
+Primary
+
+--btn-p-bg
+
+var(--color-accent)
+
+Primary background
+
+--btn-p-text
+
+var(--color-accent-text)
+
+Primary text colour
+
+--btn-p-hover-bg
+
+var(--color-accent-hover)
+
+Primary hover background
+
+--btn-p-active-bg
+
+var(--color-accent-active)
+
+Primary pressed background
+
+--btn-p-hover-text
+
+--btn-p-text (dark mode: --bm2-birch)
+
+Primary hover text colour — flips to birch in dark mode, where void text on the fern hover background would fail AA
+
+--btn-p-active-text
+
+--btn-p-text (dark mode: --bm2-birch)
+
+Primary pressed text colour — same dark-mode swap as hover
+
+Secondary
+
+--btn-s-bg
+
+var(--color-bg-inset)
+
+Secondary background
+
+--btn-s-text
+
+var(--color-text)
+
+Secondary text colour
+
+--btn-s-hover-bg
+
+var(--color-bg-interactive-hover)
+
+Secondary hover background
+
+Ghost
+
+--btn-g-bg
+
+transparent
+
+Ghost background
+
+--btn-g-border
+
+var(--color-border)
+
+Ghost border colour
+
+--btn-g-hover-bg
+
+var(--color-bg-interactive-hover)
+
+Ghost hover background
+
+Destructive
+
+--btn-d-bg
+
+var(--color-error)
+
+Destructive background
+
+--btn-d-text
+
+var(--color-on-error)
+
+Destructive text colour
+
+--btn-d-hover-bg
+
+var(--in0-void)
+
+Destructive hover background (theme-invariant)
+
+Overriding tokens
+
+/* Retheme the primary button for a promotional section */
+.promo-section {
+--btn-p-bg: #7C3AED;
+--btn-p-hover-bg: #6D28D9;
+--btn-p-text: #fff;
+}
+
+/* Pill-shaped buttons in a card */
+.card {
+--btn-radius: var(--radius-full);
+}
+
+Links
+
+Naked <a> elements inherit --link-color,
+--link-hover-color, and --link-visited-color from
+tokens/base.css. Override these tokens to retheme inline links without
+touching --color-accent. Any <a> also accepts
+.btn classes to render as a button.
+
+Inline text link — uses --link-color and underlines on hover.
+Visited links use --link-visited-color.
+
+Link primary
+Link secondary
+Link ghost
+
+Full reference — Links
+
+Naked links
+
+Base link styles are applied globally via tokens/base.css. No class needed — just use <a href="…">.
+
+<p>See the <a href="/docs">full documentation</a> for details.</p>
+
+Link buttons
+
+Any <a> element accepts the .btn classes. The base
+styles set text-decoration: none so links render identically to
+<button> elements. Use <button> for in-page
+actions and <a> for navigation.
+
+<a href="/docs" class="btn btn-p">Read the docs</a>
+<a href="/cancel" class="btn btn-s">Cancel</a>
+
+Token reference
+
+Token
+
+Default
+
+Purpose
+
+--link-color
+
+var(--color-accent)
+
+Naked link colour
+
+--link-hover-color
+
+var(--color-accent-hover)
+
+Naked link hover colour
+
+--link-visited-color
+
+var(--color-accent)
+
+Naked link visited colour
+
+Overriding tokens
+
+/* Retheme inline links in a dark editorial section */
+.editorial {
+--link-color: var(--fo0-glade);
+--link-hover-color: var(--fo1-fern);
+}
+
+Tooltip
+
+Add data-tooltip="…" to any element to attach a tooltip bubble. CSS-only —
+no script required. Shows on :hover and :focus-visible so
+keyboard users see it without JavaScript.
+
+Delete
+Copy
+Bottom
+W3C
+
+Full reference — Tooltip
+
+Placement
+
+Default placement is above the trigger. Add data-tooltip-placement="bottom" when the trigger sits near the top of the viewport and a top tooltip would overflow.
+
+Attribute value
+
+Placement
+
+(absent)
+
+Above the trigger (default)
+
+"bottom"
+
+Below the trigger
+
+Anatomy
+
+Works on any element that supports pseudo-elements. Does not work on replaced/void elements: <input>, <img>, <select>, <textarea>. Wrap them in a <span data-tooltip="…"> instead.
+
+<!-- Icon button with tooltip (hover + keyboard focus) -->
+<button data-tooltip="Delete item" aria-label="Delete item">
+<svg aria-hidden="true">…</svg>
+</button>
+
+<!-- Below placement -->
+<button data-tooltip="More options"
+data-tooltip-placement="bottom"
+aria-label="More options">
+⋯
+</button>
+
+<!-- Replaced element: wrap in a span -->
+<span data-tooltip="Profile photo" style="display:inline-block">
+<img src="avatar.jpg" alt="Profile photo">
+</span>
+
+<!-- Abbreviation (hover only — not focusable) -->
+<abbr data-tooltip="Cascading Style Sheets"
+title="Cascading Style Sheets">CSS</abbr>
+
+Accessibility
+
+content: attr(data-tooltip) in CSS pseudo-elements is not exposed to the
+accessibility tree. Always pair data-tooltip with aria-label
+(interactive elements) or title (non-interactive elements such as
+<abbr>) carrying the same text.
+
+Tooltips respond to :focus-visible in CSS, so keyboard users see the bubble
+on focus without JavaScript. Non-focusable elements are hover-only — add
+tabindex="0" if keyboard access is needed for that element.
+
+Touch devices: :hover is unreliable on mobile. If the
+tooltip text is essential (not supplementary), surface it in visible UI rather than
+relying on a tooltip.
+
+Token reference
+
+Token
+
+Light default
+
+Dark default
+
+Purpose
+
+--tooltip-bg
+
+var(--in0-void)
+
+var(--bm1-mist)
+
+Bubble background — theme-inverse for guaranteed contrast
+
+--tooltip-text
+
+var(--bm2-birch)
+
+var(--in0-void)
+
+Bubble text colour
+
+--tooltip-max-width
+
+220px
+
+Maximum bubble width before text wraps
+
+--tooltip-radius
+
+var(--radius-sm)
+
+Bubble corner radius
+
+--tooltip-padding
+
+4px 10px
+
+Internal bubble padding
+
+--tooltip-font-size
+
+0.75rem
+
+Bubble font size (12px)
+
+Overriding tokens
+
+/* Custom tooltip colour in a dark promo section */
+.promo {
+--tooltip-bg: var(--fo2-forest);
+--tooltip-text: var(--bm2-birch);
+}
+
+Known limitation — viewport edges
+
+The bubble is centred on the trigger midpoint via left: 50%; transform: translateX(-50%).
+On triggers near the left or right edge of the viewport the bubble may overflow.
+For fully collision-aware positioning use a JavaScript positioning library (e.g. Floating UI).
+
+---
+
+## Data — https://farn.jbpt.de/components/data
+Data display components in the Farn design system — badges, tables, and structured content patterns
+
+Data
+
+Components for labelling, categorising, and presenting structured information.
+Badges communicate status at a glance; tables display structured tabular data.
+
+Badges
+
+Informational labels — never interactive. Seven semantic variants use opaque palette fills
+so they read clearly on any surface without dark-mode overrides.
+
+General
+Published
+Draft
+Archived
+Beta
+Research
+Category
+
+Full reference — Badges
+
+Variants
+
+All seven variants share the same base dimensions. Mix freely within a layout — the distinct fills create their own visual hierarchy.
+
+Label
+
+Class
+
+Background
+
+Use
+
+General
+
+.badge-general
+
+--bm0-sand
+
+Neutral, uncategorised content
+
+Published
+
+.badge-published
+
+--bl3-moss
+
+Active, live, stable, success state
+
+Draft
+
+.badge-draft
+
+--bl1-ochre
+
+In-progress, pending, warning state
+
+Archived
+
+.badge-archived
+
+--bl0-ember
+
+Deprecated, removed, error state
+
+Beta
+
+.badge-beta
+
+--bl4-heather
+
+Experimental feature, preview release
+
+Research
+
+.badge-research
+
+--bl2-grain
+
+Discovery phase, annotation, exploration
+
+Category
+
+.badge-category
+
+--fo2-forest
+
+Primary content category label
+
+Usage guidance
+
+Choose variants by semantic meaning, not by colour preference.
+
+Situation
+
+Variant
+
+Content is live and visible to end users
+
+Published
+
+Content is being worked on and not yet live
+
+Draft
+
+Content is no longer active, or an action has failed
+
+Archived
+
+A feature is released but not yet stable
+
+Beta
+
+Item is in a discovery or annotation phase
+
+Research
+
+Label indicates content type or taxonomy
+
+Category
+
+No meaningful status or category applies
+
+General
+
+One badge per item. Stacking multiple badges signals ambiguity in the data model — resolve it at the data level.
+
+Never make badges interactive. For clickable filters or dismissible tags, use a different component. A badge communicates state; it does not change it.
+
+Anatomy
+
+Apply the base .badge class first, then exactly one variant modifier.
+
+<span class="badge badge-published">Published</span>
+<span class="badge badge-beta">Beta</span>
+
+CSS reference
+
+Shipped in dist/farn-components.css. Load alongside farn.css or farn-tokens.css.
+
+.badge {
+display: inline-flex;
+align-items: center;
+height: 22px;
+padding: 0 8px;
+border-radius: var(--radius-sm);
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 0.04em;
+}
+
+.badge-general { background: var(--bm0-sand); color: var(--in0-void); }
+.badge-published { background: var(--bl3-moss); color: var(--color-accent-text); }
+.badge-draft { background: var(--bl1-ochre); color: var(--color-accent-text); }
+.badge-archived { background: var(--bl0-ember); color: var(--color-accent-text); }
+.badge-beta { background: var(--bl4-heather); color: var(--color-accent-text); }
+.badge-research { background: var(--bl2-grain); color: var(--color-accent-text); }
+.badge-category { background: var(--fo2-forest); color: var(--color-accent-text); }
+
+Table
+
+A lightweight, token-driven table component. The .table base class handles
+borders, cell padding, and header styling. Compose with .table-striped,
+.table-hover, .table-sm, or .table-lg for
+alternating rows, hover highlights, and density variants.
+
+Default
+
+Name
+
+Role
+
+Status
+
+Ada Lovelace
+
+Engineer
+
+Active
+
+Grace Hopper
+
+Architect
+
+Active
+
+Alan Turing
+
+Researcher
+
+On leave
+
+Margaret Hamilton
+
+Lead
+
+Active
+
+Striped
+
+Add .table-striped for alternating row contrast using --table-row-stripe-bg.
+
+Name
+
+Role
+
+Status
+
+Ada Lovelace
+
+Engineer
+
+Active
+
+Grace Hopper
+
+Architect
+
+Active
+
+Alan Turing
+
+Researcher
+
+On leave
+
+Margaret Hamilton
+
+Lead
+
+Active
+
+Hover
+
+Add .table-hover for a row highlight on pointer hover. Combines with .table-striped.
+
+Name
+
+Role
+
+Status
+
+Ada Lovelace
+
+Engineer
+
+Active
+
+Grace Hopper
+
+Architect
+
+Active
+
+Alan Turing
+
+Researcher
+
+On leave
+
+Margaret Hamilton
+
+Lead
+
+Active
+
+Density
+
+.table-sm tightens cell padding for dense data views; the default suits most content; .table-lg adds breathing room for spacious layouts.
+
+Compact — .table-sm (4px / 6px padding)
+
+Name
+
+Role
+
+Status
+
+Ada Lovelace
+
+Engineer
+
+Active
+
+Grace Hopper
+
+Architect
+
+Active
+
+Alan Turing
+
+Researcher
+
+On leave
+
+Default — .table (12px / 12px padding)
+
+Name
+
+Role
+
+Status
+
+Ada Lovelace
+
+Engineer
+
+Active
+
+Grace Hopper
+
+Architect
+
+Active
+
+Alan Turing
+
+Researcher
+
+On leave
+
+Comfortable — .table-lg (24px / 24px padding)
+
+Name
+
+Role
+
+Status
+
+Ada Lovelace
+
+Engineer
+
+Active
+
+Grace Hopper
+
+Architect
+
+Active
+
+Alan Turing
+
+Researcher
+
+On leave
+
+Full reference — Table
+
+Rounded corners
+
+overflow: hidden on a border-collapse: collapse table is
+cross-browser unreliable. To get rounded corners, wrap the table in a container:
+
+<div style="border-radius: var(--table-radius); overflow: hidden">
+<table class="table">...</table>
+</div>
+
+Scroll wrapper (narrow viewports)
+
+Wrap with an overflow-x: auto container to allow horizontal scrolling
+on narrow viewports without breaking the layout.
+
+<div style="overflow-x: auto">
+<table class="table">...</table>
+</div>
+
+Both wrappers can be combined on a single div.
+
+Anatomy
+
+<!-- Base -->
+<table class="table">
+<thead>
+<tr><th>Name</th><th>Role</th></tr>
+</thead>
+<tbody>
+<tr><td>Ada Lovelace</td><td>Engineer</td></tr>
+</tbody>
+</table>
+
+<!-- Striped + hover -->
+<table class="table table-striped table-hover">...</table>
+
+<!-- Compact -->
+<table class="table table-sm">...</table>
+
+<!-- Comfortable -->
+<table class="table table-lg">...</table>
+
+Token reference
+
+Token
+
+Default
+
+Description
+
+--table-border
+
+--color-border
+
+Cell and header border colour
+
+--table-header-bg
+
+--color-bg-inset
+
+Header row background
+
+--table-header-text
+
+--color-text
+
+Header row text colour
+
+--table-row-stripe-bg
+
+--color-bg-inset
+
+Even row background in .table-striped — inset ensures visibility on panel-bg surfaces
+
+--table-row-hover-bg
+
+var(--table-row-stripe-bg)
+
+Row background on hover in .table-hover
+
+--table-font-size
+
+0.875rem
+
+Body cell font size
+
+--table-cell-padding
+
+12px 12px
+
+Default cell padding (~38px rows)
+
+--table-cell-padding-sm
+
+4px 6px
+
+Compact cell padding (~22px rows)
+
+--table-cell-padding-lg
+
+24px 24px
+
+Comfortable cell padding (~62px rows)
+
+--table-radius
+
+--radius-md
+
+Corner radius — apply to a wrapper element
+
+CSS reference
+
+.table {
+width: 100%;
+border-collapse: collapse;
+font-size: var(--table-font-size);
+}
+
+.table th,
+.table td {
+padding: var(--table-cell-padding);
+text-align: left;
+border-bottom: 1px solid var(--table-border);
+}
+
+.table thead th {
+background: var(--table-header-bg);
+color: var(--table-header-text);
+font-weight: 600;
+font-size: 0.8125rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+border-bottom: 2px solid var(--table-border);
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+
+.table-striped tbody tr:nth-child(even) td {
+background: var(--table-row-stripe-bg);
+}
+
+.table-hover tbody tr:hover td {
+background: var(--table-row-hover-bg);
+transition: background var(--duration-fast) var(--ease-out);
+}
+
+.table-sm th, .table-sm td { padding: var(--table-cell-padding-sm); }
+.table-lg th, .table-lg td { padding: var(--table-cell-padding-lg); }
+
+Code block
+
+Shipped classes for block and inline code. Both consume --code-* Tier-3 tokens
+so consumers can retheme code formatting independently without touching the semantic layer.
+A copy-to-clipboard button is injected automatically by the reference JS module.
+
+Block code
+
+Apply .code-block to a <pre> element. Add <code> inside for proper semantics.
+
+.card {
+background: var(--color-bg-panel);
+border-radius: var(--radius-lg);
+padding: var(--space-md);
+}
+
+Inline code
+
+Use .inline-code on a <code>
+element within prose. It uses font-size: 0.875em so it scales
+with the surrounding text size.
+
+Full reference — Code block
+
+Anatomy
+
+<!-- Block code -->
+<pre class="code-block"><code>your code here</code></pre>
+
+<!-- Inline code -->
+<p>Set <code class="inline-code">color: var(--color-text)</code> for contrast.</p>
+
+Copy button
+
+The .code-copy-btn class styles an icon button absolutely positioned
+top-right inside a .code-block. The reference implementation injects it
+automatically via JS:
+
+import { initCodeCopy } from './code-copy.js';
+initCodeCopy(); // appends .code-copy-btn to every <pre> that contains <code>
+
+The button is only added when JS runs — no-script users never see an inert element.
+
+Token reference
+
+Token
+
+Default
+
+Use
+
+--code-bg
+
+--color-bg-inset
+
+Background of code blocks and inline code
+
+--code-text
+
+--color-text
+
+Text color inside code blocks
+
+--code-border
+
+--color-border
+
+Border around code blocks
+
+--code-radius
+
+--radius-md
+
+Corner radius on code blocks
+
+--code-copy-size
+
+32px
+
+Width and height of the copy button
+
+--code-copy-radius
+
+--radius-sm
+
+Corner radius of the copy button
+
+To use a consistently dark code block regardless of page theme, override
+--code-bg and --code-text locally:
+
+.my-editor {
+--code-bg: var(--color-bg-code); /* always dark */
+--code-text: var(--bm2-birch); /* always light */
+}
+
+CSS reference
+
+Shipped in dist/farn-components.css. Load alongside farn.css or farn-tokens.css.
+
+.code-block {
+position: relative;
+font-family: var(--font-mono);
+font-size: 0.8125rem;
+background: var(--code-bg);
+color: var(--code-text);
+border: 1px solid var(--code-border);
+border-radius: var(--code-radius);
+padding: var(--space-md);
+overflow-x: auto;
+line-height: 1.6;
+}
+
+.inline-code {
+font-family: var(--font-mono);
+font-size: 0.875em;
+background: var(--code-bg);
+color: var(--code-text);
+padding: 2px 6px;
+border-radius: var(--radius-sm);
+}
+
+---
+
+## Forms — https://farn.jbpt.de/components/forms
+Form components in the Farn design system — inputs, selects, textareas, and form layout patterns
+
+Forms
+
+Form element styles ship as bare element selectors — no extra classes required on
+input, textarea, or select. All styles consume
+Tier-3 --input-* tokens so the full form palette can be rethemed in one
+place without touching semantic tokens.
+
+Form elements
+
+Include farn-components.css — every input, textarea,
+and select is styled automatically. Use .form-field to group a
+label with its control and optional hint text.
+
+Text input
+
+Select
+
+Choose an option
+Fern
+Forest
+Deepwater
+
+Textarea
+
+Remember me
+
+States
+
+Hover darkens to --input-bg-active. Focus adds a coloured border and glow ring. Error via aria-invalid="true" (preferred) or .form-field--error wrapper. Readonly shows the field with a page-level background and a default cursor. Disabled reduces opacity and suppresses pointer events.
+
+Default
+
+Focus simulated
+
+Error
+
+Invalid value.
+
+Readonly
+
+Cannot be edited; use disabled to visually suppress interaction.
+
+Disabled
+
+Wrapper + hint
+
+.form-field stacks label, control, and optional hint text with consistent spacing. .form-hint renders helper or error text below the control in a smaller, secondary colour.
+
+Username
+
+3–24 characters, letters and underscores only.
+
+Email
+
+Enter a valid email address.
+
+Full reference — Form elements
+
+Anatomy
+
+<!-- Minimal — element selector handles all styling -->
+<input type="text" placeholder="…" />
+
+<!-- With label -->
+<label for="x">Label</label>
+<input type="text" id="x" />
+
+<!-- Full wrapper pattern -->
+<div class="form-field">
+<label for="name">Name</label>
+<input type="text" id="name" placeholder="Jane Smith" />
+</div>
+
+<!-- With hint text -->
+<div class="form-field">
+<label for="username">Username</label>
+<input type="text" id="username" />
+<span class="form-hint">3–24 characters, letters and underscores only.</span>
+</div>
+
+<!-- Error via ARIA attribute -->
+<input type="email" aria-invalid="true" value="bad@" />
+
+<!-- Error via wrapper — colours label and hint too; aria-describedby links hint to input -->
+<div class="form-field form-field--error">
+<label for="email">Email</label>
+<input type="email" id="email" aria-invalid="true"
+aria-describedby="email-hint" value="bad@" />
+<span class="form-hint" id="email-hint">Enter a valid email address.</span>
+</div>
+
+<!-- Disabled -->
+<input type="text" disabled value="Cannot edit" />
+
+Token reference
+
+All --input-* tokens are defined in tokens/components.css.
+
+Token
+
+Default
+
+Purpose
+
+--input-radius
+
+var(--radius-md)
+
+Border radius for all form controls
+
+--input-bg
+
+var(--color-bg-panel)
+
+Idle background
+
+--input-bg-active
+
+var(--color-bg-inset)
+
+Hover and focus background
+
+--input-border
+
+var(--color-border)
+
+Idle border colour; overridden to --in3-ash on dark layer/overlay surfaces
+
+--input-border-focus
+
+var(--color-accent)
+
+Focus border colour
+
+--input-border-error
+
+var(--color-error)
+
+Error border colour
+
+--input-focus-shadow
+
+0 0 0 3px color-mix(…)
+
+Focus glow ring
+
+--input-text
+
+var(--color-text)
+
+Input text colour
+
+--input-placeholder
+
+var(--color-text-tertiary)
+
+Placeholder text colour
+
+--input-disabled-opacity
+
+0.4
+
+Opacity applied to disabled controls
+
+Overriding tokens
+
+/* Tighter radius for a dense data-entry panel */
+.data-panel {
+--input-radius: var(--radius-sm);
+}
+
+/* Visible idle border in a flat section */
+.flat-form {
+--input-bg: transparent;
+--input-border: var(--color-border);
+}
+
+---
+
+## Components — https://farn.jbpt.de/components/
+Farn component patterns — layout, navigation, actions, forms, data display, and status feedback
+
+Components
+
+Farn is a design token system with an optional component layer. Tokens give you the
+vocabulary; component classes give you a starting point — override the tokens to retheme
+without touching the classes.
+
+All component classes consume semantic tokens so they adapt to dark/light mode and surface context automatically.
+
+Layout
+
+Cards, section transitions, separators, and quotes — structural components for organising content.
+
+Home›Components›Navigation
+
+Breadcrumbs
+Tabs
+Pagination
+
+Navigation
+
+Breadcrumbs, accordions, tabs, and pagination — components for orientation and movement.
+
+Primary
+Secondary
+
+Actions
+
+Buttons and links — four variants cover the full intent spectrum from confirmation to destructive.
+
+Email
+
+Forms
+
+Input, textarea, and select styles consuming --input-* tokens — no extra classes on native elements.
+
+General
+Published
+Draft
+
+Data
+
+Badges, tables, code blocks — seven badge variants and full table density tiers.
+
+Status
+
+Spinners, skeleton loaders, and tooltips — visual language for async state and feedback.
+
+Using component classes
+
+All component classes ship in dist/farn-components.css. Load it alongside farn.css or farn-tokens.css.
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/farn-theme/dist/farn.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/farn-theme/dist/farn-components.css">
+
+Surfaces and theme context
+
+All components inherit the correct tokens automatically when placed inside a data-surface or data-theme context.
+
+<!-- depth levels (relative to page theme) -->
+<section data-surface="base"> … </section>
+<section data-surface="layer"> … </section>
+<section data-surface="overlay"> … </section>
+
+<!-- forced theme (sets background + all tokens) -->
+<section data-theme="dark"> … </section>
+<section data-theme="dark" data-surface="layer"> … </section>
+
+---
+
+## Layout — https://farn.jbpt.de/components/layout
+Layout components in the Farn design system — cards, section transitions, separators, quotes, and footer
+
+Layout
+
+Structural components for organising content on a page. Cards surface discrete pieces of
+content in a scannable grid; section transitions create intentional visual breaks between
+full-width areas; and the footer provides a reusable site-wide shell.
+
+Cards
+
+Entry points that surface content and invite action. Background, border, and border-radius
+are driven by --card-* Tier-3 tokens — retheme in one place without touching
+the semantic layer.
+
+Default
+
+Background fill, no visible border. Use for most card contexts.
+
+Outlined
+
+Adds a --color-border edge for same-level surfaces.
+
+Highlight
+
+High-contrast background — adapts per theme.
+
+Anatomy
+
+When anatomy children are present the wrapper's padding is removed automatically via
+:has() — each section carries its own var(--card-padding).
+.card-media must be the first child so its top corners
+align with the card's border-radius.
+
+Fern Valley Trail
+
+3.2 km · Moderate
+
+A shaded loop through old-growth forest with seasonal wildflower meadows along the ridge.
+
+View trail
+Save
+
+Full reference — Cards
+
+Variants
+
+Variant
+
+Class
+
+Use
+
+Default
+
+.card
+
+Article lists, feature grids, project indexes. Background: --card-bg → --color-bg-panel.
+
+Outlined
+
+.card-outlined
+
+Adds var(--color-border) edge when the surrounding surface matches the card's background.
+
+Highlight
+
+.card-highlight
+
+Featured or promoted content. Background: Deepwater (--fo3-deepwater) in light, Forest (--fo2-forest) in dark — Birch Mist text in both modes (8.6:1 on deepwater, 6.7:1 on forest).
+
+Interactive
+
+.card-interactive
+
+Any card that is a navigation target or action trigger — adds hover, focus, and active states.
+
+Anatomy
+
+<div class="card">
+<div class="card-media"><img src="trail.jpg" alt="…"></div>
+<div class="card-header"><h3>Title</h3></div>
+<div class="card-body"><p>Description</p></div>
+<div class="card-footer">
+<button class="btn btn-p btn-sm">Action</button>
+</div>
+</div>
+
+Class
+
+Purpose
+
+Notes
+
+.card-media
+
+Top image / visual area
+
+Must be first child. overflow:hidden clips to card radius.
+
+.card-header
+
+Title and metadata row
+
+Use semantic heading elements (h2–h4).
+
+.card-body
+
+Main content area
+
+flex: 1 — expands to fill in equal-height grids.
+
+.card-footer
+
+Actions row
+
+margin-top: auto pins to bottom. Divider appears when preceded by .card-body.
+
+Interactive cards
+
+Add .card-interactive to any card that is a navigation target or action trigger.
+Works on both <div> (with tabindex="0") and <a>.
+
+<!-- div card -->
+<div class="card card-interactive" tabindex="0"> … </div>
+
+<!-- anchor card (whole card is the link) -->
+<a href="/trail/fern-valley" class="card card-interactive"> … </a>
+
+Card grid
+
+.card-grid creates a responsive auto-fit grid. Minimum column width: 280px.
+Cards collapse to a single column on narrow viewports.
+
+<div class="card-grid">
+<div class="card card-interactive"> … </div>
+<div class="card card-interactive"> … </div>
+<div class="card card-interactive"> … </div>
+</div>
+
+Token reference
+
+Token
+
+Default
+
+Purpose
+
+--card-bg
+
+var(--color-bg-panel)
+
+Default card background
+
+--card-hover-bg
+
+var(--color-bg-inset)
+
+Background on hover (interactive cards)
+
+--card-border
+
+transparent
+
+Border colour — .card-outlined overrides to --color-border
+
+--card-radius
+
+var(--radius-lg)
+
+Border radius for card and media
+
+--card-padding
+
+var(--space-md)
+
+Padding for bare cards and all anatomy sections
+
+--card-highlight-bg
+
+--fo3-deepwater (light) · --fo2-forest (dark)
+
+Background for .card-highlight
+
+--card-highlight-border
+
+transparent
+
+Border for .card-highlight
+
+--card-highlight-text
+
+var(--color-card-highlight-text)
+
+Primary text on highlight card — adapts per theme
+
+--card-highlight-text-secondary
+
+var(--color-card-highlight-text-secondary)
+
+Secondary text on highlight card
+
+--card-highlight-text-tertiary
+
+var(--color-card-highlight-text-tertiary)
+
+Tertiary text on highlight card
+
+Overriding tokens
+
+/* Tighter padding for a dense list layout */
+.article-list {
+--card-padding: var(--space-sm);
+}
+
+/* Pill cards in a marketing section */
+.feature-grid {
+--card-radius: var(--radius-xl);
+}
+
+CSS reference
+
+Shipped in dist/farn-components.css. Load alongside farn.css or farn-tokens.css.
+
+.card-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: var(--space-md);
+}
+
+.card {
+display: flex;
+flex-direction: column;
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: var(--card-radius);
+padding: var(--card-padding);
+}
+.card:has(> .card-header, > .card-body, > .card-footer, > .card-media) {
+padding: 0;
+}
+
+.card-outlined { border-color: var(--color-border); }
+.card-highlight { background: var(--card-highlight-bg); border-color: var(--card-highlight-border); }
+
+.card-interactive {
+cursor: pointer;
+transition: background var(--duration-fast) var(--ease-out);
+}
+.card-interactive:hover { background: var(--card-hover-bg); }
+.card-interactive:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.card-interactive:active { transform: scale(0.99); }
+a.card-interactive { color: inherit; text-decoration: none; }
+
+Preview card pattern
+
+A card with a fixed-height live-demo strip at the top — useful whenever a card should preview
+the content or context it links to, giving the viewer a visual taste before they navigate.
+Composes the existing card anatomy: .card-media.card-preview for the strip,
+.card-body for the label and description.
+
+Color
+
+Palette tokens and semantic colour mappings.
+
+Primary
+Secondary
+
+Actions
+
+Buttons and interactive triggers.
+
+Full reference — Preview card
+
+Markup
+
+<a class="card card-interactive card-outlined" href="/section">
+<div class="card-media card-preview" aria-hidden="true">
+<!-- live mini-demo content -->
+</div>
+<div class="card-body">
+<p>Section title</p>
+<p>One-sentence description.</p>
+</div>
+</a>
+
+.card-media must be the first child for correct corner clipping.
+
+.card-preview sets height: 9rem, flex-centres content, and clips overflow.
+
+a.card-interactive suppresses default link colour and underline — child text renders in --color-text.
+
+Add aria-hidden="true" to the preview strip — the link label comes from the card body, not the demo content.
+
+Add tabindex="-1" to any interactive elements inside the preview strip so they are not keyboard-reachable.
+
+Token reference
+
+Token
+
+Default
+
+Purpose
+
+--card-preview-height
+
+9rem
+
+Height of the preview strip. Override on a parent element to resize without touching the class.
+
+All other --card-* tokens apply — background and border are inherited from the card context.
+
+CSS reference
+
+.card-preview {
+height: 9rem;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+padding: var(--space-sm);
+}
+
+a.card-interactive {
+color: inherit;
+text-decoration: none;
+}
+
+Section Transitions
+
+Intentional visual breaks between full-width page sections — signalling a shift in content,
+depth, or energy. All patterns consume the semantic token layer so transitions stay coherent
+as the palette evolves. Use one primary pattern per page.
+
+Layered overlap
+
+The only pure-CSS pattern — no SVG. The next section or a card bleeds upward into the
+preceding one using a negative margin-top and rounded top corners.
+Never add overflow:hidden to the preceding section — it clips the overlap entirely.
+
+Preceding section
+
+Dark area — never add overflow:hidden here.
+
+Overlapping section
+
+Rounded top corners float over the section above.
+
+Sine wave
+
+An SVG divider using layered cubic bezier curves — two offset paths create the illusion
+of a receding tide. Sits absolutely at the bottom of the parent section; fill matches
+the next section's background.
+
+Preceding section
+
+Wave at the bottom — fill matches the section below.
+
+Next section
+
+Override --color-section-next to match this background.
+
+Convex arc
+
+A single quadratic bezier spanning the full width. Calmer than the sine wave — one smooth
+dome suited to centred hero layouts. Animates via animation-timeline: view()
+in supporting browsers; static fallback otherwise. The preview below shows the static state.
+
+Preceding section
+
+Arc at the bottom — fill matches the section below.
+
+Next section
+
+Override --color-section-next on the parent to match this background.
+
+Organic blob
+
+A freeform SVG boundary — no mathematical regularity. Two offset paths soften the edge.
+Fade-only animation keeps the irregular shape from looking chaotic in motion.
+Use at most once per page for a high-emphasis brand moment. Draw paths in Figma or
+Inkscape — do not hand-author blob paths.
+
+Preceding section
+
+Blob at the bottom — replace the example paths with exported Figma paths for production.
+
+Next section
+
+Diagonal cut
+
+A skewed ::before pseudo-element paints the section background at an angle —
+content stays horizontal and box-shadow still works. In supporting browsers
+the angle flattens via animation-timeline: view().
+
+Preceding section
+
+Background skewed via ::before — content stays horizontal.
+
+Next section
+
+Set --color-section on the element to match the preceding section's background.
+
+Full reference — Section Transitions
+
+Pattern guide
+
+Pattern
+
+Classes
+
+Character
+
+Best for
+
+Layered overlap
+
+.overlap-preceding / .overlap-section / .overlap-card
+
+Dimensional, modern
+
+Dark hero → light content; featured CTA panels
+
+Sine wave
+
+.section-wave
+
+Organic, rhythmic
+
+Repeated section breaks; any natural flowing transition
+
+Convex arc
+
+.section-arc
+
+Refined, quiet
+
+Centred hero layouts; calm lens-like elegance
+
+Organic blob
+
+.section-blob
+
+Expressive, freeform
+
+High-emphasis brand moments; one-off expressive breaks
+
+Diagonal cut
+
+.section-skew
+
+Sharp, directional
+
+CTA sections; forward-momentum transitions
+
+Use one primary type per page. A second type is acceptable for a single high-emphasis moment (e.g., sine waves throughout with one layered overlap at a CTA). More than two distinct types creates visual noise.
+
+Layered overlap — details
+
+<section class="overlap-preceding">
+<!-- Hero — never overflow:hidden -->
+</section>
+
+<section class="overlap-section" style="background: var(--color-bg-panel);">
+<!-- Slides up over the hero -->
+</section>
+
+Class / attribute
+
+Element
+
+Purpose
+
+.overlap-preceding
+
+Any block
+
+Sets overflow: visible explicitly. Prevents accidental overflow:hidden clipping the overlap.
+
+.overlap-section
+
+<section>
+
+Full section that slides up. Sets z-index, negative margin, rounded top corners. Consumer sets background.
+
+.overlap-card
+
+<div>
+
+Card variant — floats upward with Tier-1 entry animation (opacity + translateY + shadow grow).
+
+data-scroll-reveal
+
+.overlap-card
+
+Opts into the shared IntersectionObserver. Adds .is-visible on first entry.
+
+Token
+
+Default
+
+Purpose
+
+--overlap-section-radius
+
+var(--radius-xl)
+
+Top corners on .overlap-section
+
+--overlap-section-offset
+
+60px
+
+How far .overlap-section bleeds upward
+
+--overlap-card-radius
+
+var(--card-radius)
+
+Border radius on .overlap-card
+
+--overlap-card-offset
+
+80px
+
+How far .overlap-card bleeds upward
+
+--overlap-card-duration
+
+0.7s
+
+Entry animation duration
+
+Sine wave — details
+
+<section style="position: relative; padding-bottom: var(--wave-height);
+--color-section-next: var(--color-bg-panel);">
+<div class="section-wave" aria-hidden="true">
+<svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+<!-- depth layer first (SVG paints in document order) -->
+<path d="M0,40 C300,80 900,0 1200,40 L1200,80 L0,80 Z"
+fill="var(--color-section-next)" opacity="0.4"/>
+<path d="M0,45 C300,85 900,5 1200,45 L1200,80 L0,80 Z"
+fill="var(--color-section-next)"/>
+</svg>
+</div>
+</section>
+
+Token
+
+Default
+
+Purpose
+
+--wave-height
+
+80px
+
+SVG rendered height and required parent padding-bottom
+
+--color-section-next
+
+var(--color-bg-panel)
+
+Fill colour — set on the parent to match the destination background
+
+Change amplitude by adjusting control-point Y values. Equal and opposite offsets (C300,80 900,0) produce a symmetric wave. To reverse direction, place .section-wave at the top of the next section with transform: scaleY(-1).
+
+Convex arc — details
+
+<!-- Convex (dome) -->
+<section style="position: relative; padding-bottom: var(--arc-height);
+--color-section-next: var(--color-bg-panel);">
+<div class="section-arc" aria-hidden="true">
+<svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+<path d="M0,80 Q600,0 1200,80 Z" fill="var(--color-section-next)"/>
+</svg>
+</div>
+</section>
+
+<!-- Concave (bowl) — redrawn path, always static -->
+<div class="section-arc section-arc--concave" aria-hidden="true">
+<svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+<path d="M0,0 Q600,80 1200,0 L1200,80 L0,80 Z" fill="var(--color-section-next)"/>
+</svg>
+</div>
+
+Token
+
+Default
+
+Purpose
+
+--arc-height
+
+80px
+
+SVG rendered height and required parent padding-bottom
+
+--color-section-next
+
+var(--color-bg-panel)
+
+Fill colour — set on the parent to match the destination background
+
+Organic blob — details
+
+<section style="position: relative; padding-bottom: var(--blob-height);
+--color-section-next: var(--color-bg-panel);">
+<div class="section-blob" aria-hidden="true">
+<svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+<!-- depth layer first (SVG paints in document order) -->
+<path d="M0,60 C150,25 200,80 400,55 C600,28 700,75 900,50 C1050,28 1150,65 1200,45 L1200,100 L0,100 Z"
+fill="var(--color-section-next)" opacity="0.45"/>
+<path d="M0,65 C150,30 200,85 400,60 C600,33 700,80 900,55 C1050,33 1150,70 1200,50 L1200,100 L0,100 Z"
+fill="var(--color-section-next)"/>
+</svg>
+</div>
+</section>
+
+Token
+
+Default
+
+Purpose
+
+--blob-height
+
+100px
+
+SVG rendered height and required parent padding-bottom
+
+--color-section-next
+
+var(--color-bg-panel)
+
+Fill colour — set on the parent to match the destination background
+
+Diagonal cut — details
+
+Three implementation approaches in increasing precision. Only approach 2 ships
+as a CSS class; approaches 1 and 3 are code patterns to adapt.
+Note: clip-path (approach 1) clips box-shadow
+on the same element — use the ::before approach if the section needs a shadow.
+
+Approach 1 — clip-path polygon
+
+Simplest option. GPU-accelerated. Does not work if the section needs box-shadow.
+
+<section style="clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);">
+<!-- Section content -->
+</section>
+
+Approach 2 — ::before skew (shipped as .section-skew)
+
+The section element itself must have no background — only the ::before
+pseudo-element provides the background. In supporting browsers the angle flattens via
+animation-timeline: view(). Static fallback shows var(--diagonal-angle).
+
+<section class="section-skew"
+style="padding: 80px 0; --color-section: var(--color-bg-panel);">
+<!-- Content sits horizontally above the skewed ::before background -->
+</section>
+
+Approach 3 — SVG triangle
+
+Precise pixel control. Place the SVG at the bottom of the preceding section.
+
+<section style="position: relative; padding-bottom: 60px;">
+<svg viewBox="0 0 1200 60" preserveAspectRatio="none"
+style="display:block; position:absolute; bottom:0; left:0; width:100%; height:60px;"
+aria-hidden="true">
+<polygon points="0,60 1200,0 1200,60" fill="var(--color-section-next)"/>
+</svg>
+</section>
+
+Token
+
+Default
+
+Purpose
+
+--diagonal-angle
+
+-3deg
+
+Static display angle (approach 2). Keep between -2deg and -5deg. Scroll-driven animation always starts at -5deg regardless.
+
+--color-section
+
+var(--color-bg)
+
+Background fill for the ::before (approach 2). Set to match the section's intended background.
+
+--color-section-next
+
+var(--color-bg-panel)
+
+SVG fill for the triangle approach. Set to match the destination section background.
+
+Direction carries meaning: negative skewY (bottom-left to top-right) reads as forward momentum. Be consistent within a page.
+
+Separator
+
+Content-level horizontal rules — distinct from section-transition patterns. Three
+purpose-named variants cover the full range from tight list spacing to editorial
+accent moments.
+
+Hairline — between list items
+
+Section — between content groups
+
+Decorative — editorial scene break
+
+Full reference — Separator
+
+Variants
+
+Class
+
+Description
+
+.hairline
+
+1px subtle rule — tight spacing; between list items or dense content
+
+.section-divider
+
+2px standard rule — medium spacing; between content groups
+
+.decorative
+
+2px accent-color rule, 32px wide — editorial scene break
+
+Anatomy
+
+<!-- Tight rule between list items -->
+<hr class="hairline">
+
+<!-- Standard rule between content groups -->
+<hr class="section-divider">
+
+<!-- Short accent rule for editorial breaks -->
+<hr class="decorative">
+
+<!-- Purely decorative — hide from assistive tech -->
+<hr class="decorative" aria-hidden="true">
+
+Token reference
+
+Separator uses semantic tokens directly — no Tier-3 override layer.
+
+Token
+
+Default
+
+Purpose
+
+--separator-section-weight
+
+2px
+
+Section divider border thickness
+
+--color-border-subtle
+
+color-mix() at 12% / 25%
+
+Hairline color
+
+--color-border
+
+Light: --in3-ash · Dark: --in2-slate
+
+Section divider color
+
+--color-accent
+
+Light: --fo1-fern · Dark: --fo0-glade
+
+Decorative rule color
+
+--space-sm
+
+0.75rem
+
+Hairline vertical margin
+
+--space-lg
+
+2rem
+
+Section divider vertical margin
+
+--space-md
+
+1.5rem
+
+Decorative rule vertical margin
+
+CSS reference
+
+Shipped in dist/farn-components.css. Load alongside farn.css or farn-tokens.css.
+
+hr { border: none; }
+
+.hairline { border-top: 1px solid var(--color-border-subtle); margin: var(--space-sm) 0; }
+.section-divider { border-top: var(--separator-section-weight) solid var(--color-border); margin: var(--space-lg) 0; }
+.decorative { border-top: 2px solid var(--color-accent); width: 32px; margin: var(--space-md) 0; }
+
+Quotes
+
+Three patterns for surfacing cited text, featured statements, and testimonials.
+All variants consume --quote-* Tier-3 tokens — retheme in one place.
+
+Blockquote
+
+The platform is never finished. The moment you ship it, the next set of needs is already forming at the edges.
+
+— Teresa Torres, Continuous Discovery Habits
+
+Pullquote
+
+Good platform thinking starts with the developer, not the platform.
+
+Jacob Lueg Tiedemann
+
+Testimonial card
+
+Working this way changed how I think about internal tooling entirely. It stopped being infrastructure and started being product.
+
+MR
+
+Maya Rodriguez
+VP Engineering, Acme
+
+Full reference — Quotes
+
+Variants
+
+Variant
+
+Element
+
+Class
+
+Use
+
+Blockquote
+
+<blockquote>
+
+.quote
+
+Inline prose citation with left accent border. Body text uses Fraunces italic.
+
+Pullquote
+
+<figure>
+
+.quote-pull
+
+Centred featured statement. Accent rule generated via ::before. Caption via <figcaption>.
+
+Testimonial
+
+<figure>
+
+.quote-testimonial
+
+Testimonial card with decorative quote mark, quote text, and an attribution row (avatar + name/role).
+
+Anatomy
+
+<!-- Blockquote -->
+<blockquote class="quote">
+<p>Quote body text here.</p>
+<footer>— Author Name, <cite>Source Title</cite></footer>
+</blockquote>
+
+<!-- Pullquote -->
+<figure class="quote-pull">
+<p>Featured statement goes here.</p>
+<figcaption>Attribution name</figcaption>
+</figure>
+
+<!-- Testimonial card — .card provides the shell (bg, border, radius, flex-column) -->
+<figure class="card quote-testimonial">
+<p class="quote-testimonial-text">Quote text here.</p>
+<figcaption class="quote-testimonial-attribution">
+<div class="quote-testimonial-avatar" aria-hidden="true">AB</div>
+<div class="quote-testimonial-meta">
+<span class="quote-testimonial-name">Full Name</span>
+<span class="quote-testimonial-role">Title, Company</span>
+</div>
+</figcaption>
+</figure>
+
+Token reference
+
+Token
+
+Default
+
+Purpose
+
+--quote-border-width
+
+3px
+
+Blockquote left accent bar width
+
+--quote-border-color
+
+--color-accent
+
+Blockquote left accent bar color
+
+--quote-text-color
+
+--color-text-secondary
+
+Body text color
+
+--quote-footer-color
+
+--color-text-tertiary
+
+Footer / cite text color
+
+--quote-padding
+
+--space-sm 0 --space-sm --space-lg
+
+Blockquote inset
+
+--quote-margin-bottom
+
+--space-lg
+
+Spacing below all quote variants
+
+--quote-opsz
+
+16
+
+Fraunces optical size for blockquote body text
+
+--quote-pull-rule-width
+
+32px
+
+Pullquote decorative rule width
+
+--quote-pull-rule-height
+
+2px
+
+Pullquote decorative rule height
+
+--quote-pull-rule-color
+
+--color-accent
+
+Pullquote rule color
+
+--quote-testimonial-border
+
+--color-border-subtle
+
+Border color override (card default is transparent)
+
+--quote-testimonial-padding
+
+--space-lg
+
+Padding override (card default is --space-md)
+
+--quote-testimonial-gap
+
+--space-sm
+
+Gap between quote mark, text, and attribution row
+
+--quote-testimonial-mark-color
+
+--color-accent
+
+Decorative opening quote mark color
+
+--quote-testimonial-mark-size
+
+3rem
+
+Decorative opening quote mark font size
+
+--quote-testimonial-avatar-size
+
+2.5rem
+
+Avatar circle diameter
+
+--quote-testimonial-avatar-bg
+
+color-mix(fern 15%)
+
+Avatar circle background tint
+
+--quote-testimonial-attribution-gap
+
+--space-sm
+
+Gap between avatar and name/role block
+
+--quote-testimonial-attribution-top
+
+--space-xs
+
+Extra top margin on attribution row (adds to parent gap)
+
+CSS reference
+
+Shipped in dist/farn-components.css. Load alongside farn.css or farn-tokens.css.
+
+.quote {
+border-left: var(--quote-border-width) solid var(--quote-border-color);
+padding: var(--quote-padding);
+margin-bottom: var(--quote-margin-bottom);
+font-family: var(--font-display);
+font-style: italic;
+font-variation-settings: 'opsz' var(--quote-opsz);
+color: var(--quote-text-color);
+}
+
+.quote-pull { text-align: center; padding: 0 var(--space-xl); }
+.quote-pull::before { /* accent rule — width/height/color via tokens */ }
+.quote-pull p { font-family: var(--font-display); font-variation-settings: 'opsz' 20; }
+
+.quote-testimonial { /* compose with .card — adds border-color, padding, gap overrides */ border-color: var(--quote-testimonial-border); padding: var(--quote-testimonial-padding); gap: var(--quote-testimonial-gap); }
+.quote-testimonial::before { content: '\201C'; font-family: var(--font-display); font-variation-settings: 'opsz' 72; font-size: 3rem; line-height: 0.8; color: var(--quote-testimonial-mark-color); }
+.quote-testimonial-text { font-family: var(--font-display); font-variation-settings: 'opsz' 20; font-style: italic; font-size: 1rem; }
+.quote-testimonial-attribution { display: flex; align-items: center; gap: var(--quote-testimonial-attribution-gap); }
+.quote-testimonial-avatar { width: var(--quote-testimonial-avatar-size); border-radius: var(--radius-full); }
+.quote-testimonial-name { font-weight: 600; color: var(--color-text); }
+.quote-testimonial-role { font-size: 0.75rem; color: var(--color-text-secondary); }
+
+Footer
+
+A site-wide footer shell — logo, tagline, navigation slot, copyright bar, and secondary
+links — styled by --footer-* Tier-3 tokens. Works on any background; pair
+with data-theme="dark" for the standard inverted treatment.
+
+Live demo: the .footer component is rendered at the bottom of
+this page. Scroll down to see the logo, tagline, navigation links, and footer bar in action.
+
+Full reference — Footer
+
+Anatomy
+
+<footer class="footer" data-theme="dark">
+<div class="footer-inner">
+<div class="footer-top">
+<div class="footer-logo">
+<svg ...></svg> <!-- your logo icon -->
+Site Name<span>.</span>
+</div>
+<p class="footer-tagline">Short tagline.</p>
+<nav class="footer-nav">
+<a href="/docs">Docs</a>
+<a href="/components">Components</a>
+</nav>
+</div>
+<hr class="footer-hr">
+<div class="footer-bar">
+<p class="footer-copy">&copy; 2026 Your Name</p>
+<div class="footer-links">
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+</div>
+</div>
+</div>
+</footer>
+
+Class
+
+Element
+
+Purpose
+
+.footer
+
+<footer>
+
+Outer shell — top/bottom padding via --footer-padding-top/bottom
+
+.footer-inner
+
+<div>
+
+Max-width container with horizontal padding
+
+.footer-top
+
+<div>
+
+Logo + tagline + nav row
+
+.footer-logo
+
+<div>
+
+Flex row for logo icon and wordmark
+
+.footer-logo-icon
+
+<svg>
+
+56px tall logo icon — set on the <svg> or <img>
+
+.footer-tagline
+
+<p>
+
+Short one-liner below logo — --color-text-secondary, max-width 48ch
+
+.footer-nav
+
+<nav> or <div>
+
+Horizontal link row — --color-text-tertiary with hover/focus states
+
+.footer-hr
+
+<hr>
+
+Subtle horizontal rule — --color-border-subtle
+
+.footer-bar
+
+<div>
+
+Copyright + secondary links row — space-between layout
+
+.footer-copy
+
+<p>
+
+12px copyright line — --color-text-tertiary
+
+.footer-links
+
+<div>
+
+Flex row for legal/secondary links — 12px, --color-text-tertiary
+
+Theme
+
+Add data-theme="dark" to get the standard dark-footer treatment — all
+semantic tokens flip automatically without any extra CSS.
+
+<footer class="footer" data-theme="dark"> … </footer>
+
+The footer slot accepts any content via <slot /> (Astro) or direct
+children — use .footer-nav with plain <a> elements for
+navigation links.
+
+Token reference
+
+Token
+
+Default
+
+Purpose
+
+--footer-padding-top
+
+var(--space-3xl)
+
+Space above footer content
+
+--footer-padding-bottom
+
+var(--space-xl)
+
+Space below footer content
+
+CSS reference
+
+Shipped in dist/farn-components.css. Load alongside farn.css or farn-tokens.css.
+
+.footer {
+padding: var(--footer-padding-top) 0 var(--footer-padding-bottom);
+}
+.footer-inner {
+max-width: var(--width-content); margin: 0 auto; padding: 0 var(--space-lg);
+}
+.footer-top { margin-bottom: var(--space-xl); }
+.footer-logo {
+display: flex; align-items: center;
+font-size: 1.75rem; font-weight: 700; text-decoration: none; color: var(--color-text);
+}
+.footer-logo span { color: var(--color-accent); }
+.footer-logo-icon { height: 56px; width: auto; margin-right: 0.45em; }
+.footer-tagline { font-size: 14px; color: var(--color-text-secondary); max-width: 48ch; }
+.footer-nav { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+.footer-nav a { font-size: 14px; color: var(--color-text-tertiary); text-decoration: none; }
+.footer-nav a:hover { color: var(--color-text-secondary); }
+.footer-nav a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.footer-hr { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-xl) 0; }
+.footer-bar {
+display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-sm);
+}
+.footer-copy { font-size: 12px; color: var(--color-text-tertiary); }
+.footer-links { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: var(--color-text-tertiary); text-decoration: none; }
+.footer-links a:hover { color: var(--color-text-secondary); }
+.footer-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+---
+
+## Navigation — https://farn.jbpt.de/components/navigation
+Navigation components in the Farn design system — site nav, breadcrumbs, tabs, pagination, and wayfinding patterns
+
+Navigation
+
+Components that help users orient themselves and move through a site or application.
+Nav and Tabs add a small progressive-enhancement script; all other components ship as
+pure CSS.
+
+Nav
+
+A fixed top navigation bar with a logo zone, primary links, an actions zone
+(icon links, theme toggle, CTAs), and a mobile drawer. The mobile drawer and theme
+toggle are wired by dist/nav.js. Scroll-fill and auto-hide behaviors are
+opt-in via data attributes.
+
+↑ Live demo — The navigation bar fixed to the top of this page is
+the shipped component. Resize below 640 px to see the mobile drawer open.
+
+Full reference — Nav
+
+Anatomy
+
+The .nav wrapper is position: fixed. Add
+padding-top: var(--nav-height) to <body> so
+page content clears it. The drawer and overlay are siblings of
+.nav — not nested inside it.
+
+<nav class="nav" aria-label="Main navigation">
+<div class="nav-inner">
+<a href="/" class="nav-logo">Brand</a>
+<ul class="nav-links">
+<li><a href="/about">About</a></li>
+<li><a href="/work" class="active">Work</a></li>
+</ul>
+<div class="nav-right">
+<a href="https://github.com/…" class="nav-icon-link" aria-label="GitHub">
+<!-- icon -->
+</a>
+<button class="nav-theme-toggle" aria-label="Switch to dark mode">
+<!-- icon -->
+</button>
+<a href="/get-started" class="nav-cta">Get started</a>
+<button class="nav-toggle" aria-expanded="false" aria-controls="nav-drawer">
+<!-- hamburger icon -->
+</button>
+</div>
+</div>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+<div class="nav-drawer-header">
+<span class="nav-drawer-logo">Brand</span>
+<button class="nav-drawer-close" aria-label="Close menu"><!-- icon --></button>
+</div>
+<nav class="nav-drawer-nav">
+<span class="nav-drawer-group-label">Docs</span>
+<a href="/about" class="nav-drawer-link">About</a>
+<a href="/work" class="nav-drawer-link active">Work</a>
+</nav>
+<div class="nav-drawer-actions">
+<a href="/get-started" class="nav-drawer-cta">Get started</a>
+</div>
+</div>
+<div class="nav-overlay"></div>
+
+Scroll behaviors (opt-in)
+
+Add data attributes to .nav to enable scroll-driven behaviors.
+Both are handled by nav.js — no extra configuration needed.
+
+Attribute
+
+Behavior
+
+data-nav-fill
+
+Nav starts transparent; gains .filled (opaque background + border) once the page scrolls past 10 px. Use over hero sections.
+
+data-nav-autohide
+
+Nav slides up (.hidden) when scrolling down past 80 px; slides back on scroll-up. Recovers screen space on long pages.
+
+<!-- Always filled (doc pages, app shells) -->
+<nav class="nav filled" …>…</nav>
+
+<!-- Transparent-to-filled + auto-hide (landing pages) -->
+<nav class="nav" data-nav-fill data-nav-autohide …>…</nav>
+
+Script
+
+dist/nav.js is a self-initializing script — include it once and it
+finds .nav automatically. Ships as a named package export:
+
+<!-- Via CDN — defer is required so the script runs after the DOM is ready -->
+<script defer src="https://cdn.jsdelivr.net/npm/farn-theme@0.7.0/dist/nav.js"></script>
+
+<!-- Via npm (Astro, Vite, etc.) — deferred automatically -->
+import 'farn-theme/scripts/nav';
+
+The script handles: theme toggle (.nav-theme-toggle), mobile
+drawer open/close (.nav-toggle, .nav-drawer-close,
+.nav-overlay), Escape key close, and opt-in scroll behaviors.
+Without the script, the nav renders as a static bar — no content is hidden.
+
+Theme toggle
+
+Add .nav-theme-toggle to any button inside .nav-right.
+The script reads and writes data-theme on <html>
+and persists the choice to localStorage under the key
+farn-theme. Include the FOWT-prevention inline script in
+<head> to avoid a flash on load:
+
+<script>
+(function () {
+const t = localStorage.getItem('farn-theme');
+const s = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+document.documentElement.setAttribute('data-theme', t ?? s);
+})();
+</script>
+
+Accessibility
+
+Attribute
+
+Where
+
+Why
+
+aria-label="Main navigation"
+
+.nav
+
+Names the landmark for screen readers.
+
+aria-expanded
+
+.nav-toggle
+
+Updated by the script to reflect open/closed state.
+
+aria-controls="nav-drawer"
+
+.nav-toggle
+
+Associates the toggle with the drawer element.
+
+role="dialog" aria-modal="true"
+
+.nav-drawer
+
+Identifies the drawer as a modal for assistive technology. The script traps focus inside the drawer while it is open and returns focus to .nav-toggle on close.
+
+aria-label="Navigation menu"
+
+.nav-drawer
+
+Names the dialog.
+
+Token reference
+
+Token
+
+Default
+
+Controls
+
+--nav-height
+
+64px
+
+Bar height — also set on <body> as padding-top: var(--nav-height) to clear the fixed bar
+
+--nav-link-font-size
+
+var(--text-sm)
+
+Primary link text size
+
+--nav-cta-height
+
+36px
+
+CTA button height
+
+--nav-overlay-bg
+
+color-mix(in srgb, black 50%, transparent)
+
+Drawer backdrop color
+
+Breadcrumbs
+
+Shows users where they are within a site hierarchy and lets them navigate back to parent
+sections. Colors adapt automatically to any surface or theme context.
+
+Home
+
+Components
+
+Navigation
+
+Full reference — Breadcrumbs
+
+Anatomy
+
+Wrap an <ol> in a <nav> with
+aria-label="Breadcrumb". Each list item gets .breadcrumb-item.
+The current page's link carries aria-current="page". The ›
+separator is generated by CSS — never in the DOM.
+
+<nav aria-label="Breadcrumb">
+<ol class="breadcrumb" role="list">
+<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/docs">Docs</a></li>
+<li class="breadcrumb-item">
+<a href="/docs/start" aria-current="page">Getting started</a>
+</li>
+</ol>
+</nav>
+
+Usage guidance
+
+Use breadcrumbs when the site has two or more levels of hierarchy and users are likely to have arrived deep in the tree from search, a direct link, or a previous session. Skip them on flat sites, landing pages, or anywhere the hierarchy has fewer than two meaningful levels.
+
+Situation
+
+Guidance
+
+Current page link
+
+Keep as an <a> with aria-current="page". Avoid plain <span> — it breaks keyboard navigation consistency.
+
+Depth
+
+Show the full path from root. Truncating intermediate crumbs hides context without saving meaningful space.
+
+Placement
+
+Render above the page <h1>, below the primary navigation bar.
+
+Mobile
+
+.breadcrumb uses flex-wrap: wrap so long paths reflow naturally.
+
+Accessibility
+
+Attribute
+
+Where
+
+Why
+
+aria-label="Breadcrumb"
+
+<nav>
+
+Distinguishes this landmark from the primary navigation when both appear on the page.
+
+role="list"
+
+<ol>
+
+Restores list semantics in Safari/VoiceOver, which removes them from any <ol> with list-style: none.
+
+aria-current="page"
+
+Last <a>
+
+Tells screen readers which link represents the current page.
+
+CSS separator
+
+::after
+
+Generated via content: '›' / '' — the empty alt value suppresses screen-reader announcement.
+
+CSS reference
+
+Shipped in dist/farn-components.css. Colors are semantic — adapt automatically under data-theme and data-surface.
+
+.breadcrumb {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+list-style: none;
+padding: 0;
+margin: 0;
+font-size: 0.875rem;
+}
+
+.breadcrumb-item {
+display: flex;
+align-items: center;
+color: var(--color-text-secondary);
+}
+
+.breadcrumb-item:not(:last-child)::after {
+content: '›'; /* fallback */
+content: '›' / ''; /* modern: suppresses screen-reader announcement */
+margin: 0 var(--space-xs);
+}
+
+.breadcrumb-item a {
+color: inherit;
+text-decoration: none;
+transition: color var(--duration-fast) var(--ease-out);
+}
+
+.breadcrumb-item a:hover,
+.breadcrumb-item a[aria-current="page"] {
+color: var(--color-text);
+}
+
+Accordion
+
+Expandable content panels built on native <details> /
+<summary> — no JavaScript required. Animated height in Chrome 131+
+via interpolate-size: allow-keywords; instant reveal in all other browsers.
+
+What is Farn?
+
+Farn is a token-first design system built around Iron Night and Birch Mist palettes. It ships three CSS artifacts: a full bundle, a tokens-only build for teams with their own reset, and an opt-in component classes file.
+
+How do I install it?
+
+Install via npm: npm install farn-theme. Then import the CSS bundle that matches your setup — farn-theme for the full bundle or farn-theme/tokens if you manage your own reset.
+
+Does it support dark mode?
+
+Yes. Set data-theme="dark" or data-theme="light" on any element. All semantic tokens update automatically — no additional class toggling required.
+
+Full reference — Accordion
+
+Anatomy
+
+Wrap one or more <details> elements in a .accordion
+container. Each <details> must contain exactly one
+<summary> and a .accordion-panel div.
+
+<div class="accordion">
+<details>
+<summary>Question one</summary>
+<div class="accordion-panel">
+<p>Answer text.</p>
+</div>
+</details>
+<details>
+<summary>Question two</summary>
+<div class="accordion-panel">
+<p>Answer text.</p>
+</div>
+</details>
+</div>
+
+Open by default
+
+Add the open attribute to any <details> to render it expanded on load — the standard HTML boolean attribute, no extra classes needed.
+
+<details open>
+<summary>Expanded on load</summary>
+<div class="accordion-panel">…</div>
+</details>
+
+Usage guidance
+
+Situation
+
+Guidance
+
+FAQs and help content
+
+Ideal fit. Users scan summaries to find the answer they need, then expand only the relevant panel.
+
+Settings panels
+
+Group related settings under a collapsible heading to reduce visual noise without burying options.
+
+Progressive disclosure
+
+Use when secondary details are genuinely optional — not to shorten a page that is already the right length.
+
+Multiple open at once
+
+Native <details> allows any number of panels open simultaneously. To enforce exclusive-open, close sibling <details> on the toggle event with a small JS listener.
+
+Critical content
+
+Do not hide content that every user needs in a closed accordion. Use open for important panels, or a different layout.
+
+Animation
+
+In Chrome 131+ the panel height animates using interpolate-size: allow-keywords combined with the ::details-content pseudo-element. Older browsers get an instant reveal. The + icon rotates 45° on open. Both transitions are disabled under prefers-reduced-motion: reduce.
+
+Token reference
+
+Token
+
+Default
+
+Controls
+
+--accordion-border
+
+var(--color-border)
+
+Outer border and item dividers
+
+--accordion-radius
+
+var(--radius-md)
+
+Outer corner radius
+
+--accordion-summary-bg
+
+transparent
+
+Summary row background (idle)
+
+--accordion-summary-hover-bg
+
+var(--color-bg-interactive-hover)
+
+Summary row background (hover)
+
+--accordion-panel-bg
+
+transparent
+
+Panel content background
+
+--accordion-font-size
+
+0.9375rem
+
+Summary text size
+
+CSS reference
+
+Shipped in dist/farn-components.css. All colors are semantic — adapt to data-theme and data-surface automatically.
+
+.accordion {
+border: 1px solid var(--accordion-border);
+border-radius: var(--accordion-radius);
+overflow: hidden;
+}
+
+.accordion-panel {
+padding: 0 var(--space-md) var(--space-md);
+background: var(--accordion-panel-bg);
+}
+
+/* Animated height — Chrome 131+ */
+@supports (interpolate-size: allow-keywords) {
+.accordion { interpolate-size: allow-keywords; }
+.accordion details::details-content {
+overflow: hidden;
+transition: block-size var(--duration-base) var(--ease-out);
+}
+.accordion details:not([open])::details-content { block-size: 0; }
+}
+
+Tabs
+
+Horizontal tabs for switching between related views on the same screen. CSS drives all
+visual states via [aria-selected]; a small script handles panel switching
+and arrow-key navigation.
+
+Overview
+Specifications
+Reviews
+Unavailable
+
+A brief summary of the product, its key benefits, and who it's for. This panel is active by default.
+
+Technical specifications: dimensions, weight, materials, and compatibility details.
+
+Customer reviews and ratings appear here.
+
+This panel is not reachable — its tab is disabled.
+
+Full reference — Tabs
+
+Anatomy
+
+A .tab-list wrapper carries role="tablist" and an
+aria-label. Each .tab button has role="tab",
+aria-selected, aria-controls pointing to its panel, and
+an id. Each .tab-panel has role="tabpanel"
+and aria-labelledby pointing back to its tab. Non-active panels carry
+the HTML hidden attribute — the script toggles it on click; CSS reveals
+all panels when scripting is unavailable.
+
+<div class="tabs">
+<div class="tab-list" role="tablist" aria-label="Section label">
+<button class="tab" role="tab"
+id="tab-a" aria-selected="true"
+aria-controls="panel-a" tabindex="0">First</button>
+<button class="tab" role="tab"
+id="tab-b" aria-selected="false"
+aria-controls="panel-b" tabindex="-1">Second</button>
+<button class="tab" role="tab"
+id="tab-c" aria-selected="false"
+aria-controls="panel-c" tabindex="-1" disabled>Off</button>
+</div>
+<div class="tab-panel" role="tabpanel"
+id="panel-a" aria-labelledby="tab-a" tabindex="0">
+Panel A content.
+</div>
+<div class="tab-panel" role="tabpanel"
+id="panel-b" aria-labelledby="tab-b" tabindex="0" hidden>
+Panel B content.
+</div>
+<div class="tab-panel" role="tabpanel"
+id="panel-c" aria-labelledby="tab-c" tabindex="0" hidden>
+Panel C content.
+</div>
+</div>
+
+Script
+
+dist/tabs.js exports initTabs() and ships as a named package
+export. Call it once after the DOM is ready:
+
+import { initTabs } from 'farn-theme/scripts/tabs';
+document.addEventListener('DOMContentLoaded', initTabs);
+
+The Astro docs site calls it automatically via DocLayout.astro.
+Without the script, panels with hidden are shown stacked
+(via @media (scripting: none)) so no content is lost.
+
+Keyboard navigation
+
+Key
+
+Action
+
+Tab
+
+Moves focus into the tab list (to the active tab), then out to the panel.
+
+→ / ←
+
+Moves focus and activates the next/previous enabled tab.
+
+Home / End
+
+Moves focus and activates the first/last enabled tab.
+
+Usage guidance
+
+Situation
+
+Guidance
+
+Content type
+
+Use tabs only when panel content is parallel and mutually exclusive — overviews, specs, reviews. Avoid for sequential steps (use a stepper instead).
+
+Number of tabs
+
+2–6 tabs is the sweet spot. Fewer than two is not a tab pattern; more than six overwhelms the list even on desktop. Use overflow-scroll sparingly — prefer restructuring.
+
+Active tab on load
+
+Set aria-selected="true" and tabindex="0" on the first tab in the HTML; all others get tabindex="-1". The script maintains this.
+
+Disabled tabs
+
+Use the HTML disabled attribute on the <button>. The tab renders at reduced opacity and is skipped by arrow-key navigation.
+
+Tab labels
+
+Keep labels short (1–3 words). Never use icons alone without a visible label — add aria-label if an icon is truly needed.
+
+Panel content height
+
+Panels can vary in height — the container grows naturally. Avoid fixed-height panels with scrollable content inside; users will struggle to reach content with keyboard.
+
+Accessibility
+
+Attribute
+
+Where
+
+Why
+
+role="tablist"
+
+.tab-list
+
+Identifies the group of tabs as a tab widget to assistive technology.
+
+aria-label
+
+.tab-list
+
+Names the tab group — required when multiple tab lists appear on the same page.
+
+role="tab"
+
+.tab
+
+Marks each button as a tab control. Screen readers announce "Tab 1 of 3, selected" etc.
+
+aria-selected="true/false"
+
+.tab
+
+Communicates active state to assistive technology. CSS reads this attribute for all visual styling.
+
+aria-controls
+
+.tab
+
+Associates the tab with its panel via the panel's id.
+
+tabindex="0/-1"
+
+.tab
+
+Roving tabindex — only the active tab is in the tab order; arrow keys move within the list.
+
+role="tabpanel"
+
+.tab-panel
+
+Identifies the panel container for assistive technology.
+
+aria-labelledby
+
+.tab-panel
+
+Links the panel back to its controlling tab label.
+
+hidden
+
+Inactive .tab-panel
+
+HTML attribute removes the panel from the accessibility tree and from layout. Toggled by the script.
+
+tabindex="0"
+
+.tab-panel with no focusable children
+
+If the panel contains no links, buttons, or inputs, add tabindex="0" so keyboard users can Tab into it after selecting a tab. Omit when the panel has focusable content — Tab will find it naturally.
+
+Token reference
+
+Token
+
+Default
+
+Controls
+
+--tab-idle-text
+
+var(--color-text-secondary)
+
+Inactive tab label colour
+
+--tab-hover-bg
+
+var(--color-bg-interactive-hover)
+
+Tab background on hover
+
+--tab-active-text
+
+var(--color-text)
+
+Active (selected) tab label colour
+
+--tab-indicator
+
+var(--color-accent)
+
+Underline indicator colour on the active tab
+
+--tab-border
+
+var(--color-border)
+
+Full-width separator between the tab list and panel
+
+--tab-panel-bg
+
+transparent
+
+Panel content area background
+
+--tab-gap
+
+4px
+
+Gap between tab buttons
+
+--tab-font-size
+
+0.875rem
+
+Tab label font size
+
+--tab-disabled-opacity
+
+0.4
+
+Opacity of disabled tabs
+
+CSS reference
+
+Shipped in dist/farn-components.css. All colours adapt to data-theme and data-surface automatically.
+
+.tab-list {
+display: flex;
+gap: var(--tab-gap);
+border-bottom: 1px solid var(--tab-border);
+overflow-x: auto;
+scrollbar-width: none;
+}
+
+.tab {
+position: relative;
+flex-shrink: 0;
+padding: var(--space-sm) var(--space-md);
+background: transparent;
+border: none;
+border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+color: var(--tab-idle-text);
+font-size: var(--tab-font-size);
+font-family: inherit;
+font-weight: 500;
+cursor: pointer;
+white-space: nowrap;
+transition: color var(--duration-fast) var(--ease-out),
+background var(--duration-fast) var(--ease-out);
+}
+
+.tab::after {
+content: '';
+position: absolute;
+bottom: -1px;
+left: 0; right: 0;
+height: 2px;
+background: transparent;
+transition: background var(--duration-fast) var(--ease-out);
+}
+
+.tab:hover { background: var(--tab-hover-bg); color: var(--tab-active-text); }
+.tab[aria-selected="true"] { color: var(--tab-active-text); font-weight: 600; }
+.tab[aria-selected="true"]::after { background: var(--tab-indicator); }
+.tab:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+
+.tab:disabled,
+.tab[aria-disabled="true"] {
+opacity: var(--tab-disabled-opacity);
+cursor: not-allowed;
+pointer-events: none;
+}
+
+.tab-panel {
+padding-top: var(--space-md);
+background: var(--tab-panel-bg);
+}
+
+@media (scripting: none) {
+.tab-panel[hidden] { display: block; }
+}
+
+Pagination
+
+Numbered and prev/next page controls for navigating multi-page content. CSS-only —
+no JavaScript required. Active state driven by aria-current="page";
+disabled state by aria-disabled="true".
+
+Numbered
+
+← Prev
+
+1
+
+2
+
+3
+
+4
+
+5
+
+Next →
+
+With ellipsis
+
+← Prev
+
+1
+
+…
+
+4
+
+5
+
+6
+
+…
+
+12
+
+Next →
+
+Previous / next only
+
+← Previous
+
+Next →
+
+Full reference — Pagination
+
+Anatomy
+
+Wrap an <ol> in a <nav> with
+aria-label="Pagination". Each <li> gets
+.page-item; each link gets .page-link. The active
+page carries aria-current="page" on its <a> —
+no extra class needed. Disabled controls carry aria-disabled="true".
+
+<nav aria-label="Pagination">
+<ol class="pagination" role="list">
+<li class="page-item">
+<a class="page-link" href="#" aria-disabled="true" aria-label="Previous page">← Prev</a>
+</li>
+<li class="page-item"><a class="page-link" href="/page/1">1</a></li>
+<li class="page-item">
+<a class="page-link" href="/page/2" aria-current="page">2</a>
+</li>
+<li class="page-item"><a class="page-link" href="/page/3">3</a></li>
+<li class="page-item">
+<a class="page-link" href="/page/3" aria-label="Next page">Next →</a>
+</li>
+</ol>
+</nav>
+
+Ellipsis
+
+For truncated ranges, use a .page-ellipsis <span>
+inside a .page-item marked aria-hidden="true". It is
+decorative — screen readers skip it entirely.
+
+<li class="page-item" aria-hidden="true">
+<span class="page-ellipsis">…</span>
+</li>
+
+Usage guidance
+
+Situation
+
+Guidance
+
+Active page
+
+Add aria-current="page" to the link for the current page. CSS styles it automatically; screen readers announce it as the current page.
+
+Disabled prev/next
+
+Add aria-disabled="true" to the link. Do not remove href — keep the element an <a> so DOM order stays consistent.
+
+Icon-only controls
+
+Provide aria-label="Previous page" / aria-label="Next page" on icon-only links. Text labels are preferred for clarity.
+
+Ellipsis
+
+Use aria-hidden="true" on the .page-item wrapping the ellipsis span. Screen readers skip it; the surrounding numbered links provide sufficient context.
+
+Very long ranges
+
+Show the first page, last page, active page, and ±1–2 neighbours. Everything else becomes ellipsis. This pattern is purely HTML — no extra CSS needed.
+
+Accessibility
+
+Attribute
+
+Where
+
+Why
+
+aria-label="Pagination"
+
+<nav>
+
+Distinguishes this landmark from site navigation when both appear on the page.
+
+role="list"
+
+<ol>
+
+Restores list semantics in Safari/VoiceOver when list-style: none is applied.
+
+aria-current="page"
+
+Active .page-link
+
+Announces the current page to screen readers and drives the active style — no class needed.
+
+aria-disabled="true"
+
+Disabled .page-link
+
+Communicates disabled state to assistive technology; pointer-events: none prevents click.
+
+aria-hidden="true"
+
+.page-item with ellipsis
+
+Hides the decorative separator from the accessibility tree.
+
+Token reference
+
+Token
+
+Default
+
+Controls
+
+--pagination-active-bg
+
+var(--color-accent)
+
+Active page item background
+
+--pagination-active-text
+
+var(--color-accent-text)
+
+Active page item text color
+
+--pagination-hover-bg
+
+var(--color-bg-interactive-hover)
+
+Hovered item background
+
+--pagination-hover-text
+
+var(--color-text)
+
+Hovered item text color
+
+--pagination-radius
+
+var(--radius-md)
+
+Corner radius on each page link
+
+--pagination-gap
+
+var(--space-xs)
+
+Gap between page items
+
+CSS reference
+
+Shipped in dist/farn-components.css. All colors adapt to data-theme and data-surface automatically.
+
+.pagination {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: var(--pagination-gap);
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.page-link {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+min-width: 36px;
+height: 36px;
+padding: 0 var(--space-xs);
+border: 1px solid transparent;
+border-radius: var(--pagination-radius);
+font-size: 0.875rem;
+font-weight: 500;
+color: var(--color-text-secondary);
+text-decoration: none;
+}
+
+.page-link[aria-current="page"] {
+background: var(--pagination-active-bg);
+color: var(--pagination-active-text);
+font-weight: 600;
+cursor: default;
+pointer-events: none;
+}
+
+.page-link[aria-disabled="true"] {
+opacity: 0.4;
+cursor: not-allowed;
+pointer-events: none;
+}
+
+---
+
+## Status — https://farn.jbpt.de/components/status
+Feedback and status components in the Farn design system — loading states and async feedback patterns
+
+Status
+
+Components that communicate system feedback and async state.
+
+Loading states
+
+Two complementary patterns for async and in-progress feedback. Use spinner
+for determinate operations where the control point is known (a button, a small region).
+Use skeleton for content areas that are loading — it preserves layout
+and reduces perceived latency.
+
+Saving…
+
+Loading
+
+Full reference — Loading states
+
+Spinner
+
+A rotating ring that consumes --spinner-color (defaults to --color-accent) and --spinner-track (20% tint of accent). Apply .spinner alone for the default 24 px size; add .spinner-sm or .spinner-lg for 16 px or 40 px.
+
+Class
+
+Size
+
+Border
+
+.spinner .spinner-sm
+
+16px
+
+2px
+
+.spinner
+
+24px
+
+2px
+
+.spinner .spinner-lg
+
+40px
+
+3px
+
+Accessibility — spinner
+
+A standalone spinner needs role="status" and aria-label="Loading" so screen readers announce it. When inside a button, the button label already describes the action — use aria-hidden="true" on the spinner element instead to avoid double-announcing.
+
+<!-- Standalone spinner -->
+<span class="spinner" role="status" aria-label="Loading"></span>
+
+<!-- Spinner inside a button (button label carries the announcement) -->
+<button class="btn btn-p btn-loading" aria-label="Saving">
+<span class="spinner spinner-sm" aria-hidden="true"></span>
+Saving…
+</button>
+
+Skeleton
+
+Apply .skeleton to a <span> or <div> and set explicit width and height to match the content it stands in for. Add .skeleton-circle for avatar and icon placeholders.
+
+<!-- Text line placeholders -->
+<span class="skeleton" style="display:block;width:60%;height:14px" aria-hidden="true"></span>
+<span class="skeleton" style="display:block;width:90%;height:12px" aria-hidden="true"></span>
+
+<!-- Avatar placeholder -->
+<span class="skeleton skeleton-circle" style="width:40px;height:40px" aria-hidden="true"></span>
+
+<!-- Image card placeholder -->
+<span class="skeleton" style="display:block;width:100%;height:180px;border-radius:var(--radius-lg)" aria-hidden="true"></span>
+
+Accessibility — skeleton
+
+Mark all skeleton elements aria-hidden="true" — they are visual scaffolding, not content. Announce the loading state to screen readers with a separate live region:
+
+<div aria-live="polite" aria-busy="true" class="sr-only">Loading content…</div>
+<!-- skeleton markup here -->
+
+Remove or update the live region once content loads.
+
+Reduced motion
+
+Both components respect prefers-reduced-motion: reduce. The spinner stops rotating (ring remains visible as a static indicator). The skeleton disables the shimmer and renders as a static tinted block — both still communicate "something is here but not yet loaded."
+
+Token reference
+
+Token
+
+Default
+
+Purpose
+
+--spinner-color
+
+var(--color-accent)
+
+Active arc colour
+
+--spinner-track
+
+20% tint of accent
+
+Background ring colour
+
+--spinner-size
+
+24px
+
+Default spinner diameter
+
+--spinner-sm-size
+
+16px
+
+Small spinner diameter
+
+--spinner-lg-size
+
+40px
+
+Large spinner diameter
+
+--spinner-border
+
+2px
+
+Default + sm ring width
+
+--spinner-lg-border
+
+3px
+
+Large ring width
+
+--spinner-duration
+
+var(--duration-loop)
+
+Rotation cycle duration
+
+--skeleton-radius
+
+var(--radius-sm)
+
+Placeholder corner radius
+
+--skeleton-base
+
+var(--color-bg-panel)
+
+Placeholder base colour
+
+--skeleton-shine
+
+--bm2-birch light / --in2-slate dark
+
+Shimmer highlight colour — per-theme palette value
+
+--skeleton-duration
+
+var(--duration-loop)
+
+Shimmer cycle duration
+
+CSS reference
+
+Selector
+
+Purpose
+
+.spinner
+
+Default 24px rotating ring
+
+.spinner-sm
+
+16px size modifier (add to .spinner)
+
+.spinner-lg
+
+40px size modifier (add to .spinner)
+
+.skeleton
+
+Shimmer placeholder rectangle
+
+.skeleton-circle
+
+Makes skeleton circular (add to .skeleton)
+
+---
+
+## Accessibility — https://farn.jbpt.de/foundations/accessibility
+Farn's WCAG AA commitment, focus styles, reduced-motion support, and contrast matrix
+
+Accessibility
+
+Farn targets WCAG 2.1 Level AA. The token system, focus styles, and motion controls are
+designed to make accessible output the default rather than an afterthought.
+
+AA
+
+WCAG 2.1 Level AA
+
+All semantic foreground/background token pairs are chosen to meet at least 4.5:1
+contrast in both light and dark themes. The one exception (--color-text-tertiary)
+is documented explicitly in the matrix below.
+
+:focus-visible
+
+Global focus ring
+
+A 2px focus ring using --color-accent applies to every focusable element
+without opt-in. It shows only on keyboard navigation — mouse clicks suppress it via
+:focus:not(:focus-visible).
+
+@media
+
+Reduced motion
+
+A blanket rule in tokens/base.css collapses all animation and transition
+durations to 0.01&thinsp;ms when the OS motion preference is set — no per-component guard
+required.
+
+WCAG contrast matrix
+
+Full contrast matrix for all semantic foreground/background token pairs. Ratings follow
+WCAG 2.1: AAA &ge; 7:1 &middot; AA
+&ge; 4.5:1 &middot; AA Large &ge; 3:1
+(≥ 24&thinsp;px regular or &ge; 19&thinsp;px bold) &middot;
+Fail < 3:1.
+
+Light mode
+
+Foreground token
+
+--color-bg
+
+--color-bg-panel
+
+--color-bg-inset
+
+--color-text
+
+17.51:1 AAA
+
+15.15:1 AAA
+
+12.50:1 AAA
+
+--color-text-secondary
+
+6.99:1 AA
+
+6.05:1 AA
+
+4.99:1 AA
+
+--color-text-tertiary †
+
+4.47:1 AA Large
+
+3.87:1 AA Large
+
+3.19:1 AA Large
+
+--color-accent
+
+4.78:1 AA
+
+4.14:1 AA Large
+
+3.41:1 AA Large
+
+--color-accent-hover
+
+6.91:1 AA
+
+5.98:1 AA
+
+4.93:1 AA
+
+--color-accent-text ‡
+
+1.00:1 Fail
+
+1.16:1 Fail
+
+1.40:1 Fail
+
+--color-error
+
+4.59:1 AA
+
+3.97:1 AA Large
+
+3.28:1 AA Large
+
+--color-warning
+
+4.59:1 AA
+
+3.98:1 AA Large
+
+3.28:1 AA Large
+
+--color-success
+
+4.59:1 AA
+
+3.97:1 AA Large
+
+3.28:1 AA Large
+
+Dark mode
+
+Foreground token
+
+--color-bg
+
+--color-bg-panel
+
+--color-bg-inset
+
+--color-text
+
+17.51:1 AAA
+
+9.54:1 AAA
+
+6.99:1 AA
+
+--color-text-secondary
+
+15.15:1 AAA
+
+8.25:1 AAA
+
+6.05:1 AA
+
+--color-text-tertiary
+
+12.50:1 AAA
+
+6.81:1 AA
+
+4.99:1 AA
+
+--color-accent
+
+9.79:1 AAA
+
+5.33:1 AA
+
+3.91:1 AA Large
+
+--color-accent-hover §
+
+3.66:1 AA Large
+
+1.99:1 Fail
+
+1.46:1 Fail
+
+--color-accent-text
+
+17.51:1 AAA
+
+9.54:1 AAA
+
+6.99:1 AA
+
+--color-error §
+
+3.82:1 AA Large
+
+2.08:1 Fail
+
+1.52:1 Fail
+
+--color-warning §
+
+3.81:1 AA Large
+
+2.08:1 Fail
+
+1.52:1 Fail
+
+--color-success §
+
+3.82:1 AA Large
+
+2.08:1 Fail
+
+1.52:1 Fail
+
+† --color-text-tertiary is AA Large only in all light-mode contexts —
+never use it for body-size text; restrict to &ge; 24&thinsp;px regular or
+&ge; 19&thinsp;px bold.
+
+‡ --color-accent-text (light mode) is designed for text on
+--color-accent button backgrounds — Fail against page surfaces is by design;
+both tokens resolve correctly in dark mode (17.51:1 AAA on --color-bg).
+
+§ Dark mode: --color-accent-hover, --color-error,
+--color-warning, --color-success only meet AA Large on
+--color-bg; they fail on panel and inset surfaces. Always pair these with a
+text label or icon — never use colour alone to convey meaning.
+
+Focus styles
+
+Farn ships a global focus ring in tokens/base.css that applies to every
+focusable element without opt-in:
+
+:focus-visible {
+outline: 2px solid var(--color-accent);
+outline-offset: 3px;
+border-radius: inherit;
+}
+
+:focus:not(:focus-visible) {
+outline: none;
+}
+
+border-radius: inherit means the ring hugs the shape of buttons, inputs, and
+cards rather than defaulting to a square. Component classes in farn-components.css
+inherit this ring automatically — override only when a component needs a custom offset or
+colour (see --input-focus-shadow in the Forms component).
+
+Reduced motion
+
+tokens/base.css includes a blanket reduced-motion rule:
+
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+animation-duration: 0.01ms !important;
+transition-duration: 0.01ms !important;
+}
+}
+
+The 0.01ms value — rather than 0 — keeps animation events firing
+so JavaScript listeners do not stall waiting for an animationend event that
+never comes. Scroll-reveal elements (.scroll-reveal) additionally snap directly
+to their revealed state, bypassing the observer entirely.
+
+Colour alone
+
+Never use colour as the sole means of conveying information, indicating an action, prompting a
+response, or distinguishing a visual element (WCAG 1.4.1). Pair every colour-coded signal
+with at least one of: a text label, an icon, a pattern, or a position cue. Badge variants, for
+example, combine colour with a text label — the label alone would be sufficient; the colour
+reinforces but does not replace it.
+
+---
+
+## Foundations — https://farn.jbpt.de/foundations/
+The concepts behind Farn — how the system thinks before you build with it
+
+Foundations
+
+Foundations is the concept layer. It explains how Farn thinks — the ideas and
+rationale behind the system — before you reach for specific token values. For the concrete
+values you look up while building, see Styles.
+
+base
+
+layer
+
+overlay
+
+Surfaces
+
+The theme + depth model — data-theme and data-surface — and how it aligns with the palette.
+
+Layout
+
+Content-first widths, page structure, and grid-vs-flex guidance.
+
+all
+
+≤960px
+
+≤640px
+
+Responsive
+
+Breakpoint tokens and the reflow-by-content philosophy.
+
+Focus visible
+
+Aa
+Aa
+
+Accessibility
+
+Farn's WCAG AA commitment, focus styles, and reduced-motion approach.
+
+Contrast data for all semantic token pairs lives on Foundations › Accessibility.
+
+---
+
+## Layout — https://farn.jbpt.de/foundations/layout
+Content-first widths, page structure, and layout guidance for building with Farn
+
+Layout
+
+Farn's layout philosophy is content-first: let the content determine the container size, not
+the other way around. Width tokens give you three semantic slots. Structural HTML gives you
+meaningful landmarks. Grid and flex each have a clear job.
+
+Content-first widths
+
+Three width tokens cover the full range of layout needs. Apply them to the element that owns
+the constraint — usually a wrapper <div> with margin-inline: auto.
+
+--width-content
+1080px · outer container
+
+--width-narrow
+640px · forms, dialogs
+
+--width-prose
+70ch · running prose
+
+70ch is relative to the element's own font size, so prose columns naturally
+widen slightly for display headings and narrow for captions — no extra math required.
+For the full spacing reference including padding scale and z-index, see
+Styles &rsaquo; Spacing.
+
+Width token reference
+
+Token
+
+Value
+
+Use
+
+--width-content
+
+1080px
+
+Outer page container — navigation, hero, section wrappers
+
+--width-prose
+
+70ch
+
+Text column — articles, docs, any running prose
+
+--width-narrow
+
+640px
+
+Tight containers — forms, dialogs, focused card layouts
+
+Page structure
+
+Use semantic landmarks. The wireframe below shows a typical page skeleton and the natural
+width token pairing for each landmark.
+
+header
+max-width: var(--width-content)
+
+main
+max-width: var(--width-content)
+
+article
+max-width: var(--width-prose)
+
+aside
+var(--width-narrow)
+
+footer
+max-width: var(--width-content)
+
+Page structure code
+
+<body>
+<header>
+<!-- max-width: var(--width-content) -->
+<nav>...</nav>
+</header>
+
+<main>
+<!-- outer bound: var(--width-content) -->
+
+<article>
+<!-- prose column: var(--width-prose) -->
+<h1>...</h1>
+<p>...</p>
+</article>
+
+<aside>
+<!-- sidebar or supplemental: var(--width-narrow) -->
+</aside>
+</main>
+
+<footer>
+<!-- max-width: var(--width-content) -->
+</footer>
+</body>
+
+Grid vs flex
+
+Flex for one-dimensional alignment, grid for two-dimensional layout. The demo below uses
+repeat(auto-fill, minmax(180px, 1fr)) — columns appear as space allows,
+collapsing to a single column on narrow viewports without a media query.
+
+grid-demo-card layer grid-card-label grid-card-meta
+
+Grid vs flex pattern reference
+
+Pattern
+
+Use
+
+Example
+
+Flex row
+
+Aligning items along a single axis
+
+Nav links, button group, icon + label
+
+Flex column
+
+Stacking with controlled spacing
+
+Form fields, card body
+
+Grid columns
+
+Placing items in explicit rows and columns
+
+Card grid, two-column doc layout
+
+Grid auto-fill
+
+Responsive columns without breakpoints
+
+repeat(auto-fill, minmax(240px, 1fr))
+
+Always use gap: var(--space-*) rather than margins between grid or flex children.
+This keeps spacing in the token system and avoids margin-collapse edge cases.
+
+Layout composition primitives
+
+farn-layout.css is an opt-in layer of ten composition classes built on top of
+the Farn token set. Load it after farn.css or farn-tokens.css.
+The classes use Every Layout naming — they describe intent, not CSS properties.
+
+@import "farn-theme"; /* tokens + reset */
+@import "farn-theme/layout"; /* opt-in: container, stack, cluster… */
+
+Containers
+
+Three width-constrained, centered wrappers. Each sets container-type: inline-size
+so @container queries on children fire without an extra wrapper.
+Padding reduces from --space-lg to --space-md at mobile widths.
+
+.container
+max-width: 1080px · outer sections
+
+.container-narrow
+max-width: 640px · forms, dialogs
+
+.container-prose
+max-width: 70ch · running text
+
+Container reference
+
+Class
+
+Max-width token
+
+Typical use
+
+.container
+
+--width-content (1080px)
+
+Page sections, nav wrapper, hero, footer
+
+.container-narrow
+
+--width-narrow (640px)
+
+Forms, dialogs, focused card layouts
+
+.container-prose
+
+--width-prose (70ch)
+
+Articles, documentation, running prose
+
+All three set box-sizing: border-box, margin-inline: auto, and padding-inline: var(--space-lg) (reduced to var(--space-md) at <640px). The box-sizing guard ensures padding is absorbed into the max-width even when loading farn-tokens.css without farn.css's base reset.
+
+Name collision: .container is a common class name. If your existing CSS already defines .container, loading farn-layout.css may conflict — audit your styles or use farn-tokens.css to adopt only the tokens without the classes.
+
+<section>
+<div class="container">
+<!-- content constrained to 1080px -->
+</div>
+</section>
+
+Stack, Cluster, Center
+
+The three fundamental composition primitives. Stack flows children
+vertically. Cluster wraps them horizontally. Center
+places a single item at the middle of both axes. All accept inline custom-property
+overrides for gap.
+
+.stack
+
+Item A
+
+Item B
+
+Item C
+
+.cluster
+
+Design
+Released
+Beta
+CSS
+
+.center
+
+Centered
+
+Stack / Cluster / Center reference
+
+Class
+
+CSS
+
+Override
+
+.stack
+
+flex-direction: column; gap: var(--space-md)
+
+--stack-gap
+
+.cluster
+
+flex-wrap: wrap; align-items: center; gap: var(--space-md)
+
+--cluster-gap
+
+.center
+
+display: flex; align-items: center; justify-content: center
+
+—
+
+<!-- Tighter gap on this stack -->
+<div class="stack" style="--stack-gap: var(--space-sm)">
+<div class="card">…</div>
+<div class="card">…</div>
+</div>
+
+<!-- Badge row -->
+<div class="cluster">
+<span class="badge badge-general">Tag</span>
+<span class="badge badge-published">Live</span>
+</div>
+
+Auto grid
+
+Columns auto-fit to available space using auto-fit minmax() — no breakpoints
+needed. Override the minimum column width with --grid-min (default: 280px).
+This is the general-purpose version; .card-grid in farn-components.css
+uses the same pattern with a fixed 280px minimum.
+
+prim-item prim-item--tall layer font-size: 11px
+
+Auto grid reference
+
+Override
+
+Default
+
+Effect
+
+--grid-min
+
+280px
+
+Minimum column width before wrapping
+
+--grid-gap
+
+var(--space-md)
+
+Gap between columns and rows
+
+<!-- Tighter columns, smaller gap -->
+<div class="auto-grid" style="--grid-min: 200px; --grid-gap: var(--space-sm)">
+<div class="card">…</div>
+<div class="card">…</div>
+<div class="card">…</div>
+</div>
+
+vs .card-grid: .auto-grid is in farn-layout.css
+and accepts --grid-min. .card-grid is in farn-components.css
+with a fixed 280px minimum — use it when you always want the card column width, .auto-grid
+when you need a different minimum or want to override per-instance.
+
+Sidebar, Grid-2, Grid-3
+
+Explicit column grids. Sidebar pairs a fixed-width column with a
+flexible main area. Grid-2 and Grid-3 create equal
+columns. All three collapse responsively when inside a container context — wrap them in
+.container (or any element with container-type: inline-size) to
+activate @container collapsing.
+
+.sidebar — collapses to 1 col at <600px container width
+
+sidebar--sidebar-w: 160px
+
+main content
+
+.grid-2 — collapses to 1 col at <500px
+
+Column 1
+
+Column 2
+
+.grid-3 — 3→2 cols at <900px, 1 col at <500px
+
+Column 1
+
+Column 2
+
+Column 3
+
+Sidebar / Grid-2 / Grid-3 reference
+
+Class
+
+Columns
+
+Collapses (in container context)
+
+Overrides
+
+.sidebar
+
+var(--sidebar-w, 300px) 1fr
+
+1 col at <600px
+
+--sidebar-w, --grid-gap
+
+.grid-2
+
+repeat(2, 1fr)
+
+1 col at <500px
+
+--grid-gap
+
+.grid-3
+
+repeat(3, 1fr)
+
+2 cols at <900px, 1 col at <500px
+
+--grid-gap
+
+Container context required for collapsing. Grids collapse via
+@container queries, not @media queries. Wrap in
+.container or set container-type: inline-size on a parent.
+
+<!-- Grids collapse when the .container is narrow -->
+<section>
+<div class="container">
+<div class="grid-3">
+<div class="card">…</div>
+<div class="card">…</div>
+<div class="card">…</div>
+</div>
+</div>
+</section>
+
+<!-- Sidebar with narrow sidebar column -->
+<div class="container">
+<div class="sidebar" style="--sidebar-w: 240px">
+<nav>…</nav>
+<main>…</main>
+</div>
+</div>
+
+Radius as hierarchy
+
+Border radius is not purely decorative — it signals depth and interactivity. Use the scale
+consistently so elements at the same depth read as related.
+
+--radius-sm
+4px · badges, code
+
+--radius-md
+6px · buttons, inputs
+
+--radius-lg
+8px · cards, panels
+
+--radius-xl
+12px · hero cards
+
+--radius-full
+9999px · pills
+
+Nest radii correctly: an inner element should have a smaller radius than its container,
+roughly container-radius - padding. Matching radii at every level makes nested
+surfaces look misaligned. See Styles &rsaquo; Spacing for the
+full radius token reference.
+
+Stacking order
+
+Eight z-index tokens define a predictable stacking ladder. Never hardcode z-index values —
+use the tokens so layers stay relative to each other as the system grows.
+
+--z-base · 0
+Normal flow
+
+--z-raised · 1
+Floated cards
+
+--z-content · 10
+Sticky sub-nav
+
+--z-dropdown · 100
+Dropdowns, popovers
+
+--z-sticky · 200
+Sticky header
+
+--z-overlay · 300
+Modal backdrop
+
+--z-modal · 400
+Modal dialog
+
+--z-toast · 500
+Toasts, notifications
+
+The stacking order matches the visual hierarchy: page content sits at the bottom, transient
+UI (toasts, modals) at the top. Never set a dropdown above a modal — if a component needs to
+break this order, the design decision is worth questioning first.
+
+---
+
+## Responsive — https://farn.jbpt.de/foundations/responsive
+Farn's breakpoint tokens and mobile-first responsive conventions
+
+Responsive
+
+Farn defines two breakpoint reference values as tokens: --breakpoint-mobile (640&thinsp;px)
+and --breakpoint-tablet (768&thinsp;px). CSS custom properties cannot be used inside
+@media conditions directly, so the tokens act as the canonical reference — every
+media query in the codebase is annotated with the corresponding token name in a comment so the
+connection is always visible and a project-wide search finds all breakpoint usage immediately.
+
+Breakpoint scale
+
+Two breakpoints divide the design space into three layout zones. Layouts are designed for the
+widest context first and collapse inward at each threshold.
+
+Mobile
+< 640px
+
+Tablet
+640–768px
+
+Desktop
+> 768px
+
+--breakpoint-mobile · 640px
+--breakpoint-tablet · 768px
+
+Reference — breakpoint tokens
+
+Token
+
+Value
+
+Use
+
+--breakpoint-mobile
+
+640px
+
+Single-column stack, mobile nav drawer, reduced padding
+
+--breakpoint-tablet
+
+768px
+
+Multi-column grid collapse, reduced gap between sections
+
+Usage pattern
+
+CSS custom properties are not supported inside @media (...) conditions by any browser.
+Instead, write the literal pixel value and add an inline comment naming the token. This keeps
+media queries greppable and ties each one back to the token system without requiring a build tool.
+
+/* ✓ correct — literal value + token annotation */
+@media (max-width: 640px) /* --breakpoint-mobile */ {
+.grid { grid-template-columns: 1fr; }
+}
+
+/* ✗ incorrect — custom properties do not work in @media */
+@media (max-width: var(--breakpoint-mobile)) { ... }
+
+When you add a new media query, search for --breakpoint-mobile first to see how
+existing rules are written, then follow the same comment pattern.
+
+Reflow in action
+
+A three-column card grid that collapses to a single column at 640&thinsp;px. Resize the browser
+to see the transition at the --breakpoint-mobile threshold.
+
+Card one
+
+Three columns at desktop and tablet widths.
+
+Card two
+
+One column below 640&thinsp;px — a single breakpoint, one rule.
+
+Card three
+
+No intermediate states needed for this layout.
+
+CSS for this demo
+
+.grid {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: var(--space-md);
+}
+
+@media (max-width: 640px) /* --breakpoint-mobile */ {
+.grid { grid-template-columns: 1fr; }
+}
+
+Reflow-by-content
+
+Before reaching for a breakpoint, lean on intrinsic sizing: flex-wrap,
+auto-fill/auto-fit grid tracks, and min-width: 0 on flex
+children often reflow naturally without a media query. Breakpoints should express a deliberate
+layout intent — switching from two columns to one, collapsing a nav drawer — not patch visual
+overflow or spacing accidents.
+
+The example below uses auto-fit with a minmax track to reflow without
+any media query at all:
+
+.auto-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: var(--space-md);
+}
+
+Heading and body sizes use clamp() to scale fluidly between breakpoints without
+any media queries. See Styles &rsaquo; Typography for the
+full type scale and clamp values.
+
+---
+
+## Surfaces — https://farn.jbpt.de/foundations/surfaces
+Farn's theme and surface model — the two-axis system behind dark/light and depth
+
+Surfaces
+
+Farn's theming system has two orthogonal axes. data-theme sets an absolute
+light or dark context on any element. data-surface sets depth within that
+context — base, layer, overlay, or featured — and resolves automatically to the correct
+palette token for the current theme. They compose freely: a dark panel inside a light page
+needs only one attribute pair.
+
+Live Demo
+
+Both columns below are pinned to their respective themes. Each surface renders at the same
+depth so you can compare all four levels side by side.
+
+Light theme
+
+base
+
+Page background — birch
+
+Primary
+Secondary
+
+layer
+
+Cards, panels — mist
+
+Primary
+Secondary
+
+overlay
+
+Modals, dropdowns — sand
+
+Primary
+Secondary
+
+featured
+
+Hero sections — void
+
+Primary
+Secondary
+
+Dark theme
+
+base
+
+Page background — void
+
+Primary
+Secondary
+
+layer
+
+Cards, panels — iron
+
+Primary
+Secondary
+
+overlay
+
+Modals, dropdowns — slate
+
+Primary
+Secondary
+
+featured
+
+Hero sections — deepwater
+
+Primary
+Secondary
+
+Responds to the page toggle
+
+Without a forced data-theme the surfaces adapt automatically. Use the moon/sun
+button in the nav above to see all four levels update in place.
+
+Current page theme
+
+base
+
+Page background
+
+layer
+
+Cards, panels
+
+overlay
+
+Modals, dropdowns
+
+featured
+
+Always dark
+
+Override with data-theme
+
+Add data-theme="dark" (or "light") to any element to pin it to a
+specific theme regardless of the page. Toggle the page theme — the right panel stays dark
+while the left follows the page.
+
+data-surface="layer"
+
+Follows page theme
+
+data-theme="dark" data-surface="layer"
+
+Always dark
+
+<!-- Pinned theme + explicit depth -->
+<section data-theme="dark" data-surface="layer">
+Dark panel regardless of page theme
+</section>
+
+Surface Card Pattern
+
+A card that adapts to its surface with no component-specific CSS: background resolves from
+data-surface alone, and only --space-* / --radius-*
+semantic tokens shape it. Reuse this pattern instead of hand-rolling background/border rules
+per page — it's what the landing page's token story section is
+built from. Unlike the shipped .card component class, it has no fixed
+background — that's the point: it lets data-surface decide.
+
+base
+
+layer
+
+overlay
+
+Copy-paste — Surface Card
+
+<div class="surface-card" data-surface="layer">
+<h4>Card title</h4>
+<p>Card copy.</p>
+</div>
+
+.surface-card {
+padding: var(--space-lg);
+border-radius: var(--radius-lg);
+}
+
+No background declaration needed — data-surface sets it
+directly on the element. Add border: 1px solid var(--color-border) if
+adjacent surfaces need a visible edge (e.g. nested one level deep with little contrast
+between steps).
+
+The Two-Axis Model
+
+Most theming systems give you a single switch — light or dark. Farn gives you two independent
+controls: an absolute theme axis and a relative depth axis.
+
+The absolute axis (data-theme) sets the entire context for an element and all
+its descendants. The relative axis (data-surface) expresses depth within
+whatever theme context is currently active. Because depth is relative, a
+data-surface="layer" on a dark panel resolves to Iron Night iron, and on a light
+panel it resolves to Birch Mist mist — the same semantic intent, the right palette value.
+
+This is why Farn palettes are designed in complementary pairs: Iron Night and Birch Mist
+mirror each other's depth levels. Iron Night void = dark page; Birch Mist birch = light page.
+Iron Night iron = dark card; Birch Mist mist = light card. The surface system is an
+expression of the palette story, not a separate mechanism bolted on.
+
+The featured surface opts out of theme-relativity by design. It always provides
+maximum contrast against the page — void in light mode, mist in dark mode — and forces its own
+text and border tokens so descendants inherit correct contrast without a data-theme attribute.
+
+Featured Surface
+
+The featured surface is intentionally theme-breaking. It always provides maximum
+contrast against the page — void (#0D1117) in light mode, mist (#E9E6DC)
+in dark mode — giving hero sections and feature callouts visual weight that adapts without losing
+contrast.
+
+Unlike the three relative surfaces, it overrides text and border tokens directly so descendants
+automatically inherit the correct palette values. Just add data-surface="featured"
+— no data-theme composition required.
+
+<section data-surface="featured">
+<!-- light mode: void bg, dark-palette text (birch/mist/sand) -->
+<!-- dark mode: mist bg, light-palette text (void/slate/ash) -->
+</section>
+
+Toggle the page theme — the block below inverts to maximum contrast in both modes:
+
+data-surface="featured"
+
+Light mode: void · Dark mode: mist
+
+Light — Primary text 19:1 (AAA) · Secondary 9:1 (AAA) · Tertiary 5.9:1 (AA)
+
+FOWT Prevention
+
+A Flash of Wrong Theme (FOWT) occurs when the browser renders a frame in the default light mode
+before JavaScript runs and reads the stored preference. The fix is a tiny synchronous inline
+script placed in <head> — before <body> — that sets
+data-theme on <html> before the browser paints anything:
+
+<script>
+(function () {
+const stored = localStorage.getItem('farn-theme');
+const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+document.documentElement.setAttribute('data-theme', stored ?? system);
+})();
+</script>
+
+Three rules for the script to work:
+
+Synchronous, not deferred. No defer, no type="module". The script must block parsing briefly to run before the first paint.
+
+In <head> before <body>. Any content painted before the script runs will flash in the wrong theme.
+
+localStorage key is farn-theme. The theme toggle must write to the same key. Falls back to prefers-color-scheme when no stored preference exists.
+
+In Astro, use is:inline on the script tag to prevent bundling:
+<script is:inline>...</script>.
+For a practical setup walkthrough, see Getting Started &rsaquo; FOWT.
+
+Token Reference
+
+Surface Depth
+
+Apply data-surface to set depth on any element. Tokens resolve automatically
+for the active theme.
+
+data-surface
+
+Light --color-bg
+
+Dark --color-bg
+
+Light --color-bg-panel
+
+Dark --color-bg-panel
+
+Use
+
+base
+
+--bm2-birch
+
+--in0-void
+
+inherits
+
+inherits
+
+Resets to page bg inside a deeper surface
+
+layer
+
+--bm1-mist
+
+--in1-iron
+
+--bm2-birch
+
+--in2-slate
+
+Cards, sidebars, panels
+
+overlay
+
+--bm0-sand
+
+--in2-slate
+
+inherits
+
+--in2-slate (capped)
+
+Modals, dropdowns, floating elements
+
+featured
+
+--in0-void
+
+--bm1-mist
+
+--in1-iron
+
+--bm2-birch
+
+Hero sections, feature callouts — maximum contrast
+
+Dark overlay ceiling: in dark mode --color-bg-panel inside an overlay is capped
+at --in2-slate — the same as the overlay background — because slate is the
+deepest available surface.
+
+Theme Toggle
+
+Set data-theme on any element to control its theme context.
+All semantic tokens re-declare inside [data-theme] — no extra overrides needed.
+
+<!-- Page-level: set on <html> -->
+<html data-theme="dark">
+
+<!-- Element-level: local override -->
+<section data-theme="dark">
+Always dark, regardless of the page theme
+</section>
+
+<!-- Composed: pinned theme + explicit depth -->
+<section data-theme="dark" data-surface="layer">
+Dark panel, card depth
+</section>
+
+Background
+
+Token
+
+Light
+
+Dark
+
+Use
+
+--color-bg
+
+--bm2-birch
+
+--in0-void
+
+Page background
+
+--color-bg-panel
+
+--bm1-mist
+
+--in1-iron
+
+Cards, panels
+
+--color-bg-inset
+
+--bm0-sand
+
+--in2-slate
+
+Input fills, sunken areas
+
+--color-bg-code
+
+--fo3-deepwater
+
+--in1-iron
+
+Code block background
+
+--color-bg-interactive-hover
+
+--bm1-mist
+
+--in3-ash
+
+Row hover, ghost button fill
+
+Text
+
+Token
+
+Light
+
+Dark
+
+Use
+
+--color-text
+
+--in0-void
+
+--bm2-birch
+
+Primary text
+
+--color-text-secondary
+
+--in2-slate
+
+--bm1-mist
+
+Supporting text
+
+--color-text-tertiary
+
+--in3-ash
+
+--bm0-sand
+
+Placeholders, captions (AA Large only)
+
+Borders
+
+Token
+
+Light
+
+Dark
+
+Use
+
+--color-border
+
+--in3-ash
+
+--in2-slate
+
+Default border
+
+--color-border-strong
+
+--in1-iron
+
+--bm0-sand
+
+Prominent dividers
+
+--color-border-subtle
+
+rgba 55,65,81 12%
+
+rgba 75,85,99 25%
+
+Hairline borders
+
+--color-ghost-border
+
+rgba 55,65,81 25%
+
+rgba 247,246,243 25%
+
+Ghost button ring
+
+Accent & State
+
+Token
+
+Light
+
+Dark
+
+Use
+
+--color-accent
+
+--fo1-fern
+
+--fo0-glade
+
+CTAs, links, focus ring
+
+--color-accent-hover
+
+--fo2-forest
+
+--fo1-fern
+
+Hover state
+
+--color-accent-active
+
+--fo3-deepwater
+
+--fo2-forest
+
+Active/pressed state
+
+--color-accent-text
+
+--bm2-birch
+
+--in0-void
+
+Text on accent backgrounds
+
+--color-error
+
+--bl0-ember
+
+--bl0-ember
+
+Error, destructive
+
+--color-warning
+
+--bl1-ochre
+
+--bl1-ochre
+
+Warning, draft
+
+--color-success
+
+--bl3-moss
+
+--bl3-moss
+
+Success, published
+
+--color-on-error
+
+--bm2-birch
+
+--bm2-birch
+
+Text on error backgrounds
+
+--color-on-success
+
+--bm2-birch
+
+--bm2-birch
+
+Text on success backgrounds
+
+--color-on-warning
+
+--bm2-birch
+
+--bm2-birch
+
+Text on warning backgrounds
+
+---
+
+## Getting Started — https://farn.jbpt.de/getting-started
+Install Farn and set up dark/light mode in your project
+
+For AI
+npm
+CDN
+Layers
+Fonts
+FOWT
+Theming
+Surfaces
+Tokens
+Fraunces
+Example
+FAQ
+
+Getting Started
+
+Farn ships as a single CSS file — no build step, no runtime, no framework assumptions. Add one <link> tag or install from npm and you have all tokens.
+
+For AI Agents
+
+Farn ships an llms.txt at the site root — a concise machine-readable reference covering install, core rules, token layers, and links to every docs page. Drop the sample prompt below into your system context before generating any Farn CSS:
+
+This project uses the Farn design system.
+- Use semantic tokens (--color-*, --space-*), never palette tokens (--in*, --bm*, --fo*, --bl*)
+- Every Fraunces heading: font-variation-settings: 'opsz' <value>
+- data-theme="dark|light" on <html>, data-surface="base|layer|overlay" on elements
+Full reference: https://farn.jbpt.de/llms.txt
+
+Tip: For best results, allow your AI agent network access to farn.jbpt.de so it can fetch the full reference automatically.
+
+npm Install
+
+npm install farn-theme
+
+Then import in your bundler entry (Vite, webpack, Parcel, etc.):
+
+@import "farn-theme"; /* full bundle: tokens + base reset */
+@import "farn-theme/tokens"; /* tokens only — no reset */
+@import "farn-theme/components"; /* opt-in component classes */
+@import "farn-theme/typography"; /* opt-in typography utility classes */
+@import "farn-theme/layout"; /* opt-in layout composition primitives */
+
+Five named export paths are available. Load the core bundle first ("farn-theme" or farn-theme/tokens), then opt-in bundles in order: components, typography, layout. The default ("farn-theme") includes the base reset; use farn-theme/tokens if you manage your own.
+
+No bundler? Use the CDN path below — a <link> tag requires no build step.
+
+CDN Install
+
+Link directly from jsDelivr. Replace @0.7.0 with the latest version tag.
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.7.0/dist/farn.css">
+
+dist/farn.css is a single concatenated file containing palette tokens, semantic tokens, typography, spacing, motion tokens, and the base reset.
+
+If you manage your own CSS reset, use the tokens-only bundle instead:
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.7.0/dist/farn-tokens.css">
+
+dist/farn-tokens.css includes all tokens but omits base.css (box-sizing reset, smooth scroll, focus ring, reduced-motion guard).
+
+Load opt-in bundles after the core. Both require farn.css or farn-tokens.css for semantic tokens:
+
+<!-- opt-in: component classes (buttons, cards, forms, badges, breadcrumbs, accordion) -->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.7.0/dist/farn-components.css">
+
+<!-- opt-in: typography utility classes -->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.7.0/dist/farn-typography.css">
+
+<!-- opt-in: layout composition primitives (.container, .stack, .cluster, .grid-2…) -->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.7.0/dist/farn-layout.css">
+
+Replace @0.7.0 with the latest release tag.
+
+What Gets Loaded
+
+farn.css bundles seven layers in order:
+
+colors.css — 17 palette tokens across four palettes
+
+typography.css — font-family tokens and scale reference
+
+spacing.css — space scale, layout widths, border radius, z-index
+
+motion.css — duration scale and easing tokens
+
+dark-light.css — semantic token layer with dark/light switching
+
+components.css — Tier-3 component tokens (--btn-*, --card-*, --input-*, etc.)
+
+base.css — box-sizing reset, smooth scroll, focus ring, reduced-motion
+
+farn-tokens.css is the same bundle without base.css (layers 1–6 only).
+
+Fonts are not bundled — load them separately. Self-hosting the WOFF2 files is recommended; see Load Fonts below.
+
+Load Fonts
+
+Farn uses Fraunces (display/headings), Instrument Sans (body/UI), and JetBrains Mono (code). Download the four WOFF2 files from the Farn repo, place them at /fonts/ in your public root, and declare them with @font-face:
+
+/* Fraunces — variable (wt 300–900), upright */
+@font-face {
+font-family: 'Fraunces';
+font-style: normal;
+font-weight: 300 900;
+font-display: swap;
+src: url('/fonts/fraunces-latin-normal.woff2') format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+font-family: 'Fraunces';
+font-style: italic;
+font-weight: 300 900;
+font-display: swap;
+src: url('/fonts/fraunces-latin-italic.woff2') format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Instrument Sans — variable (wt 400–600), upright */
+@font-face {
+font-family: 'Instrument Sans';
+font-style: normal;
+font-weight: 400 600;
+font-display: swap;
+src: url('/fonts/instrument-sans-latin.woff2') format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* JetBrains Mono — variable (wt 400–500), upright */
+@font-face {
+font-family: 'JetBrains Mono';
+font-style: normal;
+font-weight: 400 500;
+font-display: swap;
+src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+Self-hosting serves fonts from your own domain — no IP addresses are sent to third-party servers, which satisfies GDPR obligations without a consent banner. If you prefer the Google Fonts CDN, add a consent management platform before enabling it.
+
+Prevent Flash of Wrong Theme (FOWT)
+
+Add this inline script in <head> before any CSS loads. It reads the stored preference and sets data-theme on <html> before the browser paints.
+
+<script>
+(function () {
+const stored = localStorage.getItem('farn-theme');
+const system = window.matchMedia('(prefers-color-scheme: dark)').matches
+? 'dark' : 'light';
+document.documentElement.setAttribute('data-theme', stored ?? system);
+})();
+</script>
+
+Dark / Light Mode
+
+Theme mode is controlled via a data-theme attribute on <html>:
+
+<html data-theme="light"> … </html>
+<html data-theme="dark"> … </html>
+
+Toggle it with JavaScript and persist the choice:
+
+function toggleTheme() {
+const current = document.documentElement.getAttribute('data-theme');
+const next = current === 'dark' ? 'light' : 'dark';
+document.documentElement.setAttribute('data-theme', next);
+localStorage.setItem('farn-theme', next);
+}
+
+Default (no attribute) is light mode. System preference is respected when no manual choice is stored.
+
+Surfaces and Theme Overrides
+
+Use data-surface to set a depth level on any element. All three surfaces are relative — they adapt automatically when the page theme switches:
+
+<!-- depth level: adapts to current theme -->
+<div data-surface="base">…</div> <!-- page-level bg -->
+<div data-surface="layer">…</div> <!-- cards, panels -->
+<div data-surface="overlay">…</div> <!-- modals, dropdowns -->
+
+<!-- forced theme on any element: combine with data-surface -->
+<section data-theme="dark" data-surface="layer">
+<!-- dark panel regardless of page theme -->
+</section>
+
+All children inherit the re-scoped tokens automatically — no conditional logic needed.
+
+Using Tokens
+
+Reference semantic tokens in your component CSS — never raw palette tokens:
+
+.btn-primary {
+background: var(--color-accent); /* always Fern */
+color: var(--color-accent-text); /* always Parchment */
+border-radius: var(--radius-md); /* 6px */
+padding: 0 var(--space-md);
+font-family: var(--font-body);
+font-weight: 600;
+}
+
+.card {
+background: var(--card-bg);
+border-radius: var(--card-radius);
+padding: var(--card-padding);
+}
+
+Customising components (Tier-3 tokens)
+
+Each shipped component exposes Tier-3 tokens — one level above semantic tokens — so you can retheme a single component without touching the rest of the system. Override them on :root for global changes, or scope them to any element:
+
+/* Rebrand the primary button globally */
+:root {
+--btn-p-bg: #your-brand;
+--btn-p-text: white;
+}
+
+/* Different brand colour inside a specific section */
+.marketing-hero {
+--btn-p-bg: #alternate-brand;
+}
+
+Each component's full token table is listed in the reference section of its group page (Actions, Forms, Layout, etc.).
+
+Fraunces Headings
+
+font-variation-settings: 'opsz' is mandatory on every Fraunces heading — the font renders incorrectly without it:
+
+h1 { font-family: var(--font-display); font-variation-settings: 'opsz' 72; }
+h2 { font-family: var(--font-display); font-variation-settings: 'opsz' 24; }
+h3 { font-family: var(--font-display); font-variation-settings: 'opsz' 20; }
+
+Minimal Example
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.7.0/dist/farn.css">
+<link rel="stylesheet" href="/styles/fonts.css"><!-- self-hosted @font-face, see Load Fonts -->
+<script>
+(function(){
+const s = localStorage.getItem('farn-theme');
+const p = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+document.documentElement.setAttribute('data-theme', s ?? p);
+})();
+</script>
+<style>
+body {
+font-family: var(--font-body);
+background: var(--color-bg);
+color: var(--color-text);
+padding: var(--space-xl);
+}
+h1 {
+font-family: var(--font-display);
+font-variation-settings: 'opsz' 72;
+font-weight: 800;
+}
+</style>
+</head>
+<body>
+<h1>Hello, Farn</h1>
+<p>Token-first design system.</p>
+</body>
+</html>
+
+FAQ
+
+accordion-panel
+
+Need a starting point? Browse Templates — copy-paste page sections assembled into complete layouts, all built with Farn tokens.
+
+What is Farn?  Farn is a zero-dependency, token-first CSS design system. A single stylesheet gives you palette and semantic design tokens plus opt-in component classes for buttons, cards, forms, badges, and more — no JavaScript framework required.  Do I need a build step or JavaScript framework to use Farn?  No. Farn ships as plain CSS you link with one <link> tag or install from npm. Two small opt-in scripts (nav.js, tabs.js) add progressive enhancement for the theme toggle and tabs, but the CSS works without them.  How does dark/light mode work?  Set data-theme="dark" or data-theme="light" on <html> (or any element). Farn’s semantic tokens resolve to the correct palette values for that mode automatically — no separate dark-mode stylesheet needed.  Can I use Farn with React, Vue, Svelte, or another framework?  Yes. Farn is framework-agnostic CSS with no JavaScript dependencies, so it works identically in any stack.  Is Farn free to use?  Yes, MIT licensed, free for personal and commercial projects.  How do I customize Farn's colors for my brand?  Override Tier-3 component tokens (e.g. --btn-p-bg, --card-bg) on :root for a global change, or scope them to a selector for a local override — no need to touch Farn’s source.  Does Farn meet accessibility standards?  Farn targets WCAG AA contrast across all four surfaces in both dark and light mode, with visible :focus-visible states and prefers-reduced-motion support built in.
+
+---
+
+## Farn — Design System — https://farn.jbpt.de/
+A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes for any stack.
+
+Sharp · Warm · Intellectual
+
+A design system
+rooted in northern forests.
+
+Created for a clean and lightweight design. Framework-agnostic tokens and component classes. Zero runtime, zero framework dependency.
+
+Explore
+Get Started
+
+About
+
+A design system that knows what it is.
+
+From the Old Saxon farn — feather-leaf, forest floor, northern ground.
+
+Etymology
+
+Farn is built on one conviction: a design system should have a point of view. Not neutral components, but a coherent vocabulary — warm enough to feel human, sharp enough to feel considered. Four token palettes, a two-layer semantic architecture, and component classes with light and dark surface variants.
+
+Explore Foundations
+
+Iron Night
+
+Birch Mist
+
+Forest
+
+Bloom
+
+Architecture
+
+Tokens all the way down.
+
+Three tiers, each building on the last. Swap a palette token and the entire system updates. Components never reference raw colours.
+
+Browse Styles
+
+Tier 1
+
+Palette tokens
+
+Named colour, spacing, type, and motion values. The raw vocabulary — never referenced by components directly.
+
+--fo1-fern
+--in0-void
+--space-md
+
+→
+
+Tier 2
+
+Semantic tokens
+
+Purpose-named aliases that resolve per theme and surface. Light, dark, and surface overrides cascade automatically.
+
+--color-bg
+--color-accent
+--color-text
+
+→
+
+Tier 3
+
+Component tokens & classes
+
+Opt-in CSS classes built on top of semantic tokens. Override at the component level without touching the palette.
+
+.btn.btn-p
+.card
+.badge
+
+Palette
+
+Four palettes.
+One vocabulary.
+
+Iron Night
+
+Void
+
+Iron
+
+Slate
+
+Ash
+
+Birch Mist
+
+Sand
+
+Mist
+
+Birch
+
+Forest
+
+Glade
+
+Fern
+
+Forest
+
+Deepwater
+
+Bloom
+
+Ember
+
+Ochre
+
+Grain
+
+Moss
+
+Heather
+
+Explore Colors
+
+Farn.
+
+Display
+Fraunces — variable, optical size
+
+Body
+Instrument Sans — humanist, geometric
+
+Mono
+JetBrains Mono — code, data
+
+The token story
+
+One component. Every surface.
+
+Switch to Dark
+
+Toggle the theme — tokens resolve automatically. The card, badge, and button below share no hardcoded colours.
+
+Base
+
+base
+
+The page-level background. Every theming context starts here.
+
+More about Surfaces
+
+Layer
+
+layer
+
+Cards, panels, sidebars. One step above the base — naturally elevated.
+
+More about Surfaces
+
+Overlay
+
+overlay
+
+Modals, dropdowns, tooltips. The topmost surface, floating above.
+
+More about Surfaces
+
+Included
+
+The complete token system.
+
+CSS tokens
+
+Two-layer architecture: palette → semantic. Custom properties that resolve automatically with data-theme and data-surface.
+
+Component classes
+
+Shipped CSS classes for buttons, cards, badges, forms, and more. Load farn-components.css alongside the token bundle.
+
+Zero dependencies
+
+Pure CSS custom properties. Load from CDN or install from npm. Works with any stack — React, Vue, Svelte, plain HTML, or none.
+
+Ready to build
+
+Start building
+with Farn.
+
+CSS tokens and component classes. No runtime, no framework, no build step.
+Just add the stylesheet and start building.
+
+Get Started
+Discover Components
+
+Foundations
+Styles
+Components
+Get Started
+GitHub
+
+---
+
+## Colors — https://farn.jbpt.de/styles/color
+Farn color palette tokens and semantic layer
+
+Colors
+
+Four palettes — Iron Night, Birch Mist, Forest, Bloom — organised by role.
+A two-layer token architecture separates raw palette values from semantic aliases,
+so components never reference a colour directly. Click any swatch to copy its hex value.
+
+Palette Tokens
+
+Raw palette tokens define the colour vocabulary. In production code, use the
+semantic layer instead — raw tokens are for brand
+moments and design showcases only.
+
+Iron Night — Dark Surfaces
+
+#0D1117
+Copied!
+
+--in0-void
+
+Primary bg (dark); primary text (light)
+
+bg
+text
+
+#374151
+Copied!
+
+--in1-iron
+
+Elevated dark surfaces; panels, cards
+
+bg
+border
+
+#4B5563
+Copied!
+
+--in2-slate
+
+Active lines, selections, highlights
+
+bg
+border
+
+#6B7280
+Copied!
+
+--in3-ash
+
+Secondary text, placeholders (AA large only)
+
+text
+border
+
+Birch Mist — Light Surfaces
+
+#D5D2C7
+Copied!
+
+--bm0-sand
+
+Elevated light surface; inset fills; dark tertiary text
+
+bg
+text
+
+#E9E6DC
+Copied!
+
+--bm1-mist
+
+Card fill, hover states; dark secondary text
+
+bg
+text
+
+#F7F6F3
+Copied!
+
+--bm2-birch
+
+Primary light bg; primary dark text; accent text
+
+bg
+text
+
+Forest — Accent
+
+#94C5AF
+Copied!
+
+--fo0-glade
+
+Dark-mode primary accent — links, buttons (9.79:1 on void)
+
+accent
+
+#327A59
+Copied!
+
+--fo1-fern
+
+Light-mode primary accent — buttons, links, CTAs
+
+accent
+
+#2D5E4A
+Copied!
+
+--fo2-forest
+
+Accent hover; card highlight bg (dark mode)
+
+accent
+
+#254D5A
+Copied!
+
+--fo3-deepwater
+
+Code block bg (light); card highlight bg (light)
+
+accent
+
+Bloom — Semantic States
+
+#C5414C
+Copied!
+
+--bl0-ember
+
+Error, destructive actions
+
+state
+
+#AB5A2B
+Copied!
+
+--bl1-ochre
+
+Warning, draft, pending
+
+state
+
+#8D6B20
+Copied!
+
+--bl2-grain
+
+Annotation, decorator-weight info
+
+state
+
+#567A37
+Copied!
+
+--bl3-moss
+
+Success, published, active
+
+state
+
+#885DB4
+Copied!
+
+--bl4-heather
+
+Special states, beta, experimental
+
+state
+
+Semantic Token Layer
+
+Components always reference semantic tokens — never palette tokens directly.
+The semantic layer resolves to the correct palette value per theme mode automatically.
+Surface depth patterns (data-surface) are documented on
+Foundations &rsaquo; Surfaces.
+
+Token reference — light & dark
+
+Light Mode (default)
+
+:root,
+[data-theme="light"] {
+--color-bg: var(--bm2-birch); /* Page background */
+--color-bg-panel: var(--bm1-mist); /* Cards, panels */
+--color-bg-inset: var(--bm0-sand); /* Input fills */
+--color-bg-code: var(--fo3-deepwater); /* Code block background */
+--color-text: var(--in0-void); /* Primary text */
+--color-text-secondary: var(--in2-slate); /* Supporting text */
+--color-text-tertiary: var(--in3-ash); /* Placeholders, captions */
+--color-border: var(--in3-ash); /* Default border */
+--color-border-strong: var(--in1-iron); /* Prominent dividers */
+--color-border-subtle: rgba(55,65,81,0.12); /* Hairline borders */
+--color-ghost-border: rgba(55,65,81,0.25); /* Ghost button border */
+--color-accent: var(--fo1-fern); /* Primary CTA, links */
+--color-accent-hover: var(--fo2-forest); /* Accent hover */
+--color-accent-text: var(--bm2-birch); /* Text on accent bg */
+--color-error: var(--bl0-ember); /* Error, destructive */
+--color-warning: var(--bl1-ochre); /* Warning, draft */
+--color-success: var(--bl3-moss); /* Success, published */
+}
+
+Dark Mode
+
+[data-theme="dark"] {
+--color-bg: var(--in0-void);
+--color-bg-panel: var(--in1-iron);
+--color-bg-inset: var(--in2-slate);
+--color-bg-code: var(--in1-iron);
+--color-text: var(--bm2-birch);
+--color-text-secondary: var(--bm1-mist);
+--color-text-tertiary: var(--bm0-sand);
+--color-border: var(--in2-slate);
+--color-border-strong: var(--bm0-sand);
+--color-border-subtle: rgba(75,85,99,0.25);
+--color-ghost-border: rgba(247,246,243,0.25);
+--color-accent: var(--fo0-glade);
+--color-accent-hover: var(--fo1-fern);
+--color-accent-text: var(--in0-void);
+--color-error: var(--bl0-ember);
+--color-warning: var(--bl1-ochre);
+--color-success: var(--bl3-moss);
+}
+
+Accessibility
+
+All semantic token pairs meet at least 4.5:1 contrast (WCAG 2.1 AA) in both themes.
+One exception — --color-text-tertiary — is AA Large only.
+The complete foreground/background contrast matrix, with colour chips and WCAG ratings
+for every pair, is on Foundations &rsaquo; Accessibility.
+
+Usage Rules
+
+Never use Bloom colours as decorative accents — reserve them for semantic states only (error, warning, success, annotation).
+
+Iron Night tones must not appear as foreground text on light backgrounds — contrast is too low.
+
+Light-mode CTA: --fo1-fern background with --bm2-birch text (4.78:1 ✓).
+
+Dark-mode CTA: --fo0-glade background with --in0-void text (9.79:1 ✓). Both --color-accent and --color-accent-text resolve correctly in dark mode — no consumer-side override needed.
+
+Components reference semantic tokens only. Palette tokens are for brand moments and one-off elements.
+
+---
+
+## Icons — https://farn.jbpt.de/styles/icons
+How to use a third-party icon set with Farn — sizing and colour driven by Farn tokens
+
+Icons
+
+Farn does not ship an icon set. Icons are a large, opinionated surface — hundreds of glyphs,
+multiple weights, a release cadence of their own — and bundling one would tie Farn to choices
+that belong to your project, not the token layer. Instead, Farn gives you the sizing
+and colour tokens to make any third-party set feel native.
+
+Recommended library
+
+Lucide
+is the recommended default — 1,700+ icons, ISC licence, a clean stroke character that sits
+naturally with Farn's restrained aesthetic, and every icon uses currentColor out
+of the box. It is the only library in the space with an official lucide-astro
+package, and the lucide-static package ships individual SVG files for any
+framework or no framework at all.
+
+Install
+
+# Astro — official component package
+npm install lucide-astro
+
+# Vanilla / any bundler — individual SVG files
+npm install lucide-static
+
+Inline SVG (vanilla)
+
+Browse lucide.dev/icons,
+click an icon, and copy the <svg> markup. Paste it directly into your HTML.
+The default stroke="currentColor" means the icon inherits the surrounding text
+colour without any extra CSS.
+
+<!-- Paste any icon from lucide.dev — stroke="currentColor" is the default -->
+<svg xmlns="http://www.w3.org/2000/svg"
+width="24" height="24" viewBox="0 0 24 24"
+fill="none" stroke="currentColor" stroke-width="2"
+stroke-linecap="round" stroke-linejoin="round"
+aria-hidden="true">
+<path d="M5 12h14"/>
+<path d="m12 5 7 7-7 7"/>
+</svg>
+
+Astro components
+
+---
+import { ArrowRight, Check, Info } from 'lucide-astro';
+---
+
+<!-- Decorative icon next to a label -->
+<button>
+<ArrowRight size={20} aria-hidden="true" />
+Continue
+</button>
+
+<!-- Icon-only control — label goes on the button, not the icon -->
+<button aria-label="Next page">
+<ArrowRight size={20} aria-hidden="true" />
+</button>
+
+Need more?
+Phosphor
+offers six weights including duotone — the only free library with native two-tone icons.
+Tabler
+(6,100+ icons) suits dashboards and data-heavy products, and is the recommended choice for
+brand icons (ti-brand-github, ti-brand-figma, etc.)
+— Lucide intentionally excludes third-party brand marks.
+Both use currentColor and work with the same sizing and colour patterns below.
+
+Size with spacing tokens
+
+Drive icon dimensions from the spacing scale so they track the rest of the system. As a rule of
+thumb: inline icons match the surrounding cap height; standalone affordances sit one step up.
+
+Inline with text
+
+Read the
+
+docs
+
+Button / input (--space-md, 24px)
+
+Standalone / feature (--space-lg, 36px)
+
+Context
+
+Token
+
+Value
+
+Inline with text
+
+1em
+
+tracks font-size
+
+Button / input affordance
+
+--space-md
+
+24px
+
+Standalone / feature
+
+--space-lg
+
+36px
+
+.icon {
+width: var(--space-md); /* 24px — button and input icons */
+height: var(--space-md);
+}
+
+.icon-inline {
+width: 1em; /* tracks surrounding text size */
+height: 1em;
+vertical-align: -0.125em; /* optical baseline nudge */
+}
+
+.icon-feature {
+width: var(--space-lg); /* 36px — standalone callout or feature icon */
+height: var(--space-lg);
+}
+
+Colour with semantic tokens
+
+Control icon colour through the parent's color property — SVG icons inherit it
+via currentColor regardless of whether they use stroke or fill. Lucide uses
+stroke="currentColor" by default; Phosphor Fill and Tabler filled variants use
+fill="currentColor". Either way, Farn's semantic tokens resolve per theme and
+surface, so an icon coloured with var(--color-text) stays legible everywhere —
+no dark-mode overrides needed.
+
+--color-text
+
+--color-accent
+
+--color-text-secondary
+
+--color-error
+
+--color-success
+
+/* Drive icon colour through the parent — icons inherit currentColor */
+.icon-accent { color: var(--color-accent); }
+.icon-muted { color: var(--color-text-secondary); }
+.icon-error { color: var(--color-error); }
+.icon-success { color: var(--color-success); }
+
+Toggle the page theme to verify — the demo icons above adapt to light, dark, and every
+data-surface context automatically.
+
+Accessibility
+
+Decorative icon (next to a label) — add aria-hidden="true".
+The visible text already conveys the meaning; the icon is presentational.
+
+Icon-only control (no visible label) — put the accessible name on the
+interactive element (aria-label on the <button>),
+and add aria-hidden="true" to the icon itself.
+
+Standalone icon conveying meaning — use role="img" and
+a <title> inside the SVG so screen readers announce it.
+
+Colour alone — never use icon colour as the sole state signal. Pair a
+semantic colour with a distinct shape or a visible label.
+
+<!-- Decorative — icon sits next to a text label -->
+<button>
+<svg aria-hidden="true">...</svg>
+Save changes
+</button>
+
+<!-- Icon-only control — accessible name lives on the button -->
+<button aria-label="Close dialog">
+<svg aria-hidden="true">...</svg>
+</button>
+
+<!-- Standalone meaningful icon — title is read aloud -->
+<svg role="img" aria-labelledby="icon-title">
+<title id="icon-title">Warning</title>
+...
+</svg>
+
+---
+
+## Styles — https://farn.jbpt.de/styles/
+The token reference for Farn — the concrete values you look up while building
+
+Styles
+
+Styles is the token reference: the concrete values — colours, type, spacing, motion — you
+look up while building. For the concepts and rationale behind them, see
+Foundations.
+
+Color
+
+The four palettes, semantic tokens, and the WCAG contrast matrix.
+
+Farn
+
+Instrument Sans · body
+
+Typography
+
+Font stacks, the Fraunces opsz rule, and the type scale.
+
+xs
+
+sm
+
+md
+
+lg
+
+xl
+
+Spacing
+
+The spacing scale, border radius, and z-index.
+
+Hover state
+
+--duration-base + --ease-out
+
+Motion
+
+Duration and easing tokens with pairing guidance.
+
+var(--space-xl)
+
+Icons
+
+Using a third-party icon set with Farn sizing and colour tokens.
+
+For the theming system — data-theme, data-surface, and the full
+semantic token reference — see Foundations › Surfaces.
+
+---
+
+## Motion — https://farn.jbpt.de/styles/motion
+Farn duration and easing tokens for consistent, purposeful animation
+
+Motion
+
+Motion communicates relationships and reinforces hierarchy. Use the right token for the right moment — fast for press states, slow for reveals — and combine duration with easing to shape how an element arrives or departs.
+
+Duration
+
+Five steps, each tuned to a specific interaction type. Heavier geometry and content reveals warrant longer durations; micro-interactions should be nearly invisible.
+
+--duration-fast 80ms
+
+Press / active states
+
+--duration-base 120ms
+
+Standard hover interactions
+
+--duration-slow 200ms
+
+Fill, colour, and indicator transitions
+
+--duration-enter 250ms
+
+Enter / exit geometry
+
+--duration-reveal 400ms
+
+Content reveal and stagger
+
+Reference — Duration
+
+Token
+
+Value
+
+Use
+
+--duration-fast
+
+80ms
+
+Press / active states. The user should feel the response, not watch it.
+
+--duration-base
+
+120ms
+
+The default for hover colour and background shifts.
+
+--duration-slow
+
+200ms
+
+Fill and progress indicators; anything tracking a measured change.
+
+--duration-enter
+
+250ms
+
+Panel slide-ins, drawer opens, nav transitions. Default for geometry.
+
+--duration-reveal
+
+400ms
+
+Content that appears in stages. Use sparingly.
+
+--duration-loop
+
+800ms
+
+Repeating cycle animations — spinner, skeleton shimmer.
+
+Easing
+
+All easings are one-directional — they describe how something arrives. The preview shows each curve in the direction it is designed to be used, then snaps back to reset.
+
+--ease-default ease
+
+General transitions, no strong directional intent
+
+--ease-out ease-out
+
+Elements entering the screen — decelerate into position
+
+--ease-in-out ease-in-out
+
+Long-distance travel — elements that need to feel settled at both ends
+
+--ease-spring cubic-bezier(0.16, 1, 0.3, 1)
+
+Expressive, high-attention moments — drawers, modals
+
+Reference — Easing
+
+Token
+
+Value
+
+Use
+
+--ease-default
+
+ease
+
+Safe choice when direction is neutral (colour shifts, opacity fades).
+
+--ease-out
+
+ease-out
+
+Anything sliding or fading into view; standard pairing with --duration-enter.
+
+--ease-in-out
+
+ease-in-out
+
+Elements that travel a significant distance and need to feel settled at both ends.
+
+--ease-spring
+
+cubic-bezier(0.16, 1, 0.3, 1)
+
+Use for one expressive moment per interaction. Not for loops or repeated micro-interactions.
+
+prefers-reduced-motion: base.css sets transition-duration and animation-duration to 0.01ms when the user has requested reduced motion; no extra guard is needed if you import farn.css. In custom animation code, always add an explicit @media (prefers-reduced-motion: reduce) guard.
+
+Pairing Guide
+
+Each scenario calls for a specific duration and easing combination. The demos below loop continuously to show the intended feel.
+
+Confirm
+
+Button press / active
+
+--duration-fast + --ease-default
+
+Hover state
+
+Hover colour shift
+
+--duration-base + --ease-out
+
+Panel entering
+
+Panel / drawer enter
+
+--duration-enter + --ease-spring
+
+Panel exiting
+
+Panel / drawer exit
+
+--duration-enter + --ease-out
+
+Content reveals
+
+Content reveal
+
+--duration-reveal + --ease-out
+
+Reference — Pairing Guide
+
+Situation
+
+Duration
+
+Easing
+
+Button press / active
+
+--duration-fast
+
+--ease-default
+
+Hover colour shift
+
+--duration-base
+
+--ease-out
+
+Panel / drawer enter
+
+--duration-enter
+
+--ease-spring
+
+Panel / drawer exit
+
+--duration-enter
+
+--ease-out
+
+Content reveal
+
+--duration-reveal
+
+--ease-out
+
+Code example
+
+Combining duration and easing in a single transition declaration. Transform and opacity use different easing functions to feel natural — spring for the slide, ease-out for the fade.
+
+.panel {
+transform: translateY(8px);
+opacity: 0;
+transition:
+transform var(--duration-enter) var(--ease-spring),
+opacity var(--duration-enter) var(--ease-out);
+}
+
+.panel.is-open {
+transform: translateY(0);
+opacity: 1;
+}
+
+---
+
+## Spacing — https://farn.jbpt.de/styles/spacing
+Farn spacing scale, layout widths, border radius, and z-index
+
+Spacing
+
+Proximity signals relationship; distance signals importance. The spacing scale encodes this — small gaps within components, large gaps between sections.
+
+Space Scale
+
+Base unit is 12px. The scale runs from 6px (half-unit, for tight intra-component gaps) to 96px (hero breathing room).
+
+xs
+6px
+
+sm
+12px
+
+sm-plus
+16px
+
+md
+24px
+
+lg
+36px
+
+xl
+48px
+
+2xl
+60px
+
+3xl
+72px
+
+4xl
+96px
+
+Padding in context
+
+Each token applied as vertical padding around a content block, so you can judge the breathing room each step provides.
+
+xs · 6px
+
+sm · 12px
+
+sm-plus · 16px
+
+md · 24px
+
+lg · 36px
+
+xl · 48px
+
+2xl · 60px
+
+3xl · 72px
+
+4xl · 96px
+
+Reference — Space Scale
+
+Token
+
+rem
+
+px
+
+Use
+
+--space-xs
+
+0.375rem
+
+6px
+
+Icon-to-label gap, tag padding
+
+--space-sm
+
+0.75rem
+
+12px
+
+Tight grouping within a component
+
+--space-sm-plus
+
+1rem
+
+16px
+
+Off-scale optical step — compact component padding (button/nav-CTA horizontal padding)
+
+--space-md
+
+1.5rem
+
+24px
+
+Standard gap — when in doubt, start here
+
+--space-lg
+
+2.25rem
+
+36px
+
+Between distinct content blocks
+
+--space-xl
+
+3rem
+
+48px
+
+Section breathing room, major transitions
+
+--space-2xl
+
+3.75rem
+
+60px
+
+Between page sections
+
+--space-3xl
+
+4.5rem
+
+72px
+
+Hero padding, top-of-page breathing room
+
+--space-4xl
+
+6rem
+
+96px
+
+Maximum section gap — use sparingly
+
+Usage rules
+
+xs / sm — intra-component only. Never use to separate independent elements.
+
+md — the default gap. When in doubt, start here.
+
+lg / xl — between content blocks within a section.
+
+2xl / 3xl — between named page sections. The visual pause that lets sections breathe.
+
+4xl — reserved for hero areas. More than one use per page usually signals restructuring is needed.
+
+Layout Widths
+
+The page container can be wide, but readable text should always be constrained to ~70ch. These two values operate independently — a wide layout can contain narrow prose.
+
+--width-content · 1080px · outer page container
+
+--width-prose · 70ch · body copy, articles, long-form text
+
+--width-narrow · 640px · forms, focused UI, modals
+
+Reference — Layout Widths
+
+Token
+
+Value
+
+Use
+
+--width-content
+
+1080px
+
+Outer page container
+
+--width-prose
+
+70ch
+
+Body copy, articles, long-form text
+
+--width-narrow
+
+640px
+
+Forms, focused UI, modals
+
+Page Structure
+
+A standard page skeleton with spacing tokens at each level. Use this as a starting blueprint — the gaps between sections give the page its rhythm.
+
+site header / nav — sticky, full-width
+
+padding-top: --space-3xl
+
+hero / page header
+
+--space-2xl between sections
+
+content section · max-width: --width-prose or --width-content
+
+--space-2xl
+
+content section
+
+padding-top: --space-xl
+
+site footer
+
+Reference — Page Structure
+
+[site header / nav] — sticky or static, full-width
+[hero / page header] — padding-top: --space-3xl
+[content sections] — gap between sections: --space-2xl
+[section heading]
+[section body] — max-width: --width-prose or --width-content
+[site footer] — padding: --space-xl top
+
+Grid Pattern
+
+auto-fit with minmax produces a responsive layout without breakpoint queries. Resize your browser — the columns collapse automatically when there is not enough room.
+
+A
+
+B
+
+C
+
+D
+
+E
+
+Reference — Grid Pattern
+
+.card-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: var(--space-md); /* 24px */
+}
+
+Use CSS Grid for two-dimensional layouts, flexbox for one-dimensional. Never go beyond 3 columns at --width-content.
+
+Border Radius
+
+Each radius maps to a specific element type. The progression creates implicit hierarchy — larger surfaces have larger radii, signalling containment without needing a border.
+
+--radius-sm
+4px · badges, tags
+
+--radius-md
+6px · buttons, inputs
+
+--radius-lg
+8px · cards, drawers
+
+--radius-xl
+12px · large panels
+
+--radius-full
+9999px · avatars
+
+Reference — Border Radius
+
+Token
+
+Value
+
+Use
+
+--radius-sm
+
+4px
+
+Badges, tags, nav link focus ring, checkboxes
+
+--radius-md
+
+6px
+
+Buttons, inputs, selects, textarea, icon containers
+
+--radius-lg
+
+8px
+
+Cards, dropdowns, popovers, drawers
+
+--radius-xl
+
+12px
+
+Large panels, featured sections
+
+--radius-full
+
+9999px
+
+Avatar circles (one-off use — not for badges)
+
+A badge (4px) sits inside a card (8px) — the radius difference signals containment. The system does not use pill-shaped badges.
+
+Z-index Scale
+
+Always reference a token — never use raw numbers. Each layer is designed to sit cleanly above the one before it. Never skip levels.
+
+--z-toast500Toast notifications
+
+--z-modal400Modals
+
+--z-overlay300Overlays, mobile nav drawer
+
+--z-sticky200Sticky nav bar, fixed header
+
+--z-dropdown100Dropdowns, popovers
+
+--z-content10Sticky sub-nav
+
+--z-raised1Sticky elements in flow
+
+--z-base0Default page content
+
+Reference — Z-index Scale
+
+Token
+
+Value
+
+Use
+
+--z-base
+
+0
+
+Default page content
+
+--z-raised
+
+1
+
+Sticky elements in flow (sub-nav tab row)
+
+--z-content
+
+10
+
+Sticky sub-nav — above page, below fixed nav
+
+--z-dropdown
+
+100
+
+Dropdowns, popovers
+
+--z-sticky
+
+200
+
+Sticky nav bar, fixed header
+
+--z-overlay
+
+300
+
+Overlays, mobile nav drawer
+
+--z-modal
+
+400
+
+Modals
+
+--z-toast
+
+500
+
+Toast notifications
+
+The nav (--z-sticky: 200) sits below overlays (--z-overlay: 300) — dropdowns triggered inside the nav render correctly above it without adjustment.
+
+Elevation
+
+Three shadow tiers for raised surfaces — dropdowns, popovers, raised cards. Each tier is an opacity token layered under a fixed offset/blur, so dark mode can boost the alpha without redeclaring the whole shadow.
+
+--shadow-sm
+Hover rows, inline chips
+
+--shadow-md
+Dropdowns, popovers, tooltips
+
+--shadow-lg
+Modals, raised cards
+
+Reference — Elevation
+
+Token
+
+Light opacity
+
+Dark opacity
+
+Use
+
+--shadow-sm
+
+0.06
+
+0.18
+
+Hover rows, inline chips
+
+--shadow-md
+
+0.10
+
+0.28
+
+Dropdowns, popovers, tooltips
+
+--shadow-lg
+
+0.14
+
+0.40
+
+Modals, raised cards
+
+Dark mode needs a higher opacity for the same shadow to read against an already-dark background — override only the --shadow-opacity-* token, not the full --shadow-* value, if you need a fourth tier. --overlap-card-shadow-raised (used by .overlap-card) reuses --shadow-opacity-lg for its own upward-facing shadow.
+
+Breakpoints
+
+Two reference values marking layout transitions. Use min(), max(), and clamp() within components — only reach for breakpoints at the page layout level.
+
+Mobile
+< 640px
+
+640px
+--breakpoint-mobile
+
+Tablet
+640 – 1079px
+
+1080px
+--width-content
+
+Desktop
+≥ 1080px
+
+Reference — Breakpoints
+
+Token
+
+Value
+
+Behaviour
+
+--breakpoint-mobile
+
+640px
+
+Single column; horizontal padding: --space-md
+
+--breakpoint-tablet
+
+768px
+
+Single column centered; horizontal padding: --space-lg
+
+(--width-content)
+
+1080px
+
+Centered container, auto horizontal margins
+
+CSS custom properties cannot be used directly in @media queries. Use the token value as a reference comment.
+
+/* --breakpoint-mobile: 640px */
+@media (max-width: 640px) {
+.layout { flex-direction: column; }
+}
+
+---
+
+## Typography — https://farn.jbpt.de/styles/typography
+Farn typography system — font stacks, type scale, and opsz rules
+
+Typography
+
+Display serif for personality, humanist sans for readability, mono for code. The combination creates warmth without sacrificing legibility.
+
+Font Families
+
+Fraunces
+
+--font-display
+Display & headings (h1–h3)
+'Fraunces', Georgia, serif
+
+Instrument Sans
+
+--font-body
+Body copy, UI & navigation
+'Instrument Sans', system-ui, sans-serif
+
+JetBrains Mono
+
+--font-mono
+Code blocks & inline code
+'JetBrains Mono', 'Courier New', monospace
+
+Critical — Fraunces optical size: Every Fraunces usage must set
+font-variation-settings: 'opsz' <value>.
+Use 72 for display/h1, 24 for h2, 20 for h3.
+Omitting it gives incorrect letterform rendering at every size.
+
+Type Scale
+
+Display
+
+.text-display &middot; Fraunces 800 &middot; clamp(3–4.5rem) &middot; opsz 72 &middot; lh 1.05
+
+Heading 1
+
+.text-h1 &middot; Fraunces 800 &middot; clamp(2.5–4rem) &middot; opsz 72 &middot; lh 1.1
+
+Heading 2
+
+.text-h2 &middot; Fraunces 700 &middot; clamp(1.5–2rem) &middot; opsz 24 &middot; lh 1.2
+
+Heading 3
+
+.text-h3 &middot; Fraunces 600 &middot; clamp(1.1–1.35rem) &middot; opsz 20 &middot; lh 1.3
+
+Heading 4
+
+.text-h4 &middot; Instrument Sans 600 &middot; 1rem &middot; lh 1.4
+
+Heading 5
+
+.text-h5 &middot; Instrument Sans 600 &middot; 0.875rem &middot; tracking 0.04em &middot; lh 1.4
+
+Body large — intro copy and lead paragraphs
+
+.text-body-lg &middot; Instrument Sans 400 &middot; 1.125rem &middot; lh 1.7
+
+Body — default prose and paragraph text
+
+.text-body &middot; Instrument Sans 400 &middot; 1rem &middot; lh 1.7
+
+Body small — secondary copy and supporting text
+
+.text-body-sm &middot; Instrument Sans 400 &middot; 0.875rem &middot; lh 1.7
+
+Label
+
+.text-label &middot; Instrument Sans 600 &middot; 0.75rem
+
+Caption — timestamps, metadata, footnotes
+
+.text-caption &middot; Instrument Sans 400 &middot; 0.75rem &middot; lh 1.6
+
+const result = compute(input);
+
+.text-mono &middot; JetBrains Mono 400 &middot; 0.8125rem &middot; lh 1.6
+
+Utility Classes
+
+Opt-in classes that encode the full type scale — including mandatory Fraunces
+font-variation-settings — so consumers never need to look up opsz values or
+clamp ranges. Load alongside farn.css or farn-tokens.css:
+
+<!-- npm -->
+import 'farn-theme/typography';
+
+<!-- CDN / manual -->
+<link rel="stylesheet" href="farn-typography.css" />
+
+Display & headings
+
+Display
+
+.text-display — Fraunces 800 · clamp(3rem, 7vw, 4.5rem) · opsz 72 · tracking -0.02em · lh 1.05
+
+Heading 1
+
+.text-h1 — Fraunces 800 · clamp(2.5rem, 5vw, 4rem) · opsz 72 · tracking -0.02em · lh 1.1
+
+Heading 2
+
+.text-h2 — Fraunces 700 · clamp(1.5rem, 3vw, 2rem) · opsz 24 · tracking -0.02em · lh 1.2
+
+Heading 3
+
+.text-h3 — Fraunces 600 · clamp(1.1rem, 2vw, 1.35rem) · opsz 20 · tracking -0.01em · lh 1.3
+
+Heading 4
+
+.text-h4 — Instrument Sans 600 · 1rem · lh 1.4
+
+Heading 5
+
+.text-h5 — Instrument Sans 600 · 0.875rem · tracking 0.04em · lh 1.4
+
+Body & UI
+
+Body large — intro copy and lead paragraphs
+
+.text-body-lg — Instrument Sans 400 · 1.125rem · lh 1.7
+
+Body — default prose and paragraph text
+
+.text-body — Instrument Sans 400 · 1rem · lh 1.7
+
+Body small — secondary copy and supporting text
+
+.text-body-sm — Instrument Sans 400 · 0.875rem · lh 1.7
+
+Label
+
+.text-label — Instrument Sans 600 · 0.75rem
+
+Caption — timestamps, metadata, footnotes
+
+.text-caption — Instrument Sans 400 · 0.75rem · lh 1.6
+
+Mono
+
+text-mono · const result = compute(input);
+
+.text-mono — JetBrains Mono 400 · 0.8125rem · lh 1.6
+
+CSS reference
+
+/* Display */
+.text-display {
+font-family: var(--font-display);
+font-weight: 800;
+font-size: clamp(3rem, 7vw, 4.5rem);
+font-variation-settings: 'opsz' 72;
+letter-spacing: -0.02em;
+line-height: 1.05;
+}
+
+/* Heading 1 */
+.text-h1 {
+font-family: var(--font-display);
+font-weight: 800;
+font-size: clamp(2.5rem, 5vw, 4rem);
+font-variation-settings: 'opsz' 72;
+letter-spacing: -0.02em;
+line-height: 1.1;
+}
+
+/* Heading 2 */
+.text-h2 {
+font-family: var(--font-display);
+font-weight: 700;
+font-size: clamp(1.5rem, 3vw, 2rem);
+font-variation-settings: 'opsz' 24;
+letter-spacing: -0.02em;
+line-height: 1.2;
+}
+
+/* Heading 3 */
+.text-h3 {
+font-family: var(--font-display);
+font-weight: 600;
+font-size: clamp(1.1rem, 2vw, 1.35rem);
+font-variation-settings: 'opsz' 20;
+letter-spacing: -0.01em;
+line-height: 1.3;
+}
+
+/* Heading 4 */
+.text-h4 {
+font-family: var(--font-body);
+font-weight: 600;
+font-size: 1rem;
+line-height: 1.4;
+}
+
+/* Heading 5 */
+.text-h5 {
+font-family: var(--font-body);
+font-weight: 600;
+font-size: 0.875rem;
+letter-spacing: 0.04em;
+line-height: 1.4;
+}
+
+/* Body */
+.text-body { font-family: var(--font-body); font-weight: 400; font-size: 1rem; line-height: 1.7; }
+.text-body-lg { font-family: var(--font-body); font-weight: 400; font-size: 1.125rem; line-height: 1.7; }
+.text-body-sm { font-family: var(--font-body); font-weight: 400; font-size: 0.875rem; line-height: 1.7; }
+.text-label { font-family: var(--font-body); font-weight: 600; font-size: 0.75rem; }
+.text-caption { font-family: var(--font-body); font-weight: 400; font-size: 0.75rem; line-height: 1.6; }
+
+/* Mono */
+.text-mono { font-family: var(--font-mono); font-weight: 400; font-size: 0.8125rem; line-height: 1.6; }
+
+Usage Rules
+
+Fraunces for h1–h3 and display copy only — never for body text, UI labels, or navigation.
+
+font-variation-settings: 'opsz' is mandatory on every Fraunces usage: h1/display &rarr; 72, h2 &rarr; 24, h3 &rarr; 20.
+
+Instrument Sans for everything interactive: buttons, inputs, nav, labels, UI text.
+
+JetBrains Mono for code only — never decorative. Inline <code>: font-size: 0.875em (scales with context). Block <pre><code>: font-size: 0.8125rem; line-height: 1.6.
+
+Body copy max-width: 70ch (--width-prose). Never use Instrument Sans at weight 700+.
+
+Fraunces minimum size: 16px — never smaller.
+
+Accent Emphasis
+
+Use <em> inside any heading to highlight a word or phrase in the accent
+color. Works across all themes and surfaces — the accent token adapts automatically.
+
+Build faster with Farn.
+
+Compatible with any heading class — .text-display, .text-h1, .text-h2, etc.
+
+CSS
+
+em {
+font-style: normal;
+color: var(--color-accent);
+}
+
+Reference
+
+Heading styles spec
+
+Element
+
+Font
+
+Weight
+
+Size
+
+opsz
+
+Tracking
+
+h1
+
+Fraunces
+
+800
+
+clamp(2.5rem, 5vw, 4rem)
+
+72
+
+-0.02em
+
+h2
+
+Fraunces
+
+700
+
+clamp(1.5rem, 3vw, 2rem)
+
+24
+
+-0.02em
+
+h3
+
+Fraunces
+
+600
+
+clamp(1.1rem, 2vw, 1.35rem)
+
+20
+
+-0.01em
+
+h4
+
+Instrument Sans
+
+600
+
+1rem
+
+—
+
+0
+
+h5, h6
+
+Instrument Sans
+
+600
+
+0.875rem
+
+—
+
+0.04em
+
+Body & UI styles
+
+Role
+
+Font
+
+Weight
+
+Size
+
+Line height
+
+Body
+
+Instrument Sans
+
+400
+
+16px
+
+1.7
+
+Body large
+
+Instrument Sans
+
+400
+
+18px
+
+1.7
+
+Body small
+
+Instrument Sans
+
+400
+
+14px
+
+1.7
+
+Label
+
+Instrument Sans
+
+600
+
+12px
+
+—
+
+Caption
+
+Instrument Sans
+
+400
+
+12px
+
+1.6
+
+UI / buttons
+
+Instrument Sans
+
+500–600
+
+13–14px
+
+1.6
+
+Code
+
+JetBrains Mono
+
+400–500
+
+13px
+
+1.6
+
+Mono & code
+
+--font-mono is JetBrains Mono, loaded at weights 400 and 500.
+Use it exclusively for code — never decorative text.
+Coding ligatures (=>, !=, -->) are enabled by default.
+To disable: font-variant-ligatures: none.
+
+Element
+
+Context
+
+CSS
+
+<code>
+
+Inline code in prose
+
+font-family: var(--font-mono); font-size: 0.875em
+
+<pre><code>
+
+Code blocks
+
+font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.6
+
+Inline code uses em so it scales with surrounding text size. Block code uses rem for a fixed 13px baseline.
+
+Letter spacing
+
+Value
+
+Use
+
+-0.02em
+
+Display, h1, h2 — tightens large headings
+
+0em
+
+Default for body and most UI
+
+0.04em
+
+H5/h6, small UI labels
+
+0.12em
+
+Uppercase caps, overline labels
+
+Responsive typography
+
+Breakpoint
+
+H1
+
+H2
+
+Body
+
+Mobile < 640px
+
+28px
+
+22px
+
+16px
+
+Tablet 640–1079px
+
+clamp(28px, 5vw, 52px)
+
+clamp(22px, 4vw, 36px)
+
+16px
+
+Desktop &ge; 1080px
+
+36px
+
+24px
+
+16px
+
+All headings use clamp() — no hard breakpoint jumps. DocLayout applies these to the base h1–h3 elements.
+
+UI Text Scale
+
+Four size tokens for component CSS — inputs, labels, buttons, badges, metadata.
+Distinct from the heading/body utility classes above: those encode full typographic styles
+(family, weight, opsz, line-height); these are raw size values for overriding in
+component contexts. All component tokens (--btn-font-size,
+--input-font-size, etc.) reference these. Defined in
+tokens/typography.css.
+
+Token
+
+Value
+
+px
+
+Used for
+
+--text-2xs
+
+0.6875rem
+
+11
+
+Badge labels, overline captions (--badge-font-size)
+
+--text-xs
+
+0.75rem
+
+12
+
+Tooltips, metadata, small btn, role text (--tooltip-font-size, --btn-sm-font-size)
+
+--text-sm
+
+0.875rem
+
+14
+
+UI text: inputs, labels, buttons, tabs, tables (--input-font-size, --btn-font-size, --tab-font-size)
+
+--text-base
+
+1rem
+
+16
+
+Body text, accordion content (--accordion-font-size)
+
+Loading fonts
+
+Self-host the WOFF2 files from the Farn repo and declare them with @font-face — no requests to third-party servers. See Getting Started › Load Fonts for the full declarations.
+
+@font-face {
+font-family: 'Fraunces';
+font-style: normal;
+font-weight: 300 900;
+font-display: swap;
+src: url('/fonts/fraunces-latin-normal.woff2') format('woff2');
+}
+@font-face {
+font-family: 'Instrument Sans';
+font-style: normal;
+font-weight: 400 600;
+font-display: swap;
+src: url('/fonts/instrument-sans-latin.woff2') format('woff2');
+}
+@font-face {
+font-family: 'JetBrains Mono';
+font-style: normal;
+font-weight: 400 500;
+font-display: swap;
+src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+}
+
+---
+
+## Templates — https://farn.jbpt.de/templates/
+Copy-paste page section templates built with Farn tokens and components
+
+Templates
+
+Templates are complete page layouts assembled from Blocks. A Block is a named,
+reusable page section — styled exclusively with Farn semantic tokens and built from Farn components.
+Copy a block's HTML and CSS into your project, swap the content, and rename the classes to fit
+your codebase.
+
+How it works
+
+Three levels, each building on the last:
+
+Template — a named, complete page layout assembled from blocks (e.g. Landing Page).
+
+Block — a named page section combining layout HTML with Farn tokens and components. Styled only with semantic tokens — no hardcoded values.
+
+Component — Farn's shipped atoms: .btn, .card, .badge, and the rest. Used inside blocks.
+
+Block CSS classes (.hero, .features, etc.) are copy-paste starters —
+rename them to fit your project. They are not part of Farn's stable component API.
+
+Available templates
+
+Landing Page
+
+Hero · Intro · Features · CTA — four blocks assembled into a complete marketing landing page.
+
+---
+
+## Landing Page — https://farn.jbpt.de/templates/landing-page
+A complete landing page template built from four Farn blocks: Hero, Intro, Features, and CTA
+
+Landing Page
+
+Four blocks assembled into a complete marketing landing page. Copy each block independently
+or use all four together. The assembly order is Hero → Intro → Features → CTA.
+
+Each block's CSS uses only Farn semantic tokens. Block class names (.hero,
+.intro, etc.) are starters — rename them to avoid conflicts with your own styles.
+Layout utility classes (.stack, .cluster, .grid-2,
+.auto-grid, .container-prose) require farn-layout.css.
+Typography utility classes (.text-label, .text-h2) require
+farn-typography.css.
+
+Hero
+
+Full-page intro section with eyebrow text, a large display headline, body copy, and primary
+and secondary CTAs. Use as the first section of any marketing or product page.
+
+Your tagline here
+
+A headline that captures attention.
+
+One or two sentences describing your product or service. Keep it focused and honest about the value you deliver.
+
+Primary action
+Secondary action
+
+HTML
+
+<section class="hero" aria-labelledby="hero-heading">
+<div class="container">
+<div class="hero-inner stack" style="--stack-gap: var(--space-xl)">
+<header>
+<p class="text-label section-eyebrow">Your tagline here</p>
+<h1 id="hero-heading" class="hero-title">A headline that <em>captures attention.</em></h1>
+</header>
+<p class="hero-desc">One or two sentences describing your product or service.
+Keep it focused and honest about the value you deliver.</p>
+<div class="cluster">
+<a href="#" class="btn btn-p btn-lg">Primary action</a>
+<a href="#" class="btn btn-g btn-lg">Secondary action</a>
+</div>
+</div>
+</div>
+</section>
+
+CSS
+
+.hero {
+padding: var(--space-4xl) 0;
+background: var(--color-bg);
+}
+
+.hero-inner {
+max-width: 640px;
+}
+
+.hero-title {
+font-family: var(--font-display);
+font-size: clamp(40px, 7vw, 96px);
+font-weight: 800;
+font-variation-settings: 'opsz' 72;
+line-height: 1.05;
+letter-spacing: -0.03em;
+color: var(--color-text);
+}
+
+.hero-title em {
+font-style: normal;
+color: var(--color-accent);
+}
+
+.hero-desc {
+font-size: clamp(16px, 2vw, 20px);
+line-height: 1.65;
+color: var(--color-text-secondary);
+max-width: 52ch;
+}
+
+/* Add min-height: 100vh to .hero for a full-viewport hero */
+
+Intro
+
+Two-column section with text on the left and a visual on the right. Use it to introduce
+your product, explain what you do, or build trust. Collapses to a single column on mobile
+via .grid-2's built-in container query.
+
+About
+
+A brief, compelling description of your product.
+
+Expand on your value proposition. What problem do you solve? Who is it for? Keep it direct and honest.
+
+A second paragraph if you need more context. This is where you earn trust.
+
+Learn more
+
+Your image or illustration
+
+HTML
+
+<section class="intro" data-surface="featured" aria-labelledby="intro-heading">
+<div class="container">
+<div class="grid-2" style="--grid-gap: var(--space-4xl); align-items: center">
+<div class="intro-text stack">
+<header>
+<p class="text-label section-eyebrow">About</p>
+<h2 id="intro-heading" class="text-h2 section-title">A brief, compelling description of your product.</h2>
+</header>
+<p>Expand on your value proposition. What problem do you solve? Who is it for?</p>
+<p>A second paragraph if you need more context. This is where you earn trust.</p>
+<div class="cluster">
+<a href="#" class="btn btn-g">Learn more</a>
+</div>
+</div>
+<div class="intro-visual">
+<!-- Place your image, illustration, or other visual here -->
+<img src="your-image.png" alt="Description of your visual" />
+</div>
+</div>
+</div>
+</section>
+
+CSS
+
+.intro {
+padding: var(--space-3xl) 0;
+}
+
+.intro-text p {
+font-size: var(--text-base);
+line-height: 1.75;
+color: var(--color-text-secondary);
+}
+
+.intro-visual img {
+width: 100%;
+border-radius: var(--radius-lg);
+}
+
+Features
+
+A responsive card grid for showcasing product features, benefits, or capabilities. Each card
+holds an icon, a heading, and a short description. Add or remove cards as needed — the grid
+reflows automatically via .auto-grid.
+
+Features
+
+What you get.
+
+Feature one
+
+A short description of this feature. What does it do and why does it matter?
+
+Feature two
+
+Keep each description to two or three sentences. Focus on the benefit, not the mechanism.
+
+Feature three
+
+A third feature. Three cards is a natural minimum — add more as needed.
+
+HTML
+
+<section class="features" aria-labelledby="features-heading">
+<div class="container stack" style="--stack-gap: var(--space-2xl)">
+<header>
+<p class="text-label section-eyebrow">Features</p>
+<h2 id="features-heading" class="text-h2 section-title">What you get.</h2>
+</header>
+<div class="auto-grid" style="--grid-min: 240px">
+<div class="card">
+<div class="card-body stack">
+<!-- Replace with your icon -->
+<h3>Feature one</h3>
+<p>A short description of this feature. What does it do and why does it matter?</p>
+</div>
+</div>
+<div class="card">
+<div class="card-body stack">
+<!-- Replace with your icon -->
+<h3>Feature two</h3>
+<p>Keep each description concise. Focus on the benefit, not the mechanism.</p>
+</div>
+</div>
+<div class="card">
+<div class="card-body stack">
+<!-- Replace with your icon -->
+<h3>Feature three</h3>
+<p>Three cards is a natural minimum — add more as needed.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+CSS
+
+.features {
+padding: var(--space-3xl) 0;
+}
+
+.features .card h3 {
+font-family: var(--font-display);
+font-size: var(--text-base);
+font-weight: 700;
+font-variation-settings: 'opsz' 16;
+letter-spacing: -0.01em;
+color: var(--color-text);
+}
+
+.features .card p {
+font-size: var(--text-sm);
+line-height: 1.65;
+color: var(--color-text-secondary);
+}
+
+CTA
+
+Closing call-to-action section using the featured surface for maximum contrast.
+Use it as the last section before the footer to give readers a clear next step.
+
+Ready to start
+
+Start building with your product.
+
+One clear sentence. What do you want the reader to do next?
+
+Get started
+Learn more
+
+HTML
+
+<section class="cta" data-surface="featured" aria-labelledby="cta-heading">
+<div class="container-prose stack" style="--stack-gap: var(--space-xl)">
+<header>
+<p class="text-label section-eyebrow">Ready to start</p>
+<h2 id="cta-heading" class="cta-title">Start building with <em>your product.</em></h2>
+</header>
+<p class="cta-desc">One clear sentence. What do you want the reader to do next?</p>
+<div class="cluster">
+<a href="#" class="btn btn-p btn-lg">Get started</a>
+<a href="#" class="btn btn-g btn-lg">Learn more</a>
+</div>
+</div>
+</section>
+
+CSS
+
+.cta {
+padding: var(--space-3xl) 0;
+}
+
+.cta-title {
+font-family: var(--font-display);
+font-size: clamp(32px, 5vw, 64px);
+font-weight: 800;
+font-variation-settings: 'opsz' 48;
+line-height: 1.1;
+letter-spacing: -0.02em;
+color: var(--color-text);
+}
+
+.cta-title em {
+font-style: normal;
+color: var(--color-accent);
+}
+
+.cta-desc {
+font-size: var(--text-base);
+line-height: 1.65;
+color: var(--color-text-secondary);
+max-width: 48ch;
+}

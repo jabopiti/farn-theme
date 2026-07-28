@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://farn.jbpt.de/sitemap-index.xml

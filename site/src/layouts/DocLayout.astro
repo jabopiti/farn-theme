@@ -1,6 +1,7 @@
 ---
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
+import SeoMeta from '../components/SeoMeta.astro';
 import { groups, links, ctas } from '../data/navigation';
 
 interface Props {
@@ -19,6 +20,28 @@ const p = path !== '/' && path.endsWith('/') ? path.slice(0, -1) : path;
 const activeGroup =
   groups.find((g) => p === g.href || p.startsWith(g.href + '/') || g.pages.some((pg) => pg.href === p)) ?? null;
 
+const pageTitle = `${title} — Farn`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Breadcrumb: Home > Group (if any) > Page (omitted when the page IS the group's own overview)
+const breadcrumbItems = [{ name: 'Home', url: new URL('/', Astro.site).toString() }];
+if (activeGroup) {
+  breadcrumbItems.push({ name: activeGroup.label, url: new URL(activeGroup.href, Astro.site).toString() });
+}
+if (!activeGroup || p !== activeGroup.href) {
+  breadcrumbItems.push({ name: title, url: canonicalURL.toString() });
+}
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    item: item.url,
+  })),
+};
+
 ---
 
 <!doctype html>
@@ -27,8 +50,8 @@ const activeGroup =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} — Farn</title>
-    {description && <meta name="description" content={description} />}
+    <SeoMeta title={pageTitle} {description} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="/fern_icon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -43,6 +66,7 @@ const activeGroup =
         document.documentElement.setAttribute('data-theme', stored ?? system);
       })();
     </script>
+    <slot name="head" />
   </head>
   <body>
 

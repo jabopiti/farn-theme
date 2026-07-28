@@ -8,6 +8,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 ## [Unreleased]
 
 ### Added
+- `site/src/layouts/DocLayout.astro`: canonical `<link>`, Open Graph, and Twitter Card tags on every doc page (previously only `index.astro` had them), plus a `BreadcrumbList` JSON-LD script derived from the existing `navigation.ts` group data.
+- `site/src/pages/index.astro`: `og:site_name`, and `WebSite` + `SoftwareSourceCode` JSON-LD describing the Farn site and package.
+- `site/astro.config.mjs`, `site/public/robots.txt`: `@astrojs/sitemap` integration and a `robots.txt` pointing at the generated sitemap.
+- `site/src/components/SeoMeta.astro` (new): shared canonical/OG/Twitter meta partial used by both `DocLayout.astro` and `index.astro`, replacing two copies of the same block.
+- `site/scripts/generate-llms-full.mjs` (new): generates `site/public/llms-full.txt` — full text of every docs page in one file — on every `build`, so it can't drift from the actual content. `llms.txt` now links to it.
+- `site/src/pages/getting-started.astro`: FAQ section (7 questions, `.accordion` component) backed by matching `FAQPage` JSON-LD, both generated from a single `faqs` array so they can't drift apart. `site/src/layouts/DocLayout.astro` gains a `slot="head"` extension point so pages can add their own JSON-LD.
+
 - `tokens/spacing.css`: `--space-sm-plus` (16px) — off-scale step between `--space-sm` and `--space-md`. Replaces the raw `16px` literals in `--btn-padding-x` and `.nav-cta` padding. Documented on `site/src/pages/styles/spacing.astro`.
 - `tokens/spacing.css`: `--shadow-sm/-md/-lg` elevation scale, backed by per-tier `--shadow-opacity-*` tokens so dark mode can override just the opacity. `--overlap-card-shadow-raised` now reuses `--shadow-opacity-lg` instead of a hardcoded rgba literal (rendered output unchanged). Documented on `site/src/pages/styles/spacing.astro#elevation`.
 - `site/src/styles/site.css`: `.surface-card` — a shared card class with no fixed `background` (resolves from `data-surface`). Used by both `index.astro`'s token-story cards and the new Surfaces "Surface Card Pattern" doc section, replacing an undocumented, independently-invented `.demo-card` treatment.
