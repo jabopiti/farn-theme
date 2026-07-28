@@ -5512,8 +5512,6 @@ Need a starting point? Browse Templates — copy-paste page sections assembled i
 ## Farn — Design System — https://farn.jbpt.de/
 A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes for any stack.
 
-{title}
-
 Sharp · Warm · Intellectual
 
 A design system

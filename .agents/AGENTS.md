@@ -24,7 +24,7 @@ dist/
   farn-layout.css               Layout composition primitives — opt-in, requires farn.css or farn-tokens.css
   tabs.js                       Tab widget script — exported as farn-theme/scripts/tabs
 site/
-  scripts/generate-llms-full.mjs  Extracts full page text into public/llms-full.txt — runs on every `dev`/`build`
+  scripts/generate-llms-full.mjs  Extracts full page text into public/llms-full.txt — runs on every `build`
   src/data/navigation.ts        Single source of truth for top nav, sub-nav, mobile drawer
   src/components/SiteNav.astro  Shared nav — rendered by DocLayout.astro and index.astro
   src/scripts/

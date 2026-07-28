@@ -5,12 +5,12 @@
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
 import FernParallaxBackground from '../components/FernParallaxBackground.astro';
+import SeoMeta from '../components/SeoMeta.astro';
 import { groups, links, ctas } from '../data/navigation';
 import pkg from '../../../package.json';
 
 const title = 'Farn — Design System';
 const description = 'A token-first CSS design system rooted in the forests of northern Germany. Framework-agnostic tokens and component classes for any stack.';
-const ogImage = new URL('/og-image.png', Astro.site);
 const authorName = pkg.author.replace(/\s*<.*>\s*/, '');
 
 const jsonLd = {
@@ -47,21 +47,7 @@ const jsonLd = {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>{title}</title>
-<meta name="description" content={description} />
-<link rel="canonical" href={Astro.site} />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Farn" />
-<meta property="og:url" content={Astro.site} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={ogImage} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={ogImage} />
+<SeoMeta {title} {description} />
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" href="/fern_icon.png" />

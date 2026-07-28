@@ -11,7 +11,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `site/src/layouts/DocLayout.astro`: canonical `<link>`, Open Graph, and Twitter Card tags on every doc page (previously only `index.astro` had them), plus a `BreadcrumbList` JSON-LD script derived from the existing `navigation.ts` group data.
 - `site/src/pages/index.astro`: `og:site_name`, and `WebSite` + `SoftwareSourceCode` JSON-LD describing the Farn site and package.
 - `site/astro.config.mjs`, `site/public/robots.txt`: `@astrojs/sitemap` integration and a `robots.txt` pointing at the generated sitemap.
-- `site/scripts/generate-llms-full.mjs` (new): generates `site/public/llms-full.txt` — full text of every docs page in one file — on every `dev`/`build`, so it can't drift from the actual content. `llms.txt` now links to it.
+- `site/src/components/SeoMeta.astro` (new): shared canonical/OG/Twitter meta partial used by both `DocLayout.astro` and `index.astro`, replacing two copies of the same block.
+- `site/scripts/generate-llms-full.mjs` (new): generates `site/public/llms-full.txt` — full text of every docs page in one file — on every `build`, so it can't drift from the actual content. `llms.txt` now links to it.
 
 - `tokens/spacing.css`: `--space-sm-plus` (16px) — off-scale step between `--space-sm` and `--space-md`. Replaces the raw `16px` literals in `--btn-padding-x` and `.nav-cta` padding. Documented on `site/src/pages/styles/spacing.astro`.
 - `tokens/spacing.css`: `--shadow-sm/-md/-lg` elevation scale, backed by per-tier `--shadow-opacity-*` tokens so dark mode can override just the opacity. `--overlap-card-shadow-raised` now reuses `--shadow-opacity-lg` instead of a hardcoded rgba literal (rendered output unchanged). Documented on `site/src/pages/styles/spacing.astro#elevation`.

@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "dev": "node scripts/generate-llms-full.mjs && astro dev",
+    "dev": "astro dev",
     "build": "node scripts/generate-llms-full.mjs && astro build",
     "preview": "astro preview",
     "generate-llms-full": "node scripts/generate-llms-full.mjs"

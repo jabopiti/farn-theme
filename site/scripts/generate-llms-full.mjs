@@ -3,7 +3,7 @@
 // into one file, for AI agents/answer engines that want the whole corpus in a
 // single fetch instead of crawling. Runs on every site build so it can't drift
 // from the actual page content (unlike a hand-maintained file).
-import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join, relative, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -19,17 +19,17 @@ const ENTITIES = {
 
 function walk(dir) {
   let files = [];
-  for (const entry of readdirSync(dir)) {
-    const full = join(dir, entry);
-    if (statSync(full).isDirectory()) files = files.concat(walk(full));
-    else if (entry.endsWith('.astro')) files.push(full);
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) files = files.concat(walk(full));
+    else if (entry.name.endsWith('.astro')) files.push(full);
   }
   return files;
 }
 
 function urlFor(file) {
   const rel = relative(pagesDir, file).replace(/\\/g, '/');
-  return '/' + rel.replace(/index\.astro$/, '').replace(/\.astro$/, '');
+  return '/' + rel.replace(/(?:index)?\.astro$/, '');
 }
 
 function extractMeta(source) {
@@ -42,11 +42,15 @@ function extractMeta(source) {
   return { title, description };
 }
 
-// Block-level tags become line breaks; everything else (code, strong, a, span…)
-// is stripped in place so inline-formatted sentences stay on one line.
+// Block-level HTML tags become line breaks; everything else (code, strong, a, span…)
+// is stripped in place so inline-formatted sentences stay on one line. The page's
+// layout wrapper (<DocLayout>, not an HTML tag) is stripped separately below —
+// keeping it out of this list means adding a different layout later can't silently
+// leave its wrapper tags unstripped.
 const BLOCK_TAGS = 'p|div|section|article|h[1-6]|li|ul|ol|tr|td|th|table|pre|br|hr' +
-  '|blockquote|header|footer|nav|main|figure|figcaption|dl|dt|dd|DocLayout';
+  '|blockquote|header|footer|nav|main|figure|figcaption|dl|dt|dd';
 const BLOCK_TAG_RE = new RegExp(`</?(?:${BLOCK_TAGS})(?:\\s[^>]*)?>`, 'gi');
+const LAYOUT_WRAPPER_RE = /<\/?DocLayout(?:\s[^>]*)?>/gi;
 
 // Apply a replacement repeatedly until it stops changing the string, so a single
 // pass can't leave behind a fragment (e.g. from malformed/nested tags) that only
@@ -69,6 +73,7 @@ function extractText(source) {
   body = stripElement(body, 'script');
   body = stripElement(body, 'style');
   body = stripElement(body, 'svg');
+  body = body.replace(LAYOUT_WRAPPER_RE, '\n');
   body = body.replace(BLOCK_TAG_RE, '\n');
   body = replaceUntilStable(body, /<[^>]*>/g, ''); // strip remaining inline tags, keep their text content
   body = body.replace(/&[a-z#0-9]+;/gi, (m) => ENTITIES[m] ?? m);
