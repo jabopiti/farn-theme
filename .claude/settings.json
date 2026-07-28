@@ -6,11 +6,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 -c \"import sys,json,os; d=json.loads(os.environ.get('CLAUDE_TOOL_INPUT','{}')); sys.exit(0 if 'tokens/' in d.get('file_path','') else 1)\" && npm run build; exit 0"
+            "command": "FP=$(python3 -c \"import sys,json; print(json.load(sys.stdin).get('tool_input',{}).get('file_path',''))\"); case \"$FP\" in *tokens/*) npm run build ;; esac; exit 0"
           },
           {
             "type": "command",
-            "command": "FP=$(python3 -c \"import json,os; print(json.loads(os.environ.get('CLAUDE_TOOL_INPUT','{}')).get('file_path',''))\") && [[ \"$FP\" == *.css ]] && MATCHES=$(grep -n ':focus[^-]' \"$FP\" 2>/dev/null) && echo \"Warning: use :focus-visible, not :focus:\" && echo \"$MATCHES\"; exit 0"
+            "command": "FP=$(python3 -c \"import sys,json; print(json.load(sys.stdin).get('tool_input',{}).get('file_path',''))\"); case \"$FP\" in *.css) M=$(grep -n ':focus[^-]' \"$FP\" 2>/dev/null) && { echo \"Warning: use :focus-visible, not :focus:\"; echo \"$M\"; } ;; esac; exit 0"
           }
         ]
       }

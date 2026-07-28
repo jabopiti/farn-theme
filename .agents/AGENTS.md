@@ -2,57 +2,13 @@
 
 Token-first CSS design system: palette → semantic → component token layers, with opt-in shipped component classes. Source in `tokens/`, built to `dist/`, documented in `site/` (Astro). Task backlog lives in GitHub Issues.
 
-## Repo structure
+## Layout notes
 
-```
-tokens/                         CSS source — edit here, not in dist/
-  colors.css                    Palette tokens (--in*, --bm*, --fo*, --bl*)
-  typography.css                Font imports, font-family tokens, UI text scale (--text-*)
-  spacing.css                   Spacing scale, widths, radius, z-index
-  motion.css                    Duration and easing tokens
-  dark-light.css                Semantic tokens + data-surface patterns (4 surfaces: base/layer/overlay/featured)
-  components.css                Tier-3 component tokens (--btn-*, --card-*, --badge-*, --accordion-*, --input-*, --link-*, --tab-*, --tooltip-*, --table-*, --pagination-*, --code-*, --quote-*, --separator-*, --overlap-*, --wave-height, --arc-height)
-  component-classes.css         Shipped CSS classes (.badge, .btn, .card, .table, etc.) — no tokens
-  typography-classes.css        Typography utility classes (.text-display, .text-h1, etc.) — NOT in index.css
-  base.css                      Reset, focus, reduced-motion
-  index.css                     @import chain (used by the site)
-dist/
-  farn.css                      Full bundle — tokens + base reset
-  farn-tokens.css               Tokens only — no base reset (for consumers with their own reset)
-  farn-components.css           Component tokens + classes — opt-in, load alongside farn.css
-  farn-typography.css           Typography utility classes — opt-in
-  farn-layout.css               Layout composition primitives — opt-in, requires farn.css or farn-tokens.css
-  tabs.js                       Tab widget script — exported as farn-theme/scripts/tabs
-site/
-  scripts/generate-llms-full.mjs  Extracts full page text into public/llms-full.txt — runs on every `build`
-  src/data/navigation.ts        Single source of truth for top nav, sub-nav, mobile drawer
-  src/components/SiteNav.astro  Shared nav — rendered by DocLayout.astro and index.astro
-  src/scripts/
-    subnav-tracker.js           Page-internal TOC scroll-tracking utility
-    scroll-reveal.js            Shared IntersectionObserver for .scroll-reveal elements
-    code-copy.js                Copy-to-clipboard for .code-block elements
-    tabs.js                     Tab component progressive enhancement (source; dist/tabs.js is the built copy)
-  src/pages/foundations/
-    surfaces.astro              Surfaces deep-dive (data-surface values, base/layer/overlay/featured)
-    layout.astro                Layout foundations
-    responsive.astro            Responsive system
-    accessibility.astro         Accessibility guidelines
-  src/pages/styles/
-    color.astro                 Color palette + semantic token reference (edit here when adding color tokens)
-    typography.astro            Typography scale reference
-    spacing.astro               Spacing scale reference
-    motion.astro                Motion tokens reference
-    icons.astro                 Icon reference
-  src/pages/components/
-    layout.astro                Group page — Cards, Section Transitions, Separators, Quotes
-    navigation.astro            Group page — Breadcrumbs, Pagination, Tabs
-    actions.astro               Group page — Buttons, Links
-    forms.astro                 Group page — Inputs, Labels, Selects, Form Fields
-    data.astro                  Group page — Tables, Code Blocks, Badges
-    status.astro                Group page — Spinner, Skeleton
-llms.txt                        Machine-readable guide for AI agents building *with* Farn (root is canonical; synced to site/public/)
-CHANGELOG.md                    Updated on every token or component change
-```
+Read `tokens/`, `dist/`, and `site/src/pages/` directly for the current file layout. The non-obvious parts:
+
+- `tokens/typography-classes.css` is **not** in `tokens/index.css` — DocLayout imports it directly from source. Do not add it to the index chain.
+- `llms.txt` at the repo root is canonical; `site/public/llms.txt` is a build-synced copy. Edit the root file.
+- `dist/` is generated. Edit `tokens/`, never `dist/`.
 
 ## Navigation structure
 
@@ -63,31 +19,10 @@ Component group pages live at `site/src/pages/components/{layout,navigation,acti
 ## Build command
 
 ```bash
-# Tokens only (no reset) — build this first
-cat tokens/colors.css tokens/typography.css tokens/spacing.css tokens/motion.css tokens/components.css tokens/dark-light.css > dist/farn-tokens.css
-
-# Full bundle (tokens + reset) — appends base.css to the tokens-only output
-cat dist/farn-tokens.css tokens/base.css > dist/farn.css
-
-# Component classes (opt-in) — tokens + classes, no reset
-cat tokens/components.css tokens/component-classes.css > dist/farn-components.css
-
-# Typography utility classes (opt-in) — requires farn.css or farn-tokens.css for --font-* tokens
-cat tokens/typography-classes.css > dist/farn-typography.css
-
-# Layout composition primitives (opt-in) — requires farn.css or farn-tokens.css loaded first
-cat tokens/layout.css > dist/farn-layout.css
-
-# Sync llms.txt to site/public so farn.jbpt.de/llms.txt stays current (root file is canonical)
-cp llms.txt site/public/llms.txt
-
-# Copy tabs script to dist so it ships as farn-theme/scripts/tabs
-cp site/src/scripts/tabs.js dist/tabs.js
+npm run build
 ```
 
-`tokens/typography-classes.css` is **not** in `tokens/index.css` — DocLayout imports it directly from source. Do not add it to the index chain.
-
-Run all steps after any change to a `tokens/` file, `llms.txt`, or `site/src/scripts/tabs.js` (in order — `farn-tokens.css` first). Shorthand: `npm run build` from the repo root.
+See the `build` script in `package.json` for the exact steps. Run it after any change to a `tokens/` file, `llms.txt`, or a script under `site/src/scripts/`.
 
 A PostToolUse hook auto-runs `npm run build` after every `tokens/` edit for Claude Code — Claude does not need to run it manually between individual changes. For `llms.txt` or `site/src/scripts/tabs.js` changes, run it explicitly.
 
@@ -226,38 +161,13 @@ Template pages use `DocLayout`. Each block gets its own `<h2>` section following
 Use the `/release-farn` skill to be guided through these steps.
 
 Farn has three core deliverables that must be aligned on every release:
-1. **CSS artifacts** — `dist/farn.css`, `dist/farn-tokens.css`, `dist/farn-components.css`, `dist/farn-typography.css`, `dist/tabs.js`
+1. **CSS artifacts** — `dist/farn.css`, `dist/farn-tokens.css`, `dist/farn-components.css`, `dist/farn-typography.css`, `dist/farn-layout.css`, `dist/tabs.js`, `dist/nav.js`
 2. **`llms.txt`** — machine-readable spec for AI agents building with Farn; root file is canonical, synced to `site/public/llms.txt` via build
 3. **Documentation site** — deployed to Cloudflare Pages; must match what ships in dist
 
 All three must reflect the same feature set and version on every release. A token added to dist but absent from llms.txt or the docs site is a broken release.
 
-### Pre-release alignment check
-
-Before bumping the version, verify these are in sync:
-- [ ] Every surface listed in `data-surface="..."` in `dark-light.css` is documented in `llms.txt` Core rules and in the docs (Foundations › Surfaces)
-- [ ] Every component listed in `package.json` exports has docs on the corresponding group page
-- [ ] All URLs in the `llms.txt` Reference section resolve (no 404s from page moves or renames)
-- [ ] `llms.txt` component lists and status page reflect current `done` / `coming soon` state
-- [ ] `CHANGELOG.md` `## [Unreleased]` captures all changes since the last tag
-
-### Version bump — files to update
-
-- `package.json` — `"version"` field
-- `CHANGELOG.md` — rename `## [Unreleased]` to `## [X.Y.Z] — YYYY-MM-DD`, add empty `## [Unreleased]` above it
-- `README.md` — CDN URL `@X.Y.Z` (the version badge on line 7 is dynamic — auto-updates from GitHub tags, no manual change needed)
-- `llms.txt` — CDN URL `@X.Y.Z`
-- `site/src/components/Footer.astro` — version badge `vX.Y.Z`
-- `site/src/pages/getting-started.astro` — all CDN URL occurrences (use replace_all)
-
-### Release steps
-
-1. Complete the pre-release alignment check above; fix any gaps first
-2. Make all version bumps
-3. Run `npm run build` (rebuilds all dist/ artifacts and syncs `site/public/llms.txt`)
-4. Verify dist/ contains all 5 artifacts with updated content: `ls -la dist/`
-5. Commit, push, open a PR
-6. After merge: create a GitHub Release at `github.com/jabopiti/farn-theme/releases/new` — set tag `vX.Y.Z`, target `main`; GitHub creates the tag automatically and activates the jsDelivr CDN URL
+The pre-release alignment check, the full list of files to version-bump, and the release steps live in the skill — follow it rather than duplicating the checklist here.
 
 ### Keeping llms.txt current (between releases)
 
@@ -269,7 +179,7 @@ Before bumping the version, verify these are in sync:
 
 ## Task lifecycle
 
-When creating, picking up, or closing a GitHub issue, or when documenting discovered or deferred work: invoke the `tracker` skill.
+Track all work in GitHub Issues. When creating, picking up, or closing an issue — or when documenting discovered or deferred work — record it there rather than in code comments or scratch files.
 
 ### Complexity gate — get user approval (Risk: high) if any apply
 

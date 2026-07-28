@@ -50,11 +50,11 @@ npm run build
 ls -la dist/
 ```
 
-Confirm all 5 artifacts are present and timestamped after the build: `farn.css`, `farn-tokens.css`, `farn-components.css`, `farn-typography.css`, `tabs.js`.
+Confirm all 7 artifacts are present and timestamped after the build: `farn.css`, `farn-tokens.css`, `farn-components.css`, `farn-typography.css`, `farn-layout.css`, `tabs.js`, `nav.js`.
 
 ### 5. Commit, push, open PR
 
-Use the commit-push-pr skill. PR title: `release: vX.Y.Z`.
+Commit the version bumps and rebuilt artifacts, push the branch, and open a PR titled `release: vX.Y.Z`.
 
 ### 6. After merge
 
