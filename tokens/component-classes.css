@@ -119,7 +119,7 @@ select {
   width: 100%;
   padding: 0 var(--space-sm);
   height: 40px;
-  background: var(--input-bg);
+  background: var(--input-bg, var(--color-bg-panel));
   border: 1px solid var(--input-border);
   border-radius: var(--input-radius);
   color: var(--input-text);
@@ -140,14 +140,25 @@ textarea {
   min-height: 80px;
 }
 
-:is(input, textarea, select):hover {
-  background: var(--input-bg-active);
+/* :hover/:focus-visible repeat the base rule's :not() selectors (rather than
+   :is(input, textarea, select):hover) so their specificity (0,3,1) beats the
+   base rule's (0,2,1) — :is()'s specificity is that of its most specific
+   argument, not the sum of the list, so :is(...):hover alone only reaches
+   (0,1,1) and silently lost to the base rule every time, regardless of
+   source order. Pre-existing, unrelated to the --input-bg-active token fix
+   above: input hover/focus never repainted at all until this. */
+input:not([type="checkbox"]):not([type="radio"]):hover,
+textarea:hover,
+select:hover {
+  background: var(--input-bg-active, var(--color-bg-inset));
 }
 
 :is(input, textarea, select):focus { outline: none; }
 
-:is(input, textarea, select):focus-visible {
-  background: var(--input-bg-active);
+input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  background: var(--input-bg-active, var(--color-bg-inset));
   border-color: var(--input-border-focus);
 }
 
@@ -210,7 +221,7 @@ input[type="radio"] {
 .card {
   display: flex;
   flex-direction: column;
-  background: var(--card-bg);
+  background: var(--card-bg, var(--color-bg-panel));
   border: 1px solid var(--card-border); /* transparent — keeps box model stable when variants add a border */
   border-radius: var(--card-radius);
   padding: var(--card-padding);         /* safe default for bare card usage */
@@ -236,7 +247,7 @@ input[type="radio"] {
   cursor: pointer;
   transition: background var(--duration-fast) var(--ease-out);
 }
-.card-interactive:hover  { background: var(--card-hover-bg); }
+.card-interactive:hover  { background: var(--card-hover-bg, var(--color-bg-inset)); }
 /* focus-visible: base.css global rule covers farn.css consumers;
    explicit here for farn-components.css standalone use */
 .card-interactive:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
@@ -291,7 +302,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
   z-index: var(--z-raised);
   margin-top: calc(-1 * var(--overlap-card-offset));
   border-radius: var(--overlap-card-radius);
-  background: var(--card-bg);
+  background: var(--card-bg, var(--color-bg-panel));
   padding: var(--card-padding);
   opacity: 0;
   transform: translateY(40px);
@@ -580,7 +591,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
 }
 
 .page-link:hover {
-  background: var(--pagination-hover-bg);
+  background: var(--pagination-hover-bg, var(--color-bg-interactive-hover));
   color: var(--pagination-hover-text);
 }
 
@@ -670,7 +681,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
 .accordion summary::-webkit-details-marker,
 .accordion summary::marker { display: none; }
 
-.accordion summary:hover        { background: var(--accordion-summary-hover-bg); }
+.accordion summary:hover        { background: var(--accordion-summary-hover-bg, var(--color-bg-interactive-hover)); }
 .accordion summary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
 
 .accordion summary::after {
@@ -820,7 +831,7 @@ hr { border: none; }
   width: var(--quote-testimonial-avatar-size);
   height: var(--quote-testimonial-avatar-size);
   border-radius: var(--radius-full);
-  background: var(--quote-testimonial-avatar-bg);
+  background: var(--quote-testimonial-avatar-bg, var(--color-bg-inset));
   display: grid;
   place-items: center;
   font-size: var(--quote-testimonial-avatar-font);
@@ -853,7 +864,7 @@ hr { border: none; }
   position: relative;
   font-family: var(--font-mono);
   font-size: var(--code-font-size);
-  background: var(--code-bg);
+  background: var(--code-bg, var(--color-bg-inset));
   color: var(--code-text);
   border: 1px solid var(--code-border);
   border-radius: var(--code-radius);
@@ -872,7 +883,7 @@ hr { border: none; }
 .inline-code {
   font-family: var(--font-mono);
   font-size: 0.875em;
-  background: var(--code-bg);
+  background: var(--code-bg, var(--color-bg-inset));
   color: var(--code-text);
   padding: 2px 6px;
   border-radius: var(--radius-sm);
@@ -1016,7 +1027,7 @@ hr { border: none; }
 }
 
 .table thead th {
-  background: var(--table-header-bg);
+  background: var(--table-header-bg, var(--color-bg-inset));
   color: var(--table-header-text);
   font-weight: 600;
   font-size: var(--table-header-font-size);
@@ -1030,7 +1041,7 @@ hr { border: none; }
 }
 
 .table-striped tbody tr:nth-child(even) td {
-  background: var(--table-row-stripe-bg);
+  background: var(--table-row-stripe-bg, var(--color-bg-inset));
 }
 
 .table-hover td {
@@ -1038,7 +1049,7 @@ hr { border: none; }
 }
 
 .table-hover tbody tr:hover td {
-  background: var(--table-row-hover-bg);
+  background: var(--table-row-hover-bg, var(--table-row-stripe-bg, var(--color-bg-inset)));
 }
 
 .table-sm th,
@@ -1155,7 +1166,7 @@ hr { border: none; }
 }
 
 .tab:hover {
-  background: var(--tab-hover-bg);
+  background: var(--tab-hover-bg, var(--color-bg-interactive-hover));
   color: var(--tab-active-text);
 }
 
