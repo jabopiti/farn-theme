@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Card/input token-scoping matrix</title>
+<!-- Individual token imports, in the same order as button-matrix.html — see
+     that fixture's comment for why dist/*.css isn't used here instead. -->
+<link rel="stylesheet" href="../../tokens/colors.css">
+<link rel="stylesheet" href="../../tokens/typography.css">
+<link rel="stylesheet" href="../../tokens/spacing.css">
+<link rel="stylesheet" href="../../tokens/motion.css">
+<link rel="stylesheet" href="../../tokens/components.css">
+<link rel="stylesheet" href="../../tokens/dark-light.css">
+<link rel="stylesheet" href="../../tokens/component-classes.css">
+<link rel="stylesheet" href="../../tokens/base.css">
+<style>
+  body { margin: 0; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .surface-block { padding: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+  /* Reference swatches: apply the semantic token directly so the browser
+     resolves it fresh at this element, same as effectiveBackground() in
+     contrast.spec.ts. These are the ground truth each component token
+     (--card-bg, --card-hover-bg, --input-bg, --input-bg-active) must match
+     inside this same surface block — not :root's resolution of them. */
+  .ref-panel, .ref-inset { width: 12px; height: 12px; flex-shrink: 0; }
+  .ref-panel { background: var(--color-bg-panel); }
+  .ref-inset { background: var(--color-bg-inset); }
+</style>
+</head>
+<body>
+  <!-- "page" = no data-surface, just inherits the page theme -->
+  <div class="surface-block" data-surface-name="page">
+    <div class="ref-panel"></div>
+    <div class="ref-inset"></div>
+    <div class="card">Card</div>
+    <div class="card card-interactive">Interactive card</div>
+    <input type="text" value="Input">
+  </div>
+
+  <div class="surface-block" data-surface="base" data-surface-name="base">
+    <div class="ref-panel"></div>
+    <div class="ref-inset"></div>
+    <div class="card">Card</div>
+    <div class="card card-interactive">Interactive card</div>
+    <input type="text" value="Input">
+  </div>
+
+  <div class="surface-block" data-surface="layer" data-surface-name="layer">
+    <div class="ref-panel"></div>
+    <div class="ref-inset"></div>
+    <div class="card">Card</div>
+    <div class="card card-interactive">Interactive card</div>
+    <input type="text" value="Input">
+  </div>
+
+  <div class="surface-block" data-surface="overlay" data-surface-name="overlay">
+    <div class="ref-panel"></div>
+    <div class="ref-inset"></div>
+    <div class="card">Card</div>
+    <div class="card card-interactive">Interactive card</div>
+    <input type="text" value="Input">
+  </div>
+
+  <div class="surface-block" data-surface="featured" data-surface-name="featured">
+    <div class="ref-panel"></div>
+    <div class="ref-inset"></div>
+    <div class="card">Card</div>
+    <div class="card card-interactive">Interactive card</div>
+    <input type="text" value="Input">
+  </div>
+
+  <!-- featured pinned to the opposite theme on the same element — the -->
+  <!-- same-element form that must also flip correctly (see dark-light.css) -->
+  <div class="surface-block" data-surface="featured" data-theme="dark" data-surface-name="featured-pinned-dark">
+    <div class="ref-panel"></div>
+    <div class="ref-inset"></div>
+    <div class="card">Card</div>
+    <div class="card card-interactive">Interactive card</div>
+    <input type="text" value="Input">
+  </div>
+
+  <div class="surface-block" data-surface="featured" data-theme="light" data-surface-name="featured-pinned-light">
+    <div class="ref-panel"></div>
+    <div class="ref-inset"></div>
+    <div class="card">Card</div>
+    <div class="card card-interactive">Interactive card</div>
+    <input type="text" value="Input">
+  </div>
+</body>
+</html>

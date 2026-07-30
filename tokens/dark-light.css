@@ -199,6 +199,13 @@
   background:                   var(--bm1-mist);
   --color-bg:                   var(--bm1-mist);
   --color-bg-panel:             var(--bm2-birch);
+  /* panel is already promoted to birch (the lightest step), so inset steps
+     one swatch deeper — same relative move as the ambient panel→inset
+     (mist→sand) it's promoted from. Left undeclared before this fix,
+     --color-bg-inset silently inherited the ambient value (sand) here,
+     which happened to still read fine in light mode but masked the real
+     gap surfaced by the dark case just below. */
+  --color-bg-inset:             var(--bm1-mist);
   --color-bg-interactive-hover: var(--bm0-sand);  /* go deeper from mist */
   --skeleton-base:              var(--bm0-sand);
   --skeleton-shine:             var(--bm2-birch);
@@ -210,6 +217,20 @@
   --color-bg:                   var(--in1-iron);
   --color-bg-panel:             var(--in2-slate);
   --color-bg-code:              var(--in2-slate);
+  /* Undeclared before this fix, --color-bg-inset inherited the ambient dark
+     theme's value (also slate — the same token --color-bg-panel is set to
+     on this line), collapsing panel and inset to the identical color: any
+     token chasing "one step past the panel" (e.g. --card-hover-bg once it
+     stops freezing at :root) rendered with zero contrast against the panel
+     it's supposed to sit on top of. Not --in3-ash (the "go lighter" direction
+     --color-bg-inset takes ambiently, iron→slate): --btn-s-bg falls back to
+     --color-bg-inset, and birch text only reaches 4.47:1 on ash (same trap
+     --btn-s-hover-bg already avoids elsewhere in this file). Iron instead —
+     this surface's own bg — mirrors overlay's dark block below, which faces
+     the identical "panel already sits at slate" situation and resolves it
+     the same way (inset moves opposite panel's direction to avoid reusing
+     the ash already claimed by --color-bg-interactive-hover here). */
+  --color-bg-inset:             var(--in1-iron);
   --color-bg-interactive-hover: var(--in3-ash);
   --skeleton-base:              var(--in2-slate);
   --skeleton-shine:             var(--in3-ash);
@@ -220,6 +241,13 @@
 [data-surface="overlay"] {
   background:                   var(--bm0-sand);
   --color-bg:                   var(--bm0-sand);
+  /* sand ceiling — overlay bg is already the darkest light step, cap panels
+     here (mirrors the dark block below's "slate ceiling" for the same
+     reason). Missing before this fix: --color-bg-panel silently inherited
+     the ambient theme's mist, coinciding exactly with --color-bg-inset just
+     below (also mist) — any token chasing "one step past the panel" had
+     zero contrast to work with on this surface. */
+  --color-bg-panel:             var(--bm0-sand);
   --color-bg-inset:             var(--bm1-mist);   /* sand is the darkest light step — inset goes lighter for contrast */
   --color-bg-interactive-hover: var(--bm2-birch);  /* go lighter — sand is the darkest light step */
   --skeleton-base:              var(--bm1-mist);
@@ -365,6 +393,7 @@
   --color-bg:                   var(--bm1-mist);
   --color-bg-panel:             var(--bm2-birch);
   --color-bg-code:              var(--fo3-deepwater);
+  --color-bg-inset:             var(--bm1-mist); /* one step deeper than the promoted panel — see the bare [data-surface="layer"] block's comment */
   --color-bg-interactive-hover: var(--bm0-sand);
   --skeleton-base:              var(--bm0-sand);
   --skeleton-shine:             var(--bm2-birch);
@@ -375,6 +404,7 @@
 [data-theme="light"] [data-surface="overlay"]:not([data-theme="dark"]) {
   background:                   var(--bm0-sand);
   --color-bg:                   var(--bm0-sand);
+  --color-bg-panel:             var(--bm0-sand); /* sand ceiling — see the bare [data-surface="overlay"] block's comment */
   --color-bg-inset:             var(--bm1-mist);
   --color-bg-code:              var(--fo3-deepwater);
   --color-bg-interactive-hover: var(--bm2-birch);

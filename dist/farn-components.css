@@ -73,8 +73,15 @@
   --link-visited-color: var(--color-accent);
 
   /* ── Card tokens ────────────────────────────────────────────────────── */
-  --card-bg:             var(--color-bg-panel);
-  --card-hover-bg:       var(--color-bg-inset);
+  /* --card-bg/--card-hover-bg are intentionally NOT declared here — same
+     freeze bug as the --btn-* tokens above (see the comment there), and it
+     shipped for real: --card-bg/--card-hover-bg were frozen to :root's own
+     --color-bg-panel/--color-bg-inset inside every [data-surface] context.
+     component-classes.css falls back to var(--color-bg-panel)/
+     var(--color-bg-inset) directly instead, so the card tracks whatever
+     surface it's actually rendered in. Override --card-bg/--card-hover-bg
+     directly on any scope if a context needs a value that genuinely diverges
+     from its surface's panel/inset (same escape hatch as --btn-*). */
   --card-border:         transparent;
   --card-radius:         var(--radius-lg);
   --card-padding:        var(--space-md);
@@ -115,8 +122,9 @@
 
   /* ── Input tokens ───────────────────────────────────────────────────── */
   --input-radius:           var(--radius-md);
-  --input-bg:               var(--color-bg-panel);
-  --input-bg-active:        var(--color-bg-inset);   /* hover + focus */
+  /* --input-bg/--input-bg-active omitted here for the same reason as
+     --card-bg/--card-hover-bg above — component-classes.css falls back to
+     var(--color-bg-panel)/var(--color-bg-inset) directly. */
   --input-border:           var(--color-border);
   --input-border-focus:     var(--color-accent);
   --input-border-error:     var(--color-error);
@@ -129,7 +137,9 @@
   --accordion-border:           var(--color-border);
   --accordion-radius:           var(--radius-md);
   --accordion-summary-bg:       transparent;
-  --accordion-summary-hover-bg: var(--color-bg-interactive-hover);
+  /* --accordion-summary-hover-bg omitted — same freeze issue as --card-bg
+     above; component-classes.css falls back to
+     var(--color-bg-interactive-hover) directly. */
   --accordion-panel-bg:         transparent;
   --accordion-font-size:        var(--text-base);
   --accordion-toggle-size:      1.25rem;
@@ -189,7 +199,9 @@
   --quote-testimonial-mark-color:      var(--color-accent);
   --quote-testimonial-mark-size:       3rem;
   --quote-testimonial-avatar-size:     2.5rem;
-  --quote-testimonial-avatar-bg:       var(--color-bg-inset);
+  /* --quote-testimonial-avatar-bg omitted — same freeze issue as --card-bg
+     above; component-classes.css falls back to var(--color-bg-inset)
+     directly. */
   --quote-testimonial-text-size:       var(--text-base);
   --quote-testimonial-avatar-font:     var(--text-sm); /* initials size */
   --quote-testimonial-name-size:       var(--text-sm);
@@ -198,7 +210,11 @@
   --quote-testimonial-attribution-top: var(--space-xs);
 
   /* ── Code block tokens ──────────────────────────────────────────────── */
-  --code-bg:          var(--color-bg-inset); /* surface-aware; override with --color-bg-code for always-dark */
+  /* --code-bg omitted — same freeze issue as --card-bg above;
+     component-classes.css falls back to var(--color-bg-inset) directly, so
+     it tracks the surface it's rendered in. Override --code-bg directly
+     (e.g. to var(--color-bg-code)) on any scope that wants always-dark code
+     blocks regardless of surface. */
   --code-text:        var(--color-text);
   --code-border:      var(--color-border);
   --code-radius:      var(--radius-md);
@@ -216,7 +232,9 @@
   /* ── Pagination tokens ──────────────────────────────────────────────── */
   --pagination-active-bg:   var(--color-accent);
   --pagination-active-text: var(--color-accent-text);
-  --pagination-hover-bg:    var(--color-bg-interactive-hover);
+  /* --pagination-hover-bg omitted — same freeze issue as --card-bg above;
+     component-classes.css falls back to var(--color-bg-interactive-hover)
+     directly. */
   --pagination-hover-text:  var(--color-text);
   --pagination-radius:      var(--radius-md);
   --pagination-gap:         var(--space-xs);
@@ -224,7 +242,9 @@
 
   /* ── Tab tokens ─────────────────────────────────────────────────────── */
   --tab-idle-text:        var(--color-text-secondary);
-  --tab-hover-bg:         var(--color-bg-interactive-hover);
+  /* --tab-hover-bg omitted — same freeze issue as --card-bg above;
+     component-classes.css falls back to var(--color-bg-interactive-hover)
+     directly. */
   --tab-active-text:      var(--color-text);
   --tab-indicator:        var(--color-accent);
   --tab-border:           var(--color-border);
@@ -257,11 +277,14 @@
 
   /* ── Table tokens ────────────────────────────────────────────────────── */
   --table-border:             var(--color-border);
-  --table-header-bg:          var(--color-bg-inset);
+  /* --table-header-bg/--table-row-stripe-bg/--table-row-hover-bg omitted —
+     same freeze issue as --card-bg above; component-classes.css falls back
+     to var(--color-bg-inset) directly (two levels deep for the hover case,
+     chaining through --table-row-stripe-bg the same way --btn-*-hover-text
+     chains through --btn-*-text above), so each tracks the surface it's
+     rendered in. */
   --table-header-text:        var(--color-text);
   --table-header-font-size:   var(--text-sm);
-  --table-row-stripe-bg:      var(--color-bg-inset);   /* inset for visible contrast on panel-bg surfaces */
-  --table-row-hover-bg:       var(--table-row-stripe-bg);
   --table-font-size:          var(--text-sm);
   --table-cell-padding:       var(--space-sm) var(--space-sm);  /* 12px 12px */
   --table-cell-padding-sm:    4px var(--space-xs);              /* 4px 6px — compact */
@@ -389,7 +412,7 @@ select {
   width: 100%;
   padding: 0 var(--space-sm);
   height: 40px;
-  background: var(--input-bg);
+  background: var(--input-bg, var(--color-bg-panel));
   border: 1px solid var(--input-border);
   border-radius: var(--input-radius);
   color: var(--input-text);
@@ -410,14 +433,25 @@ textarea {
   min-height: 80px;
 }
 
-:is(input, textarea, select):hover {
-  background: var(--input-bg-active);
+/* :hover/:focus-visible repeat the base rule's :not() selectors (rather than
+   :is(input, textarea, select):hover) so their specificity (0,3,1) beats the
+   base rule's (0,2,1) — :is()'s specificity is that of its most specific
+   argument, not the sum of the list, so :is(...):hover alone only reaches
+   (0,1,1) and silently lost to the base rule every time, regardless of
+   source order. Pre-existing, unrelated to the --input-bg-active token fix
+   above: input hover/focus never repainted at all until this. */
+input:not([type="checkbox"]):not([type="radio"]):hover,
+textarea:hover,
+select:hover {
+  background: var(--input-bg-active, var(--color-bg-inset));
 }
 
 :is(input, textarea, select):focus { outline: none; }
 
-:is(input, textarea, select):focus-visible {
-  background: var(--input-bg-active);
+input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  background: var(--input-bg-active, var(--color-bg-inset));
   border-color: var(--input-border-focus);
 }
 
@@ -480,7 +514,7 @@ input[type="radio"] {
 .card {
   display: flex;
   flex-direction: column;
-  background: var(--card-bg);
+  background: var(--card-bg, var(--color-bg-panel));
   border: 1px solid var(--card-border); /* transparent — keeps box model stable when variants add a border */
   border-radius: var(--card-radius);
   padding: var(--card-padding);         /* safe default for bare card usage */
@@ -506,7 +540,7 @@ input[type="radio"] {
   cursor: pointer;
   transition: background var(--duration-fast) var(--ease-out);
 }
-.card-interactive:hover  { background: var(--card-hover-bg); }
+.card-interactive:hover  { background: var(--card-hover-bg, var(--color-bg-inset)); }
 /* focus-visible: base.css global rule covers farn.css consumers;
    explicit here for farn-components.css standalone use */
 .card-interactive:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
@@ -561,7 +595,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
   z-index: var(--z-raised);
   margin-top: calc(-1 * var(--overlap-card-offset));
   border-radius: var(--overlap-card-radius);
-  background: var(--card-bg);
+  background: var(--card-bg, var(--color-bg-panel));
   padding: var(--card-padding);
   opacity: 0;
   transform: translateY(40px);
@@ -850,7 +884,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
 }
 
 .page-link:hover {
-  background: var(--pagination-hover-bg);
+  background: var(--pagination-hover-bg, var(--color-bg-interactive-hover));
   color: var(--pagination-hover-text);
 }
 
@@ -940,7 +974,7 @@ a.card-interactive { color: inherit; text-decoration: none; }
 .accordion summary::-webkit-details-marker,
 .accordion summary::marker { display: none; }
 
-.accordion summary:hover        { background: var(--accordion-summary-hover-bg); }
+.accordion summary:hover        { background: var(--accordion-summary-hover-bg, var(--color-bg-interactive-hover)); }
 .accordion summary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
 
 .accordion summary::after {
@@ -1090,7 +1124,7 @@ hr { border: none; }
   width: var(--quote-testimonial-avatar-size);
   height: var(--quote-testimonial-avatar-size);
   border-radius: var(--radius-full);
-  background: var(--quote-testimonial-avatar-bg);
+  background: var(--quote-testimonial-avatar-bg, var(--color-bg-inset));
   display: grid;
   place-items: center;
   font-size: var(--quote-testimonial-avatar-font);
@@ -1123,7 +1157,7 @@ hr { border: none; }
   position: relative;
   font-family: var(--font-mono);
   font-size: var(--code-font-size);
-  background: var(--code-bg);
+  background: var(--code-bg, var(--color-bg-inset));
   color: var(--code-text);
   border: 1px solid var(--code-border);
   border-radius: var(--code-radius);
@@ -1142,7 +1176,7 @@ hr { border: none; }
 .inline-code {
   font-family: var(--font-mono);
   font-size: 0.875em;
-  background: var(--code-bg);
+  background: var(--code-bg, var(--color-bg-inset));
   color: var(--code-text);
   padding: 2px 6px;
   border-radius: var(--radius-sm);
@@ -1286,7 +1320,7 @@ hr { border: none; }
 }
 
 .table thead th {
-  background: var(--table-header-bg);
+  background: var(--table-header-bg, var(--color-bg-inset));
   color: var(--table-header-text);
   font-weight: 600;
   font-size: var(--table-header-font-size);
@@ -1300,7 +1334,7 @@ hr { border: none; }
 }
 
 .table-striped tbody tr:nth-child(even) td {
-  background: var(--table-row-stripe-bg);
+  background: var(--table-row-stripe-bg, var(--color-bg-inset));
 }
 
 .table-hover td {
@@ -1308,7 +1342,7 @@ hr { border: none; }
 }
 
 .table-hover tbody tr:hover td {
-  background: var(--table-row-hover-bg);
+  background: var(--table-row-hover-bg, var(--table-row-stripe-bg, var(--color-bg-inset)));
 }
 
 .table-sm th,
@@ -1425,7 +1459,7 @@ hr { border: none; }
 }
 
 .tab:hover {
-  background: var(--tab-hover-bg);
+  background: var(--tab-hover-bg, var(--color-bg-interactive-hover));
   color: var(--tab-active-text);
 }
 
