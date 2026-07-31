@@ -7,6 +7,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+## [0.8.0] — 2026-07-31
+
 ### Added
 - `site/src/layouts/DocLayout.astro`: canonical `<link>`, Open Graph, and Twitter Card tags on every doc page (previously only `index.astro` had them), plus a `BreadcrumbList` JSON-LD script derived from the existing `navigation.ts` group data.
 - `site/src/pages/index.astro`: `og:site_name`, and `WebSite` + `SoftwareSourceCode` JSON-LD describing the Farn site and package.
