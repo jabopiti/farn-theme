@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Form field states</title>
+<link rel="stylesheet" href="../../tokens/colors.css">
+<link rel="stylesheet" href="../../tokens/typography.css">
+<link rel="stylesheet" href="../../tokens/spacing.css">
+<link rel="stylesheet" href="../../tokens/motion.css">
+<link rel="stylesheet" href="../../tokens/components.css">
+<link rel="stylesheet" href="../../tokens/dark-light.css">
+<link rel="stylesheet" href="../../tokens/component-classes.css">
+<link rel="stylesheet" href="../../tokens/base.css">
+<style>
+  body { margin: 0; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  /* Reference swatches: apply the semantic token directly so the browser
+     resolves it fresh here, same convention as card-matrix.html's
+     .ref-panel/.ref-inset — the ground truth each state rule below must
+     match, rather than a value re-derived at test time. */
+  .ref-page-bg, .ref-border-error { width: 12px; height: 12px; }
+  .ref-page-bg { background: var(--color-bg); }
+  .ref-border-error { border: 1px solid var(--input-border-error); }
+</style>
+</head>
+<body>
+  <div class="ref-page-bg"></div>
+  <div class="ref-border-error"></div>
+  <input id="plain" type="text" value="plain">
+  <input id="readonly" type="text" value="readonly" readonly>
+  <input id="invalid" type="text" value="invalid" aria-invalid="true">
+  <div class="form-field form-field--error">
+    <input id="error-class" type="text" value="error class">
+  </div>
+</body>
+</html>

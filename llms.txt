@@ -20,10 +20,10 @@ Then import in your bundler (Vite, webpack, Parcel, etc.):
 @import "farn-theme/layout";     /* opt-in: .container, .stack, .cluster, .center, .auto-grid, .sidebar, .grid-2, .grid-3 */
 ```
 
-Or link from CDN (replace `@0.7.0` with the latest tag):
+Or link from CDN (replace `@0.8.0` with the latest tag):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.7.0/dist/farn.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jabopiti/farn-theme@0.8.0/dist/farn.css">
 ```
 
 ### Optional JavaScript

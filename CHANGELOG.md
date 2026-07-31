@@ -7,6 +7,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 
 ## [Unreleased]
 
+## [0.8.0] — 2026-07-31
+
 ### Added
 - `site/src/layouts/DocLayout.astro`: canonical `<link>`, Open Graph, and Twitter Card tags on every doc page (previously only `index.astro` had them), plus a `BreadcrumbList` JSON-LD script derived from the existing `navigation.ts` group data.
 - `site/src/pages/index.astro`: `og:site_name`, and `WebSite` + `SoftwareSourceCode` JSON-LD describing the Farn site and package.
@@ -18,6 +20,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), version
 - `tokens/spacing.css`: `--space-sm-plus` (16px) — off-scale step between `--space-sm` and `--space-md`. Replaces the raw `16px` literals in `--btn-padding-x` and `.nav-cta` padding. Documented on `site/src/pages/styles/spacing.astro`.
 - `tokens/spacing.css`: `--shadow-sm/-md/-lg` elevation scale, backed by per-tier `--shadow-opacity-*` tokens so dark mode can override just the opacity. `--overlap-card-shadow-raised` now reuses `--shadow-opacity-lg` instead of a hardcoded rgba literal (rendered output unchanged). Documented on `site/src/pages/styles/spacing.astro#elevation`.
 - `site/src/styles/site.css`: `.surface-card` — a shared card class with no fixed `background` (resolves from `data-surface`). Used by both `index.astro`'s token-story cards and the new Surfaces "Surface Card Pattern" doc section, replacing an undocumented, independently-invented `.demo-card` treatment.
+
+### Fixed
+- `tokens/component-classes.css`: `--card-bg`, `--card-hover-bg`, `--input-bg`, `--input-bg-active`, `--code-bg`, `--accordion-summary-hover-bg`, `--quote-testimonial-avatar-bg`, `--pagination-hover-bg`, `--tab-hover-bg`, `--table-header-bg`, `--table-row-stripe-bg`, and `--table-row-hover-bg` were declared once at `:root` and froze there per the CSS custom-properties spec, never re-resolving inside `[data-surface]` blocks — a card, input, or table rendered inside `layer`/`overlay`/`featured` inherited the page's default tier instead of the surface-local one. Fixed via a `var(--alias, var(--color-*))` fallback at each consumer, mirroring the existing `--btn-*` pattern. `tests/card-scoping.spec.ts` (new) is the regression suite.
+- `tokens/component-classes.css`: the form-field base rule (`input:not([type="checkbox"]):not([type="radio"]), textarea, select`) boosted its `input` branch to specificity (0,2,1), which silently beat several state overrides written as `:is(input, textarea, select)[...]` (specificity collapses to (0,0,1) — `:is()` takes its single most specific argument, not the sum of the list). `:hover`/`:focus-visible` backgrounds, `[readonly]` background, and `[aria-invalid="true"]`/`.form-field--error` border-color never painted on `<input>` in any theme, regardless of source order. Fixed structurally by wrapping the base rule in `:where(...)` (zero specificity), the same technique already used for `:where(a)` in `base.css`, so no override selector needs to out-specificity it again. `tests/form-field-states.spec.ts` (new) is the regression suite.
 
 ## [0.7.0] — 2026-07-03
 

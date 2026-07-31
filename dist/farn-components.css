@@ -405,9 +405,14 @@ label {
   margin-bottom: var(--space-xs);
 }
 
-input:not([type="checkbox"]):not([type="radio"]),
-textarea,
-select {
+/* :where(...) zeroes this reset's specificity — same technique as
+   :where(a) in base.css — so every state override below (:hover,
+   [readonly], [aria-invalid], etc.) always wins without a specificity
+   fight. Do not swap in a plain `input:not(...):not(...)` selector here:
+   that previously outranked the `:is(input, textarea, select)[...]`
+   overrides and silently broke :hover/[readonly]/[aria-invalid] painting
+   on <input>. See CHANGELOG.md for the full specificity breakdown. */
+:where(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
   display: block;
   width: 100%;
   padding: 0 var(--space-sm);
@@ -433,24 +438,13 @@ textarea {
   min-height: 80px;
 }
 
-/* :hover/:focus-visible repeat the base rule's :not() selectors (rather than
-   :is(input, textarea, select):hover) so their specificity (0,3,1) beats the
-   base rule's (0,2,1) — :is()'s specificity is that of its most specific
-   argument, not the sum of the list, so :is(...):hover alone only reaches
-   (0,1,1) and silently lost to the base rule every time, regardless of
-   source order. Pre-existing, unrelated to the --input-bg-active token fix
-   above: input hover/focus never repainted at all until this. */
-input:not([type="checkbox"]):not([type="radio"]):hover,
-textarea:hover,
-select:hover {
+:is(input, textarea, select):hover {
   background: var(--input-bg-active, var(--color-bg-inset));
 }
 
 :is(input, textarea, select):focus { outline: none; }
 
-input:not([type="checkbox"]):not([type="radio"]):focus-visible,
-textarea:focus-visible,
-select:focus-visible {
+:is(input, textarea, select):focus-visible {
   background: var(--input-bg-active, var(--color-bg-inset));
   border-color: var(--input-border-focus);
 }
@@ -466,6 +460,8 @@ select:focus-visible {
   cursor: not-allowed;
 }
 
+/* select has no readonly attribute per the HTML spec, so it's intentionally
+   omitted here, not an oversight. */
 :is(input, textarea)[readonly] {
   background: var(--color-bg);
   cursor: default;
